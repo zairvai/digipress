@@ -1,4 +1,4 @@
-import {COMPANYCALENDAR} from '../Actions/constants'
+import {COMPANYCALENDAR} from '../actions/constants'
 
 const dataDate = new Date()
 const dateAdd = (date, interval, units, sethour='', setmin='') => {
