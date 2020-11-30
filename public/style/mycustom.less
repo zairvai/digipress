@@ -1,0 +1,134 @@
+
+@import './variables.less';
+@import './colors.less';
+
+.ant-checkbox-wrapper{
+	line-height:0 !important;
+}
+
+.btn-social-facebook{
+	border: 1px solid #3b5998 !important;
+	background-color: #3b5998 !important;
+	color: #fff;
+}
+.btn-social-facebook i{
+	margin-top: 1px;
+    display: block;
+}
+.btn-social-google{
+	border: 1px solid #dd4b39 !important;
+	background-color: #dd4b39 !important;
+	color: #fff;
+}
+.btn-social-instagram{
+	border: 1px solid #97076c !important;
+	background-color: #97076c !important;
+	color: #fff;
+}
+
+.state-wrapper{
+	&.left .dot{
+		margin-left: -18px;
+	}
+	&.right{
+		margin-right:15px;
+		& .dot{
+			margin-left:8px;
+		}
+	}
+	& .success,& .fail, & .warning, & .default{
+		content:'';
+		position: absolute;
+		margin-top: 7px;
+		display: inline-block;
+		width: 6px;
+		height: 6px;
+		border-radius: 30px;
+	}
+	& .success{
+		color: #00d300 !important;
+		background: #00d300 !important;
+	}
+	& .fail{
+		color: #c40041 !important;
+		background: #c40041 !important;
+	}
+	& .default{
+		color: #ffffff !important;
+		background: #ffffff !important;
+	}
+	& .warning{
+		color: #f59841 !important;
+		background: #f59841 !important;
+	}
+}
+
+
+.blinking{
+	animation-name: blink-animation;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes blink-animation{
+	0%{ opacity: 1; }
+	25%{ opacity: 0; }
+	50%{ opacity: 1; }
+	75%{ opacity: 0; }
+	100%{ opacity: 1; }
+}
+
+ul.vurox-horizontal-links{
+	margin-bottom:0 !important;
+}
+
+.vurox-breadcrumb-list li a{
+	font-size:14px;
+}
+
+.ql-toolbar{
+	background:#eeeeee;
+	border-radius: 3px 3px 0 0;
+}
+.ql-container{
+	background: #ffffff;
+	border-radius: 0 0 3px 3px;
+}
+.ql-editor{
+	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: auto;
+	color:#333333;
+
+	& > *{
+		color:#333333;
+	}
+  }
+
+  .ant-input{
+	  background:#ffffff;
+	  color:#333333;
+  }
+
+  span.anticon{
+	  color:#888888;
+  }
+
+  .ant-select-selector{
+	  background: #ffffff !important;
+	  color:#333333 !important;
+  }
+
+  .ant-select-selection-placeholder{
+	color:#888888;
+  }
+
+  Button.link, ul.vurox-horizontal-links li a {
+	  color: rgba(255, 255, 255, 0.65);
+	  padding:0;
+	  font-size:14px;
+
+	  & i {
+		  color: inherit;
+	  }
+  }
