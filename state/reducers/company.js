@@ -1,4 +1,4 @@
-import { COMPANYINFO } from '../Actions/constants'
+import { COMPANYINFO } from '../actions/constants'
 
 const initialState = {
 	sales: [
