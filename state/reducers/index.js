@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import { accounts } from './accounts'
 import { articles } from './articles'
 import { classrooms } from './classrooms'
+import { categories } from './categories'
+import { tags } from './tags'
 import { campaigns } from './campaigns'
 import { vuroxUsers } from './users'
 import { vuroxCompanyInfo } from './company'
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
 	users: vuroxUsers,
 	articles: articles,
 	classrooms: classrooms,
+	categories: categories,
+	tags: tags,
 	campaigns: campaigns,
 	company: vuroxCompanyInfo,
 	calendar: vuroxCompanyCalendar,

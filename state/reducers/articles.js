@@ -5,10 +5,10 @@ const initialState = {
         summary:"Halo AL",
         content:"<H1>MAS AL</H1>",
         category:{id:1,name:"Berita"},
-        tags:["islam","nusantara"],
+        tags:[{id:1,name:"islam"},{id:2,name:"nusantara"}],
         author:{id:1,name:"zulfikar"},
         readAccess:"public",
-        allowComment:1,
+        allowComment:true,
         status:1
     },
     list:[
@@ -16,7 +16,7 @@ const initialState = {
             id:'1',
             name:'Perkembangan dunia Islam Nusantara',
             category:{id:1,name:"Berita"},
-            tags:["islam","nusantara"],
+            tags:[{id:1,name:"islam"},{id:2,name:"nusantara"}],
             author:{id:1,name:"zulfikar"},
             readAccess:"public",
             status:1
@@ -25,7 +25,7 @@ const initialState = {
             id:'2',
             name:'Perjalanan hidup seorang sufi abad pertengahan',
             category:{id:2,name:"Sejarah"},
-            tags:["sejarah","islam"],
+            tags:[{id:3,name:"nusantara"},{id:1,name:"islam"}],
             author:{id:1,name:"zulfikar"},
             readAccess:"private",
             status:2

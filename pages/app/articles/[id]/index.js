@@ -12,58 +12,104 @@ import {
 	ContentLayout,
 	VuroxComponentsContainer
 } from 'Components/layout'
-import VuroxFormSearch from 'Components/search'
 import { vuroxContext } from 'Context'
 
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-
 import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio} from 'antd'
-import {currency} from 'Utilities/number'
-import Icon from '@mdi/react'
-import {mdiGoogleAds, mdiInstagram} from '@mdi/js'
-import {Status} from 'Components/mycomponents.js'
-import { Search} from 'react-bootstrap-icons'
 import RichTextEditor from 'Components/RichTextEditor'
+import {useForm,Controller} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers'
+import * as yup from 'yup'
 
 
-class index extends React.Component {
+class Index extends React.Component {
 
 	static contextType = vuroxContext
 
-    item = {}
+    item = this.props.articles.item   
+
+    pagename = ""
+    links = [['App','/app/classroom',''],['Articles','/app/articles',''],[this.item.name,`/app/articles/${this.item.id}`,'active']]
 
 	state = {
         formLayout:'vertical',
-        pagename:"",
-        links:[],
+        selectedCategory:{id:null,value:null},
+        selectedTags:[{id:null,value:null}],
+        allowComment:true,
+        readAccess:"",
 	}
 
-    
-
 	componentDidMount(){
-        this.item = this.props.articles.item     
-        const pagename = ""
-        const links = [['App','/app/classroom',''],['Articles','/app/articles',''],[this.item.name,`/app/articles/${this.item.id}`,'active']]
         
-        this.setState({pagename,links})
-    }
+        const selectedCategory = {
+            id:this.item.category.id,
+            value:this.item.category.id.toString(),
+            label:this.item.category.name}
 
-    onAccessValueChange = e => {
-        console.log('radio checked', e.target.value);
-        this.setState({accessValue:e.target.value})
-    };
+        
+        
+        let selectedTags = []
+        this.item.tags.forEach(tag=>selectedTags.push({
+            id:tag.id,
+            value:tag.id.toString(),
+            label:tag.name}))
+
+        const allowComment = this.item.allowComment
+        const readAccess = this.item.readAccess
+
+        this.setState({selectedCategory,selectedTags,allowComment,readAccess})
+
+    }
 
     onFormLayoutChange = ({ layout }) => {
         this.setState({ formLayout: layout });
     };
 
+    onSelectCategoryChange = selected =>{
+        this.setState({selectedCategory:{
+            id:parseInt(selected.value),
+            value:selected.value,
+            label:selected.label}})
+    }
+
+    onSelectTagsChange = selecteds =>{
+
+        let items=[]
+
+        selecteds.forEach((item)=>{
+            items.push({
+                id:parseInt(item.value),
+                value:item.value,
+                label:item.label})
+        })
+
+        this.setState({selectedTags:items})
+
+    }
+
+    onAllowCommentChange = e =>{
+
+        const allowComment = e.target.checked
+        this.setState({allowComment})
+        
+    }
+
+    onReadAccessChange = e => {
+        
+        const readAccess = e.target.value
+        this.setState({readAccess})
+    }
+
 	render() {
 
+        
 		const { menuState } = this.context
 		const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+        const {selectedCategory,selectedTags,allowComment,readAccess} = this.state
+    
 
 		return (
 			<React.Fragment>
@@ -76,7 +122,7 @@ class index extends React.Component {
 					</VuroxSidebar>
 					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                         
-                        <Summery2 pagename={this.state.pagename} links={this.state.links}/>
+                        <Summery2 pagename={this.pagename} links={this.links}/>
 
                         <Form
                             layout={this.state.formLayout}
@@ -117,21 +163,20 @@ class index extends React.Component {
                                                 
                                                 <Form.Item label="Category" className="mb-0">
                                                     <Select
-                                                        size="large"
+                                                        labelInValue
+                                                        value={selectedCategory}
                                                         showSearch
+                                                        size="large"
                                                         placeholder="Select a category"
                                                         optionFilterProp="children"
-                                                        // onChange={onChange}
-                                                        // onFocus={onFocus}
-                                                        // onBlur={onBlur}
-                                                        // onSearch={onSearch}
-                                                        filterOption={(input, option) =>
-                                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                                        }
-                                                    >
-                                                        <Select.Option value="jack">Jack</Select.Option>
-                                                        <Select.Option value="lucy">Lucy</Select.Option>
-                                                        <Select.Option value="tom">Tom</Select.Option>
+                                                        optionLabelProp="label"
+                                                        onChange={this.onSelectCategoryChange}
+                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                                                        
+                                                        {this.props.categories.list.map(item=>
+                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
+                                                        )}
+
                                                     </Select>
                                                 </Form.Item>
                                                 <div className="d-flex justify-content-end">
@@ -144,22 +189,25 @@ class index extends React.Component {
                                                 
                                                 <Form.Item label="Tags" className="mb-0">
                                                     <Select
-                                                        size="large"
+                                                        labelInValue
+                                                        value={selectedTags}
                                                         showSearch
-                                                        mode="tags"
+                                                        size="large"
+                                                        mode="multiple"
                                                         placeholder="Select tags"
                                                         optionFilterProp="children"
-                                                        // onChange={onChange}
+                                                        optionLabelProp="label"
+                                                        onChange={this.onSelectTagsChange}
                                                         // onFocus={onFocus}
                                                         // onBlur={onBlur}
                                                         // onSearch={onSearch}
-                                                        filterOption={(input, option) =>
-                                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                                        }
-                                                    >
-                                                        <Select.Option value="jack">Jack</Select.Option>
-                                                        <Select.Option value="lucy">Lucy</Select.Option>
-                                                        <Select.Option value="tom">Tom</Select.Option>
+                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                                        >
+
+                                                        {this.props.tags.list.map(item=>
+                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
+                                                        )}
+
                                                     </Select>
                                                 </Form.Item>
                                                 <div className="d-flex justify-content-end">
@@ -169,13 +217,13 @@ class index extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col md={24}>
-                                                <Checkbox onChange={()=>{}}>Allow comment</Checkbox>
+                                                <Checkbox onChange={this.onAllowCommentChange} checked={allowComment}>Allow comment</Checkbox>
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col md={24}>
                                                 <Form.Item label="Who can read this article" className="mt-3 mb-0">
-                                                    <Radio.Group onChange={this.onAccessValueChange.bind(this)} value={this.state.accessValue}>
+                                                    <Radio.Group onChange={this.onReadAccessChange} value={readAccess}>
                                                         <Radio value="public">Public</Radio>
                                                         <Radio value="private">Private</Radio>
                                                     </Radio.Group>
@@ -208,4 +256,4 @@ class index extends React.Component {
 		);
 	}
 }
-export default connect(state=>state)(index)
+export default connect(state=>state)(Index)

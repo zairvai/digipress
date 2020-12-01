@@ -31,11 +31,13 @@ import RichTextEditor from 'Components/RichTextEditor'
 class index extends React.Component {
 
 	static contextType = vuroxContext
-
+    
 	state = {
         formLayout:'vertical',
         checkboxSelected:true,
-        accessValue:"public",
+        selectedCategory:{id:null,value:null},
+        selectedTags:[{id:null,value:null}],
+        readAccess:"public",
 	}
 
     pagename="New article"
@@ -49,15 +51,39 @@ class index extends React.Component {
         this.setState({ formLayout: layout });
     };
 
-    onAccessValueChange = e => {
+    onReadAccessChange = e => {
         console.log('radio checked', e.target.value);
-        this.setState({accessValue:e.target.value})
+        this.setState({readAccess:e.target.value})
     };
+
+    onSelectCategoryChange = selected =>{
+        this.setState({selectedCategory:{
+            id:parseInt(selected.value),
+            value:selected.value,
+            label:selected.label}})
+    }
+
+    onSelectTagsChange = selecteds =>{
+
+        let items=[]
+
+        selecteds.forEach((item)=>{
+            items.push({
+                id:parseInt(item.value),
+                value:item.value,
+                label:item.label})
+        })
+
+        this.setState({selectedTags:items})
+
+    }
 
 	render() {
 
 		const { menuState } = this.context
-		const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+        const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+        
+        const {selectedCategory,selectedTags} = this.state
 
 		return (
 			<React.Fragment>
@@ -110,21 +136,20 @@ class index extends React.Component {
                                                 
                                                 <Form.Item label="Category" className="mb-0">
                                                     <Select
-                                                        size="large"
+                                                        labelInValue
+                                                        value={selectedCategory}
                                                         showSearch
+                                                        size="large"
                                                         placeholder="Select a category"
                                                         optionFilterProp="children"
-                                                        // onChange={onChange}
-                                                        // onFocus={onFocus}
-                                                        // onBlur={onBlur}
-                                                        // onSearch={onSearch}
-                                                        filterOption={(input, option) =>
-                                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                                        }
-                                                    >
-                                                        <Select.Option value="jack">Jack</Select.Option>
-                                                        <Select.Option value="lucy">Lucy</Select.Option>
-                                                        <Select.Option value="tom">Tom</Select.Option>
+                                                        optionLabelProp="label"
+                                                        onChange={this.onSelectCategoryChange}
+                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                                                        
+                                                        {this.props.categories.list.map(item=>
+                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
+                                                        )}
+
                                                     </Select>
                                                 </Form.Item>
                                                 <div className="d-flex justify-content-end">
@@ -137,22 +162,25 @@ class index extends React.Component {
                                                 
                                                 <Form.Item label="Tags" className="mb-0">
                                                     <Select
-                                                        size="large"
+                                                        labelInValue
+                                                        value={selectedTags}
                                                         showSearch
-                                                        mode="tags"
+                                                        size="large"
+                                                        mode="multiple"
                                                         placeholder="Select tags"
                                                         optionFilterProp="children"
-                                                        // onChange={onChange}
+                                                        optionLabelProp="label"
+                                                        onChange={this.onSelectTagsChange}
                                                         // onFocus={onFocus}
                                                         // onBlur={onBlur}
                                                         // onSearch={onSearch}
-                                                        filterOption={(input, option) =>
-                                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                                        }
-                                                    >
-                                                        <Select.Option value="jack">Jack</Select.Option>
-                                                        <Select.Option value="lucy">Lucy</Select.Option>
-                                                        <Select.Option value="tom">Tom</Select.Option>
+                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                                        >
+
+                                                        {this.props.tags.list.map(item=>
+                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
+                                                        )}
+
                                                     </Select>
                                                 </Form.Item>
                                                 <div className="d-flex justify-content-end">
@@ -168,7 +196,7 @@ class index extends React.Component {
                                         <Row>
                                             <Col md={24}>
                                                 <Form.Item label="Who can read this article" className="mt-3 mb-0">
-                                                    <Radio.Group onChange={this.onAccessValueChange.bind(this)} value={this.state.accessValue}>
+                                                    <Radio.Group onChange={this.onReadAccessChange.bind(this)} value={this.state.readAccess}>
                                                         <Radio value="public">Public</Radio>
                                                         <Radio value="private">Private</Radio>
                                                     </Radio.Group>

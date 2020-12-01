@@ -128,7 +128,7 @@ class index extends React.Component {
 																{
 																	item.tags.map(tag=>
 																		<Tag>
-																			<Link href={{pathname:'/app/tags/[name]',query:{name:tag}}} shallow><a>{tag}</a></Link>
+																			<Link href={{pathname:'/app/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
 																		</Tag>	
 																	)
 																}
