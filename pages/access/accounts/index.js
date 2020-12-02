@@ -121,7 +121,7 @@ class index extends React.Component {
 															<td valign="middle" className="fright">
 																{
 																	item.status===3 ? <Status text="Active" state="success" position="right"/> :
-																	item.status===2 ? <Status text="Pending approval" state="warning" position="right" blinking/> :
+																	item.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
 																	<></>
 																}
 															</td>

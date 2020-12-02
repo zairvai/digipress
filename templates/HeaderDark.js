@@ -26,7 +26,7 @@ const HeaderDark = props => {
 				<Row align="middle">
 					<Col span={12}>
 						<Space direction="horizontal" size="large" align="center">
-							<VuroxBrand image='/image/logo.png' />
+							{/* <VuroxBrand image='/image/logo.png' /> */}
 							{
 								menuState ? 
 								<Link href='#'><Grid className="vurox-menu-toggler" onClick={ toggleMenu } /></Link>
