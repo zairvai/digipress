@@ -30,8 +30,8 @@ class index extends React.Component {
 		checkboxSelected:true,
 	}
 
-    pagename="Classrooms"
-	links = [['App','/app/classrooms',''],['Classrooms','/app/classrooms','active']]
+    pagename="Accounts"
+	links = [['Access','/access/accounts',''],['Accounts','/access/accounts','active']]
 	
 	componentDidMount(){
 		
@@ -86,7 +86,7 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                        <li className="p-0"><Link href={{pathname:'/app/classrooms/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Add new classroom</a></Link></li>
+                                        <li className="p-0"><Link href={{pathname:'/app/accounts/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
                                     </ul>
                                 </div>
                             </Col>
@@ -102,42 +102,26 @@ class index extends React.Component {
 											<thead>
 												<tr>
 													<th width="20"><Checkbox/></th>
-													<th>Classroom</th>
-													<th>Pelajaran</th>
-													<th>Quiz</th>
-													<th>Tags</th>
-													<th>Akses</th>
-													<th>Penulis</th>
+													<th>Account</th>
+													<th width="30%">Alamat</th>
+													<th width="15%">Telpon</th>
+													<th width="20%">Contact Person</th>
 													<th className="fright">Status</th>
 												</tr>
 											</thead>
 											<tbody>
 												{
-													this.props.classrooms.list.map(item=>(
+													this.props.accounts.list.map(item=>(
 														<tr key={item.id}>
 															<td><Checkbox/></td>
-															<td valign="middle"><Link href={{pathname:'/app/classrooms/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
-															<td valign="middle">{item.noOfModules}</td>
-															<td valign="middle">{item.noOfQuizes}</td>
-															<td valign="middle">
-																{
-																	item.tags.map(tag=>
-																		<Tag key={tag.id}>
-																			<Link href={{pathname:'/app/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
-																		</Tag>	
-																	)
-																}
-															</td>
-															<td valign="middle">{item.readAccess}</td>
-															<td valign="middle"><Link href={{pathname:'/access/user/[id]',query:{id:item.author.id}}} shallow><a>{item.author.name}</a></Link></td>
+															<td valign="middle"><Link href={{pathname:'/app/accounts/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
+															<td valign="middle">{item.address}</td>
+															<td valign="middle">{item.phone}</td>
+                                                            <td valign="middle">{item.person}</td>
 															<td valign="middle" className="fright">
 																{
-																	item.status===1 ? <Status text="Published" state="success" position="right"/> :
-																	item.status===2 ? <Status text="Draft" state="warning" position="right"/> :
-																	// campaign.status===2 ? <Status text="On Approval" state="warning" position="right"/> :
-																	// campaign.status===3 ? <Status text="Running" state="success" position="right" blinking/> :
-																	// campaign.status===4 ? <Status text="Finished" state="default" position="right"/> :
-																	// campaign.status===5 ? <Status text="Canceled" state="fail" position="right"/> :
+																	item.status===3 ? <Status text="Active" state="success" position="right"/> :
+																	item.status===2 ? <Status text="Pending approval" state="warning" position="right" blinking/> :
 																	<></>
 																}
 															</td>

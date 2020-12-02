@@ -31,7 +31,7 @@ class index extends React.Component {
 	}
 
     pagename="Articles"
-	links = [['App','/app/classroom',''],['Articles','/app/articles','active']]
+	links = [['App','/app/classrooms',''],['Articles','/app/articles','active']]
 	
 	componentDidMount(){
 		
@@ -101,12 +101,12 @@ class index extends React.Component {
 										<table className="table table-borderless">
 											<thead>
 												<tr>
-													<th><Checkbox/></th>
-													<th>Article</th>
-													<th>Category</th>
+													<th width="20"><Checkbox/></th>
+													<th>Artikel</th>
+													<th>Kategori</th>
 													<th>Tags</th>
-													<th>Access</th>
-													<th>Author</th>
+													<th>Akses</th>
+													<th>Penulis</th>
 													<th className="fright">Status</th>
 												</tr>
 											</thead>

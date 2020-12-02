@@ -169,7 +169,7 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Content">
-                                            <RichTextEditor style={{height:"300px"}} className="mb-3" value={props.value} onChange={props.onChange}/>
+                                            <RichTextEditor style={{height:"600px"}} className="mb-3" value={props.value} onChange={props.onChange}/>
                                         </Form.Item>
                                     }
                                 />

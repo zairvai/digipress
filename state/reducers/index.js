@@ -4,6 +4,10 @@ import { articles } from './articles'
 import { classrooms } from './classrooms'
 import { categories } from './categories'
 import { tags } from './tags'
+import { lessons } from './lessons'
+import { questions } from './questions'
+import { comments } from './comments'
+
 import { campaigns } from './campaigns'
 import { vuroxUsers } from './users'
 import { vuroxCompanyInfo } from './company'
@@ -18,6 +22,10 @@ const rootReducer = combineReducers({
 	classrooms: classrooms,
 	categories: categories,
 	tags: tags,
+	lessons: lessons,
+	questions: questions,
+	comments: comments,
+
 	campaigns: campaigns,
 	company: vuroxCompanyInfo,
 	calendar: vuroxCompanyCalendar,

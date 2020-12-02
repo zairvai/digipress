@@ -17,7 +17,6 @@ import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Checkbox,Dropdown,Menu,Tag} from 'antd'
-import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
 
@@ -30,8 +29,8 @@ class index extends React.Component {
 		checkboxSelected:true,
 	}
 
-    pagename="Classrooms"
-	links = [['App','/app/classrooms',''],['Classrooms','/app/classrooms','active']]
+    pagename="Tags"
+	links = [['App','/app/classrooms',''],['Tags','/app/tags','active']]
 	
 	componentDidMount(){
 		
@@ -86,7 +85,7 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                        <li className="p-0"><Link href={{pathname:'/app/classrooms/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Add new classroom</a></Link></li>
+                                        <li className="p-0"><Link href={{pathname:'/app/articles/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah tag</a></Link></li>
                                     </ul>
                                 </div>
                             </Col>
@@ -102,45 +101,15 @@ class index extends React.Component {
 											<thead>
 												<tr>
 													<th width="20"><Checkbox/></th>
-													<th>Classroom</th>
-													<th>Pelajaran</th>
-													<th>Quiz</th>
-													<th>Tags</th>
-													<th>Akses</th>
-													<th>Penulis</th>
-													<th className="fright">Status</th>
+													<th>Tag</th>
 												</tr>
 											</thead>
 											<tbody>
 												{
-													this.props.classrooms.list.map(item=>(
+													this.props.tags.list.map(item=>(
 														<tr key={item.id}>
 															<td><Checkbox/></td>
-															<td valign="middle"><Link href={{pathname:'/app/classrooms/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
-															<td valign="middle">{item.noOfModules}</td>
-															<td valign="middle">{item.noOfQuizes}</td>
-															<td valign="middle">
-																{
-																	item.tags.map(tag=>
-																		<Tag key={tag.id}>
-																			<Link href={{pathname:'/app/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
-																		</Tag>	
-																	)
-																}
-															</td>
-															<td valign="middle">{item.readAccess}</td>
-															<td valign="middle"><Link href={{pathname:'/access/user/[id]',query:{id:item.author.id}}} shallow><a>{item.author.name}</a></Link></td>
-															<td valign="middle" className="fright">
-																{
-																	item.status===1 ? <Status text="Published" state="success" position="right"/> :
-																	item.status===2 ? <Status text="Draft" state="warning" position="right"/> :
-																	// campaign.status===2 ? <Status text="On Approval" state="warning" position="right"/> :
-																	// campaign.status===3 ? <Status text="Running" state="success" position="right" blinking/> :
-																	// campaign.status===4 ? <Status text="Finished" state="default" position="right"/> :
-																	// campaign.status===5 ? <Status text="Canceled" state="fail" position="right"/> :
-																	<></>
-																}
-															</td>
+															<td valign="middle">{item.name}</td>
 														</tr>
 													))
 												}

@@ -1,7 +1,7 @@
 const initialState = {
     item:{
         id:'1',
-        name:'Bahasa Arab',
+        name:'Berita',
         description:"Pelajaran Bahasa Arab",
         status:1
     },
@@ -23,7 +23,7 @@ const initialState = {
             name:'Bahasa Arab',
             description:"Pelajaran Bahasa Arab",
             status:1
-        },
+        }
     ]
 }
 

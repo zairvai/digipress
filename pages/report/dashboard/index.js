@@ -28,7 +28,7 @@ import {
 } from 'Components/layout'
 import { vuroxContext } from '../../../context'
 
-import Layout from 'Templates/DashboardLayout'
+import Layout from 'Templates/Layout.dashboard'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import AdminSummeryBox from 'Templates/AdminSummeryBox';
