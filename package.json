@@ -14,6 +14,7 @@
     "@fullcalendar/interaction": "^4.4.0",
     "@fullcalendar/react": "^4.4.0",
     "@fullcalendar/timegrid": "^4.4.0",
+    "@hookform/error-message": "^0.0.5",
     "@hookform/resolvers": "^1.1.1",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",

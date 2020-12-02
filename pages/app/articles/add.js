@@ -1,89 +1,29 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import Link from 'next/link'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
-
 import {
 	VuroxLayout,
 	HeaderLayout,
 	VuroxSidebar,
-	ContentLayout,
-	VuroxComponentsContainer
+	ContentLayout
 } from 'Components/layout'
-import VuroxFormSearch from 'Components/search'
 import { vuroxContext } from 'Context'
-
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 
-import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio} from 'antd'
-import {currency} from 'Utilities/number'
-import Icon from '@mdi/react'
-import {mdiGoogleAds, mdiInstagram} from '@mdi/js'
-import {Status} from 'Components/mycomponents.js'
-import { Search} from 'react-bootstrap-icons'
-import RichTextEditor from 'Components/RichTextEditor'
-
+import FormArticle from 'Components/FormArticle'
 
 class index extends React.Component {
 
-	static contextType = vuroxContext
+    static contextType = vuroxContext
     
-	state = {
-        formLayout:'vertical',
-        checkboxSelected:true,
-        selectedCategory:{id:null,value:null},
-        selectedTags:[{id:null,value:null}],
-        readAccess:"public",
-	}
-
     pagename="New article"
 	links = [['App','/app/classroom',''],['Articles','/app/articles',''],['Add new','/app/articles/add','active']]
 	
-	async componentDidMount(){
-        
-    }
-
-    onFormLayoutChange = ({ layout }) => {
-        this.setState({ formLayout: layout });
-    };
-
-    onReadAccessChange = e => {
-        console.log('radio checked', e.target.value);
-        this.setState({readAccess:e.target.value})
-    };
-
-    onSelectCategoryChange = selected =>{
-        this.setState({selectedCategory:{
-            id:parseInt(selected.value),
-            value:selected.value,
-            label:selected.label}})
-    }
-
-    onSelectTagsChange = selecteds =>{
-
-        let items=[]
-
-        selecteds.forEach((item)=>{
-            items.push({
-                id:parseInt(item.value),
-                value:item.value,
-                label:item.label})
-        })
-
-        this.setState({selectedTags:items})
-
-    }
-
 	render() {
 
 		const { menuState } = this.context
         const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-        
-        const {selectedCategory,selectedTags} = this.state
 
 		return (
 			<React.Fragment>
@@ -96,132 +36,7 @@ class index extends React.Component {
 					</VuroxSidebar>
 					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                         <Summery2 pagename={this.pagename} links={this.links}/>
-                        
-                        <Form
-                            layout={this.state.formLayout}
-                            initialValues={{layout:this.state.formLayout}}
-                        >
-                            <Row>
-                                <Col md={18}>
-                                    <VuroxComponentsContainer className="p-4">
-                                        <Row>
-                                            <Col md={24}>
-                                                <Form.Item label="Title">
-                                                    <Input size="large" placeholder="..." />
-                                                </Form.Item>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={24}>
-                                                <Form.Item label="Summary" className="mb-0">
-                                                    <Input.TextArea style={{height:"150px"}} placeholder="..."/>
-                                                </Form.Item>
-                                            </Col>
-                                        </Row>
-                                    </VuroxComponentsContainer>	
-                                    <VuroxComponentsContainer className="p-4 mt-2">
-                                        <Row>
-                                            <Col md={24}>
-                                                <Form.Item label="Content">
-                                                    <RichTextEditor style={{height:"600px"}} className="mb-3"/>
-                                                </Form.Item>
-                                            </Col>
-                                        </Row>
-                                    </VuroxComponentsContainer>
-                                </Col>
-                                <Col md={6}>
-                                    <VuroxComponentsContainer className="p-4 ml-2">
-                                        <Row>
-                                            <Col md={24}>
-                                                
-                                                <Form.Item label="Category" className="mb-0">
-                                                    <Select
-                                                        labelInValue
-                                                        value={selectedCategory}
-                                                        showSearch
-                                                        size="large"
-                                                        placeholder="Select a category"
-                                                        optionFilterProp="children"
-                                                        optionLabelProp="label"
-                                                        onChange={this.onSelectCategoryChange}
-                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                                                        
-                                                        {this.props.categories.list.map(item=>
-                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
-                                                        )}
-
-                                                    </Select>
-                                                </Form.Item>
-                                                <div className="d-flex justify-content-end">
-                                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new category</Button>
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={24}>
-                                                
-                                                <Form.Item label="Tags" className="mb-0">
-                                                    <Select
-                                                        labelInValue
-                                                        value={selectedTags}
-                                                        showSearch
-                                                        size="large"
-                                                        mode="multiple"
-                                                        placeholder="Select tags"
-                                                        optionFilterProp="children"
-                                                        optionLabelProp="label"
-                                                        onChange={this.onSelectTagsChange}
-                                                        // onFocus={onFocus}
-                                                        // onBlur={onBlur}
-                                                        // onSearch={onSearch}
-                                                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                                                        >
-
-                                                        {this.props.tags.list.map(item=>
-                                                            <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
-                                                        )}
-
-                                                    </Select>
-                                                </Form.Item>
-                                                <div className="d-flex justify-content-end">
-                                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new tag</Button>
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={24}>
-                                                <Checkbox onChange={()=>{}}>Allow comment</Checkbox>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={24}>
-                                                <Form.Item label="Who can read this article" className="mt-3 mb-0">
-                                                    <Radio.Group onChange={this.onReadAccessChange.bind(this)} value={this.state.readAccess}>
-                                                        <Radio value="public">Public</Radio>
-                                                        <Radio value="private">Private</Radio>
-                                                    </Radio.Group>
-                                                </Form.Item>
-                                            </Col>
-                                        </Row>
-                                    </VuroxComponentsContainer>
-                                    <VuroxComponentsContainer className="p-4 ml-2 mt-2">
-                                        <Row>
-                                            <Col md={24}>
-                                                <Row>
-                                                    <Col md={11}>
-                                                        <Button size="medium" type="primary" block>Publish</Button>
-                                                    </Col>
-                                                    <Col md={2}></Col>
-                                                    <Col md={11}>
-                                                        <Button size="medium" type="primary" danger block>Draft</Button>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                    </VuroxComponentsContainer>
-                                </Col>
-                            </Row>
-						</Form>
+                        <FormArticle/>
 					</ContentLayout>
 				</VuroxLayout>
 			</React.Fragment>

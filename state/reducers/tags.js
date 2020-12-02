@@ -23,6 +23,12 @@ const initialState = {
             name:'sejarah',
             description:"",
             status:1
+        },
+        {
+            id:'4',
+            name:'bahasa arab',
+            description:"",
+            status:1
         }
     ]
 }

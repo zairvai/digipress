@@ -1,10 +1,9 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import Link from 'next/link'
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -14,15 +13,10 @@ import {
 } from 'Components/layout'
 import VuroxFormSearch from 'Components/search'
 import { vuroxContext } from 'Context'
-
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-
 import { Row, Col,Button, Checkbox,Dropdown,Menu,Tag} from 'antd'
-import {currency} from 'Utilities/number'
-import Icon from '@mdi/react'
-import {mdiGoogleAds, mdiInstagram} from '@mdi/js'
 import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
@@ -92,7 +86,6 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                        {/* <li className="p-0"><Button type="link" size="small" icon={<i classxName="ti-plus"></i>}>&nbsp;Add news</Button></li> */}
                                         <li className="p-0"><Link href={{pathname:'/app/articles/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Add new article</a></Link></li>
                                     </ul>
                                 </div>
@@ -127,7 +120,7 @@ class index extends React.Component {
 															<td valign="middle">
 																{
 																	item.tags.map(tag=>
-																		<Tag>
+																		<Tag key={tag.id}>
 																			<Link href={{pathname:'/app/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
 																		</Tag>	
 																	)

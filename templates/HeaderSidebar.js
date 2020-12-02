@@ -38,7 +38,6 @@ const Sidebar = (props) => {
 							
 					<VerticalNavHeading>App</VerticalNavHeading>
 					<Navitem link='/app/classrooms' text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-					{/* <Navitem link='/app/news' text='News' icon={<Icon size="1.3em" path={mdiNewspaperVariantMultipleOutline} />} /> */}
 					<Navitem link='/app/articles' text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					<Navitem link='/app/comments' text='Comments' icon={<Icon size="1.3em" path={mdiCommentMultipleOutline} />} />
 					<Navitem link='/app/categories' text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />

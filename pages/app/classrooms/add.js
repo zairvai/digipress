@@ -10,21 +10,20 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import FormArticle from 'Components/FormArticle'
 
-class Index extends React.Component {
+import FormClassroom from 'Components/FormClassroom'
 
-	static contextType = vuroxContext
+class index extends React.Component {
 
-    item = this.props.articles.item   
-
-    pagename = ""
-    links = [['App','/app/classrooms',''],['Articles','/app/articles',''],[this.item.name,`/app/articles/${this.item.id}`,'active']]
-
+    static contextType = vuroxContext
+    
+    pagename="New classroom"
+	links = [['App','/app/classroom',''],['Classrooms','/app/classrooms',''],['Add new','/app/classrooms/add','active']]
+	
 	render() {
 
-        const { menuState } = this.context
-		const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+		const { menuState } = this.context
+        const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
 		return (
 			<React.Fragment>
@@ -36,15 +35,12 @@ class Index extends React.Component {
 						<Sidebar className={toggleClass} />
 					</VuroxSidebar>
 					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-                        
                         <Summery2 pagename={this.pagename} links={this.links}/>
-
-                        <FormArticle item={this.item}/>
-
+                        <FormClassroom/>
 					</ContentLayout>
 				</VuroxLayout>
 			</React.Fragment>
 		);
 	}
 }
-export default connect(state=>state)(Index)
+export default connect(state=>state)(index)

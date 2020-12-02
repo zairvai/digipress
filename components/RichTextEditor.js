@@ -1,58 +1,50 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 
-class RichTextEditor extends React.Component{
+const Editor = props => {
 
+    const [TextEditor,setTextEditor] = React.useState(null)
+    const [content,setContent] = React.useState("")
 
-    state = {
-        ReactQuill:null,
-        reactQuillText: ""
-    }
-
-    async componentDidMount(){
-        this. modules = {
-            toolbar: [
-                [{ 'header': [1, 2, 3, 4,5, false] }],
-                ["bold", "underline" ,"italic", "strike"],
-                ["link", "blockquote", "code", "image"],
-                [{ 'color': [] }, { 'background': [] }], 
-                [{list: "ordered"},{list: "bullet"}],
-                [{ align: "" },{align:"center"},{align:"right"},{align:"justify"}]
-            ]
-        };
-
-        const ReactQuillComponent = await import('react-quill')//dynamic (()=>import('react-quill'),{ssr:true}) 
-        this.setState({ReactQuill:ReactQuillComponent.default})
-    }
-
-    handleReactQuillChange = value => {
-        this.setState({
-          reactQuillText: value
-        });
-
-        console.log(this.state.reactQuillText)
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, 3, 4,5, false] }],
+            ["bold", "underline" ,"italic", "strike"],
+            ["link", "blockquote", "code", "image"],
+            [{ 'color': [] }, { 'background': [] }], 
+            [{list: "ordered"},{list: "bullet"}],
+            [{ align: "" },{align:"center"},{align:"right"},{align:"justify"}]
+        ]
     };
 
+    React.useEffect(()=>{
 
-    render(){
+        const ReactQuillComponent = dynamic (()=>import('react-quill'),{ssr:false}) 
+        setTextEditor(ReactQuillComponent)
 
-        const {ReactQuill} = this.state
+        return(()=>{
 
-        return <>
+        })
+    },[])
+
+    const handleReactQuillChange = value => {
+        setContent(value)
+    };
+
+    return <>
             {
-                ReactQuill && 
-                    <ReactQuill
-                        style = {this.props.style}
-                        className={this.props.className}
-                        value={this.props.value ? this.props.value : this.reactQuillText}
-                        onChange={this.handleReactQuillChange}
+                TextEditor && 
+                    <TextEditor
+                        style = {props.style}
+                        className={props.className}
+                        value={props.value ? props.value : content}
+                        onChange={props.onChange}
                         theme="snow"
-                        modules={this.modules}
+                        modules={modules}
                     />
             }
         </>
-    }
-
 
 }
 
-export default RichTextEditor
+export default Editor
