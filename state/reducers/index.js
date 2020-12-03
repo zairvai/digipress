@@ -9,7 +9,7 @@ import { questions } from './questions'
 import { comments } from './comments'
 
 import { campaigns } from './campaigns'
-import { vuroxUsers } from './users'
+import { users } from './users'
 import { vuroxCompanyInfo } from './company'
 import { vuroxCompanyCalendar } from './calendar'
 import { vuroxMail } from './mail'
@@ -17,7 +17,7 @@ import { vuroxChatMessages } from './message'
 
 const rootReducer = combineReducers({
 	accounts: accounts,
-	users: vuroxUsers,
+	users: users,
 	articles: articles,
 	classrooms: classrooms,
 	categories: categories,

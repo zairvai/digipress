@@ -34,8 +34,10 @@ const HeaderDark = props => {
 								<GridFill className="vurox-menu-toggler" onClick={ toggleMenu } />
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
+							<h5 className="vurox-text-sizes mb-0">{props.accounts.item.name}</h5>
 						</Space>
 					</Col>
+				
 					<Col span={12}>
 						<div className='justify-content-end d-flex flex-row'>
 							{/* <VuroxDropdown position='vurox-dropdown-top-right'>

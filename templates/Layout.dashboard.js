@@ -29,7 +29,7 @@ import {
 import { vuroxContext } from 'Context'
 
 import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
+import Summery from 'Templates/Summery';
 import Sidebar from 'Templates/HeaderSidebar';
 
 import {Mylink} from 'Components/mycomponents'
@@ -85,7 +85,7 @@ class campaign extends React.Component {
 						<Sidebar className={toggleClass} />
 					</VuroxSidebar>
 					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-                        <Summery2 pagename={this.item.name} links={this.links}/>
+                        <Summery pagename={this.item.name} links={this.links}/>
                         <Row className="mb-2">
                             <Col md={12}>
                                 <div className="vurox-tabs-underlined vurox-dark vurox-tabs-underlined-left mt-3 mb-1">

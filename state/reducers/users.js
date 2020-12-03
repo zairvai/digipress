@@ -12,7 +12,7 @@ const initialState = {
 	verified: false
 }
 
-export const vuroxUsers = ( state = initialState, action ) => {
+export const users = ( state = initialState, action ) => {
 	switch( action.type ){
 		case 'USER_LOGGEDIN' : {
 			return{
