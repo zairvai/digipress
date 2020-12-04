@@ -12,12 +12,20 @@ import {
 } from 'Components/progressbar';
 import { Search, GridFill ,Grid } from 'react-bootstrap-icons'
 import { vuroxContext } from '../context'
+import { appContext } from '../context/app'
+import { Row, Col,Button} from 'antd'
 
-import Nav, { Navitem, SubNavItems } from 'Components/nav'
-import { Row, Col } from 'antd'
+import AuthController from 'Library/controllers/AuthController'
 
 const HeaderDark = props => {
 	const { toggleMenu, menuState } = useContext(vuroxContext)
+
+	const {auth} = React.useContext(appContext)
+	const [name,setName] = React.useState("")
+
+	React.useEffect(()=>{
+		if(auth.user) setName(auth.user.name)
+	},[auth.user])
 	
 	return (
 		<div>
@@ -29,12 +37,23 @@ const HeaderDark = props => {
 							{/* <VuroxBrand image='/image/logo.png' /> */}
 							{
 								menuState ? 
-								<Link href='#'><Grid className="vurox-menu-toggler" onClick={ toggleMenu } /></Link>
+								<Grid className="vurox-menu-toggler" onClick={ toggleMenu } />
 								:
 								<GridFill className="vurox-menu-toggler" onClick={ toggleMenu } />
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
-							<h5 className="vurox-text-sizes mb-0">{props.accounts.name}</h5>
+
+							{
+
+								AuthController.isAppOwner(auth)  ? 
+								<h5 className="vurox-text-sizes mb-0">APP Owner</h5>
+								:
+								!AuthController.isAppAdmin(auth) ? 
+								<h5 className="vurox-text-sizes mb-0">APP Admin</h5>
+								:
+								<h5 className="vurox-text-sizes mb-0">{props.accounts.name}</h5>
+
+							}
 						</Space>
 					</Col>
 				
@@ -94,6 +113,16 @@ const HeaderDark = props => {
 								</DropdownItems>
 							</VuroxDropdown>
 
+							<VuroxDropdown position='vurox-dropdown-top-right'>
+								<button className='dropbtn'><i className='ti-user bg-blue-6 flex-fill'></i></button>
+								<DropdownItems width={240} className='pb-2'>
+									<DropdownItemsHead color='bg-cyan-6'>
+										{name}
+									</DropdownItemsHead>
+									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
+									<DropdownItem link="/"><i className='ti-arrow-left'></i>Keluar</DropdownItem>
+								</DropdownItems>
+							</VuroxDropdown>
 							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
 								<button className='dropbtn'><i className="ti-email"></i></button>
 								<DropdownItems width={240}> 
@@ -142,7 +171,7 @@ const HeaderDark = props => {
 							</VuroxDropdown> */}
 
 
-							<VuroxDropdown position='vurox-dropdown-top-right'>
+							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
 								<ProfileBadge name='S'  size='md' shape='rounded' version='dark' className='mt-3 ml-2 vurox-dropdown' badge='2' badgeColor='bg-purple-6' badgeShape='circle' />
 								<DropdownItems width={200} className='py-2'>
 									<DropdownItem link='#' className='disabled-hover'>
@@ -163,7 +192,7 @@ const HeaderDark = props => {
 									<DropdownItem link='/'><i className='ti-money'></i>Earnings</DropdownItem>
 									<DropdownItem link='/'><i className='ti-layout-media-overlay'></i>Statements</DropdownItem>
 								</DropdownItems>
-							</VuroxDropdown>
+							</VuroxDropdown> */}
 						</div>
 					</Col>
 				</Row>

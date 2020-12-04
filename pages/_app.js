@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper'
 import configureStore from '../state/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { VuroxContextProvider } from '../context'
+import { AppContextProvider } from '../context/app'
 import 'antd/dist/antd.less'
 import 'react-quill/dist/quill.snow.css';
 import 'Styles/styles.less'
@@ -21,6 +22,7 @@ class VuroxApp extends App{
 	}
 
 	static async getInitialProps( { Component, ctx } ){
+		
 		let pageProps = {}
 		if( Component.getInitialProps ){
 			pageProps = await Component.getInitialProps(ctx)
@@ -42,7 +44,9 @@ class VuroxApp extends App{
 	        <Provider store={store}>
 				<PersistGate persistor={store._PERSISTOR} loading={null}>
 					<VuroxContextProvider pageWidth={this.state.width}>
-						<Component {...pageProps}/>
+						<AppContextProvider>
+							<Component {...pageProps}/>
+						</AppContextProvider>
 					</VuroxContextProvider>
 				</PersistGate>
 	        </Provider>

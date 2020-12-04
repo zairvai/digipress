@@ -42,6 +42,7 @@ import {
 	ResponsiveContainer, BarChart,LineChart,Line, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area, linearGradient, PieChart, Pie, Sector
 } from 'recharts';
 
+import AppContainer from 'Templates/AppContainer'
 
 class Page extends React.Component {
 
@@ -70,7 +71,7 @@ class Page extends React.Component {
         this.id = query.id
         
         this.item = this.props.campaigns.item 
-        console.log(this.item)
+        
         this.links = [['Main','/dashboard',''],['Campaign','/campaign','active']]
 
     }
@@ -78,7 +79,7 @@ class Page extends React.Component {
 	render() {
 		
 		return (
-			<React.Fragment>
+			<AppContainer>
                 <Layout>
 					<AdminSummeryBox />
 					<Row gutter={{xs: 4, sm:6, md: 8}}>
@@ -424,7 +425,7 @@ class Page extends React.Component {
 					</Row>
 								
                 </Layout>
-            </React.Fragment>
+            </AppContainer>
 		);
 	}
 }

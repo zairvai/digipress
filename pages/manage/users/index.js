@@ -21,6 +21,7 @@ import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
 
+import AppContainer from 'Templates/AppContainer'
 
 class index extends React.Component {
 
@@ -31,7 +32,7 @@ class index extends React.Component {
 	}
 
     pagename="Users"
-	links = [['Access','/access/accounts',''],['Users','/access/users','active']]
+	links = [['Manage','/manage/accounts',''],['Users','/manage/users','active']]
 	
 	componentDidMount(){
 		
@@ -56,7 +57,7 @@ class index extends React.Component {
 		  );
 
 		return (
-			<React.Fragment>
+			<AppContainer>
 				<HeaderLayout className="sticky-top">
 					<HeaderDark />
 				</HeaderLayout>
@@ -86,7 +87,7 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-										<li className="p-0"><Link href={{pathname:'/app/users/add'}} shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah pengguna</Button></Link></li>
+									<li className="p-0"><Link href={{pathname:'/manage/users/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
                                     </ul>
                                 </div>
                             </Col>
@@ -138,7 +139,7 @@ class index extends React.Component {
 						
 					</ContentLayout>
 				</VuroxLayout>
-			</React.Fragment>
+			</AppContainer>
 		);
 	}
 }

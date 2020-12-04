@@ -21,7 +21,7 @@ import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
 
-
+import AppContainer from 'Templates/AppContainer'
 class index extends React.Component {
 
 	static contextType = vuroxContext
@@ -56,7 +56,7 @@ class index extends React.Component {
 		  );
 
 		return (
-			<React.Fragment>
+			<AppContainer>
 				<HeaderLayout className="sticky-top">
 					<HeaderDark />
 				</HeaderLayout>
@@ -86,7 +86,7 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                        <li className="p-0"><Link href={{pathname:'/app/articles/add'}} shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah artikel</Button></Link></li>
+										<li className="p-0"><Link href={{pathname:'/app/articles/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah artikel</a></Link></li>
                                     </ul>
                                 </div>
                             </Col>
@@ -153,7 +153,7 @@ class index extends React.Component {
 						
 					</ContentLayout>
 				</VuroxLayout>
-			</React.Fragment>
+			</AppContainer>
 		);
 	}
 }

@@ -1,44 +1,42 @@
 import React from 'react';
-import {Space} from 'antd'
-import $ from 'jquery'
 import { connect } from 'react-redux'
 import { Row, Col } from 'antd'
-import {currency} from 'Utilities/number'
+import {appContext} from 'Context/app'
 
-class Summery extends React.Component {
+const Summery = props =>{
 
-	componentDidMount(){
+	const {auth} = React.useContext(appContext)
+	const [name,setName] = React.useState("")
 
-		$('.slideHidden').on('click', () => {
-			$('.slideHiddenContent').slideToggle()
-		} )
-	}
+	React.useEffect(()=>{
+		if(auth.user){
+			setName(auth.user.name)
+		}
+	},[auth.user])
 
-	render() {
-
-		return (
-			<div className="vurox-admin-summery">
-				<Row>
-					<Col lg={12} md={10} xs={24}>
-						<Row>
-							
-							<Col xs={16}>
-								<div className="vurox-admin-welcome">
-									<h5>Hi {this.props.users.firstname}, Selamat datang !</h5>
-									<p>Terakhir masuk {this.props.users.lastloggedin}</p>
-								</div>
-							</Col>
-							
-							<Col xs={8} className='d-block d-sm-none'>
-								<button className='btn btn-sm bg-green-5 fright slideHidden'>Info</button>
-							</Col>
-						</Row>
-					</Col>
-					
-				</Row>
+	return (
+		<div className="vurox-admin-summery">
+			<Row>
+				<Col lg={12} md={10} xs={24}>
+					<Row>
+						
+						<Col xs={16}>
+							<div className="vurox-admin-welcome">
+								<h5>Hi {name}, Selamat datang !</h5>
+								{/* <p>Terakhir masuk {this.props.users.lastloggedin}</p> */}
+							</div>
+						</Col>
+						
+						{/* <Col xs={8} className='d-block d-sm-none'>
+							<button className='btn btn-sm bg-green-5 fright slideHidden'>Info</button>
+						</Col> */}
+					</Row>
+				</Col>
 				
-			</div>
-		);
-	}
+			</Row>
+			
+		</div>
+	);
+	
 }
 export default connect( state=>state )(Summery)

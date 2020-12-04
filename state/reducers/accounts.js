@@ -19,7 +19,7 @@ const initialState = {
             status:3
         },
         {
-            id:1,
+            id:2,
             name:"Pondok Pesantren Alzaytun",
             address:"Mekarjaya, Alzaytun, Indramayu Regency, West Java 45264",
             phone:"0234-742815",

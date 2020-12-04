@@ -11,39 +11,37 @@ import { Row, Col,Button, Checkbox,Form,Menu} from 'antd'
 import FormForgotPassword from 'Components/FormAuthForgotPassword'
 import FormResetPassword from 'Components/FormAuthResetPassword'
 
-class index extends React.Component {
+const auth = props => {
 
-	render() {
-		
 
-		return (
-			<React.Fragment>
-				<Header/>
-				<VuroxLayout>
+	return (
+		<React.Fragment>
+			<Header/>
+			<VuroxLayout>
+				
+				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
 					
-					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-						
-						<Row className="justify-content-center fullHeight">
-							<Col md={8} sm={24} xs={24} className="fullHeight">
-								<Row className="align-items-center fullHeight">
-									<Col md={24} sm={24} xs={24}>
-                                        
-										{this.props.auth.onResetPassword ? 
-											<FormResetPassword/>
-											:
-											<FormForgotPassword/>
-										}
+					<Row className="justify-content-center fullHeight">
+						<Col md={8} sm={24} xs={24} className="fullHeight">
+							<Row className="align-items-center fullHeight">
+								<Col md={24} sm={24} xs={24}>
+									
+									{props.auth.onResetPassword ? 
+										<FormResetPassword/>
+										:
+										<FormForgotPassword/>
+									}
 
-									</Col>
-								</Row>
-								
-							</Col>
-						</Row>
-                        
-					</ContentLayout>
-				</VuroxLayout>
-			</React.Fragment>
-		);
-	}
+								</Col>
+							</Row>
+							
+						</Col>
+					</Row>
+					
+				</ContentLayout>
+			</VuroxLayout>
+		</React.Fragment>
+	);
+	
 }
-export default connect(state=>state)(index)
+export default connect(state=>state)(auth)

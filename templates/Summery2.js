@@ -38,9 +38,9 @@ class Summery extends React.Component {
                                 </Row>
                             </Col>
 							
-							<Col xs={8} className='d-block d-sm-none'>
+							{/* <Col xs={8} className='d-block d-sm-none'>
 								<button className='btn btn-sm bg-green-5 fright slideHidden'>Info</button>
-							</Col>
+							</Col> */}
 						</Row>
 					</Col>
 					<Col lg={12} md={14} className='d-none d-sm-block slideHiddenContent'>

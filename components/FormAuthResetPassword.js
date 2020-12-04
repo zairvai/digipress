@@ -15,7 +15,7 @@ import AuthController from 'Library/controllers/AuthController'
 const {Text} = Typography
 
 const schema = yup.object().shape({
-    code:yup.number().required("Mohon ketik kode keamanan yang telah dikirim ke email").positive("Mohon masukan kode keamanan dengan benar."),
+    code:yup.number().typeError("Kode konfirmasi terdiri dari angka saja.").required("Mohon ketik kode keamanan yang telah dikirim ke email.").positive("Mohon masukan kode keamanan dengan benar."),
     password:yup.string().required("Mohon ketik password kamu yang baru."),
     confirm_password:yup.string().required("Mohon pastikan password konfirmasi kamu benar."),
 })

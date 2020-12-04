@@ -38,9 +38,9 @@ const FormAuth = props => {
 
     const authController = new AuthController(props)
     
-    React.useEffect(()=>{
-        authController._initSignIn()
-    },[])
+    // React.useEffect(()=>{
+    //     authController._initSignIn()
+    // },[])
 
     const onSubmit = values =>{
         authController._signIn(values.email,values.password)

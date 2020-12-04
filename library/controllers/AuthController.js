@@ -13,6 +13,17 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
+    static isAppOwner = (auth) => {
+        
+        if(auth.user) return auth.user.cognitoGroups.includes("app-owner")
+        return false
+    }
+
+    static isAppAdmin = (auth) => {
+
+        if(auth.user) return auth.user.cognitoGroups.includes("app-admin")
+        return false
+    }
 
     _initSignIn = () =>{
         this.dispatch(initSignIn())
