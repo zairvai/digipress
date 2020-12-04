@@ -86,7 +86,7 @@ class index extends React.Component {
                             <Col md={12}>
                                 <div className="fright">
                                     <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                        <li className="p-0"><Link href={{pathname:'/app/accounts/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
+										<li className="p-0"><Link href={{pathname:'/app/accounts/add'}} shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah akun</Button></Link></li>
                                     </ul>
                                 </div>
                             </Col>
@@ -102,7 +102,7 @@ class index extends React.Component {
 											<thead>
 												<tr>
 													<th width="20"><Checkbox/></th>
-													<th>Account</th>
+													<th>Akun</th>
 													<th width="30%">Alamat</th>
 													<th width="15%">Telpon</th>
 													<th width="20%">Contact Person</th>

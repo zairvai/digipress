@@ -103,7 +103,7 @@ const FormArticle = ({item,...props}) => {
         console.log(selected)
         
         setValue("category",{
-            id:parseInt(selected.value),
+            id:selected.value,
             value:selected.value,
             label:selected.label
         })
@@ -115,7 +115,7 @@ const FormArticle = ({item,...props}) => {
 
         selecteds.forEach((item)=>{
             selectedTags.push({
-                id:parseInt(item.value),
+                id:item.value,
                 value:item.value,
                 label:item.label})
         })
@@ -152,7 +152,7 @@ const FormArticle = ({item,...props}) => {
                                     // rules={{required:true,message:"isi ini"}}
                                     render={props=>
                                         <Form.Item label="Title">
-                                            <Input size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                            <Input size="large" placeholder="Artikel" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
                                     }

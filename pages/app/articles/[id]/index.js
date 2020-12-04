@@ -31,7 +31,7 @@ class Index extends React.Component{
                                     <Col md={12}>
                                         <div className="fright">
                                             <ul className="vurox-horizontal-links vurox-standard-ul">
-                                                <li className="p-0"><Link href={{pathname:'/app/articles/[id]/edit',query:{id:this.item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit article</a></Link></li>
+                                                <li className="p-0"><Link href={{pathname:'/app/articles/[id]/edit',query:{id:this.item.id}}} shallow><Button className="link" type="link" size="small" icon={<i className="ti-pencil"></i>}>&nbsp;Edit artikel</Button></Link></li>
                                             </ul>
                                         </div>
                                     </Col>

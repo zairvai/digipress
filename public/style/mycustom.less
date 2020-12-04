@@ -2,6 +2,9 @@
 @import './variables.less';
 @import './colors.less';
 
+.fullHeight{
+	height:100%;
+}
 .ant-checkbox-wrapper{
 	line-height:0 !important;
 }
@@ -104,33 +107,22 @@ ul.vurox-horizontal-links{
 		color:#333333;
 	}
   }
-
-  .ant-input{
-	  background:#ffffff;
-	  color:#333333;
-  }
+  
 
   span.anticon{
 	  color:#888888;
   }
 
-  .ant-select-selector{
-	  background: #ffffff !important;
-	  color:#333333 !important;
-  }
-
-  .ant-select-selection-placeholder{
-	color:#888888;
-  }
-
   .vurox-admin-table thead tr th{
 	  font-size:14px;
+	  padding:16px 17px 10px;
   }
+
   .vurox-admin-table tbody tr td{
 	  font-weight: normal;
   }
   Button.link, ul.vurox-horizontal-links li a {
-	  color: rgba(255, 255, 255, 0.65);
+	  
 	  padding:0;
 	  font-size:14px;
 
@@ -138,3 +130,23 @@ ul.vurox-horizontal-links{
 		  color: inherit;
 	  }
   }
+
+.vurox-breadcrumb-list li a{
+	font-weight: normal;
+}
+
+.vurox-breadcrumb-list li:after{
+	top:10px;
+}
+
+.vurox-breadcrumb-list li a.active {
+	font-size:14px;
+	color:#333333 !important;
+	font-weight: bold;
+}
+
+.vurox-vertical-nav ul li.active a {
+	color: @vurox-text-primary-color;
+	background: rgba(0,193,216,0.5);
+			
+}

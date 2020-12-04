@@ -6,7 +6,7 @@ const index = () => {
     const router = useRouter()
 
     useEffect(()=>{
-        router.push('/dashboard')
+        router.push('/report/dashboard')
         return ()=>{}
     })
 

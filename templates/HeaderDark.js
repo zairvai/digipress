@@ -34,7 +34,7 @@ const HeaderDark = props => {
 								<GridFill className="vurox-menu-toggler" onClick={ toggleMenu } />
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
-							<h5 className="vurox-text-sizes mb-0">{props.accounts.item.name}</h5>
+							<h5 className="vurox-text-sizes mb-0">{props.accounts.name}</h5>
 						</Space>
 					</Col>
 				

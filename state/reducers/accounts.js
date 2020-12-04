@@ -1,4 +1,6 @@
 const initialState = {
+    id:1,
+    name:"Al-Mahadul Islami",
     item:{
         id:1,
         name:"Al-Mahadul Islami",

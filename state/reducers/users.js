@@ -1,15 +1,57 @@
 import { USERS } from '../actions/constants'
 const initialState = {
-	loggedin: false,
-	username: 'Fikar',
-	id: '',
+	id: '1002',
+	username: 'masvickar',
+	firstname:'Zulfikar',
+	lastname:'Latief',
+	email: 'masvickar19@gmail.com',
 	token: '',
-	email: '',
-	lastloggedin: '',
-	list: '',
+	loggedin: false,
+	lastloggedin: '2019-11-30 22:30',
+	verified: true,
 	salesVolume: 500000,
 	currency: 'Rp',
-	verified: false
+	item:{
+		id:'1001',
+		username: 'masvickar',
+		firstname:'Zulfikar',
+		lastname:'Latief',
+		email: 'masvickar19@gmail.com',
+		verified: true,
+		status:3
+	},
+	list:[
+		{
+			id:'1001',
+			username: 'zairvai',
+			firstname:'Aljazair',
+			lastname:'Lindan',
+			email: 'zairvai@gmail.com',
+			verified: true,
+			role:'owner',
+			status:2
+		},
+		{
+			id:'1002',
+			username: 'masvickar',
+			firstname:'Zulfikar',
+			lastname:'Latief',
+			email: 'masvickar19@gmail.com',
+			verified: true,
+			role:'admin',
+			status:3
+		},
+		{
+			id:'1003',
+			username: 'johny',
+			firstname:'Rahmat',
+			lastname:'Johny',
+			email: 'rjo@gmail.com',
+			verified: true,
+			role:'tutor',
+			status:4
+		}
+	]
 }
 
 export const users = ( state = initialState, action ) => {

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword } from './auth'
 import { accounts } from './accounts'
 import { articles } from './articles'
 import { classrooms } from './classrooms'
@@ -15,22 +16,42 @@ import { vuroxCompanyCalendar } from './calendar'
 import { vuroxMail } from './mail'
 import { vuroxChatMessages } from './message'
 
+import {reduceReducers} from 'Helper'
+import {persistReducer} from 'redux-persist'
+import AsyncStorage from '@react-native-community/async-storage'
+const storage = require('redux-persist/lib/storage').default
+
+const authPersistConfig = {
+    key:"auth",
+	storage,
+	// blacklist:['error','isError']
+    // blacklist:['_persist',
+    //     "temp",
+    //     "newPasswordRequired",
+    //     "userNotConfirmed",
+    //     "usernamExists"]
+}
+
+
+const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword)
+
 const rootReducer = combineReducers({
-	accounts: accounts,
-	users: users,
-	articles: articles,
-	classrooms: classrooms,
-	categories: categories,
-	tags: tags,
-	lessons: lessons,
-	questions: questions,
-	comments: comments,
+	auth:persistReducer(authPersistConfig,authReducers),
+	accounts,
+	users,
+	articles,
+	classrooms,
+	categories,
+	tags,
+	lessons,
+	questions,
+	comments,
 
 	campaigns: campaigns,
 	company: vuroxCompanyInfo,
-	calendar: vuroxCompanyCalendar,
-	mail: vuroxMail,
-	message: vuroxChatMessages,
+	// calendar: vuroxCompanyCalendar,
+	// mail: vuroxMail,
+	// message: vuroxChatMessages,
 })
 
 

@@ -28,6 +28,7 @@ export const useWindowSize = () => {
 
   return windowSize;
 }
+
 export const VuroxContextProvider = (props) => {
     const [menutoggle, setMenutoggle] = props.pageWidth > 700 ? useState(false) : useState(true)  
     const [initClosed, setInitClosed] = useState(true)

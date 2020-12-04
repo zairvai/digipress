@@ -5,11 +5,14 @@ import withRedux from 'next-redux-wrapper'
 import configureStore from '../state/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { VuroxContextProvider } from '../context'
-
-import 'Styles/styles.less'
 import 'antd/dist/antd.less'
 import 'react-quill/dist/quill.snow.css';
+import 'Styles/styles.less'
 import 'Styles/mycustom.less'
+
+import Amplify from 'aws-amplify'
+import awsExports from 'Src/aws-exports'
+Amplify.configure(awsExports)
 
 class VuroxApp extends App{
 
@@ -33,7 +36,6 @@ class VuroxApp extends App{
 
 	render () {
 
-		console.log(this.props)
 		const { Component, pageProps,store} = this.props
 		
 	    return(

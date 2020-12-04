@@ -108,8 +108,8 @@
 	position: fixed;
 	z-index: 99;
 	width: 100%;
-	margin-bottom: 200px; 
-}*/
+	/* margin-bottom: 200px; */
+}*
 
 /*------------- Header Search ------------*/
 /*.vurox-header-search input{
@@ -1478,7 +1478,7 @@ label.custom-file-label:focus{
 	position: absolute;
 	content: "";
 	right: 5px;
-	top: 10px;
+	top: 8px;
 	background: transparent;
 	width: 5px;
 	height: 5px;

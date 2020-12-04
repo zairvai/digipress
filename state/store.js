@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { persistStore } from 'redux-persist'
 import { createLogger } from 'redux-logger'
 import rootReducer from './reducers'
-import rootSaga from './saga'
+import rootSaga from './sagas'
 
 function configureStore(preloadedState) {
 
@@ -18,21 +18,22 @@ function configureStore(preloadedState) {
 
 	const persistConfig = {
 		key:'root',
-		storage
+		storage,
+		blacklist:['auth']
 	}
 
   	const store = createStore(
-    	persistReducer(persistConfig,rootReducer),
-    	preloadedState,
+		// persistReducer(persistConfig,rootReducer),
+		rootReducer,
+    	// preloadedState,
     	applyMiddleware(...middlewares)
 	  )
 	
 	store._PERSISTOR = persistStore(store)
 
-	//store.sagaTask = sagaMiddleware.run(rootSaga)
-	// rootSaga.forEach(saga=> {
-	// 	sagaMiddleware.run(saga)
-	// })
+	rootSaga.forEach(saga=> {
+		sagaMiddleware.run(saga)
+	})
 
 
   	return store
