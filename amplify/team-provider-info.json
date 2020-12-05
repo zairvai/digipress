@@ -1,14 +1,32 @@
 {
-  "staging": {
+  "live": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amplify1e720594eabe4-staging-184222-authRole",
-      "UnauthRoleArn": "arn:aws:iam::147604133037:role/amplify-amplify1e720594eabe4-staging-184222-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::147604133037:role/amplify-amplify1e720594eabe4-staging-184222-authRole",
+      "AuthRoleName": "amplify-baktikominfo-pesantrenv1-live-33123-authRole",
+      "UnauthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-live-33123-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-live-33123-authRole",
       "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-amplify1e720594eabe4-staging-184222-deployment",
-      "UnauthRoleName": "amplify-amplify1e720594eabe4-staging-184222-unauthRole",
-      "StackName": "amplify-amplify1e720594eabe4-staging-184222",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:147604133037:stack/amplify-amplify1e720594eabe4-staging-184222/484705c0-3597-11eb-89e8-0a75dab48e26",
+      "DeploymentBucketName": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
+      "UnauthRoleName": "amplify-baktikominfo-pesantrenv1-live-33123-unauthRole",
+      "StackName": "amplify-baktikominfo-pesantrenv1-live-33123",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:147604133037:stack/amplify-baktikominfo-pesantrenv1-live-33123/59ccb420-36aa-11eb-b80f-02f95ca67868",
+      "AmplifyAppId": "d36af40al4qg3j"
+    },
+    "categories": {
+      "auth": {
+        "baktikominfopesantrenv1": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-baktikominfo-pesantrenv1-dev-30759-authRole",
+      "UnauthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-dev-30759-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-dev-30759-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-baktikominfo-pesantrenv1-dev-30759-deployment",
+      "UnauthRoleName": "amplify-baktikominfo-pesantrenv1-dev-30759-unauthRole",
+      "StackName": "amplify-baktikominfo-pesantrenv1-dev-30759",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:147604133037:stack/amplify-baktikominfo-pesantrenv1-dev-30759/150a7fa0-36a7-11eb-9681-0243768bbe4a",
       "AmplifyAppId": "d36af40al4qg3j"
     },
     "categories": {
