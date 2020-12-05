@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
+import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
@@ -143,7 +144,7 @@ const FormAccount = ({item,...props}) => {
                                 <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
                             </Col>
                             <Col md={3} sm={24} xs={24}>
-                                <Button size="large" danger type="text" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button>
+                                <Link href="/manage/accounts" shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
                             </Col>
                         </Row>
                         

@@ -14,7 +14,7 @@ import { Row, Col,Button, Checkbox,Form,Menu} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
-const auth = props =>{
+const Page = props =>{
 
 	const {router,auth} = props
 	const {setLoginStatus,setCurrentUser} = React.useContext(appContext)
@@ -61,4 +61,4 @@ const auth = props =>{
 	)
 	
 }
-export default connect(state=>state)(withRouter(auth))
+export default connect(state=>state)(withRouter(Page))

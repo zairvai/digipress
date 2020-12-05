@@ -113,14 +113,14 @@ const HeaderDark = props => {
 								</DropdownItems>
 							</VuroxDropdown>
 
-							<VuroxDropdown position='vurox-dropdown-top-right'>
+							<VuroxDropdown position='vurox-dropdown-top-right' className="ml-3">
 								<button className='dropbtn'><i className='ti-user bg-blue-6 flex-fill'></i></button>
 								<DropdownItems width={240} className='pb-2'>
 									<DropdownItemsHead color='bg-cyan-6'>
 										{name}
 									</DropdownItemsHead>
 									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
-									<DropdownItem link="/"><i className='ti-arrow-left'></i>Keluar</DropdownItem>
+									<DropdownItem link="/auth/logout"><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
 							{/* <VuroxDropdown position='vurox-dropdown-top-right'>

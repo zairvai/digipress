@@ -11,7 +11,7 @@ import { Row, Col,Button, Checkbox,Form,Menu} from 'antd'
 import FormForgotPassword from 'Components/FormAuthForgotPassword'
 import FormResetPassword from 'Components/FormAuthResetPassword'
 
-const auth = props => {
+const Page = props => {
 
 
 	return (
@@ -44,4 +44,4 @@ const auth = props => {
 	);
 	
 }
-export default connect(state=>state)(auth)
+export default connect(state=>state)(Page)
