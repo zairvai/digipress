@@ -9,18 +9,18 @@ export const AppContextProvider = (props) =>{
     const [account,setAccount] = React.useState(false)
 
     const setCurrentUser = user => {
-
-        console.log(user)
-        
-        const currentUser = {
-            id:user.attributes.sub,
-            name:user.attributes.name,
-            email:user.attributes.email,
-            email_verified:user.attributes.email_verified,
-            cognitoGroups:user.signInUserSession.accessToken.payload["cognito:groups"]
+        if(user){
+            const currentUser = {
+                id:user.attributes.sub,
+                name:user.attributes.name,
+                email:user.attributes.email,
+                email_verified:user.attributes.email_verified,
+                cognitoGroups:user.signInUserSession.accessToken.payload["cognito:groups"]
+            }
+            setUser(currentUser)
         }
-
-        setUser(currentUser)
+        else setUser(false)
+       
     }
 
     const setLoginStatus = val => {

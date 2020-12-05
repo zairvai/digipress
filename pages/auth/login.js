@@ -21,6 +21,7 @@ const auth = props =>{
 
 	React.useEffect(()=>{
 		if(auth.isLoggedIn){
+			
 			setCurrentUser(auth.data)
 			setLoginStatus(auth.isLoggedIn)
 			router.push("/report/dashboard")
