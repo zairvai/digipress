@@ -23,7 +23,7 @@ export const Navitem = (props) => {
 	const active = test ? ' active' : ''
 		
 	const submenuIcon = props.className === 'has-submenu' ? <i className="ti-angle-right"></i> : null
-	const badge = props.badgde !== null ? <span className={props.badge + ' ml-2'}>{props.badgeText}</span> : null
+	const badge = props.badge !== null ? <span className={props.badge + ' ml-2'}>{props.badgeText}</span> : null
 	return(
 		<li className={props.className + active}>
 			<Link href={props.link}>
