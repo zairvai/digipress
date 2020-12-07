@@ -19,7 +19,6 @@ const Index = props =>{
 
     const item = props.item
     const pagename = false
-    const links = [['App','/app/classrooms',''],['Classrooms','/app/classrooms',''],[item.name,`/app/classrooms/${item.id}`,'active']]
 
     const { menuState } = context
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -35,7 +34,7 @@ const Index = props =>{
 					</VuroxSidebar>
 					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                         
-                        <Summery2 pagename={pagename} links={links}/>
+                        <Summery2 pagename={pagename} links={props.links}/>
 
                         {/* <Row className="mb-2">
                             <Col md={12}>

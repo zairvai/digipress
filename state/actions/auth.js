@@ -20,7 +20,6 @@ export const signOut = () => ({
     type:signOutRoutine.TRIGGER
 })
 
-
 export const completeNewPassword = payload => ({
     type : completeNewPasswordRoutine.TRIGGER,
     payload : payload

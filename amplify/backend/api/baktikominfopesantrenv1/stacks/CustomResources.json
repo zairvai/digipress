@@ -1,0 +1,582 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "An auto-generated nested stack.",
+	"Metadata": {},
+	"Parameters": {
+	  "AppSyncApiId": {
+		"Type": "String",
+		"Description": "The id of the AppSync API associated with this project."
+	  },
+	  "AppSyncApiName": {
+		"Type": "String",
+		"Description": "The name of the AppSync API",
+		"Default": "AppSyncSimpleTransform"
+	  },
+	  "env": {
+		"Type": "String",
+		"Description": "The environment name. e.g. Dev, Test, or Production",
+		"Default": "NONE"
+	  },
+	  "S3DeploymentBucket": {
+		"Type": "String",
+		"Description": "The S3 bucket containing all deployment assets for the project."
+	  },
+	  "S3DeploymentRootKey": {
+		"Type": "String",
+		"Description": "An S3 key relative to the S3DeploymentBucket that points to the root\nof the deployment directory."
+	  }
+	},
+	"Resources": {
+	  "EmptyResource": {
+		"Type": "Custom::EmptyResource",
+		"Condition": "AlwaysFalse"
+	  },
+	  "FunctionTableAppGetItem":{
+		  "Type":"AWS::AppSync::FunctionConfiguration",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "DataSourceName":"AppTable",
+			  "Description":"Get item from Table App",
+			  "FunctionVersion":"2018-05-29",
+			  "Name":"TableAppGetItem",
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.getItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.getItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "FunctionTableAppPutItem":{
+		  "Type":"AWS::AppSync::FunctionConfiguration",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "DataSourceName":"AppTable",
+			  "Description":"Put item to Table App",
+			  "FunctionVersion":"2018-05-29",
+			  "Name":"TableAppPutItem",
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.putItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.putItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "FunctionTableAppDeleteItem":{
+		  "Type":"AWS::AppSync::FunctionConfiguration",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "DataSourceName":"AppTable",
+			  "Description":"Delete item from Table App",
+			  "FunctionVersion":"2018-05-29",
+			  "Name":"TableAppDeleteItem",
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.deleteItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.deleteItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "FunctionTableAppUpdateItem":{
+		  "Type":"AWS::AppSync::FunctionConfiguration",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "DataSourceName":"AppTable",
+			  "Description":"Update item in Table App",
+			  "FunctionVersion":"2018-05-29",
+			  "Name":"TableAppUpdateItem",
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.updateItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.updateItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "FunctionTableAppBatchGetItem":{
+		"Type":"AWS::AppSync::FunctionConfiguration",
+		"Properties":{
+			"ApiId":{
+				"Ref":"AppSyncApiId"
+			},
+			"DataSourceName":"AppTable",
+			"Description":"Get item in batch from Table App",
+			"FunctionVersion":"2018-05-29",
+			"Name":"TableAppBatchGetItem",
+			"RequestMappingTemplateS3Location":{
+				"Fn::Sub":[
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.batchGetItem.req.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			},
+			"ResponseMappingTemplateS3Location":{
+				"Fn::Sub": [
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.batchGetItem.res.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			}
+		}
+	},
+	"MutationCreateAccountResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Mutation",
+			  "FieldName":"createAccount",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppPutItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.createAccount.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.createAccount.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "MutationUpdateAccountResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Mutation",
+			  "FieldName":"updateAccount",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppUpdateItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.updateAccount.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Mutation.updateAccount.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "MutationDeleteAccountResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Mutation",
+			  "FieldName":"deleteAccount",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppDeleteItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.deleteItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.deleteItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "QueryGetAccountResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Query",
+			  "FieldName":"getAccount",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppGetItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.getItem.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.getItem.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "QueryListAccountsResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "DataSourceName":"SearchManager",
+			  "TypeName":"Query",
+			  "FieldName":"listAccounts",
+			  "Kind":"UNIT",
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listAccounts.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listAccounts.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "AccountCreatedByResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Account",
+			  "FieldName":"createdBy",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppGetItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.createdBy.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.createdBy.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "AccountUpdatedByResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"Account",
+			  "FieldName":"updatedBy",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppGetItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.updatedBy.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.updatedBy.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  },
+	  "AccountConnectionItemsResolver":{
+		  "Type":"AWS::AppSync::Resolver",
+		  "Properties":{
+			  "ApiId":{
+				  "Ref":"AppSyncApiId"
+			  },
+			  "TypeName":"AccountConnection",
+			  "FieldName":"items",
+			  "Kind":"PIPELINE",
+			  "PipelineConfig":{
+				  "Functions":[
+					  {"Fn::GetAtt":["FunctionTableAppBatchGetItem","FunctionId"]}
+				  ]
+			  },
+			  "RequestMappingTemplateS3Location":{
+				  "Fn::Sub":[
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/ItemConnection.items.req.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  },
+			  "ResponseMappingTemplateS3Location":{
+				  "Fn::Sub": [
+					  "s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/ItemConnection.items.res.vtl",
+					  {
+						  "S3DeploymentBucket": {
+							  "Ref": "S3DeploymentBucket"
+						  },
+						  "S3DeploymentRootKey": {
+							  "Ref": "S3DeploymentRootKey"
+						  }
+					  }
+				  ]
+			  }
+		  }
+	  }
+	},
+	"Conditions": {
+	  "HasEnvironmentParameter": {
+		"Fn::Not": [
+		  {
+			"Fn::Equals": [
+			  {
+				"Ref": "env"
+			  },
+			  "NONE"
+			]
+		  }
+		]
+	  },
+	  "AlwaysFalse": {
+		"Fn::Equals": ["true", "false"]
+	  }
+	},
+	"Outputs": {
+	  "EmptyOutput": {
+		"Description": "An empty output. You may delete this if you have at least one resource above.",
+		"Value": ""
+	  }
+	}
+}
+  
+  

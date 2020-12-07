@@ -1,0 +1,91 @@
+type Account {
+	id: ID!
+	name: String!
+	uniqueURL: String!
+	address: String!
+	contactPerson: String!
+	emailAddress: AWSEmail!
+	phoneNumber: String!
+	status: Int
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int
+}
+
+input CreateAccountInput {
+	name: String!
+	uniqueURL: String!
+	address: String!
+	contactPerson: String!
+	emailAddress: AWSEmail!
+	phoneNumber: String!
+}
+
+input DeleteItemInput {
+	id: ID!
+}
+
+input GetItemInput {
+	id: ID!
+}
+
+type Mutation {
+	createAccount(input: CreateAccountInput!): Account
+	updateAccount(input: UpdateAccountInput!): Account
+	deleteAccount(input: DeleteItemInput!): Account
+}
+
+type Query {
+	getAccount(input: GetItemInput!): Account
+	listAccounts(input:ListItemInput):AccountConnection
+}
+
+type AccountConnection{
+	items:[Account]
+	foundDocs:Int
+}
+
+input ListItemInput {
+	orderBy: String
+	direction: String
+	from:Int
+	size:Int
+}
+
+input UpdateAccountInput {
+	id: ID!
+	name: String
+	uniqueURL: String
+	address: String
+	contactPerson: String
+	emailAddress: AWSEmail
+	phoneNumber: String
+	status: Int
+	expectedVersion: Int
+}
+
+type User {
+	id: ID!
+	name: String!
+	emailAddress: AWSEmail!
+	emailAddressVerified: Boolean!
+	phoneNumber: String
+	phoneNumberVerified: Boolean
+	role: UserRole
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	status: Int!
+	version: Int!
+}
+
+enum UserRole {
+	AppOwner
+	AppAdmin
+	Owner
+	Admin
+	Tutor
+	Student
+	Member
+}

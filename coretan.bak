@@ -1,0 +1,836 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::254123356077:user/zairvai",
+          "arn:aws:iam::254123356077:root"
+        ]
+      },
+      "Action": "es:*",
+      "Resource": "arn:aws:es:ap-southeast-1:254123356077:domain/searchmanager-dev/*"
+    }
+  ]
+}
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "es:*",
+      "Resource": "arn:aws:es:ap-southeast-1:254123356077:domain/searchmanager-dev/*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "3.1.250.113"
+        }
+      }
+    }
+  ]
+}
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::254123356077:role/service-role/appsync-ds-es-fzl4vt-search-searchmanager"
+      },
+      "Action": [
+        "es:ESHttpDelete",
+        "es:ESHttpHead",
+        "es:ESHttpGet",
+        "es:ESHttpPost",
+        "es:ESHttpPut"
+      ],
+      "Resource": "arn:aws:es:ap-southeast-1:254123356077:domain/searchmanager-dev/*"
+    }
+  ]
+}
+
+
+curl -H "Content-Type: application/json" -XPOST "https://search-searchmanager-dev-bisyfe2mkreccbjsgtsc7lpiwe.ap-southeast-1.es.amazonaws.com/_bulk?pretty&refresh" --data-binary "@accounts.json"
+curl "https://search-searchmanager-dev-bisyfe2mkreccbjsgtsc7lpiwe.ap-southeast-1.es.amazonaws.com/_cat/indices?v"
+
+GET /account/_search
+{
+  "query": { "match_all": {} },
+  "sort": [
+    { "account_number": "asc" }
+  ],
+  "from":10,
+  "size": 10
+}
+
+GET /account/_search
+{
+  "query":{
+    "match_phrase":{
+      "address":"mill lane"
+    }
+  }
+}
+
+GET /account/_search
+{
+  "query":{
+    "bool":{
+      "must": [
+        {"match":{"age":"40"}}
+      ],
+      "must_not": [
+        {"match":{"state":"ID"}}
+      ]
+    }
+  }
+}
+
+GET /account/_search
+{
+  "query":{
+    "bool":{
+      "must": [
+        {"match_all": {}}
+      ],
+      "filter": {
+        "range": {
+          "balance": {
+            "gte": 20000,
+            "lte": 30000
+          }
+        }
+      }
+    }
+  }
+}
+
+GET /account/_search
+{
+  "size": 0,
+  "aggs": {
+    "group_by_state": {
+      "terms": {
+        "field":"state.keyword"
+      }
+    }
+  }
+}
+
+GET /account/_search
+{
+  "size": 0,
+  "aggs": {
+    "group_by_state": {
+      "terms": {
+        "field":"state.keyword",
+        "order":{
+          "average_balance":"desc"
+        }
+      },
+      "aggs": {
+        "average_balance": {
+          "avg": {
+            "field": "balance"
+          }
+        }
+      }
+    }
+  }
+}
+
+PUT /venue
+
+PUT /venue/_mapping/doc?include_type_name=true
+{
+  "properties": {
+    "location":{
+      "type":"geo_point"
+    }
+  }
+}
+
+
+PUT /venue/doc/1
+{
+  
+    "id":"1",
+    "name":"Kickspot",
+    "location":"-6.2385727,106.8228363",
+    "address":{
+      "suburb":"Mampang Prapatan",
+      "city":"Jakarta Selatan",
+      "state":"DKI Jakarta",
+      "country":"Indonesia"
+    }
+  
+}
+
+
+
+#**
+The 'params' key accepts any valid Elasticsearch DSL expression.
+You must replace the <index>, <type>, and <field> placeholders with actual values.
+*#
+{
+  "version":"2017-02-28",
+  "operation":"PUT",
+  "path":"/id/venue/$ctx.args.input.id",
+  "params":{
+  	"headers":{},
+    "queryString":{},
+    "body":{
+    	"id":"$ctx.args.input.id",
+        "name":"$ctx.args.input.name",
+        "lat":"$ctx.args.input.lat",
+        "lon":"$ctx.args.input.lon"
+    }
+  }
+}
+
+PUT /venue
+
+PUT /venue/_mapping/doc?include_type_name=true
+{
+  "properties": {
+    "location":{
+      "type":"geo_point"
+    }
+  }
+}
+
+POST /venue/doc/1
+{
+  
+    "id":"1",
+    "name":"Kickspot",
+    "location":"-6.2385727,106.8228363"
+  
+}
+
+PUT /venue/doc/1
+{
+  
+    "id":"1",
+    "name":"Kickspot",
+    "location":"-6.2385727,106.8228363",
+    "address":{
+      "suburb":"Mampang Prapatan",
+      "city":"Jakarta Selatan",
+      "state":"DKI Jakarta",
+      "country":"Indonesia"
+    }
+  
+}
+
+
+
+GET /venue/doc/1
+
+Jl. Kuningan Barat Raya No.8, RT.3/RW.2, Kuningan Bar., Kec. Mampang Prpt., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12310, Indonesia
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+  	name:"KickSpot"
+    lat:-6.2385727
+    lon:106.8228363
+    street:"Jl. Kuningan Barat Raya No.8, RT.3/RW.2"
+    suburb:"Mampang Prapatan"
+    city:"Jakarta Selatan"
+    state:"DKI Jakarta"
+    country:"Indonesia"
+  }){
+    id
+    name
+    location{
+      lat
+      lon
+    }
+    street
+		city    
+    
+  }
+}
+
+Jl. Karbela Timur No.1A, RT.1/RW.5, Kuningan, Karet, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12920, Indonesia
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+  	name:"Kuningan Village Futsal"
+    lat:-6.2146072
+    lon:106.8191876
+    street:"JJl. Karbela Timur No.1A, RT.1/RW.5, Kuningan"
+    suburb:"Setiabudi"
+    city:"Jakarta Selatan"
+    state:"DKI Jakarta"
+    country:"Indonesia"
+  }){
+    id
+    name
+    
+  }
+}
+
+Jl. Karang Tengah Raya No.9, RT.14/RW.3, Lb. Bulus, Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12440, Indonesia
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+  	name:"Serenia Hills Sport"
+    lat:-6.3102735
+    lon:106.7738639
+    street:"l. Karang Tengah Raya No.9, RT.14/RW.3, Lebak Bulus"
+    suburb:"Cilandak"
+    city:"Jakarta Selatan"
+    state:"DKI Jakarta"
+    country:"Indonesia"
+  }){
+    id
+    name
+    
+  }
+}
+
+mutation updateVenue{
+  	
+    updateVenue(input:{
+      id:"a88c5c75-70d2-431a-8808-3bab7645d73b"
+      accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+      street:"Jl. Karang Tengah Raya No.9, RT.14/RW.3, Lebak Bulus"
+      expectedVersion:1
+    }){
+    id
+    name
+  }
+}
+
+0 : 07.00 - 22.00
+1 : 07.00 - 22.00
+2 : 07.00 - 22.00
+3 : 07.00 - 22.00
+4 : 07.00 - 22.00
+5 : 07.00 - 22.00
+7 : 07.00 - 23.00
+
+Cipadung Kidul, Panyileukan, Bandung City, West Java 40614, Indonesia
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"9f7c4e2f-937d-4a85-bd90-65a5d2778f5e"
+  	name:"Mayasari Futsal Cibiru"
+    lat:-6.9070381
+    lon:107.6073339
+    street:"Cipadung Kidul"
+    suburb:"Panyileukan"
+    city:"Bandung"
+    state:"Jawa Barat"
+    country:"Indonesia"
+  }){
+    id
+    name
+    
+  }
+}
+
+https://arena.auth.ap-southeast-1.amazoncognito.com/login?response_type=code&client_id=39fomaoqsdufo2kag5ht7ivhos&redirect_uri=https://www.facebook.com
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"9f7c4e2f-937d-4a85-bd90-65a5d2778f5e"
+  	name:"Rajawali Futsal"
+    lat:-6.2293773
+    lon:106.6507027
+    street:"Jalan KH. Hasyim Ashari"
+    suburb:"Sudimara Pinang"
+    city:"Kota Tangerang"
+    state:"Banten"
+    country:"Indonesia"
+  }){
+    id
+    name
+  }
+}
+
+mutation deleteVenue{
+  deleteItem(input:{
+    id:"e515b959-5ff4-4780-8954-cce2256efd4a"
+  }){
+    id
+    ...on Venue{
+      name
+    }
+  }
+}
+"{\"id\":\"zairvai\",\"channel\":\"facebook\"}"
+
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+  	name:"KickSpot"
+    location:{
+      lat:-6.2385727
+    	lon:106.8228363
+    }
+    address:{
+     	street:"Jl. Kuningan Barat Raya No.8, RT.3/RW.2"
+      suburb:"Mampang Prapatan"
+      city:"Jakarta Selatan"
+      state:"DKI Jakarta"
+      country:"Indonesia" 
+    }
+    socialMedia:[
+      {id:"zairvai",channel:Facebook},
+      {id:"zairvai",channel:YouTube},
+      {id:"zairvai",channel:Twitter}
+      
+    ]
+    phoneNumber:[
+      "+62-21-7941234",
+      "+62-21-7829912"
+    ]
+    emailAddress:[
+      "zairvai@gmail.com",
+      "zairvai@advedai360.com"
+    ]
+  }){
+    id
+    name
+  }
+}
+
+
+mutation updateVenue{
+  updateVenue(input:{
+    id:"cb6f16ed-7dd3-4fdb-9ea9-ea2fdc3cb5c6"
+    accountId:"9f7c4e2f-937d-4a85-bd90-65a5d2778f5e"
+    socialMedia:[
+      {id:"zairvai",channel:Facebook},
+      {id:"zairvai",channel:YouTube},
+      {id:"zairvai",channel:Twitter}
+      
+    ]
+    phoneNumber:[
+      "+62-21-7941234",
+      "+62-21-7829912"
+    ]
+    emailAddress:[
+      "zairvai@gmail.com",
+      "zairvai@advedai360.com"
+    ]
+  }){
+    id
+    name
+    emailAddress
+    phoneNumber
+  }
+}
+
+mutation createFutsal{
+  createFutsal(input:{
+    accountId:"8249b65e-4fd0-45d6-9183-53306e177c8c"
+    venueId:"0f8bf67c-d4ed-4a3c-989a-e6ab0c6ae5c8"
+    name:"Lapangan B"
+    location:{
+      lat:-6.2385727
+    	lon:106.8228363
+    }
+    address:{
+     	street:"Jl. Kuningan Barat Raya No.8, RT.3/RW.2"
+      suburb:"Mampang Prapatan"
+      city:"Jakarta Selatan"
+      state:"DKI Jakarta"
+      country:"Indonesia" 
+    }
+  }){
+    id
+    name
+  }
+}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:ap-southeast-1:254123356077:table/ArenaApp-prod",
+                "arn:aws:dynamodb:ap-southeast-1:254123356077:table/ArenaApp-prod/*"
+            ]
+        }
+    ]
+}
+
+GET /venue/_search
+{
+    "query": {
+        "bool" : {
+            "must" : {
+                "match" : {
+                  "__typename":"venue"
+                }
+            },
+            "filter" : {
+                "geo_distance" : {
+                    "distance" : "1km",
+                    "location" : [106.8228363,-6.2385727]
+                }
+            }
+        }
+    }
+}
+
+
+lambda-sqs-execution-role
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:sqs:ap-southeast-1:254123356077:UpdateFacilitiesByVenueId"
+        }
+    ]
+}
+
+AROATWKXOV6WQRGBF6IQZ
+
+
+//Write batch DynamoDb
+var AWS = require("aws-sdk")
+
+exports.handler = function (event, context) { 
+  event.Records.forEach(async(record) => {
+    
+    // console.log(record)
+    var jsonMessage = JSON.parse(record.Sns.Message)
+    console.log(jsonMessage)
+    const updatedVenueAttr = jsonMessage.attributes
+    var venueId = updatedVenueAttr.id.S
+    var from = parseInt(jsonMessage.from)
+    var size = parseInt(jsonMessage.size)
+    
+    try{
+      
+      var response = await getFacilitiesByVenueId(venueId,from,size)
+
+      if(response.hits.hits.length>0){
+        var totalFoundRecords = response.hits.total.value
+        var items = response.hits.hits
+
+        var promises = []
+
+        promises.push(putFacilities(items,updatedVenueAttr))
+
+        if(from+size < totalFoundRecords){
+          //get next records
+          var snsPubMessage = {
+            attributes:updatedVenueAttr,
+            from: (from + size),
+            size : size
+          }
+          
+          promises.push(publishSnsPostUpdateVenue(snsPubMessage))
+
+        }
+
+        await Promise.all(promises)
+        
+      }
+
+    }
+    catch(error){
+      context.done("Error",error)
+    }
+    finally{
+      context.done(null,"Done")
+    }
+  })
+  
+  return {};
+};
+
+
+
+
+function publishSnsPostUpdateVenue(attr){
+  
+  return new Promise((resolve,reject)=>{
+    var sns = new AWS.SNS({
+        region:process.env.REGION,
+        apiVersion: '2010-03-31'
+    });
+
+    var params ={
+        Message:JSON.stringify(attr),
+        TopicArn:process.env.SNS_TOPIC_ARENAPOSTUPDATEVENUE
+    }
+
+    sns.publish(params).promise().then(response=>resolve(response)).catch(error=>{
+      console.log(error)
+      reject(error)
+      
+    })
+  })
+}
+
+function putFacilities(facilities,updatedAttr){
+
+  return new Promise((resolve,reject)=>{
+
+    //insert update to dynamodb App table
+    var tableName = process.env.TABLE_NAME
+    var requestItems = {}
+    requestItems[tableName] = []
+    
+
+    facilities.forEach(item=>{
+      
+      console.log(item._source.id)
+
+      var itemAttr = {}
+      itemAttr = Object.assign({},updatedAttr)
+      itemAttr.id = {S:item._source.id}
+      
+      console.log(itemAttr)
+      
+      requestItems[tableName].push({
+        PutRequest:{
+          Item: itemAttr
+        }
+      })
+
+    })
+
+
+    var ddb = new AWS.DynamoDB({
+      region:process.env.REGION,
+      apiVersion:"2018-05-29"
+    })
+  
+    var params = {RequestItems:requestItems}
+    
+    //console.log(JSON.stringify(params));resolve(true)
+        
+      
+    ddb.batchWriteItem(params).promise().then(response=>resolve(response)).catch(error=>{
+      console.log(error)
+      reject(error)
+      
+    })
+
+  }) 
+
+}
+
+function getFacilitiesByVenueId(venueId,from,size){
+
+  var domain = process.env.ELASTICSEARCH_DOMAIN
+
+  var endpoint = new AWS.Endpoint(domain)
+  var request = new AWS.HttpRequest(endpoint,process.env.REGION)
+
+  return new Promise((resolve,reject)=>{
+     var body = {
+          "query":{
+            "bool": {
+              "must": [
+                {"match": {"venueId": venueId}
+                }
+              ],
+              "must_not": [
+                {"match": {
+                  "status": "deleted"
+                }}
+              ]
+            }
+          },
+          "from":from,
+          "size":size
+        }
+    
+    request.method = "GET"
+    request.path = '/facility/_search'
+    request.body = JSON.stringify(body)
+    request.headers["host"] = domain
+    request.headers["Content-Type"] = "application/json"
+    request.headers["Content-Length"] = Buffer.byteLength(request.body)
+
+    var client = new AWS.HttpClient()
+
+    var credentials = new AWS.EnvironmentCredentials('AWS');
+    var signer = new AWS.Signers.V4(request, 'es');
+    signer.addAuthorization(credentials, new Date());
+
+    var responseBody = ""
+    
+    client.handleRequest(request,null,
+      response => {
+
+          response.on("data",chunk=>{
+              responseBody += chunk
+          })
+
+          response.on("end",()=>{
+              var jsonResponse = JSON.parse(responseBody)
+              resolve(jsonResponse)
+          })
+      },
+      error => {
+          reject(error)
+      })
+
+  })
+
+}
+
+mutation updateUser{
+  updateUser(input:{
+    id:"9214b0e5-4e49-48af-a816-1b3f638b1277"
+    # name:"Aljazair Lindan"
+    status:Inactive
+    expectedVersion:1
+  }){
+    id
+    name
+  }
+}
+
+
+mutation createAccount{
+  createAccount(input:{
+    name:"360 Sports"
+  }){
+    id
+    name
+    createdBy{
+      id
+      name
+    }
+  }
+}
+
+query listItems{
+  listItems(input:{
+    limit:1
+    type:User
+  }){
+    items{
+      id
+      ...on User{
+        name
+      }
+    }
+  }
+}
+
+mutation createVenue{
+  createVenue(input:{
+    accountId:"58c75b95-513e-4b7a-a4e0-dc4127333c64"
+  	name:"Rajawali Futsal"
+    location:{
+      lat:-6.2293773
+    	lon:106.6507027
+    }
+    address:{
+     	street:"Jalan KH. Hasyim Ashari"
+      suburb:"Sudimara Pinang"
+      city:"Kota Tangerang"
+      state:"Banten"
+      country:"Indonesia" 
+    }
+  }){
+    id
+    name
+  }
+}
+
+mutation updateVenue{
+  updateVenue(input:{
+    id:"cb6f16ed-7dd3-4fdb-9ea9-ea2fdc3cb5c6"
+    accountId:"9f7c4e2f-937d-4a85-bd90-65a5d2778f5e"
+    expectedVersion:3
+    socialMedia:[
+      {id:"zairvai",channel:Facebook},
+      {id:"zairvai",channel:YouTube},
+      {id:"zairvai",channel:Twitter}
+      
+    ]
+    phoneNumber:[
+      "+62-21-7941234",
+      "+62-21-7829912"
+    ]
+    emailAddress:[
+      "zairvai@gmail.com",
+      "zairvai@advedai360.com"
+    ]
+  }){
+    id
+    name
+    emailAddress
+    phoneNumber
+    socialMedia{
+      id
+      channel
+    }
+  }
+}
+
+ mutation createFutsal{
+  createFutsal(input:{
+    venueId:"0f8bf67c-d4ed-4a3c-989a-e6ab0c6ae5c8"
+    name:"Lapangan B"
+  }){
+    id
+    name
+  }
+}
+
+mutation updateFutsal{
+  updateFutsal(input:{
+    id:"671ff549-1ba3-42b7-b89d-3cc9a43d04b9"
+    name:"Lapangan ABC"
+    expectedVersion:1
+  }){
+    id
+    name
+  }
+}
+query getItem{
+  getItem(input:{
+    id:"cb6f16ed-7dd3-4fdb-9ea9-ea2fdc3cb5c6"
+  }){
+    id
+    ...on Venue{
+      name
+      socialMedia{
+        id
+        channel
+      }
+      createdBy{
+        id
+        name
+      }
+    }
+  }
+}

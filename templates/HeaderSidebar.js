@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {  VerticalNavHeading, Navitem } from 'Components/nav'
 
 import Icon from '@mdi/react'
-import {mdiMonitorDashboard, mdiFrequentlyAskedQuestions, mdiHeadset, mdiCommentOutline, mdiAccountSupervisorOutline, mdiCogOutline, mdiNewspaperVariantMultipleOutline, mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, mdiAccountMultipleOutline, mdiKeyChain, mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, mdiCommentMultipleOutline, mdiBriefcaseAccount} from '@mdi/js'
+import {mdiMonitorDashboard, mdiFrequentlyAskedQuestions, mdiHeadset, mdiCommentOutline, mdiAccountSupervisorOutline, mdiSchoolOutline,mdiCogOutline, mdiNewspaperVariantMultipleOutline, mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, mdiAccountMultipleOutline, mdiKeyChain, mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, mdiCommentMultipleOutline, mdiBriefcaseAccount, mdiAccountOutline, mdiAccountTieOutline} from '@mdi/js'
 import { appContext } from '../context/app'
 import AuthController from 'Library/controllers/AuthController'
 
@@ -36,19 +36,24 @@ const Sidebar = (props) => {
 
 					}
 					
-					
 					<VerticalNavHeading>Manage</VerticalNavHeading>
 					
 					{
-						AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+						AuthController.isAppOwner(auth)? 
 						
 						<Navitem link='/manage/accounts' text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
 						:
 						<></>
 					}
 
-					<Navitem link='/manage/users' text='Users' icon={<Icon size="1.3em" path={mdiAccountMultipleOutline} />} />
-					{/* <Navitem link='/access/groups' text='Groups' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} /> */}
+					<VerticalNavHeading>Roles</VerticalNavHeading>
+					<Navitem link='/roles/users' text='App Admins' icon={<Icon size="1.3em" path={mdiAccountTieOutline} />} />
+					<Navitem link='/roles/admins' text='Admins' icon={<Icon size="1.3em" path={mdiAccountOutline} />} />
+					<Navitem link='/roles/tutors' text='Tutors' icon={<Icon size="1.3em" path={mdiAccountSupervisorOutline} />} />
+					<Navitem link='/roles/students' text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
+					<Navitem link='/roles/members' text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />
+
+
 
 					<VerticalNavHeading>Help</VerticalNavHeading>
 					<Navitem link='/help/setting' text='Setting' icon={<Icon size="1.3em" path={mdiCogOutline} />} />

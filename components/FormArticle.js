@@ -71,8 +71,7 @@ const FormArticle = ({item,...props}) => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
-                title: item ? item.name : "",
-                //summary:item ? item.summary : "",
+                title:item ? item.name : "",
                 content:item ? item.content : "",
                 category:{id:null,value:null},
                 tags:[],

@@ -30,7 +30,7 @@ class index extends React.Component {
 		checkboxSelected:true,
 	}
 
-    pagename="Tags"
+    pagename=""
 	links = [['App','/app/classrooms',''],['Tags','/app/tags','active']]
 	
 	componentDidMount(){

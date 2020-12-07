@@ -14,7 +14,7 @@ import Sidebar from 'Templates/HeaderSidebar';
 import FormAccount from 'Components/FormAccount'
 import AppContainer from 'Templates/AppContainer'
 
-const Index = props => {
+const PageAccountAdd = props => {
     
     const pagename=""
 	const links = [['Manage','/manage/accounts',''],['Accounts','/manage/accounts',''],['Add new','/manage/accounts/add','active']]
@@ -40,4 +40,4 @@ const Index = props => {
     );
 	
 }
-export default connect(state=>state)(Index)
+export default connect(state=>state)(PageAccountAdd)

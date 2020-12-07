@@ -1,8 +1,7 @@
 import {
     initSignIn,signIn,signOut,
     completeNewPassword,
-    initForgotPassword,forgotPassword} from 'State/actions/auth'
-import { resetPassword } from '../../state/actions/auth'
+    initForgotPassword,forgotPassword,resetPassword} from 'State/actions/auth'
 
 export default class Controller{
 
@@ -70,8 +69,6 @@ export default class Controller{
     }
 
     _resetPassword = (email,password,code) =>{
-
-        //const username = this.props.auth.data.username
 
         this.dispatch(resetPassword({
             values:{

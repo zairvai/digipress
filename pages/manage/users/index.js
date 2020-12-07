@@ -31,7 +31,7 @@ class index extends React.Component {
 		checkboxSelected:true,
 	}
 
-    pagename="Users"
+    pagename=""
 	links = [['Manage','/manage/accounts',''],['Users','/manage/users','active']]
 	
 	componentDidMount(){

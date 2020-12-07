@@ -21,16 +21,55 @@ import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
 import AppContainer from 'Templates/AppContainer'
+import AccountController from 'Library/controllers/AccountController'
 
-const Index = props => {
+const PageAccounts = props => {
 
-    const pagename="Accounts"
+	const {router,listAccounts} = props
+
+	const [items,setItems] = React.useState([])
+	const [foundItem,setFoundItem] = React.useState(0)
+
+	const accountController = new AccountController(props)
+
+	React.useEffect(()=>{
+		accountController._list({orderBy:"createdAt",direction:"asc",from:0,size:50})
+	},[])
+
+	React.useEffect(()=>{
+		if(listAccounts.isSuccessFull){
+			
+			setItems(listAccounts.list.items)
+			setFoundItem(listAccounts.list.foundDocs)
+
+			console.log("loading complete")
+		}else{
+			console.log("still loading")
+		}
+		
+	},[listAccounts.isSuccessFull,listAccounts.list])
+
+    const pagename=""
 	const links = [['Manage','/manage/accounts',''],['Accounts','/manage/accounts','active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
-	const[checkboxAllSelected,setCheckbokAllSelected] = React.useState(false)
+	const tableAction = (
+		<Menu>
+		  <Menu.Item key="1">
+			Enable
+		  </Menu.Item>
+		  <Menu.Item key="2">
+			Disable
+		  </Menu.Item>
+		  <Menu.Item key="3">
+			Delete
+		  </Menu.Item>
+		</Menu>
+	  );
+
+	const[checkboxAllSelected,setCheckbokAllSelected] = React.useState(true)
 
 	return (
 		<AppContainer>
@@ -88,13 +127,13 @@ const Index = props => {
 										</thead>
 										<tbody>
 											{
-												props.accounts.list.map(item=>(
+												items.map(item=>(
 													<tr key={item.id}>
 														<td><Checkbox/></td>
-														<td valign="middle"><Link href={{pathname:'/app/accounts/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
+														<td valign="middle"><Link href={{pathname:'/manage/accounts/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
 														<td valign="middle">{item.address}</td>
-														<td valign="middle">{item.phone}</td>
-														<td valign="middle">{item.person}</td>
+														<td valign="middle">{item.phoneNumber}</td>
+														<td valign="middle">{item.contactPerson}</td>
 														<td valign="middle" className="fright">
 															{
 																item.status===3 ? <Status text="Active" state="success" position="right"/> :
@@ -120,4 +159,4 @@ const Index = props => {
 	);
 	
 }
-export default connect(state=>state)(Index)
+export default connect(state=>state)(PageAccounts)

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { LockOutlined, LockTwoTone} from '@ant-design/icons';
+import { LockOutlined, LockTwoTone,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import { Row, Col,Button, Alert,Form,Input,Typography} from 'antd'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -108,14 +108,15 @@ const FormAuth = props => {
                             control={control}
                             render={props=>
                                 <Form.Item label="Password">
-                                    <Input
+                                    <Input.Password
                                         size="large"   
                                         prefix={<LockOutlined className="site-form-item-icon" />}
-                                        type="password"
-                                        placeholder="Password"
                                         autoComplete="current-password"
+                                        placeholder="Password"
                                         value={props.value} 
-                                        onChange={props.onChange} />
+                                        onChange={props.onChange} 
+                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                        />
                                     
                                     {errors && errors.password && <Text type="danger">{errors.password.message}</Text>}
                                 </Form.Item>
@@ -131,14 +132,15 @@ const FormAuth = props => {
                             control={control}
                             render={props=>
                                 <Form.Item label="Konfirmasi Password">
-                                    <Input
+                                    <Input.Password
                                         size="large"   
                                         prefix={<LockOutlined className="site-form-item-icon" />}
-                                        type="password"
-                                        placeholder="Konfirmasi password"
                                         autoComplete="current-password"
+                                        placeholder="Konfirmasi password"
                                         value={props.value} 
-                                        onChange={props.onChange} />
+                                        onChange={props.onChange} 
+                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                        />
                                     
                                     {errors && errors.confirm_password && <Text type="danger">{errors.confirm_password.message}</Text>}
                                 </Form.Item>

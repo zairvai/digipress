@@ -48,7 +48,7 @@ const HeaderDark = props => {
 								AuthController.isAppOwner(auth)  ? 
 								<h5 className="vurox-text-sizes mb-0">APP Owner</h5>
 								:
-								!AuthController.isAppAdmin(auth) ? 
+								AuthController.isAppAdmin(auth) ? 
 								<h5 className="vurox-text-sizes mb-0">APP Admin</h5>
 								:
 								<h5 className="vurox-text-sizes mb-0">{props.accounts.name}</h5>
@@ -123,76 +123,6 @@ const HeaderDark = props => {
 									<DropdownItem link="/auth/logout"><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
-							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
-								<button className='dropbtn'><i className="ti-email"></i></button>
-								<DropdownItems width={240}> 
-									<DropdownItemsHead color='bg-green-6'>
-										Message <span className="badge badge-pill badge-light">20+</span>
-									</DropdownItemsHead>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/5.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Hello, we are going to fishing </p>
-												<p className='text-meta'>March 28, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/1.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>We are opening a new shop</p>
-												<p className='text-meta'>March 28, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/4.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Received a new help request</p>
-												<p className='text-meta'>April 08, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-stats-up bg-red-4 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p>A new monthly report has been published</p>
-												<p className='text-meta'>April 08, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItemSeperator />
-									<DropdownItem className='text-center' link='/' >Check All</DropdownItem>
-								</DropdownItems>
-							</VuroxDropdown> */}
-
-
-							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
-								<ProfileBadge name='S'  size='md' shape='rounded' version='dark' className='mt-3 ml-2 vurox-dropdown' badge='2' badgeColor='bg-purple-6' badgeShape='circle' />
-								<DropdownItems width={200} className='py-2'>
-									<DropdownItem link='#' className='disabled-hover'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/5.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Welcome, {props.users.username} </p>
-												<p className='text-meta'>Balance: $4435.34</p>
-											</div>
-										</DropdownBigItems>
-										<VuroxProgressbar className='mt-3 progressbar-xs' progresstextleft='Storage' progresstextright='45GB' progresscolor='#7B4DFF' width='80%' />
-									</DropdownItem>
-									<DropdownItem link='/'><i className='ti-user'></i>Profile</DropdownItem>
-									<DropdownItem link='/'><i className='ti-image'></i>Portfolio</DropdownItem>
-									<DropdownItem link='/'><i className='ti-import'></i>Downloads</DropdownItem>
-									<DropdownItem link='/'><i className='ti-heart'></i>Favourite</DropdownItem>
-									<DropdownItem link='/'><i className='ti-layers'></i>Collections</DropdownItem>
-									<DropdownItem link='/'><i className='ti-money'></i>Earnings</DropdownItem>
-									<DropdownItem link='/'><i className='ti-layout-media-overlay'></i>Statements</DropdownItem>
-								</DropdownItems>
-							</VuroxDropdown> */}
 						</div>
 					</Col>
 				</Row>

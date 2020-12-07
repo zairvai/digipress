@@ -4,6 +4,7 @@ import { persistStore } from 'redux-persist'
 import { createLogger } from 'redux-logger'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
+import thunk from 'redux-thunk'
 
 function configureStore(preloadedState) {
 
@@ -11,6 +12,7 @@ function configureStore(preloadedState) {
   	const sagaMiddleware = createSagaMiddleware()
 	const middlewares = [sagaMiddleware]
 	
+	middlewares.push(thunk)
 	middlewares.push(logger)
 
 	const { persistReducer } = require('redux-persist')

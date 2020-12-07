@@ -1,0 +1,52 @@
+## By default in a before template, all you need is a valid JSON payload.
+## You can also stash data to be made available to the functions in the pipeline.
+## Examples: 
+## - $ctx.stash.put("email", $ctx.args.email)
+## - $ctx.stash.put("badgeNumber", $ctx.args.input.badgeNumber)
+## - $ctx.stash.put("username", $ctx.identity.username)
+
+
+#set( $input = {} )
+
+#if( !$util.isNull($ctx.args.input.name ))
+	$util.qr($input.put("name",$ctx.args.input.name))
+#end
+
+## #if( !$util.isNull($ctx.args.input.uniqueURL ))
+## 	$util.qr($input.put("uniqueURL",$ctx.args.input.uniqueURL))
+## #end
+
+#if( !$util.isNull($ctx.args.input.address ))
+	$util.qr($input.put("address",$ctx.args.input.address))
+#end
+
+#if( !$util.isNull($ctx.args.input.contactPerson ))
+	$util.qr($input.put("contactPerson",$ctx.args.input.contactPerson))
+#end
+
+#if( !$util.isNull($ctx.args.input.emailAddress ))
+	$util.qr($input.put("emailAddress",$ctx.args.input.emailAddress))
+#end
+
+#if( !$util.isNull($ctx.args.input.phoneNumber ))
+	$util.qr($input.put("phoneNumber",$ctx.args.input.phoneNumber))
+#end
+
+#if( !$util.isNull($ctx.args.input.status ))
+	$util.qr($input.put("status",$ctx.args.input.status))
+#end
+
+#if($input.isEmpty() )
+	#{return}
+#end
+
+$util.qr($ctx.stash.put("id",$ctx.args.input.id))
+
+
+$util.qr($input.put("expectedVersion",$ctx.args.input.expectedVersion))
+$util.qr($input.put("updatedBy",$ctx.identity.sub))
+$util.qr($input.put("updatedAt",$util.time.nowISO8601()))
+
+$util.qr($ctx.stash.put("input",$input))
+
+{}

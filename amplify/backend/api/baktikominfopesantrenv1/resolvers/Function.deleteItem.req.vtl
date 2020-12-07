@@ -1,0 +1,9 @@
+{
+	"version" : "2018-05-29",
+    "operation" : "DeleteItem",
+    "key" : {
+        ## If your table's hash key is not named 'id', update it here. **
+        "id" : $util.dynamodb.toDynamoDBJson($ctx.stash.id)
+        ## If your table has a sort key, add it as an item here. **
+    }
+}

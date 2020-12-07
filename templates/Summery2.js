@@ -19,8 +19,6 @@ class Summery extends React.Component {
 			$('.slideHiddenContent').slideToggle()
 		} )
 
-		console.log(this.props.links)
-
 	}
 
 	render() {
