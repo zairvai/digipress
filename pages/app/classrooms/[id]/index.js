@@ -12,7 +12,7 @@ import {
 import HTMLRenderer from 'react-html-renderer'
 import {Status} from 'Components/mycomponents.js'
 
-const Index = () => {
+const Index = props => {
 
     const item = props.classrooms.item
     const links = [['App','/app/classrooms',''],['Classrooms','/app/classrooms',''],[item.name,`/app/classrooms/${item.id}`,'active']]
