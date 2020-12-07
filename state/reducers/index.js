@@ -46,7 +46,8 @@ const rootReducer = combineReducers({
 	getAccount:persistReducer({key:"getAccount",storage},getAccount),
 	updateAccount:persistReducer({key:"updateAccount",storage},updateAccount),
 	deleteAccount:persistReducer({key:"deleteAccount",storage},deleteAccount),
-
+	
+	accounts,
 	users,
 	articles,
 	classrooms,
