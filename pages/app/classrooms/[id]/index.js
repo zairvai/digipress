@@ -19,7 +19,7 @@ const Index = props => {
 
     return(
         <React.Fragment>
-            <Layout item={item}>
+            <Layout item={item} links={links}>
 
                 <Row>
                     <Col md={24}>
