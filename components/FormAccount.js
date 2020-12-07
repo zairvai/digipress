@@ -34,8 +34,6 @@ const schema = yup.object().shape({
 const FormAccount = ({item,...props}) => {
 
     const accountController = new AccountController(props)
-    
-    console.log(item)
 
     const {
         handleSubmit,
@@ -72,9 +70,14 @@ const FormAccount = ({item,...props}) => {
             
         }
     },[item])
+
     const onSubmit = (values) => {
 
-        accountController._create(values)
+        if(item) {
+            values = {version:item.version,...values}
+            accountController._update(item.id,values)
+        }
+        else accountController._create(values)
 
     }
 

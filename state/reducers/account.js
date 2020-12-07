@@ -1,6 +1,6 @@
 import {
     createAccountRoutine,customCreateAccountRoutine,
-    updateAccountRoutine,
+    updateAccountRoutine,customUpdateAccountRoutine,
     deleteAccountRoutine,
     getAccountRoutine,customGetAccountRoutine,
     listAccountsRoutine
@@ -14,9 +14,21 @@ const initialState = {
 }
 
 //signin
-export const createAccount = (state={...initialState},action) => {
+export const createAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
+
+        case customCreateAccountRoutine.INIT  : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+
+        }
 
         case createAccountRoutine.REQUEST  : {
 
@@ -24,7 +36,8 @@ export const createAccount = (state={...initialState},action) => {
                 isRequesting:true,
                 error:false,
                 isError:false,
-                isSuccessFull:false
+                isSuccessFull:false,
+                item:{}
             })
 
         }
@@ -37,7 +50,7 @@ export const createAccount = (state={...initialState},action) => {
                 isError:false,
                 error:false,
                 isSuccessFull:true,
-                data
+                item:data
             })     
 
         }
@@ -49,7 +62,8 @@ export const createAccount = (state={...initialState},action) => {
                 isRequesting:false,
                 isSuccessFull:false,
                 isError:true,
-                error
+                error,
+                item:{}
             })
         }
     }
@@ -134,8 +148,6 @@ export const getAccount = (state={item:{},...initialState},action) => {
 
             const {data} = action.payload
             
-            console.log(data)
-            
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,
@@ -147,6 +159,64 @@ export const getAccount = (state={item:{},...initialState},action) => {
         }
 
         case getAccountRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                item:{}
+            })
+        }
+
+    }
+
+    return state
+}
+
+export const updateAccount = (state={item:{},...initialState},action) => {
+
+    switch(action.type){
+
+        case customUpdateAccountRoutine.INIT : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+        }
+
+        case updateAccountRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+        }
+
+        case updateAccountRoutine.SUCCESS : {
+
+            const {data} = action.payload
+            
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                isSuccessFull:true,
+                item:data
+            })     
+
+        }
+
+        case updateAccountRoutine.FAILURE : {
 
             const {error} = action.payload
 

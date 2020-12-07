@@ -1,6 +1,8 @@
 import {
-    createAccount,listAccounts,
-    getAccount,getAccountInit
+    createAccount,createAccountInit,
+    listAccounts,
+    getAccount,getAccountInit,
+    updateAccount,updateAccountInit
 } from 'State/actions/account'
 
 export default class Controller{
@@ -14,6 +16,17 @@ export default class Controller{
 
     _create = values =>{
         this.dispatch(createAccount({values}))
+    }
+    _createInit = () => {
+        this.dispatch(createAccountInit())
+    }
+
+    _update = (id,values) =>{
+        this.dispatch(updateAccount(id,{values}))
+    }
+
+    _updateInit = () =>{
+        this.dispatch(updateAccountInit())
     }
 
     _list = ({orderBy,direction,from,size}) => {

@@ -51,7 +51,7 @@ const HeaderDark = props => {
 								AuthController.isAppAdmin(auth) ? 
 								<h5 className="vurox-text-sizes mb-0">APP Admin</h5>
 								:
-								<h5 className="vurox-text-sizes mb-0">{props.accounts.name}</h5>
+								<h5 className="vurox-text-sizes mb-0">Regular Account</h5>
 
 							}
 						</Space>

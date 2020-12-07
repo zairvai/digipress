@@ -85,8 +85,6 @@ function* getAccount(action){
         yield put(getAccountRoutine.request())
 
         const {id} = action.payload
-
-        console.log("id " + id)
         
         const response = yield API.graphql(graphqlOperation(queries.getAccount,{input:{id}}))
 
@@ -102,4 +100,56 @@ function* getAccount(action){
 
 export function* getAccountWatcher(){
     yield takeEvery(getAccountRoutine.TRIGGER,getAccount)
+}
+
+
+function* updateAccount(action){
+
+    try{
+
+        console.log(action)
+        
+        yield put(updateAccountRoutine.request())
+
+        const {values} = action.payload
+
+        const id = action.id.replace(/\s/g,"")
+        const name = values.name.trim()
+        const address = values.address.trim()
+        const contactPerson = values.contactPerson.trim()
+        const uniqueURL = values.uniqueURL.trim().toLowerCase()
+        const phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
+        const emailAddress = values.emailAddress.trim()
+        const status = values.status
+        const expectedVersion = values.version
+
+        const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{
+            input:{
+                id,
+                name,
+                address,
+                contactPerson,
+                uniqueURL,
+                phoneNumber,
+                emailAddress,
+                status,
+                expectedVersion}}))
+
+        yield put(updateAccountRoutine.success({data:response.data.updateAccount}))
+
+                    
+    }catch(error){
+
+        yield put(updateAccountRoutine.failure({error}))
+
+    }finally{
+
+        yield put(updateAccountRoutine.fulfill())
+
+    }
+
+}
+
+export function* updateAccountWatcher(){
+    yield takeEvery(updateAccountRoutine.TRIGGER,updateAccount)
 }

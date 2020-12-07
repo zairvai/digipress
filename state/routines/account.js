@@ -3,7 +3,7 @@ import {
 } from 'redux-saga-routines'
 
 //add account
-var customRoutine = createRoutineCreator(["INIT","CANCEL"])
+var customRoutine = createRoutineCreator(["INIT"])
 export const customCreateAccountRoutine = customRoutine("create_account_custom")
 export const createAccountRoutine = createRoutine("create_account")
 
@@ -11,6 +11,8 @@ export const createAccountRoutine = createRoutine("create_account")
 export const deleteAccountRoutine = createRoutine("delete_account")
 
 //update account
+customRoutine = createRoutineCreator(["INIT"])
+export const customUpdateAccountRoutine = customRoutine("update_account_custom")
 export const updateAccountRoutine = createRoutine("update_account")
 
 //list accounts

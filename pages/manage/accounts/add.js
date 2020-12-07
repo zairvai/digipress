@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -13,14 +14,33 @@ import Sidebar from 'Templates/HeaderSidebar';
 
 import FormAccount from 'Components/FormAccount'
 import AppContainer from 'Templates/AppContainer'
+import AccountController from 'Library/controllers/AccountController'
 
 const PageAccountAdd = props => {
     
+    const accountController = new AccountController(props)
+
+    const {router,createAccount} = props
+
     const pagename=""
 	const links = [['Manage','/manage/accounts',''],['Accounts','/manage/accounts',''],['Add new','/manage/accounts/add','active']]
 	
     const { menuState } = React.useContext(vuroxContext)
-	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+    const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+    
+    React.useEffect(()=>{
+
+		if(createAccount.isSuccessFull){
+
+            const item = createAccount.item
+			router.push(`/manage/accounts/${item.id}`)	
+        }		
+        
+        return(()=>{
+            accountController._createInit()
+        })
+        
+	},[createAccount.isSuccessFull])
 
     return (
         <AppContainer>
@@ -40,4 +60,4 @@ const PageAccountAdd = props => {
     );
 	
 }
-export default connect(state=>state)(PageAccountAdd)
+export default connect(state=>state)(withRouter(PageAccountAdd))
