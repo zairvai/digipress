@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword } from './auth'
-import { createAccount,listAccounts,getAccount,updateAccount } from './account'
+import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount } from './account'
 
 
 import { accounts } from './accounts'
@@ -45,6 +45,7 @@ const rootReducer = combineReducers({
 	listAccounts:persistReducer({key:"listAccounts",storage},listAccounts),
 	getAccount:persistReducer({key:"getAccount",storage},getAccount),
 	updateAccount:persistReducer({key:"updateAccount",storage},updateAccount),
+	deleteAccount:persistReducer({key:"deleteAccount",storage},deleteAccount),
 
 	users,
 	articles,

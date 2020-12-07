@@ -17,7 +17,7 @@ const PageAccountEdit = props => {
     const {id} = router.query
 
     React.useEffect(()=>{
-        accountController._get({id})
+        accountController._get(id)
     },[])
 
     React.useEffect(()=>{

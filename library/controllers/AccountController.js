@@ -2,7 +2,9 @@ import {
     createAccount,createAccountInit,
     listAccounts,
     getAccount,getAccountInit,
-    updateAccount,updateAccountInit
+    updateAccount,updateAccountInit,
+    deleteAccount,deleteAccountInit,
+    updateList
 } from 'State/actions/account'
 
 export default class Controller{
@@ -38,12 +40,25 @@ export default class Controller{
         
     }
 
-    _get = ({id}) =>{
+    _get = (id) =>{
         this.dispatch(getAccount({id}))
     }
 
     _getInit = () => {
         this.dispatch(getAccountInit())
+    }
+
+    _delete = (id) =>{
+        this.dispatch(deleteAccount({id}))
+    }
+    _deleteInit = () => {
+        this.dispatch(deleteAccountInit())
+    }
+
+
+    _updateList = (method,items)=>{
+        return this.dispatch(updateList(method,items))
+        
     }
 
 }

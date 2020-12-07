@@ -72,7 +72,7 @@ const FormAccount = ({item,...props}) => {
     },[item])
 
     const onSubmit = (values) => {
-
+        
         if(item) {
             values = {version:item.version,...values}
             accountController._update(item.id,values)

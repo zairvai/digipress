@@ -33,7 +33,12 @@ const PageAccountAdd = props => {
 		if(createAccount.isSuccessFull){
 
             const item = createAccount.item
-			router.push(`/manage/accounts/${item.id}`)	
+            
+            accountController._updateList("add",[item]).then(success=>{
+                console.log(success)
+                router.push(`/manage/accounts/${item.id}`)	
+            }).catch(error=>console.log(error))
+			
         }		
         
         return(()=>{

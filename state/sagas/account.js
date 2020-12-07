@@ -102,38 +102,57 @@ export function* getAccountWatcher(){
     yield takeEvery(getAccountRoutine.TRIGGER,getAccount)
 }
 
+function* deleteAccount(action){
+
+    try{
+
+        yield put(deleteAccountRoutine.request())
+
+        const {id} = action.payload
+        
+        const response = yield API.graphql(graphqlOperation(mutations.deleteAccount,{input:{id}}))
+
+        yield put(deleteAccountRoutine.success({data:response.data.deleteAccount}))
+                    
+    }catch(error){
+        yield put(deleteAccountRoutine.failure({error}))
+    }finally{
+        yield put(deleteAccountRoutine.fulfill())
+    }
+
+}
+
+export function* deleteAccountWatcher(){
+    yield takeEvery(deleteAccountRoutine.TRIGGER,deleteAccount)
+}
+
 
 function* updateAccount(action){
 
     try{
 
         console.log(action)
-        
+
         yield put(updateAccountRoutine.request())
 
         const {values} = action.payload
 
-        const id = action.id.replace(/\s/g,"")
-        const name = values.name.trim()
-        const address = values.address.trim()
-        const contactPerson = values.contactPerson.trim()
-        const uniqueURL = values.uniqueURL.trim().toLowerCase()
-        const phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
-        const emailAddress = values.emailAddress.trim()
-        const status = values.status
-        const expectedVersion = values.version
+        const updateParams = {
+            id : action.id.replace(/\s/g,""),
+            expectedVersion : values.version
+        }
+
+        if(values.name) updateParams.name = values.name.trim()
+        if(values.address) updateParams.address = values.address.trim()
+        if(values.contactPerson) updateParams.contactPerson = values.contactPerson.trim()
+        if(values.uniqueURL) updateParams.uniqueURL = values.uniqueURL.trim().toLowerCase()
+        if(values.phoneNumber) updateParams.phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
+        if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim()
+        if(values.status) updateParams.status = values.status.trim()
+        
 
         const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{
-            input:{
-                id,
-                name,
-                address,
-                contactPerson,
-                uniqueURL,
-                phoneNumber,
-                emailAddress,
-                status,
-                expectedVersion}}))
+            input:updateParams}))
 
         yield put(updateAccountRoutine.success({data:response.data.updateAccount}))
 
