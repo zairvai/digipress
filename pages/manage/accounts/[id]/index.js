@@ -100,7 +100,7 @@ const PageAccountId = props => {
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:'/manage/accounts/[id]/edit',query:{id:item.id}}} shallow><Button className="link mr-3" type="link" size="small" icon={<i className="ti-pencil"></i>}>&nbsp;Edit account</Button></Link></li>
+                                            <li className="p-0 mr-3"><Link href={{pathname:'/manage/accounts/[id]/edit',query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akun</a></Link></li>
                                             <li className="p-0"><Button onClick={()=>showConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akun</Button></li>
                                         </ul>
                                     </div>
@@ -131,7 +131,7 @@ const PageAccountId = props => {
                                 <Col md={12}>
                                     <div className="fright ml-3">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:'/app/classrooms/[id]/quizes/add',query:{id:item.id}}}shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah pengguna</Button></Link></li>
+                                            <li className="p-0"><Link href={{pathname:'/manage/accounts/[id]/user/add',query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
                                         </ul>
                                     </div>
                                 </Col>
