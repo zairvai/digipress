@@ -1,0 +1,16 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "baktikominfopesantrenv1",
+  "functionName": "baktikominfopesantrenv1PostConfirmation",
+  "resourceName": "baktikominfopesantrenv1PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/Users/zairvai/.npm-global/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "roleName": "baktikominfopesantrenv1PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}

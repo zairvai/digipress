@@ -1,6 +1,6 @@
 {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "baktik634cbbf7",
     "userPoolName": "baktikominfopesantrenv1",
     "autoVerifiedAttributes": [
@@ -29,13 +29,23 @@
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+        "address",
+        "phone_number",
+        "updated_at",
+        "email",
+        "name"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+        "address",
+        "email",
+        "name",
+        "phone_number",
+        "updated_at",
+        "email_verified",
+        "phone_number_verified"
     ],
     "userpoolClientLambdaRole": "baktik634cbbf7_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "634cbbf7",
     "resourceName": "baktikominfopesantrenv1",
     "authSelections": "identityPoolAndUserPool",
@@ -58,8 +68,23 @@
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],
-    "adminQueries": false,
+    "adminQueries": true,
     "thirdPartyAuth": false,
-    "authProviders": [],
-    "dependsOn": []
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "baktikominfopesantrenv1PostConfirmation",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ],
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "hostedUI": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": []
 }

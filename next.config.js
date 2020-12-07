@@ -14,6 +14,9 @@ const themeVariables = lessToJS(
 const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants')
 
 module.exports = vuroxConfigPlugins([
+	[{
+		trailingSlash: true,
+	}],
 	[withLess, {
 		lessLoaderOptions: {
 		  javascriptEnabled: true,
