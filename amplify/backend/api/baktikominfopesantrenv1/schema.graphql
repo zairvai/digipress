@@ -11,7 +11,7 @@ type Account {
 	updatedBy: User
 	createdAt: AWSDateTime
 	updatedAt: AWSDateTime
-	version: Int
+	version: Int!
 }
 
 input CreateAccountInput {
@@ -31,10 +31,33 @@ input GetItemInput {
 	id: ID!
 }
 
+input CreateUserInput {
+	name:String!
+	phoneNumber:String!
+	emailAddress:AWSEmail
+	password:String
+}
+
+input UpdateUserInput {
+	id: ID!
+	name: String
+	emailAddress: AWSEmail
+	phoneNumber: String
+	password:String
+	status: Int
+	expectedVersion: Int!
+}
+
 type Mutation {
+
+	createUser(input: CreateUserInput!): User
+	updateUser(input:UpdateUserInput!):User
+	deleteUser(input:DeleteItemInput!):User
+
 	createAccount(input: CreateAccountInput!): Account
 	updateAccount(input: UpdateAccountInput!): Account
 	deleteAccount(input: DeleteItemInput!): Account
+
 }
 
 type Query {
@@ -74,10 +97,24 @@ type User {
 	phoneNumber: String
 	phoneNumberVerified: Boolean
 	role: UserRole
-	createdAt: AWSDateTime!
-	updatedAt: AWSDateTime!
-	status: Int!
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
 	version: Int!
+}
+
+type Access {
+	id:ID!
+	accountId:ID!
+	userId:ID!
+	role:UserRole!
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+
 }
 
 enum UserRole {

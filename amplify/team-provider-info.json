@@ -16,7 +16,8 @@
         "baktikominfopesantrenv1": {}
       },
       "function": {
-        "baktikominfopesantrenv1PostConfirmation": {}
+        "baktikominfopesantrenv1PostConfirmation": {},
+        "baktikominfopesantrenv1PreSignup": {}
       }
     }
   },

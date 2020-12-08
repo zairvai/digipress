@@ -17,12 +17,13 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Button, Checkbox,Dropdown,Menu,Tag} from 'antd'
+import { Row, Col,Modal,Button, Checkbox,Dropdown,Menu,Tag} from 'antd'
 import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import { DownOutlined } from '@ant-design/icons';
 import AppContainer from 'Templates/AppContainer'
 import {getRole} from 'Helper'
+import FormUser from 'Components/FormUser'
 
 const RoleIndex = props => {
 
@@ -37,6 +38,12 @@ const RoleIndex = props => {
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+    const [addVisible,setAddVisible] = React.useState(false)
+
+    const showForm = props =>{
+        setAddVisible(true)
+    }
+
     return (
         <AppContainer>
             <HeaderLayout className="sticky-top">
@@ -48,6 +55,31 @@ const RoleIndex = props => {
                 </VuroxSidebar>
                 <ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                     <Summery2 pagename={pagename} links={links}/>
+
+                    <Modal
+                        title={`Tambah ${roleItem.name}`}
+                        centered
+                        footer={null}
+                        bodyStyle={{padding:0}}
+                        onCancel={()=>setAddVisible(false)} 
+                        visible={addVisible}
+                        keyboard={false}
+                        mask={false}
+                        maskClosable={false}
+                        width={500}>
+                        <Row>
+                            <Col md={24}>
+
+                                <FormUser 
+                                    onCancel={()=>setAddVisible(false)} 
+                                    onOk={()=>setAddVisible(false)}/>
+
+                            </Col>
+                        </Row>
+                        
+
+                    </Modal>
+                    
                     <Row className="mb-2">
                         <Col md={12}>
                             <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />} className="mr-2"/>
@@ -55,7 +87,7 @@ const RoleIndex = props => {
                         <Col md={12}>
                             <div className="fright">
                                 <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                <li className="p-0"><Link href={{pathname:'/manage/users/add'}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
+                                    <li className="p-0"><Button onClick={showForm} className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah pengguna</Button></li>
                                 </ul>
                             </div>
                         </Col>
@@ -99,7 +131,6 @@ const RoleIndex = props => {
                             </VuroxComponentsContainer>	
                         </Col>
                     </Row>
-                    
                 </ContentLayout>
             </VuroxLayout>
         </AppContainer>

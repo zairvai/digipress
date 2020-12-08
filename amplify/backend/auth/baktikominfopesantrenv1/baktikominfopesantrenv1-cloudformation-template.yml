@@ -21,6 +21,16 @@ Parameters:
   
   
   
+  functionbaktikominfopesantrenv1PreSignupArn: 
+    Type: String
+    Default: functionbaktikominfopesantrenv1PreSignupArn
+  
+  functionbaktikominfopesantrenv1PreSignupName: 
+    Type: String
+    Default: functionbaktikominfopesantrenv1PreSignupName
+  
+  
+  
 
     
   identityPoolName:
@@ -161,7 +171,6 @@ Parameters:
   hostedUI:
     Type: String
             
-            
       
   parentStack:
     Type: String
@@ -170,6 +179,7 @@ Parameters:
   permissions:
     Type: CommaDelimitedList
       
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 
@@ -238,6 +248,8 @@ Resources:
         
         
         
+          PreSignUp: !Ref functionbaktikominfopesantrenv1PreSignupArn
+        
         
         
       
@@ -281,6 +293,15 @@ Resources:
     
   
   
+  UserPoolPreSignupLambdaInvokePermission: 
+    Type: "AWS::Lambda::Permission"
+    DependsOn: UserPool
+    Properties: 
+      Action: "lambda:invokeFunction"
+      Principal: "cognito-idp.amazonaws.com"
+      FunctionName: !Ref functionbaktikominfopesantrenv1PreSignupName
+      SourceArn: !GetAtt UserPool.Arn
+  
    
     
   # Updating lambda role with permissions to Cognito
@@ -293,9 +314,6 @@ Resources:
     Properties:
       ClientName: baktik634cbbf7_app_clientWeb
       
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
-      
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
     DependsOn: UserPool
@@ -305,9 +323,6 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: baktik634cbbf7_app_client
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity

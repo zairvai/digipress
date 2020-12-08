@@ -45,7 +45,7 @@
         "phone_number_verified"
     ],
     "userpoolClientLambdaRole": "baktik634cbbf7_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
+    "userpoolClientSetAttributes": false,
     "sharedId": "634cbbf7",
     "resourceName": "baktikominfopesantrenv1",
     "authSelections": "identityPoolAndUserPool",
@@ -79,9 +79,18 @@
                 "Arn",
                 "Name"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "baktikominfopesantrenv1PreSignup",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
         }
     ],
-    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ],\n  \"PreSignup\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"

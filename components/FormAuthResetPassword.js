@@ -17,7 +17,7 @@ const {Text} = Typography
 const schema = yup.object().shape({
     code:yup.number().typeError("Kode konfirmasi terdiri dari angka saja.").required("Mohon ketik kode keamanan yang telah dikirim ke email.").positive("Mohon masukan kode keamanan dengan benar."),
     password:yup.string().required("Mohon ketik password kamu yang baru."),
-    confirm_password:yup.string().required("Mohon pastikan password konfirmasi kamu benar."),
+    confirm_password:yup.string().oneOf([yup.ref("password"),null],"Mohon pastikan password konfirmasi sama dengan password di atas.")
 })
 
 const FormAuth = props => {
