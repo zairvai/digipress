@@ -9,12 +9,12 @@ import { LockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import AccountController from 'Library/controllers/AccountController'
 
 const {Text} = Typography
 
 //validation schema
 const schema = yup.object().shape({
+    role:yup.string().required(),
     name:yup.string().required("Mohon masukkan nama pengguna.").max(100,"Nama tidak boleh lebih dari 100 karakter."),
     phoneCode:yup.string().required("Mohon masukkan kode.").max(5,"Maksimal 55 angka."),
     phoneNumber:yup.string().typeError("Mohon masukkan nomer telpon.").required("Mohon masukkan nomer telpon.").max(15,"Maksimal 15 angka."),
@@ -24,8 +24,6 @@ const schema = yup.object().shape({
 })
 
 const FormUser = ({item,...props}) => {
-
-    const accountController = new AccountController(props)
 
     const {
         handleSubmit,
@@ -37,6 +35,7 @@ const FormUser = ({item,...props}) => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
+                role:"Admin",
                 name:"",
                 phoneCode:"+62",
                 phoneNumber:"",
@@ -91,6 +90,22 @@ const FormUser = ({item,...props}) => {
                 <Col md={24}>
                     <VuroxComponentsContainer className="p-4">
                         <Row>
+                            <Col md={8} sm={24} xs={24}>
+                                <Controller
+                                    name="role"
+                                    control={control}
+                                    render={props=>
+                                        <Form.Item label="Role">
+                                            <Select size="large" style={{ width: "100%" }} value={props.value} onChange={props.onChange}>
+                                                <Select.Option value="Admin">Admin</Select.Option>
+                                            </Select>
+                                        </Form.Item>
+                                    }
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row>
                             <Col md={24} sm={24} xs={24}>
                                 <Controller
                                     name="name"
@@ -98,7 +113,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama">
                                             <Input 
-                                                tabIndex="1"
+                                                tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." value={props.value} onChange={props.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
@@ -130,7 +145,7 @@ const FormUser = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <InputNumber
-                                                    tabIndex="2"
+                                                    tabIndex="3"
                                                     size="large"
                                                     style={{ width: '70%' }} 
                                                     value={props.value} placeholder="8xx" onChange={props.onChange}/>
@@ -150,7 +165,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Email" className="ml-0 ml-md-3">
                                             <Input
-                                                tabIndex="3" 
+                                                tabIndex="4" 
                                                 allowClear
                                                 size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
                                             {errors && errors.emailAddress && <Text type="danger">{errors.emailAddress.message}</Text>}
@@ -171,7 +186,7 @@ const FormUser = ({item,...props}) => {
                                         <Form.Item label="Password">
                                             <Input.Password
                                                 size="large"   
-                                                tabIndex="4" 
+                                                tabIndex="5" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                                 autoComplete="current-password"
                                                 placeholder="Password"
@@ -194,7 +209,7 @@ const FormUser = ({item,...props}) => {
                                         <Form.Item label="Konfirmasi Password" className="ml-0 ml-md-3">
                                             <Input.Password
                                                 size="large"   
-                                                tabIndex="5" 
+                                                tabIndex="6" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                                 autoComplete="current-password"
                                                 placeholder="Konfirmasi password"
@@ -217,10 +232,10 @@ const FormUser = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="6"  onClick={onCancel} danger type="link" block>Batal</Button>
+                                <Button tabIndex="7"  onClick={onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="7" type="primary" htmlType="submit" block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>
                             </Col>
                         </Row>
 

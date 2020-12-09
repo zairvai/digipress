@@ -18,20 +18,21 @@ import { appContext } from 'Context/app'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Modal,Button, Checkbox,Dropdown,Menu,Tag} from 'antd'
+import { Row, Col,Modal,Button, Tabs,Typography} from 'antd'
 import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import AppContainer from 'Templates/AppContainer'
-import {getRole} from 'Helper'
 import FormUser from 'Components/FormUser'
+import FormUserExisting from 'Components/FormUserExisting'
 
 const RoleIndex = props => {
 
 	const {auth, baseUrl } = React.useContext(appContext)
 
-    const{router} = props
+	const {TabPane} = Tabs
 
-
+	const {Text}=Typography
+ 
     const pagename=""
 	const links = [['Manage',`${baseUrl}/manage/users`,''],['Users',`${baseUrl}/manage/users`,'active']]
 
@@ -67,24 +68,27 @@ const RoleIndex = props => {
                         mask={false}
                         maskClosable={false}
                         width={500}>
-							<VuroxComponentsContainer className="px-4">
-								<Row>
-									<Col md={24}>
-										
-										<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-											<li className="p-0"><Button onClick={showForm} className="link" type="link" size="small">Pengguna baru</Button></li>
-										</ul>
-									</Col>
-								</Row>
-							</VuroxComponentsContainer>
-							<Row>
-								<Col md={24}>
-									<FormUser 
-										onCancel={()=>setAddVisible(false)} 
-										onOk={()=>setAddVisible(false)}/>
 
-								</Col>
-							</Row>
+							<Tabs className="formTab" defaultActiveKey="1">
+								<TabPane tab="Pengguna baru" key="1">
+									<Row>
+										<Col md={24}>
+											<FormUser 
+												onCancel={()=>setAddVisible(false)} 
+												onOk={()=>setAddVisible(false)}/>
+
+										</Col>
+									</Row>
+								</TabPane>
+								<TabPane tab="Pengguna lama" key="2">
+									<Row>
+										<Col md={24}>
+											<FormUserExisting></FormUserExisting>
+										</Col>
+									</Row>
+								</TabPane>
+							</Tabs>
+							
                         
 
                     </Modal>
