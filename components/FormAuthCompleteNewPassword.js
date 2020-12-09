@@ -170,7 +170,7 @@ const FormAuth = props => {
                 </Row>
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Button type="link" className="p-0" onClick={()=>authController._signOut()}>Kembali ke halaman Login</Button>
+                        <Button type="link" className="p-0" onClick={props.onBack}>Kembali ke halaman Login</Button>
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
                         <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>

@@ -110,13 +110,14 @@ function* getAccountByUniqueUrl(action){
 
         const {url} = action.payload
 
-        const response = yield call([API,"graphql"],graphqlOperation(queries.getAccountByUniqueUrl,{url}))
+        // const response = yield call([API,"graphql"],graphqlOperation(queries.getAccountByUniqueUrl,{url}))
 
-        // const response = yield API.graphql({
-        //     query:queries.getAccountByUniqueUrl,
-        //     variables:{url},
-        //     authMode:"AWS_IAM"
-        // })
+        const response = yield API.graphql({
+            query:queries.getAccountByUniqueUrl,
+            variables:{url},
+            authMode:"AWS_IAM"
+            //authMode:"AMAZON_COGNITO_USER_POOLS"
+        })
 
         yield put(getAccountByUniqueUrlRoutine.success({data:response.data.getAccountByUniqueUrl}))
                     

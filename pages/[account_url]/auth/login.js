@@ -13,6 +13,7 @@ import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
+import { signOutRoutinePromise } from 'State/routines/auth';
 import { getAccountByUniqueUrlRoutinePromise } from 'State/routines/account';
 import { getUserRoutinePromise } from 'State/routines/user';
 
@@ -35,7 +36,7 @@ const PageLogin = props =>{
 	const {account_url} = router.query
 
 	React.useEffect(()=>{
-		authController._initSignIn()
+		//authController._initSignIn()
 		accountController._getAccountByUniqueUrl({url:account_url})
 			.then(account=>{
 				authController._setAccount(account.data)
@@ -60,6 +61,11 @@ const PageLogin = props =>{
 		
 	}
 
+	const onBacktoLogin = () => {
+		authController._signOut()
+			.then(()=>authController._initSignIn())
+	}
+
 	return(
 		<AppContainer>
 			<Header/>
@@ -75,7 +81,7 @@ const PageLogin = props =>{
 							<Row className="align-items-center fullHeight">
 								<Col md={24} sm={24} xs={24}>
 									{props.auth.newPasswordRequired ? 
-										<FormCompleteNewPasword/>
+										<FormCompleteNewPasword onBack={onBacktoLogin}/>
 										:
 										<FormLogin onAuthorized={onAuthorized}/>
 									}
@@ -94,6 +100,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
+			signOutRoutinePromise,
 			getAccountByUniqueUrlRoutinePromise,
 			getUserRoutinePromise
         },dispatch),dispatch

@@ -1,4 +1,5 @@
-type Account @aws_iam
+type Account 
+@aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	name: String!
@@ -65,9 +66,7 @@ type Mutation {
 type Query {
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input: ListItemInput): AccountConnection
-	getAccountByUniqueUrl(url: String!): Account
-		@aws_iam
-@aws_cognito_user_pools
+	getAccountByUniqueUrl(url: String!): Account @aws_iam @aws_cognito_user_pools
 	getUser(input: GetItemInput!): User
 	getUserByEmailAddress(emailAddress: String!): User
 	listUsers(input: ListItemInput): UserConnection
@@ -95,7 +94,8 @@ input UpdateUserInput {
 	expectedVersion: Int!
 }
 
-type User @aws_iam
+type User 
+@aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	name: String!
