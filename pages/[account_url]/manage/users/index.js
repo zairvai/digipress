@@ -67,15 +67,25 @@ const RoleIndex = props => {
                         mask={false}
                         maskClosable={false}
                         width={500}>
-                        <Row>
-                            <Col md={24}>
+							<VuroxComponentsContainer className="px-4">
+								<Row>
+									<Col md={24}>
+										
+										<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
+											<li className="p-0"><Button onClick={showForm} className="link" type="link" size="small">Pengguna baru</Button></li>
+										</ul>
+									
+									</Col>
+								</Row>
+							</VuroxComponentsContainer>
+							<Row>
+								<Col md={24}>
+									<FormUser 
+										onCancel={()=>setAddVisible(false)} 
+										onOk={()=>setAddVisible(false)}/>
 
-                                <FormUser 
-                                    onCancel={()=>setAddVisible(false)} 
-                                    onOk={()=>setAddVisible(false)}/>
-
-                            </Col>
-                        </Row>
+								</Col>
+							</Row>
                         
 
                     </Modal>
