@@ -16,26 +16,78 @@ export const getAccount = /* GraphQL */ `
         id
         name
         emailAddress
-        emailAddressVerified
         phoneNumber
+        emailAddressVerified
         phoneNumberVerified
-        role
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
         createdAt
         updatedAt
-        status
         version
       }
       updatedBy {
         id
         name
         emailAddress
-        emailAddressVerified
         phoneNumber
+        emailAddressVerified
         phoneNumberVerified
-        role
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
         createdAt
         updatedAt
-        status
         version
       }
       createdAt
@@ -60,26 +112,262 @@ export const listAccounts = /* GraphQL */ `
           id
           name
           emailAddress
-          emailAddressVerified
           phoneNumber
+          emailAddressVerified
           phoneNumberVerified
-          role
+          enabled
+          roles
           createdAt
           updatedAt
-          status
           version
         }
         updatedBy {
           id
           name
           emailAddress
-          emailAddressVerified
           phoneNumber
+          emailAddressVerified
           phoneNumberVerified
-          role
+          enabled
+          roles
           createdAt
           updatedAt
-          status
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      foundDocs
+    }
+  }
+`;
+export const getAccountByUniqueUrl = /* GraphQL */ `
+  query GetAccountByUniqueUrl($url: String!) {
+    getAccountByUniqueUrl(url: $url) {
+      id
+      name
+      uniqueURL
+      address
+      contactPerson
+      emailAddress
+      phoneNumber
+      status
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      createdAt
+      updatedAt
+      version
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($input: GetItemInput!) {
+    getUser(input: $input) {
+      id
+      name
+      emailAddress
+      phoneNumber
+      emailAddressVerified
+      phoneNumberVerified
+      enabled
+      roles
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      createdAt
+      updatedAt
+      version
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers($input: ListItemInput) {
+    listUsers(input: $input) {
+      items {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
           version
         }
         createdAt

@@ -21,13 +21,13 @@ Parameters:
   
   
   
-  functionbaktikominfopesantrenv1PreSignupArn: 
+  functionbaktikominfopesantrenv1PostAuthenticationArn: 
     Type: String
-    Default: functionbaktikominfopesantrenv1PreSignupArn
+    Default: functionbaktikominfopesantrenv1PostAuthenticationArn
   
-  functionbaktikominfopesantrenv1PreSignupName: 
+  functionbaktikominfopesantrenv1PostAuthenticationName: 
     Type: String
-    Default: functionbaktikominfopesantrenv1PreSignupName
+    Default: functionbaktikominfopesantrenv1PostAuthenticationName
   
   
   
@@ -155,10 +155,6 @@ Parameters:
   adminQueries:
     Type: String
             
-  
-  thirdPartyAuth:
-    Type: String
-            
         
   dependsOn:
     Type: CommaDelimitedList
@@ -179,6 +175,10 @@ Parameters:
   permissions:
     Type: CommaDelimitedList
       
+  
+  thirdPartyAuth:
+    Type: String
+            
             
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
@@ -243,12 +243,12 @@ Resources:
         
         
         
+          PostAuthentication: !Ref functionbaktikominfopesantrenv1PostAuthenticationArn
+        
         
           PostConfirmation: !Ref functionbaktikominfopesantrenv1PostConfirmationArn
         
         
-        
-          PreSignUp: !Ref functionbaktikominfopesantrenv1PreSignupArn
         
         
         
@@ -265,7 +265,7 @@ Resources:
           MinimumLength: !Ref passwordPolicyMinLength
           RequireLowercase: true
           RequireNumbers: true
-          RequireSymbols: true
+          RequireSymbols: false
           RequireUppercase: true
       
       UsernameAttributes: !Ref usernameAttributes
@@ -280,6 +280,15 @@ Resources:
     
     
   
+  
+  UserPoolPostAuthenticationLambdaInvokePermission: 
+    Type: "AWS::Lambda::Permission"
+    DependsOn: UserPool
+    Properties: 
+      Action: "lambda:invokeFunction"
+      Principal: "cognito-idp.amazonaws.com"
+      FunctionName: !Ref functionbaktikominfopesantrenv1PostAuthenticationName
+      SourceArn: !GetAtt UserPool.Arn
     
   
   UserPoolPostConfirmationLambdaInvokePermission: 
@@ -292,15 +301,6 @@ Resources:
       SourceArn: !GetAtt UserPool.Arn
     
   
-  
-  UserPoolPreSignupLambdaInvokePermission: 
-    Type: "AWS::Lambda::Permission"
-    DependsOn: UserPool
-    Properties: 
-      Action: "lambda:invokeFunction"
-      Principal: "cognito-idp.amazonaws.com"
-      FunctionName: !Ref functionbaktikominfopesantrenv1PreSignupName
-      SourceArn: !GetAtt UserPool.Arn
   
    
     
@@ -444,7 +444,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'testAuthIdentityPool', !Join ['',['testAuthIdentityPool', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'baktikominfopesantrenv1', !Join ['',['baktikominfopesantrenv1', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

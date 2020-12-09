@@ -11,7 +11,7 @@ exports.handler = (event,context,callback)=>{
   const cisp = new AWS.CognitoIdentityServiceProvider()
 
   const userPoolId = process.env.AUTH_USERPOOLID
-    
+  
   var field;
     
   if(Array.isArray(event)) field = event[0].field
@@ -46,11 +46,18 @@ exports.handler = (event,context,callback)=>{
       }
       
       cisp.adminCreateUser(params,(error,data)=>{
-      
+        
           if(error) callback(error,null)
           else{
-              var newId = data.User.Attributes[0].Value
-              callback(null,{id:newId})
+              callback(null,{
+                  id:data.User.Attributes[0].Value,
+                  name:data.User.Attributes[1].Value,
+                  phoneNumber:data.User.Attributes[2].Value,
+                  emailAddress:data.User.Attributes[3].Value,
+                  createdAt:data.User.UserCreateDate,
+                  updatedAt:data.User.UserLastModifiedDate,
+                  enabled:data.User.Enabled
+                })
           }
       
       })

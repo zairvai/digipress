@@ -3,7 +3,8 @@ import {
     completeNewPasswordRoutine,
     forgotPasswordRoutine,customForgotPasswordRoutine,
     resetPasswordRoutine,
-    signOutRoutine
+    signOutRoutine,
+    customSetDataRoutine
 } from '../routines/auth'
 
 const initialState = {
@@ -11,7 +12,9 @@ const initialState = {
     isLoggedIn:false,
     isRequesting:false,
     isError:false,
-    data:false
+    data:false,
+    user:false,
+    account:false
 }
 
 //signin
@@ -150,7 +153,9 @@ export const signOut = (state=initialState,action) => {
                 userNotFound:false,
                 userNotConfirmed:false,
                 newPasswordRequired:false,
-                isLoggedIn:false
+                isLoggedIn:false,
+                user:false,
+                account:false
             })  
         }
         case signOutRoutine.FAILURE:{
@@ -333,4 +338,26 @@ export const resetPassword = (state=initialState,action) => {
             return state
     }
 
+}
+
+export const authData = (state=initialState,action) => {
+
+    switch(action.type){
+        case customSetDataRoutine.SETUSER : {
+            
+            const {user} = action
+            return Object.assign({},state,{
+                user
+            })  
+        }
+        case customSetDataRoutine.SETACCOUNT : {
+            
+            const {account} = action
+            return Object.assign({},state,{
+                account
+            })  
+        }
+    }
+
+    return state
 }

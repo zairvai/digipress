@@ -12,7 +12,6 @@ function searchManagerPut(record){
       "emailAddressVerified":newImage.emailAddressVerified.BOOL,
       "phoneNumber":newImage.phoneNumber.S,
       "phoneNumberVerified":newImage.phoneNumberVerified.BOOL,
-      "role":newImage.role.S,
       "status":newImage.status.S,
       "__typename":newImage.__typename.S,
       "createdAt":newImage.createdAt.S,

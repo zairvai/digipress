@@ -15,6 +15,7 @@ import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'
 Amplify.configure(awsExports)
 
+
 class VuroxApp extends App{
 
 	state = {

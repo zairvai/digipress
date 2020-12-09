@@ -3,6 +3,7 @@ import {
     updateAccountRoutine,customUpdateAccountRoutine,
     deleteAccountRoutine,customDeleteAccountRoutine,
     getAccountRoutine,customGetAccountRoutine,
+    getAccountByUniqueUrlRoutine,
     listAccountsRoutine,customListAccountsRoutine
 } from '../routines/account'
 
@@ -17,11 +18,11 @@ export const createAccountInit = () => ({
 })
 
 
-export const updateAccount = (id,payload) => ({
+export const updateAccount = (payload) => ({
     type : updateAccountRoutine.TRIGGER,
-    id,
     payload
 })
+
 export const updateAccountInit = () => ({
     type : customUpdateAccountRoutine.INIT
 })
@@ -50,17 +51,14 @@ export const getAccountInit = () => ({
     type : customGetAccountRoutine.INIT
 })
 
+export const getAccountByUniqueUrl = payload => ({
+    type : getAccountByUniqueUrlRoutine.TRIGGER,
+    payload
+})
 
-//update list setelah create atau remove
+//update list setelah create atau remove, methods: add, remove
 export const updateList = (method,items) => {
     
-    // return new(dispatch,getState)=>{
-    //     dispatch({
-    //         type:customListAccountsRoutine.UPDATELIST,
-    //         method,
-    //         items
-    //     })
-    // }
     return (dispatch,getState)=>{
         
         dispatch({

@@ -15,7 +15,7 @@
         },
         {
           "category": "function",
-          "resourceName": "baktikominfopesantrenv1PreSignup",
+          "resourceName": "baktikominfopesantrenv1PostAuthentication",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -33,10 +33,7 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbaktikominfopesantrenv1"
-            }
+            "authenticationType": "AWS_IAM"
           },
           "additionalAuthenticationProviders": []
         }
@@ -89,7 +86,7 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "baktikominfopesantrenv1PreSignup": {
+    "baktikominfopesantrenv1PostAuthentication": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

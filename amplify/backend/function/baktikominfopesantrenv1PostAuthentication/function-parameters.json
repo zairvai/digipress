@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "baktikominfopesantrenv1",
+  "functionName": "baktikominfopesantrenv1PostAuthentication",
+  "resourceName": "baktikominfopesantrenv1PostAuthentication",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "/Users/zairvai/.npm-global/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PostAuthentication",
+  "triggerTemplate": "PostAuthentication.json.ejs",
+  "roleName": "baktikominfopesantrenv1PostAuthentication",
+  "skipEdit": true,
+  "enableCors": false,
+  "triggerEventPath": "PostAuthentication.event.json"
+}

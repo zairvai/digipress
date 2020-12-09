@@ -7,18 +7,23 @@ export const AppContextProvider = (props) =>{
     const [isLoggedIn,setIsLoggedIn] = React.useState(false)
     const [user,setUser] = React.useState(false)
     const [account,setAccount] = React.useState(false)
+    const [baseUrl,setBaseUrl] = React.useState("/")
+
+    const APP_ACCOUNT_ID = "11001"
+
+    const setCurrentAccount = account => {
+        if(account){
+            setAccount(account)
+            setBaseUrl(`/${account.uniqueURL}`)
+        }
+        else {
+            setAccount(false)
+            setBaseUrl("/")
+        }
+    }
 
     const setCurrentUser = user => {
-        if(user){
-            const currentUser = {
-                id:user.attributes.sub,
-                name:user.attributes.name,
-                email:user.attributes.email,
-                email_verified:user.attributes.email_verified,
-                cognitoGroups:user.signInUserSession.accessToken.payload["cognito:groups"]
-            }
-            setUser(currentUser)
-        }
+        if(user)setUser(user)
         else setUser(false)
        
     }
@@ -32,6 +37,8 @@ export const AppContextProvider = (props) =>{
             value={{
                 isLoggedIn,
                 auth:{user,account},
+                baseUrl,
+                setCurrentAccount,
                 setCurrentUser,
                 setLoginStatus
             }}>

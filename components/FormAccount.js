@@ -5,10 +5,13 @@ import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import RichTextEditor from 'Components/RichTextEditor'
+import { appContext } from 'Context/app'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { createAccountRoutinePromise,updateAccountRoutinePromise} from 'State/routines/account';
 import AccountController from 'Library/controllers/AccountController'
 
 const {Text} = Typography
@@ -34,6 +37,7 @@ const schema = yup.object().shape({
 const FormAccount = ({item,...props}) => {
 
     const accountController = new AccountController(props)
+    const { baseUrl } = React.useContext(appContext)
 
     const {
         handleSubmit,
@@ -75,9 +79,14 @@ const FormAccount = ({item,...props}) => {
         
         if(item) {
             values = {version:item.version,...values}
+            
             accountController._update(item.id,values)
+                .then(account=>props.onSuccess(account.data))
+                .catch(error=>console.log(error))
         }
         else accountController._create(values)
+                .then(account=>props.onSuccess(account.data))
+                .catch(error=>console.log(error))
 
     }
 
@@ -86,7 +95,6 @@ const FormAccount = ({item,...props}) => {
         console.log(errors)
 
     }
-
 
     return (
         <Form
@@ -228,7 +236,7 @@ const FormAccount = ({item,...props}) => {
                                 <Button tabIndex="6" className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
                             </Col>
                             <Col md={3} sm={24} xs={24}>
-                                <Link tabIndex="7" href="/manage/accounts" shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
+                                <Link tabIndex="7" href={item ? `${baseUrl}/manage/accounts/${item.id}` : `${baseUrl}/manage/accounts`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
                             </Col>
                         </Row>
                         
@@ -242,4 +250,12 @@ const FormAccount = ({item,...props}) => {
 
 }
 
-export default connect(state=>state)(FormAccount)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            createAccountRoutinePromise,
+            updateAccountRoutinePromise
+        },dispatch),dispatch
+    })
+)(FormAccount)

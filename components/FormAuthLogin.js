@@ -11,6 +11,8 @@ import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { signInRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
 
 const {Text} = Typography
@@ -38,13 +40,13 @@ const FormAuth = props => {
                 password:""
             }
     })
-    
-    // React.useEffect(()=>{
-    //     authController._initSignIn()
-    // },[])
 
     const onSubmit = values =>{
         authController._signIn(values.email,values.password)
+            .then(auth=>{
+                props.onAuthorized(auth)
+            })
+            .catch(error=>console.log(error))
     }
 
     const onError = (errors,e) => {
@@ -147,4 +149,11 @@ const FormAuth = props => {
     );
 }
 
-export default connect(state=>state)(FormAuth)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            signInRoutinePromise
+        },dispatch),dispatch
+    })
+)(FormAuth)

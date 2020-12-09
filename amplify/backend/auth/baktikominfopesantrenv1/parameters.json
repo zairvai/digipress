@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "testAuthIdentityPool",
+    "identityPoolName": "baktikominfopesantrenv1",
     "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "baktik634cbbf7",
     "userPoolName": "baktikominfopesantrenv1",
@@ -14,13 +14,12 @@
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Forgot password code: {####}",
     "emailVerificationMessage": "Forgot password code: {####}",
-    "defaultPasswordPolicy": false,
+    "defaultPasswordPolicy": true,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
         "Requires Lowercase",
-        "Requires Numbers",
-        "Requires Symbols",
-        "Requires Uppercase"
+        "Requires Uppercase",
+        "Requires Numbers"
     ],
     "requiredAttributes": [
         "email",
@@ -69,7 +68,6 @@
     "userPoolGroups": false,
     "userPoolGroupList": [],
     "adminQueries": true,
-    "thirdPartyAuth": false,
     "dependsOn": [
         {
             "category": "function",
@@ -82,7 +80,7 @@
         },
         {
             "category": "function",
-            "resourceName": "baktikominfopesantrenv1PreSignup",
+            "resourceName": "baktikominfopesantrenv1PostAuthentication",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
@@ -90,10 +88,11 @@
             ]
         }
     ],
-    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ],\n  \"PreSignup\": [\n    \"custom\"\n  ]\n}",
+    "triggers": "{\n  \"PostAuthentication\": [\n    \"custom\"\n  ],\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "thirdPartyAuth": false
 }

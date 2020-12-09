@@ -18,15 +18,12 @@ import { Row, Col,Button} from 'antd'
 import AuthController from 'Library/controllers/AuthController'
 
 const HeaderDark = props => {
+	
 	const { toggleMenu, menuState } = useContext(vuroxContext)
 
-	const {auth} = React.useContext(appContext)
-	const [name,setName] = React.useState("")
+	const {auth,baseUrl} = React.useContext(appContext)
+	const role = AuthController.getRole(auth)
 
-	React.useEffect(()=>{
-		if(auth.user) setName(auth.user.name)
-	},[auth.user])
-	
 	return (
 		<div>
 			<Header />
@@ -42,18 +39,8 @@ const HeaderDark = props => {
 								<GridFill className="vurox-menu-toggler" onClick={ toggleMenu } />
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
-
-							{
-
-								AuthController.isAppOwner(auth)  ? 
-								<h5 className="vurox-text-sizes mb-0">APP Owner</h5>
-								:
-								AuthController.isAppAdmin(auth) ? 
-								<h5 className="vurox-text-sizes mb-0">APP Admin</h5>
-								:
-								<h5 className="vurox-text-sizes mb-0">Regular Account</h5>
-
-							}
+							<h5 className="vurox-text-sizes mb-0">{auth.account.name}</h5>
+							<h6 className="mt-2">{role.role}</h6>
 						</Space>
 					</Col>
 				
@@ -117,10 +104,10 @@ const HeaderDark = props => {
 								<button className='dropbtn'><i className='ti-user bg-blue-6 flex-fill'></i></button>
 								<DropdownItems width={240} className='pb-2'>
 									<DropdownItemsHead color='bg-cyan-6'>
-										{name}
+										{auth.user.name}
 									</DropdownItemsHead>
 									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
-									<DropdownItem link="/auth/logout"><i className='ti-arrow-left'></i>Keluar</DropdownItem>
+									<DropdownItem link={`${baseUrl}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
 						</div>

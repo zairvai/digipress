@@ -2,7 +2,7 @@ import {
     createAccountRoutine,customCreateAccountRoutine,
     updateAccountRoutine,customUpdateAccountRoutine,
     deleteAccountRoutine,customDeleteAccountRoutine,
-    getAccountRoutine,customGetAccountRoutine,
+    getAccountRoutine,customGetAccountRoutine,getAccountByUniqueUrlRoutine,
     listAccountsRoutine,customListAccountsRoutine
 } from '../routines/account'
 
@@ -198,6 +198,54 @@ export const getAccount = (state={item:{},...initialState},action) => {
 
     return state
 }
+
+export const getAccountByUniqueUrl = (state={item:{},...initialState},action) => {
+
+    switch(action.type){
+
+        case getAccountByUniqueUrlRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+        }
+
+        case getAccountByUniqueUrlRoutine.SUCCESS : {
+
+            const {data} = action.payload
+            
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                isSuccessFull:true,
+                item:data
+            })     
+
+        }
+
+        case getAccountByUniqueUrlRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                item:{}
+            })
+        }
+
+    }
+
+    return state
+}
+
 
 export const updateAccount = (state={item:{},...initialState},action) => {
 

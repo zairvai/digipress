@@ -1,7 +1,9 @@
 import {
     initSignIn,signIn,signOut,
     completeNewPassword,
-    initForgotPassword,forgotPassword,resetPassword} from 'State/actions/auth'
+    initForgotPassword,forgotPassword,resetPassword,
+    setUser,setAccount
+} from 'State/actions/auth'
 
 export default class Controller{
 
@@ -12,16 +14,40 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
-    static isAppOwner = (auth) => {
+    static isOwner = (auth) => {
         
-        if(auth.user) return auth.user.cognitoGroups.includes("app-owner")
+        if(auth.user){
+            const {roles} = auth.user
+            if(roles[auth.account.id].role==="Owner") return true
+        }
+
         return false
     }
 
-    static isAppAdmin = (auth) => {
+    static isAdmin = (auth) => {
 
-        if(auth.user) return auth.user.cognitoGroups.includes("app-admin")
+        if(auth.user){
+            const {roles} = auth.user
+            if(roles[auth.account.id].role==="Admin") return true
+        }
         return false
+    }
+
+    static getRole = auth => {
+        if(auth.user){
+            const {roles} = auth.user
+            return roles[auth.account.id]
+        }
+
+        return{}
+    }
+
+    _setUser = user =>{
+        this.dispatch(setUser(user))
+    }
+
+    _setAccount = account =>{
+        this.dispatch(setAccount(account))
     }
 
     _initSignIn = () =>{
@@ -30,16 +56,16 @@ export default class Controller{
 
     _signIn = (email,password) =>{
 
-        this.dispatch(signIn({
+        return this.props.signInRoutinePromise({
             values:{
                 username:email,
                 password:password
             }
-        }))
+        })
     }
     
     _signOut = () =>{
-        this.dispatch(signOut())
+        return this.props.signOutRoutinePromise()
     }
 
     _completeNewPassword = (name,password) =>{

@@ -1,7 +1,7 @@
 import {
     createAccount,createAccountInit,
     listAccounts,
-    getAccount,getAccountInit,
+    getAccount,getAccountInit,getAccountByUniqueUrl,
     updateAccount,updateAccountInit,
     deleteAccount,deleteAccountInit,
     updateList
@@ -17,18 +17,12 @@ export default class Controller{
     }
 
     _create = values =>{
-        this.dispatch(createAccount({values}))
-    }
-    _createInit = () => {
-        this.dispatch(createAccountInit())
+        return this.props.createAccountRoutinePromise({values})
     }
 
     _update = (id,values) =>{
-        this.dispatch(updateAccount(id,{values}))
-    }
-
-    _updateInit = () =>{
-        this.dispatch(updateAccountInit())
+        values.id = id
+        return this.props.updateAccountRoutinePromise({values})
     }
 
     _list = ({orderBy,direction,from,size}) => {
@@ -49,12 +43,19 @@ export default class Controller{
     }
 
     _delete = (id) =>{
-        this.dispatch(deleteAccount({id}))
+        
+        //this.dispatch(deleteAccount({id}))
+        return this.props.deleteAccountRoutinePromise({id})
+
     }
     _deleteInit = () => {
         this.dispatch(deleteAccountInit())
     }
 
+    _getAccountByUniqueUrl = ({url}) =>{
+        
+        return this.props.getAccountByUniqueUrlRoutinePromise({url})
+    }
 
     _updateList = (method,items)=>{
         return this.dispatch(updateList(method,items))

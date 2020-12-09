@@ -22,7 +22,7 @@ const Summery = props =>{
 						
 						<Col xs={24}>
 							<div className="vurox-admin-welcome">
-								<h5>Hi {name}, Selamat datang !</h5>
+								<h5>Hi {auth.user.name}, Selamat datang !</h5>
 								{/* <p>Terakhir masuk {this.props.users.lastloggedin}</p> */}
 							</div>
 						</Col>

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword } from './auth'
-import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount } from './account'
-
+import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData } from './auth'
+import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
+import { getUser } from './user'
 
 import { accounts } from './accounts'
 import { articles } from './articles'
@@ -35,7 +35,7 @@ const authPersistConfig = {
     //     "usernamExists"]
 }
 
-const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword)
+const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData)
 
 const rootReducer = combineReducers({
 	//auth
@@ -44,8 +44,11 @@ const rootReducer = combineReducers({
 	createAccount:persistReducer({key:"createAccount",storage},createAccount),
 	listAccounts:persistReducer({key:"listAccounts",storage},listAccounts),
 	getAccount:persistReducer({key:"getAccount",storage},getAccount),
+	getAccountByUniqueUrl:persistReducer({key:"getAccountByUniqueUrl",storage},getAccountByUniqueUrl),
 	updateAccount:persistReducer({key:"updateAccount",storage},updateAccount),
 	deleteAccount:persistReducer({key:"deleteAccount",storage},deleteAccount),
+	//user
+	getUser:persistReducer({key:"getUser",storage},getUser),
 	
 	accounts,
 	users,

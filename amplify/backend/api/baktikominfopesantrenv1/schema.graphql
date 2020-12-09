@@ -34,8 +34,10 @@ input GetItemInput {
 input CreateUserInput {
 	name:String!
 	phoneNumber:String!
-	emailAddress:AWSEmail
+	emailAddress:AWSEmail!
 	password:String
+	accountId: ID!
+	role: UserRole!
 }
 
 input UpdateUserInput {
@@ -63,10 +65,19 @@ type Mutation {
 type Query {
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input:ListItemInput):AccountConnection
+	getAccountByUniqueUrl(url:String!):Account
+
+	getUser(input:GetItemInput!):User
+	listUsers(input:ListItemInput):UserConnection
 }
 
 type AccountConnection{
 	items:[Account]
+	foundDocs:Int
+}
+
+type UserConnection{
+	items:[User]
 	foundDocs:Int
 }
 
@@ -93,33 +104,19 @@ type User {
 	id: ID!
 	name: String!
 	emailAddress: AWSEmail!
-	emailAddressVerified: Boolean!
 	phoneNumber: String
+	emailAddressVerified: Boolean
 	phoneNumberVerified: Boolean
-	role: UserRole
+	enabled:Boolean
+	roles: AWSJSON
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
 	updatedAt: AWSDateTime
 	version: Int!
-}
-
-type Access {
-	id:ID!
-	accountId:ID!
-	userId:ID!
-	role:UserRole!
-	createdBy: User
-	updatedBy: User
-	createdAt: AWSDateTime
-	updatedAt: AWSDateTime
-	version: Int!
-
 }
 
 enum UserRole {
-	AppOwner
-	AppAdmin
 	Owner
 	Admin
 	Tutor

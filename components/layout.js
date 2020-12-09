@@ -1,5 +1,5 @@
 import React from 'react';
-import {useWindowSize} from '../context/index'
+import {useWindowSize} from 'Context'
 export const VuroxBody = props => (
   <div className={props.className + ' vurox-dark-version vurox-fixed-position vurox-admin-template'}>
     {props.children}

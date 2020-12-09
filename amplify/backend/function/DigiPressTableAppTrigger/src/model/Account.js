@@ -11,14 +11,17 @@ function searchManagerPut(record){
         "uniqueURL":newImage.uniqueURL.S,
         "contactPerson":newImage.contactPerson.S,
         "emailAddress":newImage.emailAddress.S,
+        "address":newImage.address.S,
         "phoneNumber":newImage.phoneNumber.S,
         "status":newImage.status.N,
         "__typename":newImage.__typename.S,
-        "version":newImage.version.N,
-        "createdAt":newImage.createdAt.S,
-        "updatedAt":newImage.updatedAt.S
+        "version":newImage.version ? newImage.version.N : 1
       }
   
+  
+      if(newImage.createdAt) body["createdAt"] = newImage.createdAt.S
+      if(newImage.updatedAt) body["updatedAt"] = newImage.updatedAt.S
+
       return functions.invokeLambdaSearchManager("put",`/account/_doc/${id}`,body)
 
   

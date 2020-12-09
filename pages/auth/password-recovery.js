@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import Header from 'Templates/Head'
 import {
 	VuroxLayout,
@@ -13,6 +14,7 @@ import FormResetPassword from 'Components/FormAuthResetPassword'
 
 const Page = props => {
 
+	const {router} = props
 
 	return (
 		<React.Fragment>
@@ -44,4 +46,4 @@ const Page = props => {
 	);
 	
 }
-export default connect(state=>state)(Page)
+export default connect(state=>state)(withRouter(Page))

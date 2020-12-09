@@ -1,5 +1,5 @@
 import {Auth} from 'aws-amplify'
-import {put,takeEvery} from 'redux-saga/effects'
+import {put,takeEvery,takeLatest,call} from 'redux-saga/effects'
 import {
     signInRoutine,customSignInRoutine,
     completeNewPasswordRoutine,
@@ -20,7 +20,9 @@ function* signIn(action) {
 
     try{
 
-        const user = yield Auth.signIn(username,password)
+        
+        //const user = yield Auth.signIn(username,password)
+        const user = yield call([Auth, 'signIn'], {username,password});
 
         if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
         else yield put(signInRoutine.success({data:user}))
@@ -44,7 +46,7 @@ function* signIn(action) {
 }
 
 export function* signInWatcher(){
-    yield takeEvery(signInRoutine.TRIGGER,signIn)
+    yield takeLatest(signInRoutine.TRIGGER,signIn)
 }
 
 //signout

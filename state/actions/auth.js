@@ -4,7 +4,8 @@ import {
     completeNewPasswordRoutine,
     forgotPasswordRoutine,
     customForgotPasswordRoutine,
-    resetPasswordRoutine
+    resetPasswordRoutine,
+    customSetDataRoutine
 } from '../routines/auth'
 
 export const initSignIn = () => ({
@@ -37,4 +38,15 @@ export const forgotPassword = payload => ({
 export const resetPassword = payload => ({
     type:resetPasswordRoutine.TRIGGER,
     payload
+})
+
+
+export const setUser = user => ({
+    type:customSetDataRoutine.SETUSER,
+    user
+})
+
+export const setAccount = account => ({
+    type:customSetDataRoutine.SETACCOUNT,
+    account
 })

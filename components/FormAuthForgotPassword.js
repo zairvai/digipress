@@ -1,10 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { MailOutlined, LockOutlined} from '@ant-design/icons';
+import { appContext } from '../context/app'
+import { MailOutlined} from '@ant-design/icons';
 import { Row, Col,Button, Alert,Form,Input,Typography} from 'antd'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -20,6 +22,7 @@ const schema = yup.object().shape({
 
 const FormAuth = props => {
 
+    const {baseUrl} = React.useContext(appContext)
 
     const {
         handleSubmit,
@@ -122,7 +125,8 @@ const FormAuth = props => {
                 
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:'/auth/login'}}shallow><a>Kembali ke halaman Login</a></Link>
+                        <Link href={{pathname:`${baseUrl}/auth/login`}} shallow><a>Kembali ke halaman Login</a></Link>
+                        {/* <Button className="pl-0" type="link" onClick={()=>router.back()}>Kembali ke halaman login</Button> */}
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
                         <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Ganti Password</Button>
@@ -134,4 +138,4 @@ const FormAuth = props => {
     );
 }
 
-export default connect(state=>state)(FormAuth)
+export default connect(state=>state)(withRouter(FormAuth))

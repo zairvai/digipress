@@ -26,7 +26,7 @@ exports.handler = (event,context,callback) => {
                                       break;
 
           case 'Account'          :   Account.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
-                                      break;
+                                      break;                      
 
 
           default                 :   callback(null,"Unknown Field"); break;
@@ -46,6 +46,8 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          
+
           default                 :   callback(null,"Unknown Field"); break;
 
         }
@@ -63,6 +65,8 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;                       
 
+          
+                                      
           default                 :   callback(null,"Unknown Field"); break;
 
         }  

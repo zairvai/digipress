@@ -8,16 +8,24 @@ import {Auth} from 'aws-amplify'
 const Container = props => {
 
     const {router,auth} = props
-	const {setLoginStatus,setCurrentUser} = React.useContext(appContext)
+	const {setLoginStatus,setCurrentUser,setCurrentAccount,setBaseUrl} = React.useContext(appContext)
 
-    React.useEffect(async ()=>{
+    const {account_url} = router.query
+
+    React.useEffect(()=>{
 
         if(auth.isLoggedIn){
-            const user = await Auth.currentAuthenticatedUser()
+            const user = auth.user
+            const account = auth.account
+
             setCurrentUser(user)
+            setCurrentAccount(account)
+
         }else{
             setCurrentUser(false)
+            setCurrentAccount(false)
             setLoginStatus(false)
+            router.push(`/${account_url}/auth/login`)
         }
 
     },[auth.isLoggedIn])

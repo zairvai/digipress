@@ -1,14 +1,13 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as mutations from 'Src/graphql/mutations'
 import * as queries from 'Src/graphql/queries'
-import {put,takeEvery} from 'redux-saga/effects'
+import {put,takeLatest,call} from 'redux-saga/effects'
 
 import {
     createAccountRoutine,
-    customCreateAccountRoutine,
     updateAccountRoutine,
     deleteAccountRoutine,
-    getAccountRoutine,
+    getAccountRoutine,getAccountByUniqueUrlRoutine,
     listAccountsRoutine
 } from '../routines/account'
 
@@ -50,7 +49,7 @@ function* createAccount(action){
 }
 
 export function* createAccountWatcher(){
-    yield takeEvery(createAccountRoutine.TRIGGER,createAccount)
+    yield takeLatest(createAccountRoutine.TRIGGER,createAccount)
 }
 
 function* listAccounts(action){
@@ -75,7 +74,7 @@ function* listAccounts(action){
 }
 
 export function* listAccountsWatcher(){
-    yield takeEvery(listAccountsRoutine.TRIGGER,listAccounts)
+    yield takeLatest(listAccountsRoutine.TRIGGER,listAccounts)
 }
 
 function* getAccount(action){
@@ -99,7 +98,38 @@ function* getAccount(action){
 }
 
 export function* getAccountWatcher(){
-    yield takeEvery(getAccountRoutine.TRIGGER,getAccount)
+    yield takeLatest(getAccountRoutine.TRIGGER,getAccount)
+}
+
+
+function* getAccountByUniqueUrl(action){
+
+    try{
+
+        yield put(getAccountByUniqueUrlRoutine.request())
+
+        const {url} = action.payload
+
+        const response = yield call([API,"graphql"],graphqlOperation(queries.getAccountByUniqueUrl,{url}))
+
+        // const response = yield API.graphql({
+        //     query:queries.getAccountByUniqueUrl,
+        //     variables:{url:url},
+        //     authMode:"AWS_IAM"
+        // })
+
+        yield put(getAccountByUniqueUrlRoutine.success({data:response.data.getAccountByUniqueUrl}))
+                    
+    }catch(error){
+        yield put(getAccountByUniqueUrlRoutine.failure({error}))
+    }finally{
+        yield put(getAccountByUniqueUrlRoutine.fulfill())
+    }
+
+}
+
+export function* getAccountByUniqueUrlWatcher(){
+    yield takeLatest(getAccountByUniqueUrlRoutine.TRIGGER,getAccountByUniqueUrl)
 }
 
 function* deleteAccount(action){
@@ -123,7 +153,7 @@ function* deleteAccount(action){
 }
 
 export function* deleteAccountWatcher(){
-    yield takeEvery(deleteAccountRoutine.TRIGGER,deleteAccount)
+    yield takeLatest(deleteAccountRoutine.TRIGGER,deleteAccount)
 }
 
 
@@ -138,7 +168,7 @@ function* updateAccount(action){
         const {values} = action.payload
 
         const updateParams = {
-            id : action.id.replace(/\s/g,""),
+            id : values.id.replace(/\s/g,""),
             expectedVersion : values.version
         }
 
@@ -170,5 +200,5 @@ function* updateAccount(action){
 }
 
 export function* updateAccountWatcher(){
-    yield takeEvery(updateAccountRoutine.TRIGGER,updateAccount)
+    yield takeLatest(updateAccountRoutine.TRIGGER,updateAccount)
 }

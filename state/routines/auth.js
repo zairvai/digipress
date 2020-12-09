@@ -1,14 +1,16 @@
 import {
-    createRoutine,createRoutineCreator
+    createRoutine,createRoutineCreator,promisifyRoutine
 } from 'redux-saga-routines'
 
 //signin
 var customRoutine = createRoutineCreator(["INIT","USERNOTCONFIRMED","USERNOTFOUND","NEWPASSWORDREQUIRED"])
 export const customSignInRoutine = customRoutine("signin_custom")
 export const signInRoutine = createRoutine("signin")
+export const signInRoutinePromise = promisifyRoutine(signInRoutine)
 
 //signout
 export const signOutRoutine = createRoutine("logout")
+export const signOutRoutinePromise = promisifyRoutine(signOutRoutine)
 
 //complete complete new password after add user via cognito
 export const completeNewPasswordRoutine = createRoutine("complete_new_password")
@@ -20,3 +22,6 @@ export const forgotPasswordRoutine = createRoutine("forgot_password")
 
 //reset password
 export const resetPasswordRoutine = createRoutine("reset_password")
+
+customRoutine = createRoutineCreator(["SETUSER","SETACCOUNT"])
+export const customSetDataRoutine = customRoutine("set_data_custom")

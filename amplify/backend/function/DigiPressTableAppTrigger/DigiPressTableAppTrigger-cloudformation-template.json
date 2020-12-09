@@ -83,7 +83,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/DigiPressTableAppTrigger-303572436c4166593559-build.zip"
+          "S3Key": "amplify-builds/DigiPressTableAppTrigger-51587448782f4d6e7036-build.zip"
         }
       }
     },
