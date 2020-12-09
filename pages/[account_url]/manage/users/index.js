@@ -74,7 +74,6 @@ const RoleIndex = props => {
 										<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
 											<li className="p-0"><Button onClick={showForm} className="link" type="link" size="small">Pengguna baru</Button></li>
 										</ul>
-									
 									</Col>
 								</Row>
 							</VuroxComponentsContainer>
