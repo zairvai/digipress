@@ -8,7 +8,7 @@ import {
 	ContentLayout
 } from 'Components/layout'
 import { vuroxContext } from 'Context'
-c
+import { appContext } from 'Context/app'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
@@ -19,6 +19,7 @@ import AccountController from 'Library/controllers/AccountController'
 const PageAccountAdd = props => {
 
     const accountController = new AccountController(props)
+    
     const { baseUrl } = React.useContext(appContext)
 
     const {router,createAccount} = props
