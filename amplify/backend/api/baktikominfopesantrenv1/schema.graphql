@@ -1,4 +1,5 @@
-type Account {
+type Account @aws_iam
+@aws_cognito_user_pools {
 	id: ID!
 	name: String!
 	uniqueURL: String!
@@ -14,6 +15,11 @@ type Account {
 	version: Int!
 }
 
+type AccountConnection {
+	items: [Account]
+	foundDocs: Int
+}
+
 input CreateAccountInput {
 	name: String!
 	uniqueURL: String!
@@ -21,6 +27,15 @@ input CreateAccountInput {
 	contactPerson: String!
 	emailAddress: AWSEmail!
 	phoneNumber: String!
+}
+
+input CreateUserInput {
+	name: String!
+	phoneNumber: String!
+	emailAddress: AWSEmail!
+	password: String
+	accountId: ID!
+	role: UserRole!
 }
 
 input DeleteItemInput {
@@ -31,61 +46,31 @@ input GetItemInput {
 	id: ID!
 }
 
-input CreateUserInput {
-	name:String!
-	phoneNumber:String!
-	emailAddress:AWSEmail!
-	password:String
-	accountId: ID!
-	role: UserRole!
-}
-
-input UpdateUserInput {
-	id: ID!
-	name: String
-	emailAddress: AWSEmail
-	phoneNumber: String
-	password:String
-	status: Int
-	expectedVersion: Int!
+input ListItemInput {
+	orderBy: String
+	direction: String
+	from: Int
+	size: Int
 }
 
 type Mutation {
-
 	createUser(input: CreateUserInput!): User
-	updateUser(input:UpdateUserInput!):User
-	deleteUser(input:DeleteItemInput!):User
-
+	updateUser(input: UpdateUserInput!): User
+	deleteUser(input: DeleteItemInput!): User
 	createAccount(input: CreateAccountInput!): Account
 	updateAccount(input: UpdateAccountInput!): Account
 	deleteAccount(input: DeleteItemInput!): Account
-
 }
 
 type Query {
 	getAccount(input: GetItemInput!): Account
-	listAccounts(input:ListItemInput):AccountConnection
-	getAccountByUniqueUrl(url:String!):Account
-
-	getUser(input:GetItemInput!):User
-	listUsers(input:ListItemInput):UserConnection
-}
-
-type AccountConnection{
-	items:[Account]
-	foundDocs:Int
-}
-
-type UserConnection{
-	items:[User]
-	foundDocs:Int
-}
-
-input ListItemInput {
-	orderBy: String
-	direction: String
-	from:Int
-	size:Int
+	listAccounts(input: ListItemInput): AccountConnection
+	getAccountByUniqueUrl(url: String!): Account
+		@aws_iam
+@aws_cognito_user_pools
+	getUser(input: GetItemInput!): User
+	getUserByEmailAddress(emailAddress: String!): User
+	listUsers(input: ListItemInput): UserConnection
 }
 
 input UpdateAccountInput {
@@ -100,20 +85,36 @@ input UpdateAccountInput {
 	expectedVersion: Int
 }
 
-type User {
+input UpdateUserInput {
+	id: ID!
+	name: String
+	emailAddress: AWSEmail
+	phoneNumber: String
+	password: String
+	status: Int
+	expectedVersion: Int!
+}
+
+type User @aws_iam
+@aws_cognito_user_pools {
 	id: ID!
 	name: String!
 	emailAddress: AWSEmail!
 	phoneNumber: String
 	emailAddressVerified: Boolean
 	phoneNumberVerified: Boolean
-	enabled:Boolean
+	enabled: Boolean
 	roles: AWSJSON
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
 	updatedAt: AWSDateTime
 	version: Int!
+}
+
+type UserConnection {
+	items: [User]
+	foundDocs: Int
 }
 
 enum UserRole {

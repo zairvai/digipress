@@ -335,6 +335,44 @@
 			}
 		}
 	},
+	"FunctionAdminCreateUserAccount":{
+		"Type":"AWS::AppSync::FunctionConfiguration",
+		"Properties":{
+			"ApiId":{
+				"Ref":"AppSyncApiId"
+			},
+			"DataSourceName":"AppTable",
+			"Description":"Add user account access to DB After Identity Manager add to Cognito",
+			"FunctionVersion":"2018-05-29",
+			"Name":"FunctionAdminCreateUserAccount",
+			"RequestMappingTemplateS3Location":{
+				"Fn::Sub":[
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.adminCreateUserAccount.req.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			},
+			"ResponseMappingTemplateS3Location":{
+				"Fn::Sub": [
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Function.adminCreateUserAccount.res.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			}
+		}
+	},
 	"MutationCreateAccountResolver":{
 		  "Type":"AWS::AppSync::Resolver",
 		  "Properties":{
@@ -723,7 +761,8 @@
 			"PipelineConfig":{
 				"Functions":[
 					{"Fn::GetAtt":["FunctionIdentityManager","FunctionId"]},
-					{"Fn::GetAtt":["FunctionAdminCreateUser","FunctionId"]}
+					{"Fn::GetAtt":["FunctionAdminCreateUser","FunctionId"]},
+					{"Fn::GetAtt":["FunctionAdminCreateUserAccount","FunctionId"]}
 
 				]
 			},
@@ -869,6 +908,50 @@
 			"ResponseMappingTemplateS3Location":{
 				"Fn::Sub": [
 					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.getItem.res.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			}
+		}
+	},
+	"QueryGetUserByEmailAddressResolver":{
+		"Type":"AWS::AppSync::Resolver",
+		"Properties":{
+			"ApiId":{
+				"Ref":"AppSyncApiId"
+			},
+			"TypeName":"Query",
+			"FieldName":"getUserByEmailAddress",
+			"Kind":"PIPELINE",
+			"PipelineConfig":{
+				"Functions":[
+					{"Fn::GetAtt":["FunctionSearchManager","FunctionId"]},
+					{"Fn::GetAtt":["FunctionTableAppGetItem","FunctionId"]}
+
+				]
+			},
+			"RequestMappingTemplateS3Location":{
+				"Fn::Sub":[
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.getUserByEmailAddress.req.vtl",
+					{
+						"S3DeploymentBucket": {
+							"Ref": "S3DeploymentBucket"
+						},
+						"S3DeploymentRootKey": {
+							"Ref": "S3DeploymentRootKey"
+						}
+					}
+				]
+			},
+			"ResponseMappingTemplateS3Location":{
+				"Fn::Sub": [
+					"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.getUserByEmailAddress.res.vtl",
 					{
 						"S3DeploymentBucket": {
 							"Ref": "S3DeploymentBucket"

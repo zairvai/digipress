@@ -13,7 +13,6 @@ const initialState = {
     isError:false
 }
 
-//signin
 export const createAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){

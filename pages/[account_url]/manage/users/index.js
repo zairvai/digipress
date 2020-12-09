@@ -73,7 +73,9 @@ const RoleIndex = props => {
 								<TabPane tab="Pengguna baru" key="1">
 									<Row>
 										<Col md={24}>
-											<FormUser 
+                                            <FormUser 
+                                                accountId={auth.account.id}
+                                                onSuccess={user=>console.log(user)}
 												onCancel={()=>setAddVisible(false)} 
 												onOk={()=>setAddVisible(false)}/>
 

@@ -4,18 +4,14 @@
 ## - $ctx.stash.put("email", $ctx.args.email)
 ## - $ctx.stash.put("badgeNumber", $ctx.args.input.badgeNumber)
 ## - $ctx.stash.put("username", $ctx.identity.username)
-#if( $util.isNull($ctx.args.url) )
-	#return("url must be provided")
+#if( $util.isNull($ctx.args.emailAddress) )
+	#return("email address must be provided")
 #end
 
 #set($query={
-  "bool": {
-    "must": [{
-      "match": {
-      	"uniqueURL":$ctx.args.url
-      }
-    }]
-  }
+  "match_phrase": {
+      "emailAddress": $ctx.args.emailAddress 
+  }   
 })
 
 #set($body={
@@ -24,10 +20,9 @@
 })
 
 #set($input={
-	"path":"/account/_search",
+	"path":"/user/_search",
 	"body":$util.toJson($body)
 })
-
 
 $util.qr($ctx.stash.put("input",$input))
 

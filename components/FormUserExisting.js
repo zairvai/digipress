@@ -17,11 +17,7 @@ const {Search} = Input
 const FormUser = props =>{
 
     return (
-        <Form
-            layout="vertical"
-            // onFinish={handleSubmit(onSubmit,onError)}
-        >
-
+        <>  
             <VuroxComponentsContainer className="p-4">
                 <Row>
                     <Col md={24} sm={24} xs={24}>
@@ -29,8 +25,15 @@ const FormUser = props =>{
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
+            <Form
+                layout="vertical"
+                // onFinish={handleSubmit(onSubmit,onError)}
+            >
 
-        </Form>
+                
+
+            </Form>
+        </>
     )
 
 }

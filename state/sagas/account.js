@@ -114,7 +114,7 @@ function* getAccountByUniqueUrl(action){
 
         // const response = yield API.graphql({
         //     query:queries.getAccountByUniqueUrl,
-        //     variables:{url:url},
+        //     variables:{url},
         //     authMode:"AWS_IAM"
         // })
 

@@ -9,6 +9,7 @@ Amplify Params - DO NOT EDIT */
 
 const User = require("./model/User")
 const Account = require("./model/Account")
+const Access = require("./model/Access")
 
 exports.handler = (event,context,callback) => {
 
@@ -26,7 +27,10 @@ exports.handler = (event,context,callback) => {
                                       break;
 
           case 'Account'          :   Account.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
-                                      break;                      
+                                      break;
+                                      
+          case 'Access'           :   Access.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
 
 
           default                 :   callback(null,"Unknown Field"); break;
@@ -46,6 +50,8 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          case 'Access'           :   Access.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
           
 
           default                 :   callback(null,"Unknown Field"); break;
@@ -65,6 +71,8 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;                       
 
+          case 'Access'           :   Access.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
           
                                       
           default                 :   callback(null,"Unknown Field"); break;

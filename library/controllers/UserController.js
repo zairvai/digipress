@@ -11,6 +11,9 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
+    _create = values =>{
+        return this.props.createUserRoutinePromise({values})
+    }
 
     _get = (id) =>{
         return this.props.getUserRoutinePromise({id})

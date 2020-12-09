@@ -332,6 +332,101 @@ export const getUser = /* GraphQL */ `
     }
   }
 `;
+export const getUserByEmailAddress = /* GraphQL */ `
+  query GetUserByEmailAddress($emailAddress: String!) {
+    getUserByEmailAddress(emailAddress: $emailAddress) {
+      id
+      name
+      emailAddress
+      phoneNumber
+      emailAddressVerified
+      phoneNumberVerified
+      enabled
+      roles
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles
+          createdAt
+          updatedAt
+          version
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      createdAt
+      updatedAt
+      version
+    }
+  }
+`;
 export const listUsers = /* GraphQL */ `
   query ListUsers($input: ListItemInput) {
     listUsers(input: $input) {
