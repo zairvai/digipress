@@ -14,15 +14,15 @@
 //   "createdAt": "2020-12-06T22:26:56.594Z"
 // }
 
-// mutation MyMutation {
-//   createUser(input:{
-//     name:"App Owner",
-//     emailAddress:"appowner@advedia360.com",
-//     phoneNumber:"+62838838488343",
-//     password:"Freemax@2019",
-//     accountId:"11001",
-//     role:Admin
-//   }){
-//     id
-//   }
-// }
+mutation MyMutation {
+  createUser(input:{
+    name:"App Owner",
+    emailAddress:"appowner@advedia360.com",
+    phoneNumber:"+62838838488343",
+    password:"Freemax@2019",
+    accountId:"11001",
+    role:Admin
+  }){
+    id
+  }
+}

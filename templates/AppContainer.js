@@ -15,6 +15,7 @@ const Container = props => {
     React.useEffect(()=>{
 
         if(auth.isLoggedIn){
+            
             const user = auth.user
             const account = auth.account
 

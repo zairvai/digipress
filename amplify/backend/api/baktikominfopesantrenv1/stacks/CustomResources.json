@@ -761,8 +761,7 @@
 			"PipelineConfig":{
 				"Functions":[
 					{"Fn::GetAtt":["FunctionIdentityManager","FunctionId"]},
-					{"Fn::GetAtt":["FunctionAdminCreateUser","FunctionId"]},
-					{"Fn::GetAtt":["FunctionAdminCreateUserAccount","FunctionId"]}
+					{"Fn::GetAtt":["FunctionAdminCreateUser","FunctionId"]}
 
 				]
 			},

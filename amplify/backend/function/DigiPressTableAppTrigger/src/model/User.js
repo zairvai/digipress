@@ -5,6 +5,22 @@ function searchManagerPut(record){
     var id = record.dynamodb.Keys.id.S
     var newImage = record.dynamodb.NewImage
 
+    var roles = []
+    newImage.roles.L.forEach(item=>{
+      
+      var roleItem = item.M
+      
+      roles.push({
+        "accountId":roleItem.accountId.S,
+        "role":roleItem.role.S,
+        "status":roleItem.status.N,
+        "createdBy":roleItem.createdBy.S,
+        "updatedBy":roleItem.updatedBy.S,
+        "createdAt":roleItem.createdAt.S,
+        "updatedAt":roleItem.updatedAt.S
+      })
+    })
+
     var body = {
       "id":id,
       "name":newImage.name.S,
@@ -12,6 +28,7 @@ function searchManagerPut(record){
       "emailAddressVerified":newImage.emailAddressVerified.BOOL,
       "phoneNumber":newImage.phoneNumber.S,
       "phoneNumberVerified":newImage.phoneNumberVerified.BOOL,
+      "roles":roles,
       "status":newImage.status.S,
       "__typename":newImage.__typename.S,
       "createdAt":newImage.createdAt.S,
