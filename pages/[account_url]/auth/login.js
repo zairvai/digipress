@@ -34,7 +34,7 @@ const PageLogin = props =>{
 	React.useEffect(()=>{
 		if(isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
 		else setVisible(true)
-	},[isLoggedIn])
+	},[])
 
 
 	const onBacktoLogin = () => {
