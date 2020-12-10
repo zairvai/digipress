@@ -22,10 +22,16 @@ const {Title} = Typography
 
 const PageLogin = props =>{
 
-	const authController = new AuthController(props)
-	const [loadStatus,setLoadStatus] = React.useState(false)
-
 	const {router,auth} = props
+
+	const authController = new AuthController(props)
+	const [loadStatus,setLoadStatus] = React.useState(true)
+
+	const isLoggedIn = React.useMemo(()=>auth.isLoggedIn,[auth])
+
+	React.useEffect(()=>{
+		if(isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+	},[isLoggedIn])
 
 	const onBacktoLogin = () => {
 		authController._signOut()

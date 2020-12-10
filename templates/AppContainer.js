@@ -17,65 +17,74 @@ const Container = props => {
     const {router,auth} = props
 	const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
 
-    const {account_url} = router.query
+    const accountUrl = React.useMemo(()=>router.query.account_url,[router.query])
+    const isLoggedIn = React.useMemo(()=>auth.isLoggedIn,[auth])
 
     //get account id by unique URL
     React.useEffect(()=>{
-		accountController._getAccountByUniqueUrl({url:account_url})
+        console.log(accountUrl)
+		accountController._getAccountByUniqueUrl({url:accountUrl})
 			.then(account=>{
 				authController._setAccount(account.data)
 				setCurrentAccount(account.data)
 			})
 			.catch(error=>{
                 console.log(error)
-                router.push("/not-found")
+                //router.push("/not-found")
             })
-    },[])
+    },[accountUrl])
     
-    React.useEffect(()=>{
+    // React.useEffect(()=>{
 
-        //getCurrentAuthenticatedUser
-        if(props.onAuthorizing) props.onAuthorizing({status:"processing"})
+    //     //getCurrentAuthenticatedUser
 
-        console.log("process")
+    //     console.log("process")
 
-        authController._get()
-            .then(resp=>{
-                // if(props.onAuthorizing) props.onAuthorizing({status:"processed"})
-                console.log(resp)
-            })
-            .catch(error=>{
+    //     authController._get()
+    //         .then(resp=>{
                 
-                console.log(error)
-            })
+    //             console.log(resp)
+    //         })
+    //         .catch(error=>{
+                
+    //             console.log(error)
+    //         })
         
-    },[])
+    // },[])
 
     React.useEffect(()=>{
 
-        if(auth.isLoggedIn){
+        console.log(isLoggedIn)
+
+        if(isLoggedIn){
 
             console.log("Login")
+
+            authController._get()
+                .then(resp=>{
+                    
+                    const{user,account} = auth
+
+                    setCurrentUser(user)
+                    setCurrentAccount(account)
+
+                })
+                .catch(error=>{
+                    
+                    authController._signOut()
+
+                })
             
-            const{user,account} = auth
-
-            setCurrentUser(user)
-            setCurrentAccount(account)
-
-            router.push(`/${account_url}/report/dashboard`)
-
         }else{
-
-            if(props.onAuthorizing) props.onAuthorizing({status:"processed"})
 
             setCurrentUser(false)
             setCurrentAccount(false)
             setLoginStatus(false)
             
-            router.push(`/${account_url}/auth/login`)
+            router.push(`/${accountUrl}/auth/login`)
         }
 
-    },[auth.isLoggedIn])
+    },[isLoggedIn])
 
     return(
         <>

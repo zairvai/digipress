@@ -13,17 +13,17 @@ const PageLogout = props => {
     const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
     const authController = new AuthController(props)
 
-    // React.useEffect(()=>{
+    React.useEffect(()=>{
 
-    //     authController._signOut()
-    //         .then(()=>{
-    //             setLoginStatus(false)
-    //             setCurrentUser(false)
-    //             setCurrentAccount(false)
-    //         })
-    //         .catch(error=>console.log(error))
+        authController._signOut()
+            .then(()=>{
+                setLoginStatus(false)
+                setCurrentUser(false)
+                setCurrentAccount(false)
+            })
+            .catch(error=>console.log(error))
 
-    // },[])
+    },[])
     
 
     return <AppContainer><></></AppContainer>
