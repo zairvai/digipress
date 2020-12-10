@@ -15,7 +15,7 @@ const Container = props => {
     const accountController = new AccountController(props)
 
     const {router,auth} = props
-	const {setLoginStatus,setCurrentUser,setCurrentAccount,setBaseUrl} = React.useContext(appContext)
+	const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
 
     const {account_url} = router.query
 

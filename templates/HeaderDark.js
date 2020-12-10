@@ -15,14 +15,23 @@ import { vuroxContext } from '../context'
 import { appContext } from '../context/app'
 import { Row, Col,Button} from 'antd'
 
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { signOutRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
 
 const HeaderDark = props => {
 	
+	const authController = new AuthController(props)
+
 	const { toggleMenu, menuState } = useContext(vuroxContext)
 
 	const {auth,baseUrl} = React.useContext(appContext)
 	const role = AuthController.getRole(auth)
+
+	const signOut = () => {
+		authController._signOut()
+			.catch(error=>console.log(error))
+	}
 
 	return (
 		<div>
@@ -107,6 +116,8 @@ const HeaderDark = props => {
 										{auth.user.name}
 									</DropdownItemsHead>
 									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
+									
+									{/* <DropdownItem link={`${baseUrl}/auth/logout`} className="py-0 px-3"><button className="p-0"><i className="ti-arrow-left"></i></button></DropdownItem> */}
 									<DropdownItem link={`${baseUrl}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
@@ -117,4 +128,11 @@ const HeaderDark = props => {
 		</div>
 	);
 }
-export default connect( state=>state )(HeaderDark)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            signOutRoutinePromise
+        },dispatch),dispatch
+    })
+)(HeaderDark)
