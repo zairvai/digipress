@@ -16,11 +16,6 @@ const PageLogout = props => {
     React.useEffect(()=>{
 
         authController._signOut()
-            .then(()=>{
-                setLoginStatus(false)
-                setCurrentUser(false)
-                setCurrentAccount(false)
-            })
             .catch(error=>console.log(error))
 
     },[])

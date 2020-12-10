@@ -44,9 +44,9 @@ const FormAuth = props => {
     const onSubmit = values =>{
 
         authController._signIn(values.email,values.password,props.accountId)
-            .then(auth=>{
-                // console.log(auth)
-                if(props.onAuthorized) props.onAuthorized(auth)
+            .then(resp=>{
+                // console.log(resp)
+                if(props.onAuthorized) props.onAuthorized(resp)
             })
             .catch(error=>console.log(error))
     }

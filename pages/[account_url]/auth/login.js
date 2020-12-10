@@ -46,11 +46,11 @@ const PageLogin = props =>{
 
 					<Row className="justify-content-center fullHeight">
 						<Col md={8} sm={24} xs={24} className="fullHeight">
-							<Row>
+							{/* <Row>
 								<Col md={24} sm={24} xs={24}>
 									<Title level={1} className="text-center mb-0">{auth.account.name}</Title>
 								</Col>
-							</Row>
+							</Row> */}
 							<Row className="align-items-center fullHeight">
 								<Col md={24} sm={24} xs={24}>
 									{props.auth.newPasswordRequired ? 
