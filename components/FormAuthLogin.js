@@ -45,8 +45,8 @@ const FormAuth = props => {
 
         authController._signIn(values.email,values.password,props.accountId)
             .then(auth=>{
-                
-                props.onAuthorized(auth)
+                // console.log(auth)
+                if(props.onAuthorized) props.onAuthorized(auth)
             })
             .catch(error=>console.log(error))
     }

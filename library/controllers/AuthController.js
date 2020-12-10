@@ -2,7 +2,8 @@ import {
     initSignIn,signIn,signOut,
     completeNewPassword,
     initForgotPassword,forgotPassword,resetPassword,
-    setUser,setAccount
+    getAuthUser,
+    setAccount
 } from 'State/actions/auth'
 
 export default class Controller{
@@ -44,16 +45,16 @@ export default class Controller{
         return{}
     }
 
-    _setUser = user =>{
-        this.dispatch(setUser(user))
-    }
-
     _setAccount = account =>{
         this.dispatch(setAccount(account))
     }
 
     _initSignIn = () =>{
         this.dispatch(initSignIn())
+    }
+
+    _get = () => {
+        return this.props.getAuthUserRoutinePromise()
     }
 
     _signIn = (email,password,accountId) =>{

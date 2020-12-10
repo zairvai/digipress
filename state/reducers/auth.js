@@ -4,6 +4,7 @@ import {
     forgotPasswordRoutine,customForgotPasswordRoutine,
     resetPasswordRoutine,
     signOutRoutine,
+    getAuthUserRoutine,
     customSetDataRoutine
 } from '../routines/auth'
 
@@ -354,16 +355,76 @@ export const resetPassword = (state=initialState,action) => {
 
 }
 
+export const getAuthUser = (state=initialState,action) => {
+
+    switch(action.type){
+        
+        case getAuthUserRoutine.REQUEST  : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                userNotFound:false,
+                userNotConfirmed:false,
+                newPasswordRequired:false,
+                data:false
+            })
+
+        }
+
+        case getAuthUserRoutine.SUCCESS : {
+
+            const {data} = action.payload
+            const {attributes,signInUserSession} = data
+
+            const access = JSON.parse(signInUserSession.idToken.payload.access)
+
+            const user = {
+                id:attributes.sub,
+                name:attributes.name,
+                phoneNumber:attributes.phone_number,
+                email:attributes.email,
+                access
+            }
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                userNotConfirmed:false,
+                userNotFound:false,
+                newPasswordRequired:false,
+                isLoggedIn:true,
+                data:false,
+                user
+            })     
+
+        }
+
+        case getAuthUserRoutine.FAILURE : {
+
+            const {error} = action.payload
+            console.log(error)
+            
+            return Object.assign({},state,{
+                isRequesting:false,
+                // isError:true,
+                // error,
+                isLoggedIn:false,
+                data:false,
+                user:false
+            })
+        }
+
+    }    
+
+    return state
+}
+
 export const authData = (state=initialState,action) => {
 
     switch(action.type){
-        case customSetDataRoutine.SETUSER : {
-            
-            const {user} = action
-            return Object.assign({},state,{
-                user
-            })  
-        }
         case customSetDataRoutine.SETACCOUNT : {
             
             const {account} = action

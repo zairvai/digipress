@@ -1,5 +1,5 @@
 import { routinePromiseWatcherSaga } from 'redux-saga-routines';
-import {signInWatcher, signOutWatcher,completeNewPasswordWatcher,forgotPasswordWatcher,resetPasswordWatcher} from './auth'
+import {signInWatcher, signOutWatcher,completeNewPasswordWatcher,forgotPasswordWatcher,resetPasswordWatcher,getAuthUserWatcher} from './auth'
 import {createAccountWatcher,listAccountsWatcher,getAccountWatcher, updateAccountWatcher,deleteAccountWatcher,getAccountByUniqueUrlWatcher} from './account'
 import {createUserWatcher,getUserWatcher} from "./user"
 const sagas = [
@@ -10,6 +10,7 @@ const sagas = [
     completeNewPasswordWatcher,
     forgotPasswordWatcher,
     resetPasswordWatcher,
+    getAuthUserWatcher,
     
     //account
     createAccountWatcher,

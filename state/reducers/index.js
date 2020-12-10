@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData } from './auth'
+import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
 import { createUser,getUser } from './user'
 
@@ -35,7 +35,7 @@ const authPersistConfig = {
     //     "usernamExists"]
 }
 
-const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData)
+const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser)
 
 const rootReducer = combineReducers({
 	//auth

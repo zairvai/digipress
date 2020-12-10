@@ -10,11 +10,8 @@ import AppContainer from 'Templates/AppContainer'
 
 const PageLogout = props => {
 
-    const {router,auth} = props
     const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
     const authController = new AuthController(props)
-
-    const {account_url} = router.query
 
     React.useEffect(()=>{
 
@@ -26,9 +23,7 @@ const PageLogout = props => {
             })
             .catch(error=>console.log(error))
 
-        router.push(`/${account_url}/auth/login`)
-
-    },[auth.isLoggedIn])
+    },[])
     
 
     return <AppContainer><></></AppContainer>

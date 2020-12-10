@@ -13,13 +13,8 @@ import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { signOutRoutinePromise } from 'State/routines/auth';
-import { getAccountByUniqueUrlRoutinePromise } from 'State/routines/account';
-import { getUserRoutinePromise } from 'State/routines/user';
 
 import AuthController from 'Library/controllers/AuthController'
-import AccountController from 'Library/controllers/AccountController'
-import UserController from 'Library/controllers/UserController'
 
 import AppContainer from 'Templates/AppContainer'
 
@@ -27,46 +22,28 @@ const {Title} = Typography
 
 const PageLogin = props =>{
 
-
 	const authController = new AuthController(props)
-	const accountController = new AccountController(props)
-	const userController = new UserController(props)
+	const [loadStatus,setLoadStatus] = React.useState(false)
 
-	const {router} = props
-	const {auth,setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
-	const {account_url} = router.query
-
-	React.useEffect(()=>{
-		authController._initSignIn()
-		accountController._getAccountByUniqueUrl({url:account_url})
-			.then(account=>{
-				authController._setAccount(account.data)
-				//add to context
-				setCurrentAccount(account.data)
-			})
-			.catch(error=>console.log(error))
-	},[])
-
-	const onAuthorized = (auth) =>{
-	
-		setCurrentUser(auth.user)
-		setLoginStatus(auth.isLoggedIn)
-		
-		//redirect
-		router.push(`/${account_url}/report/dashboard`)
-		
-	}
+	const {router,auth} = props
 
 	const onBacktoLogin = () => {
 		authController._signOut()
 			.then(()=>authController._initSignIn())
 	}
 
+	const handleAuthorization = progress => {
+		setLoadStatus(progress.status === "processed" ? true : false)
+	}
+
 	return(
-		<AppContainer>
+		<AppContainer onAuthorizing={handleAuthorization}>
 			<Header/>
 			<VuroxLayout>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
+
+					{loadStatus ? 
+
 					<Row className="justify-content-center fullHeight">
 						<Col md={8} sm={24} xs={24} className="fullHeight">
 							<Row>
@@ -79,12 +56,17 @@ const PageLogin = props =>{
 									{props.auth.newPasswordRequired ? 
 										<FormCompleteNewPasword onBack={onBacktoLogin}/>
 										:
-										<FormLogin accountId={auth.account.id} onAuthorized={onAuthorized}/>
+										<FormLogin accountId={auth.account.id}/>
 									}
 								</Col>
 							</Row>	
 						</Col>
 					</Row>
+					:
+					<></>
+					}
+
+
 				</ContentLayout>
 			</VuroxLayout>
 		</AppContainer>
@@ -96,9 +78,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-			signOutRoutinePromise,
-			getAccountByUniqueUrlRoutinePromise,
-			getUserRoutinePromise
+			
         },dispatch),dispatch
     })
 )(withRouter(PageLogin))

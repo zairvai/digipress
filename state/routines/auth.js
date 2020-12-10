@@ -23,5 +23,8 @@ export const forgotPasswordRoutine = createRoutine("forgot_password")
 //reset password
 export const resetPasswordRoutine = createRoutine("reset_password")
 
-customRoutine = createRoutineCreator(["SETUSER","SETACCOUNT"])
+customRoutine = createRoutineCreator(["SETACCOUNT"])
 export const customSetDataRoutine = customRoutine("set_data_custom")
+
+export const getAuthUserRoutine = createRoutine("get_auth_user")
+export const getAuthUserRoutinePromise = promisifyRoutine(getAuthUserRoutine)

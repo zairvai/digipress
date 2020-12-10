@@ -5,7 +5,8 @@ import {
     completeNewPasswordRoutine,
     forgotPasswordRoutine,customForgotPasswordRoutine,
     resetPasswordRoutine,
-    signOutRoutine
+    signOutRoutine,
+    getAuthUserRoutine
 } from '../routines/auth'
 
 //signin
@@ -24,7 +25,6 @@ function* signIn(action) {
         
         const user = yield Auth.signIn(username,password,{accountId})
         //const user = yield call([Auth, 'signIn'], {username,password,{test:"yes"}});
-
         // const user = yield call([Auth, 'signIn'], {username,password,"clientMetadata":{accountId}});
 
         console.log(user)
@@ -171,3 +171,28 @@ export function* resetPasswordWatcher(){
     yield takeEvery( resetPasswordRoutine.TRIGGER,resetPassword)
 }
 
+
+function* getAuthUser() {
+   
+    yield put(getAuthUserRoutine.request())
+
+
+    try{
+        
+        const user = yield Auth.currentAuthenticatedUser()
+
+        yield put(getAuthUserRoutine.success({data:user}))
+
+    }catch(error){
+
+        yield put(getAuthUserRoutine.failure({error}))
+
+    }finally{
+        yield put(getAuthUserRoutine.fulfill())
+
+    }
+}
+
+export function* getAuthUserWatcher(){
+    yield takeLatest(getAuthUserRoutine.TRIGGER,getAuthUser)
+}
