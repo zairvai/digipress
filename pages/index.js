@@ -8,6 +8,7 @@ const AppIndex = props => {
     const {router} = props
 
     console.log(router)
+    router.push(router.asPath)
 
     return(
         <></>
