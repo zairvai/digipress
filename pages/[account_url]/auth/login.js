@@ -22,9 +22,9 @@ const {Title} = Typography
 
 const PageLogin = props =>{
 
-	const {router} = props
+	const {router,auth} = props
 
-	const {auth,isLoggedIn ,setLoginStatus,setCurrentUser} = React.useContext(appContext)
+	const {isLoggedIn ,setLoginStatus,setCurrentUser} = React.useContext(appContext)
 
 	const authController = new AuthController(props)
 
@@ -32,8 +32,10 @@ const PageLogin = props =>{
 
 
 	React.useEffect(()=>{
-		if(isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+		
+		if(auth.isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
 		else setVisible(true)
+
 	},[])
 
 
