@@ -16,11 +16,11 @@ const Container = props => {
 
     const {router,auth} = props
 	const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
-    const accountUrl = React.useMemo(()=>router.query.account_url,[router.query])
+    const accountUrl = React.useMemo(()=>router.query.account_url,[])
 
     //get account id by unique URL
     React.useEffect(()=>{
-        console.log(accountUrl)
+        
 		accountController._getAccountByUniqueUrl({url:accountUrl})
 			.then(account=>{
 				authController._setAccount(account.data)
@@ -28,7 +28,7 @@ const Container = props => {
 			})
 			.catch(error=>{
                 console.log(error)
-                router.push("/not-found")
+                //router.push("/not-found")
             })
     },[])
    
@@ -50,7 +50,7 @@ const Container = props => {
                         setLoginStatus(false)
                         setCurrentUser(false)
                         setCurrentAccount(false)
-                        router.push(`/${accountUrl}/auth/login`)
+                        ////router.push(`/${accountUrl}/auth/login`)
                     })
 
             })

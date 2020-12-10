@@ -30,9 +30,12 @@ const PageLogin = props =>{
 
 	const [visible,setVisible] = React.useState(true)
 
+	React.useEffect(()=>{
+		router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
+	},[])
 
 	React.useEffect(()=>{
-		
+	
 		if(auth.isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
 		else setVisible(true)
 

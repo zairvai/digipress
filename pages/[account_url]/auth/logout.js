@@ -10,10 +10,14 @@ import AppContainer from 'Templates/AppContainer'
 
 const PageLogout = props => {
 
-    const {router} = props
-    const {auth,setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
+    const {router,auth} = props
+    const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
     const authController = new AuthController(props)
 
+    React.useEffect(()=>{
+		router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
+    },[])
+    
     React.useEffect(()=>{
 
         authController._signOut()
