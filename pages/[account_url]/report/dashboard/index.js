@@ -78,8 +78,6 @@ class Page extends React.Component {
     
 	render() {
 		
-		return <>dashboard</>
-
 		return (
 			<AppContainer>
                 <Layout>
