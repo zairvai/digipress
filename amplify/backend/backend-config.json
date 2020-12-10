@@ -21,6 +21,15 @@
             "Arn",
             "Name"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
         }
       ],
       "customAuth": false
@@ -90,6 +99,11 @@
       "service": "Lambda"
     },
     "baktikominfopesantrenv1PostAuthentication": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "baktikominfopesantrenv1PreTokenGeneration": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

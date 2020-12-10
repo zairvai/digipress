@@ -17,12 +17,17 @@ function* signIn(action) {
     
     const username = values.username.replace(/\s/g,"")
     const password = values.password.replace(/\s/g,"")
+    const accountId = values.accountId
 
     try{
 
         
-        //const user = yield Auth.signIn(username,password)
-        const user = yield call([Auth, 'signIn'], {username,password});
+        const user = yield Auth.signIn(username,password,{accountId})
+        //const user = yield call([Auth, 'signIn'], {username,password,{test:"yes"}});
+
+        // const user = yield call([Auth, 'signIn'], {username,password,"clientMetadata":{accountId}});
+
+        console.log(user)
 
         if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
         else yield put(signInRoutine.success({data:user}))
@@ -82,7 +87,7 @@ function* completeNewPassword(action){
         const password = values.password.replace(/\s/g,"")
         const name = values.name.trim()
 
-        const data = yield Auth.completeNewPassword(user,password,{name:name})
+        const data = yield Auth.completeNewPassword(user,password,{name})
         
         yield put(completeNewPasswordRoutine.success({data}))
         

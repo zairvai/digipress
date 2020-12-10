@@ -20,7 +20,16 @@ export const getAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -29,10 +38,10 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -42,14 +51,15 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       updatedBy {
         id
@@ -59,7 +69,16 @@ export const getAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -68,10 +87,10 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -81,14 +100,15 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       createdAt
       updatedAt
@@ -116,10 +136,10 @@ export const listAccounts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -129,10 +149,10 @@ export const listAccounts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
@@ -161,7 +181,16 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -170,10 +199,10 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -183,14 +212,15 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       updatedBy {
         id
@@ -200,7 +230,16 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -209,10 +248,10 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -222,14 +261,15 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       createdAt
       updatedAt
@@ -247,16 +287,11 @@ export const getUser = /* GraphQL */ `
       emailAddressVerified
       phoneNumberVerified
       enabled
-      roles
-      createdBy {
+      role {
         id
-        name
-        emailAddress
-        phoneNumber
-        emailAddressVerified
-        phoneNumberVerified
-        enabled
-        roles
+        userId
+        accountId
+        role
         createdBy {
           id
           name
@@ -265,10 +300,10 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -278,14 +313,64 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
+      }
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
       }
       updatedBy {
         id
@@ -295,7 +380,16 @@ export const getUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -304,10 +398,10 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -317,18 +411,20 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       createdAt
       updatedAt
       version
+      status
     }
   }
 `;
@@ -342,16 +438,11 @@ export const getUserByEmailAddress = /* GraphQL */ `
       emailAddressVerified
       phoneNumberVerified
       enabled
-      roles
-      createdBy {
+      role {
         id
-        name
-        emailAddress
-        phoneNumber
-        emailAddressVerified
-        phoneNumberVerified
-        enabled
-        roles
+        userId
+        accountId
+        role
         createdBy {
           id
           name
@@ -360,10 +451,10 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -373,14 +464,64 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
+      }
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
       }
       updatedBy {
         id
@@ -390,7 +531,16 @@ export const getUserByEmailAddress = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -399,10 +549,10 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -412,18 +562,171 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       createdAt
       updatedAt
       version
+      status
+    }
+  }
+`;
+export const getUserByAccount = /* GraphQL */ `
+  query GetUserByAccount($userId: ID!, $accountId: ID!) {
+    getUserByAccount(userId: $userId, accountId: $accountId) {
+      id
+      name
+      emailAddress
+      phoneNumber
+      emailAddressVerified
+      phoneNumberVerified
+      enabled
+      role {
+        id
+        userId
+        accountId
+        role
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
     }
   }
 `;
@@ -438,7 +741,16 @@ export const listUsers = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        roles
+        role {
+          id
+          userId
+          accountId
+          role
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdBy {
           id
           name
@@ -447,10 +759,10 @@ export const listUsers = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         updatedBy {
           id
@@ -460,14 +772,15 @@ export const listUsers = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
-          roles
           createdAt
           updatedAt
           version
+          status
         }
         createdAt
         updatedAt
         version
+        status
       }
       foundDocs
     }

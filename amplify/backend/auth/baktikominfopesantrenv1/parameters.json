@@ -86,9 +86,18 @@
                 "Arn",
                 "Name"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
         }
     ],
-    "triggers": "{\n  \"PostAuthentication\": [\n    \"custom\"\n  ],\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "triggers": "{\n  \"PostAuthentication\": [\n    \"custom\"\n  ],\n  \"PostConfirmation\": [\n    \"custom\"\n  ],\n  \"PreTokenGeneration\": [\n    \"alter-claims\"\n  ]\n}",
     "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"

@@ -70,6 +70,17 @@ export const signIn = (state=initialState,action) => {
         case signInRoutine.SUCCESS : {
 
             const {data} = action.payload
+            const {attributes,signInUserSession} = data
+
+            const access = JSON.parse(signInUserSession.idToken.payload.access)
+
+            const user = {
+                id:attributes.sub,
+                name:attributes.name,
+                phoneNumber:attributes.phone_number,
+                email:attributes.email,
+                access
+            }
 
             return Object.assign({},state,{
                 isRequesting:false,
@@ -79,7 +90,8 @@ export const signIn = (state=initialState,action) => {
                 userNotFound:false,
                 newPasswordRequired:false,
                 isLoggedIn:true,
-                data
+                data:false,
+                user
             })     
 
         }
@@ -92,7 +104,9 @@ export const signIn = (state=initialState,action) => {
                 isRequesting:false,
                 isError:true,
                 error,
-                isLoggedIn:false
+                isLoggedIn:false,
+                data:false,
+                user:false
             })
         }
 

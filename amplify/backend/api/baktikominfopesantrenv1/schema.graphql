@@ -67,8 +67,11 @@ type Query {
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input: ListItemInput): AccountConnection
 	getAccountByUniqueUrl(url: String!): Account @aws_iam @aws_cognito_user_pools
+	
 	getUser(input: GetItemInput!): User
 	getUserByEmailAddress(emailAddress: String!): User
+	getUserByAccount(userId:ID!,accountId:ID!):User
+
 	listUsers(input: ListItemInput): UserConnection
 }
 
@@ -104,12 +107,26 @@ type User
 	emailAddressVerified: Boolean
 	phoneNumberVerified: Boolean
 	enabled: Boolean
-	roles: AWSJSON
+	role: Access
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
 	updatedAt: AWSDateTime
 	version: Int!
+	status: Int
+}
+
+type Access {
+	id:ID!
+	userId:ID!
+	accountId:ID!
+	role:UserRole!
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status:Int
 }
 
 type UserConnection {

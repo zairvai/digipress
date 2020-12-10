@@ -27,6 +27,7 @@ const {Title} = Typography
 
 const PageLogin = props =>{
 
+
 	const authController = new AuthController(props)
 	const accountController = new AccountController(props)
 	const userController = new UserController(props)
@@ -36,7 +37,7 @@ const PageLogin = props =>{
 	const {account_url} = router.query
 
 	React.useEffect(()=>{
-		//authController._initSignIn()
+		authController._initSignIn()
 		accountController._getAccountByUniqueUrl({url:account_url})
 			.then(account=>{
 				authController._setAccount(account.data)
@@ -47,17 +48,12 @@ const PageLogin = props =>{
 	},[])
 
 	const onAuthorized = (auth) =>{
+	
+		setCurrentUser(auth.user)
+		setLoginStatus(auth.isLoggedIn)
 		
-		userController._get(auth.data.attributes.sub)
-			.then(user=>{
-				authController._setUser(user.data)
-				//add to context
-				setCurrentUser(user.data)
-				setLoginStatus(auth.isLoggedIn)
-				//redirect
-				router.push(`/${account_url}/report/dashboard`)
-			})
-			.catch(error=>console.log(error))
+		//redirect
+		router.push(`/${account_url}/report/dashboard`)
 		
 	}
 
@@ -83,7 +79,7 @@ const PageLogin = props =>{
 									{props.auth.newPasswordRequired ? 
 										<FormCompleteNewPasword onBack={onBacktoLogin}/>
 										:
-										<FormLogin onAuthorized={onAuthorized}/>
+										<FormLogin accountId={auth.account.id} onAuthorized={onAuthorized}/>
 									}
 								</Col>
 							</Row>	

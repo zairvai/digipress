@@ -15,28 +15,30 @@ export default class Controller{
     }
 
     static isOwner = (auth) => {
-        
-        if(auth.user){
-            const {roles} = auth.user
-            if(roles[auth.account.id].role==="Owner") return true
-        }
 
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === auth.account.id && access.role==="Owner") return true
+        }
         return false
+
     }
 
     static isAdmin = (auth) => {
 
         if(auth.user){
-            const {roles} = auth.user
-            if(roles[auth.account.id].role==="Admin") return true
+            const {access} = auth.user
+            if(access.accountId === auth.account.id && access.role==="Admin") return true
         }
         return false
+
     }
 
     static getRole = auth => {
+
         if(auth.user){
-            const {roles} = auth.user
-            return roles[auth.account.id]
+            const {access} = auth.user
+            return access.role
         }
 
         return{}
@@ -54,12 +56,13 @@ export default class Controller{
         this.dispatch(initSignIn())
     }
 
-    _signIn = (email,password) =>{
+    _signIn = (email,password,accountId) =>{
 
         return this.props.signInRoutinePromise({
             values:{
                 username:email,
-                password:password
+                password,
+                accountId
             }
         })
     }

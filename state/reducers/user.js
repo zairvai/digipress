@@ -77,7 +77,7 @@ export const getUser = (state={item:{},...initialState},action) => {
         case getUserRoutine.SUCCESS : {
 
             const {data} = action.payload
-            data["roles"] = JSON.parse(data["roles"])
+            // data["roles"] = JSON.parse(data["roles"])
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,

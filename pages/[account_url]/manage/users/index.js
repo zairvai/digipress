@@ -45,6 +45,10 @@ const RoleIndex = props => {
         setAddVisible(true)
     }
 
+    const onSuccessAdd = user =>{
+        console.log(user)
+    }
+
     return (
         <AppContainer>
             <HeaderLayout className="sticky-top">
@@ -75,7 +79,7 @@ const RoleIndex = props => {
 										<Col md={24}>
                                             <FormUser 
                                                 accountId={auth.account.id}
-                                                onSuccess={user=>console.log(user)}
+                                                onSuccess={onSuccessAdd}
 												onCancel={()=>setAddVisible(false)} 
 												onOk={()=>setAddVisible(false)}/>
 

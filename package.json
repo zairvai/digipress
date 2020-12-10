@@ -25,6 +25,7 @@
     "@zeit/next-sass": "^1.0.1",
     "antd": "^4.2.0",
     "aws-amplify": "^3.3.11",
+    "aws-sdk": "^2.807.0",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "bootstrap": "^4.4.1",

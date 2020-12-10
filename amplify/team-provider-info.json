@@ -17,7 +17,8 @@
       },
       "function": {
         "baktikominfopesantrenv1PostConfirmation": {},
-        "baktikominfopesantrenv1PostAuthentication": {}
+        "baktikominfopesantrenv1PostAuthentication": {},
+        "baktikominfopesantrenv1PreTokenGeneration": {}
       }
     }
   },
