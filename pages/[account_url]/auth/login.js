@@ -33,6 +33,7 @@ const PageLogin = props =>{
 	}
 
 	const handleAuthorization = progress => {
+		console.log(progress)
 		setLoadStatus(progress.status === "processed" ? true : false)
 	}
 

@@ -13,21 +13,10 @@ const themeVariables = lessToJS(
 
 const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants')
 
-const nextConfig = {
-	webpack: (config,{isServer}) => {
-	  // Fixes npm packages that depend on `fs` module
-	  // eslint-disable-next-line no-param-reassign
-		
-			config.node = {
-				fs: 'empty',
-			};
-		
-  
-	  return config;
-	},
-  };
-
 module.exports = vuroxConfigPlugins([
+	[{
+		trailingSlash: true
+	}],
 	[withLess, {
 		lessLoaderOptions: {
 		  javascriptEnabled: true,
