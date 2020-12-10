@@ -14,8 +14,8 @@ const Container = props => {
     const authController = new AuthController(props)
     const accountController = new AccountController(props)
 
-    const {router} = props
-	const {auth, isLoggedIn,setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
+    const {router,auth} = props
+	const {setLoginStatus,setCurrentUser,setCurrentAccount} = React.useContext(appContext)
     const accountUrl = React.useMemo(()=>router.query.account_url,[router.query])
 
     //get account id by unique URL
@@ -55,7 +55,7 @@ const Container = props => {
 
             })
 
-    },[isLoggedIn])
+    },[auth.isLoggedIn])
 
     return(
         <>
