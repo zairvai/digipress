@@ -15,7 +15,7 @@ const Container = props => {
     React.useEffect(()=>{
 
         if(auth.isLoggedIn){
-            
+
             const user = auth.user
             const account = auth.account
 
@@ -23,10 +23,10 @@ const Container = props => {
             setCurrentAccount(account)
 
         }else{
-            setCurrentUser(false)
-            setCurrentAccount(false)
-            setLoginStatus(false)
-            router.push(`/${account_url}/auth/login`)
+            // setCurrentUser(false)
+            // setCurrentAccount(false)
+            // setLoginStatus(false)
+            // router.push(`/${account_url}/auth/login`)
         }
 
     },[auth.isLoggedIn])

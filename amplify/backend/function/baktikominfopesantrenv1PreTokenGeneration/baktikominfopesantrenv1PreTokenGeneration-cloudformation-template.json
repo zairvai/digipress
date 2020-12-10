@@ -95,7 +95,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/baktikominfopesantrenv1PreTokenGeneration-30303466587852666966-build.zip"
+          "S3Key": "amplify-builds/baktikominfopesantrenv1PreTokenGeneration-70304236556345744435-build.zip"
         }
       }
     },
