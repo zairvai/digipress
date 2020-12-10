@@ -30,7 +30,7 @@ const Container = props => {
                 console.log(error)
                 router.push("/not-found")
             })
-    },[accountUrl])
+    },[])
    
     React.useEffect(()=>{
 
