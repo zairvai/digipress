@@ -22,16 +22,20 @@ const {Title} = Typography
 
 const PageLogin = props =>{
 
-	const {router,auth} = props
+	const {router} = props
+
+	const {auth,isLoggedIn ,setLoginStatus,setCurrentUser} = React.useContext(appContext)
 
 	const authController = new AuthController(props)
-	const [loadStatus,setLoadStatus] = React.useState(true)
 
-	const isLoggedIn = React.useMemo(()=>auth.isLoggedIn,[auth])
+	const [visible,setVisible] = React.useState(true)
+
 
 	React.useEffect(()=>{
 		if(isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+		else setVisible(true)
 	},[isLoggedIn])
+
 
 	const onBacktoLogin = () => {
 		authController._signOut()
@@ -43,35 +47,40 @@ const PageLogin = props =>{
 		setLoadStatus(progress.status === "processed" ? true : false)
 	}
 
+	const onSuccess = resp =>{
+
+		setLoginStatus(true)
+		setCurrentUser(props.auth.user)
+		
+		router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+	}
+
 	return(
-		<AppContainer onAuthorizing={handleAuthorization}>
+		<AppContainer>
 			<Header/>
 			<VuroxLayout>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
 
-					{loadStatus ? 
-
-					<Row className="justify-content-center fullHeight">
-						<Col md={8} sm={24} xs={24} className="fullHeight">
-							<Row>
-								<Col md={24} sm={24} xs={24}>
-									<Title level={1} className="text-center mb-0">{auth.account.name}</Title>
-								</Col>
-							</Row>
-							<Row className="align-items-center fullHeight">
-								<Col md={24} sm={24} xs={24}>
-									{props.auth.newPasswordRequired ? 
-										<FormCompleteNewPasword onBack={onBacktoLogin}/>
-										:
-										<FormLogin accountId={auth.account.id}/>
-									}
-								</Col>
-							</Row>	
-						</Col>
-					</Row>
-					:
-					<></>
-					}
+					<div className={visible ? 'd-block':'d-none'}>
+						<Row className="justify-content-center fullHeight">
+							<Col md={8} sm={24} xs={24} className="fullHeight">
+								<Row>
+									<Col md={24} sm={24} xs={24}>
+										<Title level={1} className="text-center my-3 mb-0">{auth.account.name}</Title>
+									</Col>
+								</Row>
+								<Row className="align-items-center fullHeight">
+									<Col md={24} sm={24} xs={24}>
+										{props.auth.newPasswordRequired ? 
+											<FormCompleteNewPasword onBack={onBacktoLogin}/>
+											:
+											<FormLogin onSuccess={onSuccess} accountId={auth.account.id}/>
+										}
+									</Col>
+								</Row>	
+							</Col>
+						</Row>
+					</div>
 
 
 				</ContentLayout>
