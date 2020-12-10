@@ -7,8 +7,6 @@ const AppIndex = props => {
 
     const {router} = props
 
-    router.push("/app/auth/login")
-
     return(
         <></>
     )
