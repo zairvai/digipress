@@ -45,7 +45,7 @@ const Container = props => {
                 console.log(auth)
             })
             .catch(error=>{
-                if(props.onAuthorizing) props.onAuthorizing({status:"processed"})
+                
                 console.log(error)
             })
         
@@ -66,6 +66,8 @@ const Container = props => {
 
         }else{
 
+            if(props.onAuthorizing) props.onAuthorizing({status:"processed"})
+            
             setCurrentUser(false)
             setCurrentAccount(false)
             setLoginStatus(false)
