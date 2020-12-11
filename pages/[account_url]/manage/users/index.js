@@ -50,7 +50,8 @@ const PageListUser = props => {
 
     const [addVisible,setAddVisible] = React.useState(false)
 
-    
+    let tableItemCounter = 1
+
     React.useEffect(()=>{
 
         userController._list({
@@ -155,6 +156,7 @@ const PageListUser = props => {
                                     <table className="table table-borderless">
                                         <thead>
                                             <tr>
+                                                <th width="20"></th>
                                                 <th width="30%">Pengguna</th>
                                                 <th width="25%">Email</th>
                                                 <th width="20%">Role</th>
@@ -178,6 +180,7 @@ const PageListUser = props => {
 
                                                         return(
                                                             <tr key={item.id}>
+                                                                <td valign="middle">{tableItemCounter++}</td>
                                                                 <td valign="middle"><Link href={{pathname:`/[account_url]/manage/users/[id]`,query:{account_url:auth.account.uniqueURL,id:item.id}}} shallow><a>{item.name}</a></Link></td>
                                                                 <td valign="middle">{item.emailAddress}</td>
                                                                 <td valign="middle">{role.role}</td>

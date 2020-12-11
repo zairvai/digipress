@@ -54,11 +54,11 @@ const Sidebar = (props) => {
 				}
 
 
-				<VerticalNavHeading>Roles</VerticalNavHeading>
+				{/* <VerticalNavHeading>Roles</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/roles/admins`} text='Admins' icon={<Icon size="1.3em" path={mdiAccountTieOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/roles/tutors`} text='Tutors' icon={<Icon size="1.3em" path={mdiAccountSupervisorOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/roles/students`} text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
-				<Navitem link={`/${auth.account.uniqueURL}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} /> */}
 
 				<VerticalNavHeading>Help</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Setting' icon={<Icon size="1.3em" path={mdiCogOutline} />} />

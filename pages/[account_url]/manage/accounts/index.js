@@ -34,6 +34,8 @@ const PageAccounts = props => {
 
 	const accountController = new AccountController(props)
 
+	let tableItemCounter = 1
+	
 	React.useEffect(()=>{
 		accountController._list({orderBy:"createdAt",direction:"asc",from:0,size:50})
 	},[])
@@ -103,6 +105,7 @@ const PageAccounts = props => {
 										<thead>
 											<tr>
 												{/* <th width="20"><Checkbox/></th> */}
+												<th width="20"></th>
 												<th>Akun</th>
 												<th width="30%">Alamat</th>
 												<th width="15%">Telpon</th>
@@ -120,6 +123,7 @@ const PageAccounts = props => {
 														return(
 															<tr key={item.id}>
 																{/* <td><Checkbox/></td> */}
+																<td valign="middle">{tableItemCounter++}</td>
 																<td valign="middle"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]`,query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
 																<td valign="middle">{item.address}</td>
 																<td valign="middle">{item.phoneNumber}</td>
