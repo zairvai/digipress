@@ -75,7 +75,7 @@ const PageLogin = props =>{
 								</Row>
 								<Row className="align-items-center fullHeight">
 									<Col md={24} sm={24} xs={24}>
-										{props.auth.newPasswordRequired ? 
+										{auth.newPasswordRequired ? 
 											<FormCompleteNewPasword onBack={onBacktoLogin}/>
 											:
 											<FormLogin onSuccess={onSuccess} accountId={auth.account.id}/>

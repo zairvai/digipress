@@ -111,21 +111,6 @@ export const signIn = (state=initialState,action) => {
             })
         }
 
-        case signInRoutine.FULFILL  : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                userNotFound:false,
-                userNotConfirmed:false,
-                newPasswordRequired:false,
-                isLoggedIn:false,
-                data:false
-            })
-
-        }
-
         case customSignInRoutine.USERNOTCONFIRMED : {
 
             const {error} = action.payload

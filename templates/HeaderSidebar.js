@@ -36,15 +36,23 @@ const Sidebar = (props) => {
 				<VerticalNavHeading>Manage</VerticalNavHeading>
 				
 				{
-					AuthController.isAppOwner(auth)? 
+					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
 					<>
 						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
-						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
-						{/* <Navitem link={{pathname:"/[account_url]/manage/users",query:{account_url:auth.account.uniqueURL}}} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	 */}
 					</>
 					:
 					<></>
 				}
+
+				{
+					AuthController.isOwner(auth) ? 
+					<>
+						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+					</>
+					:
+					<></>
+				}
+
 
 				<VerticalNavHeading>Roles</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/roles/admins`} text='Admins' icon={<Icon size="1.3em" path={mdiAccountTieOutline} />} />
