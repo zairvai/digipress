@@ -27,9 +27,7 @@ import Icon from '@mdi/react'
 
 const PageAccounts = props => {
 
-	const { baseUrl } = React.useContext(appContext)
-
-	const {router,listAccounts} = props
+	const {auth,router,listAccounts} = props
 
 	const [items,setItems] = React.useState([])
 	const [foundItem,setFoundItem] = React.useState(0)
@@ -54,7 +52,7 @@ const PageAccounts = props => {
 	},[listAccounts.isSuccessFull,listAccounts.list])
 
     const pagename=""
-	const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,'active']]
+	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -92,7 +90,7 @@ const PageAccounts = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									<li className="p-0"><Link href={{pathname:`${baseUrl}/manage/accounts/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
+									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
 								</ul>
 							</div>
 						</Col>
@@ -122,7 +120,7 @@ const PageAccounts = props => {
 														return(
 															<tr key={item.id}>
 																{/* <td><Checkbox/></td> */}
-																<td valign="middle"><Link href={{pathname:`${baseUrl}/manage/accounts/[id]`,query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
+																<td valign="middle"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]`,query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
 																<td valign="middle">{item.address}</td>
 																<td valign="middle">{item.phoneNumber}</td>
 																<td valign="middle">{item.contactPerson}</td>

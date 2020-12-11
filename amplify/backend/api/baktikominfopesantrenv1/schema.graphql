@@ -8,6 +8,16 @@ type Access {
 	status: Int
 }
 
+input AccessInputType {
+	accountId: ID!
+	role: UserRole!
+	createdBy: String
+	updatedBy: String
+	createdAt: String
+	updatedAt: String
+	status: Int
+}
+
 type Account @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
@@ -58,8 +68,8 @@ input GetItemInput {
 }
 
 input ListItemInput {
-  accountId:ID
-  role:UserRole
+	accountId: ID
+	role: UserRole
 	orderBy: String
 	direction: String
 	from: Int
@@ -105,7 +115,7 @@ input UpdateUserInput {
 	emailAddress: AWSEmail
 	phoneCode: String
 	phoneNumber: String
-	password: String
+	roles: [AccessInputType]
 	status: Int
 	expectedVersion: Int!
 }

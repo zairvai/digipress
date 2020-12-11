@@ -58,14 +58,27 @@ export default class Controller{
 
     }
 
-    static getRole = auth => {
+    static getRole = ({user,account}) => {
 
-        if(auth.user){
-            const {access} = auth.user
-            return access.role
+
+        if(typeof user === "undefined") return false
+        
+        const roles = user.roles
+
+        if(typeof roles === "undefined") return false
+        let i = 0,found=false
+
+        for(i=0;i<user.roles.length;i++){
+            if(user.roles[i].accountId===account.id){
+                found=true
+                break
+            }
         }
+        
+        if(found) return roles[i]
 
-        return{}
+        return false
+        
     }
 
     _setAccount = account =>{

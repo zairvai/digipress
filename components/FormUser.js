@@ -28,6 +28,8 @@ const schema = yup.object().shape({
 
 const FormUser = ({item,...props}) => {
 
+    const {auth} = props
+
     const userController = new UserController(props)
 
     const {
@@ -68,6 +70,7 @@ const FormUser = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
+        
         console.log(values)
 
         userController._create(values)
@@ -238,7 +241,8 @@ const FormUser = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7"  onClick={onCancel} danger type="link" block>Batal</Button>
+                                {/* <Button tabIndex="7"  onClick={onCancel} danger type="link" block>Batal</Button> */}
+                                <Link tabIndex="7" href={item ? `/${auth.account.uniqueURL}/manage/users/${item.id}` : `/${auth.account.uniqueURL}/manage/users`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
                                 <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>

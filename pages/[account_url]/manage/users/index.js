@@ -14,7 +14,6 @@ import {
 } from 'Components/layout'
 import VuroxFormSearch from 'Components/search'
 import { vuroxContext } from 'Context'
-import { appContext } from 'Context/app'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
@@ -30,14 +29,11 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import { createUserRoutinePromise,listUsersRoutinePromise} from 'State/routines/user';
 import UserController from 'Library/controllers/UserController';
 
-
 const PageListUser = props => {
 
     const userController = new UserController(props)
     
     const {auth,createUser,listUsers,router} = props
-
-    const {baseUrl } = React.useContext(appContext)
     
     const [items,setItems] = React.useState([])
 
@@ -47,7 +43,7 @@ const PageListUser = props => {
     
  
     const pagename=""
-	const links = [['Manage',`${baseUrl}/manage/users`,''],['Users',`${baseUrl}/manage/users`,'active']]
+	const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,'active']]
 
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -67,7 +63,7 @@ const PageListUser = props => {
             console.log(resp)
         }).catch(error=>console.log(error))
     
-    },[createUser.isSuccessFull])
+    },[])
 
     const showForm = props =>{
         setAddVisible(true)
@@ -146,7 +142,8 @@ const PageListUser = props => {
                         <Col md={12}>
                             <div className="fright">
                                 <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                    <li className="p-0"><Button onClick={showForm} className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah pengguna</Button></li>
+                                    {/* <li className="p-0"><Button onClick={showForm} className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah pengguna</Button></li> */}
+                                    <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/users/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
                                 </ul>
                             </div>
                         </Col>
@@ -161,8 +158,8 @@ const PageListUser = props => {
                                                 <th width="30%">Pengguna</th>
                                                 <th width="25%">Email</th>
                                                 <th width="20%">Role</th>
-                                                <th>Status</th>
-                                                <th className="fright"></th>
+                                                <th className="fright">Status</th>
+                                                {/* <th className="fright"></th> */}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -181,10 +178,10 @@ const PageListUser = props => {
 
                                                         return(
                                                             <tr key={item.id}>
-                                                                <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
+                                                                <td valign="middle"><Link href={{pathname:`/[account_url]/manage/users/[id]`,query:{account_url:auth.account.uniqueURL,id:item.id}}} shallow><a>{item.name}</a></Link></td>
                                                                 <td valign="middle">{item.emailAddress}</td>
                                                                 <td valign="middle">{role.role}</td>
-                                                                <td valign="middle">
+                                                                <td valign="middle" className="fright">
                                                                     {
                                                                         role.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
                                                                         role.status===3 ? <Status text="Active" state="success" position="right"/> :
@@ -192,11 +189,11 @@ const PageListUser = props => {
                                                                         <></>
                                                                     }
                                                                 </td>
-                                                                <td className="fright">
+                                                                {/* <td className="fright">
 																	<Popover placement="left" content={menuContent} trigger="click">
 																		<Button type="link" icon={<Icon size="1.3em" path={mdiDotsVertical} />}/>
 																	</Popover>
-																</td>
+																</td> */}
                                                             </tr>
                                                         )
                                                     })

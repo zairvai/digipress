@@ -6,7 +6,8 @@ import {put,takeLatest,call} from 'redux-saga/effects'
 import {
     createUserRoutine,
     getUserRoutine,
-    listUsersRoutine
+    listUsersRoutine,
+    updateUserRoutine
 } from '../routines/user'
 
 
@@ -51,6 +52,8 @@ function* createUser(action){
 export function* createUserWatcher(){
     yield takeLatest(createUserRoutine.TRIGGER,createUser)
 }
+
+
 
 function* getUser(action){
 
@@ -100,4 +103,51 @@ function* listUsers(action){
 
 export function* listUsersWatcher(){
     yield takeLatest(listUsersRoutine.TRIGGER,listUsers)
+}
+
+
+function* updateUser(action){
+
+    try{
+
+        console.log(action)
+
+        yield put(updateUserRoutine.request())
+
+        const {values} = action.payload
+
+        console.log(values)
+
+        const updateParams = {
+            id : values.id.replace(/\s/g,""),
+            expectedVersion : values.version
+        }
+
+        if(values.name) updateParams.name = values.name.trim()
+        if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim()
+        if(values.phoneCode) updateParams.phoneCode =  values.phoneCode.trim()
+        if(values.phoneNumber) updateParams.phoneNumber =  values.phoneNumber.trim()
+        if(values.status) updateParams.status = values.status.trim()
+        if(values.roles) updateParams.roles =  values.roles        
+
+        const response = yield API.graphql(graphqlOperation(mutations.updateUser,{
+            input:updateParams}))
+
+        yield put(updateUserRoutine.success({data:response.data.updateUser}))
+
+                    
+    }catch(error){
+
+        yield put(updateUserRoutine.failure({error}))
+
+    }finally{
+
+        yield put(updateUserRoutine.fulfill())
+
+    }
+
+}
+
+export function* updateUserWatcher(){
+    yield takeLatest(updateUserRoutine.TRIGGER,updateUser)
 }

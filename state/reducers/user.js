@@ -111,6 +111,16 @@ export const getUser = (state={item:{},...initialState},action) => {
             })
         }
 
+        case getUserRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
+        }
+
     }
 
     return state
@@ -187,6 +197,65 @@ export const listUsers = (state={list:[],...initialState},action) => {
                 error:false
             })
 
+        }
+
+    }
+
+    return state
+}
+
+
+export const updateUser = (state={item:{},...initialState},action) => {
+
+    switch(action.type){
+
+
+        case updateUserRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+        }
+
+        case updateUserRoutine.SUCCESS : {
+
+            const {data} = action.payload
+            
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                isSuccessFull:true,
+                item:data
+            })     
+
+        }
+
+        case updateUserRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                item:{}
+            })
+        }
+
+        case updateUserRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
         }
 
     }

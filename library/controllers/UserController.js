@@ -1,5 +1,5 @@
 import {
-    getUser,updateList
+    updateList
 } from 'State/actions/user'
 
 export default class Controller{
@@ -17,6 +17,10 @@ export default class Controller{
 
     _get = (id) => {
         return this.props.getUserRoutinePromise({id})
+    }
+
+    _update = (values) =>{
+        return this.props.updateUserRoutinePromise({values})
     }
 
     _list = values => {

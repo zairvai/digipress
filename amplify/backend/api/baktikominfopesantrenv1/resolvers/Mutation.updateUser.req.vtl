@@ -16,12 +16,13 @@
 	$util.qr($input.put("emailAddress",$ctx.args.input.emailAddress))
 #end
 
-#if( !$util.isNull($ctx.args.input.phoneNumber ))
+#if( !$util.isNull($ctx.args.input.phoneCode) && !$util.isNull($ctx.args.input.phoneNumber ))
+	$util.qr($input.put("phoneCode",$ctx.args.input.phoneCode))
 	$util.qr($input.put("phoneNumber",$ctx.args.input.phoneNumber))
 #end
 
-#if( !$util.isNull($ctx.args.input.password ))
-	$util.qr($input.put("password",$ctx.args.input.password))
+#if( !$util.isNull($ctx.args.input.roles ))
+	$util.qr($input.put("roles",$ctx.args.input.roles))
 #end
 
 #if( !$util.isNull($ctx.args.input.status ))

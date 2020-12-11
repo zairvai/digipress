@@ -36,8 +36,11 @@ const schema = yup.object().shape({
 
 const FormAccount = ({item,...props}) => {
 
+
+    const {auth} = props
+
     const accountController = new AccountController(props)
-    const { baseUrl } = React.useContext(appContext)
+    
 
     const {
         handleSubmit,
@@ -78,9 +81,9 @@ const FormAccount = ({item,...props}) => {
     const onSubmit = (values) => {
         
         if(item) {
-            values = {version:item.version,...values}
+            values = {id:item.id,version:item.version,...values}
             
-            accountController._update(item.id,values)
+            accountController._update(values)
                 .then(account=>props.onSuccess(account.data))
                 .catch(error=>console.log(error))
         }
@@ -236,7 +239,7 @@ const FormAccount = ({item,...props}) => {
                                 <Button tabIndex="6" className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
                             </Col>
                             <Col md={3} sm={24} xs={24}>
-                                <Link tabIndex="7" href={item ? `${baseUrl}/manage/accounts/${item.id}` : `${baseUrl}/manage/accounts`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
+                                <Link tabIndex="7" href={item ? `/${auth.account.uniqueURL}/manage/accounts/${item.id}` : `/${auth.account.uniqueURL}/manage/accounts`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
                             </Col>
                         </Row>
                         

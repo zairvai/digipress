@@ -299,6 +299,16 @@ export const updateAccount = (state={item:{},...initialState},action) => {
             })
         }
 
+        case updateAccountRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
+        }
+
     }
 
     return state

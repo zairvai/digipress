@@ -22,8 +22,8 @@ export default class Controller{
         return this.props.createAccountRoutinePromise({values})
     }
 
-    _update = (id,values) =>{
-        values.id = id
+    _update = (values) =>{
+        // values.id = id
         return this.props.updateAccountRoutinePromise({values})
     }
 
