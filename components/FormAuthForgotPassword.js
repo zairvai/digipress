@@ -22,7 +22,7 @@ const schema = yup.object().shape({
 
 const FormAuth = props => {
 
-    const {baseUrl} = React.useContext(appContext)
+    const {auth} = props
 
     const {
         handleSubmit,
@@ -125,7 +125,7 @@ const FormAuth = props => {
                 
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:`${baseUrl}/auth/login`}} shallow><a>Kembali ke halaman Login</a></Link>
+                        <Link href={{pathname:`/${auth.account.uniqueURL}/auth/login`}} shallow><a>Kembali ke halaman Login</a></Link>
                         {/* <Button className="pl-0" type="link" onClick={()=>router.back()}>Kembali ke halaman login</Button> */}
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
