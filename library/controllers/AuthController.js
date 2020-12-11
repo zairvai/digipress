@@ -6,6 +6,8 @@ import {
     setAccount
 } from 'State/actions/auth'
 
+import AuthController from './AccountController'
+
 export default class Controller{
 
     constructor({dispatch, ...props}){
@@ -14,6 +16,27 @@ export default class Controller{
         
         this.dispatch = dispatch
     }
+
+    static isAppOwner = auth =>{
+        
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="Owner") return true
+        }
+        return false
+
+    }
+
+    static isAppAdmin = auth =>{
+        
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="Admin") return true
+        }
+        return false
+
+    }
+    
 
     static isOwner = (auth) => {
 

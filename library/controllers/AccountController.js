@@ -9,6 +9,8 @@ import {
 
 export default class Controller{
 
+    static APP_ACCOUNT_ID = "11001" //aplikasi owner id
+
     constructor({dispatch, ...props}){
         
         this.props = props

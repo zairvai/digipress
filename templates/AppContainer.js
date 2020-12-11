@@ -34,10 +34,11 @@ const Container = props => {
 
     },[])
 
-    React.useEffect(()=>{
-		if(props.query !== auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
-    },[props.query])
+    // React.useEffect(()=>{
+	// 	if(props.query !== auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+    // },[props.query])
     
+
     return(
         <>
             {props.children}

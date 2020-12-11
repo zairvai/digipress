@@ -5,30 +5,28 @@ import {  VerticalNavHeading, Navitem } from 'Components/nav'
 
 import Icon from '@mdi/react'
 import {mdiMonitorDashboard, mdiFrequentlyAskedQuestions, mdiHeadset, mdiCommentOutline, mdiAccountSupervisorOutline, mdiSchoolOutline,mdiCogOutline, mdiNewspaperVariantMultipleOutline, mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, mdiAccountMultipleOutline, mdiKeyChain, mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, mdiCommentMultipleOutline, mdiBriefcaseAccount, mdiAccountOutline, mdiAccountTieOutline} from '@mdi/js'
-import { appContext } from '../context/app'
 import AuthController from 'Library/controllers/AuthController'
 
 const Sidebar = (props) => {
 
-	const {router} = props
-	const {auth,baseUrl} = React.useContext(appContext)
+	const {router,auth} = props
 
 
 	return (
 		<div className={`${props.className} vurox-vertical-nav`} style={{width: props.width + 'px'}}>
 			<ul>
 				<VerticalNavHeading>Report</VerticalNavHeading>
-				<Navitem link={`${baseUrl}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
 						
 				<VerticalNavHeading>App</VerticalNavHeading>
-				<Navitem link={`${baseUrl}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-				<Navitem link={`${baseUrl}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 				
 				{
-					!AuthController.isOwner(auth) && !AuthController.isAdmin(auth) ?
+					!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth) ?
 					<>
-						<Navitem link={`${baseUrl}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
-						<Navitem link={`${baseUrl}/content/tags`} text='Tags' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tags' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
 					</>
 					:
 					<></>
@@ -38,23 +36,24 @@ const Sidebar = (props) => {
 				<VerticalNavHeading>Manage</VerticalNavHeading>
 				
 				{
-					AuthController.isOwner(auth)? 
+					AuthController.isAppOwner(auth)? 
 					<>
-						<Navitem link={`${baseUrl}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
-						<Navitem link={`${baseUrl}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+						{/* <Navitem link={{pathname:"/[account_url]/manage/users",query:{account_url:auth.account.uniqueURL}}} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	 */}
 					</>
 					:
 					<></>
 				}
 
 				<VerticalNavHeading>Roles</VerticalNavHeading>
-				<Navitem link={`${baseUrl}/roles/admins`} text='Admins' icon={<Icon size="1.3em" path={mdiAccountTieOutline} />} />
-				<Navitem link={`${baseUrl}/roles/tutors`} text='Tutors' icon={<Icon size="1.3em" path={mdiAccountSupervisorOutline} />} />
-				<Navitem link={`${baseUrl}/roles/students`} text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
-				<Navitem link={`${baseUrl}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/roles/admins`} text='Admins' icon={<Icon size="1.3em" path={mdiAccountTieOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/roles/tutors`} text='Tutors' icon={<Icon size="1.3em" path={mdiAccountSupervisorOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/roles/students`} text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />
 
 				<VerticalNavHeading>Help</VerticalNavHeading>
-				<Navitem link={`${baseUrl}/help/settings`} className={router.asPath===`${baseUrl}/help/settings` ? "active":""} text='Setting' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Setting' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
 				<Navitem link='/help/feedbacks' text='Feedback' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
 				<Navitem link='/help/supports' text='Support' icon={<Icon size="1.3em" path={mdiHeadset} />} />
 				<Navitem link='/help/faq' text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
