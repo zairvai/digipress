@@ -171,6 +171,7 @@ const FormUser = ({item,...props}) => {
                                         <Form.Item label="Email" className="ml-0 ml-md-3">
                                             <Input
                                                 tabIndex="4" 
+                                                autoComplete="username"
                                                 allowClear
                                                 size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
                                             {errors && errors.emailAddress && <Text type="danger">{errors.emailAddress.message}</Text>}

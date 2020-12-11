@@ -1,4 +1,4 @@
-import {createUserRoutine,getUserRoutine} from '../routines/user'
+import {createUserRoutine,getUserRoutine,listUsersRoutine,customListUsersRoutine} from '../routines/user'
 
 
 export const createUser = payload => ({
@@ -11,3 +11,14 @@ export const getUser = payload => ({
     payload
 })
 
+export const listUsers = payload => ({
+    type : listUsersRoutine.TRIGGER,
+    payload
+})
+
+//update list setelah create atau remove, methods: add, remove
+export const updateList = (method,items) =>({
+    type:customListUsersRoutine.UPDATELIST,
+    method,
+    items
+})

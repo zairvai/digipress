@@ -111,6 +111,21 @@ export const signIn = (state=initialState,action) => {
             })
         }
 
+        case signInRoutine.FULFILL  : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                userNotFound:false,
+                userNotConfirmed:false,
+                newPasswordRequired:false,
+                isLoggedIn:false,
+                data:false
+            })
+
+        }
+
         case customSignInRoutine.USERNOTCONFIRMED : {
 
             const {error} = action.payload
@@ -170,7 +185,6 @@ export const signOut = (state=initialState,action) => {
                 newPasswordRequired:false,
                 isLoggedIn:false,
                 user:false,
-                account:false
             })  
         }
         case signOutRoutine.FAILURE:{
@@ -182,6 +196,15 @@ export const signOut = (state=initialState,action) => {
                 error:error,
                 isError:true
             }) 
+        }
+
+        case signOutRoutine.FULFILL:{
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false
+            })  
         }
     }
 

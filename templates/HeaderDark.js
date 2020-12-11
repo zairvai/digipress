@@ -21,17 +21,10 @@ import AuthController from 'Library/controllers/AuthController'
 
 const HeaderDark = props => {
 	
-	const authController = new AuthController(props)
+	const {auth} = props
 
 	const { toggleMenu, menuState } = useContext(vuroxContext)
 
-	const {auth,baseUrl} = React.useContext(appContext)
-	const role = AuthController.getRole(auth)
-
-	const signOut = () => {
-		authController._signOut()
-			.catch(error=>console.log(error))
-	}
 
 	return (
 		<div>
@@ -49,7 +42,7 @@ const HeaderDark = props => {
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
 							<h5 className="vurox-text-sizes mb-0">{auth.account.name}</h5>
-							<h6 className="mt-2">{role.role}</h6>
+							<h6 className="mt-2">{auth.user.access.role}</h6>
 						</Space>
 					</Col>
 				
@@ -116,9 +109,7 @@ const HeaderDark = props => {
 										{auth.user.name}
 									</DropdownItemsHead>
 									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
-									
-									{/* <DropdownItem link={`${baseUrl}/auth/logout`} className="py-0 px-3"><button className="p-0"><i className="ti-arrow-left"></i></button></DropdownItem> */}
-									<DropdownItem link={`${baseUrl}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
+									<DropdownItem link={`/${auth.account.uniqueURL}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
 						</div>

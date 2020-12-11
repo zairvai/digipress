@@ -13,10 +13,9 @@ import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-
+import { getAccountByUniqueUrlRoutinePromise } from 'State/routines/account';
 import AuthController from 'Library/controllers/AuthController'
-
-import AppContainer from 'Templates/AppContainer'
+import AccountController from 'Library/controllers/AccountController'
 
 const {Title} = Typography
 
@@ -24,21 +23,30 @@ const PageLogin = props =>{
 
 	const {router,auth} = props
 
-	const {isLoggedIn ,setLoginStatus,setCurrentUser} = React.useContext(appContext)
-
 	const authController = new AuthController(props)
+	const accountController = new AccountController(props)
 
 	const [visible,setVisible] = React.useState(true)
+	 
+	 React.useEffect(async()=>{
+		
+		try{
+			//get account id by unique URL
+			const account = await accountController._getAccountByUniqueUrl({url:router.query.account_url})
 
-	React.useEffect(()=>{
-		router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
-	},[])
+			console.log(account)
 
-	React.useEffect(()=>{
-	
-		if(auth.isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
-		else setVisible(true)
+			authController._setAccount(account.data)
 
+			router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
+			
+			if(auth.isLoggedIn) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+			else setVisible(true)
+		}
+		catch(error){
+			console.log(error)
+		}
+			
 	},[])
 
 
@@ -47,21 +55,12 @@ const PageLogin = props =>{
 			.then(()=>authController._initSignIn())
 	}
 
-	const handleAuthorization = progress => {
-		console.log(progress)
-		setLoadStatus(progress.status === "processed" ? true : false)
-	}
-
 	const onSuccess = resp =>{
-
-		setLoginStatus(true)
-		setCurrentUser(props.auth.user)
-		
 		router.push(`/${auth.account.uniqueURL}/report/dashboard`)
 	}
 
 	return(
-		<AppContainer>
+		<React.Fragment>
 			<Header/>
 			<VuroxLayout>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
@@ -90,7 +89,7 @@ const PageLogin = props =>{
 
 				</ContentLayout>
 			</VuroxLayout>
-		</AppContainer>
+		</React.Fragment>
 	)
 	
 }
@@ -99,7 +98,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-			
+				getAccountByUniqueUrlRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageLogin))

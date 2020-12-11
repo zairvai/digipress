@@ -1,5 +1,5 @@
 import {
-    getUser
+    getUser,updateList
 } from 'State/actions/user'
 
 export default class Controller{
@@ -11,11 +11,19 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
-    _create = values =>{
+    _create = values => {
         return this.props.createUserRoutinePromise({values})
     }
 
-    _get = (id) =>{
+    _get = (id) => {
         return this.props.getUserRoutinePromise({id})
+    }
+
+    _list = values => {
+        return this.props.listUsersRoutinePromise({values})
+    }
+
+    _updateList = (method,items)=>{
+        this.dispatch(updateList(method,items))
     }
 }

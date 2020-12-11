@@ -1,5 +1,14 @@
-type Account 
-@aws_iam
+type Access {
+	accountId: ID!
+	role: UserRole!
+	createdBy: String
+	updatedBy: String
+	createdAt: String
+	updatedAt: String
+	status: Int
+}
+
+type Account @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	name: String!
@@ -32,6 +41,7 @@ input CreateAccountInput {
 
 input CreateUserInput {
 	name: String!
+	phoneCode: String!
 	phoneNumber: String!
 	emailAddress: AWSEmail!
 	password: String
@@ -48,6 +58,8 @@ input GetItemInput {
 }
 
 input ListItemInput {
+  accountId:ID
+  role:UserRole
 	orderBy: String
 	direction: String
 	from: Int
@@ -66,12 +78,12 @@ type Mutation {
 type Query {
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input: ListItemInput): AccountConnection
-	getAccountByUniqueUrl(url: String!): Account @aws_iam @aws_cognito_user_pools
-	
+	getAccountByUniqueUrl(url: String!): Account
+		@aws_iam
+@aws_cognito_user_pools
 	getUser(input: GetItemInput!): User
 	getUserByEmailAddress(emailAddress: String!): User
-	getUserByAccount(userId:ID!,accountId:ID!):User
-
+	getUserByAccount(userId: ID!, accountId: ID!): User
 	listUsers(input: ListItemInput): UserConnection
 }
 
@@ -91,14 +103,14 @@ input UpdateUserInput {
 	id: ID!
 	name: String
 	emailAddress: AWSEmail
+	phoneCode: String
 	phoneNumber: String
 	password: String
 	status: Int
 	expectedVersion: Int!
 }
 
-type User 
-@aws_iam
+type User @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	name: String!
@@ -107,26 +119,13 @@ type User
 	emailAddressVerified: Boolean
 	phoneNumberVerified: Boolean
 	enabled: Boolean
-	role: Access
+	roles: [Access]
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
 	updatedAt: AWSDateTime
 	version: Int!
 	status: Int
-}
-
-type Access {
-	id:ID!
-	userId:ID!
-	accountId:ID!
-	role:UserRole!
-	createdBy: User
-	updatedBy: User
-	createdAt: AWSDateTime
-	updatedAt: AWSDateTime
-	version: Int!
-	status:Int
 }
 
 type UserConnection {

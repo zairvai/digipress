@@ -2,6 +2,8 @@ import {
     createRoutine,createRoutineCreator,promisifyRoutine
 } from 'redux-saga-routines'
 
+var customRoutine = createRoutineCreator(["INIT"])
+
 //add user
 export const createUserRoutine = createRoutine("create_user")
 export const createUserRoutinePromise = promisifyRoutine(createUserRoutine)
@@ -14,9 +16,11 @@ export const deleteUserRoutinePromise = promisifyRoutine(deleteUserRoutine)
 export const updateUserRoutine = createRoutine("update_user")
 export const updateUserRoutinePromise = promisifyRoutine(updateUserRoutine)
 
-//list usert
+//list user
+customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
+export const customListUsersRoutine = customRoutine("list_user_custom")
 export const listUsersRoutine = createRoutine("list_users")
-export const listUserRoutinePromise = promisifyRoutine(listUsersRoutine)
+export const listUsersRoutinePromise = promisifyRoutine(listUsersRoutine)
 
 //get user
 export const getUserRoutine = createRoutine("get_user")

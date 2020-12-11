@@ -5,10 +5,10 @@ const index = () => {
 
     const router = useRouter()
 
-    useEffect(()=>{
-        router.push('/report/dashboard')
-        return ()=>{}
-    })
+    // useEffect(()=>{
+    //     router.push('/report/dashboard')
+    //     return ()=>{}
+    // })
 
     return (<></>)
 

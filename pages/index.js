@@ -6,9 +6,14 @@ import {connect} from 'react-redux'
 const AppIndex = props => {
 
     const {router} = props
+    const {asPath} = router
 
     console.log(router)
-    router.push(router.asPath)
+
+    if(asPath==="/") router.push("/app/auth/login")
+    else router.push(asPath)
+    
+    
 
     return(
         <></>

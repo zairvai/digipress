@@ -5,7 +5,8 @@ import {put,takeLatest,call} from 'redux-saga/effects'
 
 import {
     createUserRoutine,
-    getUserRoutine
+    getUserRoutine,
+    listUsersRoutine
 } from '../routines/user'
 
 
@@ -19,16 +20,16 @@ function* createUser(action){
 
         const name = values.name.trim()
         const emailAddress = values.emailAddress.trim()
-        const phoneNumber = values.phoneCode.trim() + values.phoneNumber.trim()
+        const phoneCode = values.phoneCode.trim()
+        const phoneNumber =  values.phoneNumber.trim()
         const password = values.password.trim()
         const accountId = values.accountId.trim()
         const role = values.role.trim()
 
-        console.log(phoneNumber)
-
         const response = yield API.graphql(graphqlOperation(mutations.createUser,{
             input:{
                 name,
+                phoneCode,
                 phoneNumber,
                 emailAddress,
                 password,
@@ -73,4 +74,30 @@ function* getUser(action){
 
 export function* getUserWatcher(){
     yield takeLatest(getUserRoutine.TRIGGER,getUser)
+}
+
+
+function* listUsers(action){
+
+    try{
+        
+        const {accountId,role,orderBy,direction,from,size} = action.payload.values
+
+        yield put(listUsersRoutine.request())
+                
+        const response = yield API.graphql(graphqlOperation(queries.listUsers,{input:{accountId,role,orderBy,direction,from,size}}))
+
+        yield put(listUsersRoutine.success({data:response.data.listUsers}))
+
+                    
+    }catch(error){
+        yield put(listUsersRoutine.failure({error}))
+    }finally{
+        yield put(listUsersRoutine.fulfill())
+    }
+
+}
+
+export function* listUsersWatcher(){
+    yield takeLatest(listUsersRoutine.TRIGGER,listUsers)
 }

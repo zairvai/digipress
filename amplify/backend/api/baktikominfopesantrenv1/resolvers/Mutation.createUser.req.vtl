@@ -3,10 +3,15 @@ The value of 'payload' after the template has been evaluated
 will be passed as the event to AWS Lambda.
 *#
 
+$util.qr($ctx.stash.put("user",{
+	"phoneCode":$ctx.args.input.phoneCode,
+    "phoneNumber":$ctx.args.input.phoneNumber
+}))
+
 #set( $input = {
 	"name":$ctx.args.input.name,
     "emailAddress":$ctx.args.input.emailAddress,
-    "phoneNumber":$ctx.args.input.phoneNumber,
+    "phoneNumber":"${ctx.args.input.phoneCode}${ctx.args.input.phoneNumber}",
     "password":$ctx.args.input.password
 } )
 
@@ -17,7 +22,6 @@ will be passed as the event to AWS Lambda.
     })    
     $util.qr($ctx.stash.put("access",$access))
 #end
-
 
 $util.qr($ctx.stash.put("field","createUser"))
 $util.qr($ctx.stash.put("input",$input))

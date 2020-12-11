@@ -25,13 +25,24 @@ import AppContainer from 'Templates/AppContainer'
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
 
-const RoleIndex = props => {
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { createUserRoutinePromise,listUsersRoutinePromise} from 'State/routines/user';
+import UserController from 'Library/controllers/UserController';
 
-	const {auth, baseUrl } = React.useContext(appContext)
+
+const PageListUser = props => {
+
+    const userController = new UserController(props)
+    
+    const {auth,createUser,listUsers,router} = props
+
+    const {baseUrl } = React.useContext(appContext)
+    
+    const [items,setItems] = React.useState([])
+
+    console.log(items)
 
 	const {TabPane} = Tabs
-
-	const {Text}=Typography
  
     const pagename=""
 	const links = [['Manage',`${baseUrl}/manage/users`,''],['Users',`${baseUrl}/manage/users`,'active']]
@@ -47,7 +58,23 @@ const RoleIndex = props => {
 
     const onSuccessAdd = user =>{
         console.log(user)
+        userController._updateList("add",[{item:user.data}])
+        setAddVisible(false)
     }
+
+    React.useEffect(()=>{
+
+        userController._list({
+            accountId:auth.account.id,
+            role:"Admin",
+            orderBy:"createdAt",
+            direction:"desc",from:0,size:20
+        }).then(resp=>{
+            setItems(listUsers.list.items)
+            console.log(resp)
+        }).catch(error=>console.log(error))
+    
+    },[createUser.isSuccessFull])
 
     return (
         <AppContainer>
@@ -95,8 +122,6 @@ const RoleIndex = props => {
 								</TabPane>
 							</Tabs>
 							
-                        
-
                     </Modal>
                     
                     <Row className="mb-2">
@@ -125,22 +150,37 @@ const RoleIndex = props => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
-                                                props.users.list.map(item=>(
-                                                    <tr key={item.id}>
-                                                        <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.firstname} {item.lastname}</a></Link></td>
-                                                        <td valign="middle">{item.email}</td>
-                                                        <td valign="middle">{item.role}</td>
-                                                        <td valign="middle" className="fright">
-                                                            {
-                                                                item.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
-                                                                item.status===3 ? <Status text="Active" state="success" position="right"/> :
-                                                                item.status===4 ? <Status text="Suspended" state="fail" position="right"/> :
-                                                                <></>
+                                            {   items ?
+                                                    items.map(item=>{
+                                                        
+                                                        let i=0,found=false, role={}
+                                                        for(i=0;i<item.roles.length;i++){
+                                                            if(item.roles[i].accountId===auth.account.id){
+                                                                found=true
+                                                                break
                                                             }
-                                                        </td>
-                                                    </tr>
-                                                ))
+                                                        }
+
+                                                        if(found) role = item.roles[i]
+
+                                                        return(
+                                                            <tr key={item.id}>
+                                                                <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
+                                                                <td valign="middle">{item.emailAddress}</td>
+                                                                <td valign="middle">{role.role}</td>
+                                                                <td valign="middle" className="fright">
+                                                                    {
+                                                                        role.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
+                                                                        role.status===3 ? <Status text="Active" state="success" position="right"/> :
+                                                                        role.status===4 ? <Status text="Suspended" state="fail" position="right"/> :
+                                                                        <></>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                    :
+                                                    <></>
                                             }
                                         </tbody>
                                     </table>
@@ -156,4 +196,12 @@ const RoleIndex = props => {
     );
 
 }
-export default connect(state=>state)(withRouter(RoleIndex))
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            createUserRoutinePromise,
+            listUsersRoutinePromise
+        },dispatch),dispatch
+    })
+)(PageListUser)

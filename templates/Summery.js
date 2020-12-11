@@ -1,18 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Row, Col } from 'antd'
-import {appContext} from 'Context/app'
 
 const Summery = props =>{
 
-	const {auth} = React.useContext(appContext)
-	const [name,setName] = React.useState("")
-
-	React.useEffect(()=>{
-		if(auth.user){
-			setName(auth.user.name)
-		}
-	},[auth.user])
+	const {auth} = props
 
 	return (
 		<div className="vurox-admin-summery">

@@ -11,40 +11,13 @@ export const createUser = /* GraphQL */ `
       emailAddressVerified
       phoneNumberVerified
       enabled
-      role {
-        id
-        userId
+      roles {
         accountId
         role
-        createdBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
-        updatedBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
+        createdBy
+        updatedBy
         createdAt
         updatedAt
-        version
         status
       }
       createdBy {
@@ -55,14 +28,13 @@ export const createUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -104,14 +76,13 @@ export const createUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -162,40 +133,13 @@ export const updateUser = /* GraphQL */ `
       emailAddressVerified
       phoneNumberVerified
       enabled
-      role {
-        id
-        userId
+      roles {
         accountId
         role
-        createdBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
-        updatedBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
+        createdBy
+        updatedBy
         createdAt
         updatedAt
-        version
         status
       }
       createdBy {
@@ -206,14 +150,13 @@ export const updateUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -255,14 +198,13 @@ export const updateUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -313,40 +255,13 @@ export const deleteUser = /* GraphQL */ `
       emailAddressVerified
       phoneNumberVerified
       enabled
-      role {
-        id
-        userId
+      roles {
         accountId
         role
-        createdBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
-        updatedBy {
-          id
-          name
-          emailAddress
-          phoneNumber
-          emailAddressVerified
-          phoneNumberVerified
-          enabled
-          createdAt
-          updatedAt
-          version
-          status
-        }
+        createdBy
+        updatedBy
         createdAt
         updatedAt
-        version
         status
       }
       createdBy {
@@ -357,14 +272,13 @@ export const deleteUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -406,14 +320,13 @@ export const deleteUser = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -473,14 +386,13 @@ export const createAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -522,14 +434,13 @@ export const createAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -588,14 +499,13 @@ export const updateAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -637,14 +547,13 @@ export const updateAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -703,14 +612,13 @@ export const deleteAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {
@@ -752,14 +660,13 @@ export const deleteAccount = /* GraphQL */ `
         emailAddressVerified
         phoneNumberVerified
         enabled
-        role {
-          id
-          userId
+        roles {
           accountId
           role
+          createdBy
+          updatedBy
           createdAt
           updatedAt
-          version
           status
         }
         createdBy {

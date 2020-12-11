@@ -3,7 +3,8 @@ import {
     updateUserRoutine,
     deleteUserRoutine,
     getUserRoutine,
-    listUsersRoutine
+    listUsersRoutine,
+    customListUsersRoutine
 } from '../routines/user'
 
 const initialState = {
@@ -54,6 +55,15 @@ export const createUser = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
+        case createUserRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:false,
+                error:false
+            })
+        }
     }
 
     return state
@@ -99,6 +109,84 @@ export const getUser = (state={item:{},...initialState},action) => {
                 error,
                 item:{}
             })
+        }
+
+    }
+
+    return state
+}
+
+export const listUsers = (state={list:[],...initialState},action) => {
+
+    switch(action.type){
+
+        case listUsersRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                list:[]
+            })
+        }
+
+        case listUsersRoutine.SUCCESS : {
+
+            const {data} = action.payload
+            
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                isSuccessFull:true,
+                list:data
+            })     
+
+        }
+
+        case listUsersRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                list:[]
+            })
+        }
+
+        case listUsersRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
+        }
+
+        case customListUsersRoutine.UPDATELIST : {
+
+            const {method,items}  = action
+            
+            if(method==="add") state.list.items.unshift(items)
+            else if(method==="remove"){
+                items.forEach(item=>{
+                    const index = state.list.items.findIndex((itemList) => itemList.id === item.id)
+                    state.list.items.splice(index,1)
+                })
+            }
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:true,
+                isError:false,
+                error:false
+            })
+
         }
 
     }

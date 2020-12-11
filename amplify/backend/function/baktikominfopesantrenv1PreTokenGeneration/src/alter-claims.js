@@ -2,6 +2,8 @@ var lib = require("./lib")
 
 exports.handler = async (event, context, callback) => {
   
+  console.log(event)
+  
   const {clientMetadata} = event.request
   const accountId = clientMetadata ? clientMetadata.accountId : false
   const userId = event.request.userAttributes.sub
