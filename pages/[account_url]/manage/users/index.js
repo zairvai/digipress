@@ -18,13 +18,14 @@ import { appContext } from 'Context/app'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Modal,Button, Tabs,Typography} from 'antd'
+import { Row, Col,Modal,Button, Tabs,Typography,Popover} from 'antd'
 import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
 import AppContainer from 'Templates/AppContainer'
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
-
+import Icon from '@mdi/react'
+import {mdiDotsVertical} from '@mdi/js'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createUserRoutinePromise,listUsersRoutinePromise} from 'State/routines/user';
 import UserController from 'Library/controllers/UserController';
@@ -42,7 +43,8 @@ const PageListUser = props => {
 
     console.log(items)
 
-	const {TabPane} = Tabs
+    const {TabPane} = Tabs
+    
  
     const pagename=""
 	const links = [['Manage',`${baseUrl}/manage/users`,''],['Users',`${baseUrl}/manage/users`,'active']]
@@ -52,16 +54,7 @@ const PageListUser = props => {
 
     const [addVisible,setAddVisible] = React.useState(false)
 
-    const showForm = props =>{
-        setAddVisible(true)
-    }
-
-    const onSuccessAdd = user =>{
-        console.log(user)
-        userController._updateList("add",[{item:user.data}])
-        setAddVisible(false)
-    }
-
+    
     React.useEffect(()=>{
 
         userController._list({
@@ -75,6 +68,29 @@ const PageListUser = props => {
         }).catch(error=>console.log(error))
     
     },[createUser.isSuccessFull])
+
+    const showForm = props =>{
+        setAddVisible(true)
+    }
+
+    const onSuccessAdd = user =>{
+        console.log(user)
+        userController._updateList("add",[{item:user.data}])
+        setAddVisible(false)
+    }
+
+
+    const menuContent = props =>{
+
+		console.log(props)
+
+		return(
+			<div>
+				<p>Content</p>
+				<p>Content</p>
+			</div>
+		)
+	}
 
     return (
         <AppContainer>
@@ -100,28 +116,27 @@ const PageListUser = props => {
                         maskClosable={false}
                         width={500}>
 
-							<Tabs className="formTab" defaultActiveKey="1">
-								<TabPane tab="Pengguna baru" key="1">
-									<Row>
-										<Col md={24}>
-                                            <FormUser 
-                                                accountId={auth.account.id}
-                                                onSuccess={onSuccessAdd}
-												onCancel={()=>setAddVisible(false)} 
-												onOk={()=>setAddVisible(false)}/>
+                        {/* <Tabs className="formTab" defaultActiveKey="1">
+                            <TabPane tab="Pengguna baru" key="1"> */}
+                                <Row>
+                                    <Col md={24}>
+                                        <FormUser 
+                                            accountId={auth.account.id}
+                                            onSuccess={onSuccessAdd}
+                                            onCancel={()=>setAddVisible(false)} 
+                                            onOk={()=>setAddVisible(false)}/>
 
-										</Col>
-									</Row>
-								</TabPane>
-								<TabPane tab="Pengguna lama" key="2">
-									<Row>
-										<Col md={24}>
-											<FormUserExisting></FormUserExisting>
-										</Col>
-									</Row>
-								</TabPane>
-							</Tabs>
-							
+                                    </Col>
+                                </Row>
+                            {/* </TabPane>
+                            <TabPane tab="Pengguna lama" key="2">
+                                <Row>
+                                    <Col md={24}>
+                                        <FormUserExisting></FormUserExisting>
+                                    </Col>
+                                </Row>
+                            </TabPane>
+                        </Tabs> */}
                     </Modal>
                     
                     <Row className="mb-2">
@@ -143,10 +158,11 @@ const PageListUser = props => {
                                     <table className="table table-borderless">
                                         <thead>
                                             <tr>
-                                                <th>Pengguna</th>
-                                                <th width="30%">Email</th>
-                                                <th>Role</th>
-                                                <th className="fright">Status</th>
+                                                <th width="30%">Pengguna</th>
+                                                <th width="25%">Email</th>
+                                                <th width="20%">Role</th>
+                                                <th>Status</th>
+                                                <th className="fright"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -168,7 +184,7 @@ const PageListUser = props => {
                                                                 <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
                                                                 <td valign="middle">{item.emailAddress}</td>
                                                                 <td valign="middle">{role.role}</td>
-                                                                <td valign="middle" className="fright">
+                                                                <td valign="middle">
                                                                     {
                                                                         role.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
                                                                         role.status===3 ? <Status text="Active" state="success" position="right"/> :
@@ -176,6 +192,11 @@ const PageListUser = props => {
                                                                         <></>
                                                                     }
                                                                 </td>
+                                                                <td className="fright">
+																	<Popover placement="left" content={menuContent} trigger="click">
+																		<Button type="link" icon={<Icon size="1.3em" path={mdiDotsVertical} />}/>
+																	</Popover>
+																</td>
                                                             </tr>
                                                         )
                                                     })
