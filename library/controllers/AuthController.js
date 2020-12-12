@@ -21,7 +21,7 @@ export default class Controller{
         
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="Owner") return true
+            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="owner") return true
         }
         return false
 
@@ -31,7 +31,7 @@ export default class Controller{
         
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="Admin") return true
+            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="admin") return true
         }
         return false
 
@@ -42,7 +42,7 @@ export default class Controller{
 
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === auth.account.id && access.role==="Owner") return true
+            if(access.accountId === auth.account.id && access.role==="owner") return true
         }
         return false
 
@@ -52,7 +52,7 @@ export default class Controller{
 
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === auth.account.id && access.role==="Admin") return true
+            if(access.accountId === auth.account.id && access.role==="admin") return true
         }
         return false
 
