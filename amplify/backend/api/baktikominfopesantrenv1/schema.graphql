@@ -1,4 +1,5 @@
-type Access {
+type Access @aws_iam
+@aws_cognito_user_pools{
 	accountId: ID!
 	role: UserRole!
 	createdBy: String

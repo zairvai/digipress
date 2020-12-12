@@ -17,8 +17,9 @@ export const listUsers = payload => ({
 })
 
 //update list setelah create atau remove, methods: add, remove
-export const updateList = (method,items) =>({
+export const updateList = (method,items,index) =>({
     type:customListUsersRoutine.UPDATELIST,
     method,
-    items
+    items,
+    index
 })

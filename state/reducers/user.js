@@ -180,16 +180,13 @@ export const listUsers = (state={list:[],...initialState},action) => {
 
         case customListUsersRoutine.UPDATELIST : {
 
-            const {method,items}  = action
+            const {method,items,index}  = action
             
             if(method==="add") state.list.items.unshift(items)
             else if(method==="remove"){
-                items.forEach(item=>{
-                    const index = state.list.items.findIndex((itemList) => itemList.id === item.id)
-                    state.list.items.splice(index,1)
-                })
+                //hapus items dari index sepanjang items.length
+                state.list.items.splice(index,items.length)
             }
-
             return Object.assign({},state,{
                 isRequesting:false,
                 isSuccessFull:true,

@@ -32,7 +32,7 @@ export default class Controller{
         const requestFrom = typeof from !== "undefined" ? from : 0
         const requestSize = typeof size !== "undefined" ? size : 50
     
-        this.dispatch(listAccounts({orderBy,direction,from:requestFrom,size:requestSize}))
+        this.props.listAccountsRoutinePromise({orderBy,direction,from:requestFrom,size:requestSize})
         
     }
 
@@ -59,8 +59,8 @@ export default class Controller{
         return this.props.getAccountByUniqueUrlRoutinePromise({url})
     }
 
-    _updateList = (method,items)=>{
-        return this.dispatch(updateList(method,items))
+    _updateList = (method,items,index)=>{
+        return this.dispatch(updateList(method,items,index))
         
     }
 

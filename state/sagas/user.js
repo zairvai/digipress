@@ -66,6 +66,8 @@ function* getUser(action){
         
         const response = yield call([API,"graphql"],graphqlOperation(queries.getUser,{input:{id}}))
 
+        if(!response.data.getUser) yield put(getUserRoutine.failure({error:{code:404,message:"not found"}}))
+
         yield put(getUserRoutine.success({data:response.data.getUser}))
                     
     }catch(error){

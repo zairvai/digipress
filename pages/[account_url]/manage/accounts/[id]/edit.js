@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import FormAccount from 'Components/FormAccount'
 import Layout from 'Templates/Layout.account.id'
+import { Row, Col} from 'antd'
 import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -28,12 +29,20 @@ const PageAccountEdit = props => {
         router.push(`/${auth.account.uniqueURL}/manage/accounts/${account.id}`)	
     }
 
+    const onCancel = () => {
+        router.push(`/${auth.account.uniqueURL}/manage/accounts/${id}`)
+    }
+
     const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
 
     return (
         <AppContainer>
             <Layout item={item} links={links}>
-                <FormAccount item={item} onSuccess={onSuccess}/>
+                <Row>
+                    <Col md={14} sm={24} xs={24}>
+                        <FormAccount item={item} onSuccess={onSuccess} onCancel={onCancel}/>
+                    </Col>
+                </Row>
             </Layout>
         </AppContainer>
     );

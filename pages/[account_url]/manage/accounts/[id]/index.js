@@ -6,18 +6,18 @@ import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
 
-import {Status} from 'Components/mycomponents.js'
 import Layout from 'Templates/Layout.account.id'
+import ListUsers from 'Components/ListUsers'
 import AppContainer from 'Templates/AppContainer'
+import AuthController from 'Library/controllers/AuthController'
 import AccountController from 'Library/controllers/AccountController'
+import UserController from 'Library/controllers/UserController'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { deleteAccountRoutinePromise,getAccountRoutinePromise} from 'State/routines/account';
+import { deleteAccountRoutinePromise,getAccountRoutinePromise } from 'State/routines/account';
+import { listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
 
 
 const {Text} = Typography
@@ -26,25 +26,51 @@ const {confirm} = Modal
 const PageAccountId = props => {
 
     const accountController = new AccountController(props)
+    const userController = new UserController(props)
 
-    const {auth,router,deleteAccount,getAccount} = props
+    const [url,setUrl] = React.useState(window.location) 
 
-	const [item,setItem] = React.useState({})
+    const {auth,listUsers,router} = props
+
+    const [item,setItem] = React.useState({})
 
     const {id} = React.useMemo(()=>router.query,[])
 
-    let tableItemCounter = 1
-
     React.useEffect(async ()=>{
-        const account = await accountController._get(id)
-        setItem(account.data)
+       
+        try{
+            const account = await accountController._get(id)
+            setItem(account.data)
+
+        }catch(error){
+            router.push(`/${auth.account.uniqueURL}/manage/accounts`)
+            console.log(error)
+        }
+        
+    },[])
+
+    React.useEffect(async()=>{
+
+        try{
+
+            await userController._list({
+                accountId:id,
+                roles:getRoleListInputs(),
+                orderBy:"createdAt",
+                direction:"desc",from:0,size:20
+            })
+
+        }catch(error){
+            console.log(error)
+        }
+
     },[])
     
     const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
     
-    const showConfirm = item => {
+    const showDeleteConfirm = item => {
         confirm({
-          title: 'Apakah kamu ingin menghapus data ini ?',
+          title: 'Apakah kamu ingin menghapus akun ini ?',
           icon: <ExclamationCircleOutlined />,
           content: item.name,
           okText:"Ya",
@@ -52,8 +78,69 @@ const PageAccountId = props => {
           onOk() {
             accountController._delete(item.id)
                 .then(account=>{
-                    accountController._updateList("remove",[{id:account.data.id}]).then(success=>router.push(`/${auth.account.uniqueURL}/manage/accounts`)	)
+                    router.push(`/${auth.account.uniqueURL}/manage/accounts`)
+                    //accountController._updateList("remove",[{id:account.data.id}]).then(success=>router.push(`/${auth.account.uniqueURL}/manage/accounts`)	)
                 }).catch(error=>console.log(error))
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    }
+
+    const showOpenAccountDashboardConfirm = item => {
+        confirm({
+          title: 'Apakah kamu ingin melanjutkan ?',
+          icon: <ExclamationCircleOutlined />,
+          content: <Text>Saat membuka tautan dashboard akun lain, sesi login kamu pada akun saat ini akan terputus otomatis.</Text>,
+          okText:"Lanjutkan",
+          cancelText:"Tidak",
+          onOk() {
+            router.push(`${url.origin}/${item.uniqueURL}/auth/login`)
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    }
+
+    const getRoleListInputs = () =>{
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)){
+            return ["owner","admin","tutor","student","member"]
+        }
+
+        return []
+    }
+
+    const onDeleteUser = (user,index) => {
+        showRevokeAccessConfirm(user,item,index)
+    }
+
+    const showRevokeAccessConfirm = (item,account,index) => {
+
+        confirm({
+          title: `Apakah kamu ingin menghapus akses pengguna ini dari akun ${account.name} ?`,
+          icon: <ExclamationCircleOutlined />,
+          content: item.name,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+
+            let roles = item.roles.map((x)=>x)//copy array
+            const indexRole = roles.findIndex((role) => role.accountId === account.id)
+            roles.splice(indexRole,1)//remove from array
+
+            userController._update({
+                id:item.id,
+                version:item.version,
+                roles:roles})
+                .then(resp=>{
+                    userController._updateList("remove",[{id:item.id}],index)
+                })
+                .catch(error=>console.log(error))
+
+
           },
           onCancel() {
             console.log('Cancel');
@@ -80,14 +167,20 @@ const PageAccountId = props => {
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
                                             <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akun</a></Link></li>
-                                            <li className="p-0"><Button onClick={()=>showConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akun</Button></li>
+                                            <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akun</Button></li>
                                         </ul>
                                     </div>
                                 </Col>
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <Text>{item.address}</Text>
+                                    <Text>Dashboard : </Text> <Button onClick={()=>showOpenAccountDashboardConfirm(item)} type="link">{`${url.origin}/${item.uniqueURL}/auth/login`}</Button>
+                                </Col>
+                            </Row>
+
+                            <Row className="mt-3">
+                                <Col md={24}>
+                                    <Text>Alamat : {item.address}</Text>
                                 </Col>
                             </Row>
                             <Row className="mt-3">
@@ -117,39 +210,7 @@ const PageAccountId = props => {
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <VuroxTableDark>
-                                        <table className="table table-borderless">
-											<thead>
-												<tr>
-													<th width="20"></th>
-													<th>Pengguna</th>
-													<th width="30%">Email</th>
-													<th>Role</th>
-													<th className="fright">Status</th>
-												</tr>
-											</thead>
-											<tbody>
-												{
-													props.users.list.map(item=>(
-														<tr key={item.id}>
-															<td>{tableItemCounter++}</td>
-                                                            <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.firstname} {item.lastname}</a></Link></td>
-															<td valign="middle">{item.email}</td>
-															<td valign="middle">{item.role}</td>
-															<td valign="middle" className="fright">
-																{
-                                                                    item.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
-																	item.status===3 ? <Status text="Active" state="success" position="right"/> :
-                                                                    item.status===4 ? <Status text="Suspended" state="fail" position="right"/> :
-																	<></>
-																}
-															</td>
-														</tr>
-													))
-												}
-											</tbody>
-										</table>
-                                    </VuroxTableDark>
+                                    <ListUsers accountId={id} items={listUsers.list.items} onDelete={onDeleteUser}/>
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>
@@ -169,7 +230,9 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
             deleteAccountRoutinePromise,
-            getAccountRoutinePromise
+            getAccountRoutinePromise,
+            listUsersRoutinePromise,
+            updateUserRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageAccountId))

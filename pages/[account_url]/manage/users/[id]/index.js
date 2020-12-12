@@ -39,16 +39,18 @@ const PageUserId = props => {
 
     React.useEffect(async()=>{
         
-        const user = await userController._get(id)
-        
-        const index = user.data.roles.findIndex((role) => role.accountId === auth.account.id)
-        if(index==-1) router.push(`/${auth.account.uniqueURL}/manage/users/`)
+        try{
+            const user = await userController._get(id)
+            
+            const index = user.data.roles.findIndex((role) => role.accountId === auth.account.id)
+            if(index==-1) router.push(`/${auth.account.uniqueURL}/manage/users/`)
 
-        setItem(user.data)
-        console.log(user.data)
-
-
-        //console.log(getUser.item)
+            setItem(user.data)
+            console.log(user.data)
+            
+        }catch(error){
+            router.push(`/${auth.account.uniqueURL}/manage/users`)
+        }
 
         
     },[id])
@@ -57,9 +59,6 @@ const PageUserId = props => {
     const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,''],[item.name,`/${auth.account.uniqueURL}/manage/users/${item.id}`,'active']]
     
     const showRevokeAccess = ({item,account}) => {
-
-        
-                    // state.list.items.splice(index,1)
 
         confirm({
           title: `Apakah kamu ingin menghapus akses pengguna ini dari akun ${account.name} ?`,

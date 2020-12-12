@@ -27,7 +27,7 @@ export default class Controller{
         return this.props.listUsersRoutinePromise({values})
     }
 
-    _updateList = (method,items)=>{
-        this.dispatch(updateList(method,items))
+    _updateList = (method,items,index)=>{
+        this.dispatch(updateList(method,items,index))
     }
 }

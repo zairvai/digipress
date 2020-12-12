@@ -2,9 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import Link from 'next/link'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
+
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -18,15 +16,15 @@ import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Modal,Button, Tabs,Typography,Popover} from 'antd'
-import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
+import ListUsers from 'Components/ListUsers'
 import AppContainer from 'Templates/AppContainer'
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
-import Icon from '@mdi/react'
-import {mdiDotsVertical} from '@mdi/js'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { createUserRoutinePromise,listUsersRoutinePromise} from 'State/routines/user';
+import { createUserRoutinePromise,listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
+import AuthController from 'Library/controllers/AuthController';
 import UserController from 'Library/controllers/UserController';
 
 const PageListUser = props => {
@@ -35,13 +33,8 @@ const PageListUser = props => {
     
     const {auth,createUser,listUsers,router} = props
     
-    const [items,setItems] = React.useState([])
+    const {confirm} = Modal
 
-    console.log(items)
-
-    const {TabPane} = Tabs
-    
- 
     const pagename=""
 	const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,'active']]
 
@@ -50,30 +43,72 @@ const PageListUser = props => {
 
     const [addVisible,setAddVisible] = React.useState(false)
 
-    let tableItemCounter = 1
+    React.useEffect(async()=>{
 
-    React.useEffect(()=>{
+        try{
 
-        userController._list({
-            accountId:auth.account.id,
-            roles:["admin"],
-            orderBy:"createdAt",
-            direction:"desc",from:0,size:20
-        }).then(resp=>{
-            setItems(listUsers.list.items)
-            console.log(resp)
-        }).catch(error=>console.log(error))
-    
+            await userController._list({
+                accountId:auth.account.id,
+                roles:getRoleListInputs(),
+                orderBy:"createdAt",
+                direction:"desc",from:0,size:20
+            })
+
+        }catch(error){
+            console.log(error)
+        }
+
     },[])
 
-    const showForm = props =>{
-        setAddVisible(true)
+    const getRoleListInputs = () =>{
+
+        if(AuthController.isAppAdmin(auth)) return []// donot allow app admin to manage current account user
+
+        if(AuthController.isAppOwner(auth)){
+            return ["admin"]
+        }else if(AuthController.isOwner(auth)){
+            return ["admin","tutor","student","member"]
+        }
+        else if(AuthController.isAdmin(auth)){
+            return ["tutor","student","member"]
+        }
+
+        return []
     }
 
-    const onSuccessAdd = user =>{
-        console.log(user)
-        userController._updateList("add",[{item:user.data}])
-        setAddVisible(false)
+    const onDeleteItem = (item,index) => {
+        showRevokeAccessConfirm(item,auth.account,index)
+    }
+
+    const showRevokeAccessConfirm = (item,account,index) => {
+
+        confirm({
+          title: `Apakah kamu ingin menghapus akses pengguna ini dari akun ${account.name} ?`,
+          icon: <ExclamationCircleOutlined />,
+          content: item.name,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+
+            let roles = item.roles.map((x)=>x)//copy array
+            const indexRole = roles.findIndex((role) => role.accountId === account.id)
+            roles.splice(indexRole,1)//remove from array
+
+            userController._update({
+                id:item.id,
+                version:item.version,
+                roles:roles})
+                .then(resp=>{
+                    userController._updateList("remove",[{id:item.id}],index)
+                })
+                .catch(error=>console.log(error))
+
+
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
     }
 
     return (
@@ -106,7 +141,7 @@ const PageListUser = props => {
                                     <Col md={24}>
                                         <FormUser 
                                             accountId={auth.account.id}
-                                            onSuccess={onSuccessAdd}
+                                            //onSuccess={onSuccessAdd}
                                             onCancel={()=>setAddVisible(false)} 
                                             onOk={()=>setAddVisible(false)}/>
 
@@ -139,62 +174,7 @@ const PageListUser = props => {
                     <Row>
                         <Col md={24}>
                             <VuroxComponentsContainer>
-                                <VuroxTableDark>
-                                    <table className="table table-borderless">
-                                        <thead>
-                                            <tr>
-                                                <th width="20"></th>
-                                                <th width="30%">Pengguna</th>
-                                                <th width="25%">Email</th>
-                                                <th width="20%">Role</th>
-                                                <th className="fright">Status</th>
-                                                {/* <th className="fright"></th> */}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {   items ?
-                                                    items.map(item=>{
-                                                        
-                                                        let i=0,found=false, role={}
-                                                        for(i=0;i<item.roles.length;i++){
-                                                            if(item.roles[i].accountId===auth.account.id){
-                                                                found=true
-                                                                break
-                                                            }
-                                                        }
-
-                                                        if(found) role = item.roles[i]
-
-                                                        return(
-                                                            <tr key={item.id}>
-                                                                <td valign="middle">{tableItemCounter++}</td>
-                                                                <td valign="middle"><Link href={{pathname:`/[account_url]/manage/users/[id]`,query:{account_url:auth.account.uniqueURL,id:item.id}}} shallow><a>{item.name}</a></Link></td>
-                                                                <td valign="middle">{item.emailAddress}</td>
-                                                                <td valign="middle">{role.role}</td>
-                                                                <td valign="middle" className="fright">
-                                                                    {
-                                                                        role.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
-                                                                        role.status===3 ? <Status text="Active" state="success" position="right"/> :
-                                                                        role.status===4 ? <Status text="Suspended" state="fail" position="right"/> :
-                                                                        <></>
-                                                                    }
-                                                                </td>
-                                                                {/* <td className="fright">
-																	<Popover placement="left" content={menuContent} trigger="click">
-																		<Button type="link" icon={<Icon size="1.3em" path={mdiDotsVertical} />}/>
-																	</Popover>
-																</td> */}
-                                                            </tr>
-                                                        )
-                                                    })
-                                                    :
-                                                    <></>
-                                            }
-                                        </tbody>
-                                    </table>
-                                    
-                                </VuroxTableDark>
-                                
+                                <ListUsers accountId={auth.account.id} items={listUsers.list.items} onDelete={onDeleteItem}/>
                             </VuroxComponentsContainer>	
                         </Col>
                     </Row>
@@ -209,7 +189,8 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
             createUserRoutinePromise,
-            listUsersRoutinePromise
+            listUsersRoutinePromise,
+            updateUserRoutinePromise
         },dispatch),dispatch
     })
 )(PageListUser)

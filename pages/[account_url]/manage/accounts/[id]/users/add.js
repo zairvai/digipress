@@ -19,6 +19,7 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import { getAccountRoutinePromise} from 'State/routines/account';
 import AuthController from 'Library/controllers/AuthController';
 import AccountController from 'Library/controllers/AccountController'
+import UserController from 'Library/controllers/UserController'
 import AppContainer from 'Templates/AppContainer'
 
 const PageUserAdd = props => {
@@ -28,7 +29,8 @@ const PageUserAdd = props => {
     const {id} = React.useMemo(()=>router.query,[])
 
     const accountController = new AccountController(props)
-
+    const userController= new UserController(props)
+    
     const pagename=""
 	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],['Add new user',`/${auth.account.uniqueURL}/manage/accounts/${item.id}/users/add`,'active']]
     
@@ -62,6 +64,7 @@ const PageUserAdd = props => {
         router.push(`/${auth.account.uniqueURL}/manage/accounts/${item.id}`)
     }
     const onSuccess = user =>{	
+        userController._updateList("add",user,0)
         router.push(`/${auth.account.uniqueURL}/manage/accounts/${item.id}`)	
     }
 

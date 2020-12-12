@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Row, Col,Form,Input,InputNumber,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
+import { Row, Col,Form,Input,InputNumber,Button, Checkbox,Dropdown,Menu,Select,Space,Divider,Typography} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
@@ -105,7 +105,7 @@ const FormAccount = ({item,...props}) => {
             onFinish={handleSubmit(onSubmit,onError)}
         >
             <Row>
-                <Col md={14}>
+                <Col md={24}>
                     <VuroxComponentsContainer className="p-4">
                         <Row>
                             <Col md={16} sm={24} xs={24}>
@@ -233,18 +233,23 @@ const FormAccount = ({item,...props}) => {
                             </Col>
 
                         </Row>
-                        
-                        <Row>
-                            <Col md={3} sm={24} xs={24}>
-                                <Button tabIndex="6" className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
-                            </Col>
-                            <Col md={3} sm={24} xs={24}>
-                                <Link tabIndex="7" href={item ? `/${auth.account.uniqueURL}/manage/accounts/${item.id}` : `/${auth.account.uniqueURL}/manage/accounts`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
-                            </Col>
-                        </Row>
-                        
 
-                    </VuroxComponentsContainer>
+                        </VuroxComponentsContainer>
+                        
+                        <Divider className="m-0" />
+
+                        <VuroxComponentsContainer className="px-4 py-3">
+                            <Row className="justify-content-end">
+                                <Col md={6} sm={8} xs={12}  >
+                                    <Button tabIndex="7"  onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                </Col>
+                                <Col md={6} sm={8} xs={12} className="fright">
+                                    <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>
+                                </Col>
+                            </Row>
+
+                        </VuroxComponentsContainer>
+                        
                 </Col>
             </Row>
         </Form>

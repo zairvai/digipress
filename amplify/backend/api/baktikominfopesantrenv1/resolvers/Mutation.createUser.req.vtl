@@ -15,8 +15,9 @@ $util.qr($ctx.stash.put("user",{
     "password":$ctx.args.input.password
 } )
 
+
 #if(!$util.isNull($ctx.args.input.role))
-    $util.qr($ctx.stash.put("role",$util.isNull($ctx.args.input.role)))
+    $util.qr($ctx.stash.put("role",$ctx.args.input.role))
 #end
 
 $util.qr($ctx.stash.put("field","createUser"))

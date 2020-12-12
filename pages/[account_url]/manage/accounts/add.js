@@ -8,7 +8,7 @@ import {
 	ContentLayout
 } from 'Components/layout'
 import { vuroxContext } from 'Context'
-import { appContext } from 'Context/app'
+import { Row, Col} from 'antd'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
@@ -18,40 +18,25 @@ import AccountController from 'Library/controllers/AccountController'
 
 const PageAccountAdd = props => {
 
-    const accountController = new AccountController(props)
-    
-    const { baseUrl } = React.useContext(appContext)
+    const {auth,router} = props
 
-    const {router,createAccount} = props
+    const accountController= new AccountController(props)
 
     const pagename=""
 	
-    const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,''],['Add new account',`${baseUrl}/manage/accounts/add`,'active']]
+    const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],['Add new account',`/${auth.account.uniqueURL}/manage/accounts/add`,'active']]
     
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-    
-    // React.useEffect(()=>{
 
-	// 	if(createAccount.isSuccessFull){
-
-    //         const item = createAccount.item
-            
-    //         accountController._updateList("add",[item]).then(success=>{
-    //             console.log(success)
-    //             router.push(`/manage/accounts/${item.id}`)	
-    //         }).catch(error=>console.log(error))
-			
-    //     }		
-        
-    //     return(()=>{
-    //         accountController._createInit()
-    //     })
-        
-    // },[createAccount.isSuccessFull])
     
     const onSuccess = account =>{
-        router.push(`${baseUrl}/manage/accounts/${account.id}`)	
+        accountController._updateList("add",account,0)
+        router.push(`/${auth.account.uniqueURL}/manage/accounts/${account.id}`)	
+    }
+
+    const onCancel = () =>{
+        router.push(`/${auth.account.uniqueURL}/manage/accounts`)
     }
 
     return (
@@ -65,7 +50,11 @@ const PageAccountAdd = props => {
                 </VuroxSidebar>
                 <ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                     <Summery2 pagename={pagename} links={links}/>
-                    <FormAccount onSuccess={onSuccess}/>
+                    <Row>
+                        <Col md={14} sm={24} xs={24}>
+                            <FormAccount onSuccess={onSuccess} onCancel={onCancel}/>
+                        </Col>
+                    </Row>
                 </ContentLayout>
             </VuroxLayout>
         </AppContainer>

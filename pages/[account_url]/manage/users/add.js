@@ -64,6 +64,7 @@ const PageUserAdd = props => {
     }
     
     const onSuccess = user =>{
+        userController._updateList("add",user,0)
         router.push(`/${auth.account.uniqueURL}/manage/users`)	
     }
 
@@ -79,7 +80,7 @@ const PageUserAdd = props => {
                 <ContentLayout width='100%' className='p-3 vurox-scroll-y'>
                     <Summery2 pagename={pagename} links={links}/>
                     <Row>
-                        <Col md={14}>
+                        <Col md={14} sm={24} xs={24}>
                             <FormUser accountId={auth.account.id} roleInputs={getRoleInputs()} onSuccess={onSuccess} onCancel={onCancel}/>
                         </Col>
                     </Row>

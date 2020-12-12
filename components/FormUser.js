@@ -72,8 +72,6 @@ const FormUser = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
-        
-        console.log(values)
 
         userController._create(values)
             .then(user=>props.onSuccess(user.data))

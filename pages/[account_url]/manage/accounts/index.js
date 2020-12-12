@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import Link from 'next/link'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -13,17 +11,18 @@ import {
 } from 'Components/layout'
 import VuroxFormSearch from 'Components/search'
 import { vuroxContext } from 'Context'
-import { appContext } from 'Context/app'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Popover} from 'antd'
-import {Status} from 'Components/mycomponents.js'
 import { Search} from 'react-bootstrap-icons'
-import { DownOutlined } from '@ant-design/icons';
+import ListAccounts from 'Components/ListAccounts'
 import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
-import Icon from '@mdi/react'
+
+
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { listAccountsRoutinePromise } from 'State/routines/account';
 
 const PageAccounts = props => {
 
@@ -34,24 +33,12 @@ const PageAccounts = props => {
 
 	const accountController = new AccountController(props)
 
-	let tableItemCounter = 1
-	
-	React.useEffect(()=>{
-		accountController._list({orderBy:"createdAt",direction:"asc",from:0,size:50})
+	React.useEffect(async ()=>{
+		await accountController._list({
+			orderBy:"createdAt",
+			direction:"asc",
+			from:0,size:50})
 	},[])
-
-	React.useEffect(()=>{
-		if(listAccounts.isSuccessFull){
-			
-			setItems(listAccounts.list.items)
-			setFoundItem(listAccounts.list.foundDocs)
-
-			console.log("loading complete")
-		}else{
-			console.log("still loading")
-		}
-		
-	},[listAccounts.isSuccessFull,listAccounts.list])
 
     const pagename=""
 	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,'active']]
@@ -100,57 +87,7 @@ const PageAccounts = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<VuroxTableDark>
-									<table className="table table-borderless">
-										<thead>
-											<tr>
-												{/* <th width="20"><Checkbox/></th> */}
-												<th width="20"></th>
-												<th>Akun</th>
-												<th width="30%">Alamat</th>
-												<th width="15%">Telpon</th>
-												<th width="20%">Contact Person</th>
-												<th className="fright">Status</th>
-												{/* <th className="fright"></th> */}
-											</tr>
-										</thead>
-										<tbody>
-											{
-												items.map(item=>{
-
-													if(item){
-
-														return(
-															<tr key={item.id}>
-																{/* <td><Checkbox/></td> */}
-																<td valign="middle">{tableItemCounter++}</td>
-																<td valign="middle"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]`,query:{id:item.id}}} shallow><a>{item.name}</a></Link></td>
-																<td valign="middle">{item.address}</td>
-																<td valign="middle">{item.phoneNumber}</td>
-																<td valign="middle">{item.contactPerson}</td>
-																<td valign="middle" className="fright">
-																	{
-																		item.status===3 ? <Status text="Active" state="success" position="right"/> :
-																		item.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
-																		<></>
-																	}
-																</td>
-																{/* <td>
-																	<Popover placement="left" title={text} content={menuContent} trigger="click">
-																		<Button type="link" icon={<Icon size="1.3em" path={mdiDotsVertical} />}/>
-																	</Popover>
-																</td> */}
-															</tr>
-														)
-													}
-												})
-												
-											}
-										</tbody>
-									</table>
-									
-								</VuroxTableDark>
-								
+								<ListAccounts items={listAccounts.list.items} foundDoc={listAccounts.list.foundDocs}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -161,4 +98,13 @@ const PageAccounts = props => {
 	);
 	
 }
-export default connect(state=>state)(PageAccounts)
+
+
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            listAccountsRoutinePromise
+        },dispatch),dispatch
+    })
+)(withRouter(PageAccounts))

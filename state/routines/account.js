@@ -23,6 +23,7 @@ export const updateAccountRoutinePromise = promisifyRoutine(updateAccountRoutine
 customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
 export const customListAccountsRoutine = customRoutine("list_account_custom")
 export const listAccountsRoutine = createRoutine("list_accounts")
+export const listAccountsRoutinePromise = promisifyRoutine(listAccountsRoutine)
 
 //get account
 customRoutine = createRoutineCreator(["INIT"])

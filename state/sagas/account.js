@@ -86,6 +86,8 @@ function* getAccount(action){
         const {id} = action.payload
         
         const response = yield API.graphql(graphqlOperation(queries.getAccount,{input:{id}}))
+        
+        if(!response.data.getAccount) yield put(getAccountRoutine.failure({error:{code:404,message:"not found"}}))
 
         yield put(getAccountRoutine.success({data:response.data.getAccount}))
                     

@@ -56,21 +56,11 @@ export const getAccountByUniqueUrl = payload => ({
     payload
 })
 
-//update list setelah create atau remove, methods: add, remove
-export const updateList = (method,items) => {
-    
-    return (dispatch,getState)=>{
-        
-        dispatch({
-            type:customListAccountsRoutine.UPDATELIST,
-            method,
-            items
-        })
 
-        return new Promise((resolve,reject)=>{
-            if(getState().listAccounts.isSuccessFull) resolve(true)
-            if(getState().listAccounts.isError) reject(getState().listAccounts.error)
-        })
-    }
-    
-}
+//update list setelah create atau remove, methods: add, remove
+export const updateList = (method,items,index) =>({
+    type:customListAccountsRoutine.UPDATELIST,
+    method,
+    items,
+    index
+})

@@ -33,9 +33,7 @@ export const signIn = (state=initialState,action) => {
                 userNotFound:false,
                 userNotConfirmed:false,
                 newPasswordRequired:false,
-                isLoggedIn:false,
-                noAccessToAccount:false,
-                data:false
+                noAccessToAccount:false
             })
 
         }
