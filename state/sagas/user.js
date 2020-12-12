@@ -84,11 +84,11 @@ function* listUsers(action){
 
     try{
         
-        const {accountId,role,orderBy,direction,from,size} = action.payload.values
+        const {accountId,roles,orderBy,direction,from,size} = action.payload.values
 
         yield put(listUsersRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listUsers,{input:{accountId,role,orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listUsers,{input:{accountId,roles,orderBy,direction,from,size}}))
 
         yield put(listUsersRoutine.success({data:response.data.listUsers}))
 

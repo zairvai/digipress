@@ -56,7 +56,7 @@ const PageListUser = props => {
 
         userController._list({
             accountId:auth.account.id,
-            role:"Admin",
+            roles:["admin"],
             orderBy:"createdAt",
             direction:"desc",from:0,size:20
         }).then(resp=>{
@@ -75,19 +75,6 @@ const PageListUser = props => {
         userController._updateList("add",[{item:user.data}])
         setAddVisible(false)
     }
-
-
-    const menuContent = props =>{
-
-		console.log(props)
-
-		return(
-			<div>
-				<p>Content</p>
-				<p>Content</p>
-			</div>
-		)
-	}
 
     return (
         <AppContainer>

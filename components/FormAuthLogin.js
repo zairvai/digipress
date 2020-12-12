@@ -26,6 +26,8 @@ const FormAuth = props => {
 
     const authController = new AuthController(props)
 
+    const {auth,router} = props
+
     const {
         handleSubmit,
         reset,
@@ -59,10 +61,10 @@ const FormAuth = props => {
 
         let message = ""
 
-        if(props.auth.isError){
-            if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar"        
-            else if(props.auth.error.code==="NotAuthorizedException") message = "Email atau password yang kamu masukan tidak sesuai"
-
+        if(auth.isError){
+            if(auth.userNotFound) message="Email yang kamu gunakan belum terdaftar"        
+            else if(auth.error.code==="NotAuthorizedException") message = "Email atau password yang kamu masukan tidak sesuai"
+            if(auth.noAccessToAccount) message="Kamu tidak memiliki akses ke akun ini"        
             return (
                 <Row>
                     <Col md={24} xs={24}>

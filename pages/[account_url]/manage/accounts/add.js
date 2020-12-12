@@ -26,7 +26,7 @@ const PageAccountAdd = props => {
 
     const pagename=""
 	
-    const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,'active'],['Add new',`${baseUrl}/manage/accounts/add`,'active']]
+    const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,''],['Add new account',`${baseUrl}/manage/accounts/add`,'active']]
     
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'

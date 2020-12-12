@@ -8,6 +8,8 @@ will be passed as the event to AWS Lambda.
 #set($orderBy=$util.defaultIfNull($ctx.args.input.orderBy,"createdAt"))
 #set($direction=$util.defaultIfNull($ctx.args.input.direction, "asc"))
 
+#set($roles=$util.defaultIfNull($ctx.args.input.roles, []))
+
 #set($accountId=$ctx.args.input.accountId)
 
 #set($sort=[
@@ -27,7 +29,12 @@ will be passed as the event to AWS Lambda.
             "query": {
               "bool": {
                 "must": [
-                  {"match":{"roles.accountId": $accountId}}
+                  {"match":{"roles.accountId": $accountId}},
+                  {
+                    "terms": {
+                      "roles.role": $roles
+                    }
+                  }
                 ]
               }
             }

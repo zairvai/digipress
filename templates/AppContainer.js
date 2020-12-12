@@ -20,7 +20,7 @@ const Container = props => {
 
         try{
             await authController._get()
-            if(!auth.user.access) shouldSignOut = true
+            //if(!auth.user.access) shouldSignOut = true
                 
         }catch(error){
             shouldSignOut = true

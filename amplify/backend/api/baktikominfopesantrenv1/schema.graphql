@@ -69,7 +69,7 @@ input GetItemInput {
 
 input ListItemInput {
 	accountId: ID
-	role: UserRole
+	roles: [UserRole]
 	orderBy: String
 	direction: String
 	from: Int
@@ -144,9 +144,9 @@ type UserConnection {
 }
 
 enum UserRole {
-	Owner
-	Admin
-	Tutor
-	Student
-	Member
+	owner
+	admin
+	tutor
+	student
+	member
 }

@@ -3,7 +3,7 @@ import {
 } from 'redux-saga-routines'
 
 //signin
-var customRoutine = createRoutineCreator(["INIT","USERNOTCONFIRMED","USERNOTFOUND","NEWPASSWORDREQUIRED"])
+var customRoutine = createRoutineCreator(["INIT","USERNOTCONFIRMED","USERNOTFOUND","NEWPASSWORDREQUIRED","NOACCESSTOACCOUNT"])
 export const customSignInRoutine = customRoutine("signin_custom")
 export const signInRoutine = createRoutine("signin")
 export const signInRoutinePromise = promisifyRoutine(signInRoutine)

@@ -15,7 +15,8 @@ const initialState = {
     isError:false,
     data:false,
     user:false,
-    account:false
+    account:false,
+    noAccessToAccount:false
 }
 
 //signin
@@ -33,6 +34,7 @@ export const signIn = (state=initialState,action) => {
                 userNotConfirmed:false,
                 newPasswordRequired:false,
                 isLoggedIn:false,
+                noAccessToAccount:false,
                 data:false
             })
 
@@ -48,6 +50,7 @@ export const signIn = (state=initialState,action) => {
                 userNotConfirmed:false,
                 newPasswordRequired:false,
                 isLoggedIn:false,
+                noAccessToAccount:false,
                 data:false
             })
 
@@ -64,6 +67,18 @@ export const signIn = (state=initialState,action) => {
                 newPasswordRequired:true,
                 isLoggedIn:false,
                 data
+            })
+
+        }
+
+        case customSignInRoutine.NOACCESSTOACCOUNT : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:true,
+                error:false,
+                isLoggedIn:false,
+                noAccessToAccount:true
             })
 
         }
@@ -92,6 +107,7 @@ export const signIn = (state=initialState,action) => {
                 newPasswordRequired:false,
                 isLoggedIn:true,
                 data:false,
+                noAccessToAccount:false,
                 user
             })     
 

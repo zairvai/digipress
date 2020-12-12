@@ -9,7 +9,6 @@ import {
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-import { appContext } from 'Context/app'
 
 import {Status} from 'Components/mycomponents.js'
 import Layout from 'Templates/Layout.account.id'
@@ -18,7 +17,7 @@ import AccountController from 'Library/controllers/AccountController'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { deleteAccountRoutinePromise } from 'State/routines/account';
+import { deleteAccountRoutinePromise,getAccountRoutinePromise} from 'State/routines/account';
 
 
 const {Text} = Typography
@@ -26,46 +25,22 @@ const {confirm} = Modal
 
 const PageAccountId = props => {
 
-    const { baseUrl } = React.useContext(appContext)
-
     const accountController = new AccountController(props)
 
-    const {router,deleteAccount,getAccount} = props
+    const {auth,router,deleteAccount,getAccount} = props
 
 	const [item,setItem] = React.useState({})
 
-    const {id} = router.query
+    const {id} = React.useMemo(()=>router.query,[])
 
+    let tableItemCounter = 1
 
-    React.useEffect(()=>{
-        accountController._get(id)
+    React.useEffect(async ()=>{
+        const account = await accountController._get(id)
+        setItem(account.data)
     },[])
-
-    React.useEffect(()=>{
-
-		if(getAccount.isSuccessFull){
-			setItem(getAccount.item)
-		}
-	
-    },[getAccount.isSuccessFull])
-
-
-    // React.useEffect(()=>{
-
-	// 	if(deleteAccount.isSuccessFull){
-    //         accountController._updateList("remove",[{id}]).then(success=>{
-    //             console.log(success)
-    //             router.push(`/manage/accounts`)	
-    //         }).catch(error=>console.log(error))
-    //     }		
-        
-    //     return(()=>{
-    //         accountController._deleteInit()
-    //     })
-        
-    // },[deleteAccount.isSuccessFull])
     
-    const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,''],[item.name,`${baseUrl}/manage/accounts/${item.id}`,'active']]
+    const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
     
     const showConfirm = item => {
         confirm({
@@ -77,7 +52,7 @@ const PageAccountId = props => {
           onOk() {
             accountController._delete(item.id)
                 .then(account=>{
-                    accountController._updateList("remove",[{id:account.data.id}]).then(success=>router.push(`${baseUrl}/manage/accounts`)	)
+                    accountController._updateList("remove",[{id:account.data.id}]).then(success=>router.push(`/${auth.account.uniqueURL}/manage/accounts`)	)
                 }).catch(error=>console.log(error))
           },
           onCancel() {
@@ -104,7 +79,7 @@ const PageAccountId = props => {
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0 mr-3"><Link href={{pathname:`${baseUrl}/manage/accounts/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akun</a></Link></li>
+                                            <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akun</a></Link></li>
                                             <li className="p-0"><Button onClick={()=>showConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akun</Button></li>
                                         </ul>
                                     </div>
@@ -135,7 +110,7 @@ const PageAccountId = props => {
                                 <Col md={12}>
                                     <div className="fright ml-3">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:'/manage/accounts/[id]/user/add',query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
+                                            <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/[id]/users/add`,query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
                                         </ul>
                                     </div>
                                 </Col>
@@ -146,7 +121,7 @@ const PageAccountId = props => {
                                         <table className="table table-borderless">
 											<thead>
 												<tr>
-													<th width="20"><Checkbox/></th>
+													<th width="20"></th>
 													<th>Pengguna</th>
 													<th width="30%">Email</th>
 													<th>Role</th>
@@ -157,7 +132,7 @@ const PageAccountId = props => {
 												{
 													props.users.list.map(item=>(
 														<tr key={item.id}>
-															<td><Checkbox/></td>
+															<td>{tableItemCounter++}</td>
                                                             <td valign="middle"><Link href={{pathname:'/app/users/[id]',query:{id:item.id}}} shallow><a>{item.firstname} {item.lastname}</a></Link></td>
 															<td valign="middle">{item.email}</td>
 															<td valign="middle">{item.role}</td>
@@ -193,7 +168,8 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            deleteAccountRoutinePromise
+            deleteAccountRoutinePromise,
+            getAccountRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageAccountId))

@@ -37,7 +37,7 @@ export default class Controller{
     }
 
     _get = (id) =>{
-        this.dispatch(getAccount({id}))
+        return this.props.getAccountRoutinePromise({id})
     }
 
     _getInit = () => {

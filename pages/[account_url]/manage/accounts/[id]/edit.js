@@ -5,34 +5,30 @@ import FormAccount from 'Components/FormAccount'
 import Layout from 'Templates/Layout.account.id'
 import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
-import { appContext } from 'Context/app'
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { getAccountRoutinePromise} from 'State/routines/account';
 
 const PageAccountEdit = props => {
     
     const accountController = new AccountController(props)
 
-    const {router,getAccount,updateAccount} = props
-
-    const { baseUrl } = React.useContext(appContext)
+    const {auth,router} = props
 
 	const [item,setItem] = React.useState({})
 
-    const {id} = router.query
+    const {id} = React.useMemo(()=>router.query,[])
 
-    React.useEffect(()=>{
-        accountController._get(id)
+    React.useEffect(async ()=>{
+        const account = await accountController._get(id)
+        setItem(account.data)
     },[])
-    
-    React.useEffect(()=>{
-		if(getAccount.isSuccessFull) setItem(getAccount.item)
-    },[getAccount.isSuccessFull])
 
 
     const onSuccess = account =>{
-        router.push(`${baseUrl}/manage/accounts/${account.id}`)	
+        router.push(`/${auth.account.uniqueURL}/manage/accounts/${account.id}`)	
     }
 
-    const links = [['Manage',`${baseUrl}/manage/accounts`,''],['Accounts',`${baseUrl}/manage/accounts`,''],[item.name,`${baseUrl}/manage/accounts/${item.id}`,''],["Edit",`${baseUrl}/manage/accounts/${item.id}`,'active']]
+    const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
 
     return (
         <AppContainer>
@@ -43,4 +39,12 @@ const PageAccountEdit = props => {
     );
 	
 }
-export default connect(state=>state)(withRouter(PageAccountEdit))
+
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            getAccountRoutinePromise
+        },dispatch),dispatch
+    })
+)(withRouter(PageAccountEdit))

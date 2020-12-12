@@ -16,41 +16,40 @@ import Sidebar from 'Templates/HeaderSidebar';
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { createUserRoutinePromise} from 'State/routines/user';
+import { getAccountRoutinePromise} from 'State/routines/account';
 import AuthController from 'Library/controllers/AuthController';
-import UserController from 'Library/controllers/UserController';
+import AccountController from 'Library/controllers/AccountController'
 import AppContainer from 'Templates/AppContainer'
 
 const PageUserAdd = props => {
 
-    const userController = new UserController(props)
+    const {auth,router} = props
+    const [item,setItem] = React.useState({})
+    const {id} = React.useMemo(()=>router.query,[])
 
-    const {auth,router,createUser} = props
+    const accountController = new AccountController(props)
 
     const pagename=""
-	
-    const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,''],['Add new user',`/${auth.account.uniqueURL}/manage/users/add`,'active']]
+	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],['Add new user',`/${auth.account.uniqueURL}/manage/accounts/${item.id}/users/add`,'active']]
     
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-    
+
+
+    React.useEffect(async()=>{
+
+        const account = await accountController._get(id)
+        setItem(account.data)
+
+
+    },[id])
+
     const getRoleInputs = () =>{
 
-        if(AuthController.isAppAdmin(auth)) return []// donot allow app admin to manage current account user
-
-        if(AuthController.isAppOwner(auth)){
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)){
             return [
-                {value:"admin",name:"Admin"}
-            ]
-        }else if(AuthController.isOwner(auth)){
-            return [
+                {value:"owner",name:"Owner"},
                 {value:"admin",name:"Admin"},
-                {value:"tutor",name:"Tutor"},
-                {value:"student",name:"Student"}
-            ]
-        }
-        else if(AuthController.isAdmin(auth)){
-            return [
                 {value:"tutor",name:"Tutor"},
                 {value:"student",name:"Student"}
             ]
@@ -60,11 +59,10 @@ const PageUserAdd = props => {
     }
 
     const onCancel = () => {
-        router.push(`/${auth.account.uniqueURL}/manage/users`)	
+        router.push(`/${auth.account.uniqueURL}/manage/accounts/${item.id}`)
     }
-    
-    const onSuccess = user =>{
-        router.push(`/${auth.account.uniqueURL}/manage/users`)	
+    const onSuccess = user =>{	
+        router.push(`/${auth.account.uniqueURL}/manage/accounts/${item.id}`)	
     }
 
     return (
@@ -80,7 +78,7 @@ const PageUserAdd = props => {
                     <Summery2 pagename={pagename} links={links}/>
                     <Row>
                         <Col md={14}>
-                            <FormUser accountId={auth.account.id} roleInputs={getRoleInputs()} onSuccess={onSuccess} onCancel={onCancel}/>
+                            <FormUser accountId={item.id} onSuccess={onSuccess} onCancel={onCancel} roleInputs={getRoleInputs()}/>
                         </Col>
                     </Row>
                 </ContentLayout>
@@ -93,7 +91,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            createUserRoutinePromise
+            getAccountRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageUserAdd))

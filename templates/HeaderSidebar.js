@@ -45,7 +45,7 @@ const Sidebar = (props) => {
 				}
 
 				{
-					AuthController.isOwner(auth) ? 
+					!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
 					<>
 						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
 					</>

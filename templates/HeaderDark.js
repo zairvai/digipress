@@ -42,7 +42,7 @@ const HeaderDark = props => {
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
 							<h5 className="vurox-text-sizes mb-0">{auth.account.name}</h5>
-							<h6 className="mt-2">{auth.user.access.role}</h6>
+							<h6 className="mt-2">{auth.user.access ? auth.user.access.role : ""}</h6>
 						</Space>
 					</Col>
 				

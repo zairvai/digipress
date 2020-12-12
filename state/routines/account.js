@@ -28,6 +28,7 @@ export const listAccountsRoutine = createRoutine("list_accounts")
 customRoutine = createRoutineCreator(["INIT"])
 export const customGetAccountRoutine = customRoutine("get_account_custom")
 export const getAccountRoutine = createRoutine("get_account")
+export const getAccountRoutinePromise = promisifyRoutine(getAccountRoutine)
 
 
 customRoutine = createRoutineCreator(["INIT"])

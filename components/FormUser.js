@@ -28,7 +28,9 @@ const schema = yup.object().shape({
 
 const FormUser = ({item,...props}) => {
 
-    const {auth} = props
+    const {auth,roleInputs} = props
+
+    console.log(roleInputs)
 
     const userController = new UserController(props)
 
@@ -42,7 +44,7 @@ const FormUser = ({item,...props}) => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
-                role:"Admin",
+                role:"",
                 name:"",
                 phoneCode:"+62",
                 phoneNumber:"",
@@ -104,8 +106,10 @@ const FormUser = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Role">
-                                            <Select size="large" style={{ width: "100%" }} value={props.value} onChange={props.onChange}>
-                                                <Select.Option value="Admin">Admin</Select.Option>
+                                            <Select size="large" style={{ width: "100%" }} value={props.value} onChange={props.onChange} placeholder="...">
+                                                {
+                                                    roleInputs.map(input=><Select.Option key={input.value} value={input.value}>{input.name}</Select.Option>)
+                                                }
                                             </Select>
                                         </Form.Item>
                                     }
@@ -241,8 +245,7 @@ const FormUser = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                {/* <Button tabIndex="7"  onClick={onCancel} danger type="link" block>Batal</Button> */}
-                                <Link tabIndex="7" href={item ? `/${auth.account.uniqueURL}/manage/users/${item.id}` : `/${auth.account.uniqueURL}/manage/users`} shallow><Button size="large" danger type="link" className="ml-0 ml-md-3 mt-3 mt-md-0" block>Batal</Button></Link>
+                                <Button tabIndex="7"  onClick={props.onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
                                 <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>
