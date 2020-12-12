@@ -18,6 +18,8 @@ const Container = props => {
 
         let shouldSignOut = false
 
+        if(auth.account.uniqueURL != router.query.account_url) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+
         try{
             await authController._get()
             //if(!auth.user.access) shouldSignOut = true
