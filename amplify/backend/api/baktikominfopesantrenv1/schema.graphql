@@ -55,8 +55,8 @@ input CreateUserInput {
 	phoneNumber: String!
 	emailAddress: AWSEmail!
 	password: String
-	accountId: ID!
-	role: UserRole!
+	role:AccessInputType!
+
 }
 
 input DeleteItemInput {

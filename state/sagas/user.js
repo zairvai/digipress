@@ -24,8 +24,10 @@ function* createUser(action){
         const phoneCode = values.phoneCode.trim()
         const phoneNumber =  values.phoneNumber.trim()
         const password = values.password.trim()
-        const accountId = values.accountId.trim()
-        const role = values.role.trim()
+        const role = {
+            accountId:values.accountId.trim(),
+            role:values.role.trim()
+        }
 
         const response = yield API.graphql(graphqlOperation(mutations.createUser,{
             input:{
@@ -34,7 +36,6 @@ function* createUser(action){
                 phoneNumber,
                 emailAddress,
                 password,
-                accountId,
                 role
             }}))
 

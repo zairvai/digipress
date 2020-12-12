@@ -10,8 +10,8 @@
 #end
 #set( $roles = [
 	{
-    	"accountId":$ctx.stash.access.accountId,
-        "role":$ctx.stash.access.role,
+    	"accountId":$ctx.stash.role.accountId,
+        "role":$ctx.stash.role.role,
         "status":3,
         "createdBy":$ctx.identity.sub,
         "updatedBy":$ctx.identity.sub,
