@@ -6,14 +6,11 @@
 ## - $ctx.stash.put("username", $ctx.identity.username)
 
 #set( $input = {
+    "accountId":$ctx.args.input.accountId,
 	"name":$ctx.args.input.name,
-    "uniqueURL":$ctx.args.input.uniqueURL,
-    "address":$ctx.args.input.address,
-    "contactPerson":$ctx.args.input.contactPerson,
-    "emailAddress":$ctx.args.input.emailAddress,
-    "phoneNumber":$ctx.args.input.phoneNumber,
+    "desc":$ctx.args.input.desc,
     "status":3,
-    "__typename":"Account",
+    "__typename":"Category",
     "version":1,
     "createdBy":$ctx.identity.sub,
     "updatedBy":$ctx.identity.sub,

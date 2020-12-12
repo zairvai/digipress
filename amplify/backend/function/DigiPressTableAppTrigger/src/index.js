@@ -10,6 +10,8 @@ Amplify Params - DO NOT EDIT */
 const User = require("./model/User")
 const Account = require("./model/Account")
 const Access = require("./model/Access")
+const Tag = require("./model/Tag")
+const Category = require("./model/Category")
 
 exports.handler = (event,context,callback) => {
 
@@ -30,6 +32,12 @@ exports.handler = (event,context,callback) => {
                                       break;
                                       
           case 'Access'           :   Access.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Tag'              :   Tag.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+                                      
+          case 'Category'         :   Category.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
 
@@ -53,6 +61,11 @@ exports.handler = (event,context,callback) => {
           case 'Access'           :   Access.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
           
+          case 'Tag'              :   Tag.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+                                      
+          case 'Category'         :   Category.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
 
           default                 :   callback(null,"Unknown Field"); break;
 
@@ -74,6 +87,12 @@ exports.handler = (event,context,callback) => {
           case 'Access'           :   Access.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
           
+          case 'Tag'              :   Tag.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+                                      
+          case 'Category'         :   Category.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
                                       
           default                 :   callback(null,"Unknown Field"); break;
 

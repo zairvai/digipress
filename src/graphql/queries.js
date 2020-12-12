@@ -517,25 +517,67 @@ export const getUserByEmailAddress = /* GraphQL */ `
     }
   }
 `;
-export const getUserByAccount = /* GraphQL */ `
-  query GetUserByAccount($userId: ID!, $accountId: ID!) {
-    getUserByAccount(userId: $userId, accountId: $accountId) {
-      id
-      name
-      emailAddress
-      phoneNumber
-      emailAddressVerified
-      phoneNumberVerified
-      enabled
-      roles {
-        accountId
-        role
-        createdBy
-        updatedBy
+export const listUsers = /* GraphQL */ `
+  query ListUsers($input: ListItemInput) {
+    listUsers(input: $input) {
+      items {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
         createdAt
         updatedAt
+        version
         status
       }
+      foundDocs
+    }
+  }
+`;
+export const getTag = /* GraphQL */ `
+  query GetTag($input: GetItemInput!) {
+    getTag(input: $input) {
+      id
+      accountId
+      name
       createdBy {
         id
         name
@@ -639,10 +681,56 @@ export const getUserByAccount = /* GraphQL */ `
     }
   }
 `;
-export const listUsers = /* GraphQL */ `
-  query ListUsers($input: ListItemInput) {
-    listUsers(input: $input) {
+export const listTags = /* GraphQL */ `
+  query ListTags($input: ListItemInput) {
+    listTags(input: $input) {
       items {
+        id
+        accountId
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      foundDocs
+    }
+  }
+`;
+export const getCategory = /* GraphQL */ `
+  query GetCategory($input: GetItemInput!) {
+    getCategory(input: $input) {
+      id
+      accountId
+      name
+      desc
+      createdBy {
         id
         name
         emailAddress
@@ -659,6 +747,100 @@ export const listUsers = /* GraphQL */ `
           updatedAt
           status
         }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const listCategories = /* GraphQL */ `
+  query ListCategories($input: ListItemInput) {
+    listCategories(input: $input) {
+      items {
+        id
+        accountId
+        name
+        desc
         createdBy {
           id
           name

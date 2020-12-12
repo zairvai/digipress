@@ -41,6 +41,16 @@ type AccountConnection {
 	foundDocs: Int
 }
 
+type TagConnection {
+	items: [Tag]
+	foundDocs: Int
+}
+
+type CategoryConnection {
+	items: [Category]
+	foundDocs: Int
+}
+
 input CreateAccountInput {
 	name: String!
 	uniqueURL: String!
@@ -84,18 +94,30 @@ type Mutation {
 	createAccount(input: CreateAccountInput!): Account
 	updateAccount(input: UpdateAccountInput!): Account
 	deleteAccount(input: DeleteItemInput!): Account
+
+	createTag(input:CreateTagInput!):Tag
+	updateTag(input:UpdateTagInput!):Tag
+	deleteTag(input:DeleteItemInput!):Tag
+
+	createCategory(input:CreateCategoryInput!):Category
+	updateCategory(input:UpdateCategoryInput!):Category
+	deleteCategory(input:DeleteItemInput!):Category
 }
 
 type Query {
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input: ListItemInput): AccountConnection
-	getAccountByUniqueUrl(url: String!): Account
-		@aws_iam
-@aws_cognito_user_pools
+	getAccountByUniqueUrl(url: String!): Account @aws_iam @aws_cognito_user_pools
+
 	getUser(input: GetItemInput!): User
 	getUserByEmailAddress(emailAddress: String!): User
-	getUserByAccount(userId: ID!, accountId: ID!): User
 	listUsers(input: ListItemInput): UserConnection
+
+	getTag(input:GetItemInput!):Tag
+	listTags(input:ListItemInput):TagConnection
+
+	getCategory(input:GetItemInput!):Category
+	listCategories(input:ListItemInput):CategoryConnection
 }
 
 input UpdateAccountInput {
@@ -150,4 +172,54 @@ enum UserRole {
 	tutor
 	student
 	member
+}
+
+type Tag @aws_iam
+@aws_cognito_user_pools{
+	id:ID!
+	accountId:ID!
+	name:String!
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status: Int
+}
+
+input CreateTagInput {
+	accountId:ID!
+	name:String!
+}
+input UpdateTagInput {
+	name:String
+	status:Int
+	expectedVersion:Int!
+}
+
+type Category @aws_iam
+@aws_cognito_user_pools{
+	id:ID!
+	accountId:ID!
+	name:String!
+	desc:String
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status: Int
+}
+
+input CreateCategoryInput {
+	accountId:ID!
+	name:String!
+	desc:String
+}
+
+input UpdateCategoryInput {
+	name:String
+	desc:String
+	status:Int
+	expectedVersion:Int!
 }
