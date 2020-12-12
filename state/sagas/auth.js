@@ -26,13 +26,12 @@ function* signIn(action) {
         const user = yield Auth.signIn(username,password,{accountId})
         //const user = yield call([Auth, 'signIn'], {username,password,{test:"yes"}});
         // const user = yield call([Auth, 'signIn'], {username,password,"clientMetadata":{accountId}});
-
-
-        if(user.signInUserSession.idToken.payload.access==="false") {
+        
+        if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
+        else if(user.signInUserSession.idToken.payload.access==="false") {
             yield Auth.signOut()
             yield put(customSignInRoutine.noaccesstoaccount())
         }
-        else if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
         else yield put(signInRoutine.success({data:user}))
 
     }catch(error){
