@@ -17,7 +17,7 @@ const {Text} = Typography
 
 //validation schema
 const schema = yup.object().shape({
-    role:yup.string().required(),
+    role:yup.string().required("Mohon pilih role untuk pengguna."),
     name:yup.string().required("Mohon masukkan nama pengguna.").max(100,"Nama tidak boleh lebih dari 100 karakter."),
     phoneCode:yup.string().required("Mohon masukkan kode.").max(5,"Maksimal 55 angka."),
     phoneNumber:yup.string().typeError("Mohon masukkan nomer telpon.").required("Mohon masukkan nomer telpon.").max(15,"Maksimal 15 angka."),
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
 
 const FormUser = ({item,...props}) => {
 
-    const {auth,roleInputs} = props
+    const {auth,roleInputs,createUser,updateUser} = props
 
     console.log(roleInputs)
 
@@ -104,11 +104,17 @@ const FormUser = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Role">
-                                            <Select size="large" style={{ width: "100%" }} value={props.value} onChange={props.onChange} placeholder="...">
+                                            <Select 
+                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                size="large" 
+                                                style={{ width: "100%" }} 
+                                                value={props.value} 
+                                                onChange={props.onChange} placeholder="...">
                                                 {
                                                     roleInputs.map(input=><Select.Option key={input.value} value={input.value}>{input.name}</Select.Option>)
                                                 }
                                             </Select>
+                                            {errors && errors.role && <Text type="danger">{errors.role.message}</Text>}
                                         </Form.Item>
                                     }
                                 />
@@ -123,6 +129,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama">
                                             <Input 
+                                                disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." value={props.value} onChange={props.onChange} />
@@ -145,6 +152,7 @@ const FormUser = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <Input 
+                                                    disabled={createUser.isRequesting || updateUser.isRequesting}
                                                     size="large" 
                                                     style={{width:"30%"}}
                                                     value={props.value} readOnly/>
@@ -155,6 +163,7 @@ const FormUser = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <InputNumber
+                                                    disabled={createUser.isRequesting || updateUser.isRequesting}
                                                     tabIndex="3"
                                                     size="large"
                                                     style={{ width: '70%' }} 
@@ -175,6 +184,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Email" className="ml-0 ml-md-3">
                                             <Input
+                                                disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 tabIndex="4" 
                                                 autoComplete="username"
                                                 allowClear
@@ -196,6 +206,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Password">
                                             <Input.Password
+                                                disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 size="large"   
                                                 tabIndex="5" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -219,6 +230,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Konfirmasi Password" className="ml-0 ml-md-3">
                                             <Input.Password
+                                                disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 size="large"   
                                                 tabIndex="6" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -243,10 +255,10 @@ const FormUser = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7"  onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                <Button tabIndex="7" disabled={createUser.isRequesting || updateUser.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit"  loading={createUser.isRequesting || updateUser.isRequesting} block>Kirim</Button>
                             </Col>
                         </Row>
 

@@ -34,7 +34,6 @@ const FormAuth = props => {
         control,
         errors,
         formState,
-        
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -42,15 +41,15 @@ const FormAuth = props => {
                 password:""
             }
     })
+    
+    const onSubmit = async(values) =>{
+        try{
+            const resp = await authController._signIn(values.email,values.password,props.accountId)
+            if(props.onSuccess) props.onSuccess(resp)
+        }catch(error){
+            console.log(error)
+        }
 
-    const onSubmit = values =>{
-
-        authController._signIn(values.email,values.password,props.accountId)
-            .then(resp=>{
-                // console.log(resp)
-                if(props.onSuccess) props.onSuccess(resp)
-            })
-            .catch(error=>console.log(error))
     }
 
     const onError = (errors,e) => {
@@ -84,9 +83,7 @@ const FormAuth = props => {
     }
 
     return (
-        <Form 
-            layout="vertical"
-            onFinish={handleSubmit(onSubmit,onError)}>
+        <Form layout="vertical">
            
             <VuroxComponentsContainer className="p-4">
                 
@@ -106,6 +103,7 @@ const FormAuth = props => {
                                         placeholder="Email address"
                                         autoComplete="off"
                                         type="email"
+                                        disabled={auth.isRequesting || auth.isLoggedIn}
                                         value={props.value} 
                                         onChange={props.onChange} />
                                     {errors && errors.email && <Text type="danger">{errors.email.message}</Text>}
@@ -128,6 +126,7 @@ const FormAuth = props => {
                                         autoComplete="current-password"
                                         placeholder="Password"
                                         value={props.value} 
+                                        disabled={auth.isRequesting || auth.isLoggedIn}
                                         onChange={props.onChange} 
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
@@ -141,10 +140,10 @@ const FormAuth = props => {
                 </Row>
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:'/auth/password-recovery'}}shallow><a>Lupa password?</a></Link>
+                        <Link href={{pathname:'/auth/password-recovery'}} disabled={auth.isRequesting || auth.isLoggedIn} shallow><a>Lupa password?</a></Link>
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Login</Button>
+                        <Button className="mt-md-0 mt-3" size="large" type="primary" loading={auth.isRequesting || auth.isLoggedIn} onClick={handleSubmit(onSubmit,onError)} htmlType="submit" block>Login</Button>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>

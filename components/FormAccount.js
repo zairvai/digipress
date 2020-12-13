@@ -37,11 +37,10 @@ const schema = yup.object().shape({
 const FormAccount = ({item,...props}) => {
 
 
-    const {auth} = props
+    const {auth,createAccount,updateAccount} = props
 
     const accountController = new AccountController(props)
     
-
     const {
         handleSubmit,
         reset,
@@ -115,6 +114,7 @@ const FormAccount = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Public Url untuk akses ke akun kamu">
                                             <Input.Search 
+                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                 tabIndex="1"
                                                 allowClear
                                                 addonBefore="https://digipress.id/"
@@ -135,6 +135,7 @@ const FormAccount = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama akun">
                                             <Input 
+                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." value={props.value} onChange={props.onChange} />
@@ -154,6 +155,7 @@ const FormAccount = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Alamat">
                                             <Input.TextArea 
+                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                 tabIndex="3"
                                                 allowClear
                                                 autoSize={{ minRows: 3, maxRows: 5 }}
@@ -174,6 +176,7 @@ const FormAccount = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Kontak person">
                                             <Input
+                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                 tabIndex="4" 
                                                 allowClear
                                                 size="large" placeholder="contoh: Muhammad " value={props.value} onChange={props.onChange} />
@@ -193,6 +196,7 @@ const FormAccount = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <Input 
+                                                    disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                     size="large" 
                                                     style={{width:"30%"}}
                                                     value={props.value} readOnly/>
@@ -203,6 +207,7 @@ const FormAccount = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <InputNumber
+                                                    disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                     tabIndex="5"
                                                     size="large"
                                                     style={{ width: '70%' }} value={props.value} placeholder="8xx" onChange={props.onChange}/>
@@ -222,6 +227,7 @@ const FormAccount = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Email" className="ml-0 ml-md-3">
                                             <Input
+                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
                                                 tabIndex="6" 
                                                 allowClear
                                                 size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
@@ -241,10 +247,10 @@ const FormAccount = ({item,...props}) => {
                         <VuroxComponentsContainer className="px-4 py-3">
                             <Row className="justify-content-end">
                                 <Col md={6} sm={8} xs={12}  >
-                                    <Button tabIndex="7"  onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                    <Button tabIndex="7" disabled={createAccount.isRequesting || updateAccount.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                                 </Col>
                                 <Col md={6} sm={8} xs={12} className="fright">
-                                    <Button tabIndex="8" type="primary" htmlType="submit" block>Kirim</Button>
+                                    <Button tabIndex="8" type="primary" htmlType="submit" loading={createAccount.isRequesting || updateAccount.isRequesting} block>Kirim</Button>
                                 </Col>
                             </Row>
 

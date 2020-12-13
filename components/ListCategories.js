@@ -35,7 +35,7 @@ const List = ({items,...props}) =>{
                                             <td valign="middle">{item.desc}</td>
                                             <td valign="middle" className="fright">
                                                 <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
-                                                    <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={()=>props.onDelete(item,index)}/>}/>
+                                                    <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={(e)=>{props.onDelete(item,index);e.stopPropagation(); }}/>}/>
                                                 </Tooltip>
                                             </td>
                                         </tr>
