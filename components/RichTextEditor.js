@@ -1,9 +1,12 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
+
 const Editor = props => {
 
     const [TextEditor,setTextEditor] = React.useState(null)
+
+
     const [content,setContent] = React.useState("")
 
     const modules = {
@@ -20,7 +23,13 @@ const Editor = props => {
     React.useEffect(()=>{
 
         const ReactQuillComponent = dynamic (()=>import('react-quill'),{ssr:false}) 
+        
+        // const QuillImageResize = dynamic (()=>import('quill-image-resize-module',{ssr:false}))
+        // ReactQuillComponent.register("modules/imageResize",QuillImageResize)
+
         setTextEditor(ReactQuillComponent)
+
+       
 
         return(()=>{
 

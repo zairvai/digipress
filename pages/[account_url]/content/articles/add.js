@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -13,34 +14,32 @@ import Sidebar from 'Templates/HeaderSidebar';
 
 import FormArticle from 'Components/FormArticle'
 
-class index extends React.Component {
+const PageArticleAdd = props => {
 
-    static contextType = vuroxContext
+	const {auth,router} = props
     
-    pagename="New article"
-	links = [['App','/content/classroom',''],['Articles','/content/articles',''],['Add new','/content/articles/add','active']]
+    const pagename=""
+	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,''],['Add new article',`/${auth.account.uniqueURL}/content/articles/add`,'active']]
 	
-	render() {
+	const { menuState } = React.useContext(vuroxContext)
+	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
-		const { menuState } = this.context
-        const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
-		return (
-			<React.Fragment>
-				<HeaderLayout className="sticky-top">
-					<HeaderDark />
-				</HeaderLayout>
-				<VuroxLayout>
-					<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-						<Sidebar className={toggleClass} />
-					</VuroxSidebar>
-					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-                        <Summery2 pagename={this.pagename} links={this.links}/>
-                        <FormArticle/>
-					</ContentLayout>
-				</VuroxLayout>
-			</React.Fragment>
-		);
-	}
+	return (
+		<React.Fragment>
+			<HeaderLayout className="sticky-top">
+				<HeaderDark />
+			</HeaderLayout>
+			<VuroxLayout>
+				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
+					<Sidebar className={toggleClass} />
+				</VuroxSidebar>
+				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
+					<Summery2 pagename={pagename} links={links}/>
+					<FormArticle/>
+				</ContentLayout>
+			</VuroxLayout>
+		</React.Fragment>
+	);
+	
 }
-export default connect(state=>state)(index)
+export default connect(state=>state)(withRouter(PageArticleAdd))

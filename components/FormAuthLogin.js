@@ -45,7 +45,7 @@ const FormAuth = props => {
     const onSubmit = async(values) =>{
         try{
             const resp = await authController._signIn(values.email,values.password,props.accountId)
-            if(props.onSuccess) props.onSuccess(resp)
+            if(props.onSuccess) props.onSuccess(resp.data)
         }catch(error){
             console.log(error)
         }
@@ -83,7 +83,9 @@ const FormAuth = props => {
     }
 
     return (
-        <Form layout="vertical">
+        <Form 
+            layout="vertical"
+            onFinish={handleSubmit(onSubmit,onError)}>
            
             <VuroxComponentsContainer className="p-4">
                 
@@ -144,7 +146,7 @@ const FormAuth = props => {
                         {/* <Link href={{pathname:'/auth/password-recovery'}} disabled={auth.isRequesting || auth.isLoggedIn} shallow><a>Lupa password?</a></Link> */}
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" loading={auth.isRequesting || auth.isLoggedIn} onClick={handleSubmit(onSubmit,onError)} htmlType="submit" block>Login</Button>
+                        <Button className="mt-md-0 mt-3" size="large" type="primary" loading={auth.isRequesting || auth.isLoggedIn} htmlType="submit" block>Login</Button>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>

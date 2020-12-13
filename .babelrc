@@ -2,9 +2,11 @@
   "presets": ["next/babel"],
   "plugins": [
     [
-      "import", {
-        "libraryName": "antd"
-      }
+      "@babel/plugin-syntax-import-assertions"
+    ],
+    [
+      "import", 
+      {"libraryName": "antd"}
     ],
     [
     	"module-resolver", {

@@ -9,11 +9,13 @@ import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import {Editor} from '@tinymce/tinymce-react'
+
 const {Text} = Typography
 
 //validation schema
 const schema = yup.object().shape({
-    title:yup.string().required("Please type in the title of your article").max(100,"Your article title must not exceed 100 chars"),
+    title:yup.string().required("Mohon ketik judul artikel").max(100,"Judul tidak melebihi 100 karakter"),
     //summary:yup.string(),
     content:yup.string(),
     category:yup.object(),
@@ -54,13 +56,6 @@ const FormArticle = ({item,...props}) => {
         else return
     },[])
 
-
-    React.useEffect(()=>{
-
-        console.log(formState)
-
-    },[formState])
-
     const {
         handleSubmit,
         reset,
@@ -92,10 +87,6 @@ const FormArticle = ({item,...props}) => {
 
     }
     
-
-    const onFormLayoutChange = ({ layout }) => {
-        setFormLayout(layout)
-    };
 
     const onSelectCategoryChange = selected =>{
 
@@ -135,8 +126,6 @@ const FormArticle = ({item,...props}) => {
         <Form
             layout={formLayout}
             initialValues={{layout:formLayout}}
-            // onSubmit={handleSubmit(onSubmit,onError)}
-            //onSubmit={()=>alert("submit")}
             onFinish={handleSubmit(onSubmit,onError)}
         >
             <Row>
@@ -159,22 +148,6 @@ const FormArticle = ({item,...props}) => {
                                 
                             </Col>
                         </Row>
-                        {/* <Row>
-                            <Col md={24}>
-
-                                <Controller
-                                    name="summary"
-                                    defaultValue=""
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Summary" className="mb-0">
-                                            <Input.TextArea style={{height:"150px"}} placeholder="..." value={props.value} onChange={props.onChange}/>
-                                        </Form.Item>
-                                    }
-                                />
-
-                            </Col>
-                        </Row> */}
                     
                         <Row>
                             <Col md={24}>
@@ -184,7 +157,25 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Content">
-                                            <RichTextEditor style={{height:"600px"}} className="mb-3" value={props.value} onChange={props.onChange}/>
+                                            {/* <RichTextEditor style={{height:"600px"}} className="mb-3" value={props.value} onChange={props.onChange}/> */}
+
+                                            <Editor
+                                                initialValue="<p>This is the initial content of the editor</p>"
+                                                init={{
+                                                height: 500,
+                                                menubar: false,
+                                                plugins: [
+                                                    'advlist autolink lists link image charmap print preview anchor',
+                                                    'searchreplace visualblocks code fullscreen',
+                                                    'insertdatetime media table paste code help wordcount imagetools'
+                                                ],
+                                                toolbar:
+                                                    'undo redo | formatselect | bold italic backcolor | \
+                                                    alignleft aligncenter alignright alignjustify | \
+                                                    bullist numlist | link image | removeformat | help'
+                                                }}
+                                                onEditorChange={props.onChange}
+                                            />
                                         </Form.Item>
                                     }
                                 />

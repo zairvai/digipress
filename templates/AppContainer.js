@@ -5,6 +5,7 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import { getAuthUserRoutinePromise,signOutRoutinePromise} from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
 import AccountController from 'Library/controllers/AccountController'
+import {getRedirectToDefaultPath} from 'Helper'
 const Container = props => {
 
     const authController = new AuthController(props)
@@ -18,7 +19,7 @@ const Container = props => {
 
         let shouldSignOut = false
 
-        if(auth.account.uniqueURL != router.query.account_url) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+        if(auth.account.uniqueURL != router.query.account_url) getRedirectToDefaultPath(auth,auth.user.access.role)
 
         try{
             await authController._get()

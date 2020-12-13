@@ -6,7 +6,7 @@ import {
 	ContentLayout,
 } from 'Components/layout'
 import {withRouter} from 'next/router'
-import { appContext } from 'Context/app'
+import {getRedirectToDefaultPath} from 'Helper'
 
 import { Row, Col,Button, Checkbox,Form,Menu,Typography} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
@@ -39,7 +39,7 @@ const PageLogin = props =>{
 
 			authController._setAccount(account.data)
 
-			router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
+			// router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
 			
 			if(auth.isLoggedIn){
 				
@@ -48,7 +48,8 @@ const PageLogin = props =>{
 					setVisible(true)
 				}
 				else{
-					router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+					// router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+					router.push(getRedirectToDefaultPath(auth,auth.user.access.role))
 				}
 			}
 			else setVisible(true)
@@ -59,6 +60,7 @@ const PageLogin = props =>{
 			
 	},[])
 
+	
 
 	const goToForgotPassword = () =>{
         router.push('/auth/password-recovery')
@@ -69,8 +71,9 @@ const PageLogin = props =>{
 			.then(()=>authController._initSignIn())
 	}
 
-	const onSuccess = resp =>{
-		router.push(`/${auth.account.uniqueURL}/report/dashboard`)
+	const onSuccess = user =>{
+		const access = JSON.parse(user.signInUserSession.idToken.payload.access)
+		router.push(getRedirectToDefaultPath(auth,access.role))
 	}
 
 	return(

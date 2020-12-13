@@ -15,51 +15,61 @@ const Sidebar = (props) => {
 	return (
 		<div className={`${props.className} vurox-vertical-nav`} style={{width: props.width + 'px'}}>
 			<ul>
-				<VerticalNavHeading>Report</VerticalNavHeading>
-				<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
-						
-				<VerticalNavHeading>Content</VerticalNavHeading>
-				<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-				<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
-				
-				{
-					!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth) ?
-					<>
-						<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
-						<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tags' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
-					</>
-					:
-					<></>
 
-				}
-				
-				{
-					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
-						|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
-					<>
-						<VerticalNavHeading>Manage</VerticalNavHeading>
+			{
+				AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
+					|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
+				<>
+					<VerticalNavHeading>Report</VerticalNavHeading>
+					<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
+					</>
+				:
+				<></>
+			}		
+
+					<VerticalNavHeading>Content</VerticalNavHeading>
+					<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
+					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					
-					{
-						AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
-						<>
-							<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
-						</>
-						:
-						<></>
-					}
+			{
+				!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth) ?
+				
+				<>
+					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
+					<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tags' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
+				</>
+				:
+				<></>
 
-					{
-						!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
-						<>
-							<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
-						</>
-						:
-						<></>
-					}
+			}
+				
+			{
+				AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
+					|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
+				<>
+					<VerticalNavHeading>Manage</VerticalNavHeading>
+				
+				{
+					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+					<>
+						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
 					</>
 					:
 					<></>
 				}
+
+				{
+					!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
+					<>
+						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+					</>
+					:
+					<></>
+				}
+				</>
+				:
+				<></>
+			}
 
 
 				{/* <VerticalNavHeading>Roles</VerticalNavHeading>
