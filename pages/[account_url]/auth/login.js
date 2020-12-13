@@ -60,6 +60,10 @@ const PageLogin = props =>{
 	},[])
 
 
+	const goToForgotPassword = () =>{
+        router.push('/auth/password-recovery')
+	}
+	
 	const onBacktoLogin = () => {
 		authController._signOut()
 			.then(()=>authController._initSignIn())
@@ -88,7 +92,7 @@ const PageLogin = props =>{
 										{auth.newPasswordRequired ? 
 											<FormCompleteNewPasword onBack={onBacktoLogin}/>
 											:
-											<FormLogin onSuccess={onSuccess} accountId={auth.account.id}/>
+											<FormLogin onSuccess={onSuccess} accountId={auth.account.id} onForgotPassword={goToForgotPassword}/>
 										}
 									</Col>
 								</Row>	

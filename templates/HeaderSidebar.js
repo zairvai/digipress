@@ -33,21 +33,29 @@ const Sidebar = (props) => {
 
 				}
 				
-				<VerticalNavHeading>Manage</VerticalNavHeading>
-				
 				{
-					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
+						|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
 					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
-					</>
-					:
-					<></>
-				}
+						<VerticalNavHeading>Manage</VerticalNavHeading>
+					
+					{
+						AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+						<>
+							<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
+						</>
+						:
+						<></>
+					}
 
-				{
-					!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
-					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+					{
+						!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
+						<>
+							<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+						</>
+						:
+						<></>
+					}
 					</>
 					:
 					<></>
