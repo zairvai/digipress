@@ -17,17 +17,17 @@ export const createAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customCreateAccountRoutine.INIT  : {
+        // case customCreateAccountRoutine.INIT  : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false,
+        //         item:{}
+        //     })
 
-        }
+        // }
 
         case createAccountRoutine.REQUEST  : {
 
@@ -139,16 +139,16 @@ export const getAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customGetAccountRoutine.INIT : {
+        // case customGetAccountRoutine.INIT : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false,
+        //         item:{}
+        //     })
+        // }
 
         case getAccountRoutine.REQUEST : {
 
@@ -245,16 +245,16 @@ export const updateAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customUpdateAccountRoutine.INIT : {
+        // case customUpdateAccountRoutine.INIT : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false,
+        //         item:{}
+        //     })
+        // }
 
         case updateAccountRoutine.REQUEST : {
 
@@ -314,16 +314,16 @@ export const deleteAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customDeleteAccountRoutine.INIT : {
+        // case customDeleteAccountRoutine.INIT : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false,
+        //         item:{}
+        //     })
+        // }
 
         case deleteAccountRoutine.REQUEST : {
 

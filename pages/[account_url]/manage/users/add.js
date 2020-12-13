@@ -16,7 +16,6 @@ import Sidebar from 'Templates/HeaderSidebar';
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { createUserRoutinePromise} from 'State/routines/user';
 import AuthController from 'Library/controllers/AuthController';
 import UserController from 'Library/controllers/UserController';
 import AppContainer from 'Templates/AppContainer'
@@ -94,7 +93,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            createUserRoutinePromise
+            
         },dispatch),dispatch
     })
 )(withRouter(PageUserAdd))

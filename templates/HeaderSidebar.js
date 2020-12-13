@@ -18,7 +18,7 @@ const Sidebar = (props) => {
 				<VerticalNavHeading>Report</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
 						
-				<VerticalNavHeading>App</VerticalNavHeading>
+				<VerticalNavHeading>Content</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 				

@@ -22,39 +22,28 @@ will be passed as the event to AWS Lambda.
 
 #set($query={
   "bool": {
-      "must": [
-        {
-          "nested": {
-            "path": "roles",
-            "query": {
-              "bool": {
-                "must": [
-                  {"match":{"roles.accountId": $accountId}},
-                  {
-                    "terms": {
-                      "roles.role": $roles
-                    }
-                  }
-                ]
-              }
-            }
-          }
+    "must": [
+      {
+        "match": {
+          "accountId": $accountId
         }
-      ]
+      }
+    ]
   }
 })
 
+#if(!$util.isNull($ctx.args.input.name))
+  #set($matchNamePrefix = {
+    "match_phrase_prefix": {
+        "name": {
+            "query": $ctx.args.input.name
+          }
+      }
+  })
 
-#if(!$util.isNull($ctx.args.input.role))
-	#set($matchRole={
-    "match":{"roles.role": $ctx.args.input.role }
-  })	
-      
-  $util.qr($query.bool.must[0].nested.query.bool.must.add($matchRole))
-      
+  $util.qr($query.bool.must.add($matchNamePrefix))
+
 #end
-
-## $util.error($util.toJson($query))
 
 {
   "version" : "2017-02-28",
@@ -62,7 +51,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/user/_search",
+      "path":"/tag/_search",
       "body":{
           "_source":{
               "includes":"id"

@@ -87,7 +87,7 @@ function* listUsers(action){
 
     try{
         
-        const {accountId,roles,orderBy,direction,from,size} = action.payload.values
+        const {accountId,roles,orderBy,direction,from,size} = action.payload
 
         yield put(listUsersRoutine.request())
                 

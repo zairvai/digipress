@@ -8,7 +8,7 @@ import UserController from 'Library/controllers/UserController'
 import { Row,Col } from 'antd'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { updateUserRoutinePromise,getUserRoutinePromise } from 'State/routines/user';
+import { getUserRoutinePromise } from 'State/routines/user';
 
 
 const PageUserEdit = props => {
@@ -36,7 +36,7 @@ const PageUserEdit = props => {
         router.push(`/${auth.account.uniqueURL}/manage/users/${user.id}`)	
     }
 
-    const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,''],[item.name,`/${auth.account.uniqueURL}/manage/users/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/users/${item.id}`,'active']]
+    const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,''],[item.name,`/${auth.account.uniqueURL}/manage/users/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/users/${item.id}/edit`,'active']]
 
     return (
         <AppContainer>
@@ -56,7 +56,6 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            updateUserRoutinePromise,
             getUserRoutinePromise
         },dispatch),dispatch
     })

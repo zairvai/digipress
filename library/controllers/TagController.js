@@ -1,6 +1,6 @@
 import {
     updateList
-} from 'State/actions/user'
+} from 'State/actions/tag'
 
 export default class Controller{
 
@@ -12,19 +12,23 @@ export default class Controller{
     }
 
     _create = values => {
-        return this.props.createUserRoutinePromise({values})
-    }
-
-    _update = (values) =>{
-        return this.props.updateUserRoutinePromise({values})
+        return this.props.createTagRoutinePromise({values})
     }
 
     _get = (id) => {
-        return this.props.getUserRoutinePromise({id})
+        return this.props.getTagRoutinePromise({id})
+    }
+
+    _update = (values) =>{
+        return this.props.updateTagRoutinePromise({values})
+    }
+
+    _delete = (id) => {
+        return this.props.deleteTagRoutinePromise({id})
     }
 
     _list = values => {
-        return this.props.listUsersRoutinePromise(values)
+        return this.props.listTagsRoutinePromise(values)
     }
 
     _updateList = (method,items,index)=>{

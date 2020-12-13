@@ -121,9 +121,9 @@ export default class Controller{
         }))
     }
 
-    _initForgotPassword = () =>{
-        this.dispatch(initForgotPassword())
-    }
+    // _initForgotPassword = () =>{
+    //     this.dispatch(initForgotPassword())
+    // }
 
     _forgotPassword = (email) =>{
 

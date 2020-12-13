@@ -81,6 +81,7 @@ input GetItemInput {
 input ListItemInput {
 	accountId: ID
 	roles: [UserRole]
+	name:String
 	orderBy: String
 	direction: String
 	from: Int
@@ -192,6 +193,7 @@ input CreateTagInput {
 	name:String!
 }
 input UpdateTagInput {
+	id:ID!
 	name:String
 	status:Int
 	expectedVersion:Int!
@@ -218,6 +220,7 @@ input CreateCategoryInput {
 }
 
 input UpdateCategoryInput {
+	id:ID!
 	name:String
 	desc:String
 	status:Int

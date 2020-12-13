@@ -19,7 +19,7 @@ export const updateCategoryRoutinePromise = promisifyRoutine(updateCategoryRouti
 //list category
 customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
 export const customListCategoriesRoutine = customRoutine("list_category_custom")
-export const listCategoriesRoutine = createRoutine("list_categorys")
+export const listCategoriesRoutine = createRoutine("list_categories")
 export const listCategoriesRoutinePromise = promisifyRoutine(listCategoriesRoutine)
 
 //get category

@@ -21,9 +21,9 @@ function* createTag(action){
         const {values} = action.payload
 
         const name = values.name.trim()
+        const accountId = values.accountId.trim()
 
-
-        const response = yield API.graphql(graphqlOperation(mutations.createTag,{input:{name}}))
+        const response = yield API.graphql(graphqlOperation(mutations.createTag,{input:{name,accountId}}))
 
         yield put(createTagRoutine.success({data:response.data.createTag}))
 
@@ -44,11 +44,11 @@ function* listTags(action){
 
     try{
 
-        const {orderBy,direction,from,size} = action.payload
+        const {accountId,orderBy,direction,from,size} = action.payload
 
         yield put(listTagsRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listTags,{input:{orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listTags,{input:{accountId,orderBy,direction,from,size}}))
 
         yield put(listTagsRoutine.success({data:response.data.listTags}))
 

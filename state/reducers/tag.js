@@ -264,17 +264,6 @@ export const deleteTag = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customDeleteTagRoutine.INIT : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
-        }
-
         case deleteTagRoutine.REQUEST : {
 
             return Object.assign({},state,{

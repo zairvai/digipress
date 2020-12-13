@@ -263,17 +263,6 @@ export const deleteCategory = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        case customDeleteCategoryRoutine.INIT : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false,
-                item:{}
-            })
-        }
-
         case deleteCategoryRoutine.REQUEST : {
 
             return Object.assign({},state,{

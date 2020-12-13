@@ -40,9 +40,9 @@ export default class Controller{
         return this.props.getAccountRoutinePromise({id})
     }
 
-    _getInit = () => {
-        this.dispatch(getAccountInit())
-    }
+    // _getInit = () => {
+    //     this.dispatch(getAccountInit())
+    // }
 
     _delete = (id) =>{
         
@@ -50,9 +50,9 @@ export default class Controller{
         return this.props.deleteAccountRoutinePromise({id})
 
     }
-    _deleteInit = () => {
-        this.dispatch(deleteAccountInit())
-    }
+    // _deleteInit = () => {
+    //     this.dispatch(deleteAccountInit())
+    // }
 
     _getAccountByUniqueUrl = ({url}) =>{
         

@@ -14,53 +14,69 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Button, Popover} from 'antd'
+import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
-import ListAccounts from 'Components/ListAccounts'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import ListTags from 'Components/ListTags'
 import AppContainer from 'Templates/AppContainer'
-import AccountController from 'Library/controllers/AccountController'
-
+import TagController from 'Library/controllers/TagController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listAccountsRoutinePromise } from 'State/routines/account';
+import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
 
 const PageTags = props => {
 
-	const {auth,router,listAccounts} = props
+	const {auth,router,listTags} = props
 
-	const [items,setItems] = React.useState([])
-	const [foundItem,setFoundItem] = React.useState(0)
+	const tagController = new TagController(props)
 
-	const accountController = new AccountController(props)
+	const {confirm} = Modal
 
 	React.useEffect(async ()=>{
-		await accountController._list({
+		try{
+			
+			await tagController._list({
+			accountId:auth.account.id,
 			orderBy:"createdAt",
 			direction:"asc",
 			from:0,size:50})
+
+		}catch(error){
+			console.log(error)
+		}
 	},[])
 
     const pagename=""
-	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,'active']]
+	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Tags',`/${auth.account.uniqueURL}/content/tags`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
-	const text = <span>Title</span>;
-
-	const menuContent = props =>{
-
-		console.log(props)
-
-		return(
-			<div>
-				<p>Content</p>
-				<p>Content</p>
-			</div>
-		)
-	}
-		
 	  
+	const onDeleteItem = (item,index) => {
+        showDeleteConfirm(item,index)
+    }
+
+    const showDeleteConfirm = (item,index) => {
+
+        confirm({
+          title: `Kemungkinan tag ini digunakan pada artikel/classroom. Apakah kamu ingin menghapus ?`,
+          icon: <ExclamationCircleOutlined />,
+          content: item.name,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+
+			tagController._delete(item.id)
+				.then(resp=>tagController._updateList("remove",[item],index))
+				.catch(error=>console.log(error))
+
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+	}
+	
 	return (
 		<AppContainer>
 			<HeaderLayout className="sticky-top">
@@ -79,7 +95,8 @@ const PageTags = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
+									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah tag</Button></li> */}
+									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/tags/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Tag</a></Link></li>
 								</ul>
 							</div>
 						</Col>
@@ -87,7 +104,7 @@ const PageTags = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListAccounts items={listAccounts.list.items} foundDoc={listAccounts.list.foundDocs}/>
+								<ListTags items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={onDeleteItem}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -104,7 +121,8 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listAccountsRoutinePromise
+				listTagsRoutinePromise,
+				deleteTagRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageTags))

@@ -21,13 +21,11 @@ function* createCategory(action){
         const {values} = action.payload
 
         const updateParams = {
+            accountId:values.accountId.trim(),
             name : values.name.trim()
         }
 
         if(values.desc) updateParams.desc = values.desc.trim()
-        
-        const name = values.name.trim()
-        const desc = values.desc.trim()
 
         const response = yield API.graphql(graphqlOperation(mutations.createCategory,{input:updateParams}))
 
@@ -50,11 +48,11 @@ function* listCategories(action){
 
     try{
 
-        const {orderBy,direction,from,size} = action.payload
+        const {accountId,orderBy,direction,from,size} = action.payload
 
         yield put(listCategoriesRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listCategories,{input:{orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listCategories,{input:{accountId,orderBy,direction,from,size}}))
 
         yield put(listCategoriesRoutine.success({data:response.data.listCategories}))
 
@@ -125,8 +123,6 @@ export function* deleteCategoryWatcher(){
 function* updateCategory(action){
 
     try{
-
-        console.log(action)
 
         yield put(updateCategoryRoutine.request())
 

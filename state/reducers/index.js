@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
 import { createUser,getUser,listUsers, updateUser } from './user'
+import { listTags,deleteTag,createTag } from './tag'
+import { listCategories,getCategory,deleteCategory,createCategory,updateCategory } from './category'
 
 import { accounts } from './accounts'
 import { articles } from './articles'
@@ -52,7 +54,17 @@ const rootReducer = combineReducers({
 	getUser:persistReducer({key:"getUser",storage},getUser),
 	listUsers:persistReducer({key:"listUsers",storage},listUsers),
 	updateUser:persistReducer({key:"updateUser",storage},updateUser),
-	
+	//tag
+	listTags:persistReducer({key:"listTags",storage},listTags),
+	deleteTag:persistReducer({key:"deleteTag",storage},deleteTag),
+	createTag:persistReducer({key:"createTag",storage},createTag),
+	//category
+	createCategory:persistReducer({key:"createCategory",storage},createCategory),
+	getCategory:persistReducer({key:"getCategory",storage},getCategory),
+	listCategories:persistReducer({key:"listCategories",storage},listCategories),
+	updateCategory:persistReducer({key:"updateCategory",storage},updateCategory),
+	deleteCategory:persistReducer({key:"deleteCategory",storage},deleteCategory),
+
 	accounts,
 	users,
 	articles,
