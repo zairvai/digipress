@@ -1,7 +1,7 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as mutations from 'Src/graphql/mutations'
 import * as queries from 'Src/graphql/queries'
-import {put,takeLatest,call} from 'redux-saga/effects'
+import {put,takeLatest,call,delay} from 'redux-saga/effects'
 
 import {
     createAccountRoutine,
@@ -37,6 +37,7 @@ function* createAccount(action){
                 phoneNumber,
                 emailAddress}}))
 
+        yield delay(2000)
         yield put(createAccountRoutine.success({data:response.data.createAccount}))
 
 

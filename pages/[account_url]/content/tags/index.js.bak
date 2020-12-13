@@ -17,50 +17,23 @@ import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import ListCategories from 'Components/ListCategories'
+import ListTags from 'Components/ListTags'
 import AppContainer from 'Templates/AppContainer'
-import CategoryController from 'Library/controllers/CategoryController'
+import TagController from 'Library/controllers/TagController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCategoriesRoutinePromise,deleteCategoryRoutinePromise } from 'State/routines/category';
+import { deleteTagRoutinePromise } from 'State/routines/tag';
 
-const PageCategories = props => {
+const PageTags = props => {
 
-	const {auth,router,listCategories} = props
+	const {auth,router,listTags} = props
 
-	const categoryController = new CategoryController(props)
-
+	const tagController = new TagController(props)
+	
 	const {confirm} = Modal
-
-	React.useEffect(async ()=>{
-		
-		try{
-			await listItems({accountId:auth.account.id})
-		}catch(error){
-			console.log(error)
-		}
-
-	},[])
-
-	const listItems = async ({accountId,name=false,orderBy="createdAt",direction="asc",from=0,size=50}) => {
-
-        try{
-
-            await categoryController._list({
-                accountId,
-                name,
-                orderBy,
-                direction,
-                from,size})
-
-        }catch(error){
-            console.log(error)
-        }
-
-    }
-
+	
     const pagename=""
-	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Categories',`/${auth.account.uniqueURL}/content/categories`,'active']]
+	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Tags',`/${auth.account.uniqueURL}/content/tags`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -72,15 +45,15 @@ const PageCategories = props => {
     const showDeleteConfirm = (item,index) => {
 
         confirm({
-          title: `Kemungkinan category ini digunakan pada artikel/classroom. Apakah kamu ingin menghapus ?`,
+          title: `Kemungkinan tag ini digunakan pada artikel/classroom. Apakah kamu ingin menghapus ?`,
           icon: <ExclamationCircleOutlined />,
           content: item.name,
           okText:"Ya",
           cancelText:"Tidak",
           onOk() {
 
-			categoryController._delete(item.id)
-				.then(resp=>categoryController._updateList("remove",[item],index))
+			tagController._delete(item.id)
+				.then(resp=>tagController._updateList("remove",[item],index))
 				.catch(error=>console.log(error))
 
           },
@@ -108,8 +81,8 @@ const PageCategories = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah category</Button></li> */}
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/categories/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Category</a></Link></li>
+									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah tag</Button></li> */}
+									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/tags/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Tag</a></Link></li>
 								</ul>
 							</div>
 						</Col>
@@ -117,7 +90,7 @@ const PageCategories = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListCategories items={listCategories.list.items} foundDoc={listCategories.list.foundDocs} onDelete={onDeleteItem}/>
+								<ListTags accountId={auth.account.id} items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={onDeleteItem}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -134,8 +107,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-				listCategoriesRoutinePromise,
-				deleteCategoryRoutinePromise
+				deleteTagRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageCategories))
+)(withRouter(PageTags))

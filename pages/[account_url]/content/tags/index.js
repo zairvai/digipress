@@ -31,20 +31,33 @@ const PageTags = props => {
 	const tagController = new TagController(props)
 
 	const {confirm} = Modal
-
+	
 	React.useEffect(async ()=>{
+		
 		try{
-			
-			await tagController._list({
-			accountId:auth.account.id,
-			orderBy:"createdAt",
-			direction:"asc",
-			from:0,size:50})
-
+			await listItems({accountId:auth.account.id})
 		}catch(error){
 			console.log(error)
 		}
+
 	},[])
+
+	const listItems = async ({accountId,name=false,orderBy="createdAt",direction="asc",from=0,size=50}) => {
+
+        try{
+
+            await tagController._list({
+                accountId,
+                name,
+                orderBy,
+                direction,
+                from,size})
+
+        }catch(error){
+            console.log(error)
+        }
+
+    }
 
     const pagename=""
 	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Tags',`/${auth.account.uniqueURL}/content/tags`,'active']]
@@ -76,6 +89,7 @@ const PageTags = props => {
           },
         });
 	}
+	
 	
 	return (
 		<AppContainer>

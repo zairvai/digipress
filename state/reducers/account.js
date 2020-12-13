@@ -81,7 +81,7 @@ export const listAccounts = (state={list:[],...initialState},action) => {
                 error:false,
                 isError:false,
                 isSuccessFull:false,
-                list:[]
+                list:state.list
             })
         }
 

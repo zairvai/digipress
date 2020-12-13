@@ -7,8 +7,44 @@ import {Button,Tooltip} from 'antd'
 import Icon from '@mdi/react'
 import {mdiDelete} from '@mdi/js'
 
-const List = ({items,...props}) =>{
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { listTagsRoutinePromise } from 'State/routines/tag';
+import TagController from 'Library/controllers/TagController'
 
+const List = ({accountId,...props}) =>{
+
+    const {listTags} = props
+
+    const tagController = new TagController(props)
+
+    React.useEffect(async ()=>{
+		
+		try{
+
+			await listItems({accountId})
+
+		}catch(error){
+			console.log(error)
+		}
+
+    },[accountId])
+    
+    const listItems = async ({accountId,name=false,orderBy="createdAt",direction="asc",from=0,size=50}) => {
+
+        try{
+
+            await tagController._list({
+                accountId,
+                name,
+                orderBy,
+                direction,
+                from,size})
+
+        }catch(error){
+            console.log(error)
+        }
+
+    }
 
     const RowItem = ({item,index}) => (
         <tr>
@@ -33,13 +69,8 @@ const List = ({items,...props}) =>{
                     </tr>
                 </thead>
                 <tbody>
-                    {   items ?
-                            items.map((item,index)=>{
-
-                                return(
-                                    <RowItem key={`${item.name}${item.id}`} index={index} item={item}/>
-                                )
-                            })
+                    {   listTags.list.items ?
+                            listTags.list.items.map((item,index)=><RowItem key={`${item.name}${item.id}`} index={index} item={item}/>)
                             :
                             <></>
                     }
@@ -51,4 +82,13 @@ const List = ({items,...props}) =>{
 
 }
 
-export default connect(state=>state)(List)
+const Page =  connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+				listTagsRoutinePromise
+        },dispatch),dispatch
+    })
+)(List)
+
+export default React.memo(Page)

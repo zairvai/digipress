@@ -1,7 +1,7 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as mutations from 'Src/graphql/mutations'
 import * as queries from 'Src/graphql/queries'
-import {put,takeLatest,call} from 'redux-saga/effects'
+import {put,takeLatest,call,delay} from 'redux-saga/effects'
 
 import {
     createCategoryRoutine,
@@ -29,6 +29,8 @@ function* createCategory(action){
 
         const response = yield API.graphql(graphqlOperation(mutations.createCategory,{input:updateParams}))
 
+        yield delay(2000)
+        
         yield put(createCategoryRoutine.success({data:response.data.createCategory}))
 
 

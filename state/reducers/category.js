@@ -136,7 +136,7 @@ export const listCategories = (state={list:[],...initialState},action) => {
                 error:false,
                 isError:false,
                 isSuccessFull:false,
-                list:[]
+                list:state.list
             })
         }
 

@@ -137,7 +137,7 @@ export const listUsers = (state={list:[],...initialState},action) => {
                 error:false,
                 isError:false,
                 isSuccessFull:false,
-                list:[]
+                list:state.list
             })
         }
 

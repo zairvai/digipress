@@ -1,7 +1,7 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as mutations from 'Src/graphql/mutations'
 import * as queries from 'Src/graphql/queries'
-import {put,takeLatest,call} from 'redux-saga/effects'
+import {put,takeLatest,delay} from 'redux-saga/effects'
 
 import {
     createTagRoutine,
@@ -20,10 +20,12 @@ function* createTag(action){
 
         const {values} = action.payload
 
-        const name = values.name.trim()
+        const name = values.name.trim().toLowerCase()
         const accountId = values.accountId.trim()
 
         const response = yield API.graphql(graphqlOperation(mutations.createTag,{input:{name,accountId}}))
+
+        yield delay(2000)
 
         yield put(createTagRoutine.success({data:response.data.createTag}))
 
@@ -131,7 +133,7 @@ function* updateTag(action){
             expectedVersion : values.version
         }
 
-        if(values.name) updateParams.name = values.name.trim()
+        if(values.name) updateParams.name = values.name.trim().toLowerCase()
 
         const response = yield API.graphql(graphqlOperation(mutations.updateTag,{input:updateParams}))
 

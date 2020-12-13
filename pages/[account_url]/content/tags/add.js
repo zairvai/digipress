@@ -36,7 +36,7 @@ const PageTagAdd = props => {
     }
     
     const onSuccess = tag =>{
-        tagController._updateList("add",tag,0)
+        // tagController._updateList("add",tag,0)
         router.push(`/${auth.account.uniqueURL}/content/tags`)	
     }
 

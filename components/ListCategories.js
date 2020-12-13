@@ -12,6 +12,21 @@ const List = ({items,...props}) =>{
 
     const {auth} = props
 
+    const RowItem = ({item,index}) => (
+        <Link href={`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`} shallow>
+            <tr>
+                <td valign="middle">{index+1}</td>
+                <td valign="middle">{item.name}</td>
+                <td valign="middle">{item.desc}</td>
+                <td valign="middle" className="fright">
+                    <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
+                        <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={(e)=>{props.onDelete(item,index);e.stopPropagation(); }}/>}/>
+                    </Tooltip>
+                </td>
+            </tr>
+        </Link>
+    )
+
     return(
         <VuroxTableDark>
             <table className="table table-borderless">
@@ -27,20 +42,7 @@ const List = ({items,...props}) =>{
                     {   items ?
                             items.map((item,index)=>{
 
-                                return(
-                                    <Link key={`${item.name}${item.id}`} href={`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`} shallow>
-                                        <tr>
-                                            <td valign="middle">{index+1}</td>
-                                            <td valign="middle">{item.name}</td>
-                                            <td valign="middle">{item.desc}</td>
-                                            <td valign="middle" className="fright">
-                                                <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
-                                                    <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={(e)=>{props.onDelete(item,index);e.stopPropagation(); }}/>}/>
-                                                </Tooltip>
-                                            </td>
-                                        </tr>
-                                    </Link>
-                                )
+                                return(<RowItem key={`${item.name}${item.id}`} item={item} index={index}/>)
                             })
                             :
                             <></>

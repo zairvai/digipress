@@ -33,7 +33,7 @@ export const createTag = (state={item:{},...initialState},action) => {
         case createTagRoutine.SUCCESS : {
 
             const {data} = action.payload
-
+            
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,
@@ -137,7 +137,7 @@ export const listTags = (state={list:[],...initialState},action) => {
                 error:false,
                 isError:false,
                 isSuccessFull:false,
-                list:[]
+                list:state.list
             })
         }
 
