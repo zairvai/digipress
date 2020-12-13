@@ -40,9 +40,9 @@ const FormAuth = props => {
 
     const authController = new AuthController(props)
     
-    React.useEffect(()=>{
-        authController._initForgotPassword()
-    },[])
+    // React.useEffect(()=>{
+    //     authController._initForgotPassword()
+    // },[])
 
     const onSubmit = values =>{
         authController._forgotPassword(values.email)
