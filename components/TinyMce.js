@@ -60,7 +60,7 @@ const TinyMce = ({id,content,...props}) =>{
                     })
                     
                 })
-        },1000)
+        },100)
         
         
         return ()=>{
