@@ -152,9 +152,9 @@ const FormArticle = ({item,...props}) => {
                                     defaultValue=""
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Content">
+                                        <Form.Item label="Content" className="mb-0">
                                            
-                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value}/>
+                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi artikel..."/>
                                             
                                         </Form.Item>
                                     }

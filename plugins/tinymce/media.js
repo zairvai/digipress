@@ -5,12 +5,12 @@
 
   function Plugin(){
   
-    global.add("custom-media",function(editor){
+    global.add("mymedia",function(editor){
       
       console.log(editor)
       console.log("shit")
 
-      editor.ui.registry.addButton("custom-media",{
+      editor.ui.registry.addButton("mymedia",{
         text:"Add Media",
         tooltip:"add shit",
         onAction:function(){

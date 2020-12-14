@@ -11,7 +11,7 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-
+import AppContainer from 'Templates/AppContainer'
 import FormArticle from 'Components/FormArticle'
 
 const PageArticleAdd = props => {
@@ -25,7 +25,7 @@ const PageArticleAdd = props => {
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
 	return (
-		<React.Fragment>
+		<AppContainer>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>
@@ -38,7 +38,7 @@ const PageArticleAdd = props => {
 					<FormArticle/>
 				</ContentLayout>
 			</VuroxLayout>
-		</React.Fragment>
+		</AppContainer>
 	);
 	
 }
