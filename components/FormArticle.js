@@ -25,18 +25,8 @@ const schema = yup.object().shape({
 
 const FormArticle = ({item,...props}) => {
 
-    const [formLayout,setFormLayout] = React.useState("vertical")
-    
-    // const [TinyMce,setTinyMce] = React.useState(null)
-
     const categoryOptions = props.categories
     const tagOptions = props.tags
-
-    
-    // React.useEffect(async()=>{
-    //     const TinyMceComponent = await import("Components/TinyMce")
-    //     setTinyMce(TinyMceComponent.default)
-    // },[])
 
     React.useEffect(()=>{
         if(item){
@@ -130,8 +120,7 @@ const FormArticle = ({item,...props}) => {
 
     return (
         <Form
-            layout={formLayout}
-            initialValues={{layout:formLayout}}
+            layout="vertical"
             onFinish={handleSubmit(onSubmit,onError)}
         >
             <Row>
@@ -165,7 +154,7 @@ const FormArticle = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Content">
                                            
-                                            <TinyMce id="myEditor" onChange={props.onChange} value={props.value}/>
+                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value}/>
                                             
                                         </Form.Item>
                                     }

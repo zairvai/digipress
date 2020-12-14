@@ -8,6 +8,7 @@ import {
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import TinyMce from 'Components/TinyMce'
 
 const {Text} = Typography
 
@@ -161,7 +162,7 @@ const FormArticle = ({item,...props}) => {
                             </Col>
                         </Row>
                     
-                        {/* <Row>
+                        <Row>
                             <Col md={24}>
                                 <Controller
                                     name="content"
@@ -169,12 +170,12 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Content">
-                                            <RichTextEditor style={{height:"600px"}} className="mb-3" value={props.value} onChange={props.onChange}/>
+                                             <TinyMce id="classroomEditor" onChange={props.onChange} value={props.value}/>
                                         </Form.Item>
                                     }
                                 />
                             </Col>
-                        </Row> */}
+                        </Row>
                     </VuroxComponentsContainer>
                 </Col>
                 <Col md={6}>

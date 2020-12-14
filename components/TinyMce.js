@@ -5,55 +5,65 @@ import dynamic from 'next/dynamic'
 
 const TinyMce = ({id,content,...props}) =>{
     
-    const [editor,setEditor] = React.useState()
-    const [tinymce,setTinymce] = React.useState(null)
     
 
-    React.useEffect(async ()=>{
-        const tce = await import('tinymce/tinymce')
-        setTinymce(tce.default)
+    React.useEffect(()=>{
+
+        console.log("construct")
+
+        let tinyMce = null
+        let editor = null
+
+        setTimeout(()=>{
+        import('tinymce/tinymce')
+            .then(obj=>{
+
+                tinyMce = obj.default
+
+                const url = window.location
+
+                console.log("prepare init")
+
+                tinymce.init({
+                    selector:`#${id}`,
+                    skin_url:`${url.origin}/modules/tinymce/skins/ui/oxide`,
+                    //plugins:"wordcount table",
+                    setup:(tinyEditor)=>{
+                        console.log(tinyEditor)
+                        console.log("setup")
+                        
+                        editor = tinyEditor
+                        
+                        tinyEditor.on("keyup change",()=>{
+                            const content = tinyEditor.getContent()
+                            props.onEditorChange(content)
+                        })
+                    }
+                })
+                
+            })
+        },1000)
+        
+        
+        return ()=>{
+            
+            console.log("unmount")
+
+            if(tinyMce){
+                console.log("remove editor")
+                tinyMce.remove(editor)
+            }
+            
+        }
+
     },[])
 
-    React.useEffect(async ()=>{
-
-        console.log(tinymce)
-
-        if(tinymce){
-
-            await import("tinymce/plugins/wordcount")
-            await import("tinymce/plugins/table")
-
-            const url = window.location
-
-            tinymce.init({
-                selector:`#${id}`,
-                skin_url:`${url.origin}/modules/tinymce/skins/ui/oxide`,
-                plugins:"wordcount table",
-                setup:(tinyEditor)=>{
-                    console.log("setup")
-                    setEditor(tinyEditor)
-                    tinyEditor.on("keyup change",()=>{
-                        const content = tinyEditor.getContent()
-                        props.onEditorChange(content)
-                    })
-                }
-            })
-
-        }
-
-        return ()=>{
-            if(tinymce) tinymce.remove(editor)
-        }
-    },[tinymce])
-
     return <>
-        {   tinymce && 
-            <textarea
-                id={id}
-                value={content}
-                onChange={(e)=>console.log(e)}
-        />
-        }
+    
+        <textarea style={{visibility:"hidden"}}
+            id={id}
+            value={content}
+            onChange={(e)=>console.log(e)}/>
     </>
         
 }

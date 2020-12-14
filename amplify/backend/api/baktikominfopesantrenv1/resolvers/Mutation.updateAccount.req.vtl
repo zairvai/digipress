@@ -12,9 +12,9 @@
 	$util.qr($input.put("name",$ctx.args.input.name))
 #end
 
-## #if( !$util.isNull($ctx.args.input.uniqueURL ))
-## 	$util.qr($input.put("uniqueURL",$ctx.args.input.uniqueURL))
-## #end
+#if( !$util.isNull($ctx.args.input.uniqueURL ))
+	$util.qr($input.put("uniqueURL",$ctx.args.input.uniqueURL))
+#end
 
 #if( !$util.isNull($ctx.args.input.address ))
 	$util.qr($input.put("address",$ctx.args.input.address))
