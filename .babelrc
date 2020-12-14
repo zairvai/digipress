@@ -20,7 +20,8 @@
           "Utilities": "./utilities",
           "State":"./state",
           "Library":"./library",
-          "Helper":"./helper"
+          "Helper":"./helper",
+          "Plugins":"./plugins"
 	      }
 	    }
     ]

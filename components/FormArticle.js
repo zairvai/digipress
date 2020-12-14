@@ -4,12 +4,14 @@ import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,T
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import RichTextEditor from 'Components/RichTextEditor'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import {Editor} from '@tinymce/tinymce-react'
+// import {Editor} from '@tinymce/tinymce-react'
+
+// import Editor from 'Components/Editor'
+import TinyMce from 'Components/TinyMce'
 
 const {Text} = Typography
 
@@ -27,11 +29,18 @@ const schema = yup.object().shape({
 const FormArticle = ({item,...props}) => {
 
     const [formLayout,setFormLayout] = React.useState("vertical")
+    
+    // const [TinyMce,setTinyMce] = React.useState(null)
 
     const categoryOptions = props.categories
     const tagOptions = props.tags
 
     
+    // React.useEffect(async()=>{
+    //     const TinyMceComponent = await import("Components/TinyMce")
+    //     setTinyMce(TinyMceComponent.default)
+    // },[])
+
     React.useEffect(()=>{
         if(item){
 
@@ -151,34 +160,20 @@ const FormArticle = ({item,...props}) => {
                     
                         <Row>
                             <Col md={24}>
+                                
                                 <Controller
                                     name="content"
                                     defaultValue=""
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Content">
-                                            {/* <RichTextEditor style={{height:"600px"}} className="mb-3" value={props.value} onChange={props.onChange}/> */}
-
-                                            <Editor
-                                                initialValue="<p>This is the initial content of the editor</p>"
-                                                init={{
-                                                height: 500,
-                                                menubar: false,
-                                                plugins: [
-                                                    'advlist autolink lists link image charmap print preview anchor',
-                                                    'searchreplace visualblocks code fullscreen',
-                                                    'insertdatetime media table paste code help wordcount imagetools'
-                                                ],
-                                                toolbar:
-                                                    'undo redo | formatselect | bold italic backcolor | \
-                                                    alignleft aligncenter alignright alignjustify | \
-                                                    bullist numlist | link image | removeformat | help'
-                                                }}
-                                                onEditorChange={props.onChange}
-                                            />
+                                           
+                                            <TinyMce id="myEditor" onChange={props.onChange} value={props.value}/>
+                                            
                                         </Form.Item>
                                     }
                                 />
+                                
                             </Col>
                         </Row>
                     </VuroxComponentsContainer>

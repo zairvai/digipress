@@ -83,6 +83,7 @@
     "styled-jsx": "^3.2.5",
     "svg-pan-zoom": "^3.6.1",
     "tinify": "^1.6.0-beta.2",
+    "tinymce": "^5.6.2",
     "yarn": "^1.22.4",
     "yup": "^0.31.1"
   },
@@ -90,6 +91,7 @@
     "@babel/plugin-syntax-import-assertions": "^7.12.1",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "file-loader": "^6.2.0",
     "raw-loader": "^4.0.2"
   }
 }
