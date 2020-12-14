@@ -19,6 +19,8 @@ import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListCategories from 'Components/ListCategories'
 import AppContainer from 'Templates/AppContainer'
+import Permission from 'Library/controllers/Permission'
+import AuthController from 'Library/controllers/AuthController'
 import CategoryController from 'Library/controllers/CategoryController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -35,23 +37,35 @@ const PageCategories = props => {
 	React.useEffect(async ()=>{
 		
 		try{
-			await listItems({accountId:auth.account.id})
+			
+			let params = {}
+
+			if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+				params.accountId = auth.account.id
+			}
+
+			await listItems(params)
+
 		}catch(error){
 			console.log(error)
 		}
 
 	},[])
 
-	const listItems = async ({accountId,name=false,orderBy="createdAt",direction="asc",from=0,size=50}) => {
+	const listItems = async ({accountId=false,name=false,orderBy="createdAt",direction="asc",from=0,size=50}=false) => {
 
         try{
 
-            await categoryController._list({
-                accountId,
-                name,
+			const listParams = {
                 orderBy,
                 direction,
-                from,size})
+                from,size
+			}
+
+			if(accountId) listParams.accountId = accountId
+			if(name) listParams.name = name
+
+            await categoryController._list(listParams)
 
         }catch(error){
             console.log(error)
@@ -109,7 +123,9 @@ const PageCategories = props => {
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
 									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah category</Button></li> */}
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/categories/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Category</a></Link></li>
+									{
+										Permission.ADD_CATEGORY({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/categories/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Category</a></Link></li>
+									}
 								</ul>
 							</div>
 						</Col>

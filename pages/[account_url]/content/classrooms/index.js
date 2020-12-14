@@ -23,6 +23,7 @@ import ClassroomController from 'Library/controllers/ClassroomController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
+import AuthController from 'AuthController'
 
 const PageClassrooms = props => {
 

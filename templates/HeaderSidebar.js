@@ -17,8 +17,7 @@ const Sidebar = (props) => {
 			<ul>
 
 			{
-				AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
-					|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
+				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
 				<>
 					<VerticalNavHeading>Report</VerticalNavHeading>
 					<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
@@ -32,7 +31,7 @@ const Sidebar = (props) => {
 					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					
 			{
-				!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth) ?
+				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ?
 				
 				<>
 					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />

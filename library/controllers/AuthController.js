@@ -6,7 +6,7 @@ import {
     setAccount
 } from 'State/actions/auth'
 
-import AuthController from './AccountController'
+import AccountController from './AccountController'
 
 export default class Controller{
 
@@ -21,7 +21,7 @@ export default class Controller{
         
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="owner") return true
+            if(access.accountId === AccountController.APP_ACCOUNT_ID && access.role==="owner") return true
         }
         return false
 
@@ -31,7 +31,7 @@ export default class Controller{
         
         if(auth.user){
             const {access} = auth.user
-            if(access.accountId === AuthController.APP_ACCOUNT_ID && access.role==="admin") return true
+            if(access.accountId === AccountController.APP_ACCOUNT_ID && access.role==="admin") return true
         }
         return false
 
@@ -57,6 +57,40 @@ export default class Controller{
         return false
 
     }
+
+    static isTutor = (auth) => {
+
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === auth.account.id && access.role==="tutor") return true
+        }
+        return false
+
+    }
+
+    static isStudent = (auth) => {
+
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === auth.account.id && access.role==="student") return true
+        }
+        return false
+
+    }
+
+    static isMember = (auth) => {
+
+        if(auth.user){
+            const {access} = auth.user
+            if(access.accountId === auth.account.id && access.role==="member") return true
+        }
+        return false
+
+    }
+    
+
+
+
 
     static getRole = ({user,account}) => {
 

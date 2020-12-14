@@ -13,34 +13,47 @@ will be passed as the event to AWS Lambda.
 #set($accountId=$ctx.args.input.accountId)
 
 #set($sort=[
-    {
-      "${orderBy}": {
-        "order": "${direction}"
-      }
-    }
-  ])
-
-#set($query={
-  "bool": {
-    "must": [
-      {"match": {"accountId": $accountId}}
-    ]
+{
+  "${orderBy}": {
+    "order": "${direction}"
   }
-})
+}
+])
 
-#if(!$util.isNull($ctx.args.input.name))
-  #set($matchNamePrefix = {
-    "match_phrase_prefix": {
-        "name": {
-            "query": $ctx.args.input.name
-          }
-      }
+
+#if($util.isNull($ctx.args.input.accountId) && $util.isNull($ctx.args.input.name))
+
+  #set($query={
+      "match_all": {}
   })
 
-  $util.qr($query.bool.must.add($matchNamePrefix))
+#else
 
+  #set($query={
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "accountId": $accountId
+          }
+        }
+      ]
+    }
+  })
+
+  #if(!$util.isNull($ctx.args.input.name))
+    #set($matchNamePrefix = {
+      "match_phrase_prefix": {
+          "name": {
+              "query": $ctx.args.input.name
+            }
+        }
+    })
+
+    $util.qr($query.bool.must.add($matchNamePrefix))
+
+  #end
 #end
-
 
 {
   "version" : "2017-02-28",
