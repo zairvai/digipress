@@ -16,12 +16,12 @@ const TinyMce = ({id,content,...props}) =>{
 
     React.useEffect(async ()=>{
 
+        console.log(tinymce)
+        
         if(tinymce){
 
             await import("tinymce/plugins/wordcount")
             await import("tinymce/plugins/table")
-
-            console.log(tinymce)
 
             const url = window.location
 
@@ -42,7 +42,7 @@ const TinyMce = ({id,content,...props}) =>{
         }
 
         return ()=>{
-            if(tinymce) tinymce.remove(editor)
+            //if(tinymce) tinymce.remove(editor)
         }
     },[tinymce])
 

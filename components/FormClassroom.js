@@ -4,7 +4,7 @@ import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,T
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import RichTextEditor from 'Components/RichTextEditor'
+// import RichTextEditor from 'Components/RichTextEditor'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -161,7 +161,7 @@ const FormArticle = ({item,...props}) => {
                             </Col>
                         </Row>
                     
-                        <Row>
+                        {/* <Row>
                             <Col md={24}>
                                 <Controller
                                     name="content"
@@ -174,7 +174,7 @@ const FormArticle = ({item,...props}) => {
                                     }
                                 />
                             </Col>
-                        </Row>
+                        </Row> */}
                     </VuroxComponentsContainer>
                 </Col>
                 <Col md={6}>
