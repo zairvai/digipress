@@ -22,9 +22,17 @@ const schema = yup.object().shape({
     phoneCode:yup.string().required("Mohon masukkan kode.").max(5,"Maksimal 55 angka."),
     phoneNumber:yup.string().typeError("Mohon masukkan nomer telpon.").required("Mohon masukkan nomer telpon.").max(15,"Maksimal 15 angka."),
     emailAddress:yup.string().required("Mohon masukkan alamat email.").email("Masukan alamat email dengan benar").max(64,"Maksimal 64 karakter."),
-    password:yup.string().required("Mohon ketik password kamu."),
+    password:yup.string().required("Mohon ketik password kamu.").min(8,"Password minimal 8 karakter.").max(99,"Maksimal 99 karakter")
+        .test("test-name","Masukan password kombinasi huruf besar, kecil dan angka.",
+            value=>{
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value)
+            }
+),
     confirm_password:yup.string().oneOf([yup.ref("password"),null],"Konfirmasi tidak sesuai.")
 })
+
+"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
 
 const FormUser = ({item,...props}) => {
 
