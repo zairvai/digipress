@@ -31,19 +31,13 @@ const PageLogin = props =>{
 	 
 	 React.useEffect(async()=>{
 		
-		authController._initSignIn()
-		
 		try{
-			//get account id by unique URL
-			const account = await accountController._getAccountByUniqueUrl({url:router.query.account_url})
-
-			authController._setAccount(account.data)
-
+			
 			// router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
 			
 			if(auth.isLoggedIn){
 				
-				if(auth.user.access.accountId != account.data.id){
+				if(auth.user.access.accountId != auth.account.id){
 					await authController._signOut()
 					setVisible(true)
 				}
@@ -52,7 +46,17 @@ const PageLogin = props =>{
 					router.push(getRedirectToDefaultPath(auth,auth.user.access.role))
 				}
 			}
-			else setVisible(true)
+			else{
+				
+				authController._initSignIn()
+				//get account id by unique URL
+				const account = await accountController._getAccountByUniqueUrl({url:router.query.account_url})
+
+				authController._setAccount(account.data)
+				
+				setVisible(true)
+
+			}
 		}
 		catch(error){
 			console.log(error)
