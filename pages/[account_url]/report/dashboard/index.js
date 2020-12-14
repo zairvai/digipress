@@ -46,6 +46,8 @@ import AppContainer from 'Templates/AppContainer'
 
 class Page extends React.Component {
 
+	
+
 	static contextType = vuroxContext
 	state = {
 		doubleBarChartData: [],
@@ -56,6 +58,8 @@ class Page extends React.Component {
     links = []
 
 	componentDidMount(){
+
+		console.log(this.props)
         
         const visitors = this.props.company.visitors[0].dailyStats
         const profit = this.props.company.profit
@@ -66,16 +70,12 @@ class Page extends React.Component {
 		this.setState({doubleBarChartData: barChartData })
         this.setState({doubleBarChartData2: barChartData2 })
         
-        
-        var {query} = this.props.router 
-        this.id = query.id
-        
         this.item = this.props.campaigns.item 
         
         this.links = [['Main','/dashboard',''],['Campaign','/campaign','active']]
 
-    }
-    
+	}
+	
 	render() {
 		
 		return (

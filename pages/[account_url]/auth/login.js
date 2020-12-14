@@ -27,7 +27,7 @@ const PageLogin = props =>{
 	const authController = new AuthController(props)
 	const accountController = new AccountController(props)
 
-	const [visible,setVisible] = React.useState(true)
+	const [visible,setVisible] = React.useState(false)
 	 
 	 React.useEffect(async()=>{
 		
@@ -60,8 +60,6 @@ const PageLogin = props =>{
 			
 	},[])
 
-	
-
 	const goToForgotPassword = () =>{
         router.push('/auth/password-recovery')
 	}
@@ -78,11 +76,12 @@ const PageLogin = props =>{
 
 	return(
 		<React.Fragment>
+			
 			<Header/>
 			<VuroxLayout>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-
-					<div className={visible ? 'd-block':'d-none'}>
+					<div style={visible ? {visibility:"visible"} : {visibility:"hidden"}}>	
+					
 						<Row className="justify-content-center fullHeight">
 							<Col md={8} sm={24} xs={24} className="fullHeight">
 								<Row>
@@ -102,10 +101,9 @@ const PageLogin = props =>{
 							</Col>
 						</Row>
 					</div>
-
-
 				</ContentLayout>
 			</VuroxLayout>
+			
 		</React.Fragment>
 	)
 	

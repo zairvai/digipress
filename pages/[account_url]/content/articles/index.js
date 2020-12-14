@@ -28,6 +28,8 @@ import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/t
 
 const PageArticles = props => {
 
+	console.log(props)
+	
 	const {auth,router,listTags} = props
 
 	const articleController = new ArticleController(props)

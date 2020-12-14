@@ -6,10 +6,11 @@ import { getAuthUserRoutinePromise,signOutRoutinePromise} from 'State/routines/a
 import AuthController from 'Library/controllers/AuthController'
 import AccountController from 'Library/controllers/AccountController'
 import {getRedirectToDefaultPath} from 'Helper'
+
 const Container = props => {
 
     const authController = new AuthController(props)
-
+    const [visible,setVisible] = React.useState(false)
     const {router,auth} = props
    
     React.useEffect(async()=>{
@@ -19,12 +20,16 @@ const Container = props => {
 
         let shouldSignOut = false
 
-        if(auth.account.uniqueURL != router.query.account_url) getRedirectToDefaultPath(auth,auth.user.access.role)
-
         try{
             await authController._get()
+            
             if(!auth.user.access) shouldSignOut = true
-                
+            else {
+                if(auth.account.uniqueURL != router.query.account_url) router.push(getRedirectToDefaultPath(auth,auth.user.access.role))    
+                setVisible(true)
+            }
+            
+
         }catch(error){
             shouldSignOut = true
             console.log(error)
@@ -35,16 +40,20 @@ const Container = props => {
             router.push(`/${auth.account.uniqueURL}/auth/login`)
         }
 
+        
+
     },[])
 
     // React.useEffect(()=>{
 	// 	if(props.query !== auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
     // },[props.query])
-    
+     
 
     return(
         <>
+        <div style={visible ? {visibility:"visible"} : {visibility:"hidden"} }>
             {props.children}
+        </div>
         </>
     )
 
