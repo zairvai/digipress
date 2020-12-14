@@ -8,9 +8,6 @@ import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-// import {Editor} from '@tinymce/tinymce-react'
-
-// import Editor from 'Components/Editor'
 import TinyMce from 'Components/TinyMce'
 
 const {Text} = Typography

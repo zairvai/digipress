@@ -10,14 +10,14 @@ const TinyMce = ({id,content,...props}) =>{
     
 
     React.useEffect(async ()=>{
-        const tce = await import('tinymce')
+        const tce = await import('tinymce/tinymce')
         setTinymce(tce.default)
     },[])
 
     React.useEffect(async ()=>{
 
         console.log(tinymce)
-        
+
         if(tinymce){
 
             await import("tinymce/plugins/wordcount")
@@ -42,7 +42,7 @@ const TinyMce = ({id,content,...props}) =>{
         }
 
         return ()=>{
-            //if(tinymce) tinymce.remove(editor)
+            if(tinymce) tinymce.remove(editor)
         }
     },[tinymce])
 
