@@ -108,5 +108,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "storage": {
+    "baktikominfopesantrenv1": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

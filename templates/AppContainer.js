@@ -21,12 +21,13 @@ const Container = props => {
         let shouldSignOut = false
 
         try{
+
             await authController._get()
             
             if(!auth.user.access) shouldSignOut = true
             else {
                 if(auth.account.uniqueURL != router.query.account_url) router.push(getRedirectToDefaultPath(auth,auth.user.access.role))    
-                setVisible(true)
+                else setVisible(true)
             }
             
 

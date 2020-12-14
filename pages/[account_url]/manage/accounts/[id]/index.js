@@ -16,6 +16,7 @@ import UserController from 'Library/controllers/UserController'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { bindPromiseCreators } from 'redux-saga-routines';
+import { signOutRoutinePromise } from 'State/routines/auth'
 import { deleteAccountRoutinePromise,getAccountRoutinePromise } from 'State/routines/account';
 import { listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
 
@@ -25,6 +26,7 @@ const {confirm} = Modal
 
 const PageAccountId = props => {
 
+    const authController = new AuthController(props)
     const accountController = new AccountController(props)
     const userController = new UserController(props)
 
@@ -96,7 +98,8 @@ const PageAccountId = props => {
           okText:"Lanjutkan",
           cancelText:"Tidak",
           onOk() {
-            router.push(`${url.origin}/${item.uniqueURL}/auth/login`)
+            authController._signOut()
+                .then(()=>router.push(`${url.origin}/${item.uniqueURL}/auth/login`))
           },
           onCancel() {
             console.log('Cancel');
@@ -229,6 +232,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
+            signOutRoutinePromise,
             deleteAccountRoutinePromise,
             getAccountRoutinePromise,
             listUsersRoutinePromise,
