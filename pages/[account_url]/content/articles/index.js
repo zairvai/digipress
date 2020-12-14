@@ -19,6 +19,8 @@ import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListTags from 'Components/ListTags'
 import AppContainer from 'Templates/AppContainer'
+import Permission from 'Library/controllers/Permission'
+import AuthController from 'Library/controllers/AuthController'
 import ArticleController from 'Library/controllers/ArticleController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -35,7 +37,15 @@ const PageArticles = props => {
 	React.useEffect(async ()=>{
 		
 		try{
-			await listItems({accountId:auth.account.id})
+			
+			let params = {}
+
+			if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+				params.accountId = auth.account.id
+			}
+
+			await listItems(params)
+
 		}catch(error){
 			console.log(error)
 		}
@@ -46,12 +56,16 @@ const PageArticles = props => {
 
         try{
 
-            await articleController._list({
-                accountId,
-                name,
+			const listParams = {
                 orderBy,
                 direction,
-                from,size})
+                from,size
+			}
+
+			if(accountId) listParams.accountId = accountId
+			if(name) listParams.name = name
+
+            await articleController._list(listParams)
 
         }catch(error){
             console.log(error)
@@ -109,7 +123,7 @@ const PageArticles = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Article</a></Link></li>
+									{ Permission.ADD_ARTICLE({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Article</a></Link></li>}
 								</ul>
 							</div>
 						</Col>

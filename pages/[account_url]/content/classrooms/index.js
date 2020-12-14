@@ -19,11 +19,11 @@ import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListTags from 'Components/ListTags'
 import AppContainer from 'Templates/AppContainer'
+import Permission from 'Library/controllers/Permission'
+import AuthController from 'Library/controllers/AuthController'
 import ClassroomController from 'Library/controllers/ClassroomController'
-
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
-import AuthController from 'AuthController'
 
 const PageClassrooms = props => {
 
@@ -36,7 +36,15 @@ const PageClassrooms = props => {
 	React.useEffect(async ()=>{
 		
 		try{
-			await listItems({accountId:auth.account.id})
+			
+			let params = {}
+
+			if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+				params.accountId = auth.account.id
+			}
+
+			await listItems(params)
+
 		}catch(error){
 			console.log(error)
 		}
@@ -47,12 +55,16 @@ const PageClassrooms = props => {
 
         try{
 
-            await classroomController._list({
-                accountId,
-                name,
+            const listParams = {
                 orderBy,
                 direction,
-                from,size})
+                from,size
+			}
+
+			if(accountId) listParams.accountId = accountId
+			if(name) listParams.name = name
+
+            await classroomController._list(listParams)
 
         }catch(error){
             console.log(error)
@@ -110,7 +122,7 @@ const PageClassrooms = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Classroom</a></Link></li>
+									{ Permission.ADD_CLASSROOM({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Classroom</a></Link></li>}
 								</ul>
 							</div>
 						</Col>

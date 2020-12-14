@@ -8,6 +8,24 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
+    static ADD_ARTICLE = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+    static ADD_CLASSROOM = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
 
     //TAG
 
@@ -19,6 +37,8 @@ export default class Controller{
         return true
 
     }
+
+    //CATEGORY
 
     static ADD_CATEGORY = ({auth,...props}) => {
 
