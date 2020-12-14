@@ -22,32 +22,35 @@ const TinyMce = ({id,content,...props}) =>{
 
                     console.log("prepare init")
 
-                    await import("Plugins/tinymce/media")
-                    await import("tinymce/plugins/advlist")
-                    await import("tinymce/plugins/lists")
-                    await import("tinymce/plugins/fullscreen")
-                    await import("tinymce/plugins/autolink")
-                    await import("tinymce/plugins/link")
-                    await import("tinymce/plugins/code")
-                    await import("tinymce/plugins/autoresize")
+                    const plugins = [
+                        import("Plugins/tinymce/media"),
+                        import("tinymce/plugins/advlist"),
+                        import("tinymce/plugins/lists"),
+                        import("tinymce/plugins/fullscreen"),
+                        import("tinymce/plugins/autolink"),
+                        import("tinymce/plugins/link"),
+                        import("tinymce/plugins/code"),
+                        import("tinymce/plugins/autoresize")
+                    ]
+
+                    await Promise.all(plugins)
 
                     tinymce.init({
                         selector:`#${id}`,
                         skin_url:`${url.origin}/modules/tinymce/skins/ui/oxide`,
                         plugins:["advlist lists fullscreen autolink link code autoresize"],
                         menubar:false,
-                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | code | fullscreen ",
-                        toolbar2:"bullist numlist | link | ",
+                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen ",
                         autoresize_on_init: false,
                         autoresize_bottom_margin: 50,
-                        min_height:600,
+                        min_height:props.minHeight ? props.minHeight : 600,
                         max_height:900,
                         setup:(tinyEditor)=>{
-                            console.log(tinyEditor)
-                            console.log("setup")
-                            
                             editor = tinyEditor
                             
+                            tinyEditor.on('keydown', function (e, evt) {
+                                if (e.keyCode == 9) e.preventDefault();
+                            })
                             tinyEditor.on("keyup change",()=>{
                                 const content = tinyEditor.getContent()
                                 props.onChange(content)

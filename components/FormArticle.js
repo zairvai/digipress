@@ -134,7 +134,7 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     // rules={{required:true,message:"isi ini"}}
                                     render={props=>
-                                        <Form.Item label="Title">
+                                        <Form.Item label="Judul artikel">
                                             <Input size="large" placeholder="Artikel" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
@@ -152,9 +152,9 @@ const FormArticle = ({item,...props}) => {
                                     defaultValue=""
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Content" className="mb-0">
+                                        <Form.Item label="Tulisan" className="mb-0">
                                            
-                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi artikel..."/>
+                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>
                                     }
@@ -172,13 +172,13 @@ const FormArticle = ({item,...props}) => {
                                     name="category"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Category" className="mb-0">
+                                        <Form.Item label="Kategori" className="mb-0">
                                             <Select
                                                 labelInValue
                                                 value={props.value}
                                                 showSearch
                                                 size="large"
-                                                placeholder="Select a category"
+                                                placeholder="Pilih kategori"
                                                 optionFilterProp="children"
                                                 optionLabelProp="label"
                                                 onChange={onSelectCategoryChange.bind(this)}
@@ -193,7 +193,7 @@ const FormArticle = ({item,...props}) => {
                                     }
                                 />
                                 <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new category</Button>
+                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah kategory</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -203,14 +203,14 @@ const FormArticle = ({item,...props}) => {
                                     name="tags"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Tags" className="mb-0">
+                                        <Form.Item label="Tag" className="mb-0">
                                             <Select
                                                 labelInValue
                                                 value={props.value}
                                                 showSearch
                                                 size="large"
                                                 mode="multiple"
-                                                placeholder="Select tags"
+                                                placeholder="Pilih tag"
                                                 optionFilterProp="children"
                                                 optionLabelProp="label"
                                                 onChange={onSelectTagsChange.bind(this)}
@@ -230,7 +230,7 @@ const FormArticle = ({item,...props}) => {
                                 />
 
                                 <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new tag</Button>
+                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah tag</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -242,7 +242,7 @@ const FormArticle = ({item,...props}) => {
                                     // onChange={onAllowCommentChange.bind(this)}
                                     render={props=>{
                                             
-                                            return <Checkbox onChange={onAllowCommentChange.bind(this)} checked={props.value}>Allow comment</Checkbox>
+                                            return <Checkbox onChange={onAllowCommentChange.bind(this)} checked={props.value}>Izinkan komentar</Checkbox>
                                         }
                                     }
                                 />
@@ -256,10 +256,10 @@ const FormArticle = ({item,...props}) => {
                                     name="readAccess"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Who can read this article" className="mt-3 mb-0">
+                                        <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
                                             <Radio.Group onChange={onReadAccessChange.bind(this)} value={props.value}>
-                                                <Radio value="public">Public</Radio>
-                                                <Radio value="private">Private</Radio>
+                                                <Radio value="public">Umum</Radio>
+                                                <Radio value="private">Internal</Radio>
                                             </Radio.Group>
                                         </Form.Item>
                                     }
@@ -285,11 +285,11 @@ const FormArticle = ({item,...props}) => {
                                         :
                                         <>
                                             <Col md={11}>
-                                                <Button size="medium" type="primary" htmlType="submit" block>Publish</Button>
+                                                <Button size="medium" type="primary" htmlType="submit" block>Publikasi</Button>
                                             </Col>
                                             <Col md={2}></Col>
                                             <Col md={11}>
-                                                <Button size="medium" type="primary" danger block>Draft</Button>
+                                                <Button size="medium" type="primary" danger block>Simpan</Button>
                                             </Col>
                                         </>
                                     }
