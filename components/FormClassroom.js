@@ -4,17 +4,17 @@ import { Row, Col,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,T
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-// import RichTextEditor from 'Components/RichTextEditor'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+
 import TinyMce from 'Components/TinyMce'
 
 const {Text} = Typography
 
 //validation schema
 const schema = yup.object().shape({
-    title:yup.string().required("Please type in the title of your classroom").max(100,"Your classroom title must not exceed 100 chars"),
+    title:yup.string().required("Mohon ketik judul artikel").max(100,"Judul tidak melebihi 100 karakter"),
     //summary:yup.string(),
     content:yup.string(),
     category:yup.object(),
@@ -23,14 +23,11 @@ const schema = yup.object().shape({
     readAccess:yup.string()
 })
 
-const FormArticle = ({item,...props}) => {
-
-    const [formLayout,setFormLayout] = React.useState("vertical")
+const FormClassroom = ({item,...props}) => {
 
     const categoryOptions = props.categories
     const tagOptions = props.tags
 
-    
     React.useEffect(()=>{
         if(item){
 
@@ -55,13 +52,6 @@ const FormArticle = ({item,...props}) => {
         else return
     },[])
 
-
-    React.useEffect(()=>{
-
-        console.log(formState)
-
-    },[formState])
-
     const {
         handleSubmit,
         reset,
@@ -72,8 +62,7 @@ const FormArticle = ({item,...props}) => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
-                title: item ? item.name : "",
-                //summary:item ? item.summary : "",
+                title:item ? item.name : "",
                 content:item ? item.content : "",
                 category:{id:null,value:null},
                 tags:[],
@@ -94,10 +83,6 @@ const FormArticle = ({item,...props}) => {
 
     }
     
-
-    const onFormLayoutChange = ({ layout }) => {
-        setFormLayout(layout)
-    };
 
     const onSelectCategoryChange = selected =>{
 
@@ -135,10 +120,7 @@ const FormArticle = ({item,...props}) => {
 
     return (
         <Form
-            layout={formLayout}
-            initialValues={{layout:formLayout}}
-            // onSubmit={handleSubmit(onSubmit,onError)}
-            //onSubmit={()=>alert("submit")}
+            layout="vertical"
             onFinish={handleSubmit(onSubmit,onError)}
         >
             <Row>
@@ -152,8 +134,8 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     // rules={{required:true,message:"isi ini"}}
                                     render={props=>
-                                        <Form.Item label="Title">
-                                            <Input size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                        <Form.Item label="Nama kelas belajar">
+                                            <Input size="large" placeholder="Artikel" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
                                     }
@@ -164,16 +146,20 @@ const FormArticle = ({item,...props}) => {
                     
                         <Row>
                             <Col md={24}>
+                                
                                 <Controller
                                     name="content"
                                     defaultValue=""
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Content">
-                                             <TinyMce id="classroomEditor" onChange={props.onChange} value={props.value}/>
+                                        <Form.Item label="Deskripsi" className="mb-0">
+                                           
+                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi..."/>
+                                            
                                         </Form.Item>
                                     }
                                 />
+                                
                             </Col>
                         </Row>
                     </VuroxComponentsContainer>
@@ -186,13 +172,13 @@ const FormArticle = ({item,...props}) => {
                                     name="category"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Category" className="mb-0">
+                                        <Form.Item label="Kategori" className="mb-0">
                                             <Select
                                                 labelInValue
                                                 value={props.value}
                                                 showSearch
                                                 size="large"
-                                                placeholder="Select a category"
+                                                placeholder="Pilih kategori"
                                                 optionFilterProp="children"
                                                 optionLabelProp="label"
                                                 onChange={onSelectCategoryChange.bind(this)}
@@ -207,7 +193,7 @@ const FormArticle = ({item,...props}) => {
                                     }
                                 />
                                 <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new category</Button>
+                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah kategory</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -217,14 +203,14 @@ const FormArticle = ({item,...props}) => {
                                     name="tags"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Tags" className="mb-0">
+                                        <Form.Item label="Tag" className="mb-0">
                                             <Select
                                                 labelInValue
                                                 value={props.value}
                                                 showSearch
                                                 size="large"
                                                 mode="multiple"
-                                                placeholder="Select tags"
+                                                placeholder="Pilih tag"
                                                 optionFilterProp="children"
                                                 optionLabelProp="label"
                                                 onChange={onSelectTagsChange.bind(this)}
@@ -244,7 +230,7 @@ const FormArticle = ({item,...props}) => {
                                 />
 
                                 <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Add new tag</Button>
+                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah tag</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -256,7 +242,7 @@ const FormArticle = ({item,...props}) => {
                                     // onChange={onAllowCommentChange.bind(this)}
                                     render={props=>{
                                             
-                                            return <Checkbox onChange={onAllowCommentChange.bind(this)} checked={props.value}>Allow comment</Checkbox>
+                                            return <Checkbox onChange={onAllowCommentChange.bind(this)} checked={props.value}>Izinkan komentar</Checkbox>
                                         }
                                     }
                                 />
@@ -270,10 +256,10 @@ const FormArticle = ({item,...props}) => {
                                     name="readAccess"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Who can read this article" className="mt-3 mb-0">
+                                        <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
                                             <Radio.Group onChange={onReadAccessChange.bind(this)} value={props.value}>
-                                                <Radio value="public">Public</Radio>
-                                                <Radio value="private">Private</Radio>
+                                                <Radio value="public">Umum</Radio>
+                                                <Radio value="private">Internal</Radio>
                                             </Radio.Group>
                                         </Form.Item>
                                     }
@@ -299,11 +285,11 @@ const FormArticle = ({item,...props}) => {
                                         :
                                         <>
                                             <Col md={11}>
-                                                <Button size="medium" type="primary" htmlType="submit" block>Publish</Button>
+                                                <Button size="medium" type="primary" htmlType="submit" block>Publikasi</Button>
                                             </Col>
                                             <Col md={2}></Col>
                                             <Col md={11}>
-                                                <Button size="medium" type="primary" danger block>Draft</Button>
+                                                <Button size="medium" type="primary" danger block>Simpan</Button>
                                             </Col>
                                         </>
                                     }
@@ -319,4 +305,4 @@ const FormArticle = ({item,...props}) => {
 
 }
 
-export default connect(state=>state)(FormArticle)
+export default connect(state=>state)(FormClassroom)

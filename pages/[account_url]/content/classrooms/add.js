@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -10,37 +11,35 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-
+import AppContainer from 'Templates/AppContainer'
 import FormClassroom from 'Components/FormClassroom'
 
-class index extends React.Component {
+const PageClassroomAdd = props => {
 
-    static contextType = vuroxContext
+	const {auth,router} = props
     
-    pagename="New classroom"
-	links = [['App','/content/classroom',''],['Classrooms','/content/classrooms',''],['Add new','/content/classrooms/add','active']]
+    const pagename=""
+	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Classrooms',`/${auth.account.uniqueURL}/content/classrooms`,''],['Add new classroom',`/${auth.account.uniqueURL}/content/classrooms/add`,'active']]
 	
-	render() {
+	const { menuState } = React.useContext(vuroxContext)
+	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
-		const { menuState } = this.context
-        const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
-		return (
-			<React.Fragment>
-				<HeaderLayout className="sticky-top">
-					<HeaderDark />
-				</HeaderLayout>
-				<VuroxLayout>
-					<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-						<Sidebar className={toggleClass} />
-					</VuroxSidebar>
-					<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-                        <Summery2 pagename={this.pagename} links={this.links}/>
-                        <FormClassroom/>
-					</ContentLayout>
-				</VuroxLayout>
-			</React.Fragment>
-		);
-	}
+	return (
+		<AppContainer>
+			<HeaderLayout className="sticky-top">
+				<HeaderDark />
+			</HeaderLayout>
+			<VuroxLayout>
+				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
+					<Sidebar className={toggleClass} />
+				</VuroxSidebar>
+				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
+					<Summery2 pagename={pagename} links={links}/>
+					<FormClassroom/>
+				</ContentLayout>
+			</VuroxLayout>
+		</AppContainer>
+	);
+	
 }
-export default connect(state=>state)(index)
+export default connect(state=>state)(withRouter(PageClassroomAdd))
