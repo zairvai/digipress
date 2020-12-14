@@ -37,9 +37,10 @@ const TinyMce = ({id,content,...props}) =>{
 
                     tinymce.init({
                         selector:`#${id}`,
-                        skin_url:`${url.origin}/modules/tinymce/skins/ui/oxide`,
+                        skin_url:`${url.origin}/modules/tinymce/skins/ui/custom`,
                         plugins:["advlist lists fullscreen autolink link code autoresize"],
                         menubar:false,
+                        statusbar:false,
                         toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen ",
                         autoresize_on_init: false,
                         autoresize_bottom_margin: 50,
