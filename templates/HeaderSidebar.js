@@ -31,7 +31,7 @@ const Sidebar = (props) => {
 					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					
 			{
-				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ?
+				!AuthController.isStudent(auth) || !AuthController.isMember(auth) ?
 				
 				<>
 					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />

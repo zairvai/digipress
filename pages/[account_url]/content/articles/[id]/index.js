@@ -84,8 +84,8 @@ const PageArticleId = props => {
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah artikel</a></Link></li>
-                                            <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus artikel</Button></li>
+                                            {Permission.UPDATE_ARTICLE({auth}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah artikel</a></Link></li>}
+                                            {Permission.DELETE_ARTICLE({auth}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus artikel</Button></li>}
                                         </ul>
                                     </div>
                                 </Col>

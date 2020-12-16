@@ -43,7 +43,7 @@ function searchManagerPut(record){
 function storageManagerDelete(record){
     var id = record.dynamodb.Keys.id.S
     var image = record.dynamodb.OldImage
-    var storageBody = {key:`public/${image.accountId.S}/classroom/${id}.txt`}
+    var storageBody = {key:`public/${image.accountId.S}/classrooms/${id}.txt`}
     
     return  functions.invokeLambdaStorageManager("delete", storageBody)
 }

@@ -17,6 +17,25 @@ export default class Controller{
 
     }
 
+    static DELETE_ARTICLE = ({auth,...props}) => {
+
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+
+    static UPDATE_ARTICLE = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+
     static ADD_CLASSROOM = ({auth,...props}) => {
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
@@ -25,6 +44,25 @@ export default class Controller{
         return true
 
     }
+
+    static UPDATE_CLASSROOM = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+    static DELETE_CLASSROOM = ({auth,...props}) => {
+
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+
 
 
     //TAG
