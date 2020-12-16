@@ -62,7 +62,7 @@ const PageArticleId = props => {
           onOk() {
             articleController._delete(item.id)
                 .then(article=>{
-                    articleController._updateList("remove",[{id:article.data.id}])
+                    //articleController._updateList("remove",[{id:article.data.id}])
                     setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
                     
                 }).catch(error=>console.log(error))

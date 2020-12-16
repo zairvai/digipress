@@ -102,7 +102,7 @@ const PageClassrooms = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									{ Permission.ADD_ARTICLE({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Classroom</a></Link></li>}
+									{ Permission.ADD_ARTICLE({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Ruang belajar</a></Link></li>}
 								</ul>
 							</div>
 						</Col>
