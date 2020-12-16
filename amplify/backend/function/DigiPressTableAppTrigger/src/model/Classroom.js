@@ -47,6 +47,7 @@ function storageManagerDelete(record){
     
     return  functions.invokeLambdaStorageManager("delete", storageBody)
 }
+
 function insert(record){
     return searchManagerPut(record)
 }
