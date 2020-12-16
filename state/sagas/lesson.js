@@ -22,12 +22,10 @@ function* createLesson(action){
 
         const inputParams = {
             accountId:values.accountId.trim(),
+            classroomId:values.classroomId.trim(),
             title:values.title.trim(),
-            categoryId:values.categoryId.trim(),
-            tags:values.tags,
-            content:values.content,
-            allowComment:values.allowComment,
-            access:values.readAccess
+            seq:values.seq,
+            content:values.content
         }
 
         const response = yield API.graphql(graphqlOperation(mutations.createLesson,{input:inputParams}))
@@ -148,16 +146,15 @@ function* updateLesson(action){
 
         const updateParams = {
             id : values.id.replace(/\s/g,""),
+            accountId : values.accountId.trim(),
+            classroomId : values.classroomId.trim(),
             expectedVersion : values.version
         }
 
-        if(accountId) inputParams.accountId = values.accountId.trim()
-        if(title) inputParams.title = values.title.trim()
-        if(categoryId) inputParams.categoryId = values.categoryId.trim()
-        if(tags) inputParams.tags = values.tags
-        if(content) inputParams.content = values.content
-        if(allowComment) inputParams.allowComment = values.allowComment
-        if(access) inputParams.readAccess = values.readAccess.trim()
+        if(values.title) inputParams.title = values.title.trim()
+        if(values.content) inputParams.content = values.content
+        if(values.seq) inputParams.seq = values.seq
+        if(values.status) inputParams.status = values.status
 
         const response = yield API.graphql(graphqlOperation(mutations.updateLesson,{input:updateParams}))
 

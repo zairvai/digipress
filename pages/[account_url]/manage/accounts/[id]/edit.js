@@ -33,7 +33,7 @@ const PageAccountEdit = props => {
         router.push(`/${auth.account.uniqueURL}/manage/accounts/${id}`)
     }
 
-    const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/accounts/${item.id}/edit`,'active']]
+    const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/manage/accounts/${item.id}/edit`,'active']]
 
     return (
         <AppContainer>

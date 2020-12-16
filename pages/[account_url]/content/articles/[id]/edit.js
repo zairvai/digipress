@@ -38,7 +38,7 @@ const PageArticleEdit = props => {
 	const {id} = React.useMemo(()=>router.query,[])
 	
     const pagename=""
-	const links = [['Content',`/${auth.account.uniqueURL}/content/articles`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/content/articles/${item.id}/edit`,'active']]
+	const links = [['Konten',`/${auth.account.uniqueURL}/content/articles`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/content/articles/${item.id}/edit`,'active']]
 	
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'

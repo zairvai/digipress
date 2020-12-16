@@ -26,7 +26,7 @@ const PageCategoryAdd = props => {
 
     const pagename=""
 	
-    const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Categorys',`/${auth.account.uniqueURL}/content/categories`,''],['Add new category',`/${auth.account.uniqueURL}/content/categories/add`,'active']]
+    const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Kategori',`/${auth.account.uniqueURL}/content/categories`,''],['Penambahan kategory',`/${auth.account.uniqueURL}/content/categories/add`,'active']]
     
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'

@@ -29,7 +29,7 @@ const PageArticleAdd = props => {
 	const tagController = new TagController(props)
 
     const pagename=""
-	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,''],['Add new article',`/${auth.account.uniqueURL}/content/articles/add`,'active']]
+	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],['Penambahan artikel',`/${auth.account.uniqueURL}/content/articles/add`,'active']]
 	
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'

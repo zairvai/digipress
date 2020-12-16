@@ -19,23 +19,23 @@ const Sidebar = (props) => {
 			{
 				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
 				<>
-					<VerticalNavHeading>Report</VerticalNavHeading>
+					<VerticalNavHeading>Laporan</VerticalNavHeading>
 					<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
 					</>
 				:
 				<></>
 			}		
 
-					<VerticalNavHeading>Content</VerticalNavHeading>
-					<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Classrooms' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Articles' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
+					<VerticalNavHeading>Konten</VerticalNavHeading>
+					<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
+					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					
 			{
 				!AuthController.isStudent(auth) || !AuthController.isMember(auth) ?
 				
 				<>
-					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Categories' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
-					<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tags' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
+					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Kategori' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
+					<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tag' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
 				</>
 				:
 				<></>
@@ -46,12 +46,12 @@ const Sidebar = (props) => {
 				AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
 					|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
 				<>
-					<VerticalNavHeading>Manage</VerticalNavHeading>
+					<VerticalNavHeading>Kelola</VerticalNavHeading>
 				
 				{
 					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
 					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Accounts' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Pesantren' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
 					</>
 					:
 					<></>
@@ -60,7 +60,7 @@ const Sidebar = (props) => {
 				{
 					!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
 					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Users' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Anggota saya' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
 					</>
 					:
 					<></>
@@ -77,10 +77,10 @@ const Sidebar = (props) => {
 				<Navitem link={`/${auth.account.uniqueURL}/roles/students`} text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} /> */}
 
-				<VerticalNavHeading>Help</VerticalNavHeading>
-				<Navitem link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Setting' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
-				<Navitem link='/help/feedbacks' text='Feedback' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
-				<Navitem link='/help/supports' text='Support' icon={<Icon size="1.3em" path={mdiHeadset} />} />
+				<VerticalNavHeading>Umum</VerticalNavHeading>
+				<Navitem link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Pengaturan' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
+				<Navitem link='/help/feedbacks' text='Saran' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
+				<Navitem link='/help/supports' text='Bantuan' icon={<Icon size="1.3em" path={mdiHeadset} />} />
 				<Navitem link='/help/faq' text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
 
 				

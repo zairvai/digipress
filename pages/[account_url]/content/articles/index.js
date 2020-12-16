@@ -53,7 +53,7 @@ const PageArticles = props => {
 
 
     const pagename=""
-	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,'active']]
+	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'

@@ -46,7 +46,7 @@ const List = ({items,...props}) =>{
                     <tr>
                         <th width="20"></th>
                         <th width="25%">Ruang belajar</th>
-                        <th width="20%">Kategory</th>
+                        <th width="20%">Kategori</th>
                         <th width="20%">Tags</th>
                         <th width="10%">Akses</th>
                         <th width="10%">Pengajar</th>

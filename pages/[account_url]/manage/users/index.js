@@ -39,7 +39,7 @@ const PageListUser = props => {
     const {confirm} = Modal
 
     const pagename=""
-	const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,'active']]
+	const links = [['Kelola',`/${auth.account.uniqueURL}/manage/users`,''],['Anggota saya',`/${auth.account.uniqueURL}/manage/users`,'active']]
 
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -158,7 +158,7 @@ const PageListUser = props => {
                             <div className="fright">
                                 <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
                                     {/* <li className="p-0"><Button onClick={showForm} className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah pengguna</Button></li> */}
-                                    <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/users/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah pengguna</a></Link></li>
+                                    <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/users/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah anggota</a></Link></li>
                                 </ul>
                             </div>
                         </Col>

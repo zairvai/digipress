@@ -50,7 +50,7 @@ const PageArticleId = props => {
 
     
 
-    const links = [['Content',`/${auth.account.uniqueURL}/content/articles`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,'active']]
+    const links = [['Konten',`/${auth.account.uniqueURL}/content/articles`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -105,7 +105,7 @@ const PageArticleId = props => {
                             </Row>
                             <Row>
                                 <Col md={24}>
-                                    Tags&nbsp;
+                                    Tag&nbsp;
                                 {
                                     item.tags && 
                                     item.tags.map(tag=>

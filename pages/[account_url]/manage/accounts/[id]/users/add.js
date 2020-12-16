@@ -32,7 +32,7 @@ const PageUserAdd = props => {
     const userController= new UserController(props)
     
     const pagename=""
-	const links = [['Manage',`/${auth.account.uniqueURL}/manage/accounts`,''],['Accounts',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],['Add new user',`/${auth.account.uniqueURL}/manage/accounts/${item.id}/users/add`,'active']]
+	const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,''],['Penambahan pengguna',`/${auth.account.uniqueURL}/manage/accounts/${item.id}/users/add`,'active']]
     
     const { menuState } = React.useContext(vuroxContext)
     const toggleClass = menuState ? 'menu-closed' : 'menu-open'

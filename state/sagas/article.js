@@ -148,10 +148,10 @@ function* updateArticle(action){
 
         const updateParams = {
             id : values.id.replace(/\s/g,""),
+            accountId: values.accountId.trim(),
             expectedVersion : values.version
         }
 
-        if(values.accountId) updateParams.accountId = values.accountId.trim()
         if(values.title) updateParams.title = values.title.trim()
         if(values.categoryId) updateParams.categoryId = values.categoryId.trim()
         if(values.tags) updateParams.tags = values.tags

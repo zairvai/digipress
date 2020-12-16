@@ -50,7 +50,7 @@ const PageClassroomId = props => {
 
     
 
-    const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Classrooms',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,'active']]
+    const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -104,7 +104,7 @@ const PageClassroomId = props => {
                             </Row>
                             <Row>
                                 <Col md={24}>
-                                    Tags&nbsp;
+                                    Tag&nbsp;
                                 {
                                     item.tags && 
                                     item.tags.map(tag=>
@@ -122,16 +122,16 @@ const PageClassroomId = props => {
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">
                             <Row>
-                                <Col md={12}><h6>Pelajaran &amp; Quiz</h6></Col>
+                                <Col md={12}><h6>Materi</h6></Col>
                                 <Col md={12}>
-                                    <div className="fright ml-3">
+                                    {/* <div className="fright ml-3">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
                                             <li className="p-0"><Link href={{pathname:'/content/classrooms/[id]/quizes/add',query:{id:item.id}}}shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah quiz</Button></Link></li>
                                         </ul>
-                                    </div>
+                                    </div> */}
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:'/content/classrooms/[id]/lessons/add',query:{id:item.id}}}shallow><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah pelajaran</Button></Link></li>
+                                            <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/add`,query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah materi</a></Link></li>
                                         </ul>
                                     </div>
                                     

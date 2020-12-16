@@ -33,7 +33,7 @@ const List = ({items,...props}) =>{
                 <thead>
                     <tr>
                         <th width="20"></th>
-                        <th width="25%">Kategory</th>
+                        <th width="25%">Kategori</th>
                         <th width="25%">Deskripsi</th>
                         <th className="fright"></th>
                     </tr>
