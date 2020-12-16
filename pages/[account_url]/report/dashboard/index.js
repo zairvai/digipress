@@ -87,9 +87,9 @@ class Page extends React.Component {
 						<VuroxComponentsContainer className="p-4 rounded-top">
 							<Row>
 								<Col md={12}>
-									<h5>Campaign Metric</h5>
+									<h5>Analytics</h5>
 									<p className="vurox-text-sizes mb-2">
-										Total number of reach within the date range
+										Total number of visitors within the date range
 									</p>
 								</Col>
 								<Col md={12}>
@@ -112,7 +112,7 @@ class Page extends React.Component {
 
 									<h4 className="vurox-fw-300 d-inline-block align-bottom mb-1">
 										{this.props.company.visitors[0].dailyTotal } 
-										<small className="vurox-text-sizes"> Reach</small>
+										<small className="vurox-text-sizes"> Pageviews</small>
 									</h4>
 								</Col>
 								<Col md={8} xs={24}>
@@ -122,7 +122,7 @@ class Page extends React.Component {
 											<Bar dataKey="value" fill="#50bc5e" barSize={2} barGap ={2} />
 										</BarChart>
 									</ResponsiveContainer>
-									<h4 className="vurox-fw-300 d-inline-block align-bottom mb-1">{this.props.company.orders[0].dailyTotal} <small className="vurox-text-sizes"> Click</small></h4>
+									<h4 className="vurox-fw-300 d-inline-block align-bottom mb-1">{this.props.company.orders[0].dailyTotal} <small className="vurox-text-sizes"> Visits</small></h4>
 									
 								</Col>
 								<Col md={8} xs={24}>
@@ -132,7 +132,7 @@ class Page extends React.Component {
 											<Bar dataKey="value" fill="#F7614D" barSize={2} barGap ={2} />
 										</BarChart>
 									</ResponsiveContainer>
-									<h4 className="vurox-fw-300 d-inline-block align-bottom mb-1">{this.props.company.bounce[0].dailyTotal}% <small className="vurox-text-sizes"> CTR</small></h4>
+									<h4 className="vurox-fw-300 d-inline-block align-bottom mb-1">{this.props.company.bounce[0].dailyTotal}% <small className="vurox-text-sizes"> Unique visits</small></h4>
 								</Col>
 							</Row>
 						</VuroxComponentsContainer>
@@ -241,7 +241,7 @@ class Page extends React.Component {
 													</Col>
 												</Row>
 
-												<p className="vurox-text-sizes">Most interest or keyword that reach your audience</p>
+												<p className="vurox-text-sizes">Most interest or keyword people coming</p>
 
 											</div>
 											<Row>
@@ -286,7 +286,7 @@ class Page extends React.Component {
 														<ViewMore/>
 													</Col>
 												</Row>
-												<p className="vurox-text-sizes">Channel where campaign has been reached to</p>
+												<p className="vurox-text-sizes">Channel where visitor coming from</p>
 											</div>
 											<Row className='py-2'>
 												<Col md={12} xs={12}>
@@ -351,11 +351,11 @@ class Page extends React.Component {
 													</ResponsiveContainer>
 												</Col>
 												<Col md={14} xs={24}>
-													<VuroxProgressbar progresstextleft='Google Adword' progresstextright='5000' progresscolor='#7B4DFF' width='45%' />
+													<VuroxProgressbar progresstextleft='Google Search' progresstextright='5000' progresscolor='#7B4DFF' width='45%' />
 
 													<VuroxProgressbar progresstextleft='Facebook' progresstextright='23984' progresscolor='#F7614E' width='85%' />
 
-													<VuroxProgressbar progresstextleft='Instagram' progresstextright='1230' progresscolor='#f9be49' width='60%' />
+													<VuroxProgressbar progresstextleft='Other website' progresstextright='1230' progresscolor='#f9be49' width='60%' />
 
 												</Col>
 											</Row>
@@ -375,41 +375,41 @@ class Page extends React.Component {
 													<ViewMore/>
 												</Col>
 											</Row>
-											<p className="vurox-text-sizes">Locations where campaign has been reached to</p>
+											<p className="vurox-text-sizes">Locations where visitor coming from</p>
 										</VuroxTableHeading>
 										<VuroxTableDark>
 											<table className="table table-borderless">
 												<thead>
 													<tr>
 														<th>Location</th>
-														<th className="fright">Click</th>
-														<th className="fright">Reach</th>
+														<th className="fright">Bounce</th>
+														<th className="fright">Views</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
 														<td>DKI Jakarta</td>
-														<td className="fright">{currency(10000)}</td>
+														<td className="fright">10%</td>
 														<td className="fright">{currency(102000)}</td>
 													</tr>
 													<tr>
 														<td>Bandung</td>
-														<td className="fright">{currency(3000)}</td>
+														<td className="fright">30%</td>
 														<td className="fright">{currency(70000)}</td>
 													</tr>
 													<tr>
 														<td>Yogyakarta</td>
-														<td className="fright">{currency(5000)}</td>
+														<td className="fright">15%</td>
 														<td className="fright">{currency(95000)}</td>
 													</tr>
 													<tr>
 														<td>Semarang</td>
-														<td className="fright">{currency(2500)}</td>
+														<td className="fright">22.5%</td>
 														<td className="fright">{currency(55000)}</td>
 													</tr>
 													<tr>
 														<td>Bali</td>
-														<td className="fright">{currency(4000)}</td>
+														<td className="fright">63%</td>
 														<td className="fright">{currency(83000)}</td>
 													</tr>
 												</tbody>
