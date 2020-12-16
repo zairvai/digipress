@@ -12,6 +12,12 @@
         "read",
         "update",
         "delete"
+      ],
+      "DigiPressStorageManager": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

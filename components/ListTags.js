@@ -33,16 +33,7 @@ const List = ({items,...props}) =>{
                     </tr>
                 </thead>
                 <tbody>
-                    {   items ?
-                            items.map((item,index)=>{
-
-                                return(
-                                    <RowItem key={`${item.name}${item.id}`} index={index} item={item}/>
-                                )
-                            })
-                            :
-                            <></>
-                    }
+                    {items && items.map((item,index)=><RowItem key={`${item.name}${item.id}`} index={index} item={item}/>)}
                 </tbody>
             </table>
             

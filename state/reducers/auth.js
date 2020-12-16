@@ -400,14 +400,14 @@ export const getAuthUser = (state=initialState,action) => {
             const {data} = action.payload
             const {attributes,signInUserSession} = data
 
-            const access = JSON.parse(signInUserSession.idToken.payload.access)
+            //const access = JSON.parse(signInUserSession.idToken.payload.access)
 
             const user = {
                 id:attributes.sub,
                 name:attributes.name,
                 phoneNumber:attributes.phone_number,
                 email:attributes.email,
-                access
+                access:state.user.access
             }
 
             return Object.assign({},state,{

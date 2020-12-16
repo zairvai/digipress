@@ -33,20 +33,13 @@ const List = ({items,...props}) =>{
                 <thead>
                     <tr>
                         <th width="20"></th>
-                        <th width="25%">Category</th>
+                        <th width="25%">Kategory</th>
                         <th width="25%">Deskripsi</th>
                         <th className="fright"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {   items ?
-                            items.map((item,index)=>{
-
-                                return(<RowItem key={`${item.name}${item.id}`} item={item} index={index}/>)
-                            })
-                            :
-                            <></>
-                    }
+                    {items && items.map((item,index)=><RowItem key={`${item.name}${item.id}`} item={item} index={index}/>)}
                 </tbody>
             </table>
             

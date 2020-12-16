@@ -10,7 +10,7 @@ import {getRedirectToDefaultPath} from 'Helper'
 const Container = props => {
 
     const authController = new AuthController(props)
-    const [visible,setVisible] = React.useState(false)
+    const [visible,setVisible] = React.useState(true)//testing
     const {router,auth} = props
    
     React.useEffect(async()=>{
@@ -26,7 +26,7 @@ const Container = props => {
             
             if(!auth.user.access) shouldSignOut = true
             else {
-                if(auth.account.uniqueURL != router.query.account_url) router.push(getRedirectToDefaultPath(auth,auth.user.access.role))    
+                if(auth.account.uniqueURL != router.query.account_url) shouldSignOut=true//router.push(getRedirectToDefaultPath(auth,auth.user.access.role))    
                 else setVisible(true)
             }
             
@@ -44,10 +44,6 @@ const Container = props => {
         
 
     },[])
-
-    // React.useEffect(()=>{
-	// 	if(props.query !== auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/report/dashboard`)
-    // },[props.query])
      
 
     return(

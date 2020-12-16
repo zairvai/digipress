@@ -7,8 +7,14 @@ import {
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-
 import TinyMce from 'Components/TinyMce'
+import SelectCategory from 'Components/SelectCategory'
+import SelectTags from 'Components/SelectTags'
+
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { createClassroomRoutinePromise,updateClassroomRoutinePromise} from 'State/routines/classroom';
+import ClassroomController from 'Library/controllers/ClassroomController';
+
 
 const {Text} = Typography
 
@@ -17,19 +23,30 @@ const schema = yup.object().shape({
     title:yup.string().required("Mohon ketik judul artikel").max(100,"Judul tidak melebihi 100 karakter"),
     //summary:yup.string(),
     content:yup.string(),
-    category:yup.object(),
-    tags:yup.object().nullable(),
+    category:yup.object().required("Silahkan pilih kategori"),
+    tags:yup.array(),
     allowComment:yup.string(),
     readAccess:yup.string()
 })
 
 const FormClassroom = ({item,...props}) => {
 
-    const categoryOptions = props.categories
-    const tagOptions = props.tags
+    const {tags,categories,createClassroom,updateClassroom} = props
+
+    const classroomController = new ClassroomController(props)
 
     React.useEffect(()=>{
+        console.log(item)
         if(item){
+
+            setValue("title",item.title)
+
+            setTimeout(()=>{
+
+                setValue("content",item.content)
+                tinymce.get("classroomEditor").setContent(item.content)
+                
+            },1000)
 
             setValue("category",{
                 id:item.category.id,
@@ -44,13 +61,12 @@ const FormClassroom = ({item,...props}) => {
                 label:tag.name}))
             
             setValue("tags",selectedTags)
-
             setValue("allowComment",item.allowComment)
-            setValue("readAccess",item.readAccess)
+            setValue("readAccess",item.access)
     
         }
-        else return
-    },[])
+        
+    },[item])
 
     const {
         handleSubmit,
@@ -62,18 +78,42 @@ const FormClassroom = ({item,...props}) => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
-                title:item ? item.name : "",
-                content:item ? item.content : "",
+                title: "",
+                content: "",
                 category:{id:null,value:null},
                 tags:[],
-                allowComment:item ? item.allowComment:false,
-                readAccess:item ? item.readAccess : "private"
+                allowComment:false,
+                readAccess:"public"
             }
     })
 
     const onSubmit = (values,e) => {
 
-        console.log(values,e)
+        console.log(values)
+
+        values.accountId = props.accountId
+        values.categoryId = values.category.id
+
+        if(values.tags.length>0){
+            let tags = []
+            values.tags.forEach(item=>{
+                tags.push(item.id)
+            })
+            values.tags = tags
+        }
+
+        if(item) {
+            values = {id:item.id,version:item.version,...values}
+            classroomController._update(values)
+                .then(classroom=>props.onSuccess(classroom.data))
+                .catch(error=>console.log(error))
+        }else{
+            classroomController._create(values)
+                .then(classroom=>props.onSuccess(classroom.data))
+                .catch(error=>console.log(error))
+        }
+
+        
 
     }
 
@@ -132,10 +172,11 @@ const FormClassroom = ({item,...props}) => {
                                     name="title"
                                     defaultValue=""
                                     control={control}
-                                    // rules={{required:true,message:"isi ini"}}
                                     render={props=>
-                                        <Form.Item label="Nama kelas belajar">
-                                            <Input size="large" placeholder="Artikel" value={props.value} onChange={props.onChange} />
+                                        <Form.Item label="Nama pelajaran">
+                                            <Input 
+                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
                                     }
@@ -152,9 +193,11 @@ const FormClassroom = ({item,...props}) => {
                                     defaultValue=""
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Deskripsi" className="mb-0">
+                                        <Form.Item label="Deskripsi pelajaran" className="mb-0">
                                            
-                                            <TinyMce id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi..."/>
+                                            <TinyMce 
+                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                id="classroomEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>
                                     }
@@ -173,28 +216,18 @@ const FormClassroom = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Kategori" className="mb-0">
-                                            <Select
-                                                labelInValue
+                                            <SelectCategory 
+                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                items={categories} 
                                                 value={props.value}
-                                                showSearch
-                                                size="large"
-                                                placeholder="Pilih kategori"
-                                                optionFilterProp="children"
-                                                optionLabelProp="label"
-                                                onChange={onSelectCategoryChange.bind(this)}
-                                                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                                                
-                                                {categoryOptions.list.map(item=>
-                                                    <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
-                                                )}
-
-                                            </Select>
+                                                onChange={onSelectCategoryChange}
+                                                />
                                         </Form.Item>
                                     }
                                 />
-                                <div className="d-flex justify-content-end">
+                                {/* <div className="d-flex justify-content-end">
                                     <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah kategory</Button>
-                                </div>
+                                </div> */}
                             </Col>
                         </Row>
                         <Row>
@@ -203,35 +236,20 @@ const FormClassroom = ({item,...props}) => {
                                     name="tags"
                                     control={control}
                                     render={props=>
-                                        <Form.Item label="Tag" className="mb-0">
-                                            <Select
-                                                labelInValue
+                                        <Form.Item label="Tag" className="mb-0 mt-3">
+                                            <SelectTags 
+                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                items={tags}
                                                 value={props.value}
-                                                showSearch
-                                                size="large"
-                                                mode="multiple"
-                                                placeholder="Pilih tag"
-                                                optionFilterProp="children"
-                                                optionLabelProp="label"
-                                                onChange={onSelectTagsChange.bind(this)}
-                                                // onFocus={onFocus}
-                                                // onBlur={onBlur}
-                                                // onSearch={onSearch}
-                                                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                                                >
-
-                                                {tagOptions.list.map(item=>
-                                                    <Select.Option key={item.id} value={item.id} label={item.name}>{item.name}</Select.Option>
-                                                )}
-
-                                            </Select>
+                                                onChange={onSelectTagsChange}
+                                            />
                                         </Form.Item>
                                     }
                                 />
 
-                                <div className="d-flex justify-content-end">
+                                {/* <div className="d-flex justify-content-end">
                                     <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah tag</Button>
-                                </div>
+                                </div> */}
                             </Col>
                         </Row>
                         <Row>
@@ -240,11 +258,7 @@ const FormClassroom = ({item,...props}) => {
                                     name="allowComment"
                                     control={control}
                                     // onChange={onAllowCommentChange.bind(this)}
-                                    render={props=>{
-                                            
-                                            return <Checkbox onChange={onAllowCommentChange.bind(this)} checked={props.value}>Izinkan komentar</Checkbox>
-                                        }
-                                    }
+                                    render={props=><Checkbox  disabled={createClassroom.isRequesting || updateClassroom.isRequesting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
                                 />
                                 
                             </Col>
@@ -257,9 +271,10 @@ const FormClassroom = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
-                                            <Radio.Group onChange={onReadAccessChange.bind(this)} value={props.value}>
+                                            <Radio.Group disabled={createClassroom.isRequesting || updateClassroom.isRequesting} 
+                                                onChange={onReadAccessChange} value={props.value}>
                                                 <Radio value="public">Umum</Radio>
-                                                <Radio value="private">Internal</Radio>
+                                                <Radio value="protected">Internal</Radio>
                                             </Radio.Group>
                                         </Form.Item>
                                     }
@@ -272,27 +287,13 @@ const FormClassroom = ({item,...props}) => {
                         <Row>
                             <Col md={24}>
                                 <Row>
-                                    {item ? 
-                                        <>
-                                            <Col md={11}>
-                                                <Button size="medium" type="primary" htmlType="submit" block>Save</Button>
-                                            </Col>
-                                            <Col md={2}></Col>
-                                            <Col md={11}>
-                                                <Button size="medium" type="primary" danger block>Unpublish</Button>
-                                            </Col>
-                                        </>
-                                        :
-                                        <>
-                                            <Col md={11}>
-                                                <Button size="medium" type="primary" htmlType="submit" block>Publikasi</Button>
-                                            </Col>
-                                            <Col md={2}></Col>
-                                            <Col md={11}>
-                                                <Button size="medium" type="primary" danger block>Simpan</Button>
-                                            </Col>
-                                        </>
-                                    }
+                                    <Col md={11}>
+                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={createClassroom.isRequesting || updateClassroom.isRequesting} block>Batal</Button>
+                                    </Col>
+
+                                    <Col md={11} className="ml-0 ml-md-2">
+                                        <Button size="medium" type="primary" htmlType="submit" loading={createClassroom.isRequesting || updateClassroom.isRequesting} block>Publikasi</Button>
+                                    </Col>
                                 </Row>
                             </Col>
                         </Row>
@@ -305,4 +306,12 @@ const FormClassroom = ({item,...props}) => {
 
 }
 
-export default connect(state=>state)(FormClassroom)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            createClassroomRoutinePromise,
+            updateClassroomRoutinePromise
+        },dispatch),dispatch
+    })
+)(FormClassroom)

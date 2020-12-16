@@ -4,6 +4,11 @@ import {createAccountWatcher,listAccountsWatcher,getAccountWatcher, updateAccoun
 import {createUserWatcher,getUserWatcher,listUsersWatcher,updateUserWatcher} from "./user"
 import {listTagsWatcher,deleteTagWatcher,createTagWatcher} from './tag'
 import {listCategoriesWatcher,deleteCategoryWatcher,createCategoryWatcher,updateCategoryWatcher,getCategoryWatcher} from './category'
+import {createArticleWatcher,deleteArticleWatcher,updateArticleWatcher,getArticleWatcher,listArticlesWatcher} from './article'
+import {createClassroomWatcher,deleteClassroomWatcher,updateClassroomWatcher,getClassroomWatcher,listClassroomsWatcher} from './classroom'
+import {createLessonWatcher,deleteLessonWatcher,updateLessonWatcher,getLessonWatcher,listLessonsWatcher} from './lesson'
+import {createQnaWatcher,deleteQnaWatcher,updateQnaWatcher,getQnaWatcher,listQnasWatcher} from './qna'
+import {createCommentWatcher,deleteCommentWatcher,updateCommentWatcher,getCommentWatcher,listCommentsWatcher} from './comment'
 
 const sagas = [
     
@@ -40,6 +45,42 @@ const sagas = [
     createCategoryWatcher,
     updateCategoryWatcher,
     getCategoryWatcher,
+
+    //article
+    listArticlesWatcher,
+    deleteArticleWatcher,
+    createArticleWatcher,
+    updateArticleWatcher,
+    getArticleWatcher,
+
+    //classroom
+    listClassroomsWatcher,
+    deleteClassroomWatcher,
+    createClassroomWatcher,
+    updateClassroomWatcher,
+    getClassroomWatcher,
+
+    //lesson
+    listLessonsWatcher,
+    deleteLessonWatcher,
+    createLessonWatcher,
+    updateLessonWatcher,
+    getLessonWatcher,    
+
+    //qna
+    listQnasWatcher,
+    deleteQnaWatcher,
+    createQnaWatcher,
+    updateQnaWatcher,
+    getQnaWatcher,
+
+
+    //comment
+    listCommentsWatcher,
+    deleteCommentWatcher,
+    createCommentWatcher,
+    updateCommentWatcher,
+    getCommentWatcher,
 
     routinePromiseWatcherSaga
 ]

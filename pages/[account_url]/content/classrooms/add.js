@@ -14,16 +14,46 @@ import Sidebar from 'Templates/HeaderSidebar';
 import AppContainer from 'Templates/AppContainer'
 import FormClassroom from 'Components/FormClassroom'
 
+import CategoryController from 'Library/controllers/CategoryController'
+import TagController from 'Library/controllers/TagController'
+
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { listCategoriesRoutinePromise } from 'State/routines/category';
+import { listTagsRoutinePromise } from 'State/routines/tag';
+
 const PageClassroomAdd = props => {
 
-	const {auth,router} = props
-    
+	const {auth,listTags,listCategories,router} = props
+	
+	const categoryController = new CategoryController(props)
+	const tagController = new TagController(props)
+
     const pagename=""
 	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Classrooms',`/${auth.account.uniqueURL}/content/classrooms`,''],['Add new classroom',`/${auth.account.uniqueURL}/content/classrooms/add`,'active']]
 	
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+	React.useEffect(()=>{
+		
+		//get category
+		categoryController._list({accountId:auth.account.id})
+		//get tag
+		tagController._list({accountId:auth.account.id})
+
+	},[])
+
+
+	const onCancel = () => {
+        router.push(`/${auth.account.uniqueURL}/content/classrooms`)	
+    }
+    
+    const onSuccess = classroom =>{
+		console.log(classroom)
+        //userController._updateList("add",user,0)
+        router.push(`/${auth.account.uniqueURL}/content/classrooms`)	
+	}
+	
 	return (
 		<AppContainer>
 			<HeaderLayout className="sticky-top">
@@ -35,11 +65,20 @@ const PageClassroomAdd = props => {
 				</VuroxSidebar>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
 					<Summery2 pagename={pagename} links={links}/>
-					<FormClassroom/>
+					<FormClassroom onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list.items} tags={listTags.list.items}/>
 				</ContentLayout>
 			</VuroxLayout>
 		</AppContainer>
 	);
 	
 }
-export default connect(state=>state)(withRouter(PageClassroomAdd))
+
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+				listCategoriesRoutinePromise,
+				listTagsRoutinePromise
+        },dispatch),dispatch
+    })
+)(withRouter(PageClassroomAdd))

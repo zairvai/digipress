@@ -4,22 +4,17 @@ import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAc
 import { createUser,getUser,listUsers, updateUser } from './user'
 import { listTags,deleteTag,createTag } from './tag'
 import { listCategories,getCategory,deleteCategory,createCategory,updateCategory } from './category'
+import { createArticle,deleteArticle,updateArticle,listArticles,getArticle } from './article'
+import { createClassroom,deleteClassroom,updateClassroom,listClassrooms,getClassroom } from './classroom'
+import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './lesson'
+import { createQna, deleteQna, updateQna, listQnas, getQna} from './qna'
+import { createComment,deleteComment,updateComment,listComments,getComment} from './comment'
 
-import { accounts } from './accounts'
-import { articles } from './articles'
-import { classrooms } from './classrooms'
-import { categories } from './categories'
-import { tags } from './tags'
 import { lessons } from './lessons'
 import { questions } from './questions'
 import { comments } from './comments'
-
 import { campaigns } from './campaigns'
-import { users } from './users'
 import { vuroxCompanyInfo } from './company'
-import { vuroxCompanyCalendar } from './calendar'
-import { vuroxMail } from './mail'
-import { vuroxChatMessages } from './message'
 
 import {reduceReducers} from 'Helper'
 import {persistReducer} from 'redux-persist'
@@ -65,21 +60,46 @@ const rootReducer = combineReducers({
 	updateCategory:persistReducer({key:"updateCategory",storage},updateCategory),
 	deleteCategory:persistReducer({key:"deleteCategory",storage},deleteCategory),
 
-	accounts,
-	users,
-	articles,
-	classrooms,
-	categories,
-	tags,
+	//article
+	createArticle:persistReducer({key:"createArticle",storage},createArticle),
+	getArticle:persistReducer({key:"getArticle",storage},getArticle),
+	listArticles:persistReducer({key:"listArticles",storage},listArticles),
+	updateArticle:persistReducer({key:"updateArticle",storage},updateArticle),
+	deleteArticle:persistReducer({key:"deleteArticle",storage},deleteArticle),
+	//classroom
+	createClassroom:persistReducer({key:"createClassroom",storage},createClassroom),
+	getClassroom:persistReducer({key:"getClassroom",storage},getClassroom),
+	listClassrooms:persistReducer({key:"listClassrooms",storage},listClassrooms),
+	updateClassroom:persistReducer({key:"updateClassroom",storage},updateClassroom),
+	deleteClassroom:persistReducer({key:"deleteClassroom",storage},deleteClassroom),
+
+	//lesson
+	createLesson:persistReducer({key:"createLesson",storage},createLesson),
+	getLesson:persistReducer({key:"getLesson",storage},getLesson),
+	listLessons:persistReducer({key:"listLessons",storage},listLessons),
+	updateLesson:persistReducer({key:"updateLesson",storage},updateLesson),
+	deleteLesson:persistReducer({key:"deleteLesson",storage},deleteLesson),
+	//qna
+	createQna:persistReducer({key:"createQna",storage},createQna),
+	getQna:persistReducer({key:"getQna",storage},getQna),
+	listQnas:persistReducer({key:"listQnas",storage},listQnas),
+	updateQna:persistReducer({key:"updateQna",storage},updateQna),
+	deleteQna:persistReducer({key:"deleteQna",storage},deleteQna),
+	//comment
+	createComment:persistReducer({key:"createComment",storage},createComment),
+	getComment:persistReducer({key:"getComment",storage},getComment),
+	listComments:persistReducer({key:"listComments",storage},listComments),
+	updateComment:persistReducer({key:"updateComment",storage},updateComment),
+	deleteComment:persistReducer({key:"deleteComment",storage},deleteComment),
+
+
+
 	lessons,
 	questions,
 	comments,
 
 	campaigns: campaigns,
 	company: vuroxCompanyInfo,
-	// calendar: vuroxCompanyCalendar,
-	// mail: vuroxMail,
-	// message: vuroxChatMessages,
 })
 
 

@@ -17,63 +17,40 @@ import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import ListTags from 'Components/ListTags'
+import ListArticles from 'Components/ListArticles'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
 import AuthController from 'Library/controllers/AuthController'
 import ArticleController from 'Library/controllers/ArticleController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
+import { listArticlesRoutinePromise } from 'State/routines/article';
 
 const PageArticles = props => {
 
 	console.log(props)
 	
-	const {auth,router,listTags} = props
+	const {auth,router,listArticles} = props
 
+	const [orderBy,setOrderBy]	= React.useState("createdAt")
+	const [direction,setDirection] = React.useState("desc")
+	
 	const articleController = new ArticleController(props)
 
 	const {confirm} = Modal
 	
-	React.useEffect(async ()=>{
+	React.useEffect(()=>{
 		
-		try{
-			
-			let params = {}
+		let accountId = null
 
-			if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-				params.accountId = auth.account.id
-			}
-
-			await listItems(params)
-
-		}catch(error){
-			console.log(error)
+		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+			accountId = auth.account.id
 		}
+
+		articleController._list({accountId,orderBy,direction})
 
 	},[])
 
-	const listItems = async ({accountId,name=false,orderBy="createdAt",direction="asc",from=0,size=50}) => {
-
-        try{
-
-			const listParams = {
-                orderBy,
-                direction,
-                from,size
-			}
-
-			if(accountId) listParams.accountId = accountId
-			if(name) listParams.name = name
-
-            await articleController._list(listParams)
-
-        }catch(error){
-            console.log(error)
-        }
-
-    }
 
     const pagename=""
 	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,'active']]
@@ -133,7 +110,7 @@ const PageArticles = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								{/* <ListTags items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={onDeleteItem}/> */}
+								<ListArticles items={listArticles.list.items} foundDoc={listArticles.list.foundDocs} onDelete={onDeleteItem}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -150,8 +127,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-				listTagsRoutinePromise,
-				deleteTagRoutinePromise
+				listArticlesRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageArticles))

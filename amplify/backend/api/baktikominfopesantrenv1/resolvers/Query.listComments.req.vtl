@@ -1,0 +1,78 @@
+#**
+The value of 'payload' after the template has been evaluated
+will be passed as the event to AWS Lambda.
+*#
+
+#set($size=$util.defaultIfNull($ctx.args.input.size, 20))
+#set($from=$util.defaultIfNull($ctx.args.input.from, 0))
+
+#set($roles=$util.defaultIfNull($ctx.args.input.roles, []))
+
+#set($accountId=$ctx.args.input.accountId)
+
+#if(!$util.isNull($ctx.args.input.orderBy))
+  #set($sort=[
+    {
+      "${ctx.args.input.orderBy}": {
+        "order": $ctx.args.input.direction
+      }
+    }
+  ])
+#else
+	#set($sort=[])
+#end
+
+#if($util.isNull($ctx.args.input.accountId) && $util.isNull($ctx.args.input.name))
+
+  #set($query={
+      "match_all": {}
+  })
+
+#else
+
+  #set($query={
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "accountId": $accountId
+          }
+        }
+      ]
+    }
+  })
+
+  #if(!$util.isNull($ctx.args.input.name))
+    #set($matchNamePrefix = {
+      "match_phrase_prefix": {
+          "name": {
+              "query": $ctx.args.input.name
+            }
+        }
+    })
+
+    $util.qr($query.bool.must.add($matchNamePrefix))
+
+  #end
+#end
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+  	"field":"get",
+    "arguments":{
+      "path":"/comment/_search",
+      "body":{
+          "_source":{
+              "includes":"id"
+          },
+          "size":$size,
+          "from":$from,
+          "query":$util.toJson($query),
+          "sort":$util.toJson($sort)
+
+      }
+    }
+  }
+}

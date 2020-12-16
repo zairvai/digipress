@@ -66,8 +66,6 @@ class campaign extends React.Component {
         
         var {query} = this.props.router 
         this.id = query.id
-        
-        this.item = this.props.accounts.item 
 
         this.links = [['Report','/report/dashboard',''],['Dashboard','/report/dashboard','active']]
     }

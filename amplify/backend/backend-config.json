@@ -90,6 +90,13 @@
           "attributes": [
             "Name"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "DigiPressStorageManager",
+          "attributes": [
+            "Name"
+          ]
         }
       ]
     },
@@ -107,6 +114,20 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "DigiPressStorageManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "baktikominfopesantrenv1",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
     }
   },
   "storage": {

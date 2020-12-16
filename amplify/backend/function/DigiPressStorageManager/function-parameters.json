@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "baktikominfopesantrenv1": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

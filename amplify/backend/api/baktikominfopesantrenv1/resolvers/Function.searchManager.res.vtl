@@ -6,12 +6,10 @@
 #if($ctx.error)
   $util.error($ctx.error.message, $ctx.error.type)
 #end
-#if($util.isNull($ctx.result))
-  #return
-#end
 
-## $util.error($util.toJson($context.result.hits.hits[0]))
-#if( $context.result.hits.hits.length > 1 )
+#if( $context.result.hits.total.value == 0 )
+	$util.error("Not Found")
+#elseif( $context.result.hits.hits.length > 1 )
 	$util.qr($ctx.stash.put("result",$context.result.hits.hits))
 	$util.toJson($context.result.hits.hits)
 #else

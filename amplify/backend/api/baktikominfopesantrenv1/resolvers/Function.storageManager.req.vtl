@@ -1,0 +1,26 @@
+#if($util.isNull($ctx.stash.field))
+  #return($ctx.prev.result)
+#end
+
+#set($arguments={
+	"key":"${ctx.stash.folder}/${ctx.prev.result.id}.txt"
+})
+
+#if($ctx.stash.field=="put")
+  $util.qr($arguments.put("content",$ctx.stash.content))
+#end
+
+## join array key with add method
+## {key:} + {content:} = {key:,content:}
+## #if(!$util.isNull($ctx.stash.arguments))
+## 	$util.qr($arguments.add($ctx.stash.arguments))
+## #end
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+      "field":"${ctx.stash.field}",
+      "arguments":$util.toJson($arguments)
+  }
+}

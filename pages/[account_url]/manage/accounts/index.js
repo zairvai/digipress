@@ -26,18 +26,17 @@ import { listAccountsRoutinePromise } from 'State/routines/account';
 
 const PageAccounts = props => {
 
-	const {auth,router,listAccounts} = props
-
-	const [items,setItems] = React.useState([])
-	const [foundItem,setFoundItem] = React.useState(0)
+	const {auth,listAccounts} = props
 
 	const accountController = new AccountController(props)
 
-	React.useEffect(async ()=>{
-		await accountController._list({
-			orderBy:"createdAt",
-			direction:"asc",
-			from:0,size:50})
+	const [orderBy,setOrderBy]	= React.useState("createdAt")
+	const [direction,setDirection] = React.useState("desc")
+
+	React.useEffect(()=>{
+
+		accountController._list({orderBy,direction})
+
 	},[])
 
     const pagename=""
@@ -45,21 +44,6 @@ const PageAccounts = props => {
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
-	const text = <span>Title</span>;
-
-	const menuContent = props =>{
-
-		console.log(props)
-
-		return(
-			<div>
-				<p>Content</p>
-				<p>Content</p>
-			</div>
-		)
-	}
-		
 	  
 	return (
 		<AppContainer>

@@ -46,11 +46,22 @@ function* listTags(action){
 
     try{
 
-        const {accountId,orderBy,direction,from,size} = action.payload
+        const {accountId,name,orderBy,direction,from,size} = action.payload
+
+        const listParams={from,size}
+
+        if(accountId) listParams.accountId = accountId
+        if(name) listParams.name = name
+        if(orderBy) {
+            listParams.orderBy = orderBy
+            listParams.direction = direction
+        }
+
+        console.log(listParams)
 
         yield put(listTagsRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listTags,{input:{accountId,orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listTags,{input:listParams}))
 
         yield put(listTagsRoutine.success({data:response.data.listTags}))
 

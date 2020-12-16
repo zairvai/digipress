@@ -1,0 +1,27 @@
+#set( $input = {
+    "accountId":$ctx.args.input.accountId,
+    "classroomId":$ctx.args.input.classroomId,
+    "status":3,
+    "__typename":"QnA",
+    "version":1,
+    "createdBy":$ctx.identity.sub,
+    "updatedBy":$ctx.identity.sub,
+    "createdAt":$util.time.nowISO8601(),
+    "updatedAt":$util.time.nowISO8601()
+} )
+
+#if( !$util.isNull($ctx.args.input.replyToId ))
+	$util.qr($input.put("replyToId",$ctx.args.input.replyToId))
+#end
+
+#if( !$util.isNull($ctx.args.input.lessonId ))
+	$util.qr($input.put("lessonId",$ctx.args.input.lessonId))
+#end
+
+$util.qr($ctx.stash.put("input",$input))
+
+$util.qr($ctx.stash.put("field","put"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/qnas"))
+$util.qr($ctx.stash.put("content",$ctx.args.input.content))
+
+{}

@@ -29,9 +29,12 @@ import UserController from 'Library/controllers/UserController';
 
 const PageListUser = props => {
 
+    const {auth,createUser,listUsers,router} = props
+
     const userController = new UserController(props)
     
-    const {auth,createUser,listUsers,router} = props
+    const [orderBy,setOrderBy]	= React.useState("createdAt")
+    const [direction,setDirection] = React.useState("desc")
     
     const {confirm} = Modal
 
@@ -45,18 +48,7 @@ const PageListUser = props => {
 
     React.useEffect(async()=>{
 
-        try{
-
-            await userController._list({
-                accountId:auth.account.id,
-                roles:getRoleListInputs(),
-                orderBy:"createdAt",
-                direction:"desc",from:0,size:20
-            })
-
-        }catch(error){
-            console.log(error)
-        }
+            userController._list({accountId:auth.account.id,roles:getRoleListInputs(),orderBy,direction})
 
     },[])
 

@@ -50,11 +50,20 @@ function* listCategories(action){
 
     try{
 
-        const {accountId,orderBy,direction,from,size} = action.payload
+        const {accountId,name,orderBy,direction,from,size} = action.payload
+
+        const listParams={from,size}
+
+        if(accountId) listParams.accountId = accountId
+        if(name) listParams.name = name
+        if(orderBy) {
+            listParams.orderBy = orderBy
+            listParams.direction = direction
+        }
 
         yield put(listCategoriesRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listCategories,{input:{accountId,orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listCategories,{input:listParams}))
 
         yield put(listCategoriesRoutine.success({data:response.data.listCategories}))
 

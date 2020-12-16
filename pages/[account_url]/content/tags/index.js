@@ -32,46 +32,22 @@ const PageTags = props => {
 
 	const tagController = new TagController(props)
 
+	const [orderBy,setOrderBy]	= React.useState("createdAt")
+	const [direction,setDirection] = React.useState("desc")
+
 	const {confirm} = Modal
 	
-	React.useEffect(async ()=>{
+	React.useEffect(()=>{
 		
-		try{
+		let accountId = null
 
-			let params = {}
-
-			if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-				params.accountId = auth.account.id
-			}
-
-			await listItems(params)
-
-		}catch(error){
-			console.log(error)
+		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+			accountId = auth.account.id
 		}
 
+		tagController._list({accountId,orderBy,direction})
+
 	},[])
-
-	const listItems = async ({accountId=false,name=false,orderBy="createdAt",direction="asc",from=0,size=50}=false) => {
-
-        try{
-
-			const listParams = {
-                orderBy,
-                direction,
-                from,size
-			}
-
-			if(accountId) listParams.accountId = accountId
-			if(name) listParams.name = name
-
-            await tagController._list(listParams)
-
-        }catch(error){
-            console.log(error)
-        }
-
-    }
 
     const pagename=""
 	const links = [['Content',`/${auth.account.uniqueURL}/content/classrooms`,''],['Tags',`/${auth.account.uniqueURL}/content/tags`,'active']]

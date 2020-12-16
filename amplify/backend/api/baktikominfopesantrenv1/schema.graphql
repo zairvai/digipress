@@ -1,11 +1,94 @@
+type Mutation {
+	createUser(input: CreateUserInput!): User
+	updateUser(input: UpdateUserInput!): User
+	deleteUser(input: DeleteItemInput!): User
+	createAccount(input: CreateAccountInput!): Account
+	updateAccount(input: UpdateAccountInput!): Account
+	deleteAccount(input: DeleteItemInput!): Account
+	createTag(input: CreateTagInput!): Tag
+	updateTag(input: UpdateTagInput!): Tag
+	deleteTag(input: DeleteItemInput!): Tag
+	createCategory(input: CreateCategoryInput!): Category
+	updateCategory(input: UpdateCategoryInput!): Category
+	deleteCategory(input: DeleteItemInput!): Category
+	createArticle(input: CreateArticleInput!): Article
+	updateArticle(input: UpdateArticleInput!): Article
+	deleteArticle(input: DeleteItemInput!): Article
+	createClassroom(input: CreateClassroomInput!): Classroom
+	updateClassroom(input: UpdateClassroomInput!): Classroom
+	deleteClassroom(input: DeleteItemInput!): Classroom
+
+	createComment(input: CreateCommentInput!): Comment
+	updateComment(input: UpdateCommentInput!): Comment
+	deleteComment(input: DeleteItemInput!): Comment
+
+	createQna(input: CreateQnaInput!): Qna
+	updateQna(input: UpdateQnaInput!): Qna
+	deleteQna(input: DeleteItemInput!): Qna
+
+	createLesson(input: CreateLessonInput!): Lesson
+	updateLesson(input: UpdateLessonInput!): Lesson
+	deleteLesson(input: DeleteItemInput!): Lesson
+
+}
+
+type Query @aws_iam
+@aws_cognito_user_pools {
+	getAccount(input: GetItemInput!): Account
+	listAccounts(input: ListItemInput): AccountConnection
+	getAccountByUniqueUrl(url: String!): Account
+	getUser(input: GetItemInput!): User
+	getUserByEmailAddress(emailAddress: String!): User
+	listUsers(input: ListItemInput): UserConnection
+	getTag(input: GetItemInput!): Tag
+	listTags(input: ListItemInput): TagConnection
+	getCategory(input: GetItemInput!): Category
+	listCategories(input: ListItemInput): CategoryConnection
+	getArticle(input: GetItemInput!): Article
+	listArticles(input: ListItemInput): ArticleConnection
+	getClassroom(input: GetItemInput!): Classroom
+	listClassrooms(input: ListItemInput): ClassroomConnection
+	getComment(input: GetItemInput!): Comment
+	listComments(input: ListItemInput): CommentConnection
+	getQna(input: GetItemInput!): Qna
+	listQnas(input: ListItemInput): QnaConnection
+
+	getLesson(input: GetItemInput!): Lesson
+	listLessons(input: ListItemInput): LessonConnection
+}
+
+enum ReadAccess {
+	public
+	protected
+	private
+}
+
+input DeleteItemInput {
+	id: ID!
+}
+
+input GetItemInput {
+	id: ID!
+}
+
+input ListItemInput {
+	accountId: ID
+	roles: [UserRole]
+	name: String
+	orderBy: String
+	direction: String
+	from: Int
+	size: Int
+}
+
 type Access @aws_iam
-@aws_cognito_user_pools{
+@aws_cognito_user_pools {
 	accountId: ID!
 	role: UserRole!
-	createdBy: String
-	updatedBy: String
-	createdAt: String
-	updatedAt: String
+	createdBy: ID!
+	updatedBy: ID!
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
 	status: Int
 }
 
@@ -36,21 +119,6 @@ type Account @aws_iam
 	version: Int!
 }
 
-type AccountConnection {
-	items: [Account]
-	foundDocs: Int
-}
-
-type TagConnection {
-	items: [Tag]
-	foundDocs: Int
-}
-
-type CategoryConnection {
-	items: [Category]
-	foundDocs: Int
-}
-
 input CreateAccountInput {
 	name: String!
 	uniqueURL: String!
@@ -58,67 +126,6 @@ input CreateAccountInput {
 	contactPerson: String!
 	emailAddress: AWSEmail!
 	phoneNumber: String!
-}
-
-input CreateUserInput {
-	name: String!
-	phoneCode: String!
-	phoneNumber: String!
-	emailAddress: AWSEmail!
-	password: String
-	role:AccessInputType!
-
-}
-
-input DeleteItemInput {
-	id: ID!
-}
-
-input GetItemInput {
-	id: ID!
-}
-
-input ListItemInput {
-	accountId: ID
-	roles: [UserRole]
-	name:String
-	orderBy: String
-	direction: String
-	from: Int
-	size: Int
-}
-
-type Mutation {
-	createUser(input: CreateUserInput!): User
-	updateUser(input: UpdateUserInput!): User
-	deleteUser(input: DeleteItemInput!): User
-	createAccount(input: CreateAccountInput!): Account
-	updateAccount(input: UpdateAccountInput!): Account
-	deleteAccount(input: DeleteItemInput!): Account
-
-	createTag(input:CreateTagInput!):Tag
-	updateTag(input:UpdateTagInput!):Tag
-	deleteTag(input:DeleteItemInput!):Tag
-
-	createCategory(input:CreateCategoryInput!):Category
-	updateCategory(input:UpdateCategoryInput!):Category
-	deleteCategory(input:DeleteItemInput!):Category
-}
-
-type Query {
-	getAccount(input: GetItemInput!): Account
-	listAccounts(input: ListItemInput): AccountConnection
-	getAccountByUniqueUrl(url: String!): Account @aws_iam @aws_cognito_user_pools
-
-	getUser(input: GetItemInput!): User
-	getUserByEmailAddress(emailAddress: String!): User
-	listUsers(input: ListItemInput): UserConnection
-
-	getTag(input:GetItemInput!):Tag
-	listTags(input:ListItemInput):TagConnection
-
-	getCategory(input:GetItemInput!):Category
-	listCategories(input:ListItemInput):CategoryConnection
 }
 
 input UpdateAccountInput {
@@ -130,18 +137,170 @@ input UpdateAccountInput {
 	emailAddress: AWSEmail
 	phoneNumber: String
 	status: Int
-	expectedVersion: Int
+	expectedVersion: Int!
 }
 
-input UpdateUserInput {
+type AccountConnection {
+	items: [Account]
+	foundDocs: Int
+}
+
+type Article @aws_iam
+@aws_cognito_user_pools {
 	id: ID!
-	name: String
-	emailAddress: AWSEmail
-	phoneCode: String
-	phoneNumber: String
-	roles: [AccessInputType]
+	account: Account!
+	category: Category!
+	title: String!
+	content:String
+	tags: [Tag]
+	allowComment: Boolean
+	access: ReadAccess
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	status: Int
+	version:Int!
+}
+
+input CreateArticleInput {
+	accountId: ID!
+	categoryId: ID!
+	title: String!
+  	content:String!
+	tags: [ID!]
+	allowComment: Boolean
+	access: ReadAccess
+}
+
+input UpdateArticleInput {
+	id: ID!
+	accountId:ID!
+	categoryId: ID
+	title: String
+  	content:String
+	tags: [ID!]
+	allowComment: Boolean
+	access: ReadAccess
 	status: Int
 	expectedVersion: Int!
+}
+
+
+type ArticleConnection {
+	items: [Article]
+	foundDocs: Int
+}
+
+type Category @aws_iam
+@aws_cognito_user_pools {
+	id: ID!
+	account: Account!
+	name: String!
+	desc: String
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status: Int
+}
+
+input UpdateCategoryInput {
+	id: ID!
+	name: String
+	desc: String
+	status: Int
+	expectedVersion: Int!
+}
+
+
+input CreateCategoryInput {
+	accountId: ID!
+	name: String!
+	desc: String
+}
+
+type CategoryConnection {
+	items: [Category]
+	foundDocs: Int
+}
+
+type Classroom @aws_iam
+@aws_cognito_user_pools {
+	id: ID!
+	account: Account!
+	category: Category!
+	title: String!
+	content:String
+	tags: [Tag]
+	allowComment: Boolean
+	access: ReadAccess
+	total:Int
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	status: Int
+	version:Int!
+}
+
+input CreateClassroomInput {
+	accountId: ID!
+	categoryId: ID!
+	title: String!
+  	content:String!
+	tags: [ID!]
+	allowComment: Boolean
+	access: ReadAccess
+}
+
+input UpdateClassroomInput {
+	id: ID!
+	accountId:ID!
+	categoryId: ID
+	title: String
+  	content:String
+	tags: [ID!]
+	allowComment: Boolean
+	access: ReadAccess
+	status: Int
+	expectedVersion: Int!
+}
+
+type ClassroomConnection {
+	items: [Classroom]
+	foundDocs: Int
+}
+
+type Tag @aws_iam
+@aws_cognito_user_pools {
+	id: ID!
+	account: Account!
+	name: String!
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status: Int
+}
+
+input CreateTagInput {
+	accountId: ID!
+	name: String!
+}
+
+input UpdateTagInput {
+	id: ID!
+	name: String
+	status: Int
+	expectedVersion: Int!
+}
+
+type TagConnection {
+	items: [Tag]
+	foundDocs: Int
 }
 
 type User @aws_iam
@@ -162,6 +321,26 @@ type User @aws_iam
 	status: Int
 }
 
+input CreateUserInput {
+	name: String!
+	phoneCode: String!
+	phoneNumber: String!
+	emailAddress: AWSEmail!
+	password: String
+	role: AccessInputType!
+}
+
+input UpdateUserInput {
+	id: ID!
+	name: String
+	emailAddress: AWSEmail
+	phoneCode: String
+	phoneNumber: String
+	roles: [AccessInputType]
+	status: Int
+	expectedVersion: Int!
+}
+
 type UserConnection {
 	items: [User]
 	foundDocs: Int
@@ -175,11 +354,14 @@ enum UserRole {
 	member
 }
 
-type Tag @aws_iam
-@aws_cognito_user_pools{
-	id:ID!
-	accountId:ID!
-	name:String!
+type Comment @aws_iam
+@aws_cognito_user_pools {
+	id: ID!
+	account:Account!
+	article:Article!
+	replyTo:Comment
+	replyToUser:User
+	content: String!
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
@@ -188,23 +370,76 @@ type Tag @aws_iam
 	status: Int
 }
 
-input CreateTagInput {
-	accountId:ID!
-	name:String!
-}
-input UpdateTagInput {
-	id:ID!
-	name:String
-	status:Int
-	expectedVersion:Int!
+input CreateCommentInput {
+	accountId: ID!
+	articleId: ID!
+	replyToId:ID
+	replyToUserId:ID
+	content:String!
 }
 
-type Category @aws_iam
+input UpdateCommentInput {
+	id: ID!
+	accountId:ID!
+	articleId:ID!
+	content:String
+	status: Int
+	expectedVersion: Int!
+}
+
+type CommentConnection {
+	items: [Comment]
+	foundDocs: Int
+}
+
+type Lesson @aws_iam
 @aws_cognito_user_pools{
+	id: ID!
+	account: Account!
+	classroom:Classroom!
+	title: String!
+	seq:Int!
+	content:String
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	status: Int
+	version:Int!
+}
+
+type LessonConnection {
+	items: [Lesson]
+	foundDocs: Int
+}
+
+input CreateLessonInput {
+	accountId: String!
+	classroomId:ID!
+	title:String!
+	seq:Int!
+	content:String!
+}
+
+input UpdateLessonInput{
 	id:ID!
 	accountId:ID!
-	name:String!
-	desc:String
+	classroomId:ID!
+	title:String
+	content:String
+	seq:Int
+	status: Int
+	expectedVersion: Int!
+}
+
+type Qna @aws_iam
+@aws_cognito_user_pools{
+	id:ID!
+	account:Account!
+	classroom:Classroom!
+	lesson:Lesson
+	replyTo:Qna
+	content: String!
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
@@ -213,16 +448,26 @@ type Category @aws_iam
 	status: Int
 }
 
-input CreateCategoryInput {
-	accountId:ID!
-	name:String!
-	desc:String
+type QnaConnection {
+	items: [Qna]
+	foundDocs: Int
 }
 
-input UpdateCategoryInput {
-	id:ID!
-	name:String
-	desc:String
-	status:Int
-	expectedVersion:Int!
+input CreateQnaInput {
+	accountId: String!
+	classroomId:ID!
+	lessonId:ID
+	replyToId:ID
+	content:String!
 }
+
+input UpdateQnaInput {
+	id: ID!
+	accountId: String!
+	classroomId:ID!
+	lessonId:ID
+	content:String
+	status: Int
+	expectedVersion: Int!
+}
+

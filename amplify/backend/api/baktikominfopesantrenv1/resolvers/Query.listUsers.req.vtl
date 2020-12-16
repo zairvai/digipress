@@ -5,20 +5,22 @@ will be passed as the event to AWS Lambda.
 
 #set($size=$util.defaultIfNull($ctx.args.input.size, 20))
 #set($from=$util.defaultIfNull($ctx.args.input.from, 0))
-#set($orderBy=$util.defaultIfNull($ctx.args.input.orderBy,"createdAt"))
-#set($direction=$util.defaultIfNull($ctx.args.input.direction, "asc"))
 
 #set($roles=$util.defaultIfNull($ctx.args.input.roles, []))
 
 #set($accountId=$ctx.args.input.accountId)
 
-#set($sort=[
+#if(!$util.isNull($ctx.args.input.orderBy))
+  #set($sort=[
     {
-      "${orderBy}": {
-        "order": "${direction}"
+      "${ctx.args.input.orderBy}": {
+        "order": $ctx.args.input.direction
       }
     }
   ])
+#else
+	#set($sort=[])
+#end
 
 #set($query={
   "bool": {

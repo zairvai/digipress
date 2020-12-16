@@ -57,11 +57,19 @@ function* listAccounts(action){
 
     try{
 
-        const {orderBy,direction,from,size} = action.payload
+        const {name,orderBy,direction,from,size} = action.payload
+
+        const listParams={from,size}
+
+        if(name) listParams.name = name
+        if(orderBy) {
+            listParams.orderBy = orderBy
+            listParams.direction = direction
+        }
 
         yield put(listAccountsRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listAccounts,{input:{orderBy,direction,from,size}}))
+        const response = yield API.graphql(graphqlOperation(queries.listAccounts,{input:listParams}))
 
         yield put(listAccountsRoutine.success({data:response.data.listAccounts}))
 

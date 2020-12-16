@@ -1,29 +1,24 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
-// import "tinymce/plugins/wordcount"
-// import "tinymce/plugins/table"
 
-const TinyMce = ({id,content,...props}) =>{
+const TinyMce = ({id,...props}) =>{
+
+    const [editor,setEditor] = React.useState(null)
 
     React.useEffect(()=>{
 
-        console.log("construct")
-
-        let tinyMce = null
-        let editor = null
+        let tinymce = null
 
         setTimeout(()=>{
+            
             import('tinymce/tinymce')
                 .then(async(obj)=>{
 
-                    tinyMce = obj.default
+                    tinymce = obj.default
 
                     const url = window.location
 
-                    console.log("prepare init")
-
                     const plugins = [
-                        import("Plugins/tinymce/media"),
+                        import("Plugins/tinymce/mymedia"),
                         import("tinymce/plugins/advlist"),
                         import("tinymce/plugins/lists"),
                         import("tinymce/plugins/fullscreen"),
@@ -38,16 +33,17 @@ const TinyMce = ({id,content,...props}) =>{
                     tinymce.init({
                         selector:`#${id}`,
                         skin_url:`${url.origin}/modules/tinymce/skins/ui/custom`,
-                        plugins:["advlist lists fullscreen autolink link code autoresize"],
+                        plugins:["advlist lists fullscreen autolink link code autoresize mymedia"],
                         menubar:false,
                         statusbar:false,
-                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen ",
+                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen | mymedia",
                         autoresize_on_init: false,
                         autoresize_bottom_margin: 50,
                         min_height:props.minHeight ? props.minHeight : 600,
                         max_height:900,
                         setup:(tinyEditor)=>{
-                            editor = tinyEditor
+                            console.log("setup")
+                            setEditor(tinyEditor)
                             
                             tinyEditor.on('keydown', function (e, evt) {
                                 if (e.keyCode == 9) e.preventDefault();
@@ -56,21 +52,18 @@ const TinyMce = ({id,content,...props}) =>{
                                 const content = tinyEditor.getContent()
                                 props.onChange(content)
                             })
+
                         }
                     })
-                    
+                                
                 })
+
         },100)
         
         
         return ()=>{
             
-            console.log("unmount")
-
-            if(tinyMce){
-                console.log("remove editor")
-                tinyMce.remove(editor)
-            }
+            if(tinymce)tinymce.remove(editor)
             
         }
 
@@ -80,7 +73,6 @@ const TinyMce = ({id,content,...props}) =>{
     
         <textarea style={{visibility:"hidden"}}
             id={id}
-            value={content}
             onChange={(e)=>console.log(e)}
             placeholder={props.placeholder}/>
     </>

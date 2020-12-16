@@ -45,3 +45,23 @@ exports.invokeLambdaSearchManager = function(field,path,body={}){
 
 }
 
+exports.invokeLambdaStorageManager = function(field,body){
+
+    const lambda = new AWS.Lambda({
+        region:process.env.REGION,
+        apiVersion:"2015-03-31"
+    })
+
+    var params = {
+        FunctionName:process.env.FUNCTION_DIGIPRESSSTORAGEMANAGER_NAME,
+        InvocationType:"Event",
+        LogType:"Tail",
+        Payload:`{
+            "field":"${field}",
+            "arguments":${JSON.stringify(body)}
+        }`
+    }
+    
+    return lambda.invoke(params).promise()
+
+}

@@ -710,7 +710,45 @@ export const createTag = /* GraphQL */ `
   mutation CreateTag($input: CreateTagInput!) {
     createTag(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       createdBy {
         id
@@ -819,7 +857,45 @@ export const updateTag = /* GraphQL */ `
   mutation UpdateTag($input: UpdateTagInput!) {
     updateTag(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       createdBy {
         id
@@ -928,7 +1004,45 @@ export const deleteTag = /* GraphQL */ `
   mutation DeleteTag($input: DeleteItemInput!) {
     deleteTag(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       createdBy {
         id
@@ -1037,7 +1151,45 @@ export const createCategory = /* GraphQL */ `
   mutation CreateCategory($input: CreateCategoryInput!) {
     createCategory(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       desc
       createdBy {
@@ -1147,7 +1299,45 @@ export const updateCategory = /* GraphQL */ `
   mutation UpdateCategory($input: UpdateCategoryInput!) {
     updateCategory(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       desc
       createdBy {
@@ -1257,7 +1447,45 @@ export const deleteCategory = /* GraphQL */ `
   mutation DeleteCategory($input: DeleteItemInput!) {
     deleteCategory(input: $input) {
       id
-      accountId
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
       name
       desc
       createdBy {
@@ -1360,6 +1588,4212 @@ export const deleteCategory = /* GraphQL */ `
       updatedAt
       version
       status
+    }
+  }
+`;
+export const createArticle = /* GraphQL */ `
+  mutation CreateArticle($input: CreateArticleInput!) {
+    createArticle(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const updateArticle = /* GraphQL */ `
+  mutation UpdateArticle($input: UpdateArticleInput!) {
+    updateArticle(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const deleteArticle = /* GraphQL */ `
+  mutation DeleteArticle($input: DeleteItemInput!) {
+    deleteArticle(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const createClassroom = /* GraphQL */ `
+  mutation CreateClassroom($input: CreateClassroomInput!) {
+    createClassroom(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      total
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const updateClassroom = /* GraphQL */ `
+  mutation UpdateClassroom($input: UpdateClassroomInput!) {
+    updateClassroom(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      total
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const deleteClassroom = /* GraphQL */ `
+  mutation DeleteClassroom($input: DeleteItemInput!) {
+    deleteClassroom(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      content
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      total
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment($input: CreateCommentInput!) {
+    createComment(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      article {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        article {
+          id
+          title
+          content
+          allowComment
+          access
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment($input: UpdateCommentInput!) {
+    updateComment(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      article {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        article {
+          id
+          title
+          content
+          allowComment
+          access
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment($input: DeleteItemInput!) {
+    deleteComment(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      article {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        article {
+          id
+          title
+          content
+          allowComment
+          access
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const createQna = /* GraphQL */ `
+  mutation CreateQna($input: CreateQnaInput!) {
+    createQna(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      lesson {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        title
+        seq
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        lesson {
+          id
+          title
+          seq
+          content
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const updateQna = /* GraphQL */ `
+  mutation UpdateQna($input: UpdateQnaInput!) {
+    updateQna(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      lesson {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        title
+        seq
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        lesson {
+          id
+          title
+          seq
+          content
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const deleteQna = /* GraphQL */ `
+  mutation DeleteQna($input: DeleteItemInput!) {
+    deleteQna(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      lesson {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        title
+        seq
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      replyTo {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        classroom {
+          id
+          title
+          content
+          allowComment
+          access
+          total
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        lesson {
+          id
+          title
+          seq
+          content
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        replyTo {
+          id
+          content
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      version
+      status
+    }
+  }
+`;
+export const createLesson = /* GraphQL */ `
+  mutation CreateLesson($input: CreateLessonInput!) {
+    createLesson(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      title
+      seq
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const updateLesson = /* GraphQL */ `
+  mutation UpdateLesson($input: UpdateLessonInput!) {
+    updateLesson(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      title
+      seq
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+    }
+  }
+`;
+export const deleteLesson = /* GraphQL */ `
+  mutation DeleteLesson($input: DeleteItemInput!) {
+    deleteLesson(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      classroom {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        content
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        total
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+      }
+      title
+      seq
+      content
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
     }
   }
 `;

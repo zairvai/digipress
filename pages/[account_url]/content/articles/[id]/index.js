@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import Layout from 'Templates/Layout.article.id'
-import { Row, Col,Tag,Form,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
+import { Row, Col,Tag,Modal,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
@@ -11,42 +12,102 @@ import {
 } from 'Components/tables'
 import HTMLRenderer from 'react-html-renderer'
 import {Status} from 'Components/mycomponents.js'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import AppContainer from 'Templates/AppContainer'
+import Permission from 'Library/controllers/Permission'
+import AuthController from 'Library/controllers/AuthController'
+import ArticleController from 'Library/controllers/ArticleController'
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { getArticleRoutinePromise,deleteArticleRoutinePromise} from 'State/routines/article';
 
-const Index = props => {
 
-    const item = props.articles.item
+const PageArticleId = props => {
 
-    const links = [['App','/content/classrooms',''],['Articles','/content/articles',''],[item.name,`/content/articles/${item.id}`,'active']]
+    const {Text} = Typography
+    const {confirm} = Modal
+
+    const {auth,getArticle,router} = props
+
+    const articleController = new ArticleController(props)
+
+    const [item,setItem] = React.useState({})
+
+    const {id} = React.useMemo(()=>router.query,[])
+
+    React.useEffect(async ()=>{
+       
+        try{
+            const article = await articleController._get(id)
+            //console.log(article)
+            setItem(article.data)
+
+        }catch(error){
+            router.push(`/${auth.account.uniqueURL}/content/articles`)
+            console.log(error)
+        }
+        
+    },[])
 
     
-    return(
-        <React.Fragment>
-            <Layout item={item} links={links}>
 
+    const links = [['Content',`/${auth.account.uniqueURL}/content/articles`,''],['Articles',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,'active']]
+
+    const showDeleteConfirm = item => {
+        confirm({
+          title: 'Apakah kamu ingin menghapus artikel ini ?',
+          icon: <ExclamationCircleOutlined />,
+          content: item.title,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+            articleController._delete(item.id)
+                .then(article=>{
+                    articleController._updateList("remove",[{id:article.data.id}])
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
+                    
+                }).catch(error=>console.log(error))
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    }
+
+    return(
+        <AppContainer>
+            <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
                             <Row>
-                                <Col md={12}><h6>{item.category.name}</h6></Col>
+                                <Col md={12}>{item.category && item.category.name}</Col>
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:'/content/articles/[id]/edit',query:{id:item.id}}} shallow><Button className="link" type="link" size="small" icon={<i className="ti-pencil"></i>}>&nbsp;Edit artikel</Button></Link></li>
+                                            <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah artikel</a></Link></li>
+                                            <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus artikel</Button></li>
                                         </ul>
                                     </div>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={24}><h4>{item.name}</h4></Col>
-                            </Row>
-                            <Row className="mt-3">
                                 <Col md={24}>
-                                    <HTMLRenderer html={item.content}/>
+                                    <h4 className="mb-0 mt-2">{item.title}</h4>
                                 </Col>
                             </Row>
-                            <Row className="mt-5">
+                            <Row>
+                                <Col md={24}><h4>{item.name}</h4></Col>
+                            </Row>
+                            <Row className="mt-2">
                                 <Col md={24}>
+                                    <HTMLRenderer html={item.content ? item.content : ""}/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24}>
+                                    Tags&nbsp;
                                 {
+                                    item.tags && 
                                     item.tags.map(tag=>
                                         <Tag key={tag.id}>
                                             <Link href={{pathname:'/content/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
@@ -109,11 +170,19 @@ const Index = props => {
                 </Row>
 
             </Layout>
-        </React.Fragment>
+        </AppContainer> 
     )
 
     
 
 }
 
-export default connect(state=>state)(Index)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+                getArticleRoutinePromise,
+                deleteArticleRoutinePromise
+        },dispatch),dispatch
+    })
+)(withRouter(PageArticleId))

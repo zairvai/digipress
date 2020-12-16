@@ -1,4 +1,10 @@
 /* Amplify Params - DO NOT EDIT
+	ENV
+	FUNCTION_DIGIPRESSIDENTITYMANAGER_NAME
+	FUNCTION_DIGIPRESSSEARCHMANAGER_NAME
+	FUNCTION_DIGIPRESSSTORAGEMANAGER_NAME
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 You can access the following resource attributes as environment variables from your Lambda function
 var environment = process.env.ENV
 var region = process.env.REGION
@@ -9,9 +15,10 @@ Amplify Params - DO NOT EDIT */
 
 const User = require("./model/User")
 const Account = require("./model/Account")
-const Access = require("./model/Access")
 const Tag = require("./model/Tag")
 const Category = require("./model/Category")
+const Article = require("./model/Article")
+const Classroom = require("./model/Classroom")
 
 exports.handler = (event,context,callback) => {
 
@@ -30,14 +37,17 @@ exports.handler = (event,context,callback) => {
 
           case 'Account'          :   Account.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
-                                      
-          case 'Access'           :   Access.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
-                                      break;
 
           case 'Tag'              :   Tag.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
                                       
           case 'Category'         :   Category.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Article'          :   Article.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Classroom'        :   Classroom.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
 
@@ -58,14 +68,18 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
-          case 'Access'           :   Access.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+          case 'Article'          :   Article.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
-          
+         
+          case 'Classroom'        :   Classroom.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           case 'Tag'              :   Tag.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
                                       
           case 'Category'         :   Category.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
+
 
           default                 :   callback(null,"Unknown Field"); break;
 
@@ -84,9 +98,12 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;                       
 
-          case 'Access'           :   Access.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+          case 'Article'          :   Article.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
           
+          case 'Classroom'        :   Classroom.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           case 'Tag'              :   Tag.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
                                       
