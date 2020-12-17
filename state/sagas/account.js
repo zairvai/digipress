@@ -57,11 +57,12 @@ function* listAccounts(action){
 
     try{
 
-        const {name,orderBy,direction,from,size} = action.payload
+        const {name,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
 
         if(name) listParams.name = name
+        if(statuses) listParams.statuses = statuses
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction

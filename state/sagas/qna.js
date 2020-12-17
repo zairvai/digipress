@@ -53,11 +53,14 @@ function* listQnas(action){
 
     try{
 
-        const {accountId,name,orderBy,direction,from,size} = action.payload
+        const {accountId,classroomId,lessonId,name,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
 
         if(accountId) listParams.accountId = accountId
+        if(classroomId) listParams.classroomId = classroomId
+        if(lessonId) listParams.lessonId = lessonId
+        if(statuses) listParams.statuses = statuses
         if(name) listParams.name = name
         if(orderBy) {
             listParams.orderBy = orderBy

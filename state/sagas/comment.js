@@ -53,12 +53,14 @@ function* listComments(action){
 
     try{
 
-        const {accountId,name,orderBy,direction,from,size} = action.payload
+        const {accountId,articleId,name,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
 
         if(accountId) listParams.accountId = accountId
+        if(articleId) listParams.articleId = articleId
         if(name) listParams.name = name
+        if(statuses) listParams.statuses = statuses
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction

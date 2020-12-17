@@ -82,6 +82,7 @@ input ListItemInput {
 	direction: String
 	from: Int
 	size: Int
+	statuses:[Int]
 }
 
 type Access @aws_iam

@@ -7,6 +7,7 @@ import {
 import {Button,Tooltip} from 'antd'
 import Icon from '@mdi/react'
 import {mdiDelete} from '@mdi/js'
+import AuthController from 'Library/controllers/AuthController'
 
 const List = ({items,...props}) =>{
 
@@ -18,6 +19,10 @@ const List = ({items,...props}) =>{
                 <td valign="middle">{index+1}</td>
                 <td valign="middle">{item.name}</td>
                 <td valign="middle">{item.desc}</td>
+                {
+                    (AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
+                    <td valign="middle">{item.account.name}</td>
+                }
                 <td valign="middle" className="fright">
                     <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
                         <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={(e)=>{props.onDelete(item,index);e.stopPropagation(); }}/>}/>
@@ -35,6 +40,10 @@ const List = ({items,...props}) =>{
                         <th width="20"></th>
                         <th width="25%">Kategori</th>
                         <th width="25%">Deskripsi</th>
+                        {
+                            (AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
+                            <td valign="middle">Akun</td>
+                        }
                         <th className="fright"></th>
                     </tr>
                 </thead>

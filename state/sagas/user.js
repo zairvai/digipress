@@ -88,12 +88,13 @@ function* listUsers(action){
 
     try{
         
-        const {accountId,name,roles,orderBy,direction,from,size} = action.payload
+        const {accountId,name,roles,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size,roles}
 
         if(accountId) listParams.accountId = accountId
         if(name) listParams.name = name
+        if(statuses) listParams.statuses = statuses
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction

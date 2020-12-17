@@ -51,17 +51,19 @@ function* listLessons(action){
 
     try{
 
-        const {accountId,classroomId,title,orderBy,direction,from,size} = action.payload
+        const {accountId,classroomId,title,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
 
         if(accountId) listParams.accountId = accountId
         if(classroomId) listParams.classroomId = classroomId
         if(title) listParams.name = title
+        if(statuses) listParams.statuses = statuses
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction
         }
+       
 
         console.log(listParams)
 

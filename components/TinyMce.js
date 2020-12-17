@@ -24,7 +24,8 @@ const TinyMce = ({id,...props}) =>{
                         import("tinymce/plugins/autolink"),
                         import("tinymce/plugins/link"),
                         import("tinymce/plugins/code"),
-                        import("tinymce/plugins/autoresize")
+                        import("tinymce/plugins/autoresize"),
+                        import("tinymce/plugins/paste")
                     ]
 
                     await Promise.all(plugins)
@@ -32,8 +33,10 @@ const TinyMce = ({id,...props}) =>{
                     tinymce.init({
                         selector:`#${id}`,
                         skin_url:`${url.origin}/modules/tinymce/skins/ui/custom`,
-                        plugins:["advlist lists fullscreen autolink link code autoresize mymedia"],
-                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen | mymedia",
+                        plugins:["advlist lists fullscreen autolink link code autoresize mymedia paste"],
+                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
+                                    alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
+                                    code | fullscreen | mymedia | paste pastetext",
                         menubar:false,
                         statusbar:false,
                         //autoresize_on_init: false,

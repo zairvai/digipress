@@ -7,6 +7,8 @@ import {
 } from 'Components/tables'
 
 import {Status} from 'Components/mycomponents.js'
+import AuthController from 'Library/controllers/AuthController'
+
 
 const List = ({items,...props}) =>{
 
@@ -20,12 +22,32 @@ const List = ({items,...props}) =>{
                     
                     <td valign="middle">{index+1}</td>
                     <td valign="middle">{item.title}</td>
-                    <td valign="middle">{item.category.name}</td>
-                    <td valign="middle">{
-                        item.tags &&
-                            item.tags.map(tag=><Tag key={tag.id}>{tag.name}</Tag>)
-                        }
-                    </td>
+                    {
+                        AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+                        <>
+                            <td valign="middle">
+                                {item.category.name}
+                                {
+                                    item.tags && item.tags.map(tag=><div className="mt-1"><Tag key={tag.id}>{tag.name}</Tag></div>)
+                                }
+                            </td>
+                            <td valign="middle">
+                                {item.account.name}
+                            </td>
+                        </>
+                        :
+                        <>
+                            <td valign="middle">
+                                {item.category.name}
+                            </td>
+                            <td valign="middle">
+                                {
+                                    item.tags && item.tags.map(tag=><div className="mt-1"><Tag key={tag.id}>{tag.name}</Tag></div>)
+                                }
+                            </td>
+                        </>
+                        
+                    }
                     <td valign="middle">{item.access}</td>
                     <td valign="middle">{item.createdBy.name}</td>
                     <td valign="middle" className="fright">
@@ -46,8 +68,19 @@ const List = ({items,...props}) =>{
                     <tr>
                         <th width="20"></th>
                         <th width="25%">Ruang belajar</th>
-                        <th width="20%">Kategori</th>
-                        <th width="20%">Tags</th>
+                        {
+                            AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+                            <>
+                                <th width="20%">Kategori &amp; Tag</th>
+                                <th width="20%">Akun</th>
+                            </>
+                            :
+                            <>
+                                <th width="20%">Kategori</th>
+                                <th width="20%">Tag</th>
+                            </>
+                            
+                        }
                         <th width="10%">Akses</th>
                         <th width="10%">Pengajar</th>
                         <th className="fright">Status</th>

@@ -10,11 +10,20 @@
 
 #set($query={
   "bool": {
-    "must": [{
-      "match": {
-      	"uniqueURL":$ctx.args.url
+    "must": [
+        {
+        "match": {
+          "uniqueURL":$ctx.args.url
+        }
       }
-    }]
+    ],
+    "must_not":[
+        {
+          "term":{
+            "status.keyword":"-1"
+          }
+        }
+    ]
   }
 })
 

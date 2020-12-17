@@ -12,7 +12,6 @@ function searchManagerPut(record){
         "desc":newImage.desc.S,
         "status":newImage.status.N,
         "__typename":newImage.__typename.S,
-        "version":newImage.version ? newImage.version.N : 1,
         "createdBy":newImage.createdBy.S,
         "updatedBy":newImage.updatedBy.S,
         "createdAt":newImage.createdAt.S,
