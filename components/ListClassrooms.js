@@ -48,8 +48,8 @@ const List = ({items,...props}) =>{
                         </>
                         
                     }
-                    <td valign="middle">{item.access}</td>
                     <td valign="middle">{item.createdBy.name}</td>
+                    <td valign="middle">{item.access}</td>
                     <td valign="middle" className="fright">
                         {
                             item.status===3 ? <Status text="Active" state="success" position="right"/> :
@@ -81,8 +81,8 @@ const List = ({items,...props}) =>{
                             </>
                             
                         }
-                        <th width="10%">Akses</th>
                         <th width="10%">Pengajar</th>
+                        <th width="10%">Akses</th>
                         <th className="fright">Status</th>
                     </tr>
                 </thead>
