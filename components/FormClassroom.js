@@ -83,9 +83,6 @@ const FormClassroom = ({item,...props}) => {
 
     const onSubmit = (values,e) => {
 
-        console.log(values)
-
-        values.accountId = props.accountId
         values.categoryId = values.category.id
 
         if(values.tags.length>0){
@@ -97,11 +94,11 @@ const FormClassroom = ({item,...props}) => {
         }
 
         if(item) {
-            values = {id:item.id,version:item.version,...values}
-            classroomController._update(values)
+            classroomController._update(item,values)
                 .then(classroom=>props.onSuccess(classroom.data))
                 .catch(error=>console.log(error))
         }else{
+            values.accountId = props.accountId
             classroomController._create(values)
                 .then(classroom=>props.onSuccess(classroom.data))
                 .catch(error=>console.log(error))

@@ -60,9 +60,8 @@ const PageArticleId = props => {
           okText:"Ya",
           cancelText:"Tidak",
           onOk() {
-            articleController._delete(item.id)
+            articleController._delete(item)
                 .then(article=>{
-                    //articleController._updateList("remove",[{id:article.data.id}])
                     setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
                     
                 }).catch(error=>console.log(error))

@@ -22,17 +22,19 @@ export default class Controller{
         return this.props.createAccountRoutinePromise({values})
     }
 
-    _update = (values) =>{
-        // values.id = id
+    _update = (item,values) =>{
+        
+        values = {
+            id:item.id,
+            version:item.version,
+            ...values}
+
         return this.props.updateAccountRoutinePromise({values})
     }
 
-    _list = ({orderBy,direction,from,size}) => {
-
-        const requestFrom = typeof from !== "undefined" ? from : 0
-        const requestSize = typeof size !== "undefined" ? size : 50
+    _list = (values) => {
     
-        this.props.listAccountsRoutinePromise({orderBy,direction,from:requestFrom,size:requestSize})
+        this.props.listAccountsRoutinePromise(values)
         
     }
 
@@ -40,18 +42,22 @@ export default class Controller{
         return this.props.getAccountRoutinePromise({id})
     }
 
-    // _getInit = () => {
-    //     this.dispatch(getAccountInit())
-    // }
+    _delete = (item) => {
 
-    _delete = (id) =>{
-        
-        //this.dispatch(deleteAccount({id}))
-        return this.props.deleteAccountRoutinePromise({id})
-
+        const values = {
+            id:item.id,
+            version:item.version,
+            status:-1}
+            
+        return this.props.updateAccountRoutinePromise({values})
     }
-    // _deleteInit = () => {
-    //     this.dispatch(deleteAccountInit())
+
+
+    //  delete fisik
+    // _delete = (id) =>{
+        
+    //     return this.props.deleteAccountRoutinePromise({id})
+
     // }
 
     _getAccountByUniqueUrl = ({url}) =>{

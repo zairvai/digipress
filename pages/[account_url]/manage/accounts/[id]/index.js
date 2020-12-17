@@ -78,10 +78,9 @@ const PageAccountId = props => {
           okText:"Ya",
           cancelText:"Tidak",
           onOk() {
-            accountController._delete(item.id)
+            accountController._delete(item)
                 .then(account=>{
                     router.push(`/${auth.account.uniqueURL}/manage/accounts`)
-                    //accountController._updateList("remove",[{id:account.data.id}]).then(success=>router.push(`/${auth.account.uniqueURL}/manage/accounts`)	)
                 }).catch(error=>console.log(error))
           },
           onCancel() {

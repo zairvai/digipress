@@ -85,11 +85,10 @@ const PageListUser = props => {
             let roles = item.roles.map((x)=>x)//copy array
             const indexRole = roles.findIndex((role) => role.accountId === account.id)
             roles.splice(indexRole,1)//remove from array
-
-            userController._update({
-                id:item.id,
-                version:item.version,
-                roles:roles})
+            
+            var values ={roles}
+            
+            userController._update(item,values)
                 .then(resp=>{
                     userController._updateList("remove",[{id:item.id}],index)
                 })

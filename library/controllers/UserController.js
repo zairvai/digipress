@@ -15,7 +15,14 @@ export default class Controller{
         return this.props.createUserRoutinePromise({values})
     }
 
-    _update = (values) =>{
+    _update = (item,values) =>{
+        
+        values = {
+            id:item.id,
+            version:item.version,
+            ...values    
+        }
+
         return this.props.updateUserRoutinePromise({values})
     }
 

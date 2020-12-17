@@ -84,9 +84,6 @@ const FormArticle = ({item,...props}) => {
 
     const onSubmit = (values,e) => {
 
-        console.log(values)
-
-        values.accountId = props.accountId
         values.categoryId = values.category.id
 
         if(values.tags.length>0){
@@ -98,14 +95,12 @@ const FormArticle = ({item,...props}) => {
         }
 
         if(item) {
-            values = {id:item.id,version:item.version,...values}
 
-            console.log(values)
-
-            articleController._update(values)
+            articleController._update(item,values)
                 .then(article=>props.onSuccess(article.data))
                 .catch(error=>console.log(error))
         }else{
+            values.accountId = props.accountId
             articleController._create(values)
                 .then(article=>props.onSuccess(article.data))
                 .catch(error=>console.log(error))

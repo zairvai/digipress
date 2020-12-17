@@ -193,8 +193,7 @@ function* updateAccount(action){
         if(values.status) updateParams.status = values.status.trim()
         
 
-        const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{
-            input:updateParams}))
+        const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{input:updateParams}))
 
         yield put(updateAccountRoutine.success({data:response.data.updateAccount}))
 

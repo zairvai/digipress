@@ -39,6 +39,7 @@ export default class Controller{
             classroomId:item.classroom.id,
             version:item.version,
             status:-1}
+            
         return this.props.updateLessonRoutinePromise({values})
 
     }

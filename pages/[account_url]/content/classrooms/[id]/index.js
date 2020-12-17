@@ -75,9 +75,8 @@ const PageClassroomId = props => {
           okText:"Ya",
           cancelText:"Tidak",
           onOk() {
-            classroomController._delete(item.id)
+            classroomController._delete(item)
                 .then(classroom=>{
-                    //classroomController._updateList("remove",[{id:article.data.id}])
                     setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms`),1000)
                 }).catch(error=>console.log(error))
           },

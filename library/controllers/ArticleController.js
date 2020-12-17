@@ -19,13 +19,34 @@ export default class Controller{
         return this.props.getArticleRoutinePromise({id})
     }
 
-    _update = (values) =>{
+    _update = (item,values) =>{
+        
+        values = {
+            id:item.id,
+            accountId:item.account.id,
+            version:item.version,
+            ...values}
+
         return this.props.updateArticleRoutinePromise({values})
     }
 
-    _delete = (id) => {
-        return this.props.deleteArticleRoutinePromise({id})
+    // delete canonical
+    _delete = (item) => {
+
+        const values = {
+            id:item.id,
+            accountId:item.account.id,
+            version:item.version,
+            status:-1}
+            
+        return this.props.updateArticleRoutinePromise({values})
+
     }
+
+    // delete fisik
+    // _delete = (id) => {
+    //     return this.props.deleteArticleRoutinePromise({id})
+    // }
 
     _list = values => {
         return this.props.listArticlesRoutinePromise(values)

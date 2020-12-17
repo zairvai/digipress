@@ -80,9 +80,8 @@ const FormAccount = ({item,...props}) => {
     const onSubmit = (values) => {
         
         if(item) {
-            values = {id:item.id,version:item.version,...values}
             
-            accountController._update(values)
+            accountController._update(item,values)
                 .then(account=>props.onSuccess(account.data))
                 .catch(error=>console.log(error))
         }
