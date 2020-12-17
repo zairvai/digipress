@@ -51,7 +51,7 @@ const Sidebar = (props) => {
 				{
 					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
 					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Pesantren' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Akun Pesantren' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
 					</>
 					:
 					<></>

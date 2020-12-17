@@ -13,12 +13,15 @@ import {
 import HTMLRenderer from 'react-html-renderer'
 import {Status} from 'Components/mycomponents.js'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import ListLessons from 'Components/ListLessons'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
 import AuthController from 'Library/controllers/AuthController'
 import ClassroomController from 'Library/controllers/ClassroomController'
+import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getClassroomRoutinePromise,deleteClassroomRoutinePromise} from 'State/routines/classroom';
+import { listLessonsRoutinePromise} from 'State/routines/lesson'
 
 
 const PageClassroomId = props => {
@@ -26,10 +29,14 @@ const PageClassroomId = props => {
     const {Text} = Typography
     const {confirm} = Modal
 
-    const {auth,getClassroom,router} = props
+    const {auth,listLessons,router} = props
 
     const classroomController = new ClassroomController(props)
+    const lessonController = new LessonController(props)
 
+    const [lessonOrderBy,setLessonOrderBy]	= React.useState("seq.keyword")
+    const [lessonDirection,setLessonDirection] = React.useState("asc")
+    
     const [item,setItem] = React.useState({})
 
     const {id} = React.useMemo(()=>router.query,[])
@@ -40,6 +47,14 @@ const PageClassroomId = props => {
             const classroom = await classroomController._get(id)
             //console.log(classroom)
             setItem(classroom.data)
+
+            let accountId = null
+
+            if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+                accountId = auth.account.id
+            }
+
+            lessonController._list({accountId,classroomId:id,orderBy:lessonOrderBy,direction:lessonDirection})
 
         }catch(error){
             router.push(`/${auth.account.uniqueURL}/content/classrooms`)
@@ -139,53 +154,14 @@ const PageClassroomId = props => {
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <VuroxTableDark>
-                                        <table className="table table-borderless mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th width="20"><Checkbox/></th>
-                                                    <th width="40%">Materi</th>
-                                                    <th width="20%">Tipe</th>
-                                                    <th>Penulis</th>
-                                                    <th className="fright">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {
-                                                props.lessons.list.map(item=>(
-                                                    <tr key={item.id}>
-                                                        <td><Checkbox/></td>
-                                                        {item.type==="lesson" ?
-                                                        <td valign="middle"><Link href={{pathname:'/content/classrooms/[id]/lessons/[lid]',query:{id:item.id,lid:item.id}}} shallow><a>{item.name}</a></Link></td>
-                                                        :
-                                                        <td valign="middle"><Link href={{pathname:'/content/classrooms/[id]/quizes/[qid]',query:{id:item.id,qid:item.id}}} shallow><a>{item.name}</a></Link></td>
-                                                        }
-                                                        <td valign="middle">{item.type}</td>
-                                                        <td valign="middle"><Link href={{pathname:'/access/user/[id]',query:{id:item.author.id}}} shallow><a>{item.author.name}</a></Link></td>
-                                                        <td valign="middle" className="fright">
-                                                            {
-                                                                item.status===1 ? <Status text="Published" state="success" position="right"/> :
-                                                                item.status===2 ? <Status text="Draft" state="warning" position="right"/> :
-                                                                // campaign.status===2 ? <Status text="On Approval" state="warning" position="right"/> :
-                                                                // campaign.status===3 ? <Status text="Running" state="success" position="right" blinking/> :
-                                                                // campaign.status===4 ? <Status text="Finished" state="default" position="right"/> :
-                                                                // campaign.status===5 ? <Status text="Canceled" state="fail" position="right"/> :
-                                                                <></>
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                            </tbody>
-                                        </table>
-                                    </VuroxTableDark>
+                                    <ListLessons items={listLessons.list.items} classroomId={item.id} />
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
 
-                <Row>
+                {/* <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">
                             <Row>
@@ -233,7 +209,7 @@ const PageClassroomId = props => {
                             </Row>
                         </VuroxComponentsContainer>
                     </Col>
-                </Row>
+                </Row> */}
 
             </Layout>
         </AppContainer> 
@@ -248,7 +224,8 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
                 getClassroomRoutinePromise,
-                deleteClassroomRoutinePromise
+                deleteClassroomRoutinePromise,
+                listLessonsRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageClassroomId))

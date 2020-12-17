@@ -9,6 +9,7 @@ will be passed as the event to AWS Lambda.
 #set($roles=$util.defaultIfNull($ctx.args.input.roles, []))
 
 #set($accountId=$ctx.args.input.accountId)
+#set($classroomId=$ctx.args.input.classroomId)
 
 #if(!$util.isNull($ctx.args.input.orderBy))
   #set($sort=[
@@ -36,6 +37,18 @@ will be passed as the event to AWS Lambda.
         {
           "match": {
             "accountId": $accountId
+          }
+        },
+        {
+          "match": {
+            "classroomId": $classroomId
+          }
+        }
+      ],
+      "must_not":[
+        {
+          "term":{
+            "status.keyword":"-1"
           }
         }
       ]

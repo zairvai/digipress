@@ -15,12 +15,12 @@ function searchManagerPut(record){
         "phoneNumber":newImage.phoneNumber.S,
         "status":newImage.status.N,
         "__typename":newImage.__typename.S,
-        "version":newImage.version ? newImage.version.N : 1
+        "version":newImage.version ? newImage.version.N : 1,
+        "createdBy":newImage.createdBy.S,
+        "updatedBy":newImage.updatedBy.S,
+        "createdAt":newImage.createdAt.S,
+        "updatedAt":newImage.updatedAt.S
       }
-  
-  
-      if(newImage.createdAt) body["createdAt"] = newImage.createdAt.S
-      if(newImage.updatedAt) body["updatedAt"] = newImage.updatedAt.S
 
       return functions.invokeLambdaSearchManager("put",`/account/_doc/${id}`,body)
 

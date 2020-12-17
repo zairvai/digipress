@@ -12,7 +12,7 @@ import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import AppContainer from 'Templates/AppContainer'
-// import FormLesson from 'Components/FormLesson'
+import FormLesson from 'Components/FormLesson'
 
 import ClassroomController from 'Library/controllers/ClassroomController'
 
@@ -21,7 +21,7 @@ import { getClassroomRoutinePromise } from 'State/routines/classroom';
 
 const PageLessonAdd = props => {
 
-	const {auth,listTags,listCategories,router} = props
+	const {auth,router} = props
 	
 	const classroomController = new ClassroomController(props)
 
@@ -52,13 +52,13 @@ const PageLessonAdd = props => {
     
 
 	const onCancel = () => {
-        router.push(`/${auth.account.uniqueURL}/content/lessons`)	
+        router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.id}`)	
     }
     
     const onSuccess = lesson =>{
 		console.log(lesson)
         //userController._updateList("add",user,0)
-        router.push(`/${auth.account.uniqueURL}/content/lessons`)	
+        router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.id}`)	
 	}
 	
 	return (
@@ -72,7 +72,9 @@ const PageLessonAdd = props => {
 				</VuroxSidebar>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
 					<Summery2 pagename={pagename} links={links}/>
-					{/* <FormLesson onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list.items} tags={listTags.list.items}/> */}
+					<FormLesson 
+						onSuccess={onSuccess} onCancel={onCancel} 
+						accountId={auth.account.id} classroomId={item.id}/>
 				</ContentLayout>
 			</VuroxLayout>
 		</AppContainer>

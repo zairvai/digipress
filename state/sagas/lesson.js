@@ -51,12 +51,13 @@ function* listLessons(action){
 
     try{
 
-        const {accountId,name,orderBy,direction,from,size} = action.payload
+        const {accountId,classroomId,title,orderBy,direction,from,size} = action.payload
 
         const listParams={from,size}
 
         if(accountId) listParams.accountId = accountId
-        if(name) listParams.name = name
+        if(classroomId) listParams.classroomId = classroomId
+        if(title) listParams.name = title
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction
@@ -151,10 +152,10 @@ function* updateLesson(action){
             expectedVersion : values.version
         }
 
-        if(values.title) inputParams.title = values.title.trim()
-        if(values.content) inputParams.content = values.content
-        if(values.seq) inputParams.seq = values.seq
-        if(values.status) inputParams.status = values.status
+        if(values.title) updateParams.title = values.title.trim()
+        if(values.content) updateParams.content = values.content
+        if(values.seq) updateParams.seq = values.seq
+        if(values.status) updateParams.status = values.status
 
         const response = yield API.graphql(graphqlOperation(mutations.updateLesson,{input:updateParams}))
 

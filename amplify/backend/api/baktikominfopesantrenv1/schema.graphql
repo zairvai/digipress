@@ -73,6 +73,9 @@ input GetItemInput {
 
 input ListItemInput {
 	accountId: ID
+	classroomId:ID
+	articleId:ID
+	lessonId:ID
 	roles: [UserRole]
 	name: String
 	orderBy: String

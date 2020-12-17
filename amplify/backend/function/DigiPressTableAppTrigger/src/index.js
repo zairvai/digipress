@@ -19,6 +19,7 @@ const Tag = require("./model/Tag")
 const Category = require("./model/Category")
 const Article = require("./model/Article")
 const Classroom = require("./model/Classroom")
+const Lesson = require("./model/Lesson")
 
 exports.handler = (event,context,callback) => {
 
@@ -50,6 +51,8 @@ exports.handler = (event,context,callback) => {
           case 'Classroom'        :   Classroom.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          case 'Lesson'           :   Lesson.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
 
           default                 :   callback(null,"Unknown Field"); break;
 
@@ -68,16 +71,19 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          case 'Tag'              :   Tag.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+                                      
+          case 'Category'         :   Category.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           case 'Article'          :   Article.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
          
           case 'Classroom'        :   Classroom.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
-          case 'Tag'              :   Tag.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
-                                      break;
-                                      
-          case 'Category'         :   Category.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+          case 'Lesson'           :   Lesson.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
 
@@ -98,16 +104,19 @@ exports.handler = (event,context,callback) => {
           case 'Account'          :   Account.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;                       
 
+          case 'Tag'              :   Tag.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+                                      
+          case 'Category'         :   Category.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           case 'Article'          :   Article.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
           
           case 'Classroom'        :   Classroom.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
-
-          case 'Tag'              :   Tag.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
-                                      break;
-                                      
-          case 'Category'         :   Category.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+          
+          case 'Lesson'           :   Lesson.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
                                       

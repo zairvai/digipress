@@ -2,11 +2,10 @@ import React from 'react'
 
 const TinyMce = ({id,...props}) =>{
 
+    let tinymce = null
     const [editor,setEditor] = React.useState(null)
 
     React.useEffect(()=>{
-
-        let tinymce = null
 
         setTimeout(()=>{
             
@@ -34,13 +33,13 @@ const TinyMce = ({id,...props}) =>{
                         selector:`#${id}`,
                         skin_url:`${url.origin}/modules/tinymce/skins/ui/custom`,
                         plugins:["advlist lists fullscreen autolink link code autoresize mymedia"],
+                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen | mymedia",
                         menubar:false,
                         statusbar:false,
-                        toolbar1:"undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link | code | fullscreen | mymedia",
-                        autoresize_on_init: false,
+                        //autoresize_on_init: false,
                         autoresize_bottom_margin: 50,
                         min_height:props.minHeight ? props.minHeight : 600,
-                        max_height:900,
+                        max_height:2000,
                         setup:(tinyEditor)=>{
                             console.log("setup")
                             setEditor(tinyEditor)
@@ -52,22 +51,48 @@ const TinyMce = ({id,...props}) =>{
                                 const content = tinyEditor.getContent()
                                 props.onChange(content)
                             })
-
                         }
                     })
-                                
                 })
-
         },100)
         
-        
         return ()=>{
-            
+            console.log("remove editor")
             if(tinymce)tinymce.remove(editor)
-            
         }
 
     },[])
+
+    let interval,counter=0
+
+    React.useEffect(()=>{
+
+        interval = setTimeout(function run(){
+                
+            console.log(editor)
+            console.log(props.content)
+            if(props.content && props.content.trim() !== ""){
+                if(counter<10){
+
+                    if(editor && props.content){
+                        console.log("DONE")
+                        editor.setContent(props.content)
+                        clearTimeout(interval)
+                    }else{
+                        setTimeout(run,1000)
+                    }
+                    counter++ 
+                }
+            }
+        
+            
+        },1000)
+    
+        return ()=>{
+            console.log("DONE2")
+            clearTimeout(interval)
+        }
+    },[editor,props.content])
 
     return <>
     

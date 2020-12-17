@@ -40,14 +40,8 @@ const FormClassroom = ({item,...props}) => {
         if(item){
 
             setValue("title",item.title)
-
-            setTimeout(()=>{
-
-                setValue("content",item.content)
-                tinymce.get("classroomEditor").setContent(item.content)
-                
-            },1000)
-
+            setValue("content",item.content)
+           
             setValue("category",{
                 id:item.category.id,
                 value:item.category.id.toString(),
@@ -197,6 +191,8 @@ const FormClassroom = ({item,...props}) => {
                                            
                                             <TinyMce 
                                                 disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                content={item ? item.content : "   "}
+                                                minHeight={400}
                                                 id="classroomEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>

@@ -63,6 +63,33 @@ export default class Controller{
     }
 
 
+    static ADD_LESSON = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+    static UPDATE_LESSON = ({auth,...props}) => {
+
+        if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+    static DELETE_LESSON = ({auth,...props}) => {
+
+        if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
+
+        return true
+
+    }
+
+
 
 
     //TAG

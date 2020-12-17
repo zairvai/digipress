@@ -21,7 +21,11 @@
 $util.qr($ctx.stash.put("input",$input))
 
 $util.qr($ctx.stash.put("field","put"))
-$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/qnas"))
+#if( !$util.isNull($ctx.args.input.lessonId ))
+    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/lessons/${ctx.args.input.lessonId}/qnas"))
+#else
+    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/qnas"))
+#end
 $util.qr($ctx.stash.put("content",$ctx.args.input.content))
 
 {}

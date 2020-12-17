@@ -38,6 +38,13 @@ will be passed as the event to AWS Lambda.
             "accountId": $accountId
           }
         }
+      ],
+      "must_not":[
+        {
+          "term":{
+            "status.keyword":"-1"
+          }
+        }
       ]
     }
   })

@@ -14,7 +14,11 @@ function searchManagerPut(record){
         "access":newImage.access.S,
         "status":newImage.status.N,
         "__typename":newImage.__typename.S,
-        "version":newImage.version ? newImage.version.N : 1
+        "version":newImage.version ? newImage.version.N : 1,
+        "createdBy":newImage.createdBy.S,
+        "updatedBy":newImage.updatedBy.S,
+        "createdAt":newImage.createdAt.S,
+        "updatedAt":newImage.updatedAt.S
       }
   
       if(newImage.tags){
@@ -24,9 +28,7 @@ function searchManagerPut(record){
           })
           body["tags"] = tags
       }
-      if(newImage.createdAt) body["createdAt"] = newImage.createdAt.S
-      if(newImage.updatedAt) body["updatedAt"] = newImage.updatedAt.S
-
+   
       return functions.invokeLambdaSearchManager("put",`/classroom/_doc/${id}`,body)
 
   
@@ -57,19 +59,23 @@ function update(record){
 }
 
 function remove(record){
-    
-    return new Promise(async(resolve,reject)=>{
-        try{
-            await searchManagerDelete(record)
-            await storageManagerDelete(record)
-            resolve(true)
-        }
-        catch(error){
-            reject(error)
-        }
-        
-    })
+    return searchManagerDelete(record)
 }
+
+// function remove(record){
+    
+//     return new Promise(async(resolve,reject)=>{
+//         try{
+//             await searchManagerDelete(record)
+//             await storageManagerDelete(record)
+//             resolve(true)
+//         }
+//         catch(error){
+//             reject(error)
+//         }
+        
+//     })
+// }
 
 exports.insert = insert
 exports.update = update

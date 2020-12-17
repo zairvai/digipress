@@ -119,7 +119,7 @@ const PageArticleId = props => {
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
-                <Row>
+                {/* <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">
                             <Row>
@@ -167,7 +167,7 @@ const PageArticleId = props => {
                             </Row>
                         </VuroxComponentsContainer>
                     </Col>
-                </Row>
+                </Row> */}
 
             </Layout>
         </AppContainer> 

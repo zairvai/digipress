@@ -17,7 +17,9 @@ function searchManagerPut(record){
         "createdBy":roleItem.createdBy.S,
         "updatedBy":roleItem.updatedBy.S,
         "createdAt":roleItem.createdAt.S,
-        "updatedAt":roleItem.updatedAt.S
+        "updatedAt":roleItem.updatedAt.S,
+        "createdBy":newImage.createdBy.S,
+        "updatedBy":newImage.updatedBy.S
       })
     })
 

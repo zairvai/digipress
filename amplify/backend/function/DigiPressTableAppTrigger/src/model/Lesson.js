@@ -8,29 +8,28 @@ function searchManagerPut(record){
       var body = {
         "id":id,
         "accountId":newImage.accountId.S,
-        "name":newImage.name.S,
-        "desc":newImage.desc.S,
+        "classroomId":newImage.classroomId.S,
+        "title":newImage.title.S,
+        "seq":newImage.seq.N,
         "status":newImage.status.N,
         "__typename":newImage.__typename.S,
-        "version":newImage.version ? newImage.version.N : 1,
         "createdBy":newImage.createdBy.S,
         "updatedBy":newImage.updatedBy.S,
         "createdAt":newImage.createdAt.S,
         "updatedAt":newImage.updatedAt.S
       }
 
-      return functions.invokeLambdaSearchManager("put",`/category/_doc/${id}`,body)
-
+      return functions.invokeLambdaSearchManager("put",`/lesson/_doc/${id}`,body)
   
   }
   
 function searchManagerDelete(record){
     var id = record.dynamodb.Keys.id.S
-
-    return functions.invokeLambdaSearchManager("delete",`/category/_doc/${id}`)
+    
+    return functions.invokeLambdaSearchManager("delete",`/lesson/_doc/${id}`)
 
 }
-  
+
 function insert(record){
     return searchManagerPut(record)
 }
@@ -42,7 +41,6 @@ function update(record){
 function remove(record){
     return searchManagerDelete(record)
 }
-
 
 exports.insert = insert
 exports.update = update

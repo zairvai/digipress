@@ -36,18 +36,14 @@ const FormArticle = ({item,...props}) => {
     const articleController = new ArticleController(props)
 
     React.useEffect(()=>{
+        
         console.log(item)
+
         if(item){
 
             setValue("title",item.title)
-
-            setTimeout(()=>{
-
-                setValue("content",item.content)
-                tinymce.get("articleEditor").setContent(item.content)
-
-            },1000)
-
+            setValue("content",item.content)
+              
             setValue("category",{
                 id:item.category.id,
                 value:item.category.id.toString(),
@@ -196,6 +192,8 @@ const FormArticle = ({item,...props}) => {
                                            
                                             <TinyMce 
                                                 disabled={createArticle.isRequesting || updateArticle.isRequesting}
+                                                minHeight={400}
+                                                content={item ? item.content : ""}
                                                 id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>
