@@ -42,7 +42,7 @@ const List = ({items,...props}) =>{
                         <th width="25%">Deskripsi</th>
                         {
                             (AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
-                            <td valign="middle">Akun</td>
+                            <th valign="middle">Akun</th>
                         }
                         <th className="fright"></th>
                     </tr>

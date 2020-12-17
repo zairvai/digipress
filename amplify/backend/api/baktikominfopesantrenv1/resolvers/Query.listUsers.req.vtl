@@ -19,21 +19,21 @@ will be passed as the event to AWS Lambda.
             "query": {
               "bool": {
                 "must": [
-                  {"match":{"roles.accountId": $accountId}},
+                  {"match":{"roles.accountId": $accountId }},
                   {
                     "terms": {
                       "roles.role": $roles
+                    }
+                  },
+                  {
+                    "terms":{
+                      "roles.status": $statuses
                     }
                   }
                 ]
               }
             }
           }
-        },
-        {
-           "terms": {
-               "status.keyword": $statuses
-            }
         }
       ]
     }
