@@ -81,7 +81,7 @@ const List = ({items,...props}) =>{
                             </>
                             
                         }
-                        <th width="10%">Pengajar</th>
+                        <th width="15%">Pengajar</th>
                         <th width="10%">Akses</th>
                         <th className="fright">Status</th>
                     </tr>

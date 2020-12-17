@@ -81,7 +81,7 @@ const List = ({items,...props}) =>{
                             </>
                             
                         }
-                        <th width="10%">Penulis</th>
+                        <th width="15%">Penulis</th>
                         <th width="10%">Akses</th>
                         <th className="fright">Status</th>
                     </tr>
