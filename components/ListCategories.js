@@ -23,6 +23,7 @@ const List = ({items,...props}) =>{
                     (AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
                     <td valign="middle">{item.account.name}</td>
                 }
+                <td valign="middle">{item.createdBy.name}</td>
                 <td valign="middle" className="fright">
                     <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
                         <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}  onClick={(e)=>{props.onDelete(item,index);e.stopPropagation(); }}/>}/>
@@ -44,6 +45,7 @@ const List = ({items,...props}) =>{
                             (AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
                             <th valign="middle">Akun</th>
                         }
+                        <th width="25%">Dibuat oleh</th>
                         <th className="fright"></th>
                     </tr>
                 </thead>
