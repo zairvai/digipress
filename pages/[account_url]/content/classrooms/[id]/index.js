@@ -20,7 +20,7 @@ import AuthController from 'Library/controllers/AuthController'
 import ClassroomController from 'Library/controllers/ClassroomController'
 import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { getClassroomRoutinePromise,deleteClassroomRoutinePromise} from 'State/routines/classroom';
+import { getClassroomRoutinePromise,updateClassroomRoutinePromise} from 'State/routines/classroom';
 import { listLessonsRoutinePromise} from 'State/routines/lesson'
 import Reader from 'Components/ReaderClassroom'
 
@@ -187,7 +187,7 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
                 getClassroomRoutinePromise,
-                deleteClassroomRoutinePromise,
+                updateClassroomRoutinePromise,
                 listLessonsRoutinePromise
         },dispatch),dispatch
     })

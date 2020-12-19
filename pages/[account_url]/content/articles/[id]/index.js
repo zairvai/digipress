@@ -10,7 +10,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AppContainer from 'Templates/AppContainer'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { getArticleRoutinePromise,deleteArticleRoutinePromise} from 'State/routines/article';
+import { getArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
 
 import Reader from 'Components/ReaderArticle'
 
@@ -137,7 +137,7 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
                 getArticleRoutinePromise,
-                deleteArticleRoutinePromise
+                updateArticleRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageArticleId))

@@ -190,7 +190,7 @@ const FormArticle = ({item,...props}) => {
                                                 minHeight={400}
                                                 content={item ? item.content : ""}
                                                 id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
-                                            
+                                            {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
                                         </Form.Item>
                                     }
                                 />
@@ -214,6 +214,7 @@ const FormArticle = ({item,...props}) => {
                                                 value={props.value}
                                                 onChange={onSelectCategoryChange}
                                                 />
+                                            {errors && errors.category && <Text type="danger">{errors.category.message}</Text>}
                                         </Form.Item>
                                     }
                                 />
