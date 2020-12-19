@@ -66,7 +66,7 @@ const ArticleItem = ({item,index,auth,...props}) => {
                     <Col md={12} sm={12} xs={12}>
                         <div className="fright">
                             <ul className="vurox-horizontal-links vurox-standard-ul">
-                                <li><Link href={`/${auth.account.uniqueURL}/main/home/post/${item.id}`}><a>Baca artikel</a></Link></li>
+                                <li><Link href={`/${auth.account.uniqueURL}/main/home/article/${item.id}`}><a>Baca artikel</a></Link></li>
                             </ul>
                         </div>
                     </Col>
@@ -130,7 +130,7 @@ const ClassroomItem = ({item,index,auth,...props}) => {
                     <Col md={12} sm={12} xs={12}>
                         <div className="fright">
                             <ul className="vurox-horizontal-links vurox-standard-ul">
-                                <li><Link href={`/${auth.account.uniqueURL}/main/home/post/${item.id}`}><a>Masuk ruang belajar</a></Link></li>
+                                <li><Link href={`/${auth.account.uniqueURL}/main/home/classroom/${item.id}`}><a>Masuk ruang belajar</a></Link></li>
                             </ul>
                         </div>
                     </Col>

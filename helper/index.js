@@ -55,10 +55,10 @@ export const getRedirectToDefaultPath = (auth,role) => {
     case "admin" 	  : 	url = `/${auth.account.uniqueURL}/report/dashboard`
                         break;
 
-    case "tutor" 	  : 	url = `/${auth.account.uniqueURL}/content/classrooms`
-                        break;
+    case "tutor" 	  : 	
     case "student"	: 
-    case "member"	  : 	break;
+    case "member"	  :   url = `/${auth.account.uniqueURL}/main/home`	
+                        break;
 
       default	 	    : 	url = `not-found`
 

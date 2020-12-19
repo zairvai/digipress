@@ -25,6 +25,7 @@ const Home = props =>{
     const postController = new PostController(props)
     const articleController = new ArticleController(props)
     const classroomController = new ClassroomController(props)
+    
     const {confirm} = Modal
     
 	React.useEffect(()=>{

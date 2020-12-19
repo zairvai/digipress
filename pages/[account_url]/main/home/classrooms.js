@@ -6,7 +6,10 @@ import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
 import AuthController from 'Library/controllers/AuthController'
 import PostController from 'Library/controllers/PostController'
+import ClassroomController from 'Library/controllers/ClassroomController'
 import ListPosts from 'Components/ListPosts'
+import {Modal} from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listPostsRoutinePromise } from 'State/routines/post';
 
@@ -17,7 +20,9 @@ const Home = props =>{
 	const [orderBy,setOrderBy]	= React.useState("createdAt")
 	const [direction,setDirection] = React.useState("desc")
 	const postController = new PostController(props)
-	
+    
+    const {confirm} = Modal
+
 	React.useEffect(()=>{
 		
 		let accountId = null
@@ -33,10 +38,35 @@ const Home = props =>{
     const pagename=""
     const links = [['Main',`/${auth.account.uniqueURL}/main/home/all`,''],['Home',`/${auth.account.uniqueURL}/main/home`,'active']]
     
+    const showDeleteConfirm = (item,index) => {
+
+        confirm({
+          title: `Apakah kamu ingin menghapus Ruang belajar ini ?`,
+          icon: <ExclamationCircleOutlined />,
+          content: item.title,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+
+            classroomController._delete(item)
+                .then(post=>{
+                    setTimeout(()=>{
+                        postController._updateList("remove",[item],index)
+                    },1000)
+                }).catch(error=>console.log(error))
+        
+
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    }
+
     return (
         <AppContainer>
             <Layout pagename={pagename} links={links}>
-                <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs}/>
+                <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
             </Layout>
         </AppContainer>
     )

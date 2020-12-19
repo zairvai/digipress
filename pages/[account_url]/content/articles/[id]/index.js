@@ -3,27 +3,19 @@ import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import Layout from 'Templates/Layout.article.id'
 import { Row, Col,Tag,Modal,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
-import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
-import HTMLRenderer from 'react-html-renderer'
-import {Status} from 'Components/mycomponents.js'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AppContainer from 'Templates/AppContainer'
-import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise,deleteArticleRoutinePromise} from 'State/routines/article';
 
+import Reader from 'Components/ReaderArticle'
 
 const PageArticleId = props => {
 
-    const {Text} = Typography
     const {confirm} = Modal
 
     const {auth,getArticle,router} = props
@@ -78,43 +70,7 @@ const PageArticleId = props => {
                 <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
-                            <Row>
-                                <Col md={12}>{item.category && item.category.name}</Col>
-                                <Col md={12}>
-                                    <div className="fright">
-                                        <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_ARTICLE({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah artikel</a></Link></li>}
-                                            {Permission.DELETE_ARTICLE({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus artikel</Button></li>}
-                                        </ul>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}>
-                                    <h4 className="mb-0 mt-2">{item.title}</h4>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}><h4>{item.name}</h4></Col>
-                            </Row>
-                            <Row className="mt-2">
-                                <Col md={24}>
-                                    <HTMLRenderer html={item.content ? item.content : ""}/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}>
-                                    Tag&nbsp;
-                                {
-                                    item.tags && 
-                                    item.tags.map(tag=>
-                                        <Tag key={tag.id}>
-                                            <Link href={{pathname:'/content/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
-                                        </Tag>	
-                                    )
-                                }
-                                </Col>
-                            </Row>
+                            <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>

@@ -22,14 +22,14 @@ import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getClassroomRoutinePromise,deleteClassroomRoutinePromise} from 'State/routines/classroom';
 import { listLessonsRoutinePromise} from 'State/routines/lesson'
-
+import Reader from 'Components/ReaderClassroom'
 
 const PageClassroomId = props => {
 
     const {Text} = Typography
     const {confirm} = Modal
 
-    const {auth,listLessons,router} = props
+    const {auth,getClassroom,listLessons,router} = props
 
     const classroomController = new ClassroomController(props)
     const lessonController = new LessonController(props)
@@ -92,43 +92,7 @@ const PageClassroomId = props => {
                 <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
-                            <Row>
-                                <Col md={12}>{item.category && item.category.name}</Col>
-                                <Col md={12}>
-                                    <div className="fright">
-                                        <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_CLASSROOM({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah ruang belajar</a></Link></li>}
-                                            {Permission.DELETE_CLASSROOM({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus ruang belajar</Button></li>}
-                                        </ul>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}>
-                                    <h4 className="mb-0 mt-2">{item.title}</h4>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}><h4>{item.name}</h4></Col>
-                            </Row>
-                            <Row className="mt-2">
-                                <Col md={24}>
-                                    <HTMLRenderer html={item.content ? item.content : ""}/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}>
-                                    Tag&nbsp;
-                                {
-                                    item.tags && 
-                                    item.tags.map(tag=>
-                                        <Tag key={tag.id}>
-                                            <Link href={{pathname:'/content/tags/[name]',query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
-                                        </Tag>	
-                                    )
-                                }
-                                </Col>
-                            </Row>
+                            <Reader item={getClassroom.item} onDelete={showDeleteConfirm}/>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
