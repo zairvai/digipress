@@ -74,7 +74,7 @@ const PageLessonAdd = props => {
 					<Summery2 pagename={pagename} links={links}/>
 					<FormLesson 
 						onSuccess={onSuccess} onCancel={onCancel} 
-						accountId={auth.account.id} classroomId={item.id}/>
+						accountId={auth.account.id} postId={item.id}/>
 				</ContentLayout>
 			</VuroxLayout>
 		</AppContainer>

@@ -11,7 +11,7 @@ const List = ({items,...props}) =>{
     const {auth} = props
 
     const RowItem = ({item,index}) => (
-        <Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]`,query:{id:item.classroom.id,lid:item.id}}} shallow>
+        <Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]`,query:{id:item.post.id,lid:item.id}}} shallow>
             
             <tr>
                 <td valign="middle">{index+1}</td>

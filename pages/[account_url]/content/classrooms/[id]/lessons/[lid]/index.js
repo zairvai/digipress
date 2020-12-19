@@ -44,7 +44,7 @@ const PageLessonId = props => {
             setItem(lesson.data)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom.id}`)
+            router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`)
             console.log(error)
         }
         
@@ -53,8 +53,8 @@ const PageLessonId = props => {
     const links = [
                     ['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],
                     ['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],
-                    [item.classroom && item.classroom.title,`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`,''],
-                    ['Materi',`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`,''],
+                    [item.post && item.post.title,`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
+                    ['Materi',`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
                     [item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
@@ -68,7 +68,7 @@ const PageLessonId = props => {
             lessonController._delete(item)
                 .then(classroom=>{
                     //classroomController._updateList("remove",[{id:article.data.id}])
-                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`),1000)
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`),1000)
                 }).catch(error=>console.log(error))
           },
           onCancel() {
@@ -84,11 +84,11 @@ const PageLessonId = props => {
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
                             <Row>
-                                <Col md={12}>{item.classroom && item.classroom.title}</Col>
+                                <Col md={12}>{item.post && item.post.title}</Col>
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_LESSON({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.classroom && item.classroom.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
+                                            {Permission.UPDATE_LESSON({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.post && item.post.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
                                             {Permission.DELETE_LESSON({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus materi</Button></li>}
                                         </ul>
                                     </div>

@@ -13,6 +13,7 @@ import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise, updateArticleRoutinePromise} from 'State/routines/article';
 import Reader from 'Components/ReaderArticle'
+import FormComment from 'Components/FormComment'
 
 const PageArticleId = props => {
 
@@ -72,6 +73,11 @@ const PageArticleId = props => {
                         <VuroxComponentsContainer className="p-4">
                             <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
                         </VuroxComponentsContainer>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={24} sm={24} xs={24} className="mt-3">
+                        <FormComment item={getArticle.item}/>
                     </Col>
                 </Row>
             </Layout>

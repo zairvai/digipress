@@ -22,7 +22,7 @@ function* createLesson(action){
 
         const inputParams = {
             accountId:values.accountId.trim(),
-            classroomId:values.classroomId.trim(),
+            postId:values.postId.trim(),
             title:values.title.trim(),
             seq:values.seq,
             content:values.content
@@ -51,12 +51,12 @@ function* listLessons(action){
 
     try{
 
-        const {accountId,classroomId,title,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,postId,title,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
 
         if(accountId) listParams.accountId = accountId
-        if(classroomId) listParams.classroomId = classroomId
+        if(postId) listParams.postId = postId
         if(title) listParams.name = title
         if(statuses) listParams.statuses = statuses
         if(orderBy) {
@@ -150,7 +150,7 @@ function* updateLesson(action){
         const updateParams = {
             id : values.id.replace(/\s/g,""),
             accountId : values.accountId.trim(),
-            classroomId : values.classroomId.trim(),
+            postId : values.postId.trim(),
             expectedVersion : values.version
         }
 

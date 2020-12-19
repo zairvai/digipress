@@ -2217,7 +2217,7 @@
 				"Kind":"UNIT",
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Article.content.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Post.content.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"
@@ -2753,7 +2753,7 @@
 				"Kind":"UNIT",
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Classroom.content.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Post.content.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"
@@ -3357,14 +3357,14 @@
 				}
 			}
 		},
-		"CommentArticleResolver":{
+		"CommentPostResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
 				"TypeName":"Comment",
-				"FieldName":"article",
+				"FieldName":"post",
 				"Kind":"PIPELINE",
 				"PipelineConfig":{
 					"Functions":[
@@ -3373,7 +3373,7 @@
 				},
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.article.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.post.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"
@@ -3814,14 +3814,14 @@
 				}
 			}
 		},
-		"LessonClassroomResolver":{
+		"LessonPostResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
 				"TypeName":"Lesson",
-				"FieldName":"classroom",
+				"FieldName":"post",
 				"Kind":"PIPELINE",
 				"PipelineConfig":{
 					"Functions":[
@@ -3830,7 +3830,7 @@
 				},
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.classroom.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.post.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"
@@ -4270,14 +4270,14 @@
 				}
 			}
 		},
-		"QnaClassroomResolver":{
+		"QnaPostResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
 				"TypeName":"Qna",
-				"FieldName":"classroom",
+				"FieldName":"post",
 				"Kind":"PIPELINE",
 				"PipelineConfig":{
 					"Functions":[
@@ -4286,7 +4286,7 @@
 				},
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.classroom.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.post.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"

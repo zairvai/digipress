@@ -1,6 +1,6 @@
 #set( $input = {
     "accountId":$ctx.args.input.accountId,
-    "articleId":$ctx.args.input.articleId,
+    "postId":$ctx.args.input.postId,
     "status":3,
     "__typename":"Comment",
     "version":1,
@@ -21,7 +21,7 @@
 $util.qr($ctx.stash.put("input",$input))
 
 $util.qr($ctx.stash.put("field","put"))
-$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/articles/${ctx.args.input.articleId}/comments"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/articles/${ctx.args.input.postId}/comments"))
 $util.qr($ctx.stash.put("content",$ctx.args.input.content))
 
 {}

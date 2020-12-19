@@ -3113,7 +3113,7 @@ export const createComment = /* GraphQL */ `
         updatedAt
         version
       }
-      article {
+      post {
         id
         account {
           id
@@ -3137,9 +3137,7 @@ export const createComment = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -3180,6 +3178,15 @@ export const createComment = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       replyTo {
         id
@@ -3196,17 +3203,24 @@ export const createComment = /* GraphQL */ `
           updatedAt
           version
         }
-        article {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         replyTo {
           id
@@ -3456,7 +3470,7 @@ export const updateComment = /* GraphQL */ `
         updatedAt
         version
       }
-      article {
+      post {
         id
         account {
           id
@@ -3480,9 +3494,7 @@ export const updateComment = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -3523,6 +3535,15 @@ export const updateComment = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       replyTo {
         id
@@ -3539,17 +3560,24 @@ export const updateComment = /* GraphQL */ `
           updatedAt
           version
         }
-        article {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         replyTo {
           id
@@ -3799,7 +3827,7 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
         version
       }
-      article {
+      post {
         id
         account {
           id
@@ -3823,9 +3851,7 @@ export const deleteComment = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -3866,6 +3892,15 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       replyTo {
         id
@@ -3882,17 +3917,24 @@ export const deleteComment = /* GraphQL */ `
           updatedAt
           version
         }
-        article {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         replyTo {
           id
@@ -4142,7 +4184,7 @@ export const createQna = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -4166,9 +4208,7 @@ export const createQna = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -4179,7 +4219,6 @@ export const createQna = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -4210,6 +4249,15 @@ export const createQna = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       lesson {
         id
@@ -4226,18 +4274,24 @@ export const createQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         title
         seq
@@ -4288,18 +4342,24 @@ export const createQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         lesson {
           id
@@ -4498,7 +4558,7 @@ export const updateQna = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -4522,9 +4582,7 @@ export const updateQna = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -4535,7 +4593,6 @@ export const updateQna = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -4566,6 +4623,15 @@ export const updateQna = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       lesson {
         id
@@ -4582,18 +4648,24 @@ export const updateQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         title
         seq
@@ -4644,18 +4716,24 @@ export const updateQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         lesson {
           id
@@ -4854,7 +4932,7 @@ export const deleteQna = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -4878,9 +4956,7 @@ export const deleteQna = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -4891,7 +4967,6 @@ export const deleteQna = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -4922,6 +4997,15 @@ export const deleteQna = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       lesson {
         id
@@ -4938,18 +5022,24 @@ export const deleteQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         title
         seq
@@ -5000,18 +5090,24 @@ export const deleteQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         lesson {
           id
@@ -5210,7 +5306,7 @@ export const createLesson = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -5234,9 +5330,7 @@ export const createLesson = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -5247,7 +5341,6 @@ export const createLesson = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -5278,6 +5371,15 @@ export const createLesson = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       title
       seq
@@ -5428,7 +5530,7 @@ export const updateLesson = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -5452,9 +5554,7 @@ export const updateLesson = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -5465,7 +5565,6 @@ export const updateLesson = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -5496,6 +5595,15 @@ export const updateLesson = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       title
       seq
@@ -5646,7 +5754,7 @@ export const deleteLesson = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -5670,9 +5778,7 @@ export const deleteLesson = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -5683,7 +5789,6 @@ export const deleteLesson = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -5714,6 +5819,15 @@ export const deleteLesson = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       title
       seq

@@ -1,6 +1,6 @@
 #set( $input = {
     "accountId":$ctx.args.input.accountId,
-    "classroomId":$ctx.args.input.classroomId,
+    "postId":$ctx.args.input.postId,
     "title":$ctx.args.input.title,
     "seq":$ctx.args.input.seq,
     "status":3,
@@ -16,7 +16,7 @@
 $util.qr($ctx.stash.put("input",$input))
 
 $util.qr($ctx.stash.put("field","put"))
-$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/lessons"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/posts/${ctx.args.input.postId}/lessons"))
 $util.qr($ctx.stash.put("content",$ctx.args.input.content))
 
 {}

@@ -1998,7 +1998,7 @@ export const getComment = /* GraphQL */ `
         updatedAt
         version
       }
-      article {
+      post {
         id
         account {
           id
@@ -2022,9 +2022,7 @@ export const getComment = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -2065,6 +2063,15 @@ export const getComment = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       replyTo {
         id
@@ -2081,17 +2088,24 @@ export const getComment = /* GraphQL */ `
           updatedAt
           version
         }
-        article {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         replyTo {
           id
@@ -2316,17 +2330,24 @@ export const listComments = /* GraphQL */ `
           updatedAt
           version
         }
-        article {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         replyTo {
           id
@@ -2428,7 +2449,7 @@ export const getQna = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -2452,9 +2473,7 @@ export const getQna = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -2465,7 +2484,6 @@ export const getQna = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -2496,6 +2514,15 @@ export const getQna = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       lesson {
         id
@@ -2512,18 +2539,24 @@ export const getQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         title
         seq
@@ -2574,18 +2607,24 @@ export const getQna = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         lesson {
           id
@@ -2759,18 +2798,24 @@ export const listQnas = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         lesson {
           id
@@ -2869,7 +2914,7 @@ export const getLesson = /* GraphQL */ `
         updatedAt
         version
       }
-      classroom {
+      post {
         id
         account {
           id
@@ -2893,9 +2938,7 @@ export const getLesson = /* GraphQL */ `
           version
           status
         }
-        postType
         title
-        content
         tags {
           id
           name
@@ -2906,7 +2949,6 @@ export const getLesson = /* GraphQL */ `
         }
         allowComment
         access
-        total
         createdBy {
           id
           name
@@ -2937,6 +2979,15 @@ export const getLesson = /* GraphQL */ `
         updatedAt
         status
         version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
       }
       title
       seq
@@ -3062,18 +3113,24 @@ export const listLessons = /* GraphQL */ `
           updatedAt
           version
         }
-        classroom {
+        post {
           id
-          postType
           title
-          content
           allowComment
           access
-          total
           createdAt
           updatedAt
           status
           version
+          ... on Article {
+            postType
+            content
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
         }
         title
         seq

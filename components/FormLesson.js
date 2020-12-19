@@ -60,17 +60,13 @@ const FormLesson = ({item,...props}) => {
 
     const onSubmit = (values,e) => {
 
-        console.log(values)
-
-        
-
         if(item) {
             lessonController._update(item,values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))
         }else{
             values.accountId = props.accountId
-            values.classroomId = props.classroomId
+            values.postId = props.postId
             lessonController._create(values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))

@@ -24,7 +24,7 @@ export default class Controller{
         values = {
             id:item.id,
             accountId:item.account.id,
-            classroomId:item.classroom.id,
+            postId:item.post.id,
             version:item.version,
             ...values}
 
@@ -36,7 +36,7 @@ export default class Controller{
         const values = {
             id:item.id,
             accountId:item.account.id,
-            classroomId:item.classroom.id,
+            postId:item.post.id,
             version:item.version,
             status:-1}
             

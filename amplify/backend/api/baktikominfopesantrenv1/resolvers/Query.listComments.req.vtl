@@ -28,9 +28,9 @@ will be passed as the event to AWS Lambda.
 #end
 
 ##set match articleid
-#if(!$util.isNull($ctx.args.input.articleId))
+#if(!$util.isNull($ctx.args.input.postId))
   #set($match={
-    "match": {"articleId": $ctx.args.input.articleId}
+    "match": {"postId": $ctx.args.input.postId}
   })
   $util.qr($query.bool.must.add($match))
 #end

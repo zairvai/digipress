@@ -54,7 +54,7 @@ const PageClassroomId = props => {
                 accountId = auth.account.id
             }
 
-            lessonController._list({accountId,classroomId:id,orderBy:lessonOrderBy,direction:lessonDirection})
+            lessonController._list({accountId,postId:id,orderBy:lessonOrderBy,direction:lessonDirection})
 
         }catch(error){
             router.push(`/${auth.account.uniqueURL}/content/classrooms`)

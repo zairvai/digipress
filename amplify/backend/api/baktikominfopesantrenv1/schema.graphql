@@ -88,8 +88,7 @@ input GetItemInput {
 
 input ListItemInput {
 	accountId: ID
-	classroomId:ID
-	articleId:ID
+	postId:ID
 	lessonId:ID
 	title:String
 	roles: [UserRole]
@@ -417,7 +416,7 @@ type Comment @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account:Account!
-	article:Article!
+	post:Post!
 	replyTo:Comment
 	replyToUser:User
 	content: String!
@@ -431,7 +430,7 @@ type Comment @aws_iam
 
 input CreateCommentInput {
 	accountId: ID!
-	articleId: ID!
+	postId: ID!
 	replyToId:ID
 	replyToUserId:ID
 	content:String!
@@ -440,7 +439,7 @@ input CreateCommentInput {
 input UpdateCommentInput {
 	id: ID!
 	accountId:ID!
-	articleId:ID!
+	postId:ID!
 	content:String
 	status: Int
 	expectedVersion: Int!
@@ -455,7 +454,7 @@ type Lesson @aws_iam
 @aws_cognito_user_pools{
 	id: ID!
 	account: Account!
-	classroom:Classroom!
+	post:Post!
 	title: String!
 	seq:Int!
 	content:String
@@ -474,7 +473,7 @@ type LessonConnection {
 
 input CreateLessonInput {
 	accountId: String!
-	classroomId:ID!
+	postId:ID!
 	title:String!
 	seq:Int!
 	content:String!
@@ -483,7 +482,7 @@ input CreateLessonInput {
 input UpdateLessonInput{
 	id:ID!
 	accountId:ID!
-	classroomId:ID!
+	postId:ID!
 	title:String
 	content:String
 	seq:Int
@@ -495,7 +494,7 @@ type Qna @aws_iam
 @aws_cognito_user_pools{
 	id:ID!
 	account:Account!
-	classroom:Classroom!
+	post:Post!
 	lesson:Lesson
 	replyTo:Qna
 	content: String!
@@ -514,7 +513,7 @@ type QnaConnection {
 
 input CreateQnaInput {
 	accountId: String!
-	classroomId:ID!
+	postId:ID!
 	lessonId:ID
 	replyToId:ID
 	content:String!
@@ -523,7 +522,7 @@ input CreateQnaInput {
 input UpdateQnaInput {
 	id: ID!
 	accountId: String!
-	classroomId:ID!
+	postId:ID!
 	lessonId:ID
 	content:String
 	status: Int

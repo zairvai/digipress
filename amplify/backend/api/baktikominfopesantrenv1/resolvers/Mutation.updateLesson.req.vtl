@@ -26,7 +26,7 @@ $util.qr($ctx.stash.put("input",$input))
 
 #if(!$util.isNull($ctx.args.input.content))
 	$util.qr($ctx.stash.put("field","put"))
-	$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/lessons"))
+	$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/posts/${ctx.args.input.postId}/lessons"))
 	$util.qr($ctx.stash.put("content",$ctx.args.input.content))
 #end
 

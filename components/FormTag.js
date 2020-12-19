@@ -5,7 +5,6 @@ import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { LockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -67,13 +66,10 @@ const FormTag = ({item,...props}) => {
     return (
         <Form
             layout="vertical"
-            onFinish={handleSubmit(onSubmit,onError)}
-        >
+            onFinish={handleSubmit(onSubmit,onError)}>
             <Row>
                 <Col md={24}>
                     <VuroxComponentsContainer className="p-4">
-                        
-
                         <Row>
                             <Col md={24} sm={24} xs={24}>
                                 <Controller
@@ -90,10 +86,8 @@ const FormTag = ({item,...props}) => {
                                         </Form.Item>
                                     }
                                 />
-                                
                             </Col>
                         </Row>
-
                     </VuroxComponentsContainer>
                     
                     <Divider className="m-0" />

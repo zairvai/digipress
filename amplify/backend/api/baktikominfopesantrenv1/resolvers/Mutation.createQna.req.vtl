@@ -1,6 +1,6 @@
 #set( $input = {
     "accountId":$ctx.args.input.accountId,
-    "classroomId":$ctx.args.input.classroomId,
+    "postId":$ctx.args.input.postId,
     "status":3,
     "__typename":"QnA",
     "version":1,
@@ -22,9 +22,9 @@ $util.qr($ctx.stash.put("input",$input))
 
 $util.qr($ctx.stash.put("field","put"))
 #if( !$util.isNull($ctx.args.input.lessonId ))
-    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/lessons/${ctx.args.input.lessonId}/qnas"))
+    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.postId}/lessons/${ctx.args.input.lessonId}/qnas"))
 #else
-    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.classroomId}/qnas"))
+    $util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/classrooms/${ctx.args.input.postId}/qnas"))
 #end
 $util.qr($ctx.stash.put("content",$ctx.args.input.content))
 
