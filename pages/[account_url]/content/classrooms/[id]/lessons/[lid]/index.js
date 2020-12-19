@@ -88,8 +88,8 @@ const PageLessonId = props => {
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_LESSON({auth}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.classroom && item.classroom.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
-                                            {Permission.DELETE_LESSON({auth}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus materi</Button></li>}
+                                            {Permission.UPDATE_LESSON({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.classroom && item.classroom.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
+                                            {Permission.DELETE_LESSON({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus materi</Button></li>}
                                         </ul>
                                     </div>
                                 </Col>
