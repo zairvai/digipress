@@ -4,7 +4,12 @@ import {withRouter} from 'next/router'
 import {  VerticalNavHeading, Navitem } from 'Components/nav'
 
 import Icon from '@mdi/react'
-import {mdiMonitorDashboard, mdiFrequentlyAskedQuestions, mdiHeadset, mdiCommentOutline, mdiAccountSupervisorOutline, mdiSchoolOutline,mdiCogOutline, mdiNewspaperVariantMultipleOutline, mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, mdiAccountMultipleOutline, mdiKeyChain, mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, mdiCommentMultipleOutline, mdiBriefcaseAccount, mdiAccountOutline, mdiAccountTieOutline} from '@mdi/js'
+import {mdiMonitorDashboard, 
+	mdiFrequentlyAskedQuestions, mdiHomeOutline,
+	mdiHeadset, mdiCommentOutline,mdiCogOutline,
+	mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, 
+	mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, 
+	mdiBriefcaseAccount} from '@mdi/js'
 import AuthController from 'Library/controllers/AuthController'
 
 const Sidebar = (props) => {
@@ -14,7 +19,11 @@ const Sidebar = (props) => {
 
 	return (
 		<div className={`${props.className} vurox-vertical-nav`} style={{width: props.width + 'px'}}>
+
 			<ul>
+
+			<VerticalNavHeading>Main</VerticalNavHeading>
+			<Navitem link={`/${auth.account.uniqueURL}/main/home/all`} activeLink={`/${auth.account.uniqueURL}/main/home`} text='Home' icon={<Icon size="1.3em" path={mdiHomeOutline} />} />
 
 			{
 				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 

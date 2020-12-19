@@ -16,11 +16,15 @@ export default class Nav extends React.Component {
 export const Navitem = (props) => {
 	const router = useRouter()
 	
-	const test = router.asPath.search(props.link)
+	let checkLink = props.link
+	if(props.activeLink) checkLink = props.activeLink
+
+	const test = router.asPath.search(checkLink)
 	const active = test >=0 ?  " active" : ""
 
 	const submenuIcon = props.className === 'has-submenu' ? <i className="ti-angle-right"></i> : null
 	const badge = props.badge !== null ? <span className={props.badge + ' ml-2'}>{props.badgeText}</span> : null
+
 	return(
 		<li className={props.className + active}>
 			<Link href={props.link}>

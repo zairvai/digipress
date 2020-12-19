@@ -28,11 +28,11 @@ will be passed as the event to AWS Lambda.
 #end
 
 ##set match name prefix
-#if(!$util.isNull($ctx.args.input.name))
+#if(!$util.isNull($ctx.args.input.title))
   #set($matchNamePrefix = {
     "match_phrase_prefix": {
-        "name": {
-            "query": $ctx.args.input.name
+        "title": {
+            "query": $ctx.args.input.title
           }
       }
   })

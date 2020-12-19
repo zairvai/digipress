@@ -97,8 +97,8 @@ const PageClassroomId = props => {
                                 <Col md={12}>
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_CLASSROOM({auth}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah ruang belajar</a></Link></li>}
-                                            {Permission.DELETE_CLASSROOM({auth}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus ruang belajar</Button></li>}
+                                            {Permission.UPDATE_CLASSROOM({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah ruang belajar</a></Link></li>}
+                                            {Permission.DELETE_CLASSROOM({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus ruang belajar</Button></li>}
                                         </ul>
                                     </div>
                                 </Col>

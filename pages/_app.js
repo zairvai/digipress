@@ -22,14 +22,14 @@ class VuroxApp extends App{
 		width : ''
 	}
 
-	static async getInitialProps( { Component, ctx } ){
+	// static async getInitialProps( { Component, ctx } ){
 		
-		let pageProps = {}
-		if( Component.getInitialProps ){
-			pageProps = await Component.getInitialProps(ctx)
-		}
-		return { pageProps}
-	}
+	// 	let pageProps = {}
+	// 	if( Component.getInitialProps ){
+	// 		pageProps = await Component.getInitialProps(ctx)
+	// 	}
+	// 	return { pageProps}
+	// }
 
 	UNSAFE_componentWillMount(){
 		const isClient = typeof window === 'object';

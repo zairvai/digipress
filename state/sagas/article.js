@@ -158,7 +158,8 @@ function* updateArticle(action){
         if(values.tags) updateParams.tags = values.tags
         if(values.content) updateParams.content = values.content
         if(values.allowComment) updateParams.allowComment = values.allowComment
-        if(values.access) updateParams.access = values.readAccess.trim()        
+        if(values.access) updateParams.access = values.readAccess.trim()
+        if(values.status) updateParams.status = values.status
 
         const response = yield API.graphql(graphqlOperation(mutations.updateArticle,{input:updateParams}))
 

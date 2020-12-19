@@ -976,6 +976,341 @@ export const listCategories = /* GraphQL */ `
     }
   }
 `;
+export const getPost = /* GraphQL */ `
+  query GetPost($input: GetItemInput) {
+    getPost(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      allowComment
+      access
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+      ... on Article {
+        postType
+        content
+      }
+      ... on Classroom {
+        postType
+        content
+        total
+      }
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts($input: ListPostInput) {
+    listPosts(input: $input) {
+      items {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        allowComment
+        access
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+        ... on Article {
+          postType
+          content
+        }
+        ... on Classroom {
+          postType
+          content
+          total
+        }
+      }
+      foundDocs
+    }
+  }
+`;
 export const getArticle = /* GraphQL */ `
   query GetArticle($input: GetItemInput!) {
     getArticle(input: $input) {
@@ -1067,6 +1402,7 @@ export const getArticle = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -1248,6 +1584,7 @@ export const listArticles = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -1386,6 +1723,7 @@ export const getClassroom = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -1568,6 +1906,7 @@ export const listClassrooms = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -1683,6 +2022,7 @@ export const getComment = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -1743,6 +2083,7 @@ export const getComment = /* GraphQL */ `
         }
         article {
           id
+          postType
           title
           content
           allowComment
@@ -1977,6 +2318,7 @@ export const listComments = /* GraphQL */ `
         }
         article {
           id
+          postType
           title
           content
           allowComment
@@ -2110,6 +2452,7 @@ export const getQna = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -2171,6 +2514,7 @@ export const getQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -2232,6 +2576,7 @@ export const getQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -2416,6 +2761,7 @@ export const listQnas = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -2547,6 +2893,7 @@ export const getLesson = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -2717,6 +3064,7 @@ export const listLessons = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment

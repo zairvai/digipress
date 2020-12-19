@@ -160,7 +160,9 @@ function* updateComment(action){
         if(content) inputParams.content = values.content
         if(allowComment) inputParams.allowComment = values.allowComment
         if(access) inputParams.readAccess = values.readAccess.trim()
+        if(values.status) updateParams.status = values.status
 
+        
         const response = yield API.graphql(graphqlOperation(mutations.updateComment,{input:updateParams}))
 
         yield put(updateCommentRoutine.success({data:response.data.updateComment}))

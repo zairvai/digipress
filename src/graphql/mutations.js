@@ -1682,6 +1682,7 @@ export const createArticle = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -1927,6 +1928,7 @@ export const updateArticle = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -2172,6 +2174,7 @@ export const deleteArticle = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -2417,6 +2420,7 @@ export const createClassroom = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -2663,6 +2667,7 @@ export const updateClassroom = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -2909,6 +2914,7 @@ export const deleteClassroom = /* GraphQL */ `
         version
         status
       }
+      postType
       title
       content
       tags {
@@ -3131,6 +3137,7 @@ export const createComment = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -3191,6 +3198,7 @@ export const createComment = /* GraphQL */ `
         }
         article {
           id
+          postType
           title
           content
           allowComment
@@ -3472,6 +3480,7 @@ export const updateComment = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -3532,6 +3541,7 @@ export const updateComment = /* GraphQL */ `
         }
         article {
           id
+          postType
           title
           content
           allowComment
@@ -3813,6 +3823,7 @@ export const deleteComment = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -3873,6 +3884,7 @@ export const deleteComment = /* GraphQL */ `
         }
         article {
           id
+          postType
           title
           content
           allowComment
@@ -4154,6 +4166,7 @@ export const createQna = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -4215,6 +4228,7 @@ export const createQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -4276,6 +4290,7 @@ export const createQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -4507,6 +4522,7 @@ export const updateQna = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -4568,6 +4584,7 @@ export const updateQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -4629,6 +4646,7 @@ export const updateQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -4860,6 +4878,7 @@ export const deleteQna = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -4921,6 +4940,7 @@ export const deleteQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -4982,6 +5002,7 @@ export const deleteQna = /* GraphQL */ `
         }
         classroom {
           id
+          postType
           title
           content
           allowComment
@@ -5213,6 +5234,7 @@ export const createLesson = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -5430,6 +5452,7 @@ export const updateLesson = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {
@@ -5647,6 +5670,7 @@ export const deleteLesson = /* GraphQL */ `
           version
           status
         }
+        postType
         title
         content
         tags {

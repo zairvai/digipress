@@ -161,7 +161,8 @@ function* updateQna(action){
         if(content) inputParams.content = values.content
         if(allowComment) inputParams.allowComment = values.allowComment
         if(access) inputParams.readAccess = values.readAccess.trim()
-
+        if(values.status) updateParams.status = values.status
+        
         const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 
         yield put(updateQnaRoutine.success({data:response.data.updateQna}))

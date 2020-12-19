@@ -2,18 +2,23 @@ type Mutation {
 	createUser(input: CreateUserInput!): User
 	updateUser(input: UpdateUserInput!): User
 	deleteUser(input: DeleteItemInput!): User
+	
 	createAccount(input: CreateAccountInput!): Account
 	updateAccount(input: UpdateAccountInput!): Account
 	deleteAccount(input: DeleteItemInput!): Account
+	
 	createTag(input: CreateTagInput!): Tag
 	updateTag(input: UpdateTagInput!): Tag
 	deleteTag(input: DeleteItemInput!): Tag
+	
 	createCategory(input: CreateCategoryInput!): Category
 	updateCategory(input: UpdateCategoryInput!): Category
 	deleteCategory(input: DeleteItemInput!): Category
+
 	createArticle(input: CreateArticleInput!): Article
 	updateArticle(input: UpdateArticleInput!): Article
 	deleteArticle(input: DeleteItemInput!): Article
+	
 	createClassroom(input: CreateClassroomInput!): Classroom
 	updateClassroom(input: UpdateClassroomInput!): Classroom
 	deleteClassroom(input: DeleteItemInput!): Classroom
@@ -37,19 +42,29 @@ type Query @aws_iam
 	getAccount(input: GetItemInput!): Account
 	listAccounts(input: ListItemInput): AccountConnection
 	getAccountByUniqueUrl(url: String!): Account
+	
 	getUser(input: GetItemInput!): User
 	getUserByEmailAddress(emailAddress: String!): User
 	listUsers(input: ListItemInput): UserConnection
+	
 	getTag(input: GetItemInput!): Tag
 	listTags(input: ListItemInput): TagConnection
+	
 	getCategory(input: GetItemInput!): Category
 	listCategories(input: ListItemInput): CategoryConnection
+	
+	getPost(input:GetItemInput):Post
+	listPosts(input:ListPostInput): PostConnection
+
 	getArticle(input: GetItemInput!): Article
 	listArticles(input: ListItemInput): ArticleConnection
+	
 	getClassroom(input: GetItemInput!): Classroom
 	listClassrooms(input: ListItemInput): ClassroomConnection
+	
 	getComment(input: GetItemInput!): Comment
 	listComments(input: ListItemInput): CommentConnection
+	
 	getQna(input: GetItemInput!): Qna
 	listQnas(input: ListItemInput): QnaConnection
 
@@ -76,6 +91,7 @@ input ListItemInput {
 	classroomId:ID
 	articleId:ID
 	lessonId:ID
+	title:String
 	roles: [UserRole]
 	name: String
 	orderBy: String
@@ -149,11 +165,49 @@ type AccountConnection {
 	foundDocs: Int
 }
 
-type Article @aws_iam
+interface Post{
+	id: ID!
+	account: Account!
+	category: Category!
+	title: String!
+	tags: [Tag]
+	allowComment: Boolean
+	access: ReadAccess
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	status: Int
+	version:Int!
+}
+
+type PostConnection {
+	items: [Post]
+	foundDocs: Int
+}
+
+enum PostType{
+	Article
+	Classroom
+}
+
+input ListPostInput{
+	postTypes:[PostType!]!
+	accountId: ID
+	title:String
+	orderBy: String
+	direction: String
+	from: Int
+	size: Int
+	statuses:[Int]
+}
+
+type Article implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
 	category: Category!
+	postType:PostType!
 	title: String!
 	content:String
 	tags: [Tag]
@@ -196,45 +250,12 @@ type ArticleConnection {
 	foundDocs: Int
 }
 
-type Category @aws_iam
-@aws_cognito_user_pools {
-	id: ID!
-	account: Account!
-	name: String!
-	desc: String
-	createdBy: User
-	updatedBy: User
-	createdAt: AWSDateTime
-	updatedAt: AWSDateTime
-	version: Int!
-	status: Int
-}
-
-input UpdateCategoryInput {
-	id: ID!
-	name: String
-	desc: String
-	status: Int
-	expectedVersion: Int!
-}
-
-
-input CreateCategoryInput {
-	accountId: ID!
-	name: String!
-	desc: String
-}
-
-type CategoryConnection {
-	items: [Category]
-	foundDocs: Int
-}
-
-type Classroom @aws_iam
+type Classroom implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
 	category: Category!
+	postType:PostType!
 	title: String!
 	content:String
 	tags: [Tag]
@@ -274,6 +295,40 @@ input UpdateClassroomInput {
 
 type ClassroomConnection {
 	items: [Classroom]
+	foundDocs: Int
+}
+
+type Category @aws_iam
+@aws_cognito_user_pools {
+	id: ID!
+	account: Account!
+	name: String!
+	desc: String
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	version: Int!
+	status: Int
+}
+
+input UpdateCategoryInput {
+	id: ID!
+	name: String
+	desc: String
+	status: Int
+	expectedVersion: Int!
+}
+
+
+input CreateCategoryInput {
+	accountId: ID!
+	name: String!
+	desc: String
+}
+
+type CategoryConnection {
+	items: [Category]
 	foundDocs: Int
 }
 

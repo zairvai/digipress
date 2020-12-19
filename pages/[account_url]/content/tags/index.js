@@ -54,15 +54,11 @@ const PageTags = props => {
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-	  
-	const onDeleteItem = (item,index) => {
-        showDeleteConfirm(item,index)
-    }
 
     const showDeleteConfirm = (item,index) => {
 
         confirm({
-          title: `Kemungkinan tag ini digunakan pada artikel/classroom. Apakah kamu ingin menghapus ?`,
+          title: `Kemungkinan tag ini digunakan pada artikel atau ruang belajar. Apakah kamu ingin menghapus ?`,
           icon: <ExclamationCircleOutlined />,
           content: item.name,
           okText:"Ya",
@@ -110,7 +106,7 @@ const PageTags = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListTags items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={onDeleteItem}/>
+								<ListTags items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={showDeleteConfirm}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>

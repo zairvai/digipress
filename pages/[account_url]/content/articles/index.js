@@ -27,8 +27,6 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import { listArticlesRoutinePromise } from 'State/routines/article';
 
 const PageArticles = props => {
-
-	console.log(props)
 	
 	const {auth,router,listArticles} = props
 
@@ -36,8 +34,6 @@ const PageArticles = props => {
 	const [direction,setDirection] = React.useState("desc")
 	
 	const articleController = new ArticleController(props)
-
-	const {confirm} = Modal
 	
 	React.useEffect(()=>{
 		
@@ -57,31 +53,6 @@ const PageArticles = props => {
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-	  
-	const onDeleteItem = (item,index) => {
-        showDeleteConfirm(item,index)
-    }
-
-    const showDeleteConfirm = (item,index) => {
-
-        confirm({
-          title: `Kemungkinan tag ini digunakan pada artikel/classroom. Apakah kamu ingin menghapus ?`,
-          icon: <ExclamationCircleOutlined />,
-          content: item.name,
-          okText:"Ya",
-          cancelText:"Tidak",
-          onOk() {
-
-			tagController._delete(item.id)
-				.then(resp=>tagController._updateList("remove",[item],index))
-				.catch(error=>console.log(error))
-
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-	}
 	
 	
 	return (
@@ -110,7 +81,7 @@ const PageArticles = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListArticles items={listArticles.list.items} foundDoc={listArticles.list.foundDocs} onDelete={onDeleteItem}/>
+								<ListArticles items={listArticles.list.items} foundDoc={listArticles.list.foundDocs}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>

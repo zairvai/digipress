@@ -27,6 +27,14 @@ will be passed as the event to AWS Lambda.
   $util.qr($query.bool.must.add($match))
 #end
 
+##set postTypes
+#if(!$util.isNull($ctx.args.input.postTypes))
+  #set($terms={
+    "terms": {"__typename.keyword": $ctx.args.input.postTypes}
+  })
+  $util.qr($query.bool.must.add($terms))
+#end
+
 ##set match name prefix
 #if(!$util.isNull($ctx.args.input.title))
   #set($matchNamePrefix = {
@@ -54,14 +62,13 @@ will be passed as the event to AWS Lambda.
 	#set($sort=[])
 #end
 
-
 {
   "version" : "2017-02-28",
   "operation": "Invoke",
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/classroom/_search",
+      "path":"/_search",
       "body":{
           "_source":{
               "includes":"id"

@@ -17,8 +17,10 @@ export const Status = ({text,state="success",blinking=false,position="left",clas
 
 export const Mylink = ({text,href}) =>{
 
-    const routes = useRouter()
-    const active = routes.asPath == href ? "active":""
+    const router = useRouter()
+
+    const test = router.asPath.search(href)
+    const active = test >=0 ?  " active" : ""
     
     return <Link href={href} shallow><a className={"nav-link "+active}>{text}</a></Link>
 

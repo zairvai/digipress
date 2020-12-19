@@ -9,10 +9,11 @@ import { createClassroom,deleteClassroom,updateClassroom,listClassrooms,getClass
 import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './lesson'
 import { createQna, deleteQna, updateQna, listQnas, getQna} from './qna'
 import { createComment,deleteComment,updateComment,listComments,getComment} from './comment'
+import { getPost,listPosts } from './post'
 
-import { lessons } from './lessons'
-import { questions } from './questions'
-import { comments } from './comments'
+import { lessons } from './unused/lessons'
+import { questions } from './unused/questions'
+import { comments } from './unused/comments'
 import { campaigns } from './campaigns'
 import { vuroxCompanyInfo } from './company'
 
@@ -60,6 +61,10 @@ const rootReducer = combineReducers({
 	updateCategory:persistReducer({key:"updateCategory",storage},updateCategory),
 	deleteCategory:persistReducer({key:"deleteCategory",storage},deleteCategory),
 
+	//post
+	getPost:persistReducer({key:"getPost",storage},getPost),
+	listPosts:persistReducer({key:"listPosts",storage},listPosts),
+
 	//article
 	createArticle:persistReducer({key:"createArticle",storage},createArticle),
 	getArticle:persistReducer({key:"getArticle",storage},getArticle),
@@ -94,9 +99,9 @@ const rootReducer = combineReducers({
 
 
 
-	lessons,
-	questions,
-	comments,
+	// lessons,
+	// questions,
+	// comments,
 
 	campaigns: campaigns,
 	company: vuroxCompanyInfo,

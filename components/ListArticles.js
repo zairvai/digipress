@@ -28,7 +28,7 @@ const List = ({items,...props}) =>{
                             <td valign="middle">
                                 {item.category.name}
                                 {
-                                    item.tags && item.tags.map(tag=><div className="mt-1"><Tag key={tag.id}>{tag.name}</Tag></div>)
+                                    item.tags && item.tags.map(tag=><div key={tag.id} className="mt-1"><Tag>{tag.name}</Tag></div>)
                                 }
                             </td>
                             <td valign="middle">
@@ -42,7 +42,7 @@ const List = ({items,...props}) =>{
                             </td>
                             <td valign="middle">
                                 {
-                                    item.tags && item.tags.map(tag=><div className="mt-1"><Tag key={tag.id}>{tag.name}</Tag></div>)
+                                    item.tags && item.tags.map(tag=><Tag key={tag.id}>{tag.name}</Tag>)
                                 }
                             </td>
                         </>
