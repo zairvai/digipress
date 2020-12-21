@@ -60,7 +60,7 @@ const ArticleItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={12} sm={12} xs={12}>
                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;100</a></li>
+                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{item.noOfAllComment > 0 ? `${item.noOfAllComment} komentar` : ""}</a></li>
                         </ul>
                     </Col>
                     <Col md={12} sm={12} xs={12}>

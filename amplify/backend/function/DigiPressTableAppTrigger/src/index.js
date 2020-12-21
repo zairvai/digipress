@@ -20,6 +20,7 @@ const Category = require("./model/Category")
 const Article = require("./model/Article")
 const Classroom = require("./model/Classroom")
 const Lesson = require("./model/Lesson")
+const Comment = require("./model/Comment")
 
 exports.handler = (event,context,callback) => {
 
@@ -54,6 +55,9 @@ exports.handler = (event,context,callback) => {
           case 'Lesson'           :   Lesson.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          case 'Comment'          :   Comment.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           default                 :   callback(null,"Unknown Field"); break;
 
         }  
@@ -84,6 +88,9 @@ exports.handler = (event,context,callback) => {
                                       break;
 
           case 'Lesson'           :   Lesson.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Comment'          :   Comment.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
 
@@ -117,6 +124,9 @@ exports.handler = (event,context,callback) => {
                                       break;
           
           case 'Lesson'           :   Lesson.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Comment'          :   Comment.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
                                       

@@ -5,7 +5,7 @@ will be passed as the event to AWS Lambda.
 
 #set($statuses=$util.defaultIfNull($ctx.args.input.statuses,[1,2,3,4]))
 #set($size=$util.defaultIfNull($ctx.args.input.size, 20))
-#set($from=$util.defaultIfNull($ctx.args.input.from, 0))
+## #set($from=$util.defaultIfNull($ctx.args.input.from, 0))
 
 #set($query={
   "bool": {
@@ -35,18 +35,31 @@ will be passed as the event to AWS Lambda.
   $util.qr($query.bool.must.add($match))
 #end
 
-##set match name prefix
-#if(!$util.isNull($ctx.args.input.name))
-  #set($matchNamePrefix = {
-    "match_phrase_prefix": {
-        "name": {
-            "query": $ctx.args.input.name
-          }
+##set match replyToId
+#if($util.isNull($ctx.args.input.replyToId))
+	#set($term={
+      "term": {
+        "isReply": {
+          "value": false
+        }}
+    })
+    $util.qr($query.bool.must.add($term))
+#else
+	#set($match={
+      "match": {"replyToId": $ctx.args.input.replyToId }
+    })
+    $util.qr($query.bool.must.add($match))
+#end
+
+#if(!$util.isNull($ctx.args.input.maxDate))
+  #set($dateRange={
+    "range": {
+      "createdAt": {
+        "lt": $ctx.args.input.maxDate
       }
+    }
   })
-
-  $util.qr($query.bool.must.add($matchNamePrefix))
-
+  $util.qr($query.bool.must.add($dateRange))
 #end
 
 ##set order
@@ -62,6 +75,19 @@ will be passed as the event to AWS Lambda.
 	#set($sort=[])
 #end
 
+#set($body={
+  "_source" : {"includes":"id"},
+  "size" : $size,
+  "query" : $query,
+  "sort" : $sort
+})
+
+#if(!$util.isNull($ctx.args.input.from))
+  $util.qr($body.add({
+    "from" : $ctx.args.input.from
+  }))
+#end
+
 {
   "version" : "2017-02-28",
   "operation": "Invoke",
@@ -69,16 +95,7 @@ will be passed as the event to AWS Lambda.
   	"field":"get",
     "arguments":{
       "path":"/comment/_search",
-      "body":{
-          "_source":{
-              "includes":"id"
-          },
-          "size":$size,
-          "from":$from,
-          "query":$util.toJson($query),
-          "sort":$util.toJson($sort)
-
-      }
+      "body": $util.toJson($body)
     }
   }
 }

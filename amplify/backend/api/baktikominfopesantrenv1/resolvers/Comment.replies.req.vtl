@@ -1,0 +1,47 @@
+#**
+The value of 'payload' after the template has been evaluated
+will be passed as the event to AWS Lambda.
+*#
+
+#set($size = 1)
+
+#set($sort=[
+  {
+    "createdAt": {
+      "order": "desc"
+    }
+  }
+])
+
+#set($query={
+  "bool": {
+      "must": [
+        {"match": {
+          "replyToId": $ctx.source.id
+        }},
+        {
+        "range": {
+            "createdAt": {
+              "lt": "now"
+            }
+          }
+        }
+      ]
+  }
+})
+
+#set($body={
+	"_source" : {"includes":"id"},
+    "size" : $size,
+    "query" : $query,
+    "sort" : $sort
+})
+
+## $util.error($util.toJson($body))
+
+$util.qr($ctx.stash.put("input",{
+	"path":"/comment/_search",
+    "body" : $util.toJson($body)
+}))
+
+{}

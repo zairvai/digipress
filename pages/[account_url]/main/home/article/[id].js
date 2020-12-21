@@ -8,12 +8,14 @@ import {
 } from 'Components/layout'
 
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { mdiCommentMultipleOutline } from '@mdi/js'
 import AppContainer from 'Templates/AppContainer'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise, updateArticleRoutinePromise} from 'State/routines/article';
+import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
-import FormComment from 'Components/FormComment'
+import PostComment from 'Components/PostComment'
 
 const PageArticleId = props => {
 
@@ -21,11 +23,12 @@ const PageArticleId = props => {
 
     const {auth,getArticle,router} = props
 
+    const {id} = React.useMemo(()=>router.query,[])
+
     const articleController = new ArticleController(props)
 
     const [item,setItem] = React.useState({})
-
-    const {id} = React.useMemo(()=>router.query,[])
+    const [noOfComment,setNoOfComment] = React.useState(0)
 
     React.useEffect(async ()=>{
        
@@ -33,6 +36,7 @@ const PageArticleId = props => {
             const article = await articleController._get(id)
             //console.log(article)
             setItem(article.data)
+            setNoOfComment(article.data.noOfAllComment)
 
         }catch(error){
             router.push(`/${auth.account.uniqueURL}/content/articles`)
@@ -40,8 +44,6 @@ const PageArticleId = props => {
         }
         
     },[])
-
-    
     
     const links = [['Main',`/${auth.account.uniqueURL}/main/home/all`,''],['Artikel',`/${auth.account.uniqueURL}/main/home/articles`,''],[item.title,`/${auth.account.uniqueURL}/main/home/article/${item.id}`,'active']]
 
@@ -65,6 +67,18 @@ const PageArticleId = props => {
         });
     }
 
+    const onSuccessAddComment = comment => {
+        // console.log(comment)
+        setNoOfComment(noOfComment+1)
+
+    }
+
+    const onSuccessDeleteComment = comment => {
+        // console.log(comment)
+        setNoOfComment(noOfComment-1)
+
+    }
+
     return(
         <AppContainer>
             <Layout item={item} links={links}>
@@ -72,14 +86,36 @@ const PageArticleId = props => {
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
                             <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
+
+                            <Row>
+                                <Col md={24} className="mt-4">
+                                    <Row>
+                                        <Col md={12} sm={12} xs={12}>
+                                            <ul className="vurox-horizontal-links vurox-standard-ul">
+                                                <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : ""}</a></li>
+                                            </ul>
+                                        </Col>
+                                        <Col md={12} sm={12} xs={12}>
+                                            {/* <div className="fright">
+                                                <ul className="vurox-horizontal-links vurox-standard-ul">
+                                                    <li><Link href={`/${auth.account.uniqueURL}/main/home/article/${item.id}`}><a>Baca artikel</a></Link></li>
+                                                </ul>
+                                            </div> */}
+                                        </Col>
+                                    </Row>
+                            
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24} sm={24} xs={24} className="mt-1">
+                                    <PostComment post={item} onSuccessAddComment={onSuccessAddComment} onSuccessDeleteComment={onSuccessDeleteComment}/>
+                                </Col>
+                            </Row>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
-                <Row>
-                    <Col md={24} sm={24} xs={24} className="mt-3">
-                        <FormComment item={getArticle.item}/>
-                    </Col>
-                </Row>
+                
+                
             </Layout>
         </AppContainer> 
     )

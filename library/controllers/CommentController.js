@@ -1,6 +1,6 @@
 import {
     updateList
-} from 'State/actions/lesson'
+} from 'State/actions/comment'
 
 export default class Controller{
 
@@ -12,11 +12,11 @@ export default class Controller{
     }
 
     _create = values => {
-        return this.props.createLessonRoutinePromise({values})
+        return this.props.createCommentRoutinePromise({values})
     }
 
     _get = (id) => {
-        return this.props.getLessonRoutinePromise({id})
+        return this.props.getCommentRoutinePromise({id})
     }
 
     _update = (item,values) =>{
@@ -28,7 +28,7 @@ export default class Controller{
             version:item.version,
             ...values}
 
-        return this.props.updateLessonRoutinePromise({values})
+        return this.props.updateCommentRoutinePromise({values})
     }
 
     _delete = (item) => {
@@ -40,17 +40,13 @@ export default class Controller{
             version:item.version,
             status:-1}
             
-        return this.props.updateLessonRoutinePromise({values})
+        return this.props.updateCommentRoutinePromise({values})
 
     }
 
-    // _delete = (id) => {
-    //     return this.props.deleteLessonRoutinePromise({id})
-    // }
-
 
     _list = values => {
-        return this.props.listLessonsRoutinePromise(values)
+        return this.props.listCommentsRoutinePromise(values)
     }
 
     _updateList = (method,items,index)=>{

@@ -96,6 +96,33 @@ export default class Controller{
     }
 
 
+    //COMMENT
+
+    static REPLY_COMMENT = ({auth,item,...props}) => {
+
+        if(item && item.createdBy && auth.user.id == item.createdBy.id) return false
+
+        return true
+
+    }
+
+    static UPDATE_COMMENT = ({auth,item,...props}) => {
+
+        if(item && item.createdBy && auth.user.id != item.createdBy.id) return false
+
+        return true
+
+    }
+
+    static DELETE_COMMENT = ({auth,item,...props}) => {
+    
+        if(AuthController.isTutor(auth) || AuthController.isStudent(auth) || AuthController.isMember(auth)){
+            if(item && item.createdBy && auth.user.id != item.createdBy.id) return false
+        }
+
+        return true
+
+    }
 
 
     //TAG

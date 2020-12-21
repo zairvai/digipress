@@ -22,12 +22,17 @@ function* createComment(action){
 
         const inputParams = {
             accountId:values.accountId.trim(),
-            title:values.title.trim(),
-            categoryId:values.categoryId.trim(),
-            tags:values.tags,
-            content:values.content,
-            allowComment:values.allowComment,
-            access:values.readAccess
+            postId:values.postId.trim(),
+            content:values.content.trim()
+        }
+
+        if(values.replyToId) {
+            inputParams.replyToId = values.replyToId
+            inputParams.isReply = true
+        }
+        if(values.replyToUserId) {
+            inputParams.replyToUserId = values.replyToUserId
+            inputParams.isReply = true
         }
 
         const response = yield API.graphql(graphqlOperation(mutations.createComment,{input:inputParams}))
@@ -53,20 +58,23 @@ function* listComments(action){
 
     try{
 
-        const {accountId,articleId,name,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,postId,replyToId,replyToUserId,orderBy,direction,maxDate,from,size,statuses} = action.payload
 
-        const listParams={from,size}
+        const listParams={size}
 
         if(accountId) listParams.accountId = accountId
-        if(articleId) listParams.articleId = articleId
-        if(name) listParams.name = name
+        if(postId) listParams.postId = postId
         if(statuses) listParams.statuses = statuses
+        if(replyToId) listParams.replyToId = replyToId
+        if(replyToUserId) listParams.replyToUserId = replyToUserId
+        if(maxDate) listParams.maxDate = maxDate
+        if(from) listParams.from = from
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction
         }
 
-        console.log(listParams)
+        //console.log(listParams)
 
         yield put(listCommentsRoutine.request())
                 
@@ -142,24 +150,19 @@ function* updateComment(action){
 
     try{
 
-        console.log(action)
-
         yield put(updateCommentRoutine.request())
 
         const {values} = action.payload
 
         const updateParams = {
             id : values.id.replace(/\s/g,""),
+            accountId : values.accountId,
+            postId : values.postId,
             expectedVersion : values.version
         }
 
-        if(accountId) inputParams.accountId = values.accountId.trim()
-        if(title) inputParams.title = values.title.trim()
-        if(categoryId) inputParams.categoryId = values.categoryId.trim()
-        if(tags) inputParams.tags = values.tags
-        if(content) inputParams.content = values.content
-        if(allowComment) inputParams.allowComment = values.allowComment
-        if(access) inputParams.readAccess = values.readAccess.trim()
+    
+        if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
 
         

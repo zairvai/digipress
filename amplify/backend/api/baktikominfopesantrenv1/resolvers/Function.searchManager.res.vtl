@@ -8,11 +8,25 @@
 #end
 
 #if( $context.result.hits.total.value == 0 )
-	$util.error("Not Found")
-#elseif( $context.result.hits.hits.length > 1 )
+	
+    #return
+
+#else
 	$util.qr($ctx.stash.put("result",$context.result.hits.hits))
 	$util.toJson($context.result.hits.hits)
-#else
-	$util.qr($ctx.stash.put("id",$context.result.hits.hits[0]["_source"].id))
-	$util.toJson($context.result.hits.hits[0]["_source"])
+    
+    #set( $ids = [] )
+    
+    #foreach( $item in $context.result.hits.hits )
+      #set( $map = {} )
+      $util.qr($map.put("id",$util.dynamodb.toString($item["_source"].id)))
+      $util.qr($ids.add($map))
+    #end
+	
+    ## $util.error($util.toJson($ids))
+    $util.qr($ctx.stash.put("ids",$ids))
+    
+    ##for functionTableAppGetItem
+    $util.qr($ctx.stash.put("id",$context.result.hits.hits[0]["_source"].id))
+    
 #end

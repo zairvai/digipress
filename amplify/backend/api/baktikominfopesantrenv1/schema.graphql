@@ -63,7 +63,7 @@ type Query @aws_iam
 	listClassrooms(input: ListItemInput): ClassroomConnection
 	
 	getComment(input: GetItemInput!): Comment
-	listComments(input: ListItemInput): CommentConnection
+	listComments(input: ListCommentInput): CommentConnection
 	
 	getQna(input: GetItemInput!): Qna
 	listQnas(input: ListItemInput): QnaConnection
@@ -210,6 +210,8 @@ type Article implements Post @aws_iam
 	title: String!
 	content:String
 	tags: [Tag]
+	noOfAllComment:Int
+	noOfNoReplyComment:Int
 	allowComment: Boolean
 	access: ReadAccess
 	createdBy: User
@@ -419,7 +421,9 @@ type Comment @aws_iam
 	post:Post!
 	replyTo:Comment
 	replyToUser:User
+	replies:[Comment]
 	content: String!
+	noOfReply:Int
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime
@@ -431,9 +435,10 @@ type Comment @aws_iam
 input CreateCommentInput {
 	accountId: ID!
 	postId: ID!
+	content:String!
+	isReply:Boolean
 	replyToId:ID
 	replyToUserId:ID
-	content:String!
 }
 
 input UpdateCommentInput {
@@ -443,6 +448,18 @@ input UpdateCommentInput {
 	content:String
 	status: Int
 	expectedVersion: Int!
+}
+
+input ListCommentInput {
+	accountId: ID
+	postId:ID
+	replyToId:ID
+	orderBy: String
+	direction: String
+	maxDate:AWSDateTime
+	from: Int
+	size: Int
+	statuses:[Int]
 }
 
 type CommentConnection {

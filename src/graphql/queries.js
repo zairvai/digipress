@@ -37,6 +37,41 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -50,6 +85,41 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -85,6 +155,41 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -98,6 +203,41 @@ export const getAccount = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -134,6 +274,41 @@ export const listAccounts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -147,6 +322,41 @@ export const listAccounts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -196,6 +406,41 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -209,6 +454,41 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -244,6 +524,41 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -257,6 +572,41 @@ export const getAccountByUniqueUrl = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -317,6 +667,41 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -330,6 +715,41 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -365,6 +785,41 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -378,6 +833,41 @@ export const getUser = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -439,6 +929,41 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -452,6 +977,41 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -487,6 +1047,41 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -500,6 +1095,41 @@ export const getUserByEmailAddress = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -545,6 +1175,41 @@ export const listUsers = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -558,6 +1223,41 @@ export const listUsers = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -593,6 +1293,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -606,6 +1341,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -641,6 +1411,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -654,6 +1459,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -689,6 +1529,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -702,6 +1577,41 @@ export const getTag = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -733,6 +1643,32 @@ export const listTags = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -746,6 +1682,41 @@ export const listTags = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -759,6 +1730,41 @@ export const listTags = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -794,6 +1800,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -807,6 +1848,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -843,6 +1919,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -856,6 +1967,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -891,6 +2037,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -904,6 +2085,41 @@ export const getCategory = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -935,6 +2151,32 @@ export const listCategories = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -949,6 +2191,41 @@ export const listCategories = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -962,6 +2239,41 @@ export const listCategories = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -997,6 +2309,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1010,6 +2357,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1030,6 +2412,32 @@ export const getPost = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1044,6 +2452,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1057,6 +2500,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1079,6 +2557,32 @@ export const getPost = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1092,6 +2596,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1105,6 +2644,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1142,6 +2716,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1155,6 +2764,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1190,6 +2834,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1203,6 +2882,41 @@ export const getPost = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1220,6 +2934,8 @@ export const getPost = /* GraphQL */ `
       ... on Article {
         postType
         content
+        noOfAllComment
+        noOfNoReplyComment
       }
       ... on Classroom {
         postType
@@ -1243,14 +2959,79 @@ export const listPosts = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1259,7 +3040,46 @@ export const listPosts = /* GraphQL */ `
         title
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1275,6 +3095,41 @@ export const listPosts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1288,6 +3143,41 @@ export const listPosts = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1300,6 +3190,8 @@ export const listPosts = /* GraphQL */ `
         ... on Article {
           postType
           content
+          noOfAllComment
+          noOfNoReplyComment
         }
         ... on Classroom {
           postType
@@ -1332,6 +3224,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1345,6 +3272,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1365,6 +3327,32 @@ export const getArticle = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1379,6 +3367,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1392,6 +3415,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1416,6 +3474,32 @@ export const getArticle = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1429,6 +3513,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1442,6 +3561,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1452,6 +3606,8 @@ export const getArticle = /* GraphQL */ `
         version
         status
       }
+      noOfAllComment
+      noOfNoReplyComment
       allowComment
       access
       createdBy {
@@ -1479,6 +3635,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1492,6 +3683,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1527,6 +3753,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1540,6 +3801,41 @@ export const getArticle = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1571,14 +3867,79 @@ export const listArticles = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1589,12 +3950,53 @@ export const listArticles = /* GraphQL */ `
         content
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
           status
         }
+        noOfAllComment
+        noOfNoReplyComment
         allowComment
         access
         createdBy {
@@ -1605,6 +4007,41 @@ export const listArticles = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1618,6 +4055,41 @@ export const listArticles = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1653,6 +4125,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1666,6 +4173,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1686,6 +4228,32 @@ export const getClassroom = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1700,6 +4268,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1713,6 +4316,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1737,6 +4375,32 @@ export const getClassroom = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1750,6 +4414,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1763,6 +4462,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1801,6 +4535,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1814,6 +4583,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1849,6 +4653,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1862,6 +4701,41 @@ export const getClassroom = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1893,14 +4767,79 @@ export const listClassrooms = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1911,7 +4850,46 @@ export const listClassrooms = /* GraphQL */ `
         content
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1928,6 +4906,41 @@ export const listClassrooms = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1941,6 +4954,41 @@ export const listClassrooms = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1976,6 +5024,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -1989,6 +5072,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2009,14 +5127,79 @@ export const getComment = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2025,7 +5208,46 @@ export const getComment = /* GraphQL */ `
         title
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2041,6 +5263,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2054,6 +5311,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2066,6 +5358,8 @@ export const getComment = /* GraphQL */ `
         ... on Article {
           postType
           content
+          noOfAllComment
+          noOfNoReplyComment
         }
         ... on Classroom {
           postType
@@ -2084,15 +5378,97 @@ export const getComment = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2100,6 +5476,8 @@ export const getComment = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -2109,7 +5487,99 @@ export const getComment = /* GraphQL */ `
         }
         replyTo {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
           content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2123,12 +5593,148 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
           status
         }
         content
+        noOfReply
         createdBy {
           id
           name
@@ -2137,6 +5743,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2150,6 +5791,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2185,6 +5861,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2198,6 +5909,510 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replies {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+        }
+        post {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          allowComment
+          access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          status
+          version
+          ... on Article {
+            postType
+            content
+            noOfAllComment
+            noOfNoReplyComment
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
+        }
+        replyTo {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        noOfReply
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2209,6 +6424,7 @@ export const getComment = /* GraphQL */ `
         status
       }
       content
+      noOfReply
       createdBy {
         id
         name
@@ -2234,6 +6450,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2247,6 +6498,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2282,6 +6568,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2295,6 +6616,41 @@ export const getComment = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2313,7 +6669,7 @@ export const getComment = /* GraphQL */ `
   }
 `;
 export const listComments = /* GraphQL */ `
-  query ListComments($input: ListItemInput) {
+  query ListComments($input: ListCommentInput) {
     listComments(input: $input) {
       items {
         id
@@ -2326,15 +6682,97 @@ export const listComments = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2342,6 +6780,8 @@ export const listComments = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -2351,7 +6791,99 @@ export const listComments = /* GraphQL */ `
         }
         replyTo {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
           content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2365,12 +6897,148 @@ export const listComments = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          replyTo {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replies {
+            id
+            content
+            noOfReply
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          noOfReply
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
           status
         }
         content
+        noOfReply
         createdBy {
           id
           name
@@ -2379,6 +7047,41 @@ export const listComments = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2392,6 +7095,41 @@ export const listComments = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2427,6 +7165,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2440,6 +7213,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2460,14 +7268,79 @@ export const getQna = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2476,7 +7349,46 @@ export const getQna = /* GraphQL */ `
         title
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2492,6 +7404,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2505,6 +7452,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2517,6 +7499,8 @@ export const getQna = /* GraphQL */ `
         ... on Article {
           postType
           content
+          noOfAllComment
+          noOfNoReplyComment
         }
         ... on Classroom {
           postType
@@ -2535,15 +7519,97 @@ export const getQna = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2551,6 +7617,8 @@ export const getQna = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -2569,6 +7637,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2582,6 +7685,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2603,15 +7741,97 @@ export const getQna = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2619,6 +7839,8 @@ export const getQna = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -2628,9 +7850,69 @@ export const getQna = /* GraphQL */ `
         }
         lesson {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
           title
           seq
           content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2638,7 +7920,85 @@ export const getQna = /* GraphQL */ `
         }
         replyTo {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            title
+            seq
+            content
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          replyTo {
+            id
+            content
+            createdAt
+            updatedAt
+            version
+            status
+          }
           content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2653,6 +8013,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2666,6 +8061,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2702,6 +8132,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2715,6 +8180,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2750,6 +8250,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2763,6 +8298,41 @@ export const getQna = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2794,15 +8364,97 @@ export const listQnas = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2810,6 +8462,8 @@ export const listQnas = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -2819,9 +8473,69 @@ export const listQnas = /* GraphQL */ `
         }
         lesson {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
           title
           seq
           content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -2829,7 +8543,85 @@ export const listQnas = /* GraphQL */ `
         }
         replyTo {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            title
+            allowComment
+            access
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            title
+            seq
+            content
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          replyTo {
+            id
+            content
+            createdAt
+            updatedAt
+            version
+            status
+          }
           content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2844,6 +8636,41 @@ export const listQnas = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2857,6 +8684,41 @@ export const listQnas = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2892,6 +8754,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2905,6 +8802,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2925,14 +8857,79 @@ export const getLesson = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         category {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
           desc
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2941,7 +8938,46 @@ export const getLesson = /* GraphQL */ `
         title
         tags {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
           name
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2957,6 +8993,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2970,6 +9041,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -2982,6 +9088,8 @@ export const getLesson = /* GraphQL */ `
         ... on Article {
           postType
           content
+          noOfAllComment
+          noOfNoReplyComment
         }
         ... on Classroom {
           postType
@@ -3017,6 +9125,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -3030,6 +9173,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -3065,6 +9243,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -3078,6 +9291,41 @@ export const getLesson = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -3109,15 +9357,97 @@ export const listLessons = /* GraphQL */ `
           emailAddress
           phoneNumber
           status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
         }
         post {
           id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            name
+            desc
+            createdAt
+            updatedAt
+            version
+            status
+          }
           title
+          tags {
+            id
+            name
+            createdAt
+            updatedAt
+            version
+            status
+          }
           allowComment
           access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           status
@@ -3125,6 +9455,8 @@ export const listLessons = /* GraphQL */ `
           ... on Article {
             postType
             content
+            noOfAllComment
+            noOfNoReplyComment
           }
           ... on Classroom {
             postType
@@ -3143,6 +9475,41 @@ export const listLessons = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
@@ -3156,6 +9523,41 @@ export const listLessons = /* GraphQL */ `
           emailAddressVerified
           phoneNumberVerified
           enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            createdAt
+            updatedAt
+            version
+            status
+          }
           createdAt
           updatedAt
           version
