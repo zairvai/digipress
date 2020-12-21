@@ -60,7 +60,7 @@ const ArticleItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={12} sm={12} xs={12}>
                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{item.noOfAllComment > 0 ? `${item.noOfAllComment} komentar` : ""}</a></li>
+                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{item.noOfAllComment > 0 ? `${item.noOfAllComment} komentar` : "belum ada komentar"}</a></li>
                         </ul>
                     </Col>
                     <Col md={12} sm={12} xs={12}>
@@ -123,9 +123,9 @@ const ClassroomItem = ({item,index,auth,...props}) => {
             <div className="pb-3 px-3">
                 <Row>
                     <Col md={12} sm={12} xs={12}>
-                        <ul className="vurox-horizontal-links vurox-standard-ul">
+                        {/* <ul className="vurox-horizontal-links vurox-standard-ul">
                             <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;10</a></li>
-                        </ul>
+                        </ul> */}
                     </Col>
                     <Col md={12} sm={12} xs={12}>
                         <div className="fright">
