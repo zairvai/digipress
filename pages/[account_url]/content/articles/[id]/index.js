@@ -2,17 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import Layout from 'Templates/Layout.article.id'
-import { Row, Col,Tag,Modal,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
+import { Row, Col,Modal} from 'antd'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { mdiCommentMultipleOutline } from '@mdi/js'
 import AppContainer from 'Templates/AppContainer'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
-
+import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
+import PostComment from 'Components/PostComment'
+
 
 const PageArticleId = props => {
 
@@ -23,6 +26,7 @@ const PageArticleId = props => {
     const articleController = new ArticleController(props)
 
     const [item,setItem] = React.useState({})
+    const [noOfComment,setNoOfComment] = React.useState(0)
 
     const {id} = React.useMemo(()=>router.query,[])
 
@@ -32,6 +36,7 @@ const PageArticleId = props => {
             const article = await articleController._get(id)
             //console.log(article)
             setItem(article.data)
+            setNoOfComment(article.data.noOfAllComment)
 
         }catch(error){
             router.push(`/${auth.account.uniqueURL}/content/articles`)
@@ -64,6 +69,18 @@ const PageArticleId = props => {
         });
     }
 
+    const onSuccessAddComment = comment => {
+        // console.log(comment)
+        setNoOfComment(noOfComment+1)
+
+    }
+
+    const onSuccessDeleteComment = comment => {
+        console.log(comment)
+        setNoOfComment(noOfComment- (comment.noOfReply + 1))
+
+    }
+
     return(
         <AppContainer>
             <Layout item={item} links={links}>
@@ -71,9 +88,36 @@ const PageArticleId = props => {
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
                             <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
+                            <Row>
+                                <Col md={24} className="mt-4">
+                                    <Row>
+                                        <Col md={12} sm={12} xs={12}>
+                                            <ul className="vurox-horizontal-links vurox-standard-ul">
+                                                <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
+                                            </ul>
+                                        </Col>
+                                        <Col md={12} sm={12} xs={12}>
+                                            {/* <div className="fright">
+                                                <ul className="vurox-horizontal-links vurox-standard-ul">
+                                                    <li><Link href={`/${auth.account.uniqueURL}/main/home/article/${item.id}`}><a>Baca artikel</a></Link></li>
+                                                </ul>
+                                            </div> */}
+                                        </Col>
+                                    </Row>
+                            
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24} sm={24} xs={24} className="mt-1">
+                                    <PostComment post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                                </Col>
+                            </Row>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
+
+
+
                 {/* <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">

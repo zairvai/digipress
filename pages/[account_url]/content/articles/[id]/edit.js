@@ -27,6 +27,8 @@ import { getArticleRoutinePromise} from 'State/routines/article';
 
 const PageArticleEdit = props => {
 
+	console.log(props)
+	
 	const {auth,listTags,listCategories,router} = props
 	
 	const articleController = new ArticleController(props)

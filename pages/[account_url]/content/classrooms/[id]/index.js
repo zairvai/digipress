@@ -109,7 +109,7 @@ const PageClassroomId = props => {
                                     </div> */}
                                     <div className="fright">
                                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/add`,query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah materi</a></Link></li>
+                                            {Permission.ADD_LESSON({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/add`,query:{id:item.id}}}shallow><a><i className="ti-plus"></i>&nbsp;Tambah materi</a></Link></li>}
                                         </ul>
                                     </div>
                                     

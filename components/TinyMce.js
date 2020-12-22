@@ -60,7 +60,7 @@ const TinyMce = ({id,...props}) =>{
         },100)
         
         return ()=>{
-            console.log("remove editor")
+            // console.log("remove editor")
             if(tinymce)tinymce.remove(editor)
         }
 
@@ -72,8 +72,8 @@ const TinyMce = ({id,...props}) =>{
 
         interval = setTimeout(function run(){
                 
-            console.log(editor)
-            console.log(props.content)
+            // console.log(editor)
+            // console.log(props.content)
             if(props.content && props.content.trim() !== ""){
                 if(counter<10){
 

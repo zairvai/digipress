@@ -37,7 +37,7 @@ const FormArticle = ({item,...props}) => {
 
     React.useEffect(()=>{
         
-        console.log(item)
+        // console.log(item)
 
         if(item){
 

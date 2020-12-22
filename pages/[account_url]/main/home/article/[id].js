@@ -74,7 +74,7 @@ const PageArticleId = props => {
     }
 
     const onSuccessDeleteComment = comment => {
-        console.log(comment)
+        // console.log(comment)
         setNoOfComment(noOfComment- (comment.noOfReply + 1))
 
     }
