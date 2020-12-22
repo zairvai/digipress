@@ -1,19 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Row, Col,Form,Input,List,Comment,Avatar,Button, Typography,Tooltip} from 'antd'
+import { Row, Col,Modal,Comment,Avatar,Button, Typography,Tooltip} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCommentsRoutinePromise} from 'State/routines/comment';
+import { listCommentsRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
 import Permission from 'Library/controllers/Permission'
 import CommentController from 'Library/controllers/CommentController';
 import FormComment from 'Components/FormComment'
 import moment from 'moment'
-import { DeleteFilled, EditFilled } from '@ant-design/icons';
+import { DeleteFilled, EditFilled, CloseCircleFilled,ExclamationCircleOutlined, RollbackOutlined } from '@ant-design/icons';
 
 moment.locale("id");
 
 const CommentItem = ({comment,index,...props}) => {
 
-    const {Text} = Typography
+    const {Text,Paragraph} = Typography
+    const {confirm} = Modal
 
     const {auth,post} = props
 
@@ -29,12 +30,15 @@ const CommentItem = ({comment,index,...props}) => {
     const [replyVisible,setReplyVisible] = React.useState(false)
     const [replyToUser,setReplyToUser] = React.useState()
 
+    const [itemContent,setItemContent] = React.useState()
+    const [isUpdating,setUpdating] = React.useState(false)
+
     React.useEffect(()=>{
         
         if(comment){
             
             setItem(comment)
-
+            setItemContent(<ItemParagraph comment={comment}/>)
             setPrevCommentTotal(comment.noOfReply)
 
             if(comment.replies){
@@ -57,6 +61,7 @@ const CommentItem = ({comment,index,...props}) => {
 
     },[prevCommentTotal,prevLoadedNumber])
 
+
     const getItems = async ({accountId,postId,replyToId,orderBy="createdAt",direction="desc",maxDate,size,statuses=[3]}) =>{ 
 
         try{
@@ -73,6 +78,8 @@ const CommentItem = ({comment,index,...props}) => {
 
                 setMaxDate(response.data.items[length-1].createdAt)
 
+                response.data.items.reverse()
+
                 setItems([...response.data.items,...(items || [])])
             }
            
@@ -82,6 +89,27 @@ const CommentItem = ({comment,index,...props}) => {
         }
 
     }
+
+    const ItemParagraph = ({comment}) => {
+
+        let objectName
+        if(comment.replyToUser){
+            if(auth.user.id == comment.replyToUser.id) objectName = "kamu"
+            else objectName = comment.replyToUser.name 
+        }
+
+        return (
+            <>
+                {comment.replyToUser && <Text className="comment-action"><RollbackOutlined rotate={180} /> mengomentari {objectName}</Text>}
+                <Paragraph ellipsis={{ rows: 3, expandable: true, symbol: 'Buka' }}>{comment.content}</Paragraph>
+            </>
+        )
+    }
+
+    const ItemUpdateForm = ({comment}) => {
+        return <FormComment className="mt-2" item={comment} onSuccess={onSuccessUpdate}/>
+    }
+
 
     const viewPreviousPost = size => {
         getItems({
@@ -94,9 +122,6 @@ const CommentItem = ({comment,index,...props}) => {
     }
 
     const setSecondLevelReply = (secondLevelItem,index) => {
-        // console.log(item)
-        // console.log(secondLevelItem.createdBy)
-        
         setReplyToUser(secondLevelItem.createdBy)
         
         setReplyVisible(true)
@@ -112,26 +137,68 @@ const CommentItem = ({comment,index,...props}) => {
             setReplyVisible(true)
         }
         
-
     }
 
-    const deleteComment = (deletedItem,index) => {
-        alert(deletedItem.content)
+    const showDeleteConfirm = (deletedItem,index) => {
+
+        console.log(props)
+
+        confirm({
+          title: `Apa kamu ingin menghapus komentar ini ?`,
+          icon: <ExclamationCircleOutlined />,
+          content: <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'Buka' }}>{item.content}</Paragraph>,
+          okText:"Ya",
+          cancelText:"Tidak",
+          onOk() {
+
+			commentController._delete(deletedItem)
+				.then(resp=>{
+                    if(props.onSuccessDelete) props.onSuccessDelete(deletedItem,index)
+                })
+				.catch(error=>console.log(error))
+
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
     }
 
     const updateComment = (updatedItem,index) => {
-        alert(updatedItem.content)
+        setUpdating(true)
+        setItemContent(<ItemUpdateForm comment={updatedItem}/>)
     }
 
+    const cancelUpdate = (updatedItem,index) => {
+        setUpdating(false)
+        setItemContent(<ItemParagraph comment={updatedItem}/>)
+    }
 
     const onSuccessAdd = comment =>{
         setItems([...items,comment])
-        if(props.onSuccessAddComment) props.onSuccessAddComment(comment)
+        if(props.onPostSuccessAddComment) props.onPostSuccessAddComment(comment)
     }
 
-    const onSuccessDelete = comment => {
 
+    const onSuccessUpdate = updatedComment => {
+        setUpdating(false)
+        setItemContent(<ItemParagraph comment={updatedComment}/>)
     }
+
+    const onSuccessDelete = (comment,index) =>{
+
+        // console.log(items)
+        // console.log(index)
+        // console.log(comment)
+
+        const cloneItems = [...items]
+        cloneItems.splice(index,1)
+
+        setItems(cloneItems)
+
+        if(props.onPostSuccessDeleteComment) props.onPostSuccessDeleteComment(comment)
+    }
+
 
     return(
         <Comment
@@ -147,7 +214,7 @@ const CommentItem = ({comment,index,...props}) => {
                 {
                     Permission.DELETE_COMMENT({auth,item}) && 
                     <Tooltip key="comment-delete" title="Hapus">
-                        <span onClick={()=>deleteComment(item,index)}>
+                        <span onClick={()=>showDeleteConfirm(item,index)}>
                             {React.createElement(DeleteFilled)}
                         </span>
                     </Tooltip>
@@ -155,12 +222,20 @@ const CommentItem = ({comment,index,...props}) => {
                 </>,
                 <>
                 {
-                    Permission.UPDATE_COMMENT({auth,item}) && 
+                    Permission.UPDATE_COMMENT({auth,item}) && isUpdating ? 
+                    <Tooltip key="comment-edit" title="Tutup">
+                        <span onClick={()=>cancelUpdate(item,index)}>
+                            {React.createElement(CloseCircleFilled)}
+                        </span>
+                    </Tooltip>
+                    :
+                    Permission.UPDATE_COMMENT({auth,item}) && !isUpdating ? 
                     <Tooltip key="comment-edit" title="Ubah">
                         <span onClick={()=>updateComment(item,index)}>
                             {React.createElement(EditFilled)}
                         </span>
                     </Tooltip>
+                    :<></>
                 }
                 </>
                 
@@ -168,14 +243,14 @@ const CommentItem = ({comment,index,...props}) => {
             author={item && item.createdBy.name}
             avatar={
                 <Avatar
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                    src="/image/default_user.jpg"
                     alt={item && item.createdBy.name}
                     />
             }
             content={(
                 <>
                     <Row>
-                        <Col md={24}>{item && item.content}</Col>
+                        <Col md={24}>{itemContent}</Col>
                     </Row>
                 </>
             )}
@@ -194,17 +269,20 @@ const CommentItem = ({comment,index,...props}) => {
             </Row>
             }
             <Row>
-                <Col md={16} sm={24} xs={24}>
+                <Col md={24} sm={24} xs={24}>
                 {items && items.map((rowItem,index)=>{
                     return <CommentItem 
                                 auth={auth}
+                                updateCommentRoutinePromise={props.updateCommentRoutinePromise}
                                 key={`${rowItem.id}-${index}`} 
                                 post={post} 
                                 comment={rowItem}
                                 index={index}
-                                onSuccessAddComment={props.onSuccessAddComment}
-                                onSuccessDeleteComment={props.onSuccessDeleteComment}
+                                onPostSuccessAddComment={props.onPostSuccessAddComment}
+                                onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
+                                onSuccessDelete={onSuccessDelete}
                                 onSecondLevelReply={setSecondLevelReply}
+
                                 />
                 })}
                 </Col>
@@ -214,26 +292,18 @@ const CommentItem = ({comment,index,...props}) => {
 
                 {replyToUser && 
                     <Row>
-                        <Col md={18} sm={24} xs={24} offset={1} className="mt-1">
+                        <Col md={1}></Col>
+                        <Col md={10} sm={24} xs={24} offset={2} className="ml-2">
                             <Text className="comment-action">Membalas komentar {replyToUser.name} </Text>
                         </Col>
                     </Row>
                 }
 
                 <Row>
-                    <Col md={18} sm={24} xs={24} className="mt-1 mb-3">
+                    <Col md={24} sm={24} xs={24} className="mt-1 mb-3">
                         <FormComment post={post} replyTo={item} replyToUser={replyToUser} onSuccess={onSuccessAdd}/>
                     </Col>
                 </Row>
-                {/* <Row>
-                    <Col md={18}>
-                        <ul className="ant-comment-actions mt-0">
-                            <li>
-                                <span onClick={(e)=>toggleReply(item,index)}>Tutup</span>
-                            </li>
-                        </ul>
-                    </Col>
-                </Row> */}
             </span>
 
         </Comment>
@@ -244,7 +314,8 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listCommentsRoutinePromise
+            listCommentsRoutinePromise,
+            updateCommentRoutinePromise
         },dispatch),dispatch
     })
 )(CommentItem)

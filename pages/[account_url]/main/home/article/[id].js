@@ -74,8 +74,8 @@ const PageArticleId = props => {
     }
 
     const onSuccessDeleteComment = comment => {
-        // console.log(comment)
-        setNoOfComment(noOfComment-1)
+        console.log(comment)
+        setNoOfComment(noOfComment- (comment.noOfReply + 1))
 
     }
 
@@ -108,7 +108,7 @@ const PageArticleId = props => {
                             </Row>
                             <Row>
                                 <Col md={24} sm={24} xs={24} className="mt-1">
-                                    <PostComment post={item} onSuccessAddComment={onSuccessAddComment} onSuccessDeleteComment={onSuccessDeleteComment}/>
+                                    <PostComment post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>

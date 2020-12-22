@@ -32,7 +32,7 @@ const PostComment = props =>  {
                 accountId:post.account.id,
                 postId:post.id,
                 maxDate,
-                size:1
+                size:2
             })
         }
 
@@ -62,6 +62,8 @@ const PostComment = props =>  {
 
                 setMaxDate(response.data.items[length-1].createdAt)
 
+                response.data.items.reverse()
+
                 setItems([...response.data.items,...(items || [])])
             }
            
@@ -83,7 +85,22 @@ const PostComment = props =>  {
 
     const onSuccessAdd = comment =>{
         setItems([...items,comment])
-        if(props.onSuccessAddComment) props.onSuccessAddComment(comment)
+        if(props.onPostSuccessAddComment) props.onPostSuccessAddComment(comment)
+    }
+
+    const onSuccessDelete = (comment,index) => {
+        // console.log(items)
+        // console.log(index)
+        // console.log(comment)
+
+        const cloneItems = [...items]
+
+        cloneItems.splice(index,1)
+
+        setItems(cloneItems)
+        
+        if(props.onPostSuccessDeleteComment) props.onPostSuccessDeleteComment(comment)
+
     }
 
     return (
@@ -103,8 +120,9 @@ const PostComment = props =>  {
                                 post={post} 
                                 comment={rowItem} 
                                 index={index} 
-                                onSuccessAddComment={props.onSuccessAddComment}
-                                onSuccessDeleteComment={props.onSuccessDeleteComment}
+                                onPostSuccessAddComment={props.onPostSuccessAddComment}
+                                onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
+                                onSuccessDelete={onSuccessDelete}
                                 />
                 })}
                 </Col>

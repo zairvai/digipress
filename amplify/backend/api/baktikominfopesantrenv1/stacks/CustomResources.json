@@ -3513,6 +3513,82 @@
 				}
 			}
 		},
+		"CommentReplyToResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"DataSourceName":"AppTable",
+				"TypeName":"Comment",
+				"FieldName":"replyTo",
+				"Kind":"UNIT",
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.replyTo.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
+		"CommentReplyToUserResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"DataSourceName":"AppTable",
+				"TypeName":"Comment",
+				"FieldName":"replyToUser",
+				"Kind":"UNIT",
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.replyToUser.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
 		"CommentRepliesResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
@@ -3545,44 +3621,6 @@
 				"ResponseMappingTemplateS3Location":{
 					"Fn::Sub": [
 						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.res.vtl",
-						{
-							"S3DeploymentBucket": {
-								"Ref": "S3DeploymentBucket"
-							},
-							"S3DeploymentRootKey": {
-								"Ref": "S3DeploymentRootKey"
-							}
-						}
-					]
-				}
-			}
-		},
-		"QueryListUsersResolver":{
-			"Type":"AWS::AppSync::Resolver",
-			"Properties":{
-				"ApiId":{
-					"Ref":"AppSyncApiId"
-				},
-				"DataSourceName":"SearchManager",
-				"TypeName":"Query",
-				"FieldName":"listUsers",
-				"Kind":"UNIT",
-				"RequestMappingTemplateS3Location":{
-					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listUsers.req.vtl",
-						{
-							"S3DeploymentBucket": {
-								"Ref": "S3DeploymentBucket"
-							},
-							"S3DeploymentRootKey": {
-								"Ref": "S3DeploymentRootKey"
-							}
-						}
-					]
-				},
-				"ResponseMappingTemplateS3Location":{
-					"Fn::Sub": [
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.list.res.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"

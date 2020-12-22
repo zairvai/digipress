@@ -19,6 +19,9 @@ will be passed as the event to AWS Lambda.
         {"match": {
           "replyToId": $ctx.source.id
         }},
+        {"terms": {
+          "status.keyword": [3] }
+      	},
         {
         "range": {
             "createdAt": {

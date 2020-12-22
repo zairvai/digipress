@@ -8,7 +8,10 @@ will be passed as the event to AWS Lambda.
       "must": [
         {"match": {
           "replyToId": $ctx.source.id
-        }}
+        }},
+        {"terms": {
+          "status.keyword": [3] }
+      	}
       ]
     }
 })

@@ -26,7 +26,7 @@ class Summery extends React.Component {
 		return (
 			<div className="vurox-admin-summery">
 				<Row>
-					<Col lg={12} md={10} xs={24}>
+					<Col lg={24} md={24} xs={24}>
 						<Row>
                             <Col md={24}>
                                 <Row className="vurox-admin-content-top-section">

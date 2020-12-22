@@ -74,7 +74,7 @@ function* listComments(action){
             listParams.direction = direction
         }
 
-        //console.log(listParams)
+        console.log(listParams)
 
         yield put(listCommentsRoutine.request())
                 
@@ -160,7 +160,6 @@ function* updateComment(action){
             postId : values.postId,
             expectedVersion : values.version
         }
-
     
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status

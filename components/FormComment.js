@@ -25,16 +25,31 @@ const FormComment = ({item,...props}) => {
     const [replyToUser,setReplyToUser] = React.useState()
     const [isSubmiting,setSubmiting] = React.useState(false)
 
+    const contentRef = React.useRef()
+
+    React.useEffect(()=>{
+        contentRef.current.focus()
+    },[])
+
     React.useEffect(()=>{
 
        setReplyToUser(props.replyToUser)
 
     },[props.replyToUser])
 
+    React.useEffect(()=>{
+
+        if(item){
+            setValue("content",item.content)
+        }
+
+    },[item])
+
     const { 
         handleSubmit,
         control,
         errors,
+        setValue,
         reset
         } = useForm({
             resolver:yupResolver(schema),
@@ -45,23 +60,35 @@ const FormComment = ({item,...props}) => {
 
     const onSubmit = (values) => {
 
-        values.accountId = post.account.id
-        values.postId = post.id
-        
-        if(replyTo) values.replyToId = replyTo.id
-        if(replyToUser) values.replyToUserId = replyToUser.id
-
-        
         setSubmiting(true)
 
-        commentController._create(values)
-            .then(comment=>{
-                reset()
-                props.onSuccess(comment.data)
-                setSubmiting(false)
-            })
-            .catch(error=>console.log(error))
+        if(item){
 
+            commentController._update(item,values)
+                .then(comment=>{
+                    props.onSuccess(comment.data)
+                    setSubmiting(false)
+                })
+                .catch(error=>console.log(error))
+
+        }
+        else{
+
+            values.accountId = post.account.id
+            values.postId = post.id
+            
+            if(replyTo) values.replyToId = replyTo.id
+            if(replyToUser) values.replyToUserId = replyToUser.id
+
+            commentController._create(values)
+                .then(comment=>{
+                    reset()
+                    props.onSuccess(comment.data)
+                    setSubmiting(false)
+                })
+                .catch(error=>console.log(error))
+
+        }
     }
 
     const onError = (errors,e) => {
@@ -74,7 +101,7 @@ const FormComment = ({item,...props}) => {
             onFinish={handleSubmit(onSubmit,onError)}>
 
             <Row>
-                <Col md={24} sm={24} xs={24}>
+                <Col md={24} sm={24} xs={24} className={props.className}>
                     
                     {/* {errors && errors.content && 
                     <Row>
@@ -84,7 +111,7 @@ const FormComment = ({item,...props}) => {
                     <Row className="justify-content-end">
                         <Col md={1} sm={4} xs={4}>
                             <Avatar
-                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                src="/image/default_user.jpg"
                                 alt={auth.user.name}/>
                         </Col>
                         <Col md={19} sm={20} xs={20}>
@@ -95,6 +122,7 @@ const FormComment = ({item,...props}) => {
                                     <Form.Item className="mb-0 ml-2">
                                         
                                         <Input.TextArea
+                                            ref={contentRef}
                                             tabIndex="1"
                                             rows={1} autoSize
                                             disabled={isSubmiting}
