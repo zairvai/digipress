@@ -10,9 +10,11 @@ export const useAnalytics = () => {
 
     return {
       init: (trackingId: string) => {
+        
         ReactGA.initialize(trackingId)
       },
       trackPageViewed: (path?: string) => {
+        
         if (path) {
           return ReactGA.pageview(path)
         }

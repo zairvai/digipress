@@ -23,7 +23,7 @@ export const reportWebVitals = (metric) => {
 
 	switch(metric.name) {
 
-		case 'FCP' 				: 	init("G-CVJL7ZM7KN")
+		case 'FCP' 				: 	init("UA-185970054-1")
 									trackPageViewed()
 									break;
 
