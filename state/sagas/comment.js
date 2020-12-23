@@ -58,7 +58,7 @@ function* listComments(action){
 
     try{
 
-        const {accountId,postId,replyToId,replyToUserId,orderBy,direction,maxDate,from,size,statuses} = action.payload
+        const {accountId,postId,replyToId,replyToUserId,orderBy,direction,minDate,maxDate,from,size,statuses} = action.payload
 
         const listParams={size}
 
@@ -67,6 +67,7 @@ function* listComments(action){
         if(statuses) listParams.statuses = statuses
         if(replyToId) listParams.replyToId = replyToId
         if(replyToUserId) listParams.replyToUserId = replyToUserId
+        if(minDate) listParams.minDate = minDate
         if(maxDate) listParams.maxDate = maxDate
         if(from) listParams.from = from
         if(orderBy) {

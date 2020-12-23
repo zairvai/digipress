@@ -24,7 +24,7 @@ const PageArticleId = props => {
 
     const {auth,getArticle,router} = props
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const {id,commentId} = React.useMemo(()=>router.query,[])
 
     const articleController = new ArticleController(props)
 
@@ -111,7 +111,7 @@ const PageArticleId = props => {
                             </Row>
                             <Row>
                                 <Col md={24} sm={24} xs={24} className="mt-1">
-                                    <PostComment post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                                    <PostComment post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>

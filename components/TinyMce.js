@@ -44,7 +44,7 @@ const TinyMce = ({id,...props}) =>{
                         min_height:props.minHeight ? props.minHeight : 600,
                         max_height:2000,
                         setup:(tinyEditor)=>{
-                            console.log("setup")
+                            //console.log("setup")
                             setEditor(tinyEditor)
                             
                             tinyEditor.on('keydown', function (e, evt) {
@@ -78,7 +78,7 @@ const TinyMce = ({id,...props}) =>{
                 if(counter<10){
 
                     if(editor && props.content){
-                        console.log("DONE")
+                        // console.log("DONE")
                         editor.setContent(props.content)
                         clearTimeout(interval)
                     }else{
@@ -92,7 +92,7 @@ const TinyMce = ({id,...props}) =>{
         },1000)
     
         return ()=>{
-            console.log("DONE2")
+            // console.log("DONE2")
             clearTimeout(interval)
         }
     },[editor,props.content])
@@ -101,7 +101,7 @@ const TinyMce = ({id,...props}) =>{
     
         <textarea style={{visibility:"hidden"}}
             id={id}
-            onChange={(e)=>console.log(e)}
+            // onChange={(e)=>console.log(e)}
             placeholder={props.placeholder}/>
     </>
         

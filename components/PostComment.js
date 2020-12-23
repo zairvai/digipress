@@ -1,32 +1,35 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import { Row, Col,Form,Input,List,Comment,Avatar,Button, Typography,Tooltip} from 'antd'
+import { Row, Col,Button } from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCommentsRoutinePromise} from 'State/routines/comment';
+import { listCommentsRoutinePromise,getCommentRoutinePromise } from 'State/routines/comment';
 import CommentController from 'Library/controllers/CommentController';
 import FormComment from 'Components/FormComment'
 import CommentItem from 'Components/CommentItem'
 import moment from 'moment'
+import _ from 'lodash'
 
 const PostComment = props =>  {
 
-    const {auth,post,listComments} = props
+    const {auth,post,commentId,listComments} = props
 
     const commentController = new CommentController(props)
 
     const [items,setItems] = React.useState([])
     
     const [prevCommentVisible, setPrevCommentVisible] = React.useState(false)
-    const [prevLoadedNumber,setPrevLoadedNumber] = React.useState(0)
-    const [prevCommentTotal,setPrevCommentTotal] = React.useState(0)
+    const [nextCommentVisible, setNextCommentVisible] = React.useState(false)
+
     const [maxDate,setMaxDate] = React.useState(moment().toISOString())
+    const [minDate,setMinDate] = React.useState()
 
     React.useEffect(()=>{
-        
-        if(post.account){
-            
-            setPrevCommentTotal(post.noOfNoReplyComment)
+
+        if(commentId){
+            getItem(commentId) 
+        }
+        else if(post.account){
 
             getItems({
                 accountId:post.account.id,
@@ -38,43 +41,87 @@ const PostComment = props =>  {
 
     },[post])
 
-    React.useEffect(()=>{
+    const getItem = async (id)=>{
 
-        console.log(`${prevCommentTotal} - ${prevLoadedNumber}`)
+        try{
+            
+            const response = await commentController._get(id)
 
-        if(prevCommentTotal > prevLoadedNumber) setPrevCommentVisible(true)
-        else setPrevCommentVisible(false)
+            if(response.data){
 
-    },[prevCommentTotal,prevLoadedNumber])
+                let comment = _.cloneDeep(response.data)
+                
+                if(comment.replyTo){
+                    let parentComment = _.cloneDeep(comment.replyTo)
+                    parentComment.replies = [comment]
+                    setMinDate(parentComment.createdAt)
+                    setMaxDate(parentComment.createdAt)
+                    setItems([parentComment,...(items || [])])
+                }else{
+                    setMinDate(comment.createdAt)
+                    setMaxDate(comment.createdAt)
+                    setItems([comment,...(items || [])])
+                }
+                setPrevCommentVisible(true)
+                setNextCommentVisible(true)
+            }else{
+                setPrevCommentVisible(false)
+                setNextCommentVisible(false)
+            }
 
-    const getItems = async ({accountId,postId,orderBy="createdAt",direction="desc",maxDate,size,statuses=[3]}) =>{ 
+        }catch(error){
+            console.warn(error)
+        }
+    }
+
+    const getItems = async ({accountId,postId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
+
 
         try{
 
             const response = await commentController._list({
-                accountId,postId,orderBy,direction,maxDate,size,statuses
+                accountId,postId,orderBy,direction,minDate,maxDate,size,statuses
             })
 
             if(response.data.items) {
-                const length = response.data.items.length
                 
-                setPrevLoadedNumber(prevLoadedNumber + length)
+                const length = response.data.items.length
 
-                setMaxDate(response.data.items[length-1].createdAt)
+                if(maxDate) {
+                    
+                    setMaxDate(response.data.items[length-1].createdAt)
+                    setPrevCommentVisible(true)
 
-                response.data.items.reverse()
+                    response.data.items.reverse()
+                    
+                    setItems([...response.data.items,...(items || [])])
 
-                setItems([...response.data.items,...(items || [])])
+                }else if(minDate){
+                    console.log("setMinDate")
+                    
+                    setMinDate(response.data.items[length-1].createdAt)
+                    setNextCommentVisible(true)
+
+                    setItems([...(items || []),...response.data.items])
+                }
+
+            }else{
+                console.log("No data found")
+                if(maxDate){
+                    setPrevCommentVisible(false)
+                }else if(minDate){
+                    setNextCommentVisible(false)
+                }
             }
            
         }
         catch(error){
-            console.log(error)
+            console.warn(error)
         }
 
     }
 
-    const viewPreviousPost = size => {
+    const viewPreviousComment = size => {
         getItems({
             accountId:post.account.id,
             postId:post.id,
@@ -82,6 +129,19 @@ const PostComment = props =>  {
             size
         })
     }
+
+    const viewNextComment = size => {
+
+        getItems({
+            accountId:post.account.id,
+            postId:post.id,
+            minDate,
+            direction:"asc",
+            size
+        })
+
+    }
+
 
     const onSuccessAdd = comment =>{
         setItems([...items,comment])
@@ -108,7 +168,7 @@ const PostComment = props =>  {
             {prevCommentVisible && 
             <Row>
                 <Col md={24}>
-                    <Button type="link" onClick={()=>viewPreviousPost(4)}>Lihat komentar sebelumnya</Button>
+                    <Button type="link" onClick={()=>viewPreviousComment(4)}>Lihat komentar sebelumnya</Button>
                 </Col>
             </Row>
             }
@@ -127,6 +187,13 @@ const PostComment = props =>  {
                 })}
                 </Col>
             </Row>
+            {nextCommentVisible && 
+            <Row>
+                <Col md={24} className="mb-3">
+                    <Button type="link" onClick={()=>viewNextComment(4)}>Lihat komentar lainnya</Button>
+                </Col>
+            </Row>
+            }
             <Row>
                 <Col md={16} sm={24} xs={24} className="mt-2">
                     <FormComment post={post} onSuccess={onSuccessAdd}/>   
@@ -141,7 +208,8 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listCommentsRoutinePromise
+            listCommentsRoutinePromise,
+            getCommentRoutinePromise
         },dispatch),dispatch
     })
 )(PostComment)

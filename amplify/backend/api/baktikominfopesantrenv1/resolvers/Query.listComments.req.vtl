@@ -51,15 +51,23 @@ will be passed as the event to AWS Lambda.
     $util.qr($query.bool.must.add($match))
 #end
 
-#if(!$util.isNull($ctx.args.input.maxDate))
-  #set($dateRange={
-    "range": {
-      "createdAt": {
-        "lt": $ctx.args.input.maxDate
-      }
-    }
-  })
+#set($dateRange={
+  "range":{
+    "createdAt":{}
+  }
+})
+
+#if(!$util.isNull($ctx.args.input.minDate) || !$util.isNull($ctx.args.input.maxDate))
+
+  #if(!$util.isNull($ctx.args.input.minDate))
+    $util.qr($dateRange.range.createdAt.put("gt",$ctx.args.input.minDate))
+  #end
+
+  #if(!$util.isNull($ctx.args.input.maxDate))
+    $util.qr($dateRange.range.createdAt.put("lt",$ctx.args.input.maxDate))
+  #end
   $util.qr($query.bool.must.add($dateRange))
+  
 #end
 
 ##set order
@@ -83,9 +91,7 @@ will be passed as the event to AWS Lambda.
 })
 
 #if(!$util.isNull($ctx.args.input.from))
-  $util.qr($body.add({
-    "from" : $ctx.args.input.from
-  }))
+  $util.qr($body.put("from",$ctx.args.input.from))
 #end
 
 {

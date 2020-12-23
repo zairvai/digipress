@@ -456,6 +456,7 @@ input ListCommentInput {
 	replyToId:ID
 	orderBy: String
 	direction: String
+	minDate:AWSDateTime
 	maxDate:AWSDateTime
 	from: Int
 	size: Int

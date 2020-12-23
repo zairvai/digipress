@@ -24,63 +24,91 @@ const CommentItem = ({comment,index,...props}) => {
     const [items,setItems] = React.useState([])
 
     const [prevCommentVisible, setPrevCommentVisible] = React.useState(false)
-    const [prevLoadedNumber,setPrevLoadedNumber] = React.useState(0)
-    const [prevCommentTotal,setPrevCommentTotal] = React.useState(0)
+    const [nextCommentVisible, setNextCommentVisible] = React.useState(false)
+
     const [maxDate,setMaxDate] = React.useState()
+    const [minDate,setMinDate] = React.useState()
     const [replyVisible,setReplyVisible] = React.useState(false)
     const [replyToUser,setReplyToUser] = React.useState()
 
+    const [itemReplyName,setItemReplyName] = React.useState()
     const [itemContent,setItemContent] = React.useState()
     const [isUpdating,setUpdating] = React.useState(false)
 
+    const isMounted = React.useRef(null)
+
     React.useEffect(()=>{
         
-        if(comment){
-            
-            setItem(comment)
-            setItemContent(<ItemParagraph comment={comment}/>)
-            setPrevCommentTotal(comment.noOfReply)
+        isMounted.current = true
 
+        if(comment && isMounted.current){
+             
+            setItem(comment)
+            
+            if(comment.replyToUser){
+
+                let replyName = ""
+                if(auth.user.id==comment.replyToUser.id) replyName = "kamu"
+                else replyName = comment.replyToUser.name
+
+                setItemReplyName(<Text className="comment-action"><RollbackOutlined rotate={180} /> mengomentari {replyName}</Text>)
+            }
+            setItemContent(<ItemParagraph comment={comment}/>)
+        
             if(comment.replies){
                 const length = comment.replies.length
-                setPrevLoadedNumber(length)
+                setPrevCommentVisible(true)
+                setNextCommentVisible(true)
+
+                setMinDate(comment.replies[length-1].createdAt)
                 setMaxDate(comment.replies[length-1].createdAt)
                 setItems(comment.replies)
             }
 
         }
 
+        return () => isMounted.current = false
+
     },[comment])
 
-    React.useEffect(()=>{
 
-        // console.log(`${prevCommentTotal} - ${prevLoadedNumber}`)
-
-        if(prevCommentTotal > prevLoadedNumber) setPrevCommentVisible(true)
-        else setPrevCommentVisible(false)
-
-    },[prevCommentTotal,prevLoadedNumber])
-
-
-    const getItems = async ({accountId,postId,replyToId,orderBy="createdAt",direction="desc",maxDate,size,statuses=[3]}) =>{ 
+    const getItems = async ({accountId,postId,replyToId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
 
         try{
 
             const response = await commentController._list({
-                accountId,postId,replyToId,orderBy,direction,maxDate,size,statuses
+                accountId,postId,replyToId,orderBy,direction,minDate,maxDate,size,statuses
             })
 
             if(response.data.items) {
-
-                const length = response.data.items.length
                 
-                setPrevLoadedNumber(prevLoadedNumber + length)
+                const length = response.data.items.length
 
-                setMaxDate(response.data.items[length-1].createdAt)
+                if(maxDate) {
+                    
+                    setMaxDate(response.data.items[length-1].createdAt)
+                    setPrevCommentVisible(true)
 
-                response.data.items.reverse()
+                    response.data.items.reverse()
+                    
+                    setItems([...response.data.items,...(items || [])])
 
-                setItems([...response.data.items,...(items || [])])
+                }else if(minDate){
+                    console.log("setMinDate")
+                    
+                    setMinDate(response.data.items[length-1].createdAt)
+                    setNextCommentVisible(true)
+
+                    setItems([...(items || []),...response.data.items])
+                }
+
+            }else{
+                console.log("No data found")
+                if(maxDate){
+                    setPrevCommentVisible(false)
+                }else if(minDate){
+                    setNextCommentVisible(false)
+                }
             }
            
         }
@@ -92,16 +120,21 @@ const CommentItem = ({comment,index,...props}) => {
 
     const ItemParagraph = ({comment}) => {
 
-        let objectName
-        if(comment.replyToUser){
-            if(auth.user.id == comment.replyToUser.id) objectName = "kamu"
-            else objectName = comment.replyToUser.name 
-        }
+        const[content,setContent] = React.useState("")
+
+        React.useEffect(()=>{
+
+            isMounted.current = true
+
+            if(comment && isMounted.current) setContent(comment.content)
+
+            return ()=>isMounted.current = false
+
+        },[comment])
 
         return (
             <>
-                {comment.replyToUser && <Text className="comment-action"><RollbackOutlined rotate={180} /> mengomentari {objectName}</Text>}
-                <Paragraph ellipsis={{ rows: 3, expandable: true, symbol: 'Buka' }}>{comment.content}</Paragraph>
+                <Paragraph ellipsis={{ rows: 3, expandable: true, symbol: 'Buka' }}>{content}</Paragraph>
             </>
         )
     }
@@ -111,7 +144,7 @@ const CommentItem = ({comment,index,...props}) => {
     }
 
 
-    const viewPreviousPost = size => {
+    const viewPreviousComment = size => {
         getItems({
             accountId:post.account.id,
             postId:post.id,
@@ -119,6 +152,19 @@ const CommentItem = ({comment,index,...props}) => {
             maxDate,
             size
         })
+    }
+
+    const viewNextComment = size => {
+
+        getItems({
+            accountId:post.account.id,
+            postId:post.id,
+            replyToId:item.id,
+            minDate,
+            direction:"asc",
+            size
+        })
+
     }
 
     const setSecondLevelReply = (secondLevelItem,index) => {
@@ -250,7 +296,7 @@ const CommentItem = ({comment,index,...props}) => {
             content={(
                 <>
                     <Row>
-                        <Col md={24}>{itemContent}</Col>
+                        <Col md={24}>{itemReplyName}{itemContent}</Col>
                     </Row>
                 </>
             )}
@@ -264,7 +310,7 @@ const CommentItem = ({comment,index,...props}) => {
             {prevCommentVisible && 
             <Row>
                 <Col md={24}>
-                    <Button type="link" onClick={()=>viewPreviousPost(4)}>Lihat komentar sebelumnya</Button>
+                    <Button type="link" onClick={()=>viewPreviousComment(4)}>Lihat balasan sebelumnya</Button>
                 </Col>
             </Row>
             }
@@ -288,6 +334,14 @@ const CommentItem = ({comment,index,...props}) => {
                 </Col>
             </Row>      
             
+            {nextCommentVisible && 
+            <Row>
+                <Col md={24} className="mb-3">
+                    <Button type="link" onClick={()=>viewNextComment(4)}>Lihat balasan lainnya</Button>
+                </Col>
+            </Row>
+            }
+
             <span className={replyVisible ? 'd-block':'d-none'}>
 
                 {replyToUser && 
