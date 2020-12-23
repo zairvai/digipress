@@ -9,7 +9,7 @@ import {mdiMonitorDashboard,
 	mdiHeadset, mdiCommentOutline,mdiCogOutline,
 	mdiPostOutline, mdiShapeOutline, mdiTagMultipleOutline, 
 	mdiBookOpenPageVariantOutline, mdiAccountGroupOutline, 
-	mdiBriefcaseAccount} from '@mdi/js'
+	mdiBriefcaseAccount,mdiCommentMultipleOutline,mdiCommentQuestionOutline} from '@mdi/js'
 import AuthController from 'Library/controllers/AuthController'
 
 const Sidebar = (props) => {
@@ -22,23 +22,25 @@ const Sidebar = (props) => {
 
 			<ul>
 
-			<VerticalNavHeading>Main</VerticalNavHeading>
-			<Navitem link={`/${auth.account.uniqueURL}/main/home/all`} activeLink={`/${auth.account.uniqueURL}/main/home`} text='Home' icon={<Icon size="1.3em" path={mdiHomeOutline} />} />
-
-			{
-				AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
-				<>
-					<VerticalNavHeading>Laporan</VerticalNavHeading>
-					<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
+				{
+					AuthController.isOwner(auth) || AuthController.isAdmin(auth) &&
+					<>
+						<VerticalNavHeading>Laporan</VerticalNavHeading>
+						<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
 					</>
-				:
-				<></>
-			}		
-
-					<VerticalNavHeading>Konten</VerticalNavHeading>
-					<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-					<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 					
+				}	
+
+				<VerticalNavHeading>Aktivitas</VerticalNavHeading>
+				<Navitem link={`/${auth.account.uniqueURL}/main/home/all`} activeLink={`/${auth.account.uniqueURL}/main/home`} text='Home' icon={<Icon size="1.3em" path={mdiHomeOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/main/comments`} activeLink={`/${auth.account.uniqueURL}/main/comments`} text='Komentar' icon={<Icon size="1.3em" path={mdiCommentMultipleOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/main/qnas`} activeLink={`/${auth.account.uniqueURL}/main/qnas`} text='Tanya jawab' icon={<Icon size="1.3em" path={mdiCommentQuestionOutline} />} />
+
+				
+				<VerticalNavHeading>Konten</VerticalNavHeading>
+				<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
+				
 			{
 				!AuthController.isStudent(auth) || !AuthController.isMember(auth) ?
 				

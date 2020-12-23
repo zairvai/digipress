@@ -3,6 +3,7 @@ const withLess = require('@zeit/next-less')
 const lessToJS = require('less-vars-to-js')
 const withFonts = require('next-fonts')
 const vuroxConfigPlugins = require('next-compose-plugins')
+const withTypescript = require('@zeit/next-typescript')
 
 const fileSystem = require('fs')
 const path = require('path')

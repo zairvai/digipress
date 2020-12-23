@@ -10,49 +10,77 @@ import 'antd/dist/antd.less'
 import 'react-quill/dist/quill.snow.css';
 import 'Styles/styles.less'
 import 'Styles/mycustom.less'
-
+import {useRouter} from 'next/router'
 import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'
 Amplify.configure(awsExports)
 
+import {useAnalytics} from 'Library/hooks/useAnalytics'
 
-class VuroxApp extends App{
+// export const reportWebVitals = (metric) => { 
+	
+// 	const router = useRouter()
+// 	console.log(router)
+// 	const {init,trackPageViewed} = useAnalytics()
 
-	state = {
-		width : ''
-	}
+// 	console.log(metric)
 
-	static async getInitialProps( { Component, ctx } ){
+// 	switch(metric.name) {
+
+// 		case 'FCP' 				: 	init("G-CVJL7ZM7KN")
+// 									trackPageViewed()
+// 									break;
+
+// 		case 'Next.js-render'	: 	trackPageViewed()
+// 									break;
+
+// 		default : break
+// 	}
+ 
+// }
+
+const MyApp = ({Component,pageProps,store,...props}) => {
+
+	const [width,setWidth] = React.useState()
+	const router = useRouter()
+	const {init,trackPageViewed} = useAnalytics()
+
+	// const getInitialProps =  async ( { Component, ctx } ) => {
 		
-		let pageProps = {}
-		if( Component.getInitialProps ){
-			pageProps = await Component.getInitialProps(ctx)
-		}
-		return { pageProps}
-	}
+	// 	let pageProps = {}
+	// 	if( Component.getInitialProps ){
+	// 		pageProps = await Component.getInitialProps(ctx)
+	// 	}
+	// 	return { pageProps}
+	// }
 
-	UNSAFE_componentWillMount(){
-		const isClient = typeof window === 'object';
+	React.useEffect(()=>{
+
+		const isClient = typeof window === 'object'
 		const width = isClient ? window.innerWidth : undefined
-		this.setState({ width: width })
-	}
-
-	render () {
-
-		const { Component, pageProps,store} = this.props
+		setWidth(width)
 		
-	    return(
-	        <Provider store={store}>
-				<PersistGate persistor={store._PERSISTOR} loading={null}>
-					<VuroxContextProvider pageWidth={this.state.width}>
-						<AppContextProvider>
-							<Component {...pageProps}/>
-						</AppContextProvider>
-					</VuroxContextProvider>
-				</PersistGate>
-	        </Provider>
-	    )
-	}
+		init("G-CVJL7ZM7KN")
+		trackPageViewed(router.asPath)
+
+		router.events.on("routeChangeComplete",(url,options)=>{
+			trackPageViewed(url)
+		})
+
+	},[])
+
+	return (
+		<Provider store={store}>
+			<PersistGate persistor={store._PERSISTOR} loading={null}>
+				<VuroxContextProvider pageWidth={width}>
+					<AppContextProvider>
+						<Component {...pageProps}/>
+					</AppContextProvider>
+				</VuroxContextProvider>
+			</PersistGate>
+		</Provider>
+	)
 }
 
-export default withRedux(configureStore)(VuroxApp)
+export default withRedux(configureStore)(MyApp)
+
