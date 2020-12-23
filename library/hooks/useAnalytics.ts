@@ -7,6 +7,7 @@ interface Event{
 }
 
 export const useAnalytics = () => {
+
     return {
       init: (trackingId: string) => {
         ReactGA.initialize(trackingId)
