@@ -16,6 +16,7 @@ import { getArticleRoutinePromise, updateArticleRoutinePromise} from 'State/rout
 import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
 import PostComment from 'Components/PostComment'
+import {NextSeo} from 'next-seo'
 
 const PageArticleId = props => {
 
@@ -44,6 +45,7 @@ const PageArticleId = props => {
         }
         
     },[])
+
     
     const links = [['Main',`/${auth.account.uniqueURL}/main/home/all`,''],['Artikel',`/${auth.account.uniqueURL}/main/home/articles`,''],[item.title,`/${auth.account.uniqueURL}/main/home/article/${item.id}`,'active']]
 
@@ -81,6 +83,7 @@ const PageArticleId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`${item.title} - Artikel`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

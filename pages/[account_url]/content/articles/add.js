@@ -20,6 +20,7 @@ import TagController from 'Library/controllers/TagController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listCategoriesRoutinePromise } from 'State/routines/category';
 import { listTagsRoutinePromise } from 'State/routines/tag';
+import {NextSeo} from 'next-seo'
 
 const PageArticleAdd = props => {
 
@@ -56,6 +57,7 @@ const PageArticleAdd = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title="Konten - Tambah artikel"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

@@ -21,6 +21,7 @@ import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getLessonRoutinePromise, updateLessonRoutinePromise} from 'State/routines/lesson'
 
+import {NextSeo} from 'next-seo'
 
 const PageLessonId = props => {
 
@@ -79,6 +80,7 @@ const PageLessonId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Konten - Materi - ${item.title}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

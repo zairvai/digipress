@@ -26,6 +26,8 @@ import ClassroomController from 'Library/controllers/ClassroomController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listClassroomsRoutinePromise } from 'State/routines/classroom';
 
+import {NextSeo} from 'next-seo'
+
 const PageClassrooms = props => {
 
 	console.log(props)
@@ -86,6 +88,7 @@ const PageClassrooms = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title="Konten - Ruang belajar"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

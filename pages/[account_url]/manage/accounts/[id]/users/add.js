@@ -22,6 +22,8 @@ import AccountController from 'Library/controllers/AccountController'
 import UserController from 'Library/controllers/UserController'
 import AppContainer from 'Templates/AppContainer'
 
+import {NextSeo} from 'next-seo'
+
 const PageUserAdd = props => {
 
     const {auth,router} = props
@@ -70,6 +72,7 @@ const PageUserAdd = props => {
 
     return (
         <AppContainer>
+            <NextSeo title="Kelola - Akun - Tambah pengguna"/>
             <HeaderLayout className="sticky-top">
                 <HeaderDark />
             </HeaderLayout>

@@ -24,6 +24,8 @@ import AccountController from 'Library/controllers/AccountController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listAccountsRoutinePromise } from 'State/routines/account';
 
+import {NextSeo} from 'next-seo'
+
 const PageAccounts = props => {
 
 	const {auth,listAccounts} = props
@@ -47,6 +49,7 @@ const PageAccounts = props => {
 	  
 	return (
 		<AppContainer>
+			<NextSeo title="Kelola - Akun"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

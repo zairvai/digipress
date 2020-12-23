@@ -18,6 +18,8 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import CategoryController from 'Library/controllers/CategoryController';
 import AppContainer from 'Templates/AppContainer'
 
+import {NextSeo} from 'next-seo'
+
 const PageCategoryAdd = props => {
 
     const categoryController = new CategoryController(props)
@@ -42,6 +44,7 @@ const PageCategoryAdd = props => {
 
     return (
         <AppContainer>
+            <NextSeo title="Konten - Tambah kategori"/>
             <HeaderLayout className="sticky-top">
                 <HeaderDark />
             </HeaderLayout>

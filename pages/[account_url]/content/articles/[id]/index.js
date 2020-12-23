@@ -16,6 +16,7 @@ import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
 import PostComment from 'Components/PostComment'
 
+import {NextSeo} from 'next-seo'
 
 const PageArticleId = props => {
 
@@ -83,6 +84,7 @@ const PageArticleId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Konten - Artikel -  ${item.title}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

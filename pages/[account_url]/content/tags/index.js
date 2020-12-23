@@ -26,6 +26,8 @@ import TagController from 'Library/controllers/TagController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
 
+import {NextSeo} from 'next-seo'
+
 const PageTags = props => {
 
 	const {auth,router,listTags} = props
@@ -79,6 +81,7 @@ const PageTags = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title="Konten - Tags"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

@@ -16,6 +16,8 @@ import FormAccount from 'Components/FormAccount'
 import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
 
+import {NextSeo} from 'next-seo'
+
 const PageAccountAdd = props => {
 
     const {auth,router} = props
@@ -41,6 +43,7 @@ const PageAccountAdd = props => {
 
     return (
         <AppContainer>
+            <NextSeo title="Kelola - Tambah akun"/>
             <HeaderLayout className="sticky-top">
                 <HeaderDark />
             </HeaderLayout>

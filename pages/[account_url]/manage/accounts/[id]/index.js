@@ -20,6 +20,7 @@ import { signOutRoutinePromise } from 'State/routines/auth'
 import { deleteAccountRoutinePromise,getAccountRoutinePromise } from 'State/routines/account';
 import { listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
 
+import {NextSeo} from 'next-seo'
 
 const {Text} = Typography
 const {confirm} = Modal
@@ -152,6 +153,7 @@ const PageAccountId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Kelola - Akun - ${item.name}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

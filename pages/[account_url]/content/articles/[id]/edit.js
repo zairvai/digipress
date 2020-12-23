@@ -23,12 +23,12 @@ import { listCategoriesRoutinePromise } from 'State/routines/category';
 import { listTagsRoutinePromise } from 'State/routines/tag';
 
 import { getArticleRoutinePromise} from 'State/routines/article';
-
+import {NextSeo} from 'next-seo'
 
 const PageArticleEdit = props => {
 
 	console.log(props)
-	
+
 	const {auth,listTags,listCategories,router} = props
 	
 	const articleController = new ArticleController(props)
@@ -76,6 +76,7 @@ const PageArticleEdit = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title={`Konten - Ubah artikel -  ${item.title}`}/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

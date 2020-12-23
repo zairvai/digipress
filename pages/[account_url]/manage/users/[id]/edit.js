@@ -10,6 +10,7 @@ import { Row,Col } from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getUserRoutinePromise } from 'State/routines/user';
 
+import {NextSeo} from 'next-seo'
 
 const PageUserEdit = props => {
     
@@ -40,6 +41,7 @@ const PageUserEdit = props => {
 
     return (
         <AppContainer>
+            <NextSeo title={`Kelola - Ubah anggota - ${item.name}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={14} sm={24} xs={24}>

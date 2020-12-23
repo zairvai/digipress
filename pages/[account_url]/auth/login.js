@@ -18,6 +18,8 @@ import { signOutRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
 import AccountController from 'Library/controllers/AccountController'
 
+import {NextSeo} from 'next-seo'
+
 const {Title} = Typography
 
 const PageLogin = props =>{
@@ -80,7 +82,7 @@ const PageLogin = props =>{
 
 	return(
 		<React.Fragment>
-			
+			<NextSeo title="Login"/>
 			<Header/>
 			<VuroxLayout>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>

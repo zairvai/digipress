@@ -8,6 +8,7 @@ import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getAccountRoutinePromise} from 'State/routines/account';
+import {NextSeo} from 'next-seo'
 
 const PageAccountEdit = props => {
     
@@ -37,6 +38,7 @@ const PageAccountEdit = props => {
 
     return (
         <AppContainer>
+            <NextSeo title={`Kelola - Ubah akun - ${item.name}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={14} sm={24} xs={24}>

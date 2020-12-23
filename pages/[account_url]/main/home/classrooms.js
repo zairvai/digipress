@@ -12,6 +12,7 @@ import {Modal} from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listPostsRoutinePromise } from 'State/routines/post';
+import { NextSeo } from 'next-seo'
 
 const Home = props =>{
 
@@ -65,6 +66,7 @@ const Home = props =>{
 
     return (
         <AppContainer>
+            <NextSeo title="Home - Ruang belajar"/>
             <Layout pagename={pagename} links={links}>
                 <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
             </Layout>

@@ -24,6 +24,8 @@ import { getClassroomRoutinePromise,updateClassroomRoutinePromise} from 'State/r
 import { listLessonsRoutinePromise} from 'State/routines/lesson'
 import Reader from 'Components/ReaderClassroom'
 
+import {NextSeo} from 'next-seo'
+
 const PageClassroomId = props => {
 
     const {Text} = Typography
@@ -88,6 +90,7 @@ const PageClassroomId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Konten - Ruang belajar - ${item.title}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

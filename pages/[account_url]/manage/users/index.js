@@ -27,6 +27,8 @@ import { createUserRoutinePromise,listUsersRoutinePromise,updateUserRoutinePromi
 import AuthController from 'Library/controllers/AuthController';
 import UserController from 'Library/controllers/UserController';
 
+import {NextSeo} from 'next-seo'
+
 const PageListUser = props => {
 
     const {auth,createUser,listUsers,router} = props
@@ -104,6 +106,7 @@ const PageListUser = props => {
 
     return (
         <AppContainer>
+            <NextSeo title="Kelola - Anggota"/>
             <HeaderLayout className="sticky-top">
                 <HeaderDark />
             </HeaderLayout>

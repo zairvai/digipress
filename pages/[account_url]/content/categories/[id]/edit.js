@@ -20,6 +20,8 @@ import { getCategoryRoutinePromise } from 'State/routines/category';
 import CategoryController from 'Library/controllers/CategoryController';
 import AppContainer from 'Templates/AppContainer'
 
+import {NextSeo} from 'next-seo'
+
 const PageCategoryAdd = props => {
 
     const categoryController = new CategoryController(props)
@@ -56,6 +58,7 @@ const PageCategoryAdd = props => {
 
     return (
         <AppContainer>
+            <NextSeo title={`Konten - Ubah kategori - ${item.name}`}/>
             <HeaderLayout className="sticky-top">
                 <HeaderDark />
             </HeaderLayout>

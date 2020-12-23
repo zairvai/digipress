@@ -50,6 +50,7 @@
     "next-images": "^1.6.2",
     "next-redux-saga": "^4.0.2",
     "next-redux-wrapper": "^4.0.1",
+    "next-seo": "^4.17.0",
     "nodemon": "^1.19.4",
     "now": "^17.1.1",
     "null-loader": "^4.0.0",

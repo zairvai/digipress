@@ -43,6 +43,7 @@ import {
 } from 'recharts';
 
 import AppContainer from 'Templates/AppContainer'
+import {NextSeo} from 'next-seo'
 
 class Page extends React.Component {
 
@@ -80,6 +81,7 @@ class Page extends React.Component {
 		
 		return (
 			<AppContainer>
+				<NextSeo title="Dashboard"/>
                 <Layout>
 					<AdminSummeryBox />
 					<Row gutter={{xs: 4, sm:6, md: 8}}>

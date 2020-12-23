@@ -25,6 +25,7 @@ import ArticleController from 'Library/controllers/ArticleController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listArticlesRoutinePromise } from 'State/routines/article';
+import {NextSeo} from 'next-seo'
 
 const PageArticles = props => {
 	
@@ -57,6 +58,7 @@ const PageArticles = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title="Konten - Artikel"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

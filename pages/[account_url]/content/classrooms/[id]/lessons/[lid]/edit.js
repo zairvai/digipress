@@ -23,7 +23,7 @@ import LessonController from 'Library/controllers/LessonController'
 import FormLesson from 'Components/FormLesson'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getLessonRoutinePromise} from 'State/routines/lesson'
-
+import {NextSeo} from 'next-seo'
 
 const PageLessonEdit = props => {
 
@@ -77,6 +77,7 @@ const PageLessonEdit = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Konten - Ubah materi - ${item.title}`}/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

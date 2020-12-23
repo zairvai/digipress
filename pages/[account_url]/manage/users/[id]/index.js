@@ -19,6 +19,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { updateUserRoutinePromise,getUserRoutinePromise } from 'State/routines/user';
 
+import {NextSeo} from 'next-seo'
 
 const {Text} = Typography
 const {confirm} = Modal
@@ -121,6 +122,7 @@ const PageUserId = props => {
 
     return(
         <AppContainer>
+            <NextSeo title={`Kelola - Anggota - ${item.name}`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>

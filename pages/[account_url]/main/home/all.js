@@ -15,6 +15,7 @@ import { updateArticleRoutinePromise } from 'State/routines/article';
 import { updateClassroomRoutinePromise } from 'State/routines/classroom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import {Modal} from 'antd'
+import {NextSeo} from 'next-seo'  
 
 const Home = props =>{
 
@@ -78,6 +79,7 @@ const Home = props =>{
 
     return (
         <AppContainer>
+            <NextSeo title="Home"/>
             <Layout pagename={pagename} links={links}>
                 <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
             </Layout>

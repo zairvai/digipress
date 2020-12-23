@@ -24,6 +24,7 @@ import { listTagsRoutinePromise } from 'State/routines/tag';
 
 import { getClassroomRoutinePromise} from 'State/routines/classroom';
 
+import {NextSeo} from 'next-seo'
 
 const PageClassroomEdit = props => {
 
@@ -74,6 +75,7 @@ const PageClassroomEdit = props => {
 	
 	return (
 		<AppContainer>
+			<NextSeo title={`Konten - Ubah ruang belajar - ${item.title}`}/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>

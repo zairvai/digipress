@@ -15,6 +15,9 @@ import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'
 Amplify.configure(awsExports)
 
+import {DefaultSeo} from 'next-seo'
+import SEO from '../next-seo.config'
+
 import {useAnalytics} from 'Library/hooks/useAnalytics'
 
 export const reportWebVitals = (metric) => { 
@@ -49,21 +52,6 @@ const MyApp = ({Component,pageProps,store,...props}) => {
 		return { pageProps}
 	}
 
-	// React.useEffect(()=>{
-
-	// 	const isClient = typeof window === 'object'
-	// 	const width = isClient ? window.innerWidth : undefined
-	// 	setWidth(width)
-		
-	// 	init("G-CVJL7ZM7KN")
-	// 	trackPageViewed(router.asPath)
-
-	// 	router.events.on("routeChangeComplete",(url,options)=>{
-	// 		trackPageViewed(url)
-	// 	})
-
-	// },[])
-
 	React.useEffect(()=>{
 		const isClient = typeof window === 'object'
 		const width = isClient ? window.innerWidth : undefined
@@ -76,6 +64,7 @@ const MyApp = ({Component,pageProps,store,...props}) => {
 			<PersistGate persistor={store._PERSISTOR} loading={null}>
 				<VuroxContextProvider pageWidth={width}>
 					<AppContextProvider>
+						<DefaultSeo {...SEO}/>
 						<Component {...pageProps}/>
 					</AppContextProvider>
 				</VuroxContextProvider>

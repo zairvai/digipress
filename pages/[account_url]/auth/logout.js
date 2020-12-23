@@ -4,6 +4,7 @@ import {withRouter} from 'next/router'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
+import {NextSeo} from 'next-seo'  
 
 const PageLogout = props => {
 
@@ -29,7 +30,9 @@ const PageLogout = props => {
     },[])
     
 
-    return <></>
+    return <>
+        <NextSeo title="Logout"/>
+    </>
 
 }
 
