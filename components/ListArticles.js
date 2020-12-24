@@ -26,9 +26,9 @@ const List = ({items,...props}) =>{
                         AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
                         <>
                             <td valign="middle">
-                                {item.category.name}
+                                {item.category && item.category.name}
                                 {
-                                    item.tags && item.tags.map(tag=><div key={tag.id} className="mt-1"><Tag>{tag.name}</Tag></div>)
+                                    item.tags && item.tags.map(tag=>tag && <div key={tag.id} className="mt-1"><Tag>{tag.name}</Tag></div>)
                                 }
                             </td>
                             <td valign="middle">

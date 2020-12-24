@@ -14,42 +14,18 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Button, Modal} from 'antd'
+import { Row, Col} from 'antd'
 import { Search} from 'react-bootstrap-icons'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+
 import ListTags from 'Components/ListTags'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
-import TagController from 'Library/controllers/TagController'
-
-import { bindPromiseCreators } from 'redux-saga-routines';
-import { listTagsRoutinePromise,deleteTagRoutinePromise } from 'State/routines/tag';
 
 import {NextSeo} from 'next-seo'
 
 const PageTags = props => {
 
-	const {auth,router,listTags} = props
-
-	const tagController = new TagController(props)
-
-	const [orderBy,setOrderBy]	= React.useState("createdAt")
-	const [direction,setDirection] = React.useState("desc")
-
-	const {confirm} = Modal
-	
-	React.useEffect(()=>{
-		
-		let accountId = null
-
-		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-			accountId = auth.account.id
-		}
-
-		tagController._list({accountId,orderBy,direction})
-
-	},[])
+	const {auth} = props
 
     const pagename=""
 	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Tag',`/${auth.account.uniqueURL}/content/tags`,'active']]
@@ -57,28 +33,6 @@ const PageTags = props => {
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
-    const showDeleteConfirm = (item,index) => {
-
-        confirm({
-          title: `Kemungkinan tag ini digunakan pada artikel atau ruang belajar. Apakah kamu ingin menghapus ?`,
-          icon: <ExclamationCircleOutlined />,
-          content: item.name,
-          okText:"Ya",
-          cancelText:"Tidak",
-          onOk() {
-
-			tagController._delete(item.id)
-				.then(resp=>tagController._updateList("remove",[item],index))
-				.catch(error=>console.log(error))
-
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-	}
-	
-	
 	return (
 		<AppContainer>
 			<NextSeo title="Konten - Tags"/>
@@ -109,7 +63,7 @@ const PageTags = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListTags items={listTags.list.items} foundDoc={listTags.list.foundDocs} onDelete={showDeleteConfirm}/>
+								<ListTags/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -122,12 +76,4 @@ const PageTags = props => {
 }
 
 
-export default connect(
-    state=>state,
-    (dispatch)=>({
-            ...bindPromiseCreators({
-				listTagsRoutinePromise,
-				deleteTagRoutinePromise
-        },dispatch),dispatch
-    })
-)(withRouter(PageTags))
+export default connect(state=>state)(PageTags)
