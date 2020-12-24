@@ -23,7 +23,7 @@ const Sidebar = (props) => {
 			<ul>
 
 				{
-					AuthController.isOwner(auth) || AuthController.isAdmin(auth) &&
+					(AuthController.isOwner(auth) || AuthController.isAdmin(auth)) &&
 					<>
 						<VerticalNavHeading>Laporan</VerticalNavHeading>
 						<Navitem link={`/${auth.account.uniqueURL}/report/dashboard`} text='Dashboard' icon={<Icon size="1.3em" path={mdiMonitorDashboard} />} />
@@ -41,45 +41,37 @@ const Sidebar = (props) => {
 				<Navitem link={`/${auth.account.uniqueURL}/content/classrooms`}  text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 				
-			{
-				!AuthController.isStudent(auth) || !AuthController.isMember(auth) ?
-				
-				<>
-					<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Kategori' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
-					<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tag' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
-				</>
-				:
-				<></>
+				{
+					(!AuthController.isStudent(auth) || !AuthController.isMember(auth)) &&
+					
+					<>
+						<Navitem link={`/${auth.account.uniqueURL}/content/categories`} text='Kategori' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
+						<Navitem link={`/${auth.account.uniqueURL}/content/tags`} text='Tag' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
+					</>
 
-			}
-				
-			{
-				AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
-					|| AuthController.isOwner(auth) || AuthController.isAdmin(auth) ? 
-				<>
-					<VerticalNavHeading>Kelola</VerticalNavHeading>
+				}
 				
 				{
-					AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) ? 
+					(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth) 
+						|| AuthController.isOwner(auth) || AuthController.isAdmin(auth)) && 
 					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Akun Pesantren' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
-					</>
-					:
-					<></>
-				}
+						<VerticalNavHeading>Kelola</VerticalNavHeading>
+					
+					{
+						(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) && 
+						<>
+							<Navitem link={`/${auth.account.uniqueURL}/manage/accounts`} text='Akun Pesantren' icon={<Icon size="1.3em" path={mdiBriefcaseAccount} />} />
+						</>
+					}
 
-				{
-					!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth)) ? 
-					<>
-						<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Anggota saya' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+					{
+						(!AuthController.isAppAdmin(auth) && (AuthController.isOwner(auth) || AuthController.isAdmin(auth))) && 
+						<>
+							<Navitem link={`/${auth.account.uniqueURL}/manage/users`} text='Anggota saya' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} />	
+						</>
+					}
 					</>
-					:
-					<></>
 				}
-				</>
-				:
-				<></>
-			}
 
 
 				{/* <VerticalNavHeading>Roles</VerticalNavHeading>
