@@ -49,7 +49,7 @@ const FormClassroom = ({item,...props}) => {
             })
             
             let selectedTags = []
-            item.tags.forEach(tag=>selectedTags.push({
+            item.tags.forEach(tag=>tag && selectedTags.push({
                 id:tag.id,
                 value:tag.id.toString(),
                 label:tag.name}))

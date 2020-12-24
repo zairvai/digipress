@@ -14,28 +14,51 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col} from 'antd'
+import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
-
-import ListCategories from 'Components/ListCategories'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import ListArticles from 'Components/ListArticles'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
+import AuthController from 'Library/controllers/AuthController'
+import ArticleController from 'Library/controllers/ArticleController'
 
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { listArticlesRoutinePromise } from 'State/routines/article';
 import {NextSeo} from 'next-seo'
 
-const PageCategories = props => {
+const PageArticles = props => {
+	
+	const {auth,router,listArticles} = props
 
-	const {auth} = props
+	const [orderBy,setOrderBy]	= React.useState("createdAt")
+	const [direction,setDirection] = React.useState("desc")
+	
+	const articleController = new ArticleController(props)
+	
+	React.useEffect(()=>{
+		
+		let accountId = null
+
+		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+			accountId = auth.account.id
+		}
+
+		articleController._list({accountId,orderBy,direction})
+
+	},[])
+
 
     const pagename=""
-	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Kategori',`/${auth.account.uniqueURL}/content/categories`,'active']]
+	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
+	
+	
 	return (
 		<AppContainer>
-			<NextSeo title="Konten - Kategori"/>
+			<NextSeo title="Konten - Artikel"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>
@@ -52,10 +75,7 @@ const PageCategories = props => {
 						<Col md={12}>
 							<div className="fright">
 								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah category</Button></li> */}
-									{
-										Permission.ADD_CATEGORY({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/categories/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Category</a></Link></li>
-									}
+									{ Permission.ADD_ARTICLE({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Article</a></Link></li>}
 								</ul>
 							</div>
 						</Col>
@@ -63,7 +83,7 @@ const PageCategories = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListCategories/>
+								<ListArticles items={listArticles.list.items} foundDoc={listArticles.list.foundDocs}/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -76,4 +96,11 @@ const PageCategories = props => {
 }
 
 
-export default connect(state=>state)(PageCategories)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+				listArticlesRoutinePromise
+        },dispatch),dispatch
+    })
+)(withRouter(PageArticles))

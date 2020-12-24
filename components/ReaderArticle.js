@@ -40,7 +40,7 @@ const Reader = ({item,...props}) =>{
                     Tag&nbsp;
                 {
                     item.tags && 
-                    item.tags.map(tag=>
+                    item.tags.map(tag=> tag &&
                         <Tag key={tag.id}>
                             <Link href={{pathname:`/content/tags/[name]`,query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
                         </Tag>	
