@@ -21,8 +21,8 @@ const List = props =>{
 	const userController = new UserController(props)
 
     const [items,setItems] = React.useState()
-    const [isEmpty,setEmpty] = React.useState(true)
-    const [loading,setLoading] = React.useState(false)
+    const [isEmpty,setEmpty] = React.useState(false)
+    const [loading,setLoading] = React.useState(true)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
     const [pageIndex,setPageIndex] = React.useState()
 	const [orderBy,setOrderBy]	= React.useState("createdAt")
