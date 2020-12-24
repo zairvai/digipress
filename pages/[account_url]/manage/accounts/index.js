@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
 import Link from 'next/link'
 import {
 	VuroxLayout,
@@ -14,32 +13,15 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Button, Popover} from 'antd'
+import { Row, Col} from 'antd'
 import { Search} from 'react-bootstrap-icons'
 import ListAccounts from 'Components/ListAccounts'
 import AppContainer from 'Templates/AppContainer'
-import AccountController from 'Library/controllers/AccountController'
-
-
-import { bindPromiseCreators } from 'redux-saga-routines';
-import { listAccountsRoutinePromise } from 'State/routines/account';
-
 import {NextSeo} from 'next-seo'
 
 const PageAccounts = props => {
 
-	const {auth,listAccounts} = props
-
-	const accountController = new AccountController(props)
-
-	const [orderBy,setOrderBy]	= React.useState("createdAt")
-	const [direction,setDirection] = React.useState("desc")
-
-	React.useEffect(()=>{
-
-		accountController._list({orderBy,direction})
-
-	},[])
+	const {auth} = props
 
     const pagename=""
 	const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,'active']]
@@ -74,7 +56,7 @@ const PageAccounts = props => {
 					<Row>
 						<Col md={24}>
 							<VuroxComponentsContainer>
-								<ListAccounts items={listAccounts.list.items} foundDoc={listAccounts.list.foundDocs}/>
+								<ListAccounts/>
 							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
@@ -87,11 +69,4 @@ const PageAccounts = props => {
 }
 
 
-export default connect(
-    state=>state,
-    (dispatch)=>({
-            ...bindPromiseCreators({
-            listAccountsRoutinePromise
-        },dispatch),dispatch
-    })
-)(withRouter(PageAccounts))
+export default connect(state=>state)(PageAccounts)

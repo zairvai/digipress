@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
 import Link from 'next/link'
 
 import {
@@ -15,30 +14,19 @@ import { vuroxContext } from 'Context'
 import HeaderDark from 'Templates/HeaderDark';
 import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Modal,Button, Tabs,Typography,Popover} from 'antd'
+import { Row, Col,Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
+import AuthController from 'Library/controllers/AuthController'
 import ListUsers from 'Components/ListUsers'
 import AppContainer from 'Templates/AppContainer'
 import FormUser from 'Components/FormUser'
 import FormUserExisting from 'Components/FormUserExisting'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { bindPromiseCreators } from 'redux-saga-routines';
-import { createUserRoutinePromise,listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
-import AuthController from 'Library/controllers/AuthController';
-import UserController from 'Library/controllers/UserController';
 
 import {NextSeo} from 'next-seo'
 
 const PageListUser = props => {
 
-    const {auth,createUser,listUsers,router} = props
-
-    const userController = new UserController(props)
-    
-    const [orderBy,setOrderBy]	= React.useState("createdAt")
-    const [direction,setDirection] = React.useState("desc")
-    
-    const {confirm} = Modal
+    const {auth} = props
 
     const pagename=""
 	const links = [['Kelola',`/${auth.account.uniqueURL}/manage/users`,''],['Anggota saya',`/${auth.account.uniqueURL}/manage/users`,'active']]
@@ -48,13 +36,7 @@ const PageListUser = props => {
 
     const [addVisible,setAddVisible] = React.useState(false)
 
-    React.useEffect(async()=>{
-
-            userController._list({accountId:auth.account.id,roles:getRoleListInputs(),orderBy,direction})
-
-    },[])
-
-    const getRoleListInputs = () =>{
+    const getRoleListInput = () =>{
 
         if(AuthController.isAppAdmin(auth)) return []// donot allow app admin to manage current account user
 
@@ -68,40 +50,6 @@ const PageListUser = props => {
         }
 
         return []
-    }
-
-    const onDeleteItem = (item,index) => {
-        showRevokeAccessConfirm(item,auth.account,index)
-    }
-
-    const showRevokeAccessConfirm = (item,account,index) => {
-
-        confirm({
-          title: `Apakah kamu ingin menghapus akses pengguna ini dari akun ${account.name} ?`,
-          icon: <ExclamationCircleOutlined />,
-          content: item.name,
-          okText:"Ya",
-          cancelText:"Tidak",
-          onOk() {
-
-            let roles = item.roles.map((x)=>x)//copy array
-            const indexRole = roles.findIndex((role) => role.accountId === account.id)
-            roles.splice(indexRole,1)//remove from array
-            
-            var values ={roles}
-            
-            userController._update(item,values)
-                .then(resp=>{
-                    userController._updateList("remove",[{id:item.id}],index)
-                })
-                .catch(error=>console.log(error))
-
-
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
     }
 
     return (
@@ -168,7 +116,7 @@ const PageListUser = props => {
                     <Row>
                         <Col md={24}>
                             <VuroxComponentsContainer>
-                                <ListUsers accountId={auth.account.id} items={listUsers.list.items} onDelete={onDeleteItem}/>
+                                <ListUsers currentAccount={auth.account} roleListInput={getRoleListInput()}/>
                             </VuroxComponentsContainer>	
                         </Col>
                     </Row>
@@ -178,13 +126,4 @@ const PageListUser = props => {
     );
 
 }
-export default connect(
-    state=>state,
-    (dispatch)=>({
-            ...bindPromiseCreators({
-            createUserRoutinePromise,
-            listUsersRoutinePromise,
-            updateUserRoutinePromise
-        },dispatch),dispatch
-    })
-)(PageListUser)
+export default connect(state=>state)(PageListUser)

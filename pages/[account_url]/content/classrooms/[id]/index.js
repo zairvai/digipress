@@ -2,26 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import Layout from 'Templates/Layout.classroom.id'
-import { Row, Col,Tag,Modal,Input,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
+import { Row, Col,Modal,Typography} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import {	
-	VuroxTableDark
-} from 'Components/tables'
-import HTMLRenderer from 'react-html-renderer'
-import {Status} from 'Components/mycomponents.js'
+
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListLessons from 'Components/ListLessons'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
 import ClassroomController from 'Library/controllers/ClassroomController'
-import LessonController from 'Library/controllers/LessonController'
+
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getClassroomRoutinePromise,updateClassroomRoutinePromise} from 'State/routines/classroom';
-import { listLessonsRoutinePromise} from 'State/routines/lesson'
 import Reader from 'Components/ReaderClassroom'
 
 import {NextSeo} from 'next-seo'
@@ -34,10 +28,6 @@ const PageClassroomId = props => {
     const {auth,getClassroom,listLessons,router} = props
 
     const classroomController = new ClassroomController(props)
-    const lessonController = new LessonController(props)
-
-    const [lessonOrderBy,setLessonOrderBy]	= React.useState("seq.keyword")
-    const [lessonDirection,setLessonDirection] = React.useState("asc")
     
     const [item,setItem] = React.useState({})
 
@@ -49,14 +39,6 @@ const PageClassroomId = props => {
             const classroom = await classroomController._get(id)
             //console.log(classroom)
             setItem(classroom.data)
-
-            let accountId = null
-
-            if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-                accountId = auth.account.id
-            }
-
-            lessonController._list({accountId,postId:id,orderBy:lessonOrderBy,direction:lessonDirection})
 
         }catch(error){
             router.push(`/${auth.account.uniqueURL}/content/classrooms`)
@@ -120,7 +102,7 @@ const PageClassroomId = props => {
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <ListLessons items={listLessons.list.items} classroomId={item.id} />
+                                    <ListLessons postId={id} />
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>
@@ -190,8 +172,7 @@ export default connect(
     (dispatch)=>({
             ...bindPromiseCreators({
                 getClassroomRoutinePromise,
-                updateClassroomRoutinePromise,
-                listLessonsRoutinePromise
+                updateClassroomRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageClassroomId))

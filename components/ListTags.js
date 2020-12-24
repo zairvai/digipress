@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-import {Table,Button,Tooltip,Modal,Pagination} from 'antd'
+import {Table,Button,Tooltip,Modal,Empty} from 'antd'
 import Icon from '@mdi/react'
 import {mdiDelete} from '@mdi/js'
 import AuthController from 'Library/controllers/AuthController'
@@ -22,6 +22,7 @@ const List = props =>{
     let accountId
 
     const [items,setItems] = React.useState()
+    const [isEmpty,setEmpty] = React.useState(true)
     const [loading,setLoading] = React.useState(false)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
     const [pageIndex,setPageIndex] = React.useState()
@@ -39,6 +40,11 @@ const List = props =>{
         fetchItems({accountId,orderBy,direction,pagination})
 
 	},[])
+
+    React.useEffect(()=>{
+        if(!items || items.length==0) setEmpty(true)
+        else setEmpty(false)
+    },[items])
 
 	const fetchItems = async ({accountId,name,orderBy,direction,statuses,pagination})=>{
 
@@ -107,9 +113,9 @@ const List = props =>{
                 key:"operation",
                 render:(text,record,index)=>(
                     <div className="fright">
-                    <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
-                        <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}/>}  onClick={()=>showDeleteConfirm(record,index)}/>
-                    </Tooltip>
+                        <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
+                            <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}/>}  onClick={()=>showDeleteConfirm(record,index)}/>
+                        </Tooltip>
                     </div>
                 )
             }
@@ -152,6 +158,7 @@ const List = props =>{
 
     return(
         <VuroxTableDark>
+            {loading || !isEmpty ? 
             <Table
                 columns={getColumns()}
                 rowKey={record=>record.id}
@@ -160,6 +167,15 @@ const List = props =>{
                 loading={loading}
                 onChange={handleTableChange}
             />
+            :
+            <Empty
+                description={
+                    <span>
+                        Belum ada tag
+                    </span>
+                }
+            />
+            }
         </VuroxTableDark>
     )
 

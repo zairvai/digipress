@@ -55,12 +55,3 @@ export const getAccountByUniqueUrl = payload => ({
     type : getAccountByUniqueUrlRoutine.TRIGGER,
     payload
 })
-
-
-//update list setelah create atau remove, methods: add, remove
-export const updateList = (method,items,index) =>({
-    type:customListAccountsRoutine.UPDATELIST,
-    method,
-    items,
-    index
-})

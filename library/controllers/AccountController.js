@@ -1,12 +1,3 @@
-import {
-    createAccount,createAccountInit,
-    listAccounts,
-    getAccount,getAccountInit,getAccountByUniqueUrl,
-    updateAccount,updateAccountInit,
-    deleteAccount,deleteAccountInit,
-    updateList
-} from 'State/actions/account'
-
 export default class Controller{
 
     static APP_ACCOUNT_ID = "11001" //aplikasi owner id
@@ -34,7 +25,7 @@ export default class Controller{
 
     _list = (values) => {
     
-        this.props.listAccountsRoutinePromise(values)
+        return this.props.listAccountsRoutinePromise(values)
         
     }
 
@@ -63,11 +54,6 @@ export default class Controller{
     _getAccountByUniqueUrl = ({url}) =>{
         
         return this.props.getAccountByUniqueUrlRoutinePromise({url})
-    }
-
-    _updateList = (method,items,index)=>{
-        return this.dispatch(updateList(method,items,index))
-        
     }
 
 }

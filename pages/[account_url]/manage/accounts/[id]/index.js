@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import { Row, Col,Tag,Modal,Button, Checkbox,Typography} from 'antd'
+import { Row, Col,Tag,Modal,Button,Typography} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
@@ -12,13 +12,11 @@ import ListUsers from 'Components/ListUsers'
 import AppContainer from 'Templates/AppContainer'
 import AuthController from 'Library/controllers/AuthController'
 import AccountController from 'Library/controllers/AccountController'
-import UserController from 'Library/controllers/UserController'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth'
 import { deleteAccountRoutinePromise,getAccountRoutinePromise } from 'State/routines/account';
-import { listUsersRoutinePromise,updateUserRoutinePromise} from 'State/routines/user';
 
 import {NextSeo} from 'next-seo'
 
@@ -29,7 +27,6 @@ const PageAccountId = props => {
 
     const authController = new AuthController(props)
     const accountController = new AccountController(props)
-    const userController = new UserController(props)
 
     const [url,setUrl] = React.useState(window.location) 
 
@@ -50,23 +47,6 @@ const PageAccountId = props => {
             console.log(error)
         }
         
-    },[])
-
-    React.useEffect(async()=>{
-
-        try{
-
-            await userController._list({
-                accountId:id,
-                roles:getRoleListInputs(),
-                orderBy:"createdAt",
-                direction:"desc",from:0,size:20
-            })
-
-        }catch(error){
-            console.log(error)
-        }
-
     },[])
     
     const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
@@ -107,48 +87,13 @@ const PageAccountId = props => {
         });
     }
 
-    const getRoleListInputs = () =>{
+    const getRoleListInput = () =>{
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)){
             return ["owner","admin","tutor","student","member"]
         }
 
         return []
-    }
-
-    const onDeleteUser = (user,index) => {
-        showRevokeAccessConfirm(user,item,index)
-    }
-
-    const showRevokeAccessConfirm = (item,account,index) => {
-
-        confirm({
-          title: `Apakah kamu ingin menghapus akses pengguna ini dari akun ${account.name} ?`,
-          icon: <ExclamationCircleOutlined />,
-          content: item.name,
-          okText:"Ya",
-          cancelText:"Tidak",
-          onOk() {
-
-            let roles = item.roles.map((x)=>x)//copy array
-            const indexRole = roles.findIndex((role) => role.accountId === account.id)
-            roles.splice(indexRole,1)//remove from array
-
-            userController._update({
-                id:item.id,
-                version:item.version,
-                roles:roles})
-                .then(resp=>{
-                    userController._updateList("remove",[{id:item.id}],index)
-                })
-                .catch(error=>console.log(error))
-
-
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
     }
 
     return(
@@ -214,7 +159,7 @@ const PageAccountId = props => {
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <ListUsers accountId={id} items={listUsers.list.items} onDelete={onDeleteUser}/>
+                                    <ListUsers currentAccount={item} roleListInput={getRoleListInput()}/>
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>
@@ -235,9 +180,7 @@ export default connect(
             ...bindPromiseCreators({
             signOutRoutinePromise,
             deleteAccountRoutinePromise,
-            getAccountRoutinePromise,
-            listUsersRoutinePromise,
-            updateUserRoutinePromise
+            getAccountRoutinePromise
         },dispatch),dispatch
     })
 )(withRouter(PageAccountId))

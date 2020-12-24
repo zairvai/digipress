@@ -28,14 +28,14 @@ const PageArticles = props => {
 	const {auth} = props
 
     const pagename=""
-	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Article',`/${auth.account.uniqueURL}/content/articles`,'active']]
+	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
 	return (
 		<AppContainer>
-			<NextSeo title="Konten - Articles"/>
+			<NextSeo title="Konten - Artikel"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>
@@ -76,4 +76,4 @@ const PageArticles = props => {
 }
 
 
-export default connect(state=>state)(PageArticles)
+export default connect(state=>state)(withRouter(PageArticles))

@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-import {Table,Button,Tooltip,Modal,Pagination} from 'antd'
+import {Table,Button,Tooltip,Modal,Empty} from 'antd'
 import Icon from '@mdi/react'
 import {mdiDelete} from '@mdi/js'
 import AuthController from 'Library/controllers/AuthController'
@@ -15,13 +16,14 @@ import _ from 'lodash'
 
 const List = props =>{
 
-    const {auth} = props
+    const {auth,router} = props
 
 	const categoryController = new CategoryController(props)
 
     let accountId
 
     const [items,setItems] = React.useState()
+    const [isEmpty,setEmpty] = React.useState(true)
     const [loading,setLoading] = React.useState(false)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
     const [pageIndex,setPageIndex] = React.useState()
@@ -38,7 +40,12 @@ const List = props =>{
 
         fetchItems({accountId,orderBy,direction,pagination})
 
-	},[])
+    },[])
+    
+    React.useEffect(()=>{
+        if(!items || items.length==0) setEmpty(true)
+        else setEmpty(false)
+    },[items])
 
 	const fetchItems = async ({accountId,name,orderBy,direction,statuses,pagination})=>{
 
@@ -155,11 +162,22 @@ const List = props =>{
 
           }
         });
-	}
+    }
+    
+    const rowHandler = (record,rowIndex) => {
+        return{
+            onDoubleClick: e => {
+                if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)) 
+                    router.push(`/${auth.account.uniqueURL}/content/categories/${record.id}/edit`)
+            }
+        }
+    }
 
     return(
         <VuroxTableDark>
+            {loading || !isEmpty ? 
             <Table
+                onRow={rowHandler}
                 columns={getColumns()}
                 rowKey={record=>record.id}
                 dataSource={items}
@@ -167,6 +185,15 @@ const List = props =>{
                 loading={loading}
                 onChange={handleTableChange}
             />
+            :
+            <Empty
+                description={
+                    <span>
+                        Belum ada kategori
+                    </span>
+                }
+            />
+            }
         </VuroxTableDark>
     )
 
@@ -181,4 +208,4 @@ export default connect(
             deleteCategoryRoutinePromise
     },dispatch),dispatch
     })
-)(List)
+)(withRouter(List))
