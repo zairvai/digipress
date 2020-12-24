@@ -18,25 +18,16 @@ Amplify.configure(awsExports)
 import {DefaultSeo} from 'next-seo'
 import SEO from '../next-seo.config'
 
-import {useAnalytics} from 'Library/hooks/useAnalytics'
+import analytics from 'Library/modules/analytics'
 
-export const reportWebVitals = (metric) => { 
-	
-	const {init,trackPageViewed} = useAnalytics()
-
-	switch(metric.name) {
-
-		case 'FCP' 				: 	init("UA-185970054-1")
-									trackPageViewed()
-									break;
-
-		case 'Next.js-render'	: 	trackPageViewed()
-									break;
-
-		default : break
-	}
- 
-}
+export function reportWebVitals({ id, name, label, value }) {
+	analytics.track(name, {
+	  category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+	  value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+	  label: id, // id unique to current page load
+	  nonInteraction: true, // avoids affecting bounce rate.
+	});
+  }
 
 const MyApp = ({Component,pageProps,store,...props}) => {
 

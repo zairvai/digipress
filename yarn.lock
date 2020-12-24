@@ -99,6 +99,32 @@
   dependencies:
     node-fetch "2.6.1"
 
+"@analytics/cookie-utils@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@analytics/cookie-utils/-/cookie-utils-0.2.3.tgz#e6ab923f88d89f7b02da0cfab585ff193977052f"
+  integrity sha512-RiMAVpSluRbWb2hlT9wMJ0r2l+MUZzScYjY+w2iWRzjOr9Zzzs4tYzJT6Sd94PDz3LzCuf4aGOwS6pkKXTEBLw==
+
+"@analytics/core@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@analytics/core/-/core-0.9.0.tgz#07d6969428b03037b6cb249222b56fc084c3938c"
+  integrity sha512-mvgAAyTXMymYY9UoNlORjCMmCl/QP+rMIaCnF0I0gzvnX0EjclEru9T1eiCH3G9Xj5YdAVKPF0hg59COOFmZEw==
+  dependencies:
+    analytics-utils "^0.4.1"
+
+"@analytics/google-analytics@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@analytics/google-analytics/-/google-analytics-0.5.2.tgz#e94501ae23284ebdccb3453cf9158984b7443388"
+  integrity sha512-6jviLzo6s7MLvsfPLCSppGgoHb9piShCk/n66s75yR8XN+Pz8ADk1Rh28jRErbLSJToJcCMOwDXikCF7U4exMQ==
+  dependencies:
+    universal-analytics "^0.4.20"
+
+"@analytics/storage-utils@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@analytics/storage-utils/-/storage-utils-0.2.4.tgz#b373fc1c3910c201c3020f014c8bffd41cfc3f94"
+  integrity sha512-VHRggJbRY8vHIADWVwbq9cZux0L9LdmlN31XA3daVAI4gMkKdQEocxB7KqGDt6SfIJ3NYi/qh1nRJGooYmTBiA==
+  dependencies:
+    "@analytics/cookie-utils" "^0.2.3"
+
 "@ant-design/colors@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@ant-design/colors/-/colors-5.0.0.tgz#46b73b4cc6935b35fc8b84555e8e42c8cfc190e6"
@@ -2570,6 +2596,22 @@ amazon-cognito-identity-js@4.5.5:
     isomorphic-unfetch "^3.0.0"
     js-cookie "^2.2.1"
 
+analytics-utils@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/analytics-utils/-/analytics-utils-0.4.1.tgz#2afa97613517d33381f505bd9a6edba45493f66e"
+  integrity sha512-Bb92wbDwHdLCNvWaRgBihERch9ynxsbGYsHF+YtGiIh+bjw+0Yc0hckqQHejV5n2k6pyDAN+5QMuj7nn2YYYXg==
+  dependencies:
+    "@analytics/storage-utils" "^0.2.4"
+    dlv "^1.1.3"
+
+analytics@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/analytics/-/analytics-0.6.4.tgz#2bcd107f7c5a0c4de5a66a319d7655e0a7753531"
+  integrity sha512-ncOBZXDvLjR0IqLsK9iD8ddT021HOTK9JRVSM4SxwE34Ziwb8y/PJznWQM8zV0GENa6tJ7uVuikvbkp0+Yqe0A==
+  dependencies:
+    "@analytics/core" "^0.9.0"
+    "@analytics/storage-utils" "^0.2.4"
+
 anser@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.9.tgz#1f85423a5dcf8da4631a341665ff675b96845760"
@@ -4876,6 +4918,11 @@ dijkstrajs@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/dijkstrajs/-/dijkstrajs-1.0.1.tgz#d3cd81221e3ea40742cfcde556d4e99e98ddc71b"
   integrity sha1-082BIh4+pAdCz83lVtTpnpjdxxs=
+
+dlv@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.3.tgz#5c198a8a11453596e751494d49874bc7732f2e79"
+  integrity sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==
 
 doctrine@^2.1.0:
   version "2.1.0"
@@ -12507,7 +12554,7 @@ unique-string@^2.0.0:
   dependencies:
     crypto-random-string "^2.0.0"
 
-universal-analytics@^0.4.16:
+universal-analytics@^0.4.16, universal-analytics@^0.4.20:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/universal-analytics/-/universal-analytics-0.4.23.tgz#d915e676850c25c4156762471bdd7cf2eaaca8ac"
   integrity sha512-lgMIH7XBI6OgYn1woDEmxhGdj8yDefMKg7GkWdeATAlQZFrMrNyxSkpDzY57iY0/6fdlzTbBV03OawvvzG+q7A==
