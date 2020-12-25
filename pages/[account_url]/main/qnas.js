@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
 import Link from 'next/link'
 import {
 	VuroxLayout,
@@ -16,40 +15,15 @@ import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
-import QnaController from 'Library/controllers/QnaController'
-
-import { bindPromiseCreators } from 'redux-saga-routines';
-import { listQnasRoutinePromise,deleteQnaRoutinePromise } from 'State/routines/qna';
 
 import {NextSeo} from 'next-seo'
 
 const PageQnas = props => {
 
-	const {auth,router,listQnas} = props
-
-	const qnaController = new QnaController(props)
-
-	const [orderBy,setOrderBy]	= React.useState("createdAt")
-	const [direction,setDirection] = React.useState("desc")
-
-	const {confirm} = Modal
-	
-	React.useEffect(()=>{
-		
-		let accountId = null
-
-		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-			accountId = auth.account.id
-		}
-
-		qnaController._list({accountId,orderBy,direction})
-
-	},[])
+	const {auth,router} = props
 
     const pagename=""
 	const links = [['Main',`/${auth.account.uniqueURL}/main/home`,''],['Tanya jawab',`/${auth.account.uniqueURL}/main/qnas`,'active']]
@@ -98,12 +72,4 @@ const PageQnas = props => {
 }
 
 
-export default connect(
-    state=>state,
-    (dispatch)=>({
-            ...bindPromiseCreators({
-				listQnasRoutinePromise,
-				deleteQnaRoutinePromise
-        },dispatch),dispatch
-    })
-)(withRouter(PageQnas))
+export default connect(state=>state)(PageQnas)

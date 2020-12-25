@@ -8,7 +8,7 @@ import { createArticle,deleteArticle,updateArticle,listArticles,getArticle } fro
 import { createClassroom,deleteClassroom,updateClassroom,listClassrooms,getClassroom } from './classroom'
 import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './lesson'
 import { createQna, deleteQna, updateQna, listQnas, getQna} from './qna'
-import { createComment,deleteComment,updateComment,listComments,getComment} from './comment'
+import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
 import { getPost,listPosts } from './post'
 
 import { lessons } from './unused/lessons'
@@ -93,7 +93,8 @@ const rootReducer = combineReducers({
 	//comment
 	createComment:persistReducer({key:"createComment",storage},createComment),
 	getComment:persistReducer({key:"getComment",storage},getComment),
-	listComments:persistReducer({key:"listComments",storage},listComments),
+	listPostComments:persistReducer({key:"listPostComments",storage},listPostComments),
+	listUserComments:persistReducer({key:"listUserComments",storage},listUserComments),
 	updateComment:persistReducer({key:"updateComment",storage},updateComment),
 	deleteComment:persistReducer({key:"deleteComment",storage},deleteComment),
 

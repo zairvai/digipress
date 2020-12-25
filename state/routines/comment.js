@@ -19,8 +19,10 @@ export const updateCommentRoutinePromise = promisifyRoutine(updateCommentRoutine
 //list comment
 customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
 export const customListCommentsRoutine = customRoutine("list_comment_custom")
-export const listCommentsRoutine = createRoutine("list_comments")
-export const listCommentsRoutinePromise = promisifyRoutine(listCommentsRoutine)
+export const listPostCommentsRoutine = createRoutine("list_post_comments")
+export const listPostCommentsRoutinePromise = promisifyRoutine(listPostCommentsRoutine)
+export const listUserCommentsRoutine = createRoutine("list_user_comments")
+export const listUserCommentsRoutinePromise = promisifyRoutine(listUserCommentsRoutine)
 
 //get comment
 export const getCommentRoutine = createRoutine("get_comment")

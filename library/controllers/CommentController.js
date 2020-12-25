@@ -1,7 +1,3 @@
-import {
-    updateList
-} from 'State/actions/comment'
-
 export default class Controller{
 
     constructor({dispatch, ...props}){
@@ -45,11 +41,11 @@ export default class Controller{
     }
 
 
-    _list = values => {
-        return this.props.listCommentsRoutinePromise(values)
+    _listPostComments = values => {
+        return this.props.listPostCommentsRoutinePromise(values)
     }
 
-    _updateList = (method,items,index)=>{
-        this.dispatch(updateList(method,items,index))
+    _listUserComments = values => {
+        return this.props.listUserCommentsRoutinePromise(values)
     }
 }

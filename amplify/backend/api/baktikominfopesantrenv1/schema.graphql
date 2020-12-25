@@ -63,7 +63,8 @@ type Query @aws_iam
 	listClassrooms(input: ListItemInput): ClassroomConnection
 	
 	getComment(input: GetItemInput!): Comment
-	listComments(input: ListCommentInput): CommentConnection
+	listPostComments(input: ListCommentInput): CommentConnection
+	listUserComments(input: ListCommentInput): CommentConnection
 	
 	getQna(input: GetItemInput!): Qna
 	listQnas(input: ListItemInput): QnaConnection
@@ -454,6 +455,8 @@ input ListCommentInput {
 	accountId: ID
 	postId:ID
 	replyToId:ID
+	replyToUserId:ID
+	createdById:ID
 	orderBy: String
 	direction: String
 	minDate:AWSDateTime

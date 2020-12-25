@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import { Row, Col,Button } from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCommentsRoutinePromise,getCommentRoutinePromise } from 'State/routines/comment';
+import { listPostCommentsRoutinePromise,getCommentRoutinePromise } from 'State/routines/comment';
 import CommentController from 'Library/controllers/CommentController';
 import FormComment from 'Components/FormComment'
 import CommentItem from 'Components/CommentItem'
@@ -31,7 +31,7 @@ const PostComment = props =>  {
         }
         else if(post.account){
 
-            getItems({
+            fetchItems({
                 accountId:post.account.id,
                 postId:post.id,
                 maxDate,
@@ -74,12 +74,12 @@ const PostComment = props =>  {
         }
     }
 
-    const getItems = async ({accountId,postId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
+    const fetchItems = async ({accountId,postId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
 
 
         try{
 
-            const response = await commentController._list({
+            const response = await commentController._listPostComments({
                 accountId,postId,orderBy,direction,minDate,maxDate,size,statuses
             })
 
@@ -122,7 +122,7 @@ const PostComment = props =>  {
     }
 
     const viewPreviousComment = size => {
-        getItems({
+        fetchItems({
             accountId:post.account.id,
             postId:post.id,
             maxDate,
@@ -132,7 +132,7 @@ const PostComment = props =>  {
 
     const viewNextComment = size => {
 
-        getItems({
+        fetchItems({
             accountId:post.account.id,
             postId:post.id,
             minDate,
@@ -208,7 +208,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listCommentsRoutinePromise,
+            listPostCommentsRoutinePromise,
             getCommentRoutinePromise
         },dispatch),dispatch
     })

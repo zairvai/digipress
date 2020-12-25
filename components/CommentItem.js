@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Row, Col,Modal,Comment,Avatar,Button, Typography,Tooltip} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCommentsRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
+import { listPostCommentsRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
 import Permission from 'Library/controllers/Permission'
 import CommentController from 'Library/controllers/CommentController';
 import FormComment from 'Components/FormComment'
@@ -72,11 +72,11 @@ const CommentItem = ({comment,index,...props}) => {
     },[comment])
 
 
-    const getItems = async ({accountId,postId,replyToId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
+    const fetchItems = async ({accountId,postId,replyToId,orderBy="createdAt",direction="desc",minDate,maxDate,size,statuses=[3]}) =>{ 
 
         try{
 
-            const response = await commentController._list({
+            const response = await commentController._listPostComments({
                 accountId,postId,replyToId,orderBy,direction,minDate,maxDate,size,statuses
             })
 
@@ -145,7 +145,7 @@ const CommentItem = ({comment,index,...props}) => {
 
 
     const viewPreviousComment = size => {
-        getItems({
+        fetchItems({
             accountId:post.account.id,
             postId:post.id,
             replyToId:item.id,
@@ -156,7 +156,7 @@ const CommentItem = ({comment,index,...props}) => {
 
     const viewNextComment = size => {
 
-        getItems({
+        fetchItems({
             accountId:post.account.id,
             postId:post.id,
             replyToId:item.id,
@@ -368,7 +368,7 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listCommentsRoutinePromise,
+            listPostCommentsRoutinePromise,
             updateCommentRoutinePromise
         },dispatch),dispatch
     })

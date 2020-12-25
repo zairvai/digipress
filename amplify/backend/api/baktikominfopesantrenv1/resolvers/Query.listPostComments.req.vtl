@@ -75,7 +75,7 @@ will be passed as the event to AWS Lambda.
   #set($sort=[
     {
       "${ctx.args.input.orderBy}": {
-        "order": $ctx.args.input.direction
+        "order": $util.defaultIfNull($ctx.args.input.direction,"asc")
       }
     }
   ])

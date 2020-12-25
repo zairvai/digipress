@@ -1,4 +1,5 @@
-import {createCommentRoutine,updateCommentRoutine,getCommentRoutine,listCommentsRoutine,customListCommentsRoutine,deleteCommentRoutine} from '../routines/comment'
+import {createCommentRoutine,updateCommentRoutine,getCommentRoutine,
+    listPostCommentsRoutine,listUserCommentsRoutine,customListCommentsRoutine,deleteCommentRoutine} from '../routines/comment'
 
 
 export const createComment = payload => ({
@@ -16,8 +17,13 @@ export const getComment = payload => ({
     payload
 })
 
-export const listComments = payload => ({
-    type : listCommentsRoutine.TRIGGER,
+export const listPostComments = payload => ({
+    type : listPostCommentsRoutine.TRIGGER,
+    payload
+})
+
+export const listUserComments = payload => ({
+    type : listUserCommentsRoutine.TRIGGER,
     payload
 })
 

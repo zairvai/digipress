@@ -8,7 +8,8 @@ import {
     updateCommentRoutine,
     deleteCommentRoutine,
     getCommentRoutine,
-    listCommentsRoutine
+    listPostCommentsRoutine,
+    listUserCommentsRoutine
 } from '../routines/comment'
 
 // create comment
@@ -54,7 +55,7 @@ export function* createCommentWatcher(){
     yield takeLatest(createCommentRoutine.TRIGGER,createComment)
 }
 
-function* listComments(action){
+function* listPostComments(action){
 
     try{
 
@@ -77,23 +78,60 @@ function* listComments(action){
 
         console.log(listParams)
 
-        yield put(listCommentsRoutine.request())
+        yield put(listPostCommentsRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listComments,{input:listParams}))
+        const response = yield API.graphql(graphqlOperation(queries.listPostComments,{input:listParams}))
 
-        yield put(listCommentsRoutine.success({data:response.data.listComments}))
+        yield put(listPostCommentsRoutine.success({data:response.data.listPostComments}))
 
                     
     }catch(error){
-        yield put(listCommentsRoutine.failure({error}))
+        yield put(listPostCommentsRoutine.failure({error}))
     }finally{
-        yield put(listCommentsRoutine.fulfill())
+        yield put(listPostCommentsRoutine.fulfill())
     }
 
 }
 
-export function* listCommentsWatcher(){
-    yield takeLatest(listCommentsRoutine.TRIGGER,listComments)
+export function* listPostCommentsWatcher(){
+    yield takeLatest(listPostCommentsRoutine.TRIGGER,listPostComments)
+}
+
+function* listUserComments(action){
+
+    try{
+
+        const {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses} = action.payload
+
+        const listParams={size}
+
+        if(accountId) listParams.accountId = accountId
+        if(createdById) listParams.createdById = createdById
+        if(statuses) listParams.statuses = statuses
+        if(replyToUserId) listParams.replyToUserId = replyToUserId
+        if(from) listParams.from = from
+        if(orderBy) {
+            listParams.orderBy = orderBy
+            listParams.direction = direction
+        }
+
+        yield put(listUserCommentsRoutine.request())
+                
+        const response = yield API.graphql(graphqlOperation(queries.listUserComments,{input:listParams}))
+
+        yield put(listUserCommentsRoutine.success({data:response.data.listUserComments}))
+
+                    
+    }catch(error){
+        yield put(listUserCommentsRoutine.failure({error}))
+    }finally{
+        yield put(listUserCommentsRoutine.fulfill())
+    }
+
+}
+
+export function* listUserCommentsWatcher(){
+    yield takeLatest(listUserCommentsRoutine.TRIGGER,listUserComments)
 }
 
 function* getComment(action){

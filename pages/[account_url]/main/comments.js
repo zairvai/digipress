@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
 import Link from 'next/link'
 import {
 	VuroxLayout,
@@ -20,36 +19,15 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
-import CommentController from 'Library/controllers/CommentController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listCommentsRoutinePromise,deleteCommentRoutinePromise } from 'State/routines/comment';
+
 
 import {NextSeo} from 'next-seo'
 
 const PageComments = props => {
 
-	const {auth,router,listComments} = props
-
-	const commentController = new CommentController(props)
-
-	const [orderBy,setOrderBy]	= React.useState("createdAt")
-	const [direction,setDirection] = React.useState("desc")
-
-	const {confirm} = Modal
-	
-	React.useEffect(()=>{
-		
-		let accountId = null
-
-		if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
-			accountId = auth.account.id
-		}
-
-		commentController._list({accountId,orderBy,direction})
-
-	},[])
+	const {auth} = props
 
     const pagename=""
 	const links = [['Main',`/${auth.account.uniqueURL}/main/home`,''],['Komentar',`/${auth.account.uniqueURL}/main/comments`,'active']]
@@ -98,12 +76,4 @@ const PageComments = props => {
 }
 
 
-export default connect(
-    state=>state,
-    (dispatch)=>({
-            ...bindPromiseCreators({
-				listCommentsRoutinePromise,
-				deleteCommentRoutinePromise
-        },dispatch),dispatch
-    })
-)(withRouter(PageComments))
+export default connect(state=>state)(PageComments)

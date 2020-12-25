@@ -3,7 +3,8 @@ import {
     updateCommentRoutine,
     deleteCommentRoutine,
     getCommentRoutine,
-    listCommentsRoutine,
+    listPostCommentsRoutine,
+    listUserCommentsRoutine,
     customListCommentsRoutine
 } from '../routines/comment'
 
@@ -126,11 +127,11 @@ export const getComment = (state={item:{},...initialState},action) => {
     return state
 }
 
-export const listComments = (state={list:[],...initialState},action) => {
+export const listPostComments = (state={list:[],...initialState},action) => {
 
     switch(action.type){
 
-        case listCommentsRoutine.REQUEST : {
+        case listPostCommentsRoutine.REQUEST : {
 
             return Object.assign({},state,{
                 isRequesting:true,
@@ -141,7 +142,7 @@ export const listComments = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listCommentsRoutine.SUCCESS : {
+        case listPostCommentsRoutine.SUCCESS : {
 
             const {data} = action.payload
             
@@ -155,7 +156,7 @@ export const listComments = (state={list:[],...initialState},action) => {
 
         }
 
-        case listCommentsRoutine.FAILURE : {
+        case listPostCommentsRoutine.FAILURE : {
 
             const {error} = action.payload
 
@@ -168,7 +169,7 @@ export const listComments = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listCommentsRoutine.FULFILL : {
+        case listPostCommentsRoutine.FULFILL : {
 
             return Object.assign({},state,{
                 isRequesting:false,
@@ -178,22 +179,61 @@ export const listComments = (state={list:[],...initialState},action) => {
             })
         }
 
-        case customListCommentsRoutine.UPDATELIST : {
+    }
 
-            const {method,items,index}  = action
+    return state
+}
+
+export const listUserComments = (state={list:[],...initialState},action) => {
+
+    switch(action.type){
+
+        case listUserCommentsRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                list:state.list
+            })
+        }
+
+        case listUserCommentsRoutine.SUCCESS : {
+
+            const {data} = action.payload
             
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
             return Object.assign({},state,{
                 isRequesting:false,
-                isSuccessFull:true,
                 isError:false,
-                error:false
-            })
+                error:false,
+                isSuccessFull:true,
+                list:data
+            })     
 
+        }
+
+        case listUserCommentsRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                list:[]
+            })
+        }
+
+        case listUserCommentsRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
         }
 
     }

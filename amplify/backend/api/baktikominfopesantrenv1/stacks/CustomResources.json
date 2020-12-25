@@ -3717,7 +3717,7 @@
 				}
 			}
 		},
-		"QueryListCommentsResolver":{
+		"QueryListPostCommentsResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
 				"ApiId":{
@@ -3725,11 +3725,49 @@
 				},
 				"DataSourceName":"SearchManager",
 				"TypeName":"Query",
-				"FieldName":"listComments",
+				"FieldName":"listPostComments",
 				"Kind":"UNIT",
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listComments.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listPostComments.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.list.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
+		"QueryListUserCommentsResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"DataSourceName":"SearchManager",
+				"TypeName":"Query",
+				"FieldName":"listUserComments",
+				"Kind":"UNIT",
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listUserComments.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"
