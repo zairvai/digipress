@@ -21,19 +21,21 @@ import Permission from 'Library/controllers/Permission'
 
 import {NextSeo} from 'next-seo'
 
-const PageSettings = props => {
+const PageFaq = props => {
 
 	const {auth,router} = props
 
-    const pagename=""
-	const links = [['Umum',`/${auth.account.uniqueURL}/help/settings`,''],['Pengaturan',`/${auth.account.uniqueURL}/help/settings`,'active']]
+	const pagename=""
+
+	const links = [['Umum',`/${auth.account.uniqueURL}/help/faq`,''],['Faq',`/${auth.account.uniqueURL}/help/faq`,'active']]
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+	
 	return (
 		<AppContainer>
-			<NextSeo title="Pengaturan"/>
+			<NextSeo title="FAQ"/>
 			<HeaderLayout className="sticky-top">
 				<HeaderDark />
 			</HeaderLayout>
@@ -71,4 +73,4 @@ const PageSettings = props => {
 }
 
 
-export default connect(state=>state)(PageSettings)
+export default connect(state=>state)(PageFaq)

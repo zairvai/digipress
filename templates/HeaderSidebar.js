@@ -82,9 +82,9 @@ const Sidebar = (props) => {
 
 				<VerticalNavHeading>Umum</VerticalNavHeading>
 				<Navitem link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Pengaturan' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
-				<Navitem link='/help/feedbacks' text='Saran' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
-				<Navitem link='/help/supports' text='Bantuan' icon={<Icon size="1.3em" path={mdiHeadset} />} />
-				<Navitem link='/help/faq' text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/help/feedbacks`} text='Saran' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/help/supports`} text='Bantuan' icon={<Icon size="1.3em" path={mdiHeadset} />} />
+				<Navitem link={`/${auth.account.uniqueURL}/help/faq`} text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
 
 				
 			</ul>
