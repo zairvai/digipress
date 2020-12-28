@@ -276,9 +276,7 @@ const CommentItem = props =>{
             // if(props.onSuccessDelete) props.onSuccessDelete(deletedItem)
 
           },
-          onCancel() {
-            console.log('Cancel');
-          },
+          onCancel() {}
         });
     }
 
