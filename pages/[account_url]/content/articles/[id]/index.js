@@ -14,7 +14,7 @@ import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
 import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
-import PostComment from 'Components/PostComment'
+import ListPostComments from 'Components/ListPostComments'
 
 import {NextSeo} from 'next-seo'
 
@@ -111,7 +111,7 @@ const PageArticleId = props => {
                             </Row>
                             <Row>
                                 <Col md={24} sm={24} xs={24} className="mt-1">
-                                    <PostComment post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                                    <ListPostComments post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>

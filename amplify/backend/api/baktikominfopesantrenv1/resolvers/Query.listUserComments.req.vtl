@@ -28,6 +28,11 @@ will be passed as the event to AWS Lambda.
               "value": $ctx.args.input.createdById
             }
           }
+        },
+        {
+          "terms": {
+            "status.keyword": $statuses
+          }
         }
       ]
     }
@@ -56,6 +61,11 @@ will be passed as the event to AWS Lambda.
             "replyToUserId.keyword": {
               "value": $ctx.args.input.replyToUserId
             }
+          }
+        },
+        {
+          "terms": {
+            "status.keyword": $statuses
           }
         }
       ]

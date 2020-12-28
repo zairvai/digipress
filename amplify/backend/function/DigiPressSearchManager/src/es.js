@@ -32,7 +32,14 @@ function put(path,body){
 
                 response.on("end",chunk=>{
                     
-                    resolve(JSON.parse(responseBody))
+                    try{
+                        const responseJson = JSON.parse(responseBody)
+                        resolve(responseJson)    
+                    }
+                    catch(error){
+                        console.log("error json")
+                        resolve()
+                    }
 
                 })
             },
@@ -48,9 +55,9 @@ function put(path,body){
 function get(path,body=false){
 
     return new Promise((resolve,reject)=>{
-
+        
         request.method = "GET"
-        request.path = path //venue/doc/id
+        request.path = path
         request.headers["host"] = domain
 
         if(body){
@@ -76,7 +83,15 @@ function get(path,body=false){
 
                 response.on("end",chunk=>{
                     
-                    resolve(JSON.parse(responseBody))
+                    try{
+                        const responseJson = JSON.parse(responseBody)
+                        resolve(responseJson)    
+                    }
+                    catch(error){
+                        console.log("error json")
+                        resolve()
+                    }
+                    
 
                 })
             },
@@ -92,6 +107,8 @@ function get(path,body=false){
 
 function remove(path){
 
+    console.log(path)
+    
     return new Promise((resolve,reject)=>{
 
         request.method = "DELETE"
@@ -115,7 +132,15 @@ function remove(path){
 
                 response.on("end",chunk=>{
                     
-                    resolve(JSON.parse(responseBody))
+                   try{
+                        const responseJson = JSON.parse(responseBody)
+                        resolve(responseJson)    
+                    }
+                    catch(error){
+                        console.log("error json")
+                        resolve()
+                    }
+                    
                 })
             },
             error => {

@@ -10,12 +10,13 @@ import CommentItem from 'Components/CommentItem'
 import moment from 'moment'
 import _ from 'lodash'
 
-const PostComment = props =>  {
+const ListPostComments = props =>  {
 
     const {auth,post,commentId,listComments} = props
 
     const commentController = new CommentController(props)
 
+    const [postItem,setPostItem] = React.useState()
     const [items,setItems] = React.useState([])
     
     const [prevCommentVisible, setPrevCommentVisible] = React.useState(false)
@@ -31,6 +32,8 @@ const PostComment = props =>  {
         }
         else if(post.account){
 
+            setPostItem(post)
+
             fetchItems({
                 accountId:post.account.id,
                 postId:post.id,
@@ -39,7 +42,7 @@ const PostComment = props =>  {
             })
         }
 
-    },[post])
+    },[post,commentId])
 
     const getItem = async (id)=>{
 
@@ -85,24 +88,24 @@ const PostComment = props =>  {
 
             if(response.data.items) {
                 
-                const length = response.data.items.length
+                const dataItems = _.cloneDeep(response.data.items)
+                const length = dataItems.length
 
                 if(maxDate) {
                     
-                    setMaxDate(response.data.items[length-1].createdAt)
+                    setMaxDate(dataItems[length-1].createdAt)
                     setPrevCommentVisible(true)
 
-                    response.data.items.reverse()
+                    dataItems.reverse()
                     
-                    setItems([...response.data.items,...(items || [])])
+                    setItems([...dataItems,...(items || [])])
 
                 }else if(minDate){
-                    console.log("setMinDate")
                     
-                    setMinDate(response.data.items[length-1].createdAt)
+                    setMinDate(dataItems[length-1].createdAt)
                     setNextCommentVisible(true)
 
-                    setItems([...(items || []),...response.data.items])
+                    setItems([...(items || []),...dataItems])
                 }
 
             }else{
@@ -123,8 +126,8 @@ const PostComment = props =>  {
 
     const viewPreviousComment = size => {
         fetchItems({
-            accountId:post.account.id,
-            postId:post.id,
+            accountId:postItem.account.id,
+            postId:postItem.id,
             maxDate,
             size
         })
@@ -133,8 +136,8 @@ const PostComment = props =>  {
     const viewNextComment = size => {
 
         fetchItems({
-            accountId:post.account.id,
-            postId:post.id,
+            accountId:postItem.account.id,
+            postId:postItem.id,
             minDate,
             direction:"asc",
             size
@@ -174,17 +177,22 @@ const PostComment = props =>  {
             }
             <Row>
                 <Col md={16} sm={24} xs={24}>
-                {items && items.map((rowItem,index)=>{
-                    return <CommentItem 
-                                key={`${rowItem.id}-${index}`} 
-                                post={post} 
-                                comment={rowItem} 
-                                index={index} 
-                                onPostSuccessAddComment={props.onPostSuccessAddComment}
-                                onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
-                                onSuccessDelete={onSuccessDelete}
-                                />
-                })}
+                {items && items.map((rowItem,index)=>(
+                    <>
+                    {items.length}
+                     <CommentItem 
+                            auth={auth}
+                            key={`${rowItem.id}-${index}`} 
+                            post={postItem} 
+                            comment={rowItem} 
+                            index={index} 
+                            onPostSuccessAddComment={props.onPostSuccessAddComment}
+                            onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
+                            onSuccessDelete={onSuccessDelete}
+                            />
+                    </>
+                    ))
+                }
                 </Col>
             </Row>
             {nextCommentVisible && 
@@ -194,12 +202,15 @@ const PostComment = props =>  {
                 </Col>
             </Row>
             }
+            {(items && postItem) && 
             <Row>
                 <Col md={16} sm={24} xs={24} className="mt-2">
-                    <FormComment post={post} onSuccess={onSuccessAdd}/>   
+                    <FormComment auth={auth} formId={`${postItem.id}PostComment`} post={postItem} onSuccess={onSuccessAdd}/>   
                 </Col>
             </Row>
+            }
         </>
+
     )
 
 }
@@ -208,8 +219,8 @@ export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
-            listPostCommentsRoutinePromise,
+                listPostCommentsRoutinePromise,
             getCommentRoutinePromise
         },dispatch),dispatch
     })
-)(PostComment)
+)(ListPostComments)

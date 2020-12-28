@@ -16,11 +16,9 @@ import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-
+import ListUserComments from 'Components/ListUserComments'
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-
-import { bindPromiseCreators } from 'redux-saga-routines';
 
 
 import {NextSeo} from 'next-seo'
@@ -62,9 +60,9 @@ const PageComments = props => {
 					</Row>
 					<Row>
 						<Col md={24}>
-							{/* <VuroxComponentsContainer>
-								<ListComments items={listComments.list.items} foundDoc={listComments.list.foundDocs} onDelete={showDeleteConfirm}/>
-							</VuroxComponentsContainer>	 */}
+							<VuroxComponentsContainer>
+								<ListUserComments currentUser={auth.user}/>
+							</VuroxComponentsContainer>	
 						</Col>
 					</Row>
 					

@@ -10,7 +10,7 @@ import 'antd/dist/antd.less'
 import 'react-quill/dist/quill.snow.css';
 import 'Styles/styles.less'
 import 'Styles/mycustom.less'
-
+import moment from 'moment'
 import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'
 Amplify.configure(awsExports)
@@ -19,6 +19,8 @@ import {DefaultSeo} from 'next-seo'
 import SEO from '../next-seo.config'
 
 import analytics from 'Library/modules/analytics'
+
+moment.locale("id")
 
 export function reportWebVitals({ id, name, label, value }) {
 	analytics.track(name, {

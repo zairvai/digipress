@@ -1,13 +1,14 @@
 export default class Controller{
 
     constructor({dispatch, ...props}){
-        
+
         this.props = props
         
-        this.dispatch = dispatch
+        //this.dispatch = dispatch
     }
 
     _create = values => {
+    
         return this.props.createCommentRoutinePromise({values})
     }
 
@@ -24,6 +25,7 @@ export default class Controller{
             version:item.version,
             ...values}
 
+        
         return this.props.updateCommentRoutinePromise({values})
     }
 
@@ -35,7 +37,9 @@ export default class Controller{
             postId:item.post.id,
             version:item.version,
             status:-1}
-            
+        
+        //console.log(values)
+
         return this.props.updateCommentRoutinePromise({values})
 
     }

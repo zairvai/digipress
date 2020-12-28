@@ -61,17 +61,34 @@ const TinyMce = ({id,className="",mode="full",
 
                             setEd(tinyEditor)
 
+                            tinymce.execCommand('mceFocus',false,editorId);
+
+                            tinyEditor.on('focusout blur',function(e,evt){
+                                if(props.onFocusOut) props.onFocusOut()
+                            })
+
                             tinyEditor.on('keydown', function (e, evt) {
                                 if (e.keyCode == 9) e.preventDefault();
                                 else if(e.keyCode == 13){
-                                    if(props.onPressEnter) props.onPressEnter(e)
+
+                                    if(e.shiftKey){
+                                        //tinyEditor.setContent(tinyEditor.getContent()+"<p></p>")
+                                        tinyEditor.execCommand('mceInsertContent', false, "");
+                                        e.stopPropagation()
+                                    }
+                                    else{
+                                        e.preventDefault()
+                                        if(props.onPressEnter) props.onPressEnter(tinyEditor)
+                                    }
                                 }
                             })
 
                             tinyEditor.on("keyup change",()=>{
-                                const content = tinyEditor.getContent()
-                                onChange(content)
+                                //const content = tinyEditor.getContent()
+                                onChange(editor)
                             })
+
+                            if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
                         }
                     }
 
@@ -133,6 +150,21 @@ const TinyMce = ({id,className="",mode="full",
         }
 
     },[])
+
+    React.useEffect(()=>{
+        if(ed){
+            if(props.isSubmitting){
+                ed.mode.set('readonly')
+            }
+            else{
+                //initial or finish submission
+                ed.setContent("")
+                ed.mode.set('design')
+            }
+        }
+        // console.log(editor.getContent({format:'text'}))
+        // 
+    },[ed,props.isSubmitting])
 
     let interval,counter=0
 

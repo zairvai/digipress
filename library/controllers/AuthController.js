@@ -19,7 +19,7 @@ export default class Controller{
 
     static isAppOwner = auth =>{
         
-        if(auth.user){
+        if(auth &&  auth.user){
             const {access} = auth.user
             if(access.accountId === AccountController.APP_ACCOUNT_ID && access.role==="owner") return true
         }
@@ -29,7 +29,7 @@ export default class Controller{
 
     static isAppAdmin = auth =>{
         
-        if(auth.user){
+        if(auth &&  auth.user){
             const {access} = auth.user
             if(access.accountId === AccountController.APP_ACCOUNT_ID && access.role==="admin") return true
         }
@@ -40,7 +40,7 @@ export default class Controller{
 
     static isOwner = (auth) => {
 
-        if(auth.user){
+        if(auth &&  auth.user){
             const {access} = auth.user
             if(access.accountId === auth.account.id && access.role==="owner") return true
         }
@@ -50,7 +50,7 @@ export default class Controller{
 
     static isAdmin = (auth) => {
 
-        if(auth.user){
+        if(auth && auth.user){
             const {access} = auth.user
             if(access.accountId === auth.account.id && access.role==="admin") return true
         }
@@ -60,7 +60,7 @@ export default class Controller{
 
     static isTutor = (auth) => {
 
-        if(auth.user){
+        if(auth && auth.user){
             const {access} = auth.user
             if(access.accountId === auth.account.id && access.role==="tutor") return true
         }
@@ -70,7 +70,7 @@ export default class Controller{
 
     static isStudent = (auth) => {
 
-        if(auth.user){
+        if(auth && auth.user){
             const {access} = auth.user
             if(access.accountId === auth.account.id && access.role==="student") return true
         }
@@ -80,7 +80,7 @@ export default class Controller{
 
     static isMember = (auth) => {
 
-        if(auth.user){
+        if(auth && auth.user){
             const {access} = auth.user
             if(access.accountId === auth.account.id && access.role==="member") return true
         }

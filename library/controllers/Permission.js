@@ -98,10 +98,11 @@ export default class Controller{
 
     //COMMENT
 
-    static REPLY_COMMENT = ({auth,item,...props}) => {
+    static REPLY_COMMENT = ({auth,item}) => {
+
 
         if(item && item.createdBy && auth.user.id == item.createdBy.id) return false
-
+        
         return true
 
     }
