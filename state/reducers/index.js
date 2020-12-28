@@ -7,7 +7,7 @@ import { listCategories,getCategory,deleteCategory,createCategory,updateCategory
 import { createArticle,deleteArticle,updateArticle,listArticles,getArticle } from './article'
 import { createClassroom,deleteClassroom,updateClassroom,listClassrooms,getClassroom } from './classroom'
 import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './lesson'
-import { createQna, deleteQna, updateQna, listQnas, getQna} from './qna'
+import { createQna,deleteQna,updateQna,listPostQnas,listUserQnas,getQna} from './qna'
 import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
 import { getPost,listPosts } from './post'
 
@@ -87,7 +87,8 @@ const rootReducer = combineReducers({
 	//qna
 	createQna:persistReducer({key:"createQna",storage},createQna),
 	getQna:persistReducer({key:"getQna",storage},getQna),
-	listQnas:persistReducer({key:"listQnas",storage},listQnas),
+	listPostQnas:persistReducer({key:"listPostQnas",storage},listPostQnas),
+	listUserQnas:persistReducer({key:"listUserQnas",storage},listUserQnas),
 	updateQna:persistReducer({key:"updateQna",storage},updateQna),
 	deleteQna:persistReducer({key:"deleteQna",storage},deleteQna),
 	//comment

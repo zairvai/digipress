@@ -4668,7 +4668,7 @@
 				}
 			}
 		},
-		"QueryListQnasResolver":{
+		"QueryListUserQnasResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{
 				"ApiId":{
@@ -4676,11 +4676,49 @@
 				},
 				"DataSourceName":"SearchManager",
 				"TypeName":"Query",
-				"FieldName":"listQnas",
+				"FieldName":"listUserQnas",
 				"Kind":"UNIT",
 				"RequestMappingTemplateS3Location":{
 					"Fn::Sub":[
-						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listQnas.req.vtl",
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listUserQnas.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.list.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
+		"QueryListPostQnasResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"DataSourceName":"SearchManager",
+				"TypeName":"Query",
+				"FieldName":"listPostQnas",
+				"Kind":"UNIT",
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.listPostQnas.req.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"

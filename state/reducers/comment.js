@@ -4,8 +4,7 @@ import {
     deleteCommentRoutine,
     getCommentRoutine,
     listPostCommentsRoutine,
-    listUserCommentsRoutine,
-    customListCommentsRoutine
+    listUserCommentsRoutine
 } from '../routines/comment'
 
 const initialState = {

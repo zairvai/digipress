@@ -1,4 +1,5 @@
-import {createQnaRoutine,getQnaRoutine,updateQnaRoutine,listQnasRoutine,customListQnasRoutine,deleteQnaRoutine} from '../routines/qna'
+import {createQnaRoutine,updateQnaRoutine,getQnaRoutine,
+    listPostQnasRoutine,listUserQnasRoutine,deleteQnaRoutine} from '../routines/qna'
 
 
 export const createQna = payload => ({
@@ -16,21 +17,17 @@ export const getQna = payload => ({
     payload
 })
 
-export const listQnas = payload => ({
-    type : listQnasRoutine.TRIGGER,
+export const listPostQnas = payload => ({
+    type : listPostQnasRoutine.TRIGGER,
+    payload
+})
+
+export const listUserQnas = payload => ({
+    type : listUserQnasRoutine.TRIGGER,
     payload
 })
 
 export const updateQna = (payload) => ({
     type : updateQnaRoutine.TRIGGER,
     payload
-})
-
-
-//update list setelah create atau remove, methods: add, remove
-export const updateList = (method,items,index) =>({
-    type:customListQnasRoutine.UPDATELIST,
-    method,
-    items,
-    index
 })

@@ -19,8 +19,10 @@ export const updateQnaRoutinePromise = promisifyRoutine(updateQnaRoutine)
 //list qna
 customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
 export const customListQnasRoutine = customRoutine("list_qna_custom")
-export const listQnasRoutine = createRoutine("list_qnas")
-export const listQnasRoutinePromise = promisifyRoutine(listQnasRoutine)
+export const listPostQnasRoutine = createRoutine("list_post_qnas")
+export const listPostQnasRoutinePromise = promisifyRoutine(listPostQnasRoutine)
+export const listUserQnasRoutine = createRoutine("list_user_qnas")
+export const listUserQnasRoutinePromise = promisifyRoutine(listUserQnasRoutine)
 
 //get qna
 export const getQnaRoutine = createRoutine("get_qna")

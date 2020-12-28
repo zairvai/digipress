@@ -21,6 +21,7 @@ const Article = require("./model/Article")
 const Classroom = require("./model/Classroom")
 const Lesson = require("./model/Lesson")
 const Comment = require("./model/Comment")
+const Qna = require("./model/Qna")
 
 exports.handler = (event,context,callback) => {
 
@@ -58,6 +59,9 @@ exports.handler = (event,context,callback) => {
           case 'Comment'          :   Comment.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
+          case 'Qna'              :   Qna.insert(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
           default                 :   callback(null,"Unknown Field"); break;
 
         }  
@@ -91,6 +95,9 @@ exports.handler = (event,context,callback) => {
                                       break;
 
           case 'Comment'          :   Comment.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Qna'              :   Qna.update(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
 
@@ -127,6 +134,9 @@ exports.handler = (event,context,callback) => {
                                       break;
 
           case 'Comment'          :   Comment.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
+                                      break;
+
+          case 'Qna'              :   Qna.remove(record).then(data=>context.done(null, data)).catch(error=>context.done("Error",error))
                                       break;
 
                                       

@@ -28,7 +28,7 @@ const PageLessonId = props => {
     const {Text} = Typography
     const {confirm} = Modal
 
-    const {auth,listLessons,router} = props
+    const {auth,router} = props
 
     const classroomController = new ClassroomController(props)
     const lessonController = new LessonController(props)
@@ -45,18 +45,18 @@ const PageLessonId = props => {
             setItem(lesson.data)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`)
+            router.push(`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`)
             console.log(error)
         }
         
     },[])
 
     const links = [
-                    ['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],
-                    ['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],
-                    [item.post && item.post.title,`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
-                    ['Materi',`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
-                    [item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}/lessons/${item.id}`,'active']]
+                    ['Main',`/${auth.account.uniqueURL}/main/home/all`,''],
+                    ['Ruang belajar',`/${auth.account.uniqueURL}/main/home/classrooms`,''],
+                    [item.post && item.post.title,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post && item.post.id}`,''],
+                    ['Materi',`/${auth.account.uniqueURL}/main/home/classrooms/${item.post && item.post.id}`,''],
+                    [item.title,`/${auth.account.uniqueURL}/main//homeclassrooms/${item.post && item.post.id}/lessons/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -69,7 +69,7 @@ const PageLessonId = props => {
             lessonController._delete(item)
                 .then(classroom=>{
                     //classroomController._updateList("remove",[{id:article.data.id}])
-                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`),1000)
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/main/home/classrooms/${item.post && item.post.id}`),1000)
                 }).catch(error=>console.log(error))
           },
           onCancel() {
@@ -80,7 +80,7 @@ const PageLessonId = props => {
 
     return(
         <AppContainer>
-            <NextSeo title={`Konten - Materi - ${item.title}`}/>
+            <NextSeo title={`${item.title} - Materi`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>
@@ -122,7 +122,7 @@ const PageLessonId = props => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getLessonRoutinePromise,

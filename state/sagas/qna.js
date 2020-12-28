@@ -8,7 +8,8 @@ import {
     updateQnaRoutine,
     deleteQnaRoutine,
     getQnaRoutine,
-    listQnasRoutine
+    listPostQnasRoutine,
+    listUserQnasRoutine
 } from '../routines/qna'
 
 // create qna
@@ -22,12 +23,18 @@ function* createQna(action){
 
         const inputParams = {
             accountId:values.accountId.trim(),
-            title:values.title.trim(),
-            categoryId:values.categoryId.trim(),
-            tags:values.tags,
-            content:values.content,
-            allowComment:values.allowComment,
-            access:values.readAccess
+            postId:values.postId.trim(),
+            content:values.content.trim(),
+            qnaType:values.qnaType.trim()
+        }
+
+        if(values.replyToId) {
+            inputParams.replyToId = values.replyToId
+            inputParams.isReply = true
+        }
+        if(values.replyToUserId) {
+            inputParams.replyToUserId = values.replyToUserId
+            inputParams.isReply = true
         }
 
         const response = yield API.graphql(graphqlOperation(mutations.createQna,{input:inputParams}))
@@ -49,19 +56,22 @@ export function* createQnaWatcher(){
     yield takeLatest(createQnaRoutine.TRIGGER,createQna)
 }
 
-function* listQnas(action){
+function* listPostQnas(action){
 
     try{
 
-        const {accountId,classroomId,lessonId,name,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,postId,replyToId,replyToUserId,orderBy,direction,minDate,maxDate,from,size,statuses} = action.payload
 
-        const listParams={from,size}
+        const listParams={size}
 
         if(accountId) listParams.accountId = accountId
-        if(classroomId) listParams.classroomId = classroomId
-        if(lessonId) listParams.lessonId = lessonId
+        if(postId) listParams.postId = postId
         if(statuses) listParams.statuses = statuses
-        if(name) listParams.name = name
+        if(replyToId) listParams.replyToId = replyToId
+        if(replyToUserId) listParams.replyToUserId = replyToUserId
+        if(minDate) listParams.minDate = minDate
+        if(maxDate) listParams.maxDate = maxDate
+        if(from) listParams.from = from
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction
@@ -69,23 +79,60 @@ function* listQnas(action){
 
         console.log(listParams)
 
-        yield put(listQnasRoutine.request())
+        yield put(listPostQnasRoutine.request())
                 
-        const response = yield API.graphql(graphqlOperation(queries.listQnas,{input:listParams}))
+        const response = yield API.graphql(graphqlOperation(queries.listPostQnas,{input:listParams}))
 
-        yield put(listQnasRoutine.success({data:response.data.listQnas}))
+        yield put(listPostQnasRoutine.success({data:response.data.listPostQnas}))
 
                     
     }catch(error){
-        yield put(listQnasRoutine.failure({error}))
+        yield put(listPostQnasRoutine.failure({error}))
     }finally{
-        yield put(listQnasRoutine.fulfill())
+        yield put(listPostQnasRoutine.fulfill())
     }
 
 }
 
-export function* listQnasWatcher(){
-    yield takeLatest(listQnasRoutine.TRIGGER,listQnas)
+export function* listPostQnasWatcher(){
+    yield takeLatest(listPostQnasRoutine.TRIGGER,listPostQnas)
+}
+
+function* listUserQnas(action){
+
+    try{
+
+        const {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses} = action.payload
+
+        const listParams={size}
+
+        if(accountId) listParams.accountId = accountId
+        if(createdById) listParams.createdById = createdById
+        if(statuses) listParams.statuses = statuses
+        if(replyToUserId) listParams.replyToUserId = replyToUserId
+        if(from) listParams.from = from
+        if(orderBy) {
+            listParams.orderBy = orderBy
+            listParams.direction = direction
+        }
+
+        yield put(listUserQnasRoutine.request())
+                
+        const response = yield API.graphql(graphqlOperation(queries.listUserQnas,{input:listParams}))
+
+        yield put(listUserQnasRoutine.success({data:response.data.listUserQnas}))
+
+                    
+    }catch(error){
+        yield put(listUserQnasRoutine.failure({error}))
+    }finally{
+        yield put(listUserQnasRoutine.fulfill())
+    }
+
+}
+
+export function* listUserQnasWatcher(){
+    yield takeLatest(listUserQnasRoutine.TRIGGER,listUserQnas)
 }
 
 function* getQna(action){
@@ -143,25 +190,20 @@ function* updateQna(action){
 
     try{
 
-        console.log(action)
-
         yield put(updateQnaRoutine.request())
 
         const {values} = action.payload
 
         const updateParams = {
             id : values.id.replace(/\s/g,""),
+            accountId : values.accountId,
+            postId : values.postId,
             expectedVersion : values.version
         }
-
-        if(accountId) inputParams.accountId = values.accountId.trim()
-        if(title) inputParams.title = values.title.trim()
-        if(categoryId) inputParams.categoryId = values.categoryId.trim()
-        if(tags) inputParams.tags = values.tags
-        if(content) inputParams.content = values.content
-        if(allowComment) inputParams.allowComment = values.allowComment
-        if(access) inputParams.readAccess = values.readAccess.trim()
+    
+        if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
+
         
         const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 

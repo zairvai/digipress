@@ -88,18 +88,20 @@ const List = props =>{
 
         let columns = [
             {
-                title:"",
                 key:"index",
+                title:"",
                 render:(text,record,index)=>pageIndex+index,
                 width:"1%"
             },
             {
+                key:"title",
                 title:"Materi",
                 dataIndex:"title",
                 sorter:true,
                 width:"40%"
             },
             {
+                key:"status",
                 title:"Status",
                 dataIndex:"status",
                 fixed:"right",
@@ -125,7 +127,7 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onDoubleClick: e => {
-                router.push(`/${auth.account.uniqueURL}/content/classrooms/${postId}/lessons/${record.id}`)
+                router.push(`${props.destinationPath}/lessons/${record.id}`)
             }
         }
     }
@@ -159,7 +161,7 @@ const List = props =>{
 
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
         ...bindPromiseCreators({
             listLessonsRoutinePromise,

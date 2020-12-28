@@ -8,7 +8,7 @@ import {
 } from 'Components/layout'
 
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { mdiCommentMultipleOutline } from '@mdi/js'
+import { mdiCommentMultipleOutline,mdiCommentOffOutline } from '@mdi/js'
 import AppContainer from 'Templates/AppContainer'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -40,7 +40,7 @@ const PageArticleId = props => {
             setNoOfComment(article.data.noOfAllComment)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/articles`)
+            router.push(`/${auth.account.uniqueURL}/main/home/articles`)
             console.log(error)
         }
         
@@ -59,7 +59,7 @@ const PageArticleId = props => {
           onOk() {
             articleController._delete(item)
                 .then(article=>{
-                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/main/home/articles`),1000)
                     
                 }).catch(error=>console.log(error))
           },
@@ -88,6 +88,7 @@ const PageArticleId = props => {
                 <Row>
                     <Col md={24}>
                         <VuroxComponentsContainer className="p-4">
+
                             <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
 
                             <Row>
@@ -95,7 +96,14 @@ const PageArticleId = props => {
                                     <Row>
                                         <Col md={12} sm={12} xs={12}>
                                             <ul className="vurox-horizontal-links vurox-standard-ul">
+                                            {
+                                                item.allowComment  ? 
                                                 <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
+                                                :
+                                                <li>
+                                                    <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
+                                                </li>
+                                            }
                                             </ul>
                                         </Col>
                                         <Col md={12} sm={12} xs={12}>
@@ -111,7 +119,11 @@ const PageArticleId = props => {
                             </Row>
                             <Row>
                                 <Col md={24} sm={24} xs={24} className="mt-1">
-                                    <ListPostComments post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                                    {item.allowComment  ? 
+                                        <ListPostComments post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                                        :
+                                        <></>
+                                    }
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>

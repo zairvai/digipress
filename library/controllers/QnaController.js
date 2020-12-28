@@ -1,17 +1,14 @@
-import {
-    updateList
-} from 'State/actions/qna'
-
 export default class Controller{
 
     constructor({dispatch, ...props}){
-        
+
         this.props = props
         
-        this.dispatch = dispatch
+        //this.dispatch = dispatch
     }
 
     _create = values => {
+    
         return this.props.createQnaRoutinePromise({values})
     }
 
@@ -28,6 +25,7 @@ export default class Controller{
             version:item.version,
             ...values}
 
+        
         return this.props.updateQnaRoutinePromise({values})
     }
 
@@ -39,17 +37,19 @@ export default class Controller{
             postId:item.post.id,
             version:item.version,
             status:-1}
-            
+        
+        //console.log(values)
+
         return this.props.updateQnaRoutinePromise({values})
 
     }
 
 
-    _list = values => {
-        return this.props.listQnasRoutinePromise(values)
+    _listPostQnas = values => {
+        return this.props.listPostQnasRoutinePromise(values)
     }
 
-    _updateList = (method,items,index)=>{
-        this.dispatch(updateList(method,items,index))
+    _listUserQnas = values => {
+        return this.props.listUserQnasRoutinePromise(values)
     }
 }

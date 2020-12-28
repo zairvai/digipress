@@ -34199,7 +34199,68 @@ export const createQna = /* GraphQL */ `
               version
               status
             }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
             content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
             createdBy {
               id
               name
@@ -34333,7 +34394,383 @@ export const createQna = /* GraphQL */ `
           version
           status
         }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
         createdBy {
           id
           name
@@ -37437,7 +37874,68 @@ export const updateQna = /* GraphQL */ `
               version
               status
             }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
             content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
             createdBy {
               id
               name
@@ -37571,7 +38069,383 @@ export const updateQna = /* GraphQL */ `
           version
           status
         }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
         createdBy {
           id
           name
@@ -40675,7 +41549,68 @@ export const deleteQna = /* GraphQL */ `
               version
               status
             }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
             content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
             createdBy {
               id
               name
@@ -40809,7 +41744,383 @@ export const deleteQna = /* GraphQL */ `
           version
           status
         }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      replyToUser {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
         createdBy {
           id
           name

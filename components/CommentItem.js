@@ -86,7 +86,7 @@ const CommentItem = props =>{
     React.useEffect(()=>{
         if(props.level){
             setLevel(props.level)
-            console.log("current level : " + props.level)
+            // console.log("current level : " + props.level)
         }
     },[props.level])
 

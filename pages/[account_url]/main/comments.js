@@ -15,10 +15,8 @@ import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import { Row, Col,Button, Modal} from 'antd'
 import { Search} from 'react-bootstrap-icons'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListUserComments from 'Components/ListUserComments'
 import AppContainer from 'Templates/AppContainer'
-import Permission from 'Library/controllers/Permission'
 
 
 import {NextSeo} from 'next-seo'

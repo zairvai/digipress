@@ -3,8 +3,8 @@ import {
     updateQnaRoutine,
     deleteQnaRoutine,
     getQnaRoutine,
-    listQnasRoutine,
-    customListQnasRoutine
+    listPostQnasRoutine,
+    listUserQnasRoutine
 } from '../routines/qna'
 
 const initialState = {
@@ -126,11 +126,11 @@ export const getQna = (state={item:{},...initialState},action) => {
     return state
 }
 
-export const listQnas = (state={list:[],...initialState},action) => {
+export const listPostQnas = (state={list:[],...initialState},action) => {
 
     switch(action.type){
 
-        case listQnasRoutine.REQUEST : {
+        case listPostQnasRoutine.REQUEST : {
 
             return Object.assign({},state,{
                 isRequesting:true,
@@ -141,7 +141,7 @@ export const listQnas = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listQnasRoutine.SUCCESS : {
+        case listPostQnasRoutine.SUCCESS : {
 
             const {data} = action.payload
             
@@ -155,7 +155,7 @@ export const listQnas = (state={list:[],...initialState},action) => {
 
         }
 
-        case listQnasRoutine.FAILURE : {
+        case listPostQnasRoutine.FAILURE : {
 
             const {error} = action.payload
 
@@ -168,7 +168,7 @@ export const listQnas = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listQnasRoutine.FULFILL : {
+        case listPostQnasRoutine.FULFILL : {
 
             return Object.assign({},state,{
                 isRequesting:false,
@@ -178,22 +178,61 @@ export const listQnas = (state={list:[],...initialState},action) => {
             })
         }
 
-        case customListQnasRoutine.UPDATELIST : {
+    }
 
-            const {method,items,index}  = action
+    return state
+}
+
+export const listUserQnas = (state={list:[],...initialState},action) => {
+
+    switch(action.type){
+
+        case listUserQnasRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                list:state.list
+            })
+        }
+
+        case listUserQnasRoutine.SUCCESS : {
+
+            const {data} = action.payload
             
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
             return Object.assign({},state,{
                 isRequesting:false,
-                isSuccessFull:true,
                 isError:false,
-                error:false
-            })
+                error:false,
+                isSuccessFull:true,
+                list:data
+            })     
 
+        }
+
+        case listUserQnasRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                list:[]
+            })
+        }
+
+        case listUserQnasRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
         }
 
     }

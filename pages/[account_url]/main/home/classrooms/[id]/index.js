@@ -41,7 +41,7 @@ const PageClassroomId = props => {
             setItem(classroom.data)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms`)
+            router.push(`/${auth.account.uniqueURL}/main/home/classrooms`)
             console.log(error)
         }
         
@@ -49,7 +49,7 @@ const PageClassroomId = props => {
 
     
 
-    const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,'active']]
+    const links = [['Main',`/${auth.account.uniqueURL}/main/home/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/main/home/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/main/home/classrooms/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -61,7 +61,7 @@ const PageClassroomId = props => {
           onOk() {
             classroomController._delete(item)
                 .then(classroom=>{
-                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms`),1000)
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/main/home/classrooms`),1000)
                 }).catch(error=>console.log(error))
           },
           onCancel() {
@@ -72,7 +72,7 @@ const PageClassroomId = props => {
 
     return(
         <AppContainer>
-            <NextSeo title={`Konten - Ruang belajar - ${item.title}`}/>
+            <NextSeo title={`${item.title} - Ruang belajar`}/>
             <Layout item={item} links={links}>
                 <Row>
                     <Col md={24}>
@@ -102,7 +102,7 @@ const PageClassroomId = props => {
                             </Row>
                             <Row className="mt-3">
                                 <Col md={24}>
-                                    <ListLessons postId={id} destinationPath={`/${auth.account.uniqueURL}/content/classrooms/${id}`} />
+                                    <ListLessons postId={id} destinationPath={`/${auth.account.uniqueURL}/main/home/classrooms/${id}`} />
                                 </Col>
                             </Row>
                         </VuroxComponentsContainer>

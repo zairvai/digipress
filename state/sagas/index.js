@@ -10,7 +10,10 @@ import {createArticleWatcher,deleteArticleWatcher,updateArticleWatcher,getArticl
 import {createClassroomWatcher,deleteClassroomWatcher,updateClassroomWatcher,getClassroomWatcher,listClassroomsWatcher} from './classroom'
 import {createLessonWatcher,deleteLessonWatcher,updateLessonWatcher,getLessonWatcher,listLessonsWatcher} from './lesson'
 
-import {createQnaWatcher,deleteQnaWatcher,updateQnaWatcher,getQnaWatcher,listQnasWatcher} from './qna'
+import {createQnaWatcher,deleteQnaWatcher,
+    updateQnaWatcher,getQnaWatcher,
+    listPostQnasWatcher,listUserQnasWatcher} from './qna'
+
 import {createCommentWatcher,deleteCommentWatcher,
     updateCommentWatcher,getCommentWatcher,
     listPostCommentsWatcher,listUserCommentsWatcher} from './comment'
@@ -78,7 +81,8 @@ const sagas = [
     getLessonWatcher,    
 
     //qna
-    listQnasWatcher,
+    listPostQnasWatcher,
+    listUserQnasWatcher,
     deleteQnaWatcher,
     createQnaWatcher,
     updateQnaWatcher,
