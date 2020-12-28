@@ -59,7 +59,11 @@ const List = props =>{
             const from = (pagination.current - 1) * pagination.pageSize
             const size = pagination.pageSize
 
-			const response = await commentController._listUserComments({accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses})
+            const params = {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses}
+
+            console.log(params)
+
+			const response = await commentController._listUserComments(params)
 
 			if(response.data.items){
                 setItems(response.data.items)
@@ -76,17 +80,15 @@ const List = props =>{
     }
     
     const handleTableChange = (pagination,filter,sorter) =>{
-
-        console.log(sorter)
         
         if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
 			accountId = auth.account.id
 		}
 
-        if(!_.isEmpty(sorter)){
-            fetchItems({accountId,orderBy:`${sorter.field}.keyword`,direction:sorter.order == "ascend" ? "asc":"desc",pagination})
-        }
-        else fetchItems({accountId,orderBy,direction,pagination})
+        
+
+        if(!_.isEmpty(sorter)) fetchItems({accountId,createdById:currentUser.id,replyToUserId:currentUser.id,orderBy:`${sorter.field}.keyword`,direction:sorter.order == "ascend" ? "asc":"desc",pagination})
+        else fetchItems({accountId,createdById:currentUser.id,replyToUserId:currentUser.id,orderBy,direction,pagination})
     }
 
 

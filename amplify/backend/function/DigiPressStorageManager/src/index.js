@@ -45,8 +45,6 @@ exports.handler = async(event,context,callback) => {
                 Bucket:process.env.STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME,
                 Key: event.arguments.key
             }
-
-            console.log(params)
             
             return s3.deleteObject(params).promise()
     }

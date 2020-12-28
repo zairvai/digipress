@@ -26,7 +26,7 @@ exports.handler = (event,context,callback) => {
 
   event.Records.forEach((record)=>{
     
-      console.log("Stream Records : ",JSON.stringify(record,null,2))
+      //console.log("Stream Records : ",JSON.stringify(record,null,2))
 
       if(record.eventName=="INSERT"){
       
