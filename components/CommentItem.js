@@ -403,7 +403,7 @@ const CommentItem = props =>{
                     <Col md={20} sm={24} xs={24}>
                         {items.map(row=>(
                             <div key={row.id}>
-                                {level}
+                         
                             { (level+1) <= limitNested ?
                                 <CommentItem 
                                     level={(level+1)}
