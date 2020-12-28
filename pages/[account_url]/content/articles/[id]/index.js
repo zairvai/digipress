@@ -7,7 +7,7 @@ import {
 	VuroxComponentsContainer
 } from 'Components/layout'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { mdiCommentMultipleOutline } from '@mdi/js'
+import { mdiCommentMultipleOutline,mdiCommentOffOutline } from '@mdi/js'
 import AppContainer from 'Templates/AppContainer'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -95,7 +95,14 @@ const PageArticleId = props => {
                                     <Row>
                                         <Col md={12} sm={12} xs={12}>
                                             <ul className="vurox-horizontal-links vurox-standard-ul">
+                                            {
+                                                item.allowComment  ? 
                                                 <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
+                                                :
+                                                <li>
+                                                    <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
+                                                </li>
+                                            }
                                             </ul>
                                         </Col>
                                         <Col md={12} sm={12} xs={12}>

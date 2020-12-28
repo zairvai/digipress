@@ -7,7 +7,7 @@ import {
 	VuroxComponentsContainer
 } from 'Components/layout'
 import Icon from '@mdi/react'
-import { mdiBookOpenPageVariantOutline, mdiCommentMultipleOutline, mdiPostOutline } from '@mdi/js'
+import { mdiBookOpenPageVariantOutline, mdiCommentMultipleOutline,mdiCommentOffOutline, mdiPostOutline } from '@mdi/js'
 import Permission from 'Library/controllers/Permission'
 
 const {Title,Text,Paragraph} = Typography
@@ -60,7 +60,14 @@ const ArticleItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={12} sm={12} xs={12}>
                         <ul className="vurox-horizontal-links vurox-standard-ul">
-                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{item.noOfAllComment > 0 ? `${item.noOfAllComment} komentar` : "belum ada komentar"}</a></li>
+                            {
+                                item.allowComment  ? 
+                                <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{item.noOfAllComment > 0 ? `${item.noOfAllComment} komentar` : "belum ada komentar"}</a></li>
+                                :
+                                <li>
+                                    <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
+                                </li>
+                            }
                         </ul>
                     </Col>
                     <Col md={12} sm={12} xs={12}>
