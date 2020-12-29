@@ -1,22 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import {
-	VuroxLayout,
-	HeaderLayout,
-	VuroxSidebar,
-	ContentLayout
-} from 'Components/layout'
 import { vuroxContext } from 'Context'
-import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
-import Sidebar from 'Templates/HeaderSidebar';
-import AppContainer from 'Templates/AppContainer'
+import LayoutArticle from 'Templates/Layout.article'
 import FormArticle from 'Components/FormArticle'
 
 import CategoryController from 'Library/controllers/CategoryController'
 import TagController from 'Library/controllers/TagController'
-
+import {Row,Col,PageHeader} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listCategoriesRoutinePromise } from 'State/routines/category';
 import { listTagsRoutinePromise } from 'State/routines/tag';
@@ -28,9 +19,6 @@ const PageArticleAdd = props => {
 	
 	const categoryController = new CategoryController(props)
 	const tagController = new TagController(props)
-
-    const pagename=""
-	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],['Penambahan artikel',`/${auth.account.uniqueURL}/content/articles/add`,'active']]
 	
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
@@ -56,21 +44,21 @@ const PageArticleAdd = props => {
 	}
 	
 	return (
-		<AppContainer>
+		<LayoutArticle>
 			<NextSeo title="Konten - Tambah artikel"/>
-			<HeaderLayout className="sticky-top">
-				<HeaderDark />
-			</HeaderLayout>
-			<VuroxLayout>
-				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-					<Sidebar className={toggleClass} />
-				</VuroxSidebar>
-				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={pagename} links={links}/>
+			<Row>
+				<Col md={24}>
+					<PageHeader title="Tambah artikel" ghost={false}
+						onBack={()=>router.push(`/[account_ur]/content/articles`,`/${auth.account.uniqueURL}/content/articles`,{shallow:true})}
+					/>
+				</Col>
+			</Row>
+			<Row>
+				<Col md={24} className="mt-2">
 					<FormArticle onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list.items} tags={listTags.list.items}/>
-				</ContentLayout>
-			</VuroxLayout>
-		</AppContainer>
+				</Col>
+			</Row>
+		</LayoutArticle>
 	);
 	
 }

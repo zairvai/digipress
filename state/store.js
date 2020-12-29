@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
 import thunk from 'redux-thunk'
-
+import mystorage from './storage'
 function configureStore(preloadedState) {
 
 	const logger = createLogger()
@@ -15,8 +15,8 @@ function configureStore(preloadedState) {
 	middlewares.push(thunk)
 	middlewares.push(logger)
 
-	const { persistReducer } = require('redux-persist')
-	const storage = require('redux-persist/lib/storage').default
+	//const { persistReducer } = require('redux-persist')
+	const storage = mystorage//require('redux-persist/lib/storage').default
 
 	const persistConfig = {
 		key:'root',

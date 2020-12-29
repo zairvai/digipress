@@ -49,7 +49,7 @@ const List = props =>{
         else setEmpty(false)
     },[items])
 
-	const fetchItems = async ({accountId,createdById,replyToUserId,orderBy,direction,statuses,pagination})=>{
+	const fetchItems = async ({accountId,createdById,replyToUserId,orderBy,direction,statuses=[3],pagination})=>{
 
 
 		try{

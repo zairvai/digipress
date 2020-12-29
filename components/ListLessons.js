@@ -22,7 +22,7 @@ const List = props =>{
 
     const [items,setItems] = React.useState()
     const [isEmpty,setEmpty] = React.useState(false)
-    const [loading,setLoading] = React.useState(true)
+    const [isLoading,setLoading] = React.useState(true)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
     const [pageIndex,setPageIndex] = React.useState()
 	const [orderBy,setOrderBy]	= React.useState("createdAt")
@@ -127,21 +127,21 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onDoubleClick: e => {
-                router.push(`${props.destinationPath}/lessons/${record.id}`)
+                router.push(`/[account_url]/content/lessons/[id]`,`/${auth.account.uniqueURL}/content/lessons/${record.id}`,{shallow:true})
             }
         }
     }
 
     return(
         <VuroxTableDark>
-            {loading || !isEmpty ? 
+            {isLoading || !isEmpty ? 
             <Table
                 onRow={rowHandler}
                 columns={getColumns()}
                 rowKey={record=>record.id}
                 dataSource={items}
                 pagination={pagination}
-                loading={loading}
+                loading={isLoading}
                 onChange={handleTableChange}
             />
             :

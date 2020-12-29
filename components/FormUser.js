@@ -38,8 +38,6 @@ const FormUser = ({item,...props}) => {
 
     const {auth,roleInputs,createUser,updateUser} = props
 
-    console.log(roleInputs)
-
     const userController = new UserController(props)
 
     const {

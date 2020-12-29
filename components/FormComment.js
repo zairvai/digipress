@@ -8,24 +8,12 @@ import { Row, Col,Form,Avatar,Button, Typography} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createCommentRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
 import CommentController from 'Library/controllers/CommentController';
-import TinyCommentEditor from 'Components/TinyCommentEditor'
+import CommentEditor from 'Components/TinyMce'
 
 const {Text} = Typography
 
-yup.addMethod(yup.mixed,"tinymceRequired",function(message){
-    console.log(message)
-    console.log(editor)
-    return this.test('content-empty',message,function(value){
-
-        const {path,createError} = this
-        return createError({ path, message });
-
-    })
-})
-
 const schema = yup.object().shape({
     hiddenContent:yup.string().required("Isi komentar kamu").max(500,"Maksimal 500 karakter")
-    //content:yup.string().tinymceRequired("helloe")
 })
 
 const FormComment = ({formId,item,...props}) => {
@@ -146,7 +134,7 @@ const FormComment = ({formId,item,...props}) => {
         if(props.onFocusOut) props.onFocusOut()
     }
     const handleEditorChange = editor =>{
-        setValue("content",editor.getContent())
+        setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
         setValue("hiddenContent",editor.getContent({format:'text'}).replace(/\r?\n|\r/g,""))
     }
     return (
@@ -172,14 +160,13 @@ const FormComment = ({formId,item,...props}) => {
                                 render={props=>
                                     <Form.Item className="mb-0">
                                         
-                                        <TinyCommentEditor 
+                                        <CommentEditor 
                                             mode="basic"
                                             id={formId}
                                             className="editor"
                                             height={80}
                                             bottomMargin={1}
                                             content={content}
-                                            
                                             value={props.value} 
                                             placeholder={auth && auth.user.name}
                                             isSubmitting={isSubmiting}

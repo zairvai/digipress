@@ -101,7 +101,7 @@ function* listUserComments(action){
 
     try{
 
-        const {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,replyToUserId,createdById,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={size}
 

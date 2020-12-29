@@ -33373,6 +33373,7 @@ export const createQna = /* GraphQL */ `
         status
         version
       }
+      qnaType
       replyTo {
         id
         account {
@@ -33957,6 +33958,7 @@ export const createQna = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -34145,6 +34147,7 @@ export const createQna = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -34191,8 +34194,10 @@ export const createQna = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt
@@ -37048,6 +37053,7 @@ export const updateQna = /* GraphQL */ `
         status
         version
       }
+      qnaType
       replyTo {
         id
         account {
@@ -37632,6 +37638,7 @@ export const updateQna = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -37820,6 +37827,7 @@ export const updateQna = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -37866,8 +37874,10 @@ export const updateQna = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt
@@ -40723,6 +40733,7 @@ export const deleteQna = /* GraphQL */ `
         status
         version
       }
+      qnaType
       replyTo {
         id
         account {
@@ -41307,6 +41318,7 @@ export const deleteQna = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -41495,6 +41507,7 @@ export const deleteQna = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -41541,8 +41554,10 @@ export const deleteQna = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt

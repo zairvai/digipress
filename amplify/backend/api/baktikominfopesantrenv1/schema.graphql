@@ -464,7 +464,7 @@ input ListCommentInput {
 	maxDate:AWSDateTime
 	from: Int
 	size: Int
-	statuses:[Int]
+	statuses:[Int!]
 }
 
 type CommentConnection {
@@ -518,6 +518,7 @@ type Qna @aws_iam
 	account:Account!
 	post:Post!
 	lesson:Lesson
+	qnaType:QnaType!
 	replyTo:Qna
 	replyToUser:User
 	content: String!
@@ -566,6 +567,7 @@ input ListQnaInput {
 	lessonId:ID
 	replyToId:ID
 	replyToUserId:ID
+	qnaType:QnaType
 	createdById:ID
 	orderBy: String
 	direction: String
@@ -573,6 +575,6 @@ input ListQnaInput {
 	maxDate:AWSDateTime
 	from: Int
 	size: Int
-	statuses:[Int]
+	statuses:[Int!]
 }
 

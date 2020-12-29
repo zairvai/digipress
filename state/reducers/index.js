@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { appReducer } from './app'
 import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
 import { createUser,getUser,listUsers, updateUser } from './user'
@@ -36,6 +37,8 @@ const authPersistConfig = {
 const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser)
 
 const rootReducer = combineReducers({
+	//app
+	app:persistReducer({key:"app",storage},appReducer),
 	//auth
 	auth:persistReducer(authPersistConfig,authReducers),
 	//account

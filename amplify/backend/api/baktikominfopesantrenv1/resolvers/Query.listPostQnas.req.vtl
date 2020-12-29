@@ -44,17 +44,38 @@ will be passed as the event to AWS Lambda.
   $util.qr($query.bool.must.add($match))
 #end
 
-##set match name prefix
-#if(!$util.isNull($ctx.args.input.name))
-  #set($matchNamePrefix = {
-    "match_phrase_prefix": {
-        "name": {
-            "query": $ctx.args.input.name
+##set match qnaType
+#if(!$util.isNull($ctx.args.input.qnaType))
+  #set($match={
+    "match": {"qnaType": $ctx.args.input.qnaType}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##with reply or not
+#if($util.isNull($ctx.args.input.replyToId))
+
+  #set($noReply={
+      "bool": {
+        "must_not": [
+          {
+            "exists": {
+              "field": "replyToId"
+            }
           }
+        ]
       }
   })
 
-  $util.qr($query.bool.must.add($matchNamePrefix))
+  $util.qr($query.bool.must.add($noReply))
+
+#else
+
+  #set($withReply={
+    "match": {"replyToId": $ctx.args.input.replyToId}
+  })
+
+  $util.qr($query.bool.must.add($withReply))
 
 #end
 

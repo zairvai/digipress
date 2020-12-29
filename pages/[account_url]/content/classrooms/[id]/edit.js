@@ -1,19 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import {
-	VuroxLayout,
-	HeaderLayout,
-	VuroxSidebar,
-	ContentLayout
-} from 'Components/layout'
-import { vuroxContext } from 'Context'
-import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
-import Sidebar from 'Templates/HeaderSidebar';
-import AppContainer from 'Templates/AppContainer'
-import FormClassroom from 'Components/FormClassroom'
 
+import LayoutClassroom from 'Templates/Layout.classroom'
+import FormClassroom from 'Components/FormClassroom'
+import {Row,Col,PageHeader} from 'antd'
 import CategoryController from 'Library/controllers/CategoryController'
 import TagController from 'Library/controllers/TagController'
 import ClassroomController from 'Library/controllers/ClassroomController'
@@ -40,9 +31,6 @@ const PageClassroomEdit = props => {
 	
     const pagename=""
 	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/content/classrooms/${item.id}/edit`,'active']]
-	
-	const { menuState } = React.useContext(vuroxContext)
-	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
 	React.useEffect(async()=>{
 		
@@ -58,37 +46,38 @@ const PageClassroomEdit = props => {
 			router.push(`/${auth.account.uniqueURL}/content/classrooms`)
 		}
 			
-		
 
 	},[])
 
 
 	const onCancel = () => {
-        router.push(`/${auth.account.uniqueURL}/content/classrooms`)	
+        router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.id}`)	
     }
     
     const onSuccess = classroom =>{
 		console.log(classroom)
-        //userController._updateList("add",user,0)
         router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.id}`)	
 	}
 	
 	return (
-		<AppContainer>
+		<LayoutClassroom>
 			<NextSeo title={`Konten - Ubah ruang belajar - ${item.title}`}/>
-			<HeaderLayout className="sticky-top">
-				<HeaderDark />
-			</HeaderLayout>
-			<VuroxLayout>
-				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-					<Sidebar className={toggleClass} />
-				</VuroxSidebar>
-				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={pagename} links={links}/>
-					<FormClassroom item={item} onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list.items} tags={listTags.list.items}/>
-				</ContentLayout>
-			</VuroxLayout>
-		</AppContainer>
+			<Row>
+				<Col md={24}>
+					<PageHeader title="Ubah ruang belajar" subTitle={item.title} ghost={false}
+						onBack={()=>router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,{shallow:true})}
+					/>
+				</Col>
+			</Row>
+			<Row>
+				<Col md={24} className="mt-2">
+					<FormClassroom item={item} onSuccess={onSuccess} onCancel={onCancel} 
+						accountId={auth.account.id} 
+						categories={listCategories.list.items} 
+						tags={listTags.list.items}/>
+				</Col>
+			</Row>
+		</LayoutClassroom>
 	);
 	
 }

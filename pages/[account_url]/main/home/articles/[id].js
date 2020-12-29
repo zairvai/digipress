@@ -106,13 +106,6 @@ const PageArticleId = props => {
                                             }
                                             </ul>
                                         </Col>
-                                        <Col md={12} sm={12} xs={12}>
-                                            {/* <div className="fright">
-                                                <ul className="vurox-horizontal-links vurox-standard-ul">
-                                                    <li><Link href={`/${auth.account.uniqueURL}/main/home/article/${item.id}`}><a>Baca artikel</a></Link></li>
-                                                </ul>
-                                            </div> */}
-                                        </Col>
                                     </Row>
                             
                                 </Col>

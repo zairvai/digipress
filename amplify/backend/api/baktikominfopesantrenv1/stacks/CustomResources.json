@@ -4584,6 +4584,48 @@
 				}
 			}
 		},
+		"QnaLessonResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"TypeName":"Qna",
+				"FieldName":"lesson",
+				"Kind":"PIPELINE",
+				"PipelineConfig":{
+					"Functions":[
+						{"Fn::GetAtt":["FunctionTableAppGetItem","FunctionId"]}
+					]
+				},
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.lesson.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
 		"QnaCreatedByResolver":{
 			"Type":"AWS::AppSync::Resolver",
 			"Properties":{

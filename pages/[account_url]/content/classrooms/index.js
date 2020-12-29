@@ -1,24 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
 import Link from 'next/link'
 import {
-	VuroxLayout,
-	HeaderLayout,
-	VuroxSidebar,
-	ContentLayout,
 	VuroxComponentsContainer
 } from 'Components/layout'
-import VuroxFormSearch from 'Components/search'
-import { vuroxContext } from 'Context'
-import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
-import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col} from 'antd'
-import { Search} from 'react-bootstrap-icons'
-
+import { Row, Col, PageHeader,Button} from 'antd'
 import ListClassrooms from 'Components/ListClassrooms'
-import AppContainer from 'Templates/AppContainer'
+import LayoutClassroom from 'Templates/Layout.classroom'
 import Permission from 'Library/controllers/Permission'
 
 import {NextSeo} from 'next-seo'
@@ -27,53 +15,34 @@ const PageClassrooms = props => {
 
 	const {auth} = props
 
-    const pagename=""
-	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,'active']]
-
-	const { menuState } = React.useContext(vuroxContext)
-	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
 	return (
-		<AppContainer>
+		<LayoutClassroom>
 			<NextSeo title="Konten - Ruang belajar"/>
-			<HeaderLayout className="sticky-top">
-				<HeaderDark />
-			</HeaderLayout>
-			<VuroxLayout>
-				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-					<Sidebar className={toggleClass} />
-				</VuroxSidebar>
-				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={pagename} links={links}/>
-					<Row className="mb-2">
-						<Col md={12} sm={24} xs={24}>
-							<VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/>
-						</Col>
-						<Col md={12}>
-							<div className="fright">
-								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									{/* <li className="p-0"><Button className="link" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp; Tambah classroom</Button></li> */}
-									{
-										Permission.ADD_CLASSROOM({auth}) && <li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah Classroom</a></Link></li>
-									}
-								</ul>
-							</div>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={24}>
-							<VuroxComponentsContainer>
-								<ListClassrooms/>
-							</VuroxComponentsContainer>	
-						</Col>
-					</Row>
+			<Row>
+				<Col md={24}>
 					
-				</ContentLayout>
-			</VuroxLayout>
-		</AppContainer>
+					<PageHeader title="Ruang Belajar" ghost={false}
+						extra={[
+							<div key="1">
+							{Permission.ADD_CLASSROOM({auth}) 
+								&& <Link href={`/${auth.account.uniqueURL}/content/classrooms/add`} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Tambah ruang belajar</Button></Link>}
+							</div>
+						]}
+					/>
+					
+				</Col>
+			</Row>
+			<Row>
+				<Col md={24}>
+					<VuroxComponentsContainer>
+						<ListClassrooms/>
+					</VuroxComponentsContainer>	
+				</Col>
+			</Row>
+		</LayoutClassroom>
 	);
 	
 }
 
 
-export default connect(state=>state)(withRouter(PageClassrooms))
+export default connect(state=>({auth:state.auth}))(PageClassrooms)

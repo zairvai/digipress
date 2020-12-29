@@ -1,6 +1,16 @@
-#set($arguments={
-	"key":"public/${ctx.source.accountId}/classrooms/${ctx.source.classroomId}/qnas/${ctx.source.id}.txt"
-})
+
+#if( !$util.isNull($ctx.source.lessonId ))
+    #set($arguments={
+      "key":"public/${ctx.source.accountId}/posts/${ctx.source.postId}/lessons/$ctx.source.lessonId/qnas/${ctx.source.id}.txt"
+    })
+#else
+    #set($arguments={
+      "key":"public/${ctx.source.accountId}/posts/${ctx.source.postId}/qnas/${ctx.source.id}.txt"
+    })
+
+#end
+
+
 {
   "version" : "2017-02-28",
   "operation": "Invoke",

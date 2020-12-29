@@ -15,12 +15,10 @@ import {Status} from 'Components/mycomponents.js'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AppContainer from 'Templates/AppContainer'
 import Permission from 'Library/controllers/Permission'
-import AuthController from 'Library/controllers/AuthController'
-import ClassroomController from 'Library/controllers/ClassroomController'
 import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getLessonRoutinePromise, updateLessonRoutinePromise} from 'State/routines/lesson'
-
+import ListTutorQnas from 'Components/ListTutorQnas'
 import {NextSeo} from 'next-seo'
 
 const PageLessonId = props => {
@@ -28,9 +26,7 @@ const PageLessonId = props => {
     const {Text} = Typography
     const {confirm} = Modal
 
-    const {auth,listLessons,router} = props
-
-    const classroomController = new ClassroomController(props)
+    const {auth,router} = props
     const lessonController = new LessonController(props)
     
     const [item,setItem] = React.useState({})
@@ -82,36 +78,40 @@ const PageLessonId = props => {
         <AppContainer>
             <NextSeo title={`Konten - Materi - ${item.title}`}/>
             <Layout item={item} links={links}>
-                <Row>
-                    <Col md={24}>
-                        <VuroxComponentsContainer className="p-4">
-                            <Row>
-                                <Col md={12}>{item.post && item.post.title}</Col>
-                                <Col md={12}>
-                                    <div className="fright">
-                                        <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {Permission.UPDATE_LESSON({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.post && item.post.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
-                                            {Permission.DELETE_LESSON({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus materi</Button></li>}
-                                        </ul>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}>
-                                    <h4 className="mb-0 mt-2">{item.title}</h4>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24}><h4>{item.name}</h4></Col>
-                            </Row>
-                            <Row className="mt-2">
-                                <Col md={24}>
-                                    <HTMLRenderer html={item.content ? item.content : ""}/>
-                                </Col>
-                            </Row>
-                        </VuroxComponentsContainer>
-                    </Col>
-                </Row>
+                
+                <VuroxComponentsContainer className="p-4">
+                    <Row>
+                        <Col md={12}>{item.post && item.post.title}</Col>
+                        <Col md={12}>
+                            <div className="fright">
+                                <ul className="vurox-horizontal-links vurox-standard-ul">
+                                    {Permission.UPDATE_LESSON({auth,item}) && <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/lessons/[lid]/edit`,query:{id:item.post && item.post.id,lid:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Ubah materi</a></Link></li>}
+                                    {Permission.DELETE_LESSON({auth,item}) && <li className="p-0"><Button onClick={()=>showDeleteConfirm(item)} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus materi</Button></li>}
+                                </ul>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={24}>
+                            <h4 className="mb-0 mt-2">{item.title}</h4>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={24}><h4>{item.name}</h4></Col>
+                    </Row>
+                    <Row className="mt-2">
+                        <Col md={24}>
+                            <HTMLRenderer html={item.content ? item.content : ""}/>
+                        </Col>
+                    </Row>
+                </VuroxComponentsContainer>
+                <VuroxComponentsContainer className="mt-2">
+                    <Row>
+                        <Col md={24} sm={24} xs={24}>
+                            <ListTutorQnas lesson={item} qnaType="ques"/>
+                        </Col>
+                    </Row>
+                </VuroxComponentsContainer>
 
             </Layout>
         </AppContainer> 

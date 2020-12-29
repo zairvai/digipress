@@ -35,34 +35,47 @@ const FormArticle = ({item,...props}) => {
 
     const articleController = new ArticleController(props)
 
+    const [editor,setEditor] = React.useState()
+    const isMounted = React.useRef()
+    
     React.useEffect(()=>{
         
-        // console.log(item)
+        isMounted.current = true
 
-        if(item){
+        if(isMounted.current){
 
-            setValue("title",item.title)
-            setValue("content",item.content)
-              
-            setValue("category",{
-                id:item.category.id,
-                value:item.category.id.toString(),
-                label:item.category.name
-            })
-            
-            let selectedTags = []
-            item.tags.forEach(tag=>tag && selectedTags.push({
-                id:tag.id,
-                value:tag.id.toString(),
-                label:tag.name}))
-            
-            setValue("tags",selectedTags)
-            setValue("allowComment",item.allowComment)
-            setValue("readAccess",item.access)
-    
+            if(item){
+
+                if(editor) editor.setContent(item.content)
+
+                setValue("title",item.title)
+                setValue("content",item.content)
+                
+                setValue("category",{
+                    id:item.category.id,
+                    value:item.category.id.toString(),
+                    label:item.category.name
+                })
+                
+                let selectedTags = []
+                item.tags.forEach(tag=>tag && selectedTags.push({
+                    id:tag.id,
+                    value:tag.id.toString(),
+                    label:tag.name}))
+                
+                setValue("tags",selectedTags)
+                setValue("allowComment",item.allowComment)
+                setValue("readAccess",item.access)
+        
+            }
+        }
+
+        return ()=>{
+            isMounted.current=false
+            if(editor) editor.setContent("")
         }
         
-    },[item])
+    },[item,editor])
 
     const {
         handleSubmit,
@@ -148,6 +161,10 @@ const FormArticle = ({item,...props}) => {
         setValue("readAccess",e.target.value)
     }
 
+    const handleEditorSetup = editor =>{
+        setEditor(editor)
+    }
+
     return (
         <Form
             layout="vertical"
@@ -166,7 +183,7 @@ const FormArticle = ({item,...props}) => {
                                         <Form.Item label="Judul artikel">
                                             <Input 
                                                 disabled={createArticle.isRequesting || updateArticle.isRequesting}
-                                                size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="Judul artikel" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
                                     }
@@ -186,10 +203,12 @@ const FormArticle = ({item,...props}) => {
                                         <Form.Item label="Isi artikel" className="mb-0">
                                            
                                             <TinyMce 
+                                                id="articleEditor" 
                                                 disabled={createArticle.isRequesting || updateArticle.isRequesting}
                                                 minHeight={400}
-                                                content={item ? item.content : ""}
-                                                id="articleEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                onFinishSetup={handleEditorSetup}
+                                                onChange={props.onChange} 
+                                                value={props.value} placeholder="Ketik isi tulisan..."/>
                                             {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
                                         </Form.Item>
                                     }

@@ -21248,6 +21248,7 @@ export const getQna = /* GraphQL */ `
         status
         version
       }
+      qnaType
       replyTo {
         id
         account {
@@ -21832,6 +21833,7 @@ export const getQna = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -22020,6 +22022,7 @@ export const getQna = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -22066,8 +22069,10 @@ export const getQna = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt
@@ -23998,6 +24003,7 @@ export const listPostQnas = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -24186,6 +24192,7 @@ export const listPostQnas = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -24232,8 +24239,10 @@ export const listPostQnas = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt
@@ -25386,6 +25395,7 @@ export const listUserQnas = /* GraphQL */ `
           status
           version
         }
+        qnaType
         replyTo {
           id
           account {
@@ -25574,6 +25584,7 @@ export const listUserQnas = /* GraphQL */ `
             status
             version
           }
+          qnaType
           replyTo {
             id
             account {
@@ -25620,8 +25631,10 @@ export const listUserQnas = /* GraphQL */ `
               status
               version
             }
+            qnaType
             replyTo {
               id
+              qnaType
               content
               createdAt
               updatedAt

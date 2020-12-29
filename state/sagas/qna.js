@@ -24,9 +24,12 @@ function* createQna(action){
         const inputParams = {
             accountId:values.accountId.trim(),
             postId:values.postId.trim(),
+            lessonId:values.lessonId.trim(),
             content:values.content.trim(),
             qnaType:values.qnaType.trim()
         }
+
+        if(values.status) inputParams.status = values.status
 
         if(values.replyToId) {
             inputParams.replyToId = values.replyToId
@@ -36,6 +39,8 @@ function* createQna(action){
             inputParams.replyToUserId = values.replyToUserId
             inputParams.isReply = true
         }
+
+        console.log(inputParams)
 
         const response = yield API.graphql(graphqlOperation(mutations.createQna,{input:inputParams}))
 
@@ -60,17 +65,16 @@ function* listPostQnas(action){
 
     try{
 
-        const {accountId,postId,replyToId,replyToUserId,orderBy,direction,minDate,maxDate,from,size,statuses} = action.payload
+        const {accountId,postId,lessonId,qnaType,replyToId,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={size}
 
         if(accountId) listParams.accountId = accountId
         if(postId) listParams.postId = postId
+        if(lessonId) listParams.lessonId = lessonId
+        if(qnaType) listParams.qnaType = qnaType
         if(statuses) listParams.statuses = statuses
         if(replyToId) listParams.replyToId = replyToId
-        if(replyToUserId) listParams.replyToUserId = replyToUserId
-        if(minDate) listParams.minDate = minDate
-        if(maxDate) listParams.maxDate = maxDate
         if(from) listParams.from = from
         if(orderBy) {
             listParams.orderBy = orderBy
@@ -102,7 +106,7 @@ function* listUserQnas(action){
 
     try{
 
-        const {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,postId,lessonId,replyToId,replyToUserId,createdById,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={size}
 
@@ -204,10 +208,11 @@ function* updateQna(action){
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
 
+        console.log(updateParams)
         
-        const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
+        // const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 
-        yield put(updateQnaRoutine.success({data:response.data.updateQna}))
+        // yield put(updateQnaRoutine.success({data:response.data.updateQna}))
 
                     
     }catch(error){

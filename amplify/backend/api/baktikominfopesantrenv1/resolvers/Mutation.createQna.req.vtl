@@ -2,7 +2,7 @@
     "accountId":$ctx.args.input.accountId,
     "postId":$ctx.args.input.postId,
     "qnaType":$ctx.args.input.qnaType,
-    "status":3,
+    "status":$util.defaultIfNull($ctx.args.input.status,3),
     "__typename":"Qna",
     "version":1,
     "createdBy":$ctx.identity.sub,

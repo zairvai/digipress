@@ -61,17 +61,42 @@ const TinyMce = ({id,className="",mode="full",
 
                             setEd(tinyEditor)
 
+                            tinymce.execCommand('mceFocus',false,editorId);
+
+                            tinyEditor.on('focusout blur',function(e,evt){
+                                if(props.onFocusOut) props.onFocusOut()
+                            })
+
                             tinyEditor.on('keydown', function (e, evt) {
+                                
                                 if (e.keyCode == 9) e.preventDefault();
+
                                 else if(e.keyCode == 13){
-                                    if(props.onPressEnter) props.onPressEnter(e)
+                                    
+                                    //if this function handler, prevent new line on enter.
+                                    //shift + enter instead.
+                                    if(props.onPressEnter){
+
+                                        if(e.shiftKey){
+                                            tinyEditor.execCommand('mceInsertContent', false, "");
+                                            e.stopPropagation()
+                                        }
+                                        else{
+                                            e.preventDefault()
+                                            props.onPressEnter(tinyEditor)
+                                        }
+                                    }
                                 }
                             })
 
-                            tinyEditor.on("keyup change",()=>{
-                                const content = tinyEditor.getContent()
-                                onChange(content)
+                            tinyEditor.on("keyup change",function(e,evt){
+                                onChange(editor)
                             })
+
+                            tinyEditor.on("init",function(e,evt){
+                                if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
+                            })
+                            
                         }
                     }
 
@@ -114,64 +139,30 @@ const TinyMce = ({id,className="",mode="full",
         
         return ()=>{
 
-            // if(tinymce) {
-                
-            //     console.log(editor)
-            //     //tinymce.remove(editor)
-            //     console.log(editorId + " is removed")
-
-                
-            
-            // }
-
             tinymce.remove(editor)
             if(onRemove) onRemove()
-            
+            isMounted.current = false
 
-            return ()=>isMounted.current = false
-            
         }
 
     },[])
 
-    let interval,counter=0
-
     React.useEffect(()=>{
-
-        // console.log(ed)
-
-        isMounted.current = true
-
-        if(isMounted.current){
-            interval = setTimeout(function run(){
-                    
-                // console.log(editor)
-                // console.log(content)
-                if(content && content.trim() !== ""){
-                    if(counter<10){
-
-                        if(ed && content){
-                            // console.log("DONE")
-                            ed.setContent(content)
-                            clearTimeout(interval)
-                        }else{
-                            setTimeout(run,1000)
-                        }
-                        counter++ 
-                    }
-                }
-            
-                
-            },1000)
+        if(ed){
+            if(props.isSubmitting){
+                ed.mode.set('readonly')
+            }
+            else{
+                //finish submission
+                ed.setContent("")
+                ed.mode.set('design')
+            }
         }
-    
+       
         return ()=>{
-            clearTimeout(interval)
-            return ()=>isMounted.current = false
+            if(ed) ed.setContent("")
         }
-    },[ed,content])
-
-
+    },[ed,props.isSubmitting])
 
 
     return <>

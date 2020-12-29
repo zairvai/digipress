@@ -26,7 +26,7 @@ const PageUserEdit = props => {
         
         const user = await userController._get(id)
         setItem(user.data)
-        console.log(user.data)
+        // console.log(user.data)
         //console.log(getUser.item)
 
         

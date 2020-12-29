@@ -1,14 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import Layout from 'Templates/Layout.article.id'
-import { Row, Col,Modal} from 'antd'
+import { Row, Col,Modal,PageHeader,Button} from 'antd'
+import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { mdiCommentMultipleOutline,mdiCommentOffOutline } from '@mdi/js'
-import AppContainer from 'Templates/AppContainer'
+import LayoutArticle from 'Templates/Layout.article'
+import Permission from 'Library/controllers/Permission'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
@@ -22,7 +23,7 @@ const PageArticleId = props => {
 
     const {confirm} = Modal
 
-    const {auth,getArticle,router} = props
+    const {auth,commentId,router} = props
 
     const articleController = new ArticleController(props)
 
@@ -35,7 +36,6 @@ const PageArticleId = props => {
        
         try{
             const article = await articleController._get(id)
-            //console.log(article)
             setItem(article.data)
             setNoOfComment(article.data.noOfAllComment)
 
@@ -83,106 +83,58 @@ const PageArticleId = props => {
     }
 
     return(
-        <AppContainer>
+        <LayoutArticle>
             <NextSeo title={`Konten - Artikel -  ${item.title}`}/>
-            <Layout item={item} links={links}>
+            <Row>
+				<Col md={24}>
+                    <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
+                        onBack={()=>router.push(`/[account_ur]/content/articles`,`/${auth.account.uniqueURL}/content/articles`,{shallow:true})}
+						extra={[
+							<div className="d-inline" key="1">
+                                {Permission.UPDATE_ARTICLE({auth}) 
+                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah artikel</Button></Link>}
+                            </div>,
+                            <div className="d-inline" key="2">
+                                {Permission.DELETE_ARTICLE({auth}) 
+                                    && <Button  type="primary" onClick={()=>showDeleteConfirm(item)}><i className="ti-trash"></i>&nbsp;Hapus artikel</Button>}
+                            </div>
+						]}
+					/>
+					
+				</Col>
+			</Row>
+            <VuroxComponentsContainer className="p-4">
                 <Row>
-                    <Col md={24}>
-                        <VuroxComponentsContainer className="p-4">
-                            <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
-                            <Row>
-                                <Col md={24} className="mt-4">
-                                    <Row>
-                                        <Col md={12} sm={12} xs={12}>
-                                            <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {
-                                                item.allowComment  ? 
-                                                <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
-                                                :
-                                                <li>
-                                                    <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
-                                                </li>
-                                            }
-                                            </ul>
-                                        </Col>
-                                        <Col md={12} sm={12} xs={12}>
-                                            {/* <div className="fright">
-                                                <ul className="vurox-horizontal-links vurox-standard-ul">
-                                                    <li><Link href={`/${auth.account.uniqueURL}/main/home/article/${item.id}`}><a>Baca artikel</a></Link></li>
-                                                </ul>
-                                            </div> */}
-                                        </Col>
-                                    </Row>
-                            
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24} sm={24} xs={24} className="mt-1">
-                                    <ListPostComments post={item} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
-                                </Col>
-                            </Row>
-                        </VuroxComponentsContainer>
+                    <Col md={24}> 
+                        <Reader item={item}/>
                     </Col>
                 </Row>
-
-
-
-                {/* <Row>
-                    <Col md={24}>
-                        <VuroxComponentsContainer className="p-4 mt-2">
-                            <Row>
-                                <Col md={12}><h6>Kolom Komentar</h6></Col>
-                            </Row>
-                            <Row className="mt-3">
-                                <Col md={24}>
-                                    <VuroxTableDark>
-                                        <table className="table table-borderless mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th width="20"><Checkbox/></th>
-                                                    <th width="40%">Komentar</th>
-                                                    <th>Tanggal</th>
-                                                    <th>Penulis</th>
-                                                    <th className="fright">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {
-                                                props.comments.list.map(item=>(
-                                                    <tr key={item.id}>
-                                                        <td><Checkbox/></td>
-                                                        <td valign="middle"><Link href={{pathname:'/content/articles/[id]/comments/[cid]',query:{id:item.id,cid:item.id}}} shallow><a>{item.name}</a></Link></td>
-                                                        <td valign="middle">{item.datetime}</td>
-                                                        <td valign="middle"><Link href={{pathname:'/access/user/[id]',query:{id:item.author.id}}} shallow><a>{item.author.name}</a></Link></td>
-                                                        <td valign="middle" className="fright">
-                                                            {
-                                                                item.status===3 ? <Status text="Approved" state="success" position="right"/> :
-                                                                item.status===2 ? <Status text="Pending" state="warning" position="right" blinking/> :
-                                                                // campaign.status===2 ? <Status text="On Approval" state="warning" position="right"/> :
-                                                                // campaign.status===3 ? <Status text="Running" state="success" position="right" blinking/> :
-                                                                // campaign.status===4 ? <Status text="Finished" state="default" position="right"/> :
-                                                                // campaign.status===5 ? <Status text="Canceled" state="fail" position="right"/> :
-                                                                <></>
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                            </tbody>
-                                        </table>
-                                    </VuroxTableDark>
-                                </Col>
-                            </Row>
-                        </VuroxComponentsContainer>
+                <Row>
+                    <Col md={12} sm={24} xs={24} className="mt-3">
+                        <ul className="vurox-horizontal-links vurox-standard-ul">
+                        {
+                            item.allowComment  ? 
+                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
+                            :
+                            <li>
+                                <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
+                            </li>
+                        }
+                        </ul>
                     </Col>
-                </Row> */}
-
-            </Layout>
-        </AppContainer> 
+                </Row>
+                <Row>
+                    <Col md={24} sm={24} xs={24} className="mt-2">
+                        {item.allowComment  ? 
+                            <ListPostComments post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                            :
+                            <></>
+                        }
+                    </Col>
+                </Row>
+            </VuroxComponentsContainer>
+        </LayoutArticle> 
     )
-
-    
-
 }
 
 export default connect(

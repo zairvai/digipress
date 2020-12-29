@@ -35,32 +35,48 @@ const FormClassroom = ({item,...props}) => {
 
     const classroomController = new ClassroomController(props)
 
-    React.useEffect(()=>{
-        console.log(item)
-        if(item){
+    const [editor,setEditor] = React.useState()
+    const isMounted = React.useRef()
 
-            setValue("title",item.title)
-            setValue("content",item.content)
-           
-            setValue("category",{
-                id:item.category.id,
-                value:item.category.id.toString(),
-                label:item.category.name
-            })
-            
-            let selectedTags = []
-            item.tags.forEach(tag=>tag && selectedTags.push({
-                id:tag.id,
-                value:tag.id.toString(),
-                label:tag.name}))
-            
-            setValue("tags",selectedTags)
-            setValue("allowComment",item.allowComment)
-            setValue("readAccess",item.access)
-    
+    React.useEffect(()=>{
+        
+        isMounted.current = true
+
+        if(isMounted.current){
+
+            if(item){
+
+                if(editor) editor.setContent(item.content)
+                
+                setValue("content",item.content)
+
+                setValue("title",item.title)
+
+                setValue("category",{
+                    id:item.category.id,
+                    value:item.category.id.toString(),
+                    label:item.category.name
+                })
+                
+                let selectedTags = []
+                item.tags.forEach(tag=>tag && selectedTags.push({
+                    id:tag.id,
+                    value:tag.id.toString(),
+                    label:tag.name}))
+                
+                setValue("tags",selectedTags)
+                setValue("allowComment",item.allowComment)
+                setValue("readAccess",item.access)
+        
+            }
+        }
+
+        return ()=>{
+            isMounted.current=false
+            if(editor) editor.setContent("")
         }
         
-    },[item])
+    },[item,editor])
 
     const {
         handleSubmit,
@@ -149,6 +165,10 @@ const FormClassroom = ({item,...props}) => {
         setValue("readAccess",e.target.value)
     }
 
+    const handleEditorSetup = editor =>{
+        setEditor(editor)
+    }
+
     return (
         <Form
             layout="vertical"
@@ -187,10 +207,12 @@ const FormClassroom = ({item,...props}) => {
                                         <Form.Item label="Deskripsi pelajaran" className="mb-0">
                                            
                                             <TinyMce 
+                                                id="classroomEditor"
                                                 disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
-                                                content={item ? item.content : "   "}
+                                                //content={content}
                                                 minHeight={400}
-                                                id="classroomEditor" onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                onFinishSetup={handleEditorSetup}
+                                                onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>
                                     }
