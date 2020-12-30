@@ -65,12 +65,10 @@ const Home = props =>{
     }
 
     return (
-        <AppContainer>
+        <Layout>
             <NextSeo title="Home - Ruang belajar"/>
-            <Layout pagename={pagename} links={links}>
-                <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
-            </Layout>
-        </AppContainer>
+            <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
+        </Layout>
     )
 }
 

@@ -14,6 +14,8 @@ import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getLessonRoutinePromise, updateLessonRoutinePromise} from 'State/routines/lesson'
 import ListTutorQnas from 'Components/ListTutorQnas'
+import FormQna from 'Components/FormQna'
+import AuthController from 'Library/controllers/AuthController'
 import {NextSeo} from 'next-seo'
 
 const PageLessonId = props => {
@@ -25,11 +27,17 @@ const PageLessonId = props => {
     
     const [item,setItem] = React.useState({})
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const {id,ref} = React.useMemo(()=>router.query,[])
 
     React.useEffect(async ()=>{
        
         try{
+
+            if(ref){
+                if(AuthController.isStudent(auth) || AuthController.isMember(auth)){
+                    router.push(`/${auth.account.uniqueURL}/main/home/`)
+                }
+            }
 
             const lesson = await lessonController._get(id)
             setItem(lesson.data)
@@ -69,13 +77,23 @@ const PageLessonId = props => {
         });
     }
 
+    const onSuccessAddQestion = addedItem => {
+
+        console.log(addedItem)
+
+    } 
+    
     return(
         <LayoutLesson>
             <NextSeo title={`Konten - Materi - ${item.title}`}/>
             <Row>
 				<Col md={24}>
-                    <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
-                        onBack={()=>router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})}
+                    <PageHeader title={item.title} subTitle={item.post && item.post.title} ghost={false}
+                        onBack={()=>{
+                            if(ref) router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
+                            else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
+                        }}
+
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_LESSON({auth}) 
@@ -97,13 +115,25 @@ const PageLessonId = props => {
                     </VuroxComponentsContainer>
                 </Col>
             </Row>
-            <Row>
-                <Col md={24} className="mt-2">
-                    <VuroxComponentsContainer className="p-4">
-                        <ListTutorQnas lesson={item} qnaType="ques"/>
-                    </VuroxComponentsContainer>
-                </Col>
-            </Row>
+            
+            {ref ? 
+                <Row>
+                    <Col md={24} className="mt-2">
+                        <VuroxComponentsContainer>
+                            <ListTutorQnas lesson={item} qnaType="ques"/>
+                        </VuroxComponentsContainer>
+                    </Col>
+                </Row>
+            :
+                <Row>
+                    <Col md={24} sm={24} xs={24}>
+                        <VuroxComponentsContainer className="p-4 mt-2">
+                            <FormQna formId="qnaForm" lesson={item} qnaType="ques" onSuccess={onSuccessAddQestion}/>
+                        </VuroxComponentsContainer>
+                    </Col>
+                </Row>
+            }   
+            
         </LayoutLesson> 
     )
 }

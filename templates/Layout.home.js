@@ -20,7 +20,7 @@ import { Search} from 'react-bootstrap-icons'
 import ListAccounts from 'Components/ListAccounts'
 import AppContainer from 'Templates/AppContainer'
 import AccountController from 'Library/controllers/AccountController'
-
+import AppController from 'Library/controllers/AppController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listAccountsRoutinePromise } from 'State/routines/account';
@@ -29,9 +29,17 @@ const PageAccounts = props => {
 
 	const {auth} = props
 
+	const appController = new AppController(props)
+
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 	  
+	React.useEffect(()=>{
+
+        appController._setCurrentPage("home")
+
+    },[])
+
 	return (
 		<AppContainer>
 			<HeaderLayout className="sticky-top">

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'next/router'
 import {
 	VuroxLayout,
 	HeaderLayout,
@@ -15,16 +16,22 @@ import AppController from 'Library/controllers/AppController'
 
 const Layout = props => {
 
-	const {app,pagename,links} = props
+	const {app,pagename,links,router} = props
 
     const appController = new AppController(props)
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+	const {ref} = React.useMemo(()=>router.query,[])
+
     React.useEffect(()=>{
 
-        appController._setCurrentPage("lessons")
+		if(ref){
+			appController._setCurrentPage("classrooms")
+		}else{
+			appController._setCurrentPage("home")
+		}
 
     },[])
 
@@ -49,4 +56,4 @@ const Layout = props => {
 }
 
 
-export default connect(state=>({app:state.app}))(Layout)
+export default connect(state=>({app:state.app}))(withRouter(Layout))

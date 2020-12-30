@@ -112,7 +112,7 @@ const PageClassroomId = props => {
                     <VuroxComponentsContainer>
                         <Row className="mt-3">
                             <Col md={24}>
-                                <ListLessons postId={id} destinationPath={`/${auth.account.uniqueURL}/content/classrooms/${id}`} />
+                                <ListLessons postId={id} destinationPath={`/${auth.account.uniqueURL}/content/lessons/[id]?ref=intclass`} />
                             </Col>
                         </Row>
                     </VuroxComponentsContainer>

@@ -101,7 +101,7 @@ const List = props =>{
                         <Text type="secondary">{moment(record.createdAt).fromNow()}</Text>
                     </>
                 ),
-                width:"20%"
+                width:"40%"
             },
             {
                 key:"status",
@@ -141,7 +141,7 @@ const List = props =>{
 
     const rowHandler = (record,rowIndex) => {
         return{
-            onDoubleClick: e => {
+            onClick: e => {
                 console.log(record)
             }
         }

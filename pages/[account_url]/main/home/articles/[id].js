@@ -1,53 +1,54 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import Layout from 'Templates/Layout.article.id'
-import { Row, Col,Modal} from 'antd'
+import { Row, Col,Modal,PageHeader,Button} from 'antd'
+import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { mdiCommentMultipleOutline,mdiCommentOffOutline } from '@mdi/js'
-import AppContainer from 'Templates/AppContainer'
+import Layout from 'Templates/Layout.home'
+import Permission from 'Library/controllers/Permission'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { getArticleRoutinePromise, updateArticleRoutinePromise} from 'State/routines/article';
+import { getArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
 import Icon from '@mdi/react'
 import Reader from 'Components/ReaderArticle'
 import ListPostComments from 'Components/ListPostComments'
+
 import {NextSeo} from 'next-seo'
 
 const PageArticleId = props => {
 
     const {confirm} = Modal
 
-    const {auth,getArticle,router} = props
-
-    const {id,commentId} = React.useMemo(()=>router.query,[])
+    const {auth,commentId,router} = props
 
     const articleController = new ArticleController(props)
 
     const [item,setItem] = React.useState({})
     const [noOfComment,setNoOfComment] = React.useState(0)
 
+    const {id} = React.useMemo(()=>router.query,[])
+
     React.useEffect(async ()=>{
        
         try{
             const article = await articleController._get(id)
-            //console.log(article)
             setItem(article.data)
             setNoOfComment(article.data.noOfAllComment)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/main/home/articles`)
+            router.push(`/${auth.account.uniqueURL}/content/articles`)
             console.log(error)
         }
         
     },[])
 
     
-    const links = [['Main',`/${auth.account.uniqueURL}/main/home/all`,''],['Artikel',`/${auth.account.uniqueURL}/main/home/articles`,''],[item.title,`/${auth.account.uniqueURL}/main/home/article/${item.id}`,'active']]
+    
+    // const links = [['Konten',`/${auth.account.uniqueURL}/content/articles`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -59,7 +60,7 @@ const PageArticleId = props => {
           onOk() {
             articleController._delete(item)
                 .then(article=>{
-                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/main/home/articles`),1000)
+                    setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
                     
                 }).catch(error=>console.log(error))
           },
@@ -76,56 +77,63 @@ const PageArticleId = props => {
     }
 
     const onSuccessDeleteComment = comment => {
-        // console.log(comment)
+        console.log(comment)
         setNoOfComment(noOfComment- (comment.noOfReply + 1))
 
     }
 
     return(
-        <AppContainer>
-            <NextSeo title={`${item.title} - Artikel`}/>
-            <Layout item={item} links={links}>
+        <Layout>
+            <NextSeo title={`Konten - Artikel -  ${item.title}`}/>
+            <Row>
+				<Col md={24}>
+                    <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
+                        onBack={()=>router.push(`/[account_ur]/content/articles`,`/${auth.account.uniqueURL}/content/articles`,{shallow:true})}
+						extra={[
+							<div className="d-inline" key="1">
+                                {Permission.UPDATE_ARTICLE({auth}) 
+                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah artikel</Button></Link>}
+                            </div>,
+                            <div className="d-inline" key="2">
+                                {Permission.DELETE_ARTICLE({auth}) 
+                                    && <Button  type="primary" onClick={()=>showDeleteConfirm(item)}><i className="ti-trash"></i>&nbsp;Hapus artikel</Button>}
+                            </div>
+						]}
+					/>
+					
+				</Col>
+			</Row>
+            <VuroxComponentsContainer className="p-4">
                 <Row>
-                    <Col md={24}>
-                        <VuroxComponentsContainer className="p-4">
-
-                            <Reader item={getArticle.item} onDelete={showDeleteConfirm}/>
-
-                            <Row>
-                                <Col md={24} className="mt-4">
-                                    <Row>
-                                        <Col md={12} sm={12} xs={12}>
-                                            <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {
-                                                item.allowComment  ? 
-                                                <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
-                                                :
-                                                <li>
-                                                    <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
-                                                </li>
-                                            }
-                                            </ul>
-                                        </Col>
-                                    </Row>
-                            
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={24} sm={24} xs={24} className="mt-1">
-                                    {item.allowComment  ? 
-                                        <ListPostComments post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
-                                        :
-                                        <></>
-                                    }
-                                </Col>
-                            </Row>
-                        </VuroxComponentsContainer>
+                    <Col md={24}> 
+                        <Reader item={item}/>
                     </Col>
                 </Row>
-                
-                
-            </Layout>
-        </AppContainer> 
+                <Row>
+                    <Col md={12} sm={24} xs={24} className="mt-3">
+                        <ul className="vurox-horizontal-links vurox-standard-ul">
+                        {
+                            item.allowComment  ? 
+                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;{noOfComment > 0 ? `${noOfComment} komentar` : "belum ada komentar"}</a></li>
+                            :
+                            <li>
+                                <Icon size="1.3em" path={mdiCommentOffOutline}/>&nbsp;Komentar tidak diperbolehkan oleh penulis
+                            </li>
+                        }
+                        </ul>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={24} sm={24} xs={24} className="mt-2">
+                        {item.allowComment  ? 
+                            <ListPostComments post={item} commentId={commentId} onPostSuccessAddComment={onSuccessAddComment} onPostSuccessDeleteComment={onSuccessDeleteComment}/>
+                            :
+                            <></>
+                        }
+                    </Col>
+                </Row>
+            </VuroxComponentsContainer>
+        </Layout> 
     )
 }
 
