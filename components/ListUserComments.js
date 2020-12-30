@@ -150,30 +150,6 @@ const List = props =>{
                     </>
                 )
             }
-            // {
-            //     title:"Komentar",
-            //     dataIndex:"content",
-            //     width:"25%",
-            //     ellipsis:{
-            //         showTitle:false
-            //     }
-            // },
-            // {
-            //     title:"Status",
-            //     dataIndex:"status",
-            //     className:"text-right",
-            //     width:"5%",
-            //     render:status=>(
-            //         <div className="fright">
-            //         {
-            //             status===2 ? <Status text="Pending" state="warning" position="right" blinking/>:
-            //             status===3 ? <Status text="Active" state="success" position="right"/> :
-            //             status===4 && <Status text="Suspended" state="danger" position="right"/>
-            //         }
-            //         </div>
-            //     )
-            // }
-            
         ]   
         
         return columns

@@ -22,7 +22,7 @@ const PageUserAdd = props => {
     const [account,setAccount] = React.useState()
     const accountController = new AccountController(props)
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const {id} = React.useMemo(()=>router.query,[])//accountId
 
     React.useEffect(()=>{
         
@@ -48,26 +48,37 @@ const PageUserAdd = props => {
 
     },[])
 
-    const getRoleInputs = () =>{
+    const getRoleInputs = (accountId) =>{
 
-        if(AuthController.isAppAdmin(auth)) return []// donot allow app admin to manage current account user
-
-        if(AuthController.isAppOwner(auth)){
-            return [
-                {value:"admin",name:"Admin"}
-            ]
-        }else if(AuthController.isOwner(auth)){
-            return [
-                {value:"admin",name:"Admin"},
-                {value:"tutor",name:"Tutor"},
-                {value:"student",name:"Student"}
-            ]
+        if(accountId){
+            if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)){
+                return [
+                    {value:"owner",name:"Owner"},
+                    {value:"admin",name:"Admin"},
+                    {value:"tutor",name:"Tutor"},
+                    {value:"student",name:"Student"}
+                ]
+            }
         }
-        else if(AuthController.isAdmin(auth)){
-            return [
-                {value:"tutor",name:"Tutor"},
-                {value:"student",name:"Student"}
-            ]
+        else{
+            if(AuthController.isAppAdmin(auth)) return []// donot allow app admin to manage current account user
+            else if(AuthController.isAppOwner(auth)){
+                return [
+                    {value:"admin",name:"Admin"}
+                ]
+            }else if(AuthController.isOwner(auth)){
+                return [
+                    {value:"admin",name:"Admin"},
+                    {value:"tutor",name:"Tutor"},
+                    {value:"student",name:"Student"}
+                ]
+            }
+            else if(AuthController.isAdmin(auth)){
+                return [
+                    {value:"tutor",name:"Tutor"},
+                    {value:"student",name:"Student"}
+                ]
+            }
         }
 
         return []
@@ -100,7 +111,7 @@ const PageUserAdd = props => {
 
             <Row>
                 <Col md={14} sm={24} xs={24} className="mt-2">
-                    <FormUser accountId={accountId} roleInputs={getRoleInputs()} onSuccess={onSuccess} onCancel={onCancel}/>
+                    <FormUser accountId={accountId} roleInputs={getRoleInputs(id)} onSuccess={onSuccess} onCancel={onCancel}/>
                 </Col>
             </Row>
              
