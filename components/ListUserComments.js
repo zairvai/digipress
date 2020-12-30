@@ -184,7 +184,7 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onDoubleClick: e => {
-                router.push(`/${auth.account.uniqueURL}/main/home/article/${record.post.id}/?commentId=${record.id}`)
+                router.push(`/${auth.account.uniqueURL}/main/home/articles/${record.post.id}/?commentId=${record.id}`)
             }
         }
     }
