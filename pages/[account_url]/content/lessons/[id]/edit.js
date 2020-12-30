@@ -19,17 +19,25 @@ const PageLessonEdit = props => {
 
     const {id} = React.useMemo(()=>router.query,[])
     
+    const isMounted = React.useRef()
+
     React.useEffect(async ()=>{
        
-        try{
-            const lesson = await lessonController._get(id)
-            setItem(lesson.data)
+        isMounted.current = true
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
-            console.log(error)
+        if(isMounted.current){
+            try{
+                const lesson = await lessonController._get(id)
+                setItem(lesson.data)
+
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
+                console.log(error)
+            }
         }
-        
+
+        return ()=> isMounted.current = false
+
     },[])
 
     

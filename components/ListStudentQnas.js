@@ -21,7 +21,7 @@ const List = props =>{
 
     const {Title,Text,Paragraph} = Typography
 
-    const {auth,lesson,qnaType,replyToId,router} = props
+    const {auth,lesson,qnaType,replyToId,createdById,router} = props
 
     const [isFormVisible,setFormVisible] = React.useState(false)
 
@@ -29,7 +29,7 @@ const List = props =>{
     
     const {confirm} = Modal
 
-    const [items,setItems] = React.useState()
+    const [items,setItems] = React.useState([])
     const [isEmpty,setEmpty] = React.useState(false)
     const [isLoading,setLoading] = React.useState(true)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
@@ -51,7 +51,7 @@ const List = props =>{
                     accountId = auth.account.id
                 }
                 
-                var params = {accountId,postId:lesson.post.id,lessonId:lesson.id,qnaType,replyToId,orderBy,direction,pagination}
+                var params = {accountId,postId:lesson.post.id,lessonId:lesson.id,qnaType,replyToId,createdById,orderBy,direction,pagination}
 
                 fetchItems(params)
             }
@@ -67,7 +67,7 @@ const List = props =>{
     },[items])
 
 
-    const fetchItems = async ({accountId,postId,lessonId,qnaType,replyToId,orderBy,direction,statuses=[2,3],pagination})=>{
+    const fetchItems = async ({accountId,postId,lessonId,qnaType,replyToId,createdById,orderBy,direction,statuses=[2,3],pagination})=>{
 
 		try{
 
@@ -76,7 +76,7 @@ const List = props =>{
             const from = (pagination.current - 1) * pagination.pageSize
             const size = pagination.pageSize
 
-            const params = {accountId,postId,lessonId,qnaType,replyToId,orderBy,direction,from,size,statuses}
+            const params = {accountId,postId,lessonId,qnaType,replyToId,createdById,orderBy,direction,from,size,statuses}
 
 			const response = await qnaController._listPostQnas(params)
 
@@ -109,13 +109,17 @@ const List = props =>{
                 title:"Tanya",
                 render:(text,record,index)=>(
                     <>
-                        
                         <HTML 
                             html={record.content}
                             componentOverrides={{
                                 p:Component=>props=><Component ellipsis={{ rows: 4, expandable: true, symbol: 'Buka' }} {...props}/>
                             }}
                         />
+                        <ul className="vurox-horizontal-links vurox-standard-ul">
+                            <li className="pl-0"><Tooltip title="Hapus" onClick={ e =>{showDeleteConfirm(record);e.stopPropagation()}}><DeleteFilled/></Tooltip></li>
+                            <li><Tooltip title="Ubah"><EditFilled onClick={(e)=>{showForm(record);e.stopPropagation()}}/></Tooltip></li>
+                        </ul>
+
                         <Text type="secondary">{moment(record.createdAt).fromNow()}</Text>
                     </>
                 ),
@@ -127,21 +131,16 @@ const List = props =>{
                 render:(text,record,index)=>(
                     <>
                         {record.status==2 ? 
-                            <Button  type="primary" onClick={(e)=>{showForm(record);e.stopPropagation()}}><i className="ti-angle-left"></i>&nbsp;Kirim jawaban</Button>
+                            <Text>Belum ada jawaban</Text>
                         :
                             <>
-                                
                                 <HTML 
                                     html={record.replies[0].content}
                                     componentOverrides={{
                                         p:Component=>props=><Component ellipsis={{ rows: 4, expandable: true, symbol: 'Buka' }} {...props}/>
                                     }}
                                 />
-                                <ul className="vurox-horizontal-links vurox-standard-ul">
-                                    <li className="pl-0"><Tooltip title="Hapus" onClick={ e =>{showDeleteConfirm(record.replies[0]);e.stopPropagation()}}><DeleteFilled/></Tooltip></li>
-                                    <li><Tooltip title="Ubah"><EditFilled onClick={(e)=>{showForm(record);e.stopPropagation()}}/></Tooltip></li>
-                                </ul>
-                                <Text type="secondary">{moment(record.replies[0].createdAt).fromNow()}</Text>
+                                <Text type="secondary" className="mt-3">{moment(record.createdAt).fromNow()}</Text>
 
                             </>
                         }
@@ -181,7 +180,7 @@ const List = props =>{
 			accountId = auth.account.id
 		}
 
-        var params = {accountId,postId:lesson.post.id,lessonId:lesson.id,qnaType,replyToId,orderBy,direction,pagination}
+        var params = {accountId,postId:lesson.post.id,lessonId:lesson.id,qnaType,replyToId,createdById,orderBy,direction,pagination}
 
         fetchItems(params)
     }
@@ -203,7 +202,7 @@ const List = props =>{
           content: <HTML 
                         html={item.content}
                         componentOverrides={{
-                            p:Component=>props=><Component ellipsis={{ rows: 2, expandable: true, symbol: 'Buka' }} {...props}/>
+                            p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
                         }}
                     />,
           okText:"Ya",
@@ -211,17 +210,11 @@ const List = props =>{
           onOk() {
 
 			qnaController._delete(item)
-				.then(answer=>{
-                    const question = answer.data.replyTo
-                    //update pertanyaan jadi belum terjawab status = 2
-                    return qnaController._update(question,{status:2,lessonId:question.lesson.id})
-                })
-                .then(replyTo=>{
-                    const question = replyTo.data
+				.then(question=>{
                     const clonedItems = _.cloneDeep(items)
-                    const index = clonedItems.findIndex(obj=>obj.id==question.id)
+                    const index = clonedItems.findIndex(obj=>obj.id==question.data.id)
                     if(index>-1){
-                        clonedItems.splice(index,1,question)
+                        clonedItems.splice(index,1)
                         setItems(clonedItems)
                     }
                 })
@@ -233,7 +226,11 @@ const List = props =>{
 
     const showForm = item =>{
         // console.log(item)
-        setSelectedItem(item)
+
+        if(item){
+            setSelectedItem(item)
+        }
+
         setFormVisible(true)
     }
 
@@ -267,16 +264,17 @@ const List = props =>{
                 :
                 <Empty
                     description={
-                        <span>
-                            Belum ada pertanyaan pada materi ini
-                        </span>
+                        <>
+                            <Text>Kamu belum ada pertanyaan pada materi ini</Text><br/><br/>
+                            <Button  type="primary" onClick={(e)=>{showForm();e.stopPropagation()}}><i className="ti-plus"></i>&nbsp;Kirim pertanyaan</Button>
+                        </>
                     }
                 />
                 }
             </VuroxTableDark>
 
             <Modal
-                title="Kirim jawaban"
+                title="Kirim pertanyaan"
                 destroyOnClose={true}
                 centered
                 footer={null}
@@ -290,30 +288,12 @@ const List = props =>{
 
                     <Row>
                         <Col md={24} className="p-4">
-                            <div className="mb-3">
-                                <Title level={5}>Pertanyaan</Title>
-                                <Text>Oleh {selectedItem && selectedItem.createdBy.name}</Text>&nbsp;
-                                <Text type="secondary">{moment(selectedItem && selectedItem.createdAt).fromNow()}</Text>
-                            </div>
-                            
-                            <HTML 
-                                html={selectedItem && selectedItem.content}
-                                componentOverrides={{
-                                    p:Component=>props=><Component ellipsis={{ rows: 5, expandable: true, symbol: 'Buka' }} {...props}/>
-                                }}
-                            />
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col md={24} className="p-4">
-                            <div className="mb-3"><Title level={5}>Jawaban</Title></div>
+                            <div className="mb-3"><Title level={5}>Pertanyaan</Title></div>
                             <FormQna formId="qnaForm" 
-                                item={selectedItem && selectedItem.replies && selectedItem.replies[0]}
-                                lesson={selectedItem && selectedItem.lesson}
-                                replyTo={selectedItem}
-                                replyToUser={selectedItem && selectedItem.createdBy} 
-                                qnaType="ans" 
+                                item={selectedItem}
+                                lesson={lesson}
+                                replyToUser={lesson && lesson.createdBy} 
+                                qnaType="ques" 
                                 onCancel={()=>setFormVisible(false)} 
                                 onSuccess={handleSuccess}/>
                         </Col>

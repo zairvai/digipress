@@ -29,21 +29,29 @@ const FormLesson = ({item,...props}) => {
     const lessonController = new LessonController(props)
 
     const [editor,setEditor] = React.useState()
+    const [content,setContent] = React.useState("")
     const isMounted = React.useRef()
 
+    React.useEffect(()=>{
+
+        return()=>{
+            setEditor(null)
+        }
+    },[])
+    
     React.useEffect(()=>{
 
         isMounted.current = true
 
         if(isMounted.current){
 
-            if(item){
-
-                if(editor) editor.setContent(item.content)
+            if(item){                
 
                 setValue("title",item.title)
                 setValue("seq",item.seq)          
                 setValue("content",item.content)
+
+                setContent(item.content)
 
             }
   
@@ -51,11 +59,16 @@ const FormLesson = ({item,...props}) => {
 
         return ()=>{
             isMounted.current=false
-            if(editor) editor.setContent("")
         }
         
-    },[item,editor])
+    },[item])
 
+    React.useEffect(()=>{
+
+        if(content && editor){
+            editor.setContent(content)
+        }
+    },[content,editor])
 
     const {
         handleSubmit,
@@ -88,13 +101,18 @@ const FormLesson = ({item,...props}) => {
     }
 
     const onError = (errors,e) => {
-
-        console.log(errors,e)
-
     }
 
     const handleEditorSetup = editor =>{
         setEditor(editor)
+    }
+
+    const handleEditorRemove = editor =>{
+        console.log("removed : " + editor)
+    }
+
+    const handleEditorChange = editor =>{
+        setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
     }
 
     return (
@@ -157,12 +175,14 @@ const FormLesson = ({item,...props}) => {
                             render={props=>
                                 <Form.Item label="Isi materi" className="mb-0">
                                     <TinyMce 
-                                        id="lessonEditor"
+                                        id="frmLesson"
+                                        className="editor"
                                         tabIndex="3"
                                         disabled={createLesson.isRequesting || updateLesson.isRequesting}
                                         minHeight={300}
                                         onFinishSetup={handleEditorSetup} 
-                                        onChange={props.onChange} value={props.value} placeholder="Ketik isi materi..."/>
+                                        onRemove={handleEditorRemove}
+                                        onChange={handleEditorChange} value={props.value} placeholder="Ketik isi materi..."/>
                                     
                                 </Form.Item>
                             }

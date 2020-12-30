@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {
+	VuroxComponentsContainer
+} from 'Components/layout'
 import { Row, Col,PageHeader} from 'antd'
 import LayoutQna from 'Templates/Layout.qna'
+import ListUserQnas from 'Components/ListUserQnas'
 
 import {NextSeo} from 'next-seo'
 
@@ -25,9 +29,9 @@ const PageQnas = props => {
 			
 			<Row>
 				<Col md={24}>
-					{/* <VuroxComponentsContainer>
-						<ListQnas items={listQnas.list.items} foundDoc={listQnas.list.foundDocs} onDelete={showDeleteConfirm}/>
-					</VuroxComponentsContainer>	 */}
+					<VuroxComponentsContainer>
+						<ListUserQnas currentUser={auth.user}/>
+					</VuroxComponentsContainer>	
 				</Col>
 			</Row>
 				

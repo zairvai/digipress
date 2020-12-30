@@ -93,7 +93,7 @@ const FormQna = ({formId,item,...props}) => {
         setSubmiting(true)
 
         if(item){
-            console.log("qnaType : " + props.qnaType)
+            // console.log("qnaType : " + props.qnaType)
             if(props.qnaType=="ques"){
                 qnaController._update(item,values)
                     .then(question=>{
@@ -128,6 +128,9 @@ const FormQna = ({formId,item,...props}) => {
             if(replyToUser) values.replyToUserId = replyToUser.id
 
             if(props.qnaType=="ques"){
+
+                // console.log(values)
+                // setSubmiting(false)
                 qnaController._create(values)
                     .then(question=>{
                         reset()
@@ -154,7 +157,7 @@ const FormQna = ({formId,item,...props}) => {
     }
 
     const onError = (errors,e) => {
-        console.log(errors)
+        // console.log(errors)
     }
 
     const handleEditorSetup = editor =>{

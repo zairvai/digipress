@@ -44,6 +44,14 @@ will be passed as the event to AWS Lambda.
   $util.qr($query.bool.must.add($match))
 #end
 
+##set match createdById
+#if(!$util.isNull($ctx.args.input.createdById))
+  #set($match={
+    "match": {"createdBy": $ctx.args.input.createdById}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
 ##set match qnaType
 #if(!$util.isNull($ctx.args.input.qnaType))
   #set($match={

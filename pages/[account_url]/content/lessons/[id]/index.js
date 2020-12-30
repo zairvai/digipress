@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import { Row, Col,Modal,PageHeader,Button} from 'antd'
+import { Row, Col,Modal,PageHeader,Button,Typography} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
@@ -14,14 +14,16 @@ import LessonController from 'Library/controllers/LessonController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getLessonRoutinePromise, updateLessonRoutinePromise} from 'State/routines/lesson'
 import ListTutorQnas from 'Components/ListTutorQnas'
-import FormQna from 'Components/FormQna'
+import ListStudentQnas from 'Components/ListStudentQnas'
+import HTML from 'Components/HTML'
+import Truncate from 'react-truncate'
 import AuthController from 'Library/controllers/AuthController'
 import {NextSeo} from 'next-seo'
 
 const PageLessonId = props => {
 
     const {confirm} = Modal
-
+    const {Paragraph} = Typography
     const {auth,router} = props
     const lessonController = new LessonController(props)
     
@@ -30,7 +32,7 @@ const PageLessonId = props => {
     const {id,ref} = React.useMemo(()=>router.query,[])
 
     React.useEffect(async ()=>{
-       
+
         try{
 
             if(ref){
@@ -43,7 +45,7 @@ const PageLessonId = props => {
             setItem(lesson.data)
 
         }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`)
+            router.push(`/${auth.account.uniqueURL}/content/classrooms/`)
             console.log(error)
         }
         
@@ -77,12 +79,6 @@ const PageLessonId = props => {
         });
     }
 
-    const onSuccessAddQestion = addedItem => {
-
-        console.log(addedItem)
-
-    } 
-    
     return(
         <LayoutLesson>
             <NextSeo title={`Konten - Materi - ${item.title}`}/>
@@ -128,7 +124,8 @@ const PageLessonId = props => {
                 <Row>
                     <Col md={24} sm={24} xs={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">
-                            <FormQna formId="qnaForm" lesson={item} qnaType="ques" replyToUser={item && item.createdBy} onSuccess={onSuccessAddQestion}/>
+                        <ListStudentQnas lesson={item} qnaType="ques" createdById={auth.user.id}/>
+                            {/* <FormQna formId="qnaForm" lesson={item} qnaType="ques" replyToUser={item && item.createdBy} onSuccess={onSuccessAddQestion}/> */}
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>
@@ -139,7 +136,7 @@ const PageLessonId = props => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getLessonRoutinePromise,

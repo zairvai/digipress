@@ -58,7 +58,7 @@ function* listPostQnas(action){
 
     try{
 
-        const {accountId,postId,lessonId,qnaType,replyToId,orderBy,direction,from,size,statuses} = action.payload
+        const {accountId,postId,lessonId,qnaType,replyToId,createdById,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={size}
 
@@ -68,13 +68,12 @@ function* listPostQnas(action){
         if(qnaType) listParams.qnaType = qnaType
         if(statuses) listParams.statuses = statuses
         if(replyToId) listParams.replyToId = replyToId
+        if(createdById) listParams.createdById = createdById
         if(from) listParams.from = from
         if(orderBy) {
             listParams.orderBy = orderBy
             listParams.direction = direction
         }
-
-        console.log(listParams)
 
         yield put(listPostQnasRoutine.request())
                 
@@ -201,8 +200,6 @@ function* updateQna(action){
         if(values.lessonId) updateParams.lessonId = values.lessonId
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
-
-        console.log(updateParams)
         
         const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 

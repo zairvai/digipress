@@ -96,6 +96,10 @@ const TinyMce = ({id,className="",mode="full",
                             tinyEditor.on("init",function(e,evt){
                                 if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
                             })
+
+                            tinyEditor.on("detach remove",function(){
+                                if(props.onRemove) props.onRemove(tinyEditor)
+                            })
                             
                         }
                     }
@@ -139,10 +143,10 @@ const TinyMce = ({id,className="",mode="full",
         
         return ()=>{
 
-            tinymce.remove(editor)
-            if(onRemove) onRemove()
             isMounted.current = false
+            tinymce.remove(editor)
 
+            
         }
 
     },[])
@@ -177,5 +181,5 @@ const TinyMce = ({id,className="",mode="full",
         
 }
 
-export default React.memo(props=><TinyMce {...props}/>) 
-// export default TinyMce
+//export default React.memo(props=><TinyMce {...props}/>) 
+export default TinyMce

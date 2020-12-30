@@ -17,8 +17,6 @@ const schema = yup.object().shape({
 })
 
 const FormComment = ({formId,item,...props}) => {
-
-    console.log(props)
     
     const {auth,post,replyTo} = props
     
@@ -26,6 +24,7 @@ const FormComment = ({formId,item,...props}) => {
     const [replyToUser,setReplyToUser] = React.useState()
     const [isSubmiting,setSubmiting] = React.useState(false)
     const [content,setContent] = React.useState("")
+    const [editor,setEditor] = React.useState()
     const isMounted = React.useRef()
 
     React.useEffect(()=>{
@@ -57,14 +56,18 @@ const FormComment = ({formId,item,...props}) => {
 
             if(item){
                 //console.log(item.content)
+                if(editor) editor.setContent(item.content)
                 
-                setContent(item.content)
+                //setContent(item.content)
                 setValue("content",item.content)
             }
         }
-        return ()=>isMounted.current = false
+        return ()=>{
+            isMounted.current = false
+            if(editor) editor.setContent("")
+        }
 
-    },[item])
+    },[item,editor])
 
     const { 
         handleSubmit,
@@ -127,6 +130,10 @@ const FormComment = ({formId,item,...props}) => {
         console.log(errors)
     }
 
+    const handleEditorSetup = editor =>{
+        setEditor(editor)
+    }
+
     const handleEditorFocusOut = () => {
         if(props.onFocusOut) props.onFocusOut()
     }
@@ -163,10 +170,11 @@ const FormComment = ({formId,item,...props}) => {
                                             className="editor"
                                             height={80}
                                             bottomMargin={1}
-                                            content={content}
+                                            //content={content}
                                             value={props.value} 
                                             placeholder={auth && auth.user.name}
                                             isSubmitting={isSubmiting}
+                                            onFinishSetup={handleEditorSetup} 
                                             onChange={handleEditorChange} 
                                             onFocusOut={handleEditorFocusOut}
                                             onPressEnter={handleSubmit(onSubmit,onError)}
