@@ -4,7 +4,7 @@ import {withRouter} from 'next/router'
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-import {Table,Typography,Empty,Tooltip} from 'antd'
+import {Table,Typography,Empty,Button} from 'antd'
 import AuthController from 'Library/controllers/AuthController'
 import QnaController from 'Library/controllers/QnaController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -95,13 +95,39 @@ const List = props =>{
             {
                 key:"createdBy",
                 title:"Penanya",
+                dataIndex:"createdBy",
+                render:createdBy=>createdBy.name,
+                width:"20%"
+            },
+            {
+                key:"question",
+                title:"Tanya",
                 render:(text,record,index)=>(
                     <>
-                        {record.createdBy.name} &nbsp;
                         <Text type="secondary">{moment(record.createdAt).fromNow()}</Text>
+                        <HTML 
+                            html={record.content}
+                            componentOverrides={{
+                                p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                            }}
+                        />
                     </>
                 ),
-                width:"40%"
+                width:"30%"
+            },
+            {
+                key:"answer",
+                title:"Jawab",
+                render:(text,record,index)=>(
+                    <>
+                        {record.status==2 ? 
+                            <Button  type="primary"><i className="ti-angle-left"></i>&nbsp;Kirim jawaban</Button>
+                        :
+                            <></>
+                        }
+                    </>
+                ),
+                width:"30%"
             },
             {
                 key:"status",
@@ -116,7 +142,8 @@ const List = props =>{
                         status===3 && <Status text="Terjawab" state="success" position="right"/> 
                     }
                     </div>
-                )
+                ),
+                width:"20%"
             }
             
         ]   
