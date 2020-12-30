@@ -36,7 +36,6 @@ const FormComment = ({formId,item,...props}) => {
             if(props.replyToUser){
                 
                 setReplyToUser(props.replyToUser)
-                console.log(props.level)
                 if(props.level > 1){
                     setValue("content",props.replyToUser.name)
                     setContent(`@${props.replyToUser.name}...`)
@@ -62,9 +61,7 @@ const FormComment = ({formId,item,...props}) => {
                 setContent(item.content)
                 setValue("content",item.content)
             }
-
         }
-
         return ()=>isMounted.current = false
 
     },[item])

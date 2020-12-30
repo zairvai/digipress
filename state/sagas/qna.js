@@ -30,16 +30,9 @@ function* createQna(action){
         }
 
         if(values.status) inputParams.status = values.status
-
-        if(values.replyToId) {
-            inputParams.replyToId = values.replyToId
-            inputParams.isReply = true
-        }
-        if(values.replyToUserId) {
-            inputParams.replyToUserId = values.replyToUserId
-            inputParams.isReply = true
-        }
-
+        if(values.replyToId) inputParams.replyToId = values.replyToId
+        if(values.replyToUserId) inputParams.replyToUserId = values.replyToUserId
+        
         console.log(inputParams)
 
         const response = yield API.graphql(graphqlOperation(mutations.createQna,{input:inputParams}))
@@ -205,14 +198,15 @@ function* updateQna(action){
             expectedVersion : values.version
         }
     
+        if(values.lessonId) updateParams.lessonId = values.lessonId
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
 
         console.log(updateParams)
         
-        // const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
+        const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 
-        // yield put(updateQnaRoutine.success({data:response.data.updateQna}))
+        yield put(updateQnaRoutine.success({data:response.data.updateQna}))
 
                     
     }catch(error){

@@ -25,7 +25,8 @@ const FormQna = ({formId,item,...props}) => {
     const qnaController = new QnaController(props)
     const [replyToUser,setReplyToUser] = React.useState()
     const [isSubmiting,setSubmiting] = React.useState(false)
-    const [content,setContent] = React.useState("")
+
+    const [editor,setEditor] = React.useState()
     const isMounted = React.useRef()
 
     React.useEffect(()=>{
@@ -48,16 +49,23 @@ const FormQna = ({formId,item,...props}) => {
 
             if(item){
                 //console.log(item.content)
+
+                if(editor) editor.setContent(item.content)
                 
-                setContent(item.content)
+                // setContent(item.content)
                 setValue("content",item.content)
             }
 
         }
 
-        return ()=>isMounted.current = false
+        return ()=>{
+            isMounted.current=false
+            setValue("content","")
+            if(editor) editor.setContent("")
+        }
+        
 
-    },[item])
+    },[item,editor])
 
     const { 
         handleSubmit,
@@ -85,34 +93,62 @@ const FormQna = ({formId,item,...props}) => {
         setSubmiting(true)
 
         if(item){
+            console.log("qnaType : " + props.qnaType)
+            if(props.qnaType=="ques"){
+                qnaController._update(item,values)
+                    .then(question=>{
+                        props.onSuccess(question.data)
+                        setSubmiting(false)
+                    })
+                    .catch(error=>console.log(error))
+            }
+            else if(props.qnaType=="ans"){
 
-            qnaController._update(item,values)
-                .then(qna=>{
-                    props.onSuccess(qna.data)
-                    setSubmiting(false)
-                })
-                .catch(error=>console.log(error))
-
+                qnaController._update(item,values)
+                    .then(answer=>{
+                        const question = answer.data.replyTo
+                        props.onSuccess(question)
+                        setSubmiting(false)
+                    })
+                    .catch(error=>console.log(error))
+            }
         }
         else{
 
             values.accountId = lesson.account.id
             values.postId = lesson.post.id
             values.lessonId = lesson.id
+
             values.qnaType = props.qnaType
-            values.status = 2 //set status to pending / unanswered
+
+            if(props.qnaType=="ans") values.status = 3 
+            else values.status = 2 //set status to pending / unanswered
             
             if(replyTo) values.replyToId = replyTo.id
             if(replyToUser) values.replyToUserId = replyToUser.id
 
-            qnaController._create(values)
-                .then(qna=>{
-                    reset()
-                    props.onSuccess(qna.data)
-                    setSubmiting(false)
-                })
-                .catch(error=>console.log(error))
-
+            if(props.qnaType=="ques"){
+                qnaController._create(values)
+                    .then(question=>{
+                        reset()
+                        props.onSuccess(question.data)
+                        setSubmiting(false)
+                    })
+                    .catch(error=>console.log(error))
+            }
+            else if(props.qnaType=="ans"){
+                qnaController._create(values)
+                    .then(answer=>{
+                        //update pertanyaan jadi terjawab status = 3
+                        return qnaController._update(replyTo,{status:3,lessonId:lesson.id})
+                    })
+                    .then(replyTo=>{
+                        reset()
+                        props.onSuccess(replyTo.data)  
+                        setSubmiting(false)      
+                    })
+                    .catch(error=>console.log(error))
+            }
         }
 
     }
@@ -121,13 +157,19 @@ const FormQna = ({formId,item,...props}) => {
         console.log(errors)
     }
 
+    const handleEditorSetup = editor =>{
+        setEditor(editor)
+    }
+
     const handleEditorFocusOut = () => {
         if(props.onFocusOut) props.onFocusOut()
     }
+
     const handleEditorChange = editor =>{
         setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
         setValue("hiddenContent",editor.getContent({format:'text'}).replace(/\r?\n|\r/g,""))
     }
+    
     return (
         <Form layout="vertical" onFinish={handleSubmit(onSubmit,onError)}>
             <Row>
@@ -152,10 +194,10 @@ const FormQna = ({formId,item,...props}) => {
                                     className="editor"
                                     height={80}
                                     bottomMargin={1}
-                                    content={content}
                                     value={props.value} 
                                     placeholder={auth && auth.user.name}
                                     isSubmitting={isSubmiting}
+                                    onFinishSetup={handleEditorSetup} 
                                     onChange={handleEditorChange} 
                                     onFocusOut={handleEditorFocusOut}
                                     />
@@ -175,9 +217,11 @@ const FormQna = ({formId,item,...props}) => {
 
 
             <Row className="justify-content-end mt-3">
-                {/* <Col md={6} sm={8} xs={12}  >
-                    <Button tabIndex="7" disabled={isSubmiting} onClick={props.onCancel} danger type="link" block>Batal</Button>
-                </Col> */}
+                {props.onCancel && 
+                    <Col md={6} sm={8} xs={12}  >
+                        <Button tabIndex="7" disabled={isSubmiting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                    </Col> 
+                }
                 <Col md={4} sm={8} xs={12} className="fright">
                     <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmiting} block>Kirim</Button>
                 </Col>

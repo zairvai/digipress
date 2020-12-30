@@ -174,8 +174,6 @@ function* updateAccount(action){
 
     try{
 
-        console.log(action)
-
         yield put(updateAccountRoutine.request())
 
         const {values} = action.payload
@@ -191,7 +189,7 @@ function* updateAccount(action){
         if(values.uniqueURL) updateParams.uniqueURL = values.uniqueURL.trim().toLowerCase()
         if(values.phoneNumber) updateParams.phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
         if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim()
-        if(values.status) updateParams.status = values.status.trim()
+        if(values.status) updateParams.status = values.status
         
 
         const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{input:updateParams}))

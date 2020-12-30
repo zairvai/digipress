@@ -128,7 +128,7 @@ const PageLessonId = props => {
                 <Row>
                     <Col md={24} sm={24} xs={24}>
                         <VuroxComponentsContainer className="p-4 mt-2">
-                            <FormQna formId="qnaForm" lesson={item} qnaType="ques" onSuccess={onSuccessAddQestion}/>
+                            <FormQna formId="qnaForm" lesson={item} qnaType="ques" replyToUser={item && item.createdBy} onSuccess={onSuccessAddQestion}/>
                         </VuroxComponentsContainer>
                     </Col>
                 </Row>

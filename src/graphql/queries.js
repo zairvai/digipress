@@ -21249,6 +21249,2069 @@ export const getQna = /* GraphQL */ `
         version
       }
       qnaType
+      replies {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+        }
+        post {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          category {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            name
+            desc
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          title
+          tags {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            name
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          allowComment
+          access
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          status
+          version
+          ... on Article {
+            postType
+            content
+            noOfAllComment
+            noOfNoReplyComment
+          }
+          ... on Classroom {
+            postType
+            content
+            total
+          }
+        }
+        lesson {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          title
+          seq
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          status
+          version
+        }
+        qnaType
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            title
+            seq
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyTo {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyTo {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            title
+            seq
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyTo {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        replyToUser {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          roles {
+            accountId
+            role
+            createdBy
+            updatedBy
+            createdAt
+            updatedAt
+            status
+          }
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
       replyTo {
         id
         account {
@@ -21834,6 +23897,565 @@ export const getQna = /* GraphQL */ `
           version
         }
         qnaType
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            title
+            seq
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyTo {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         replyTo {
           id
           account {
@@ -22023,6 +24645,116 @@ export const getQna = /* GraphQL */ `
             version
           }
           qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
           replyTo {
             id
             account {
@@ -22070,6 +24802,15 @@ export const getQna = /* GraphQL */ `
               version
             }
             qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
             replyTo {
               id
               qnaType
@@ -24004,6 +26745,565 @@ export const listPostQnas = /* GraphQL */ `
           version
         }
         qnaType
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            title
+            seq
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyTo {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         replyTo {
           id
           account {
@@ -24193,6 +27493,116 @@ export const listPostQnas = /* GraphQL */ `
             version
           }
           qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
           replyTo {
             id
             account {
@@ -24240,6 +27650,15 @@ export const listPostQnas = /* GraphQL */ `
               version
             }
             qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
             replyTo {
               id
               qnaType
@@ -25396,6 +28815,565 @@ export const listUserQnas = /* GraphQL */ `
           version
         }
         qnaType
+        replies {
+          id
+          account {
+            id
+            name
+            uniqueURL
+            address
+            contactPerson
+            emailAddress
+            phoneNumber
+            status
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+          }
+          post {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            category {
+              id
+              name
+              desc
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            title
+            tags {
+              id
+              name
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            allowComment
+            access
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+            ... on Article {
+              postType
+              content
+              noOfAllComment
+              noOfNoReplyComment
+            }
+            ... on Classroom {
+              postType
+              content
+              total
+            }
+          }
+          lesson {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            title
+            seq
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            status
+            version
+          }
+          qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyTo {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          replyToUser {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          content
+          createdBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          updatedBy {
+            id
+            name
+            emailAddress
+            phoneNumber
+            emailAddressVerified
+            phoneNumberVerified
+            enabled
+            roles {
+              accountId
+              role
+              createdBy
+              updatedBy
+              createdAt
+              updatedAt
+              status
+            }
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
+          createdAt
+          updatedAt
+          version
+          status
+        }
         replyTo {
           id
           account {
@@ -25585,6 +29563,116 @@ export const listUserQnas = /* GraphQL */ `
             version
           }
           qnaType
+          replies {
+            id
+            account {
+              id
+              name
+              uniqueURL
+              address
+              contactPerson
+              emailAddress
+              phoneNumber
+              status
+              createdAt
+              updatedAt
+              version
+            }
+            post {
+              id
+              title
+              allowComment
+              access
+              createdAt
+              updatedAt
+              status
+              version
+              ... on Article {
+                postType
+                content
+                noOfAllComment
+                noOfNoReplyComment
+              }
+              ... on Classroom {
+                postType
+                content
+                total
+              }
+            }
+            lesson {
+              id
+              title
+              seq
+              content
+              createdAt
+              updatedAt
+              status
+              version
+            }
+            qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyTo {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            replyToUser {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            content
+            createdBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            updatedBy {
+              id
+              name
+              emailAddress
+              phoneNumber
+              emailAddressVerified
+              phoneNumberVerified
+              enabled
+              createdAt
+              updatedAt
+              version
+              status
+            }
+            createdAt
+            updatedAt
+            version
+            status
+          }
           replyTo {
             id
             account {
@@ -25632,6 +29720,15 @@ export const listUserQnas = /* GraphQL */ `
               version
             }
             qnaType
+            replies {
+              id
+              qnaType
+              content
+              createdAt
+              updatedAt
+              version
+              status
+            }
             replyTo {
               id
               qnaType

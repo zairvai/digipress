@@ -22,6 +22,7 @@ export default class Controller{
             id:item.id,
             accountId:item.account.id,
             postId:item.post.id,
+            lessonId:item.lesson.id,
             version:item.version,
             ...values}
 

@@ -19,7 +19,6 @@ const PageAccountAdd = props => {
     
 
     const onSuccess = account =>{
-        accountController._updateList("add",account,0)
         router.push(`/${auth.account.uniqueURL}/manage/accounts/${account.id}`)	
     }
 

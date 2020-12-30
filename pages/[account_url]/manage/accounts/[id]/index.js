@@ -14,7 +14,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth'
-import { deleteAccountRoutinePromise,getAccountRoutinePromise } from 'State/routines/account';
+import { deleteAccountRoutinePromise,getAccountRoutinePromise,updateAccountRoutinePromise } from 'State/routines/account';
 
 import {NextSeo} from 'next-seo'
 
@@ -180,6 +180,7 @@ export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
+            updateAccountRoutinePromise,
             signOutRoutinePromise,
             deleteAccountRoutinePromise,
             getAccountRoutinePromise

@@ -4,7 +4,7 @@ import {withRouter} from 'next/router'
 import {	
 	VuroxTableDark
 } from 'Components/tables'
-import {Table,Typography,Empty,Button} from 'antd'
+import {Table,Typography,Empty,Button,Modal,Row,Col,Tooltip} from 'antd'
 import AuthController from 'Library/controllers/AuthController'
 import QnaController from 'Library/controllers/QnaController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -12,6 +12,8 @@ import { listPostQnasRoutinePromise } from 'State/routines/qna';
 import {Status} from 'Components/mycomponents.js'
 import Icon from '@mdi/react'
 import {mdiFormatQuoteOpenOutline,mdiFormatQuoteCloseOutline} from '@mdi/js'
+import {EditFilled,DeleteFilled} from '@ant-design/icons'
+import FormQna from 'Components/FormQna'
 import _ from 'lodash'
 import moment from 'moment'
 import HTML from 'Components/HTML'
@@ -22,6 +24,8 @@ const List = props =>{
 
     const {auth,lesson,qnaType,replyToId,router} = props
 
+    const [isFormAnswerVisible,setFormAnswerVisible] = React.useState(false)
+
 	const qnaController = new QnaController(props)
 
     const [items,setItems] = React.useState()
@@ -31,7 +35,8 @@ const List = props =>{
     const [pageIndex,setPageIndex] = React.useState(0)
 	const [orderBy,setOrderBy]	= React.useState("createdAt")
 	const [direction,setDirection] = React.useState("desc")
-    
+    const [selectedItem,setSelectedItem] = React.useState()
+
     let accountId
     const isMounted = React.useRef()
 
@@ -121,9 +126,22 @@ const List = props =>{
                 render:(text,record,index)=>(
                     <>
                         {record.status==2 ? 
-                            <Button  type="primary"><i className="ti-angle-left"></i>&nbsp;Kirim jawaban</Button>
+                            <Button  type="primary" onClick={(e)=>{showAnswerForm(record);e.stopPropagation()}}><i className="ti-angle-left"></i>&nbsp;Kirim jawaban</Button>
                         :
-                            <></>
+                            <>
+                                <Text type="secondary">{moment(record.replies[0].createdAt).fromNow()}</Text>
+                                <HTML 
+                                    html={record.replies[0].content}
+                                    componentOverrides={{
+                                        p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                                    }}
+                                />
+                                <ul className="vurox-horizontal-links vurox-standard-ul">
+                                    <li className="pl-0"><Tooltip title="Hapus"><DeleteFilled/></Tooltip></li>
+                                    <li><Tooltip title="Ubah"><EditFilled onClick={(e)=>{showAnswerForm(record);e.stopPropagation()}}/></Tooltip></li>
+                                </ul>
+
+                            </>
                         }
                     </>
                 ),
@@ -174,6 +192,26 @@ const List = props =>{
         }
     }
 
+    const showAnswerForm = item =>{
+        console.log(item)
+        setSelectedItem(item)
+        setFormAnswerVisible(true)
+    }
+
+    const handleSuccessAnswer = (repliedQuestion) =>{
+
+        console.log(repliedQuestion)
+        const clonedtems = [...items]
+        const index = clonedtems.findIndex(obj=>obj.id==repliedQuestion.id)
+        
+        if(index > -1){
+            clonedtems.splice(index,1,repliedQuestion)
+            setItems(clonedtems)
+        }
+
+        setFormAnswerVisible(false)
+    }
+
     return( 
         <>
             <VuroxTableDark>
@@ -197,6 +235,53 @@ const List = props =>{
                 />
                 }
             </VuroxTableDark>
+
+            <Modal
+                title="Kirim jawaban"
+                destroyOnClose={true}
+                centered
+                footer={null}
+                bodyStyle={{padding:0}}
+                visible={isFormAnswerVisible}
+                keyboard={false}
+                mask={false}
+                maskClosable={false}
+                onCancel={()=>setFormAnswerVisible(false)}
+                width={900}>
+
+                    <Row>
+                        <Col md={24} className="p-4">
+                            <div className="mb-3">
+                                <Title level={5}>Pertanyaan</Title>
+                                <Text>Oleh {selectedItem && selectedItem.createdBy.name}</Text>&nbsp;
+                                <Text type="secondary">{moment(selectedItem && selectedItem.createdAt).fromNow()}</Text>
+                            </div>
+                            
+                            <HTML 
+                                html={selectedItem && selectedItem.content}
+                                componentOverrides={{
+                                    p:Component=>props=><Component ellipsis={{ rows: 5, expandable: true, symbol: 'Buka' }} {...props}/>
+                                }}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={24} className="p-4">
+                            <div className="mb-3"><Title level={5}>Jawaban</Title></div>
+                            <FormQna formId="qnaForm" 
+                                item={selectedItem && selectedItem.replies[0]}
+                                lesson={selectedItem && selectedItem.lesson}
+                                replyTo={selectedItem}
+                                replyToUser={selectedItem && selectedItem.createdBy} 
+                                qnaType="ans" 
+                                onCancel={()=>setFormAnswerVisible(false)} 
+                                onSuccess={handleSuccessAnswer}/>
+                        </Col>
+                    </Row>
+                    
+            </Modal>
+
         </>)
 
 

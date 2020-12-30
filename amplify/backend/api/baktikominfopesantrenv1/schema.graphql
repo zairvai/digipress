@@ -519,6 +519,7 @@ type Qna @aws_iam
 	post:Post!
 	lesson:Lesson
 	qnaType:QnaType!
+	replies:[Qna]
 	replyTo:Qna
 	replyToUser:User
 	content: String!
@@ -548,7 +549,7 @@ input CreateQnaInput {
 	lessonId:ID
 	replyToId:ID
 	replyToUserId:ID
-	
+	status:Int
 }
 
 input UpdateQnaInput {
