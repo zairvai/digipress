@@ -6,7 +6,7 @@ export default class Controller{
 
     async _getData(params){
 
-        console.log(params)
+        //console.log(params)
 
         try{
             const response = await API.graphql({ 
@@ -17,7 +17,7 @@ export default class Controller{
                     }
                 }})
 
-            console.log(response)
+            //console.log(response)
 
             const data = {
                 results : JSON.parse(response.data.getAnalytic.results),

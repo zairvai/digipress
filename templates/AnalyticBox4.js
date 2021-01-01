@@ -8,10 +8,10 @@ import {
 
 import Chartbox5Pie from 'Components/Chartbox5Pie'
 import AnalyticController from 'Library/controllers/AnalyticController'
-import ArticleController from 'Library/controllers/ArticleController'
+import ClassroomController from 'Library/controllers/ClassroomController'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { listArticlesRoutinePromise} from 'State/routines/article';
+import { listClassroomsRoutinePromise} from 'State/routines/classroom';
 
 import AuthController from 'Library/controllers/AuthController'
 
@@ -30,7 +30,7 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
     const [isFetching,setFetching] = React.useState(false)
 
     const analyticController = new AnalyticController()
-    const articleController = new ArticleController(props)
+    const classroomController = new ClassroomController(props)
 
     React.useEffect(()=>{
         if(selectedMenu) setSelectedRange(selectedMenu)
@@ -116,7 +116,7 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
                         if(ids.length>0){
                             
 
-                            const posts = await articleController._list({ids})
+                            const posts = await classroomController._list({ids})
 
                             if(posts && posts.data.items){
 
@@ -175,7 +175,7 @@ export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
-                listArticlesRoutinePromise
+                listClassroomsRoutinePromise
         },dispatch),dispatch
     })
 )(AnalyticBox)

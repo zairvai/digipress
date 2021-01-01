@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Row,Col,} from 'antd'
 import {
 	VuroxComponentsContainer
@@ -9,9 +10,12 @@ import Chartbox5Line from 'Components/Chartbox5Line'
 import Chartbox5Bar from 'Components/Chartbox5Bar'
 import AnalyticController from 'Library/controllers/AnalyticController'
 import moment from 'moment'
+import AuthController from 'Library/controllers/AuthController'
 
-const AnalyticBox = ({selectedMenu,pagePath,...props}) =>{
+const AnalyticBox = ({selectedMenu,...props}) =>{
 
+    const {auth} = props
+    
     const [gaNewUsers,setGaNewUsers] = React.useState()
     const [gaReturnUsers,setGaReturnUsers] = React.useState()
     const [selectedRange,setSelectedRange] = React.useState()
@@ -29,9 +33,15 @@ const AnalyticBox = ({selectedMenu,pagePath,...props}) =>{
     React.useEffect(()=>{
 
         isMounted.current = true
-
+        
         if(isMounted.current){
 
+            let pagePath
+
+            if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+                pagePath=`/${auth.account.uniqueURL}/`
+            }
+            
             fetchData({pagePath,startDate:selectedRange && selectedRange.value})
 
         }
@@ -128,4 +138,4 @@ const AnalyticBox = ({selectedMenu,pagePath,...props}) =>{
     )
 }
 
-export default AnalyticBox
+export default connect(state=>({auth:state.auth}))(AnalyticBox)

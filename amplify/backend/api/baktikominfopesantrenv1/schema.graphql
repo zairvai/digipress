@@ -101,6 +101,7 @@ input GetItemInput {
 }
 
 input ListItemInput {
+	ids:[ID]
 	accountId: ID
 	postId:ID
 	lessonId:ID

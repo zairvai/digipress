@@ -53,10 +53,11 @@ function* listArticles(action){
 
     try{
 
-        const {accountId,name,orderBy,direction,from,size,statuses} = action.payload
+        const {ids,accountId,name,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
-
+        
+        if(ids) listParams.ids = ids
         if(accountId) listParams.accountId = accountId
         if(name) listParams.name = name
         if(statuses) listParams.statuses = statuses

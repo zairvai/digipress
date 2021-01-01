@@ -4,10 +4,12 @@ import { Row, Col } from 'antd'
 import Chartbox1 from 'Components/Chartbox1'
 import AnalyticController from 'Library/controllers/AnalyticController'
 import moment from 'moment'
-
 import {round} from 'Utilities/number'
+import AuthController from 'Library/controllers/AuthController'
 
-const AdminSummeryBox = ({pagePath,...props}) => {
+const AdminSummeryBox = ({...props}) => {
+
+	const {auth} = props
 
 	const [gaPageviews,setGaPageviews] = React.useState()
 	const [gaSessions,setGaSessions] = React.useState()
@@ -24,8 +26,12 @@ const AdminSummeryBox = ({pagePath,...props}) => {
 
         if(isMounted.current){
 
-            // console.log(fetchData)
+			let pagePath
 
+            if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+                pagePath=`/${auth.account.uniqueURL}/`
+			}
+			
             fetchData({pagePath})
 
         }
@@ -51,7 +57,7 @@ const AdminSummeryBox = ({pagePath,...props}) => {
         if(endDate) params["endDate"] = endDate
 
 		if(pagePath){
-			params = {...params,filter:`ga:pagePath=~${pagePath}`}
+			params = {...params,filters:`ga:pagePath=~${pagePath}`}
 		}
 		
 		analyticController._getData(params)
@@ -139,4 +145,4 @@ const AdminSummeryBox = ({pagePath,...props}) => {
 	
 }
 
-export default connect( state=>state )(AdminSummeryBox)
+export default connect(state=>({auth:state.auth}))(AdminSummeryBox)

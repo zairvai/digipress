@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
@@ -9,8 +10,11 @@ import Chartbox4 from 'Components/Chartbox4'
 import AnalyticController from 'Library/controllers/AnalyticController'
 import {LoadingOutlined} from '@ant-design/icons'
 import moment from 'moment'
+import AuthController from 'Library/controllers/AuthController'
 
-const AnalyticBox = ({selectedMenu,pagePath}) =>{
+const AnalyticBox = ({selectedMenu,...props}) =>{
+
+    const {auth} = props
 
     const [isFetching,setFetching] = React.useState(true)
     const [gaPageviews,setGaPageviews] = React.useState()
@@ -35,6 +39,12 @@ const AnalyticBox = ({selectedMenu,pagePath}) =>{
 
         if(isMounted.current){
 
+            let pagePath
+
+            if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
+                pagePath=`/${auth.account.uniqueURL}/`
+			}
+            
             fetchData({pagePath,startDate:selectedRange && selectedRange.value})
 
         }
@@ -157,4 +167,4 @@ const AnalyticBox = ({selectedMenu,pagePath}) =>{
     )
 }
 
-export default AnalyticBox
+export default connect(state=>({auth:state.auth}))(AnalyticBox)

@@ -1,12 +1,11 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as queries from 'Src/graphql/queries'
-import {all,put,takeLatest} from 'redux-saga/effects'
+import {all,put,takeLatest,takeEvery} from 'redux-saga/effects'
 
 import {
     getPostRoutine,
     listPostsRoutine
 } from '../routines/post'
-
 
 function* listPosts(action){
 
@@ -31,18 +30,24 @@ function* listPosts(action){
         const response = yield API.graphql(graphqlOperation(queries.listPosts,{input:listParams}))
 
         yield put(listPostsRoutine.success({data:response.data.listPosts}))
-
                     
     }catch(error){
         yield put(listPostsRoutine.failure({error}))
     }finally{
+        counter--
         yield put(listPostsRoutine.fulfill())
     }
 
 }
 
+// const listPostsActions = []
+// function* listPostsExecute(action){
+//     listPostsActions.push(action)
+//     console.log(listPostsActions)
+// } 
+
 export function* listPostsWatcher(){
-    yield takeLatest(listPostsRoutine.TRIGGER,listPosts)
+    yield takeEvery(listPostsRoutine.TRIGGER,listPosts)
 }
 
 function* getPost(action){
@@ -68,5 +73,5 @@ function* getPost(action){
 }
 
 export function* getPostWatcher(){
-    yield all([takeLatest(getPostRoutine.TRIGGER,getPost)])
+    yield takeLatest(getPostRoutine.TRIGGER,getPost)
 }

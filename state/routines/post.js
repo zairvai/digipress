@@ -5,7 +5,7 @@ import {
 var customRoutine = createRoutineCreator(["INIT"])
 
 //list post
-customRoutine = createRoutineCreator(["INIT","UPDATELIST"])
+customRoutine = createRoutineCreator(["INIT"])
 export const customListPostsRoutine = customRoutine("list_post_custom")
 export const listPostsRoutine = createRoutine("list_posts")
 export const listPostsRoutinePromise = promisifyRoutine(listPostsRoutine)

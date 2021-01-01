@@ -1,4 +1,8 @@
+import {all} from 'redux-saga/effects'
+
 export default class Controller{
+
+    static actionList = []
 
     constructor({dispatch, ...props}){
         
@@ -13,6 +17,11 @@ export default class Controller{
 
     _list = values => {
         return this.props.listPostsRoutinePromise(values)
+    }
+
+    static _all = sagas =>{
+        this.actionList = [...this.actionList,...sagas]
+        console.log(sagas)
     }
 
 }
