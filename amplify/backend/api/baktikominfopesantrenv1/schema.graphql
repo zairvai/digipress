@@ -72,6 +72,18 @@ type Query @aws_iam
 
 	getLesson(input: GetItemInput!): Lesson
 	listLessons(input: ListItemInput): LessonConnection
+
+	getAnalytic(input:GetAnalitycInput):Analytic
+}
+
+type Analytic @aws_iam
+@aws_cognito_user_pools{
+	results:AWSJSON,
+	rows:AWSJSON
+}
+
+input GetAnalitycInput {
+	params:AWSJSON
 }
 
 enum ReadAccess {
@@ -193,7 +205,8 @@ enum PostType{
 }
 
 input ListPostInput{
-	postTypes:[PostType!]!
+	ids:[ID]
+	postTypes:[PostType!]
 	accountId: ID
 	title:String
 	orderBy: String

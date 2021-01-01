@@ -18,7 +18,33 @@
       "function": {
         "baktikominfopesantrenv1PostConfirmation": {},
         "baktikominfopesantrenv1PostAuthentication": {},
-        "baktikominfopesantrenv1PreTokenGeneration": {}
+        "baktikominfopesantrenv1PreTokenGeneration": {},
+        "DigiPressLayers": {
+          "deploymentBucketName": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
+          "s3Key": "amplify-builds/DigiPressLayers-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "DigiPressLayers": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "147604133037"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "4Zsn+GQXCpsIXUJUnzzt581vAOmPHJPZqZr5MtIC01c="
+            }
+          }
+        }
       }
     }
   },

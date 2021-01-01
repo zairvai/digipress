@@ -11,7 +11,6 @@ const Summery = props =>{
 			<Row>
 				<Col lg={12} md={10} xs={24}>
 					<Row>
-						
 						<Col xs={24}>
 							<div className="vurox-admin-welcome">
 								<h5>Hi {auth.user.name}, Selamat datang !</h5>

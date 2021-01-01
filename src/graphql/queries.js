@@ -32342,3 +32342,11 @@ export const listLessons = /* GraphQL */ `
     }
   }
 `;
+export const getAnalytic = /* GraphQL */ `
+  query GetAnalytic($input: GetAnalitycInput) {
+    getAnalytic(input: $input) {
+      results
+      rows
+    }
+  }
+`;

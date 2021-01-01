@@ -19,6 +19,18 @@ will be passed as the event to AWS Lambda.
   }
 })
 
+##set ids
+#if(!$util.isNull($ctx.args.input.ids))
+
+  #set($ids={
+    "terms": {
+      "id.keyword": $ctx.args.input.ids
+    }
+  })
+  $util.qr($query.bool.must.add($ids))
+  
+#end
+
 ##set match accountid
 #if(!$util.isNull($ctx.args.input.accountId))
   #set($match={

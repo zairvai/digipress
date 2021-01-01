@@ -543,6 +543,9 @@
 			  "ApiId":{
 				  "Ref":"AppSyncApiId"
 			  },
+			  "CachingConfig":{
+				  "Ttl":120
+			  },
 			  "TypeName":"Query",
 			  "FieldName":"getAccount",
 			  "Kind":"PIPELINE",
@@ -584,6 +587,9 @@
 		"Properties":{
 			"ApiId":{
 				"Ref":"AppSyncApiId"
+			},
+			"CachingConfig":{
+				"Ttl":120
 			},
 			"TypeName":"Query",
 			"FieldName":"getAccountByUniqueUrl",
@@ -667,6 +673,9 @@
 			  "ApiId":{
 				  "Ref":"AppSyncApiId"
 			  },
+			  "CachingConfig":{
+				  "Ttl":120
+			  },
 			  "TypeName":"Account",
 			  "FieldName":"createdBy",
 			  "Kind":"PIPELINE",
@@ -709,6 +718,9 @@
 			  "ApiId":{
 				  "Ref":"AppSyncApiId"
 			  },
+			  "CachingConfig":{
+				  "Ttl":120
+			  },
 			  "TypeName":"Account",
 			  "FieldName":"updatedBy",
 			  "Kind":"PIPELINE",
@@ -750,6 +762,9 @@
 		  "Properties":{
 			  "ApiId":{
 				  "Ref":"AppSyncApiId"
+			  },
+			  "CachingConfig":{
+				  "Ttl":120
 			  },
 			  "TypeName":"AccountConnection",
 			  "FieldName":"items",
@@ -921,6 +936,9 @@
 			"ApiId":{
 				"Ref":"AppSyncApiId"
 			},
+			"CachingConfig":{
+				"Ttl":120
+			},
 			"TypeName":"Query",
 			"FieldName":"getUser",
 			"Kind":"PIPELINE",
@@ -962,6 +980,9 @@
 		"Properties":{
 			"ApiId":{
 				"Ref":"AppSyncApiId"
+			},
+			"CachingConfig":{
+				"Ttl":120
 			},
 			"TypeName":"Query",
 			"FieldName":"getUserByEmailAddress",
@@ -1045,6 +1066,9 @@
 			"ApiId":{
 				"Ref":"AppSyncApiId"
 			},
+			"CachingConfig":{
+				"Ttl":120
+			},
 			"TypeName":"User",
 			"FieldName":"createdBy",
 			"Kind":"PIPELINE",
@@ -1087,6 +1111,9 @@
 			"ApiId":{
 				"Ref":"AppSyncApiId"
 			},
+			"CachingConfig":{
+				"Ttl":120
+			},
 			"TypeName":"User",
 			"FieldName":"updatedBy",
 			"Kind":"PIPELINE",
@@ -1128,6 +1155,9 @@
 		"Properties":{
 			"ApiId":{
 				"Ref":"AppSyncApiId"
+			},
+			"CachingConfig":{
+				"Ttl":120
 			},
 			"TypeName":"UserConnection",
 			"FieldName":"items",
@@ -1297,6 +1327,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getTag",
 				"Kind":"PIPELINE",
@@ -1338,6 +1371,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Tag",
 				"FieldName":"account",
@@ -1381,6 +1417,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Tag",
 				"FieldName":"createdBy",
 				"Kind":"PIPELINE",
@@ -1422,6 +1461,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Tag",
 				"FieldName":"updatedBy",
@@ -1502,6 +1544,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"TagConnection",
 				"FieldName":"items",
@@ -1671,6 +1716,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getCategory",
 				"Kind":"PIPELINE",
@@ -1712,6 +1760,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Category",
 				"FieldName":"account",
@@ -1755,6 +1806,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Category",
 				"FieldName":"createdBy",
 				"Kind":"PIPELINE",
@@ -1796,6 +1850,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Category",
 				"FieldName":"updatedBy",
@@ -1877,6 +1934,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"CategoryConnection",
 				"FieldName":"items",
 				"Kind":"PIPELINE",
@@ -1918,6 +1978,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Query",
 				"FieldName":"getPost",
@@ -1998,6 +2061,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"PostConnection",
 				"FieldName":"items",
@@ -2169,6 +2235,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getArticle",
 				"Kind":"PIPELINE",
@@ -2211,6 +2280,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"StorageManager",
 				"TypeName":"Article",
 				"FieldName":"content",
@@ -2248,6 +2320,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"DataSourceName":"SearchManager",
 				"TypeName":"Article",
@@ -2287,6 +2362,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"SearchManager",
 				"TypeName":"Article",
 				"FieldName":"noOfNoReplyComment",
@@ -2325,6 +2403,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"EmptySource",
 				"TypeName":"Article",
 				"FieldName":"postType",
@@ -2362,6 +2443,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Article",
 				"FieldName":"createdBy",
@@ -2405,6 +2489,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Article",
 				"FieldName":"account",
 				"Kind":"PIPELINE",
@@ -2447,6 +2534,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Article",
 				"FieldName":"category",
 				"Kind":"PIPELINE",
@@ -2488,6 +2578,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Article",
 				"FieldName":"updatedBy",
@@ -2569,6 +2662,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"ArticleConnection",
 				"FieldName":"items",
 				"Kind":"PIPELINE",
@@ -2610,6 +2706,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Article",
 				"FieldName":"tags",
@@ -2781,6 +2880,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getClassroom",
 				"Kind":"PIPELINE",
@@ -2823,6 +2925,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"StorageManager",
 				"TypeName":"Classroom",
 				"FieldName":"content",
@@ -2861,6 +2966,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"EmptySource",
 				"TypeName":"Classroom",
 				"FieldName":"postType",
@@ -2898,6 +3006,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Classroom",
 				"FieldName":"createdBy",
@@ -2940,6 +3051,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Classroom",
 				"FieldName":"updatedBy",
@@ -3021,6 +3135,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"ClassroomConnection",
 				"FieldName":"items",
 				"Kind":"PIPELINE",
@@ -3062,6 +3179,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Classroom",
 				"FieldName":"account",
@@ -3105,6 +3225,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Classroom",
 				"FieldName":"category",
 				"Kind":"PIPELINE",
@@ -3146,6 +3269,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Classroom",
 				"FieldName":"tags",
@@ -3317,6 +3443,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getComment",
 				"Kind":"PIPELINE",
@@ -3359,6 +3488,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"StorageManager",
 				"TypeName":"Comment",
 				"FieldName":"content",
@@ -3396,6 +3528,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Comment",
 				"FieldName":"account",
@@ -3439,6 +3574,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Comment",
 				"FieldName":"post",
 				"Kind":"PIPELINE",
@@ -3481,6 +3619,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"SearchManager",
 				"TypeName":"Comment",
 				"FieldName":"noOfReply",
@@ -3518,6 +3659,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"DataSourceName":"AppTable",
 				"TypeName":"Comment",
@@ -3557,6 +3701,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"AppTable",
 				"TypeName":"Comment",
 				"FieldName":"replyToUser",
@@ -3594,6 +3741,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Comment",
 				"FieldName":"replies",
@@ -3639,6 +3789,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Comment",
 				"FieldName":"createdBy",
 				"Kind":"PIPELINE",
@@ -3680,6 +3833,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Comment",
 				"FieldName":"updatedBy",
@@ -3798,6 +3954,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"CommentConnection",
 				"FieldName":"items",
@@ -3969,6 +4128,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getLesson",
 				"Kind":"PIPELINE",
@@ -4012,6 +4174,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"StorageManager",
 				"TypeName":"Lesson",
 				"FieldName":"content",
@@ -4049,6 +4214,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Lesson",
 				"FieldName":"account",
@@ -4092,6 +4260,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Lesson",
 				"FieldName":"post",
 				"Kind":"PIPELINE",
@@ -4134,6 +4305,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Lesson",
 				"FieldName":"createdBy",
 				"Kind":"PIPELINE",
@@ -4175,6 +4349,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Lesson",
 				"FieldName":"updatedBy",
@@ -4255,6 +4432,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"LessonConnection",
 				"FieldName":"items",
@@ -4426,6 +4606,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Query",
 				"FieldName":"getQna",
 				"Kind":"PIPELINE",
@@ -4468,6 +4651,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"StorageManager",
 				"TypeName":"Qna",
 				"FieldName":"content",
@@ -4505,6 +4691,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Qna",
 				"FieldName":"account",
@@ -4548,6 +4737,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Qna",
 				"FieldName":"post",
 				"Kind":"PIPELINE",
@@ -4589,6 +4781,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Qna",
 				"FieldName":"lesson",
@@ -4632,6 +4827,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"AppTable",
 				"TypeName":"Qna",
 				"FieldName":"replyTo",
@@ -4670,6 +4868,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"DataSourceName":"AppTable",
 				"TypeName":"Qna",
 				"FieldName":"replyToUser",
@@ -4707,6 +4908,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Qna",
 				"FieldName":"replies",
@@ -4752,6 +4956,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"Qna",
 				"FieldName":"createdBy",
 				"Kind":"PIPELINE",
@@ -4793,6 +5000,9 @@
 			"Properties":{
 				"ApiId":{
 					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"Ttl":120
 				},
 				"TypeName":"Qna",
 				"FieldName":"updatedBy",
@@ -4912,6 +5122,9 @@
 				"ApiId":{
 					"Ref":"AppSyncApiId"
 				},
+				"CachingConfig":{
+					"Ttl":120
+				},
 				"TypeName":"QnaConnection",
 				"FieldName":"items",
 				"Kind":"PIPELINE",
@@ -4936,6 +5149,48 @@
 				"ResponseMappingTemplateS3Location":{
 					"Fn::Sub": [
 						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Item.res.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				}
+			}
+		},
+		"QueryGetAnalyticResolver":{
+			"Type":"AWS::AppSync::Resolver",
+			"Properties":{
+				"ApiId":{
+					"Ref":"AppSyncApiId"
+				},
+				"CachingConfig":{
+					"CachingKeys":["$context.arguments.input.params"],
+					"Ttl":3600
+				},
+				"DataSourceName":"GAManager",
+				"TypeName":"Query",
+				"FieldName":"getAnalytic",
+				"Kind":"UNIT",
+				"RequestMappingTemplateS3Location":{
+					"Fn::Sub":[
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.getAnalytic.req.vtl",
+						{
+							"S3DeploymentBucket": {
+								"Ref": "S3DeploymentBucket"
+							},
+							"S3DeploymentRootKey": {
+								"Ref": "S3DeploymentRootKey"
+							}
+						}
+					]
+				},
+				"ResponseMappingTemplateS3Location":{
+					"Fn::Sub": [
+						"s3://${S3DeploymentBucket}/${S3DeploymentRootKey}/resolvers/Query.getAnalytic.res.vtl",
 						{
 							"S3DeploymentBucket": {
 								"Ref": "S3DeploymentBucket"

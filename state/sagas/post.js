@@ -1,6 +1,6 @@
 import {API,graphqlOperation} from 'aws-amplify'
 import * as queries from 'Src/graphql/queries'
-import {put,takeLatest} from 'redux-saga/effects'
+import {all,put,takeLatest} from 'redux-saga/effects'
 
 import {
     getPostRoutine,
@@ -12,10 +12,11 @@ function* listPosts(action){
 
     try{
 
-        const {accountId,postTypes,name,orderBy,direction,from,size,statuses} = action.payload
+        const {ids,accountId,postTypes,name,orderBy,direction,from,size,statuses} = action.payload
 
         const listParams={from,size}
-
+        
+        if(ids) listParams.ids = ids
         if(accountId) listParams.accountId = accountId
         if(postTypes) listParams.postTypes = postTypes
         if(name) listParams.name = name
@@ -67,5 +68,5 @@ function* getPost(action){
 }
 
 export function* getPostWatcher(){
-    yield takeLatest(getPostRoutine.TRIGGER,getPost)
+    yield all([takeLatest(getPostRoutine.TRIGGER,getPost)])
 }
