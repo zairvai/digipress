@@ -241,8 +241,11 @@ const List = props =>{
         const index = clonedtems.findIndex(obj=>obj.id==repliedQuestion.id)
         
         if(index > -1){
+            console.log(repliedQuestion)
             clonedtems.splice(index,1,repliedQuestion)
             setItems(clonedtems)
+        }else{
+            setItems([...items,repliedQuestion])
         }
 
         setFormVisible(false)

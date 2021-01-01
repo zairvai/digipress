@@ -34,7 +34,6 @@ function* listPosts(action){
     }catch(error){
         yield put(listPostsRoutine.failure({error}))
     }finally{
-        counter--
         yield put(listPostsRoutine.fulfill())
     }
 
