@@ -156,7 +156,7 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
             <VuroxComponentsContainer style={{height:"330px"}}>
                 <Row>
                     <Col md={24}>
-                        {isEmpty ? 
+                        {isEmpty && !isFetching ? 
                             <div className="d-flex align-items-center justify-content-center" style={{height:"330px"}}>
                                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                             </div>

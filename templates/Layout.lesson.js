@@ -25,15 +25,15 @@ const Layout = props => {
 
 	const {ref} = React.useMemo(()=>router.query,[])
 
-    React.useEffect(()=>{
+    // React.useEffect(()=>{
 
-		if(ref){
-			appController._setCurrentPage("classrooms")
-		}else{
-			appController._setCurrentPage("home")
-		}
+	// 	if(ref){
+	// 		appController._setCurrentPage("classrooms")
+	// 	}else{
+	// 		appController._setCurrentPage("home")
+	// 	}
 
-    },[])
+    // },[])
 
 
 	return (

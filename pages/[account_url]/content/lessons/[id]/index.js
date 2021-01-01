@@ -23,8 +23,8 @@ import {NextSeo} from 'next-seo'
 const PageLessonId = props => {
 
     const {confirm} = Modal
-    const {Paragraph} = Typography
-    const {auth,router} = props
+
+    const {auth,app,router} = props
     const lessonController = new LessonController(props)
     
     const [item,setItem] = React.useState({})
@@ -86,7 +86,8 @@ const PageLessonId = props => {
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.post && item.post.title} ghost={false}
                         onBack={()=>{
-                            if(ref) router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
+                            if(app.currentPage==="qnas") router.push(`/[account_ur]/main/qnas/`,`/${auth.account.uniqueURL}/main/qnas/`,{shallow:true})
+                            else if(app.currentPage=="classrooms") router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
                             else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
                         }}
 
@@ -136,7 +137,7 @@ const PageLessonId = props => {
 }
 
 export default connect(
-    state=>({auth:state.auth}),
+    state=>({auth:state.auth,app:state.app}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getLessonRoutinePromise,
