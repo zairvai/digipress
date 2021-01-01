@@ -23,14 +23,14 @@ const PageArticleId = props => {
 
     const {confirm} = Modal
 
-    const {auth,commentId,router} = props
+    const {auth,router} = props
 
     const articleController = new ArticleController(props)
 
     const [item,setItem] = React.useState({})
     const [noOfComment,setNoOfComment] = React.useState(0)
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const {id,commentId} = React.useMemo(()=>router.query,[])
 
     React.useEffect(async ()=>{
        
