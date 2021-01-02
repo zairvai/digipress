@@ -42,7 +42,7 @@ const Layout = props => {
 				</VuroxSidebar>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
 					<Summery/>
-                    <Row className="mb-2">
+                    {/* <Row className="mb-2">
                         <Col md={12}>
                             <div className="vurox-tabs-underlined vurox-dark vurox-tabs-underlined-left mt-3 mb-1">
                                 <ul className="nav nav-pills vurox-dropdown-list" id="vurox-tab" role="tablist">
@@ -60,7 +60,7 @@ const Layout = props => {
                                 </ul>
                             </div>
                         </Col>
-                    </Row>
+                    </Row> */}
 					{props.children}
 				</ContentLayout>
 			</VuroxLayout>

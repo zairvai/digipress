@@ -105,10 +105,27 @@ const AdminSummeryBox = ({...props}) => {
 							}
 						})
 						
-						setGaPageviews({results:data.results["ga:pageviews"],rows:pageviewsRows})
-						setGaSessions({results:data.results["ga:sessions"],rows:sessionsRows})
-						setGaBounceRate({results:round(data.results["ga:bounceRate"]),rows:bounceRateRows})
-						setGaUsers({results:data.results["ga:users"],rows:usersRows})
+						const pageviews = {results:data.results["ga:pageviews"],rows:pageviewsRows}
+						setGaPageviews(pageviews)
+
+						const sessions = {results:data.results["ga:sessions"],rows:sessionsRows}
+						setGaSessions(sessions)
+
+						const bounceRate = {results:round(data.results["ga:bounceRate"]),rows:bounceRateRows}
+						setGaBounceRate(bounceRate)
+
+						const users = {results:data.results["ga:users"],rows:usersRows}
+						setGaUsers(users)
+
+						if(props.onLoad){
+							const report = {overall:[
+								{name:"pageviews",...pageviews},
+								{name:"visits",...sessions},
+								{name:"bounce rate",...bounceRate},
+								{name:"visitors",...users}]}
+								
+							props.onLoad(report)
+						}
 
 					}
 

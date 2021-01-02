@@ -80,7 +80,7 @@ const Home = props =>{
     return (
         <Layout>
             <NextSeo title="Home"/>
-            <ListPosts items={listPosts.list.items} foundDoc={listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
+            <ListPosts items={listPosts && listPosts.list && listPosts.list.items} foundDoc={listPosts && listPosts.list && listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
         </Layout>
     )
 }

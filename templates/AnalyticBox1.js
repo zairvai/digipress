@@ -98,14 +98,28 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                             //}
 
 						})
-						
-						setGaPageviews({results:data.results["ga:pageviews"],rows:pageviewsRows})
-						setGaSessions({results:data.results["ga:sessions"],rows:sessionsRows})
-                        setGaPagesPerSession({results:round(data.results["ga:pageviewsPerSession"]),rows:pagesPerSessionRows})
+                        
+                        const pageviews = {results:data.results["ga:pageviews"],rows:pageviewsRows}
+                        setGaPageviews(pageviews)
+                        
+                        const sessions = {results:data.results["ga:sessions"],rows:sessionsRows}
+                        setGaSessions(sessions)
+                        
+                        const pagesPerSession = {results:round(data.results["ga:pageviewsPerSession"]),rows:pagesPerSessionRows}
+                        setGaPagesPerSession(pagesPerSession)
                         
                         const bar1 = {label:"Pageviews",color:"#F7614E",data:barData1}
                         const bar2 = {label:"Visits",color:"#50bc5e",data:barData2}
                         setDoubleBarData({bar1,bar2})
+
+                        if(props.onLoad){
+							const report = {analyticBox1:[
+								{name:"pageviews",...pageviews},
+								{name:"visits",...sessions},
+								{name:"pages per visit",...pagesPerSession}]}
+								
+							props.onLoad(report)
+						}
 
     
                     }
