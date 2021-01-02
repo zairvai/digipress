@@ -166,7 +166,7 @@ const List = props =>{
     
     const rowHandler = (record,rowIndex) => {
         return{
-            onDoubleClick: e => {
+            onClick: e => {
                 if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)) 
                     router.push(`/${auth.account.uniqueURL}/content/categories/${record.id}/edit`)
             }

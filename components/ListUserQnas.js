@@ -161,7 +161,7 @@ const List = props =>{
 
     const rowHandler = (record,rowIndex) => {
         return{
-            onDoubleClick: e => {
+            onClick: e => {
                 router.push(`/${auth.account.uniqueURL}/content/lessons/${record.lesson.id}`)
             }
         }

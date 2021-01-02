@@ -20,7 +20,7 @@ export default class Controller{
     static DELETE_ARTICLE = ({auth,item,...props}) => {
 
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 
@@ -31,7 +31,7 @@ export default class Controller{
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 
@@ -51,7 +51,7 @@ export default class Controller{
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 
@@ -60,7 +60,7 @@ export default class Controller{
     static DELETE_CLASSROOM = ({auth,item,...props}) => {
 
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 
@@ -80,7 +80,7 @@ export default class Controller{
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 
@@ -89,7 +89,7 @@ export default class Controller{
     static DELETE_LESSON = ({auth,item,...props}) => {
 
         if(AuthController.isStudent(auth) || AuthController.isMember(auth)) return false
-        if(AuthController.isTutor(auth) && item.createdBy && auth.user.id != item.createdBy.id) return false
+        if(AuthController.isTutor(auth) && item && item.createdBy && auth.user.id != item.createdBy.id) return false
 
         return true
 

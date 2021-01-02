@@ -123,7 +123,7 @@ const List = props =>{
 
     const rowHandler = (record,rowIndex) => {
         return{
-            onDoubleClick: e => {
+            onClick: e => {
                 router.push(`/${auth.account.uniqueURL}/manage/accounts/${record.id}`)
             }
         }
