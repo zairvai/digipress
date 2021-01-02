@@ -31,12 +31,24 @@ const schema = yup.object().shape({
 
 const FormClassroom = ({item,...props}) => {
 
-    const {tags,categories,createClassroom,updateClassroom} = props
+    const {tags,categories} = props
 
     const classroomController = new ClassroomController(props)
 
+    const [isSubmitting,setSubmitting] = React.useState(false)
+
     const [editor,setEditor] = React.useState()
+    const [content,setContent] = React.useState("")
+
     const isMounted = React.useRef()
+
+    React.useEffect(()=>{
+
+        return()=>{
+            setEditor(null)
+        }
+    },[])
+
 
     React.useEffect(()=>{
         
@@ -45,9 +57,9 @@ const FormClassroom = ({item,...props}) => {
         if(isMounted.current){
 
             if(item){
-
-                if(editor) editor.setContent(item.content)
                 
+                setContent(item.content)
+
                 setValue("content",item.content)
 
                 setValue("title",item.title)
@@ -59,11 +71,14 @@ const FormClassroom = ({item,...props}) => {
                 })
                 
                 let selectedTags = []
-                item.tags.forEach(tag=>tag && selectedTags.push({
-                    id:tag.id,
-                    value:tag.id.toString(),
-                    label:tag.name}))
-                
+
+                if(item.tags){
+                    item.tags.forEach(tag=>tag && selectedTags.push({
+                        id:tag.id,
+                        value:tag.id.toString(),
+                        label:tag.name}))
+                }
+
                 setValue("tags",selectedTags)
                 setValue("allowComment",item.allowComment)
                 setValue("readAccess",item.access)
@@ -73,10 +88,16 @@ const FormClassroom = ({item,...props}) => {
 
         return ()=>{
             isMounted.current=false
-            if(editor) editor.setContent("")
         }
         
-    },[item,editor])
+    },[item])
+
+    React.useEffect(()=>{
+
+        if(content && editor){
+            editor.setContent(content)
+        }
+    },[content,editor])
 
     const {
         handleSubmit,
@@ -108,6 +129,8 @@ const FormClassroom = ({item,...props}) => {
             })
             values.tags = tags
         }
+
+        setSubmitting(true)
 
         if(item) {
             classroomController._update(item,values)
@@ -169,6 +192,10 @@ const FormClassroom = ({item,...props}) => {
         setEditor(editor)
     }
 
+    const handleEditorChange = editor =>{
+        setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
+    }
+
     return (
         <Form
             layout="vertical"
@@ -186,7 +213,7 @@ const FormClassroom = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama pelajaran">
                                             <Input 
-                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
@@ -208,11 +235,11 @@ const FormClassroom = ({item,...props}) => {
                                            
                                             <TinyMce 
                                                 id="classroomEditor"
-                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
-                                                //content={content}
+                                                isSubmitting={isSubmitting}
                                                 minHeight={400}
                                                 onFinishSetup={handleEditorSetup}
-                                                onChange={props.onChange} value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                onChange={handleEditorChange} 
+                                                value={props.value} placeholder="Ketik isi tulisan..."/>
                                             
                                         </Form.Item>
                                     }
@@ -232,7 +259,7 @@ const FormClassroom = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Kategori" className="mb-0">
                                             <SelectCategory 
-                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                disabled={isSubmitting}
                                                 items={categories} 
                                                 value={props.value}
                                                 onChange={onSelectCategoryChange}
@@ -253,7 +280,7 @@ const FormClassroom = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Tag" className="mb-0 mt-3">
                                             <SelectTags 
-                                                disabled={createClassroom.isRequesting || updateClassroom.isRequesting}
+                                                disabled={isSubmitting}
                                                 items={tags}
                                                 value={props.value}
                                                 onChange={onSelectTagsChange}
@@ -273,7 +300,7 @@ const FormClassroom = ({item,...props}) => {
                                     name="allowComment"
                                     control={control}
                                     // onChange={onAllowCommentChange.bind(this)}
-                                    render={props=><Checkbox  disabled={createClassroom.isRequesting || updateClassroom.isRequesting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
+                                    render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
                                 />
                                 
                             </Col>
@@ -286,7 +313,7 @@ const FormClassroom = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
-                                            <Radio.Group disabled={createClassroom.isRequesting || updateClassroom.isRequesting} 
+                                            <Radio.Group disabled={isSubmitting} 
                                                 onChange={onReadAccessChange} value={props.value}>
                                                 <Radio value="public">Umum</Radio>
                                                 <Radio value="protected">Internal</Radio>
@@ -303,11 +330,11 @@ const FormClassroom = ({item,...props}) => {
                             <Col md={24}>
                                 <Row>
                                     <Col md={11}>
-                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={createClassroom.isRequesting || updateClassroom.isRequesting} block>Batal</Button>
+                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={isSubmitting} block>Batal</Button>
                                     </Col>
 
                                     <Col md={11} className="ml-0 ml-md-2">
-                                        <Button size="medium" type="primary" htmlType="submit" loading={createClassroom.isRequesting || updateClassroom.isRequesting} block>Publikasi</Button>
+                                        <Button size="medium" type="primary" htmlType="submit" loading={isSubmitting} block>Publikasi</Button>
                                     </Col>
                                 </Row>
                             </Col>

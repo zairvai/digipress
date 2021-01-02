@@ -158,7 +158,7 @@ const TinyMce = ({id,className="",mode="full",
             }
             else{
                 //finish submission
-                ed.setContent("")
+                //ed.setContent("")
                 ed.mode.set('design')
             }
         }

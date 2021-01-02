@@ -41,9 +41,7 @@ const PageClassroomAdd = props => {
     }
     
     const onSuccess = classroom =>{
-		console.log(classroom)
-        //userController._updateList("add",user,0)
-        router.push(`/${auth.account.uniqueURL}/content/classrooms`)	
+        router.push(`/${auth.account.uniqueURL}/content/classrooms/${classroom.id}`)	
 	}
 	
 	return (

@@ -113,12 +113,12 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                         setDoubleBarData({bar1,bar2})
 
                         if(props.onLoad){
-							const report = {analyticBox1:[
-								{name:"pageviews",...pageviews},
-								{name:"visits",...sessions},
-								{name:"pages per visit",...pagesPerSession}]}
+							// const report = {analyticBox1:[
+							// 	{name:"pageviews",...pageviews},
+							// 	{name:"visits",...sessions},
+							// 	{name:"pages per visit",...pagesPerSession}]}
 								
-							props.onLoad(report)
+							// props.onLoad(report)
 						}
 
     

@@ -9,8 +9,8 @@ import AnalyticBox2 from 'Templates/AnalyticBox2'
 import AnalyticBox3 from 'Templates/AnalyticBox3'
 import AnalyticBox4 from 'Templates/AnalyticBox4'
 import {NextSeo} from 'next-seo'
-
 import AuthController from 'Library/controllers/AuthController'
+// import {ExcelFile, ExcelSheet} from "react-data-export";
 
 const PageDashboard = props => {
 
@@ -20,6 +20,7 @@ const PageDashboard = props => {
 
 	const [selectedMenu,setSelectedMenu] = React.useState()
 
+	const [report,setReport] = React.useState()
 
 	React.useEffect(()=>{
 
@@ -30,13 +31,25 @@ const PageDashboard = props => {
 
 	},[])
 
+	React.useEffect(()=>{
+		console.log(report)
+	},[report])
+
 	const handleMenuChange = selected =>{
 		setSelectedMenu(selected)
 	}
 
-	const handleReport = report =>{
-		console.log(report)
+	const handleReport = analytics =>{
+		
+		setReport(analytics)
+
 	}
+
+	// const DownloadButton = props =>(
+	// 	<ExcelFile element={<Button key="download-report" type="primary"><i className="ti-download"></i>&nbsp;Unduh laporan</Button>}>
+	// 		<ExcelSheet dataSet={report} name="Digipress Report"/>
+	// 	</ExcelFile>
+	// )
 
 
 	return (
@@ -50,9 +63,8 @@ const PageDashboard = props => {
 							title="Laporan"
 							subTitle="penggunaaan akun secara keseluruhan"
 							extra={[
-								<Button key="download-report" type="primary"><i className="ti-download"></i>&nbsp;Unduh laporan</Button>
+								// <DownloadButton/>
 							]}
-							
 						/>
 					</div>
 				</Col>

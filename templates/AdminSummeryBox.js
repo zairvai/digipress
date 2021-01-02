@@ -118,13 +118,21 @@ const AdminSummeryBox = ({...props}) => {
 						setGaUsers(users)
 
 						if(props.onLoad){
-							const report = {overall:[
-								{name:"pageviews",...pageviews},
-								{name:"visits",...sessions},
-								{name:"bounce rate",...bounceRate},
-								{name:"visitors",...users}]}
-								
-							props.onLoad(report)
+
+							const dataSet = [
+								{
+									columns:["Pageviews","Visits","Bounce rate(%)","Visitors"],
+									data:[pageviews.results,sessions.results,bounceRate.results,users.results]
+								},
+							]
+
+							// const report = {overall:[
+							// 	{name:"pageviews",...pageviews},
+							// 	{name:"visits",...sessions},
+							// 	{name:"bounce rate",...bounceRate},
+							// 	{name:"visitors",...users}]}
+
+							props.onLoad(dataSet)
 						}
 
 					}

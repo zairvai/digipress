@@ -109,7 +109,7 @@ const List = props =>{
                 title:"Tag",
                 dataIndex:"tags",
                 width:"20%",
-                render:tags=>tags.map(tag=> tag && <Tag key={tag.id}>{tag.name}</Tag>)
+                render:tags=>tags && tags.map(tag=> tag && <Tag key={tag.id}>{tag.name}</Tag>)
             },
             {
                 title:"Penulis",

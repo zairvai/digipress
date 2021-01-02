@@ -31,13 +31,24 @@ const schema = yup.object().shape({
 
 const FormArticle = ({item,...props}) => {
 
-    const {tags,categories,createArticle,updateArticle} = props
+    const {tags,categories} = props
 
     const articleController = new ArticleController(props)
 
+    const [isSubmitting,setSubmitting] = React.useState(false)
+
     const [editor,setEditor] = React.useState()
+    const [content,setContent] = React.useState("")
+
     const isMounted = React.useRef()
     
+    React.useEffect(()=>{
+
+        return()=>{
+            setEditor(null)
+        }
+    },[])
+
     React.useEffect(()=>{
         
         isMounted.current = true
@@ -46,8 +57,7 @@ const FormArticle = ({item,...props}) => {
 
             if(item){
 
-                if(editor) editor.setContent(item.content)
-
+                setContent(item.content)
                 setValue("title",item.title)
                 setValue("content",item.content)
                 
@@ -58,12 +68,16 @@ const FormArticle = ({item,...props}) => {
                 })
                 
                 let selectedTags = []
-                item.tags.forEach(tag=>tag && selectedTags.push({
-                    id:tag.id,
-                    value:tag.id.toString(),
-                    label:tag.name}))
+
+                if(item.tags){
+                    item.tags.forEach(tag=>tag && selectedTags.push({
+                        id:tag.id,
+                        value:tag.id.toString(),
+                        label:tag.name}))
+                }
                 
                 setValue("tags",selectedTags)
+
                 setValue("allowComment",item.allowComment)
                 setValue("readAccess",item.access)
         
@@ -72,10 +86,16 @@ const FormArticle = ({item,...props}) => {
 
         return ()=>{
             isMounted.current=false
-            if(editor) editor.setContent("")
         }
         
-    },[item,editor])
+    },[item])
+
+    React.useEffect(()=>{
+
+        if(content && editor){
+            editor.setContent(content)
+        }
+    },[content,editor])
 
     const {
         handleSubmit,
@@ -106,6 +126,8 @@ const FormArticle = ({item,...props}) => {
             })
             values.tags = tags
         }
+
+        setSubmitting(true)
 
         if(item) {
 
@@ -165,6 +187,10 @@ const FormArticle = ({item,...props}) => {
         setEditor(editor)
     }
 
+    const handleEditorChange = editor =>{
+        setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
+    }
+
     return (
         <Form
             layout="vertical"
@@ -182,7 +208,7 @@ const FormArticle = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Judul artikel">
                                             <Input 
-                                                disabled={createArticle.isRequesting || updateArticle.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large" placeholder="Judul artikel" value={props.value} onChange={props.onChange} />
                                             {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                         </Form.Item>
@@ -204,10 +230,10 @@ const FormArticle = ({item,...props}) => {
                                            
                                             <TinyMce 
                                                 id="articleEditor" 
-                                                disabled={createArticle.isRequesting || updateArticle.isRequesting}
+                                                isSubmitting={isSubmitting}
                                                 minHeight={400}
                                                 onFinishSetup={handleEditorSetup}
-                                                onChange={props.onChange} 
+                                                onChange={handleEditorChange} 
                                                 value={props.value} placeholder="Ketik isi tulisan..."/>
                                             {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
                                         </Form.Item>
@@ -228,7 +254,7 @@ const FormArticle = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Kategori" className="mb-0">
                                             <SelectCategory 
-                                                disabled={createArticle.isRequesting || updateArticle.isRequesting}
+                                                disabled={isSubmitting}
                                                 items={categories} 
                                                 value={props.value}
                                                 onChange={onSelectCategoryChange}
@@ -250,7 +276,7 @@ const FormArticle = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Tag" className="mb-0 mt-3">
                                             <SelectTags 
-                                                disabled={createArticle.isRequesting || updateArticle.isRequesting}
+                                                disabled={isSubmitting}
                                                 items={tags}
                                                 value={props.value}
                                                 onChange={onSelectTagsChange}
@@ -270,7 +296,7 @@ const FormArticle = ({item,...props}) => {
                                     name="allowComment"
                                     control={control}
                                     // onChange={onAllowCommentChange.bind(this)}
-                                    render={props=><Checkbox  disabled={createArticle.isRequesting || updateArticle.isRequesting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
+                                    render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
                                 />
                                 
                             </Col>
@@ -283,7 +309,7 @@ const FormArticle = ({item,...props}) => {
                                     control={control}
                                     render={props=>
                                         <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
-                                            <Radio.Group disabled={createArticle.isRequesting || updateArticle.isRequesting} 
+                                            <Radio.Group disabled={isSubmitting} 
                                                 onChange={onReadAccessChange} value={props.value}>
                                                 <Radio value="public">Umum</Radio>
                                                 <Radio value="protected">Internal</Radio>
@@ -300,11 +326,11 @@ const FormArticle = ({item,...props}) => {
                             <Col md={24}>
                                 <Row>
                                     <Col md={11}>
-                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={createArticle.isRequesting || updateArticle.isRequesting} block>Batal</Button>
+                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={isSubmitting} block>Batal</Button>
                                     </Col>
 
                                     <Col md={11} className="ml-0 ml-md-2">
-                                        <Button size="medium" type="primary" htmlType="submit" loading={createArticle.isRequesting || updateArticle.isRequesting} block>Publikasi</Button>
+                                        <Button size="medium" type="primary" htmlType="submit" loading={isSubmitting} block>Publikasi</Button>
                                     </Col>
                                 </Row>
                             </Col>

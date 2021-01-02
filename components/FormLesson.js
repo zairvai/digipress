@@ -28,6 +28,8 @@ const FormLesson = ({item,...props}) => {
 
     const lessonController = new LessonController(props)
 
+    const [isSubmitting,setSubmitting] = React.useState(false)
+
     const [editor,setEditor] = React.useState()
     const [content,setContent] = React.useState("")
     const isMounted = React.useRef()
@@ -87,6 +89,8 @@ const FormLesson = ({item,...props}) => {
 
     const onSubmit = (values,e) => {
 
+        setSubmitting(true)
+
         if(item) {
             lessonController._update(item,values)
                 .then(lesson=>props.onSuccess(lesson.data))
@@ -132,7 +136,7 @@ const FormLesson = ({item,...props}) => {
                                 <Form.Item label="Judul materi">
                                     <Input 
                                         tabIndex="1"
-                                        disabled={createLesson.isRequesting || updateLesson.isRequesting}
+                                        disabled={isSubmitting}
                                         size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
                                     {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                 </Form.Item>
@@ -155,7 +159,7 @@ const FormLesson = ({item,...props}) => {
                                         tabIndex="2"
                                         min={1}
                                         max={100} 
-                                        disabled={createLesson.isRequesting || updateLesson.isRequesting}
+                                        disabled={isSubmitting}
                                         size="large" placeholder="1" value={props.value} onChange={props.onChange} />
                                     {errors && errors.seq && <div><Text type="danger">{errors.seq.message}</Text></div>}
                                 </Form.Item>
@@ -178,7 +182,7 @@ const FormLesson = ({item,...props}) => {
                                         id="frmLesson"
                                         className="editor"
                                         tabIndex="3"
-                                        disabled={createLesson.isRequesting || updateLesson.isRequesting}
+                                        isSubmitting={isSubmitting}
                                         minHeight={300}
                                         onFinishSetup={handleEditorSetup} 
                                         onRemove={handleEditorRemove}
@@ -197,10 +201,10 @@ const FormLesson = ({item,...props}) => {
             <VuroxComponentsContainer className="px-4 py-3">
                 <Row className="justify-content-end">
                     <Col md={4} sm={8} xs={12}  >
-                        <Button tabIndex="7" disabled={createLesson.isRequesting || updateLesson.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                        <Button tabIndex="7" disabled={isSubmitting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                     </Col>
                     <Col md={4} sm={8} xs={12} className="fright">
-                        <Button tabIndex="8" type="primary" htmlType="submit" loading={createLesson.isRequesting || updateLesson.isRequesting} block>Kirim</Button>
+                        <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmitting} block>Kirim</Button>
                     </Col>
                 </Row>
 

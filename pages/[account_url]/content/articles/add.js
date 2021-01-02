@@ -38,9 +38,9 @@ const PageArticleAdd = props => {
     }
     
     const onSuccess = article =>{
-		console.log(article)
+		// console.log(article)
         //userController._updateList("add",user,0)
-        router.push(`/${auth.account.uniqueURL}/content/articles`)	
+        router.push(`/${auth.account.uniqueURL}/content/articles/${article.id}`)	
 	}
 	
 	return (

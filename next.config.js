@@ -5,6 +5,8 @@ const withFonts = require('next-fonts')
 const vuroxConfigPlugins = require('next-compose-plugins')
 const withTypescript = require('@zeit/next-typescript')
 
+const xslx = require('xlsx')
+
 const fileSystem = require('fs')
 const path = require('path')
 
@@ -17,6 +19,12 @@ const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/consta
 module.exports = vuroxConfigPlugins([
 	[{
 		trailingSlash: true
+	}],
+	[xslx,{
+		webpack: (config,{isServer}) => {
+			
+			config.node = {fs:"empty"}
+		}
 	}],
 	[withLess, {
 		lessLoaderOptions: {
