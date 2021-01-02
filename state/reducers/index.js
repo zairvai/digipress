@@ -12,11 +12,11 @@ import { createQna,deleteQna,updateQna,listPostQnas,listUserQnas,getQna} from '.
 import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
 import { getPost,listPosts } from './post'
 
-import { lessons } from './unused/lessons'
-import { questions } from './unused/questions'
-import { comments } from './unused/comments'
-import { campaigns } from './campaigns'
-import { vuroxCompanyInfo } from './company'
+// import { lessons } from './unused/lessons'
+// import { questions } from './unused/questions'
+// import { comments } from './unused/comments'
+// import { campaigns } from './unused/campaigns'
+// import { vuroxCompanyInfo } from './company'
 
 import {reduceReducers} from 'Helper'
 import {persistReducer} from 'redux-persist'
@@ -100,16 +100,7 @@ const rootReducer = combineReducers({
 	listPostComments:persistReducer({key:"listPostComments",storage},listPostComments),
 	listUserComments:persistReducer({key:"listUserComments",storage},listUserComments),
 	updateComment:persistReducer({key:"updateComment",storage},updateComment),
-	deleteComment:persistReducer({key:"deleteComment",storage},deleteComment),
-
-
-
-	// lessons,
-	// questions,
-	// comments,
-
-	campaigns: campaigns,
-	company: vuroxCompanyInfo,
+	deleteComment:persistReducer({key:"deleteComment",storage},deleteComment)
 })
 
 

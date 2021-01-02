@@ -16,8 +16,9 @@ function configureStore(preloadedState) {
 	middlewares.push(logger)
 
 	//const { persistReducer } = require('redux-persist')
-	const storage = mystorage//require('redux-persist/lib/storage').default
-
+	// const storage = mystorage//require('redux-persist/lib/storage').default
+	const storage = require('redux-persist/lib/storage').default
+	
 	const persistConfig = {
 		key:'root',
 		storage,

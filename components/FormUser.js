@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Row, Col,Form,Input,InputNumber,Divider,Button, Checkbox,Dropdown,Menu,Select,Space,Radio,Typography} from 'antd'
-import Link from 'next/link'
+import { Row, Col,Form,Input,InputNumber,Divider,Button,Select,Alert,Typography} from 'antd'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
@@ -38,6 +37,7 @@ const FormUser = ({item,...props}) => {
 
     const {auth,roleInputs,createUser,updateUser} = props
 
+    const [error,setError] = React.useState()
     const userController = new UserController(props)
 
     const {
@@ -81,7 +81,18 @@ const FormUser = ({item,...props}) => {
 
         userController._create(values)
             .then(user=>props.onSuccess(user.data))
-            .catch(error=>console.log(error))
+            .catch(errors=>{
+
+                if(errors){
+                    
+                    const error = errors.error
+
+                    if(error && error.errors[0] && error.errors[0].message=="An account with the given email already exists."){
+                        setError({message:"Email yang didaftarkan sudah digunakan sebelumnya."})
+                    }
+                }
+
+            })
             
     }
 
@@ -91,9 +102,7 @@ const FormUser = ({item,...props}) => {
 
     }
 
-    const onCancel = () => {
-        props.onCancel()
-    }
+
 
     return (
         <Form
@@ -103,6 +112,18 @@ const FormUser = ({item,...props}) => {
             <Row>
                 <Col md={24}>
                     <VuroxComponentsContainer className="p-4">
+                        {error && error.message &&
+                        <Row>
+                            <Col md={24} xs={24}>
+                                <Alert className="mb-3"
+                                    message="Error"
+                                    description={error.message}
+                                    type="error"
+                                    showIcon
+                                    />
+                            </Col>
+                        </Row>
+                        }
                         <Row>
                             <Col md={8} sm={24} xs={24}>
                                 <Controller

@@ -122,7 +122,7 @@ const List = props =>{
                 render:(text,record,index)=>(
                     <div className="fright">
                     <Tooltip placement="topLeft" title="Hapus" arrowPointAtCenter>
-                        <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}/>}  onClick={()=>showDeleteConfirm(record,index)}/>
+                        <Button type="link" icon={<Icon size="1.3em" path={mdiDelete}/>}  onClick={(e)=>{showDeleteConfirm(record,index);e.stopPropagation()}}/>
                     </Tooltip>
                     </div>
                 )
@@ -167,6 +167,7 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onClick: e => {
+
                 if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)) 
                     router.push(`/${auth.account.uniqueURL}/content/categories/${record.id}/edit`)
             }

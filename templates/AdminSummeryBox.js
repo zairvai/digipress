@@ -160,7 +160,7 @@ const AdminSummeryBox = ({...props}) => {
 				<Chartbox1 label="Visits" data={gaSessions} toolTipStyle={vuroxDarkToolTipStyles} className="bg-blue-7"/>
 			</Col>
 			<Col md={12} lg={6} sm={12} className='w-100 mb-2'>
-				<Chartbox1 label="Bounce Rate" data={gaBounceRate} toolTipStyle={vuroxDarkToolTipStyles} className="bg-purple-7"/>
+				<Chartbox1 label="Bounce Rate" data={gaBounceRate} numberFormat="percentage" toolTipStyle={vuroxDarkToolTipStyles} className="bg-purple-7"/>
 			</Col>
 			<Col md={12} lg={6} sm={12} className='w-100 mb-2'>
 				<Chartbox1 label="Visitors" data={gaUsers} toolTipStyle={vuroxDarkToolTipStyles} className="bg-green-7"/>

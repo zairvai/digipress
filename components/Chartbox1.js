@@ -31,7 +31,7 @@ const Chart = ({label,toolTipStyle,...props}) =>{
             <>
                 <div className={`vurox-admin-components-block-content ${props.className} constant-white`}>
                     <h6 className="text-white">{label}</h6>
-                    <h3 className="text-white">{data && data.results} <small><i className="ti-stats-up"></i> 2.00% (30 hari)</small></h3>
+                    <h3 className="text-white">{data && data.results}{props.numberFormat==="percentage" && '%'}<small>&nbsp;<i className="ti-stats-up"></i> 2.00% (30 hari)</small></h3>
                     <i className=""></i>
                 </div>
                 <ResponsiveContainer width='100%' height={100} debounce={10}>

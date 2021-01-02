@@ -10,10 +10,12 @@ import AnalyticBox3 from 'Templates/AnalyticBox3'
 import AnalyticBox4 from 'Templates/AnalyticBox4'
 import {NextSeo} from 'next-seo'
 import AuthController from 'Library/controllers/AuthController'
-// import {ExcelFile, ExcelSheet} from "react-data-export";
+import ReactExport from 'react-data-export';
 
 const PageDashboard = props => {
 
+	const {ExcelFile} = ReactExport
+	const {ExcelSheet} = ExcelFile
 	const {auth,router} = props
 
 	const [accountURL,setAccountURL] = React.useState()
@@ -45,11 +47,11 @@ const PageDashboard = props => {
 
 	}
 
-	// const DownloadButton = props =>(
-	// 	<ExcelFile element={<Button key="download-report" type="primary"><i className="ti-download"></i>&nbsp;Unduh laporan</Button>}>
-	// 		<ExcelSheet dataSet={report} name="Digipress Report"/>
-	// 	</ExcelFile>
-	// )
+	const DownloadButton = props =>(
+		<ExcelFile element={<Button key="download-report" type="primary"><i className="ti-download"></i>&nbsp;Unduh laporan</Button>}>
+			<ExcelSheet dataSet={report} name="Digipress Report"/>
+		</ExcelFile>
+	)
 
 
 	return (
@@ -62,9 +64,9 @@ const PageDashboard = props => {
 							className="p-0"
 							title="Laporan"
 							subTitle="penggunaaan akun secara keseluruhan"
-							extra={[
-								// <DownloadButton/>
-							]}
+							// extra={[
+							// 	<DownloadButton key="extra-download-button"/>
+							// ]}
 						/>
 					</div>
 				</Col>

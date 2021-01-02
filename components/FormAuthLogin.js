@@ -26,7 +26,7 @@ const FormAuth = props => {
 
     const authController = new AuthController(props)
 
-    const {auth,router} = props
+    const {auth} = props
 
     const {
         handleSubmit,
@@ -156,7 +156,7 @@ const FormAuth = props => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             signInRoutinePromise

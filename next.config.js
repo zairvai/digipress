@@ -3,9 +3,6 @@ const withLess = require('@zeit/next-less')
 const lessToJS = require('less-vars-to-js')
 const withFonts = require('next-fonts')
 const vuroxConfigPlugins = require('next-compose-plugins')
-const withTypescript = require('@zeit/next-typescript')
-
-const withXlsx = require('xlsx')
 
 const fileSystem = require('fs')
 const path = require('path')
@@ -18,7 +15,14 @@ const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/consta
 
 module.exports = vuroxConfigPlugins([
 	[{
-		trailingSlash: true
+		trailingSlash: true,
+		webpack: (config,{isServer}) => {
+			
+			console.log(config)
+			// config.node = {fs:"empty"}
+
+			return config
+		}
 	}],
 	[withLess, {
 		lessLoaderOptions: {
@@ -45,18 +49,14 @@ module.exports = vuroxConfigPlugins([
 				  test: antStyles,
 				  use: 'null-loader',
 			  })
+		  }else{
+			config.node = {fs:"empty"}
+			
 		  }
 
 		  return config
 		}
 	}],
 	[withCss],
-	[withFonts],
-	// [withXlsx,{
-	// 	webpack: (config,{isServer}) => {
-
-
-	// 		config.node = {fs:"empty"}
-	// 	}
-	// }],
+	[withFonts]
 ])

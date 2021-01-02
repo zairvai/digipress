@@ -18,10 +18,14 @@ export const completeNewPasswordRoutine = createRoutine("complete_new_password")
 //send forgot password code
 customRoutine = createRoutineCreator(["INIT","USERNOTFOUND","LIMITEXCEEDED"])
 export const customForgotPasswordRoutine = customRoutine("forgot_password_custom")
+export const customForgotPasswordRoutinePromise = promisifyRoutine(customForgotPasswordRoutine)
+
 export const forgotPasswordRoutine = createRoutine("forgot_password")
+export const forgotPasswordRoutinePromise = promisifyRoutine(forgotPasswordRoutine)
 
 //reset password
 export const resetPasswordRoutine = createRoutine("reset_password")
+export const resetPasswordRoutinePromise = promisifyRoutine(resetPasswordRoutine)
 
 customRoutine = createRoutineCreator(["SETACCOUNT"])
 export const customSetDataRoutine = customRoutine("set_data_custom")

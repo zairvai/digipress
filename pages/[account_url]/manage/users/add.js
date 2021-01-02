@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import LayoutUser from 'Templates/Layout.user'
-import { Row, Col,PageHeader} from 'antd'
+import { Row, Col,PageHeader, Alert} from 'antd'
 import FormUser from 'Components/FormUser'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -18,6 +18,8 @@ const PageUserAdd = props => {
 	
     // const links = [['Kelola',`/${auth.account.uniqueURL}/manage/users`,''],['Anggota',`/${auth.account.uniqueURL}/manage/users`,''],['Penambahan anggota',`/${auth.account.uniqueURL}/manage/users/add`,'active']]
     
+    const [error,setError] = React.useState({message:"test"})
+
     const [accountId,setAccountId] = React.useState()
     const [account,setAccount] = React.useState()
     const accountController = new AccountController(props)
@@ -94,6 +96,17 @@ const PageUserAdd = props => {
         else router.push(`/[account_ur]/manage/users`,`/${auth.account.uniqueURL}/manage/users`,{shallow:true})
     }
 
+    const handleError = errors =>{
+        
+        if(errors && errors.errors){
+            const errors = errors.errors
+            if(errors[0] && errors[0].message=="An account with the given email already exists."){
+                setError({message:"Email yang didaftarkan sudah digunakan sebelumnya."})
+            }
+        }
+
+    }
+
     return (
         <LayoutUser>
             <NextSeo title="Kelola - Tambah anggota"/>
@@ -111,7 +124,7 @@ const PageUserAdd = props => {
 
             <Row>
                 <Col md={14} sm={24} xs={24} className="mt-2">
-                    <FormUser accountId={accountId} roleInputs={getRoleInputs(id)} onSuccess={onSuccess} onCancel={onCancel}/>
+                    <FormUser accountId={accountId} roleInputs={getRoleInputs(id)} onSuccess={onSuccess} onCancel={onCancel} onError={handleError}/>
                 </Col>
             </Row>
              

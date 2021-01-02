@@ -90,8 +90,6 @@ export default class Controller{
     
 
 
-
-
     static getRole = ({user,account}) => {
 
 
@@ -155,17 +153,13 @@ export default class Controller{
         }))
     }
 
-    // _initForgotPassword = () =>{
-    //     this.dispatch(initForgotPassword())
-    // }
-
     _forgotPassword = (email) =>{
 
-        this.dispatch(forgotPassword({
+        return this.props.forgotPasswordRoutinePromise({
             values:{
                 username:email
             }
-        }))
+        })
     }
 
     _resetPassword = (email,password,code) =>{
