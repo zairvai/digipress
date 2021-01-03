@@ -5,7 +5,9 @@ import {
     resetPasswordRoutine,
     signOutRoutine,
     getAuthUserRoutine,
-    customSetDataRoutine
+    customSetDataRoutine,
+    verifyEmailRoutine,
+    verifySubmitCodeRoutine
 } from '../routines/auth'
 
 const initialState = {
@@ -442,6 +444,46 @@ export const getAuthUser = (state=initialState,action) => {
     }    
 
     return state
+}
+
+export const verifyEmail = (state=initialState,action) => {
+
+    switch(action.type){
+        case verifyEmailRoutine.TRIGGER : {
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false
+            })  
+        }
+        case verifyEmailRoutine.SUCCESS : {
+
+            const {data} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isLoggedIn:false,
+                data
+            })  
+        }
+            
+        case verifyEmailRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:error,
+                isError:true
+            }) 
+        }
+            
+    }
+
+    return state
+
 }
 
 export const authData = (state=initialState,action) => {

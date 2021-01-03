@@ -32,3 +32,9 @@ export const customSetDataRoutine = customRoutine("set_data_custom")
 
 export const getAuthUserRoutine = createRoutine("get_auth_user")
 export const getAuthUserRoutinePromise = promisifyRoutine(getAuthUserRoutine)
+
+export const verifyEmailRoutine = createRoutine("verifiy_email")
+export const verifyEmailRoutinePromise = promisifyRoutine(verifyEmailRoutine)
+
+export const verifySubmitCodeRoutine = createRoutine("verifiy_code")
+export const verifySubmitCodeRoutinePromise = promisifyRoutine(verifySubmitCodeRoutine)

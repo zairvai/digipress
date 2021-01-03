@@ -25,8 +25,8 @@ const List = props =>{
     const [isLoading,setLoading] = React.useState(true)
     const [pagination,setPagination] = React.useState({current:1,pageSize:10})
     const [pageIndex,setPageIndex] = React.useState()
-	const [orderBy,setOrderBy]	= React.useState("createdAt")
-	const [direction,setDirection] = React.useState("desc")
+	const [orderBy,setOrderBy]	= React.useState("seq.keyword")
+	const [direction,setDirection] = React.useState("asc")
 	
 	React.useEffect(()=>{
 
@@ -99,6 +99,12 @@ const List = props =>{
                 dataIndex:"title",
                 sorter:true,
                 width:"40%"
+            },
+            {
+                key:"seq",
+                title:"Urutan",
+                dataIndex:"seq",
+                width:"1%"
             },
             {
                 key:"status",

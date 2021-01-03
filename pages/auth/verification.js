@@ -7,8 +7,7 @@ import {
 	ContentLayout,
 } from 'Components/layout'
 
-import { vuroxContext } from 'Context'
-import { Row, Col,Button, Checkbox,Form,Menu} from 'antd'
+import { Row, Col} from 'antd'
 import FormVerify from 'Components/FormAuthVerify'
 // import FormVerifySubmit from 'Components/FormAuthVerifySubmit'
 

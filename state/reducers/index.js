@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { appReducer } from './app'
-import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser} from './auth'
+import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
 import { createUser,getUser,listUsers, updateUser } from './user'
 import { listTags,deleteTag,createTag } from './tag'
@@ -34,7 +34,7 @@ const authPersistConfig = {
     //     "usernamExists"]
 }
 
-const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser)
+const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail)
 
 const rootReducer = combineReducers({
 	//app

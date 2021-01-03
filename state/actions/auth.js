@@ -6,7 +6,9 @@ import {
     customForgotPasswordRoutine,
     resetPasswordRoutine,
     customSetDataRoutine,
-    getAuthUserRoutine
+    getAuthUserRoutine,
+    verifyEmailRoutine,
+    verifySubmitCodeRoutine
 } from '../routines/auth'
 
 export const initSignIn = () => ({
@@ -38,6 +40,16 @@ export const forgotPassword = payload => ({
 
 export const resetPassword = payload => ({
     type:resetPasswordRoutine.TRIGGER,
+    payload
+})
+
+export const verifyEmail = payload => ({
+    type:verifyEmailRoutine.TRIGGER,
+    payload
+})
+
+export const verifySubmitCode = payload => ({
+    type:verifySubmitCodeRoutine.TRIGGER,
     payload
 })
 

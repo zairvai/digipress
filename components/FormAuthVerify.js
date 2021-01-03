@@ -114,8 +114,8 @@ const FormAuth = props => {
                     <Col md={24}>
                         <Alert
                             className="mb-3"
-                            message="Perubahan password"
-                            description="Untuk mengubah password anda, mohon ketik email yang sudah terdaftar."
+                            message="Verifikasi email"
+                            description="Untuk melakukan verifikasi, mohon ketik email yang sudah terdaftar."
                             type="info"
                             showIcon
                         />

@@ -6,7 +6,8 @@ import {
     forgotPasswordRoutine,customForgotPasswordRoutine,
     resetPasswordRoutine,
     signOutRoutine,
-    getAuthUserRoutine
+    getAuthUserRoutine,
+    verifyEmailRoutine,verifySubmitCodeRoutine
 } from '../routines/auth'
 
 //signin
@@ -171,6 +172,35 @@ function* resetPassword(action){
 
 export function* resetPasswordWatcher(){
     yield takeEvery( resetPasswordRoutine.TRIGGER,resetPassword)
+}
+
+
+function* verifyEmail(action){
+
+
+    try{
+
+        yield put(verifyEmailRoutine.request())
+
+        const {values} = action.payload
+        const username = values.username.replace(/\s/g,"")
+
+        const data = yield Auth.verifyCurrentUserAttribute({email:username})
+
+        yield put(verifyEmailRoutine.success({data:{username,...data}}))
+                    
+    }catch(error){
+
+         yield put(verifyEmailRoutine.failure({error}))
+
+    }finally{
+        yield put(verifyEmailRoutine.fulfill())
+    }
+
+}
+
+export function* verifyEmailWatcher(){
+    yield takeEvery(verifyEmailRoutine.TRIGGER,verifyEmail)
 }
 
 
