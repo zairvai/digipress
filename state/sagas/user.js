@@ -20,7 +20,7 @@ function* createUser(action){
         const {values} = action.payload
 
         const name = values.name.trim()
-        const emailAddress = values.emailAddress.trim()
+        const emailAddress = values.emailAddress.trim().toLowerCase()
         const phoneCode = values.phoneCode.trim()
         const phoneNumber =  values.phoneNumber.trim()
         const password = values.password.trim()
@@ -138,7 +138,7 @@ function* updateUser(action){
         }
 
         if(values.name) updateParams.name = values.name.trim()
-        if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim()
+        if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim().toLowerCase()
         if(values.phoneCode) updateParams.phoneCode =  values.phoneCode.trim()
         if(values.phoneNumber) updateParams.phoneNumber =  values.phoneNumber.trim()
         if(values.status) updateParams.status = values.status.trim()
