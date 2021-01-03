@@ -79,7 +79,7 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
 
                         let newUsersRows=[],returnUsersRows=[]
                         let newUsersExcel=[],returnUsersExcel=[]
-                        let newUsersCounter=0,returningUsersCounter=0
+                        let newUsersCounter=0,returnUsersCounter=0
     
 
                         data.rows.forEach((record,index)=>{
@@ -98,13 +98,16 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                                 else if(record[1]==="Returning Visitor"){
                                     returnUsersRows.push({date,value:sessions})
                                     returnUsersExcel.push([date,sessions])
-                                    returningUsersCounter += sessions
+                                    returnUsersCounter += sessions
                                 }
                             }
                         })
 
-                        setGaNewUsers({results:round((newUsersCounter/results)*100),rows:newUsersRows})
-                        setGaReturnUsers({results:round((returningUsersCounter/results)*100),rows:returnUsersRows})
+                        const newUsers = {results:round((newUsersCounter/results)*100),rows:newUsersRows}
+                        console.log(newUsers)
+                        setGaNewUsers(newUsers)
+                        const returnUsers = {results:round((returnUsersCounter/results)*100),rows:returnUsersRows}
+                        setGaReturnUsers(returnUsers)
 
                         if(props.onLoad){
 

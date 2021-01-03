@@ -44,7 +44,7 @@ const Chart = ({label,fillColor,toolTopStyle,loading,...props}) => {
                     <BarChart data={data && data.rows}  margin={{ top: 20, right: 0, left: 0, bottom: 1 }}>
                         <XAxis dataKey="date" stroke="#ccc" hide={true} tickLine={false} axisLine={false} />
                         <Tooltip contentStyle={toolTopStyle} cursor={false} />
-                        <Bar dataKey="value" fill={fillColor} barSize={10} barGap ={2} />
+                        <Bar dataKey="value" fill={fillColor} barSize={10} barGap ={1} />
                     </BarChart>
                 </ResponsiveContainer>
             </>

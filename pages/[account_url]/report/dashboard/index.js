@@ -48,7 +48,7 @@ const PageDashboard = props => {
 
 		if(summaryReport && analytic1 && analytic2 && analytic3 && analytic4){
 			const bundledReport = [...summaryReport,...analytic1,...analytic2,...analytic3,...analytic4]
-			console.log(bundledReport)
+			// console.log(bundledReport)
 			setReport(bundledReport)
 			setDownloadable(true)
 		}

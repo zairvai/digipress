@@ -131,13 +131,14 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
 
                                     if(found>-1){
                                         row = {...row,title:items[found].title,author:items[found].createdBy.name}
+                                        dataRows[index] = row                                        
+
                                         excelData.push([index+1,row.title,row.author,row.value])
                                     }
 
                                 })
                             }
         
-
                             setGaData({results,rows:dataRows})
 
 
