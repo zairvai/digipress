@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { appReducer } from './app'
-import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail} from './auth'
+import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail,verifySubmitCode} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
 import { createUser,getUser,listUsers, updateUser } from './user'
 import { listTags,deleteTag,createTag } from './tag'
@@ -11,12 +11,6 @@ import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './
 import { createQna,deleteQna,updateQna,listPostQnas,listUserQnas,getQna} from './qna'
 import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
 import { getPost,listPosts } from './post'
-
-// import { lessons } from './unused/lessons'
-// import { questions } from './unused/questions'
-// import { comments } from './unused/comments'
-// import { campaigns } from './unused/campaigns'
-// import { vuroxCompanyInfo } from './company'
 
 import {reduceReducers} from 'Helper'
 import {persistReducer} from 'redux-persist'
@@ -34,7 +28,7 @@ const authPersistConfig = {
     //     "usernamExists"]
 }
 
-const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail)
+const authReducers = reduceReducers(signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail,verifySubmitCode)
 
 const rootReducer = combineReducers({
 	//app

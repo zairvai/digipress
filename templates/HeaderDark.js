@@ -1,23 +1,16 @@
 import React, {useContext} from 'react'
 import {connect} from 'react-redux'
 import Header from './Head'
-import Link from 'next/link'
 import {Space} from 'antd'
-import VuroxHeader, {VuroxBrand, VuroxMenuToggler} from 'Components/Header'
-import VuroxFormSearch from 'Components/search'
-import ProfileBadge from 'Components/profile'
-import VuroxDropdown, { DropdownItems, DropdownItem, DropdownItemSeperator, DropdownBigItems, DropdownItemsHead } from 'Components/dropdown'
-import { 
-	VuroxProgressbar
-} from 'Components/progressbar';
-import { Search, GridFill ,Grid } from 'react-bootstrap-icons'
+import VuroxHeader from 'Components/Header'
+import VuroxDropdown, { DropdownItems, DropdownItem, DropdownBigItems, DropdownItemsHead } from 'Components/dropdown'
+import { GridFill ,Grid } from 'react-bootstrap-icons'
 import { vuroxContext } from '../context'
-import { appContext } from '../context/app'
-import { Row, Col,Button} from 'antd'
+import { Row, Col} from 'antd'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth';
-import AuthController from 'Library/controllers/AuthController'
+import moment from 'moment'
 
 const HeaderDark = props => {
 	
@@ -25,6 +18,25 @@ const HeaderDark = props => {
 
 	const { toggleMenu, menuState } = useContext(vuroxContext)
 
+	const [notificationItems,setNotificationItems] = React.useState([])
+
+	React.useEffect(()=>{
+
+        if(!auth.user.email_verified){
+            
+            const item = {
+				date : moment().format("MMMM DD, YYYY"),
+				link:`/${auth.account.uniqueURL}/auth/verify`,
+				activity:"Verifikasi email kamu",
+				description:"Demi keamanaan password, mohon verifikasi email kamu",
+				className:"ti-email bg-red-4"
+			}
+			setNotificationItems([item,...notificationItems])
+        }else{
+			setNotificationItems([])
+		}
+
+    },[auth.user.email_verified])
 
 	return (
 		<div>
@@ -60,19 +72,38 @@ const HeaderDark = props => {
 							<VuroxDropdown position='vurox-dropdown-top-right'>
 								<button className='dropbtn'><i className="ti-bell"></i></button>
 								<DropdownItems width={240} className='pb-2'>
+
 									<DropdownItemsHead color='bg-cyan-6'>
-										Notifications <span className="badge badge-pill badge-light">20+</span>
+										Notifikasi <span className="badge badge-pill badge-light">{notificationItems.length > 0 && notificationItems.length}</span>
 									</DropdownItemsHead>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-pulse bg-yellow-6 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p className='text-meta'>March 28, 2020</p>
-												<p>This is a alert notification</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
+
+									{
+									
+										notificationItems.length > 0 ? 
+										
+										notificationItems.map((item,index)=>(
+											<DropdownItem key={`notification${index}`} link={item.link}>
+												<DropdownBigItems>
+													<i className={`${item.className}`}></i>
+													<div className="dropdown-big-items-content">
+														<p className='text-meta'>{item.date}</p>
+														<p>{item.activity}</p>
+													</div>
+												</DropdownBigItems>
+											</DropdownItem>
+										))
+
+										:
+										<DropdownItem link='#'>
+											<DropdownBigItems>
+												<div className="dropdown-big-items-content">
+													<p>Belum ada notifikasi</p>
+												</div>
+											</DropdownBigItems>
+										</DropdownItem>
+
+									}
+									{/* <DropdownItem link='/'>
 										<DropdownBigItems>
 											<i className='ti-user bg-purple-6 flex-fill'></i>
 											<div className="dropdown-big-items-content">
@@ -89,16 +120,8 @@ const HeaderDark = props => {
 												<p>Received a new help request</p>
 											</div>
 										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-stats-up bg-red-4 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p className='text-meta'>April 08, 2020</p>
-												<p>A new monthly report has been published</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
+									</DropdownItem> */}
+									
 								</DropdownItems>
 							</VuroxDropdown>
 

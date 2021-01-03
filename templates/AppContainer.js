@@ -43,16 +43,18 @@ const Container = props => {
             router.push(`/${auth.account.uniqueURL}/auth/login`)
         }
 
-        
 
     },[])
+
+   
      
 
     return(
         <>
-        <div style={visible ? {visibility:"visible"} : {visibility:"hidden"} }>
-            {props.children}
-        </div>
+
+            <div style={visible ? {visibility:"visible"} : {visibility:"hidden"} }>
+                {props.children}
+            </div>
         </>
     )
 

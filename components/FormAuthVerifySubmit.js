@@ -5,29 +5,31 @@ import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { MailOutlined} from '@ant-design/icons';
+import { MailOutlined,LockOutlined} from '@ant-design/icons';
 import { Row, Col,Button, Alert,Form,Input,Typography} from 'antd'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { forgotPasswordRoutinePromise } from 'State/routines/auth';
+import { verifySubmitCodeRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
 
 const {Text} = Typography
 
 const schema = yup.object().shape({
-    email:yup.string().required("Mohon ketik email kamu")
+    code:yup.string().required("Mohon ketik kode verifikasi")
 })
 
-const FormAuth = props => {    
+const FormAuth = ({emailAddress,...props}) => {    
     
     const {auth} = props
 
+    const [isSubmitting, setSubmitting] = React.useState(false)
     const [error,setError] = React.useState()
     const authController = new AuthController(props)
 
+    
     const {
         handleSubmit,
         reset,
@@ -38,29 +40,21 @@ const FormAuth = props => {
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
-                email: ""
+                code: ""
             }
     })
 
 
     const onSubmit = values =>{
 
-        authController._forgotPassword(values.email)
-            .then(data=>console.log(data))
+        setSubmitting(true)
+        authController._verifySubmitCode(values.code)
+            .then(verify=>{
+                console.log(verify)
+                if(props.onSuccess)  props.onSuccess(verify.data)
+            })
             .catch(errors=>{
-                
-                console.log(errors)
-                
-                if(errors){
-                    
-                    const error = errors.error
-        
-                    if(error && error.message=="Cannot reset password for the user as there is no registered/verified email or phone_number"){
-                       setError({message:"Email kamu belum pernah diverifikasi. Silahkan verifikasi terlebih dahulu."})
-                       
-                    }
-                }
-                
+               console.log(errors)
             })
     }
 
@@ -79,10 +73,10 @@ const FormAuth = props => {
             }
             
         }
-        else if(props.auth.isError){
-            if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar."        
-            else if(props.auth.limitExceeded) message="Kamu telah mencoba beberapa kali. Silahkan coba lagi dalam beberapa menit."
-        }
+        // else if(props.auth.isError){
+        //     if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar."        
+        //     else if(props.auth.limitExceeded) message="Kamu telah mencoba beberapa kali. Silahkan coba lagi dalam beberapa menit."
+        // }
 
         
         if(message.length>0){
@@ -116,8 +110,7 @@ const FormAuth = props => {
                     <Col md={24}>
                         <Alert
                             className="mb-3"
-                            message="Perubahan password"
-                            description="Untuk mengubah password anda, mohon ketik email yang sudah terdaftar."
+                            description={`Silahkan masukan kode verifikasi yang sudah dikirim ke email kamu ${emailAddress}`}
                             type="info"
                             showIcon
                         />
@@ -130,20 +123,21 @@ const FormAuth = props => {
                 <Row>
                     <Col md={24} xs={24}>
                         <Controller
-                            name="email"
+                            name="code"
                             defaultValue=""
                             control={control}
                             render={props=>
-                                <Form.Item label="Email">
+                                <Form.Item label="Kode verifikasi">
                                     <Input 
+                                        disabled={isSubmitting}
                                         size="large"  
-                                        prefix={<MailOutlined className="site-form-item-icon" />} 
-                                        placeholder="Email address"
+                                        prefix={<LockOutlined className="site-form-item-icon" />} 
+                                        placeholder="Kode..."
                                         autoComplete="off"
-                                        type="email"
+                                        type="number"
                                         value={props.value} 
                                         onChange={props.onChange} />
-                                    {errors && errors.email && <Text type="danger">{errors.email.message}</Text>}
+                                    {errors && errors.code && <Text type="danger">{errors.code.message}</Text>}
                                 </Form.Item>
                             }
                         />
@@ -151,12 +145,10 @@ const FormAuth = props => {
                 </Row>
                 
                 <Row>
-                    <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:`/${auth.account.uniqueURL}/auth/login`}} shallow><a>Kembali ke halaman Login</a></Link>
-                        {/* <Button className="pl-0" type="link" onClick={()=>router.back()}>Kembali ke halaman login</Button> */}
-                    </Col>
-                    <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Ganti Password</Button>
+                    <Col md={24} sm={24} xs={24}>
+                        <div className="fright">
+                            <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" disabled={isSubmitting}>Kirim</Button>
+                        </div>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
@@ -169,7 +161,7 @@ export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
-            forgotPasswordRoutinePromise
+                verifySubmitCodeRoutinePromise
         },dispatch),dispatch
     })
 )(FormAuth)

@@ -162,6 +162,24 @@ export default class Controller{
         })
     }
 
+    _verifyEmail = (email) =>{
+
+        return this.props.verifyEmailRoutinePromise({
+            values:{
+                username:email
+            }
+        })
+    }
+
+    _verifySubmitCode = (code) =>{
+
+        return this.props.verifySubmitCodeRoutinePromise({
+            values:{
+                code
+            }
+        })
+    }
+
     _resetPassword = (email,password,code) =>{
 
         this.dispatch(resetPassword({

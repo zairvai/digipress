@@ -185,7 +185,7 @@ function* verifyEmail(action){
         const {values} = action.payload
         const username = values.username.replace(/\s/g,"")
 
-        const data = yield Auth.verifyCurrentUserAttribute({email:username})
+        const data = yield Auth.verifyCurrentUserAttribute("email")
 
         yield put(verifyEmailRoutine.success({data:{username,...data}}))
                     
@@ -203,6 +203,32 @@ export function* verifyEmailWatcher(){
     yield takeEvery(verifyEmailRoutine.TRIGGER,verifyEmail)
 }
 
+function* verifySubmitCode(action){
+
+    try{
+
+        yield put(verifySubmitCodeRoutine.request())
+
+        const {values} = action.payload
+        const code = values.code
+
+        const data = yield Auth.verifyCurrentUserAttributeSubmit("email",code)
+
+        yield put(verifySubmitCodeRoutine.success({data}))
+                    
+    }catch(error){
+
+         yield put(verifySubmitCodeRoutine.failure({error}))
+
+    }finally{
+        yield put(verifySubmitCodeRoutine.fulfill())
+    }
+
+}
+
+export function* verifySubmitCodeWatcher(){
+    yield takeEvery(verifySubmitCodeRoutine.TRIGGER,verifySubmitCode)
+}
 
 function* getAuthUser() {
    

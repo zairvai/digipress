@@ -412,6 +412,9 @@ export const getAuthUser = (state=initialState,action) => {
                 access:state.user.access
             }
 
+            if(attributes.email_verified) user.email_verified = true
+            else if(!attributes.email_verified) user.email_verified = false
+            
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,
@@ -470,6 +473,46 @@ export const verifyEmail = (state=initialState,action) => {
         }
             
         case verifyEmailRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:error,
+                isError:true
+            }) 
+        }
+            
+    }
+
+    return state
+
+}
+
+export const verifySubmitCode = (state=initialState,action) => {
+
+    switch(action.type){
+        case verifySubmitCodeRoutine.TRIGGER : {
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false
+            })  
+        }
+        case verifySubmitCodeRoutine.SUCCESS : {
+
+            const {data} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isLoggedIn:false,
+                data
+            })  
+        }
+            
+        case verifySubmitCodeRoutine.FAILURE : {
 
             const {error} = action.payload
 

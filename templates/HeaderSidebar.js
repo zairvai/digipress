@@ -80,11 +80,11 @@ const Sidebar = (props) => {
 				<Navitem link={`/${auth.account.uniqueURL}/roles/students`} text='Students' icon={<Icon size="1.3em" path={mdiSchoolOutline} />} />
 				<Navitem link={`/${auth.account.uniqueURL}/roles/members`} text='Members' icon={<Icon size="1.3em" path={mdiAccountGroupOutline} />} /> */}
 
-				<VerticalNavHeading>Umum</VerticalNavHeading>
+				{/* <VerticalNavHeading>Umum</VerticalNavHeading>
 				<Navitem active = {app.currentPage == "settings" ? true : false} link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Pengaturan' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
 				<Navitem active = {app.currentPage == "feedbacks" ? true : false} link={`/${auth.account.uniqueURL}/help/feedbacks`} text='Saran' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
 				<Navitem active = {app.currentPage == "supports" ? true : false} link={`/${auth.account.uniqueURL}/help/supports`} text='Bantuan' icon={<Icon size="1.3em" path={mdiHeadset} />} />
-				<Navitem active = {app.currentPage == "faq" ? true : false} link={`/${auth.account.uniqueURL}/help/faq`} text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
+				<Navitem active = {app.currentPage == "faq" ? true : false} link={`/${auth.account.uniqueURL}/help/faq`} text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} /> */}
 
 				
 			</ul>
