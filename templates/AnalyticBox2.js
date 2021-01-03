@@ -78,7 +78,9 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
 					if(data.rows){
 
                         let newUsersRows=[],returnUsersRows=[]
+                        let newUsersExcel=[],returnUsersExcel=[]
                         let newUsersCounter=0,returningUsersCounter=0
+    
 
                         data.rows.forEach((record,index)=>{
 
@@ -90,10 +92,12 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                                 
                                 if(record[1]==="New Visitor"){
                                     newUsersRows.push({date,value:sessions})
+                                    newUsersExcel.push([date,sessions])
                                     newUsersCounter += sessions
                                 }
                                 else if(record[1]==="Returning Visitor"){
                                     returnUsersRows.push({date,value:sessions})
+                                    returnUsersExcel.push([date,sessions])
                                     returningUsersCounter += sessions
                                 }
                             }
@@ -102,6 +106,24 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                         setGaNewUsers({results:round((newUsersCounter/results)*100),rows:newUsersRows})
                         setGaReturnUsers({results:round((returningUsersCounter/results)*100),rows:returnUsersRows})
 
+                        if(props.onLoad){
+
+							const dataSet1 = [{
+                                ySteps:2,
+                                columns:["Tanggal","Return visitor"],
+                                data:returnUsersExcel
+                            }]
+
+                            const dataSet2 = [{
+                                ySteps:1,
+                                columns:["Tanggal","New visitor"],
+                                data:newUsersExcel
+                            }]
+
+
+                            props.onLoad([...dataSet1,...dataSet2])
+                        }
+                        
                     }
 
                 }

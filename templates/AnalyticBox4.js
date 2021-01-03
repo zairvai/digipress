@@ -116,25 +116,40 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
                         if(ids.length>0){
                             
 
+                            const excelData=[]
                             const posts = await classroomController._list({ids})
+
+                            dataRows.sort((a,b)=>a.value < b.value ? 1 : b.value < a.value ? -1 : 0)
 
                             if(posts && posts.data.items){
 
-                                posts.data.items.forEach(post=>{
-                                    
-                                    const index = dataRows.findIndex(obj=>obj.id==post.id)
+                                const items = posts.data.items
 
-                                    if(index>-1){
-                                        dataRows[index] = {...dataRows[index],title:post.title,author:post.createdBy.name}
+                                dataRows.forEach((row,index)=>{
+
+                                    const found = items.findIndex(obj=>obj.id==row.id)
+
+                                    if(found>-1){
+                                        row = {...row,title:items[found].title,author:items[found].createdBy.name}
+                                        excelData.push([index+1,row.title,row.author,row.value])
                                     }
+
                                 })
                             }
-            
-                            dataRows.sort((a,b)=>a.value < b.value ? 1 : b.value < a.value ? -1 : 0)
-            
-                            // const top3 = dataRows.splice(0,3)
-
+                            
                             setGaData({results,rows:dataRows})
+
+                            if(props.onLoad){
+
+                                const dataSet1 = [{
+                                    ySteps:2,
+                                    columns:["No","Ruang belajar","Pengajar","Total dipelajari"],
+                                    data:excelData
+                                }]
+    
+                                props.onLoad(dataSet1)
+                            }
+
                         }
                         
                         setEmpty(false)

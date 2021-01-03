@@ -10,7 +10,8 @@ import AnalyticBox3 from 'Templates/AnalyticBox3'
 import AnalyticBox4 from 'Templates/AnalyticBox4'
 import {NextSeo} from 'next-seo'
 import AuthController from 'Library/controllers/AuthController'
-import ReactExport from 'react-data-export';
+import ReactExport from 'react-export-excel';
+import moment from "moment";
 
 const PageDashboard = props => {
 
@@ -22,7 +23,15 @@ const PageDashboard = props => {
 
 	const [selectedMenu,setSelectedMenu] = React.useState()
 
+	const [summaryReport,setSummaryReport] = React.useState()
+	const [analytic1,setAnalytic1] = React.useState()
+	const [analytic2,setAnalytic2] = React.useState()
+	const [analytic3,setAnalytic3] = React.useState()
+	const [analytic4,setAnalytic4] = React.useState()
+
 	const [report,setReport] = React.useState()
+	const [filename,setFilename] = React.useState("Download")
+	const [isDownloadable,setDownloadable] = React.useState(false)
 
 	React.useEffect(()=>{
 
@@ -31,24 +40,27 @@ const PageDashboard = props => {
 			setAccountURL(auth.account.uniqueURL)
 		}
 
+		setFilename(`Digipress.id ${moment().format("DD-MMM-YYYY kk:mm:ss")}`)
+
 	},[])
 
 	React.useEffect(()=>{
-		console.log(report)
-	},[report])
+
+		if(summaryReport && analytic1 && analytic2 && analytic3 && analytic4){
+			const bundledReport = [...summaryReport,...analytic1,...analytic2,...analytic3,...analytic4]
+			console.log(bundledReport)
+			setReport(bundledReport)
+			setDownloadable(true)
+		}
+
+	},[summaryReport,analytic1,analytic2,analytic3,analytic4])
 
 	const handleMenuChange = selected =>{
 		setSelectedMenu(selected)
 	}
 
-	const handleReport = analytics =>{
-		
-		setReport(analytics)
-
-	}
-
-	const DownloadButton = props =>(
-		<ExcelFile element={<Button key="download-report" type="primary"><i className="ti-download"></i>&nbsp;Unduh laporan</Button>}>
+	const DownloadButton = ({loading,...props}) =>(
+		<ExcelFile filename={filename} element={<Button loading={loading} key="download-report" type="primary">{!loading && <i className="ti-download"></i>}&nbsp;Unduh laporan</Button>}>
 			<ExcelSheet dataSet={report} name="Digipress Report"/>
 		</ExcelFile>
 	)
@@ -64,14 +76,14 @@ const PageDashboard = props => {
 							className="p-0"
 							title="Laporan"
 							subTitle="penggunaaan akun secara keseluruhan"
-							// extra={[
-							// 	<DownloadButton key="extra-download-button"/>
-							// ]}
+							extra={[
+								<DownloadButton loading={!isDownloadable} key="extra-download-button"/>
+							]}
 						/>
 					</div>
 				</Col>
 			</Row>
-			<AdminSummeryBox onLoad={handleReport}/>
+			<AdminSummeryBox onLoad={setSummaryReport}/>
 			<Row>
 				<Col md={24}>
 					<div className="mb-2">
@@ -81,13 +93,13 @@ const PageDashboard = props => {
 			</Row>
 			<Row>
 				<Col md={14}>
-					<AnalyticBox1 selectedMenu={selectedMenu} onLoad={handleReport}/>
+					<AnalyticBox1 selectedMenu={selectedMenu} onLoad={setAnalytic1}/>
 				</Col>
 				<Col md={10}>
 					<Row>
 						<Col md={24}>
 							<div className="ml-md-2 ml-0">
-								<AnalyticBox2 selectedMenu={selectedMenu} pagePath={`/${accountURL}/`} onLoad={handleReport}/>
+								<AnalyticBox2 selectedMenu={selectedMenu} pagePath={`/${accountURL}/`} onLoad={setAnalytic2}/>
 							</div>
 						</Col>
 					</Row>
@@ -97,12 +109,12 @@ const PageDashboard = props => {
 			<Row>
 				<Col md={12} sm={12} xs={24}>
 					<div className="mt-2">
-						<AnalyticBox3 selectedMenu={selectedMenu} gaFilters={`main/home/articles/([a-zA-Z0-9\-]+)/$`} label="Top Artikel" description="Artikel paling sering dibaca" onLoad={handleReport}/>
+						<AnalyticBox3 selectedMenu={selectedMenu} gaFilters={`main/home/articles/([a-zA-Z0-9\-]+)/$`} label="Top Artikel" description="Artikel paling sering dibaca" onLoad={setAnalytic3}/>
 					</div>
 				</Col>
 				<Col md={12} sm={12} xs={24}>
 					<div className="mt-2 ml-md-2 ml-0">
-						<AnalyticBox4 selectedMenu={selectedMenu} gaFilters={`main/home/classrooms/([a-zA-Z0-9\-]+)/$`} label="Top Ruang belajar" description="Ruang belajar teraktif" onLoad={handleReport}/>
+						<AnalyticBox4 selectedMenu={selectedMenu} gaFilters={`main/home/classrooms/([a-zA-Z0-9\-]+)/$`} label="Top Ruang belajar" description="Ruang belajar teraktif" onLoad={setAnalytic4}/>
 					</div>
 				</Col>
 			</Row>

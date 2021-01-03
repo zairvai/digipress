@@ -119,18 +119,10 @@ const AdminSummeryBox = ({...props}) => {
 
 						if(props.onLoad){
 
-							const dataSet = [
-								{
+							const dataSet = [{
 									columns:["Pageviews","Visits","Bounce rate(%)","Visitors"],
-									data:[pageviews.results,sessions.results,bounceRate.results,users.results]
-								},
-							]
-
-							// const report = {overall:[
-							// 	{name:"pageviews",...pageviews},
-							// 	{name:"visits",...sessions},
-							// 	{name:"bounce rate",...bounceRate},
-							// 	{name:"visitors",...users}]}
+									data:[[pageviews.results,sessions.results,bounceRate.results,users.results]]
+								}]
 
 							props.onLoad(dataSet)
 						}

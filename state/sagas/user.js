@@ -55,8 +55,6 @@ export function* createUserWatcher(){
     yield takeLatest(createUserRoutine.TRIGGER,createUser)
 }
 
-
-
 function* getUser(action){
 
     try{
@@ -123,8 +121,6 @@ export function* listUsersWatcher(){
 function* updateUser(action){
 
     try{
-
-        console.log(action)
 
         yield put(updateUserRoutine.request())
 

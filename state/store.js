@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
 import thunk from 'redux-thunk'
-import mystorage from './storage'
+// import mystorage from './storage'
 function configureStore(preloadedState) {
 
 	const logger = createLogger()

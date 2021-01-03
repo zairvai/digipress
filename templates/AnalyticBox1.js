@@ -78,7 +78,7 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
 					if(data.rows){
 
 						let pageviewsRows=[],sessionsRows=[],pagesPerSessionRows=[]
-                        let barData1=[],barData2=[]
+                        let barData1=[],barData2=[],excelDataDaily=[]
                         
 						data.rows.forEach((record,index)=>{
                             
@@ -95,6 +95,7 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                             //if(pageviews>0 && sessions>0){
                                 barData1.push({date,value:pageviews})
                                 barData2.push({date,value:sessions})
+                                excelDataDaily.push([date,pageviews,sessions])
                             //}
 
 						})
@@ -113,12 +114,21 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                         setDoubleBarData({bar1,bar2})
 
                         if(props.onLoad){
-							// const report = {analyticBox1:[
-							// 	{name:"pageviews",...pageviews},
-							// 	{name:"visits",...sessions},
-							// 	{name:"pages per visit",...pagesPerSession}]}
-								
-							// props.onLoad(report)
+
+							const dataSet1 = [{
+                                ySteps:2,
+                                columns:["Pageviews","Visits","Pages/Visit"],
+                                data:[[pageviews.results,sessions.results,pagesPerSession.results]]
+                            }]
+
+                            const dataSet2 = [{
+                                ySteps:1,
+                                columns:["Tanggal","Visits","Pageviews"],
+                                data:excelDataDaily
+                            }]
+
+
+                            props.onLoad([...dataSet1,...dataSet2])
 						}
 
     
