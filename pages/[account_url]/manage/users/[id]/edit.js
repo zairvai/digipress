@@ -2,8 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import FormUser from 'Components/FormUser'
-import Layout from 'Templates/Layout.user.id'
-import AppContainer from 'Templates/AppContainer'
+import LayoutUser from 'Templates/Layout.user'
 import UserController from 'Library/controllers/UserController'
 import { Row,Col } from 'antd'
 
@@ -40,16 +39,15 @@ const PageUserEdit = props => {
     const links = [['Manage',`/${auth.account.uniqueURL}/manage/users`,''],['Users',`/${auth.account.uniqueURL}/manage/users`,''],[item.name,`/${auth.account.uniqueURL}/manage/users/${item.id}`,''],["Edit",`/${auth.account.uniqueURL}/manage/users/${item.id}/edit`,'active']]
 
     return (
-        <AppContainer>
+        <LayoutUser>
             <NextSeo title={`Kelola - Ubah anggota - ${item.name}`}/>
-            <Layout item={item} links={links}>
-                <Row>
-                    <Col md={14} sm={24} xs={24}>
-                        <FormUser item={item} onSuccess={onSuccess}/>
-                    </Col>
-                </Row>
-            </Layout>
-        </AppContainer>
+        
+            <Row>
+                <Col md={14} sm={24} xs={24}>
+                    <FormUser item={item} onSuccess={onSuccess}/>
+                </Col>
+            </Row>
+        </LayoutUser>
     );
 	
 }

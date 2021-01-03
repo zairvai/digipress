@@ -10,7 +10,7 @@ import {
 	VuroxTableDark
 } from 'Components/tables'
 import {Status} from 'Components/mycomponents.js'
-import Layout from 'Templates/Layout.user.id'
+import LayoutUser from 'Templates/Layout.user'
 import AppContainer from 'Templates/AppContainer'
 import AuthController from 'Library/controllers/AuthController'
 import UserController from 'Library/controllers/UserController'
@@ -121,46 +121,46 @@ const PageUserId = props => {
 
 
     return(
-        <AppContainer>
+        <LayoutUser>
             <NextSeo title={`Kelola - Anggota - ${item.name}`}/>
-            <Layout item={item} links={links}>
-                <Row>
-                    <Col md={24}>
-                        <VuroxComponentsContainer className="p-4">
-                            <Row>
-                                <Col md={12}>
-                                    <h4 className="d-inline mb-0 mr-2">{item.name}</h4>
-                                </Col>
-                                <Col md={12}>
-                                    <div className="fright">
-                                        <ul className="vurox-horizontal-links vurox-standard-ul">
-                                            {/* <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/users/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akses</a></Link></li> */}
-                                            {/* <li className="p-0 mr-3"><Button onClick={()=>setEditRoleVisible(true)} className="link" type="link" size="small" icon={<i className="ti-pencil"></i>}>&nbsp; Ubah role</Button></li> */}
-                                            <li className="p-0"><Button onClick={()=>showRevokeAccess({item,account:auth.account})} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akses</Button></li>
-                                        </ul>
-                                    </div>
-                                    <FormAkses visible={editRoleVisible} item={item} onCancel={()=>setEditRoleVisible(false)}/>
-                                </Col>
-                            </Row>
-                            <Row className="mt-3">
-                                <Col md={24}>
-                                    <Text>{item.address}</Text>
-                                </Col>
-                            </Row>
-                            <Row className="mt-3">
-                                <Col md={24}><Text>Role&nbsp;:&nbsp;{AuthController.getRole({user:item,account:auth.account}).role}</Text></Col>
-                            </Row>
-                            <Row className="mt-3">
-                                <Col md={24}><Text>Email address&nbsp;:&nbsp;{item.emailAddress}</Text></Col>
-                            </Row>
-                            <Row className="mt-3">
-                                <Col md={24}><Text>Telpon&nbsp;:&nbsp;{item.phoneNumber}</Text></Col>
-                            </Row>
-                        </VuroxComponentsContainer>
-                    </Col>
-                </Row>
-            </Layout>
-        </AppContainer>
+            
+            <Row>
+                <Col md={24}>
+                    <VuroxComponentsContainer className="p-4">
+                        <Row>
+                            <Col md={12}>
+                                <h4 className="d-inline mb-0 mr-2">{item.name}</h4>
+                            </Col>
+                            <Col md={12}>
+                                <div className="fright">
+                                    <ul className="vurox-horizontal-links vurox-standard-ul">
+                                        {/* <li className="p-0 mr-3"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/users/[id]/edit`,query:{id:item.id}}} shallow><a><i className="ti-pencil"></i>&nbsp;Edit akses</a></Link></li> */}
+                                        {/* <li className="p-0 mr-3"><Button onClick={()=>setEditRoleVisible(true)} className="link" type="link" size="small" icon={<i className="ti-pencil"></i>}>&nbsp; Ubah role</Button></li> */}
+                                        <li className="p-0"><Button onClick={()=>showRevokeAccess({item,account:auth.account})} className="link" type="link" size="small" icon={<i className="ti-trash"></i>}>&nbsp;Hapus akses</Button></li>
+                                    </ul>
+                                </div>
+                                <FormAkses visible={editRoleVisible} item={item} onCancel={()=>setEditRoleVisible(false)}/>
+                            </Col>
+                        </Row>
+                        <Row className="mt-3">
+                            <Col md={24}>
+                                <Text>{item.address}</Text>
+                            </Col>
+                        </Row>
+                        <Row className="mt-3">
+                            <Col md={24}><Text>Role&nbsp;:&nbsp;{AuthController.getRole({user:item,account:auth.account}).role}</Text></Col>
+                        </Row>
+                        <Row className="mt-3">
+                            <Col md={24}><Text>Email address&nbsp;:&nbsp;{item.emailAddress}</Text></Col>
+                        </Row>
+                        <Row className="mt-3">
+                            <Col md={24}><Text>Telpon&nbsp;:&nbsp;{item.phoneNumber}</Text></Col>
+                        </Row>
+                    </VuroxComponentsContainer>
+                </Col>
+            </Row>
+        </LayoutUser>
+        
     )
 
 }
