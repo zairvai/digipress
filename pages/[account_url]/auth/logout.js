@@ -21,7 +21,12 @@ const PageLogout = props => {
         try{
             await authController._signOut()
             
-            router.push(`/${auth.account.uniqueURL}/auth/login`)
+            if(auth && auth.account && auth.account.uniqueURL){
+                router.push(`/${auth.account.uniqueURL}/auth/login`)
+            }else{
+                router.push(`/app/auth/login`)
+            }
+            
 
         }catch(error){
             console.log(error)
