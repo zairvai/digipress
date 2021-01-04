@@ -5,13 +5,14 @@ import {connect} from 'react-redux'
 
 const Redirector = props => {
 
-    const {router} = props
+    const {auth,router} = props
 
-    router.push("/app/auth/login")
+    React.useEffect(()=>{
+        if(auth && auth.account && auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/auth/login`)
+        else router.push('/app/auth/login')
+    },[])
 
-    return(
-        <></>
-    )
+    return (<></>)
 }
 
-export default connect(state=>state)(withRouter(Redirector))
+export default connect(state=>({auth:state.auth}))(withRouter(Redirector))

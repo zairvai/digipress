@@ -5,10 +5,13 @@ import {connect} from 'react-redux'
 
 const AppIndex = props => {
 
-    const {router} = props
+    const {auth, router} = props
     const {asPath} = router
 
-    if(asPath==="/") router.push("/app/auth/login")
+    if(asPath==="/") {
+        if(auth && auth.account && auth.account.uniqueURL) router.push(`/${auth.account.uniqueURL}/auth/login`)
+        else router.push("/app/auth/login")
+    }
     else router.push(asPath)
     
     
@@ -18,4 +21,4 @@ const AppIndex = props => {
     )
 }
 
-export default connect(state=>state)(withRouter(AppIndex))
+export default connect(state=>({auth:state.auth}))(withRouter(AppIndex))

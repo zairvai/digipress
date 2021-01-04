@@ -9,7 +9,7 @@ import {
 import {withRouter} from 'next/router'
 import {getRedirectToUserDefaultPath} from 'Helper'
 
-import { Row, Col,Image,Typography} from 'antd'
+import { Row, Col,Image,Typography,PageHeader} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
@@ -21,7 +21,7 @@ import AccountController from 'Library/controllers/AccountController'
 
 import {NextSeo} from 'next-seo'
 
-const {Title} = Typography
+const {Title,Text} = Typography
 
 const PageLogin = props =>{
 
@@ -39,8 +39,6 @@ const PageLogin = props =>{
 		try{
 
 			
-			// router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
-			
 			if(auth.isLoggedIn){
 				
 				if(auth.user.access.accountId != auth.account.id){
@@ -48,20 +46,21 @@ const PageLogin = props =>{
 					setVisible(true)
 				}
 				else{
-					// router.push(`/${auth.account.uniqueURL}/report/dashboard`)
 					router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,auth.user.access.role))
 				}
 			}
 			else{
 				
+				const uniqueURLPath = router.query.account_url
+				
 				authController._initSignIn()
 				//get account id by unique URL
-				const account = await accountController._getAccountByUniqueUrl({url:router.query.account_url})
+				const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
 
 				authController._setAccount(account.data)
 				
 				setVisible(true)
-
+				
 			}
 		}
 		catch(error){
@@ -96,13 +95,25 @@ const PageLogin = props =>{
 						<Row className="justify-content-center fullHeight">
 							
 							<Col md={8} sm={24} xs={24} className="fullHeight">
-								<VuroxComponentsContainer className="p-4 mt-5 mb-1 rounded-top">
+								<VuroxComponentsContainer className="py-4 px-4 mt-5 mb-1 rounded-top">
 									<Row>
 										<Col md={24} sm={24} xs={24}>
-											<Title level={1} className="text-center my-3 mb-0">{auth.account.name}</Title>
+											<Title level={4} className="mb-0">{auth.account.name}</Title>
+											<Text type="secondary">Anda sedang mengakses akun {auth.account.name}.</Text>
+											<Text type="secondary"> Silahkan login menggunakan email yang telah terdaftar pada akun {auth.account.name}</Text>
 										</Col>
 									</Row>
 								</VuroxComponentsContainer>
+								{/* <Row>
+									<Col md={24} sm={24} xs={24}>
+										<div className="mb-1 mt-5">
+											<PageHeader
+												ghost={false}
+												title={auth.account.name} subTitle={`Anda sedang mengakses akun ${auth.account.name}`}
+											/>
+										</div>
+									</Col>
+								</Row> */}
 								<Row className="align-items-center fullHeight">
 									<Col md={24} sm={24} xs={24}>
 										{auth.newPasswordRequired ? 
@@ -114,7 +125,7 @@ const PageLogin = props =>{
 								</Row>
 								<VuroxComponentsContainer className="p-4 mt-1 rounded-bottom">
 									<Row className="justify-content-center">
-										<Col md={12}>
+										<Col md={8} sm={18} xs={18}>
 											
 												<Image
 													src={window.location.origin+"/image/baktikominfo.jpg"}
@@ -136,7 +147,7 @@ const PageLogin = props =>{
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
 				signOutRoutinePromise,
