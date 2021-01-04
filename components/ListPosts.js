@@ -20,7 +20,7 @@ const ArticleItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={18} sm={12} xs={12}>
                         <span><Icon size="1.5em" path={mdiPostOutline}/></span>&nbsp;
-                        <Text>{item.category.name}</Text>
+                        <Text>{item.category && item.category.name}</Text>
                     </Col>
                     <Col md={6} sm={12} xs={12}>
                         <div className="fright">

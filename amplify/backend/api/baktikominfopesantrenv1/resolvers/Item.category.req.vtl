@@ -5,6 +5,9 @@
 ## - $ctx.stash.put("badgeNumber", $ctx.args.input.badgeNumber)
 ## - $ctx.stash.put("username", $ctx.identity.username)
 
+#if($util.isNull($ctx.source.categoryId))
+	#return
+#end
 $util.qr($ctx.stash.put("id",$ctx.source.categoryId))
 
 {}

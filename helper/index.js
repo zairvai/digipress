@@ -22,7 +22,7 @@ export const getRedirectToUserDefaultPath = (uniqueURL,role) => {
 
     case "tutor" 	  : 	
     case "student"	: 
-    case "member"	  :   url = `${uniqueURL}/main/home`	
+    case "member"	  :   url = `${uniqueURL}main/home`	
                         break;
 
       default	 	    : 	url = `not-found`

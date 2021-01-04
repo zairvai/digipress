@@ -182,7 +182,7 @@ type AccountConnection {
 interface Post{
 	id: ID!
 	account: Account!
-	category: Category!
+	category: Category
 	title: String!
 	tags: [Tag]
 	allowComment: Boolean
@@ -221,7 +221,7 @@ type Article implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
-	category: Category!
+	category: Category
 	postType:PostType!
 	title: String!
 	content:String
@@ -271,7 +271,7 @@ type Classroom implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
-	category: Category!
+	category: Category
 	postType:PostType!
 	title: String!
 	content:String

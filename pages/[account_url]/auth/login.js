@@ -9,7 +9,7 @@ import {
 import {withRouter} from 'next/router'
 import {getRedirectToUserDefaultPath} from 'Helper'
 
-import { Row, Col,Image,Typography,PageHeader} from 'antd'
+import { Row, Col,Image,Typography} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
@@ -104,16 +104,7 @@ const PageLogin = props =>{
 										</Col>
 									</Row>
 								</VuroxComponentsContainer>
-								{/* <Row>
-									<Col md={24} sm={24} xs={24}>
-										<div className="mb-1 mt-5">
-											<PageHeader
-												ghost={false}
-												title={auth.account.name} subTitle={`Anda sedang mengakses akun ${auth.account.name}`}
-											/>
-										</div>
-									</Col>
-								</Row> */}
+								
 								<Row className="align-items-center fullHeight">
 									<Col md={24} sm={24} xs={24}>
 										{auth.newPasswordRequired ? 
