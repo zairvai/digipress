@@ -6,7 +6,7 @@ import {
 	ContentLayout,
 } from 'Components/layout'
 import {withRouter} from 'next/router'
-import {getRedirectToDefaultPath} from 'Helper'
+import {getRedirectToUserDefaultPath} from 'Helper'
 
 import { Row, Col,Button, Checkbox,Form,Menu,Typography} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
@@ -45,7 +45,7 @@ const PageLogin = props =>{
 				}
 				else{
 					// router.push(`/${auth.account.uniqueURL}/report/dashboard`)
-					router.push(getRedirectToDefaultPath(auth,auth.user.access.role))
+					router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,auth.user.access.role))
 				}
 			}
 			else{
@@ -77,7 +77,7 @@ const PageLogin = props =>{
 
 	const onSuccess = user =>{
 		const access = JSON.parse(user.signInUserSession.idToken.payload.access)
-		router.push(getRedirectToDefaultPath(auth,access.role))
+		router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,access.role))
 	}
 
 	return(

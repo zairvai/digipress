@@ -4,8 +4,6 @@ import {withRouter,useRouter} from 'next/router'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { getAuthUserRoutinePromise,signOutRoutinePromise} from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
-import AccountController from 'Library/controllers/AccountController'
-import {getRedirectToDefaultPath} from 'Helper'
 
 const Container = props => {
 
@@ -28,7 +26,7 @@ const Container = props => {
             
             if(!auth.user.access) shouldSignOut = true
             else {
-                if(auth.account.uniqueURL != router.query.account_url) shouldSignOut=true//router.push(getRedirectToDefaultPath(auth,auth.user.access.role))    
+                if(auth.account.uniqueURL != router.query.account_url) shouldSignOut=true
                 else setVisible(true)
             }
             

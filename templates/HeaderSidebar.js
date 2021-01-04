@@ -84,7 +84,7 @@ const Sidebar = (props) => {
 				{/* <Navitem active = {app.currentPage == "settings" ? true : false} link={`/${auth.account.uniqueURL}/help/settings`} className={router.asPath===`/${auth.account.uniqueURL}/help/settings` ? "active":""} text='Pengaturan' icon={<Icon size="1.3em" path={mdiCogOutline} />} />
 				<Navitem active = {app.currentPage == "feedbacks" ? true : false} link={`/${auth.account.uniqueURL}/help/feedbacks`} text='Saran' icon={<Icon size="1.3em" path={mdiCommentOutline} />} />
 				<Navitem active = {app.currentPage == "supports" ? true : false} link={`/${auth.account.uniqueURL}/help/supports`} text='Bantuan' icon={<Icon size="1.3em" path={mdiHeadset} />} /> */}
-				<Navitem active = {app.currentPage == "faq" ? true : false} link={`/${auth.account.uniqueURL}/help/faq`} text='FAQ' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
+				<Navitem active = {app.currentPage == "faq" ? true : false} link={`/${auth.account.uniqueURL}/help/faq`} text='Faq' icon={<Icon size="1.3em" path={mdiFrequentlyAskedQuestions} />} />
 
 				
 			</ul>

@@ -1,76 +1,44 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Link from 'next/link'
-import {
-	VuroxLayout,
-	HeaderLayout,
-	VuroxSidebar,
-	ContentLayout,
-	VuroxComponentsContainer
-} from 'Components/layout'
-import VuroxFormSearch from 'Components/search'
-import { vuroxContext } from 'Context'
-import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
-import Sidebar from 'Templates/HeaderSidebar';
-import { Row, Col,Button, Modal} from 'antd'
-import { Search} from 'react-bootstrap-icons'
-
-import AppContainer from 'Templates/AppContainer'
-import Permission from 'Library/controllers/Permission'
-
+import LayoutFaq from 'Templates/Layout.faq'
 import {NextSeo} from 'next-seo'
+import {Row,Col,PageHeader,Collapse} from 'antd'
 
 const PageFaq = props => {
 
-	const {auth,router} = props
+	const {Panel} = Collapse
 
-	const pagename=""
+	const {auth} = props
 
-	const links = [['Umum',`/${auth.account.uniqueURL}/help/faq`,''],['Faq',`/${auth.account.uniqueURL}/help/faq`,'active']]
-
-	const { menuState } = React.useContext(vuroxContext)
-	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
-
-	
 	return (
-		<AppContainer>
-			<NextSeo title="FAQ"/>
-			<HeaderLayout className="sticky-top">
-				<HeaderDark />
-			</HeaderLayout>
-			<VuroxLayout>
-				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-					<Sidebar className={toggleClass} />
-				</VuroxSidebar>
-				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={pagename} links={links}/>
-					<Row className="mb-2">
-						<Col md={12} sm={24} xs={24}>
-							<VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/>
-						</Col>
-						<Col md={12}>
-							<div className="fright">
-								{/* <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									
-								</ul> */}
-							</div>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={24}>
-							{/* <VuroxComponentsContainer>
-								<ListQnas items={listQnas.list.items} foundDoc={listQnas.list.foundDocs} onDelete={showDeleteConfirm}/>
-							</VuroxComponentsContainer>	 */}
-						</Col>
-					</Row>
-					
-				</ContentLayout>
-			</VuroxLayout>
-		</AppContainer>
+		<LayoutFaq>
+			<NextSeo title="Faq"/>
+			
+			<Row>
+				<Col md={24}>
+					<PageHeader title="Frequently Asked Questions" ghost={false}/>
+				</Col>
+			</Row>
+			<Row>
+				<Col md={24}>
+					<Collapse defaultActiveKey={['1']}>
+						<Panel header="Apa itu digipress Pesantren" key="1">
+							<p>Sebuah konsep portal guna membantu memberikan informasi mengenai pesantren kepada masyarakat luas serta membantu pesantren untuk menyebarkan pandangan dan keilmuan mereka melalui artikel dan diskusi yang difasilitasi portal tersebut.</p>
+						</Panel>
+						<Panel header="Bagaimana cara login digipress" key="2">
+							<p>Dengan membuka halaman https://digipress.id/[nama_akun]/auth/login</p>
+							<p>[nama_akun] adalah nama unik URL untuk setiap pesantren yang telah didaftarkan oleh Admin Bakti Kominfo. Nama tersebut</p>
+						</Panel>
+						
+				</Collapse>
+				</Col>
+			</Row>
+
+			
+		</LayoutFaq>
 	);
 	
 }
 
 
-export default connect(state=>state)(PageFaq)
+export default connect(state=>({auth:state.auth}))(PageFaq)
