@@ -32,7 +32,7 @@ const TinyMce = ({id,className="",mode="full",
                         pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste"]
                         toolbar1 = "undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
                                     alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
-                                    code | fullscreen | mymedia | paste pastetext"
+                                    code | fullscreen | paste pastetext"
                         
                         skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`
                         
