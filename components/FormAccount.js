@@ -11,33 +11,32 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
-import { createAccountRoutinePromise,updateAccountRoutinePromise} from 'State/routines/account';
+import { createAccountRoutinePromise,updateAccountRoutinePromise,getAccountByUniqueUrlRoutinePromise} from 'State/routines/account';
 import AccountController from 'Library/controllers/AccountController'
 
 const {Text} = Typography
 
 //validation schema
 const schema = yup.object().shape({
-    uniqueURL:yup.string()
+    uniqueURL: yup.string()
                     .required("Silahkan pilih URL untuk nama akun pesantren.")
                     .test("test-name","Masukan url dengan benar. Hanya karakter a-z 0-9 dan _ - .",
                         value=>{
                             return /^([a-zA-Z0-9])+([-_a-zA-Z0-9_-])*([a-zA-Z0-9])+$/i.test(value)
                         }
                     )
-                    .min(5, "Minimal 5 karakter")
+                    .min(5, "Minimal 5 karakter.")
                     .max(30,"Maksimal 30 karakter."),
-    name:yup.string().required("Mohon masukkan nama akun.").max(100,"Nama akun tidak boleh lebih dari 100 karakter."),
-    address:yup.string().required("Mohon masukkan alamat akun.").max(200),
-    contactPerson:yup.string().required("Mohon masukkan nama kontak person.").max(64,"Maksimal 64 karakter"),
+    name:yup.string().required("Mohon masukkan nama akun pesantren.").max(100,"Nama akun tidak boleh lebih dari 100 karakter."),
+    address:yup.string().required("Mohon masukkan alamat akun.").max(300,"Maksimal 300 karakter."),
+    contactPerson:yup.string().required("Mohon masukkan nama kontak person.").max(64,"Maksimal 64 karakter."),
     phoneNumber:yup.string().required("Mohon masukkan nomer telp.").max(15,"Maksimal 15 angka."),
-    emailAddress:yup.string().required("Mohon masukkan alamat email.").email("Masukan alamat email dengan benar").max(64,"Maksimal 64 karakter")
+    emailAddress:yup.string().required("Mohon masukkan alamat email.").email("Masukan alamat email dengan benar.").max(64,"Maksimal 64 karakter.")
 })
 
 const FormAccount = ({item,...props}) => {
 
-
-    const {auth,createAccount,updateAccount} = props
+    const [isSubmitting,setSubmitting] = React.useState(false)
 
     const accountController = new AccountController(props)
     
@@ -46,7 +45,9 @@ const FormAccount = ({item,...props}) => {
         reset,
         control,
         errors,
-        formState,
+        setError,
+        clearErrors,
+        getValues,
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -78,7 +79,9 @@ const FormAccount = ({item,...props}) => {
     },[item])
 
     const onSubmit = (values) => {
-        
+
+        setSubmitting(true)
+
         if(item) {
             
             accountController._update(item,values)
@@ -97,6 +100,29 @@ const FormAccount = ({item,...props}) => {
 
     }
 
+    const handleURLChange = e =>{
+        
+        const uniqueURLValue = getValues('uniqueURL')
+
+        if(uniqueURLValue.length >= 5){
+
+            setTimeout(()=>{
+                accountController._getAccountByUniqueUrl({url:uniqueURLValue})
+                    .then(account=>{
+                        if(account.data) {
+                            setError('uniqueURL',{
+                                type:"manual",
+                                message:"URL sudah digunakan sebelumnya, silahkan ketik URL yang lain"
+                            })
+                        }else{
+                            clearErrors("uniqueURL")
+                        }
+                    })
+                    .catch(error=>console.log(error))
+            },2000)
+        }
+    }
+
     return (
         <Form
             layout="vertical"
@@ -111,12 +137,12 @@ const FormAccount = ({item,...props}) => {
                                 name="name"
                                 control={control}
                                 render={props=>
-                                    <Form.Item label="Nama akun">
+                                    <Form.Item label="Nama akun pesantren">
                                         <Input 
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            disabled={isSubmitting}
                                             tabIndex="2"
                                             allowClear
-                                            size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                            size="large" placeholder="..." value={props.value} onChange={props.onChange} {...props} />
                                         {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                     </Form.Item>
                                 }
@@ -133,18 +159,23 @@ const FormAccount = ({item,...props}) => {
                                 render={props=>
                                     <Form.Item label="Public URL untuk akses ke akun pesantren">
                                         <Input.Search 
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            disabled={isSubmitting}
                                             size="large"
                                             tabIndex="1"
                                             allowClear
                                             addonBefore="https://digipress.id/"
-                                            placeholder="xxxxxxxxxx" value={props.value} onChange={props.onChange}/>
+                                            placeholder="xxxxxxxxxx" 
+                                            onChange={e=>{
+                                                props.onChange(e);
+                                                handleURLChange(e);
+                                            }}
+                                            value={props.value} 
+                                            />
                                         {/* <Text className="d-block" style={{width:"100%"}} type="secondary">hanya karakter a-z 0-9 dan _ - </Text> */}
                                         {errors && errors.uniqueURL && <Text type="danger">{errors.uniqueURL.message}</Text>}
                                     </Form.Item>
                                 }
                             />
-                            
                         </Col>
                     </Row>
                     <Row>
@@ -155,7 +186,7 @@ const FormAccount = ({item,...props}) => {
                                 render={props=>
                                     <Form.Item label="Alamat">
                                         <Input.TextArea 
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            disabled={isSubmitting}
                                             tabIndex="3"
                                             allowClear
                                             autoSize={{ minRows: 3, maxRows: 5 }}
@@ -176,7 +207,7 @@ const FormAccount = ({item,...props}) => {
                                 render={props=>
                                     <Form.Item label="Kontak person">
                                         <Input
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            disabled={isSubmitting}
                                             tabIndex="4" 
                                             allowClear
                                             size="large" placeholder="contoh: Muhammad " value={props.value} onChange={props.onChange} />
@@ -196,7 +227,7 @@ const FormAccount = ({item,...props}) => {
                                         control={control}
                                         render={props=>
                                             <Input 
-                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large" 
                                                 style={{width:"30%"}}
                                                 value={props.value} readOnly/>
@@ -207,7 +238,7 @@ const FormAccount = ({item,...props}) => {
                                         control={control}
                                         render={props=>
                                             <InputNumber
-                                                disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                                disabled={isSubmitting}
                                                 tabIndex="5"
                                                 size="large"
                                                 style={{ width: '70%' }} value={props.value} placeholder="8xx" onChange={props.onChange}/>
@@ -227,7 +258,7 @@ const FormAccount = ({item,...props}) => {
                                 render={props=>
                                     <Form.Item label="Email" className="ml-0 ml-md-3">
                                         <Input
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            disabled={isSubmitting}
                                             tabIndex="6" 
                                             allowClear
                                             size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
@@ -247,10 +278,10 @@ const FormAccount = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7" disabled={createAccount.isRequesting || updateAccount.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                <Button tabIndex="7" disabled={isSubmitting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="8" type="primary" htmlType="submit" loading={createAccount.isRequesting || updateAccount.isRequesting} block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmitting} block>Kirim</Button>
                             </Col>
                         </Row>
 
@@ -263,11 +294,12 @@ const FormAccount = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createAccountRoutinePromise,
-            updateAccountRoutinePromise
+            updateAccountRoutinePromise,
+            getAccountByUniqueUrlRoutinePromise
         },dispatch),dispatch
     })
 )(FormAccount)
