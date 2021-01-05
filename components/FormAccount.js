@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Row, Col,Form,Input,InputNumber,Button, Checkbox,Dropdown,Menu,Select,Space,Divider,Typography} from 'antd'
-import Link from 'next/link'
+import { Row, Col,Form,Input,InputNumber,Button,Divider,Typography} from 'antd'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { appContext } from 'Context/app'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -20,12 +18,12 @@ const {Text} = Typography
 const schema = yup.object().shape({
     uniqueURL: yup.string()
                     .required("Silahkan pilih URL untuk nama akun pesantren.")
-                    .test("test-name","Masukan url dengan benar. Hanya karakter a-z 0-9 dan _ - .",
+                    .min(5, "Minimal 5 karakter.")
+                    .test("test-name","Masukan url dengan benar. Hanya huruf kecil angka 0-9 dan _ -",
                         value=>{
-                            return /^([a-zA-Z0-9])+([-_a-zA-Z0-9_-])*([a-zA-Z0-9])+$/i.test(value)
+                            return /^([a-z0-9])+([-_a-z0-9_-])*([a-z0-9])+$/.test(value)
                         }
                     )
-                    .min(5, "Minimal 5 karakter.")
                     .max(30,"Maksimal 30 karakter."),
     name:yup.string().required("Mohon masukkan nama akun pesantren.").max(100,"Nama akun tidak boleh lebih dari 100 karakter."),
     address:yup.string().required("Mohon masukkan alamat akun.").max(300,"Maksimal 300 karakter."),
@@ -37,6 +35,8 @@ const schema = yup.object().shape({
 const FormAccount = ({item,...props}) => {
 
     const [isSubmitting,setSubmitting] = React.useState(false)
+
+    const [isErrorUniqueURL,setErrorUniqueURL] = React.useState(false)
 
     const accountController = new AccountController(props)
     
@@ -80,6 +80,9 @@ const FormAccount = ({item,...props}) => {
 
     const onSubmit = (values) => {
 
+
+        if(isErrorUniqueURL) return
+
         setSubmitting(true)
 
         if(item) {
@@ -102,24 +105,30 @@ const FormAccount = ({item,...props}) => {
 
     const handleURLChange = e =>{
         
-        const uniqueURLValue = getValues('uniqueURL')
+        if(errors && !errors.uniqueURL){
 
-        if(uniqueURLValue.length >= 5){
+            const uniqueURLValue = getValues('uniqueURL')
 
-            setTimeout(()=>{
-                accountController._getAccountByUniqueUrl({url:uniqueURLValue})
-                    .then(account=>{
-                        if(account.data) {
-                            setError('uniqueURL',{
-                                type:"manual",
-                                message:"URL sudah digunakan sebelumnya, silahkan ketik URL yang lain"
+            if(item && item.uniqueURL !== uniqueURLValue.trim()){
+
+                if(uniqueURLValue.length >= 5){
+
+                    setTimeout(()=>{
+                        accountController._getAccountByUniqueUrl({url:uniqueURLValue})
+                            .then(account=>{
+                                if(account.data) {
+                                    setErrorUniqueURL("URL sudah digunakan sebelumnya, silahkan ketik URL yang lain")
+                                }else{
+                                    setErrorUniqueURL(false)
+                                    clearErrors("uniqueURL")
+                                }
                             })
-                        }else{
-                            clearErrors("uniqueURL")
-                        }
-                    })
-                    .catch(error=>console.log(error))
-            },2000)
+                            .catch(error=>console.log(error))
+                    },2000)
+                }
+            }else{
+                setErrorUniqueURL(false)
+            }
         }
     }
 
@@ -152,7 +161,7 @@ const FormAccount = ({item,...props}) => {
                     </Row>
                 
                     <Row>
-                        <Col md={16} sm={24} xs={24}>
+                        <Col md={24} sm={24} xs={24}>
                             <Controller
                                 name="uniqueURL"
                                 control={control}
@@ -164,7 +173,7 @@ const FormAccount = ({item,...props}) => {
                                             tabIndex="1"
                                             allowClear
                                             addonBefore="https://digipress.id/"
-                                            placeholder="xxxxxxxxxx" 
+                                            placeholder="Contoh : pesantren,pesantren123, akun-pesantren" 
                                             onChange={e=>{
                                                 props.onChange(e);
                                                 handleURLChange(e);
@@ -173,6 +182,7 @@ const FormAccount = ({item,...props}) => {
                                             />
                                         {/* <Text className="d-block" style={{width:"100%"}} type="secondary">hanya karakter a-z 0-9 dan _ - </Text> */}
                                         {errors && errors.uniqueURL && <Text type="danger">{errors.uniqueURL.message}</Text>}
+                                        {isErrorUniqueURL && <Text type="danger">{isErrorUniqueURL}</Text>}
                                     </Form.Item>
                                 }
                             />
