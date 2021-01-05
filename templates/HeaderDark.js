@@ -131,7 +131,7 @@ const HeaderDark = props => {
 									<DropdownItemsHead color='bg-cyan-6'>
 										{auth.user.name}
 									</DropdownItemsHead>
-									<DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem>
+									{/* <DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem> */}
 									<DropdownItem link={`/${auth.account.uniqueURL}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
