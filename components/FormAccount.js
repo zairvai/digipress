@@ -109,25 +109,25 @@ const FormAccount = ({item,...props}) => {
 
             const uniqueURLValue = getValues('uniqueURL')
 
-            if(item && item.uniqueURL !== uniqueURLValue.trim()){
-
-                if(uniqueURLValue.length >= 5){
-
-                    setTimeout(()=>{
-                        accountController._getAccountByUniqueUrl({url:uniqueURLValue})
-                            .then(account=>{
-                                if(account.data) {
-                                    setErrorUniqueURL("URL sudah digunakan sebelumnya, silahkan ketik URL yang lain")
-                                }else{
-                                    setErrorUniqueURL(false)
-                                    clearErrors("uniqueURL")
-                                }
-                            })
-                            .catch(error=>console.log(error))
-                    },2000)
-                }
-            }else{
+            if(item && item.uniqueURL === uniqueURLValue.trim()) {
                 setErrorUniqueURL(false)
+                return
+            }
+
+            if(uniqueURLValue.length >= 5){
+
+                setTimeout(()=>{
+                    accountController._getAccountByUniqueUrl({url:uniqueURLValue})
+                        .then(account=>{
+                            if(account.data) {
+                                setErrorUniqueURL("URL sudah digunakan sebelumnya, silahkan ketik URL yang lain")
+                            }else{
+                                setErrorUniqueURL(false)
+                                clearErrors("uniqueURL")
+                            }
+                        })
+                        .catch(error=>console.log(error))
+                },2000)
             }
         }
     }
