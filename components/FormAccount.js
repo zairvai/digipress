@@ -19,7 +19,7 @@ const {Text} = Typography
 //validation schema
 const schema = yup.object().shape({
     uniqueURL:yup.string()
-                    .required("Silahkan pilih url untuk nama akun kamu.")
+                    .required("Silahkan pilih URL untuk nama akun pesantren.")
                     .test("test-name","Masukan url dengan benar. Hanya karakter a-z 0-9 dan _ - .",
                         value=>{
                             return /^([a-zA-Z0-9])+([-_a-zA-Z0-9_-])*([a-zA-Z0-9])+$/i.test(value)
@@ -104,27 +104,7 @@ const FormAccount = ({item,...props}) => {
         >
            
                 <VuroxComponentsContainer className="p-4">
-                    <Row>
-                        <Col md={16} sm={24} xs={24}>
-                            <Controller
-                                name="uniqueURL"
-                                control={control}
-                                render={props=>
-                                    <Form.Item label="Public Url untuk akses ke akun kamu">
-                                        <Input.Search 
-                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
-                                            tabIndex="1"
-                                            allowClear
-                                            addonBefore="https://digipress.id/"
-                                            placeholder="xxxxxxxxxx" value={props.value} onChange={props.onChange}/>
-                                        {/* <Text className="d-block" style={{width:"100%"}} type="secondary">hanya karakter a-z 0-9 dan _ - </Text> */}
-                                        {errors && errors.uniqueURL && <Text type="danger">{errors.uniqueURL.message}</Text>}
-                                    </Form.Item>
-                                }
-                            />
-                            
-                        </Col>
-                    </Row>
+                    
                     <Row>
                         <Col md={24} sm={24} xs={24}>
                             <Controller
@@ -145,6 +125,28 @@ const FormAccount = ({item,...props}) => {
                         </Col>
                     </Row>
                 
+                    <Row>
+                        <Col md={16} sm={24} xs={24}>
+                            <Controller
+                                name="uniqueURL"
+                                control={control}
+                                render={props=>
+                                    <Form.Item label="Public URL untuk akses ke akun pesantren">
+                                        <Input.Search 
+                                            disabled={createAccount.isRequesting || updateAccount.isRequesting}
+                                            size="large"
+                                            tabIndex="1"
+                                            allowClear
+                                            addonBefore="https://digipress.id/"
+                                            placeholder="xxxxxxxxxx" value={props.value} onChange={props.onChange}/>
+                                        {/* <Text className="d-block" style={{width:"100%"}} type="secondary">hanya karakter a-z 0-9 dan _ - </Text> */}
+                                        {errors && errors.uniqueURL && <Text type="danger">{errors.uniqueURL.message}</Text>}
+                                    </Form.Item>
+                                }
+                            />
+                            
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={24} sm={24} xs={24}>
                             <Controller

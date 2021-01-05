@@ -8,6 +8,23 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
+    static VIEW_ACCOUNTS = ({auth})=>{
+
+        if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)) return false
+
+        return true
+    }
+
+    static VIEW_USERS = ({auth})=>{
+
+        console.log(auth)
+        if(!AuthController.isOwner(auth) && !AuthController.isAdmin(auth)) return false
+
+        return true
+    }
+
+
+
     static ADD_ARTICLE = ({auth,...props}) => {
 
         if(AuthController.isAppOwner(auth) || AuthController.isAppAdmin(auth)) return false

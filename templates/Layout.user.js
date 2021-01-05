@@ -12,41 +12,53 @@ import Summery2 from 'Templates/Summery2';
 import Sidebar from 'Templates/HeaderSidebar';
 import AppContainer from 'Templates/AppContainer'
 import AppController from 'Library/controllers/AppController'
+import Permission from 'Library/controllers/Permission'
 
 const Layout = props => {
 
-	const {app,pagename,links} = props
+	const {auth,app,pagename,links} = props
 
     const appController = new AppController(props)
 
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
+    const [isAllowed,setAllowed] = React.useState(false)
+
     React.useEffect(()=>{
 
-        appController._setCurrentPage("users")
+		if(Permission.VIEW_USERS({auth})){
+			appController._setCurrentPage("users")
+			setAllowed(true)
+		}
 
     },[])
 
 
 	return (
 		<AppContainer>
-			<HeaderLayout className="sticky-top">
-				<HeaderDark />
-			</HeaderLayout>
-			<VuroxLayout>
-				<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
-					<Sidebar className={toggleClass} />
-				</VuroxSidebar>
-				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={pagename} links={links}/>
-					{props.children}
-				</ContentLayout>
-			</VuroxLayout>
+			{isAllowed ? 
+				<>
+					<HeaderLayout className="sticky-top">
+						<HeaderDark />
+					</HeaderLayout>
+					<VuroxLayout>
+						<VuroxSidebar width={240} className={`sidebar-container  ${toggleClass}`} >
+							<Sidebar className={toggleClass} />
+						</VuroxSidebar>
+						<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
+							<Summery2 pagename={pagename} links={links}/>
+							{props.children}
+						</ContentLayout>
+					</VuroxLayout>
+				</>
+			:
+				<></>
+			}
 		</AppContainer>
 	);
 	
 }
 
 
-export default connect(state=>({app:state.app}))(Layout)
+export default connect(state=>({auth:state.auth,app:state.app}))(Layout)

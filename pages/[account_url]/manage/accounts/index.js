@@ -13,9 +13,6 @@ const PageAccounts = props => {
 
 	const {auth} = props
 
-    // const pagename=""
-	// const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,'active']]
-	  
 	return (
 		<LayoutAccount>
 			<NextSeo title="Kelola - Akun"/>

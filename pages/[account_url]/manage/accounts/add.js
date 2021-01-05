@@ -31,7 +31,7 @@ const PageAccountAdd = props => {
             <NextSeo title="Kelola - Tambah akun"/>
             <Row>
 				<Col md={14}>
-					<PageHeader title="Tambah akun" ghost={false}
+					<PageHeader title="Tambah akun" ghost={false} subTitle="Menambahkan akun pesantren"
 						onBack={()=>router.push(`/[account_ur]/manage/accounts`,`/${auth.account.uniqueURL}/manage/accounts`,{shallow:true})}
 					/>
 				</Col>
