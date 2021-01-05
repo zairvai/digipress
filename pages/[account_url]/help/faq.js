@@ -44,6 +44,55 @@ const PageFaq = props => {
 						<Panel header="Kode penggantian password tidak sampai ke alamat email" key="7">
 							<p>Kode keamanan mungkin bisa langsung masuk kotak 'inbox'. Jika tidak ada silahkan cek juga di kotak 'spam'</p>
 						</Panel>
+
+						<Panel header="Siapa saja yang dapat membuat artikel dan ruang belajar" key="20">
+							<p>Hanya pemilik akun pesantren, admin dan tutor yang dapat membuat artikel dan ruang belajar</p>
+						</Panel>
+
+						<Panel header="Bagaimana cara membuat artikel" key="8">
+							<p>Ke halaman artikel lalu klik tombol 'tambah' artikel</p>
+						</Panel>
+						<Panel header="Bagaimana cara mengubah artikel" key="9">
+							<p>Ke halaman artikel lalu klik artikel yang mau diubah lalu klik tombol 'ubah' artikel</p>
+						</Panel>
+						<Panel header="Bagaimana cara menghapus artikel" key="10">
+							<p>Ke halaman artikel lalu klik artikel yang mau dihapus lalu klik tombol 'hapus' artikel</p>
+						</Panel>
+						<Panel header="Bagaimana cara membuat ruang belajar" key="11">
+							<p>Ke halaman ruang belajar lalu klik tombol 'tambah' ruang belajar</p>
+						</Panel>
+						<Panel header="Bagaimana cara mengubah ruang belajar" key="12">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau diubah lalu klik tombol 'ubah' ruang belajar</p>
+						</Panel>
+						<Panel header="Bagaimana cara menghapus ruang belajar" key="13">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau dihapus lalu klik tombol 'hapus' ruang belajar</p>
+						</Panel>
+
+						<Panel header="Bagaimana cara membuat materi" key="14">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan ditambahkan materi lalu klik tombol 'tambah' materi</p>
+						</Panel>
+
+						<Panel header="Bagaimana cara mengubah materi" key="15">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan diubah materinya dan klik materi tersebut lalu klik tombol 'ubah' materi</p>
+						</Panel>
+						
+						<Panel header="Bagaimana cara menghapus materi" key="16">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan dihapus materinya dan klik materi tersebut lalu klik tombol 'hapus' materi</p>
+						</Panel>
+
+						<Panel header="Bagaimana cara mengirim komentar" key="17">
+							<p>Ke halaman home lalu klik artikel yang akan dikirim komentar</p>
+						</Panel>
+
+
+						<Panel header="Bagaimana cara mengirim pertanyaan pada ruang belajar" key="18">
+							<p>Ke halaman home lalu klik ruang belajar dan pilih materi yang akan dikirim pertanyaan</p>
+						</Panel>
+
+						<Panel header="Bagaimana cara menjawab pertanyaan" key="19">
+							<p>Ke halaman ruang belajar lalu klik ruang belajar dan pilih materi dan pilih pertanyaan yang akan dijawab</p>
+						</Panel>
+
 				</Collapse>
 				</Col>
 			</Row>
