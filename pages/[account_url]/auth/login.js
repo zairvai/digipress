@@ -65,6 +65,7 @@ const PageLogin = props =>{
 		}
 		catch(error){
 			console.log(error)
+			router.push('/not-found')
 		}
 			
 	},[])

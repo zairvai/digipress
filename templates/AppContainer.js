@@ -33,12 +33,17 @@ const Container = props => {
 
         }catch(error){
             shouldSignOut = true
-            console.log(error)
         }
 
         if(shouldSignOut){
             await authController._signOut()
-            router.push(`/${auth.account.uniqueURL}/auth/login`)
+            
+            if(auth && auth.account && auth.account.uniqueURL){
+                router.push(`/${auth.account.uniqueURL}/auth/login`)
+            }else{
+                router.push(`/app/auth/login`)
+            }
+
         }
 
 
@@ -49,10 +54,13 @@ const Container = props => {
 
     return(
         <>
-
-            <div style={visible ? {visibility:"visible"} : {visibility:"hidden"} }>
-                {props.children}
-            </div>
+            {
+                auth.isLoggedIn ? 
+                <div style={visible ? {visibility:"visible"} : {visibility:"hidden"} }>
+                    {props.children}
+                </div>
+                :<></>
+            }
         </>
     )
 

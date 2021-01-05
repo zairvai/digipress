@@ -30,7 +30,6 @@ const Layout = props => {
 
     },[])
 
-
 	return (
 		<AppContainer>
 			<HeaderLayout className="sticky-top">
@@ -41,26 +40,6 @@ const Layout = props => {
 					<Sidebar className={toggleClass} />
 				</VuroxSidebar>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery/>
-                    {/* <Row className="mb-2">
-                        <Col md={12}>
-                            <div className="vurox-tabs-underlined vurox-dark vurox-tabs-underlined-left mt-3 mb-1">
-                                <ul className="nav nav-pills vurox-dropdown-list" id="vurox-tab" role="tablist">
-                                    <li className="nav-item">
-                                        <Text>Overview</Text>
-                                    </li>
-                                </ul>
-                            </div>
-                        </Col>
-                        <Col md={12}>
-                            <div className="fright">
-                                <ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-                                    <li><a href=""><i className="ti-save"></i> Download report</a></li>
-                                    <li><a href=""><i className="ti-email"></i> Send to email</a></li>
-                                </ul>
-                            </div>
-                        </Col>
-                    </Row> */}
 					{props.children}
 				</ContentLayout>
 			</VuroxLayout>
