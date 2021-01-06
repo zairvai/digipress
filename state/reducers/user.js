@@ -4,7 +4,7 @@ import {
     deleteUserRoutine,
     getUserRoutine,
     listUsersRoutine,
-    customListUsersRoutine
+    getUserByEmailRoutine
 } from '../routines/user'
 
 const initialState = {
@@ -126,6 +126,64 @@ export const getUser = (state={item:{},...initialState},action) => {
     return state
 }
 
+export const getUserByEmail = (state={item:{},...initialState},action) => {
+
+    switch(action.type){
+
+        case getUserByEmailRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false,
+                isSuccessFull:false,
+                item:{}
+            })
+        }
+
+        case getUserByEmailRoutine.SUCCESS : {
+
+            const {data} = action.payload
+    
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:false,
+                error:false,
+                isSuccessFull:true,
+                item:data
+            })     
+
+        }
+
+        case getUserByEmailRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isSuccessFull:false,
+                isError:true,
+                error,
+                item:{}
+            })
+        }
+
+        case getUserByEmailRoutine.FULFILL : {
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                isSuccessFull:false
+            })
+        }
+
+    }
+
+    return state
+}
+
+
 export const listUsers = (state={list:[],...initialState},action) => {
 
     switch(action.type){
@@ -176,24 +234,6 @@ export const listUsers = (state={list:[],...initialState},action) => {
                 isError:false,
                 isSuccessFull:false
             })
-        }
-
-        case customListUsersRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
         }
 
     }

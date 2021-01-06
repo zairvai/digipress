@@ -7,7 +7,8 @@ import {
     createUserRoutine,
     getUserRoutine,
     listUsersRoutine,
-    updateUserRoutine
+    updateUserRoutine,
+    getUserByEmailRoutine
 } from '../routines/user'
 
 
@@ -82,6 +83,35 @@ export function* getUserWatcher(){
 }
 
 
+function* getUserByEmail(action){
+
+    try{
+
+        yield put(getUserByEmailRoutine.request())
+
+        const {emailAddress} = action.payload
+
+        const response = yield API.graphql({
+            query:queries.getUserByEmailAddress,
+            variables:{emailAddress},
+            authMode:"AWS_IAM"
+        })
+
+        yield put(getUserByEmailRoutine.success({data:response.data.getUserByEmailAddress}))
+                    
+    }catch(error){
+        yield put(getUserByEmailRoutine.failure({error}))
+    }finally{
+        yield put(getUserByEmailRoutine.fulfill())
+    }
+
+}
+
+export function* getUserByEmailWatcher(){
+    yield takeLatest(getUserByEmailRoutine.TRIGGER,getUserByEmail)
+}
+
+
 function* listUsers(action){
 
     try{
@@ -126,8 +156,6 @@ function* updateUser(action){
 
         const {values} = action.payload
 
-        console.log(values)
-
         const updateParams = {
             id : values.id.replace(/\s/g,""),
             expectedVersion : values.version
@@ -139,6 +167,9 @@ function* updateUser(action){
         if(values.phoneNumber) updateParams.phoneNumber =  values.phoneNumber.trim()
         if(values.status) updateParams.status = values.status.trim()
         if(values.roles) updateParams.roles =  values.roles        
+
+        // console.log(updateParams) 
+        // return
 
         const response = yield API.graphql(graphqlOperation(mutations.updateUser,{
             input:updateParams}))

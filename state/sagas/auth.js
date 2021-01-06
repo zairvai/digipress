@@ -1,5 +1,5 @@
 import {Auth} from 'aws-amplify'
-import {put,takeEvery,takeLatest,call} from 'redux-saga/effects'
+import {put,takeEvery,takeLatest} from 'redux-saga/effects'
 import {
     signInRoutine,customSignInRoutine,
     completeNewPasswordRoutine,
@@ -75,7 +75,7 @@ function* signOut(){
 }
 
 export function* signOutWatcher(){
-    yield takeEvery(signOutRoutine.TRIGGER,signOut)
+    yield takeLatest(signOutRoutine.TRIGGER,signOut)
 }
 
 //completenewpassword
@@ -105,7 +105,7 @@ function* completeNewPassword(action){
 }
 
 export function* completeNewPasswordWatcher(){
-    yield takeEvery(completeNewPasswordRoutine.TRIGGER,completeNewPassword)
+    yield takeLatest(completeNewPasswordRoutine.TRIGGER,completeNewPassword)
 }
 
 
@@ -126,15 +126,8 @@ function* forgotPassword(action){
                     
     }catch(error){
 
-        if(typeof error.code !== undefined){
-            
-            const {code} = error
+        yield put(forgotPasswordRoutine.failure({error}))
 
-            if(code==="UserNotFoundException") yield put(customForgotPasswordRoutine.usernotfound({error:{username}}))
-            else if(code==="LimitExceededException") yield put(customForgotPasswordRoutine.limitexceeded({error:{username}}))
-            else yield put(forgotPasswordRoutine.failure({error}))
-        }
-        else yield put(forgotPasswordRoutine.failure({error}))
     }finally{
         yield put(forgotPasswordRoutine.fulfill())
     }
@@ -142,7 +135,7 @@ function* forgotPassword(action){
 }
 
 export function* forgotPasswordWatcher(){
-    yield takeEvery(forgotPasswordRoutine.TRIGGER,forgotPassword)
+    yield takeLatest(forgotPasswordRoutine.TRIGGER,forgotPassword)
 }
 
 
@@ -154,8 +147,8 @@ function* resetPassword(action){
 
         const {values} = action.payload
         const username = values.username.replace(/\s/g,"")
-        const code = values.code.replace(/\s/g,"")
         const password = values.password.replace(/\s/g,"")
+        const code = values.code.toString()
 
         const data = yield Auth.forgotPasswordSubmit(username,code,password)
 
@@ -171,7 +164,7 @@ function* resetPassword(action){
 }
 
 export function* resetPasswordWatcher(){
-    yield takeEvery( resetPasswordRoutine.TRIGGER,resetPassword)
+    yield takeLatest( resetPasswordRoutine.TRIGGER,resetPassword)
 }
 
 
@@ -200,7 +193,7 @@ function* verifyEmail(action){
 }
 
 export function* verifyEmailWatcher(){
-    yield takeEvery(verifyEmailRoutine.TRIGGER,verifyEmail)
+    yield takeLatest(verifyEmailRoutine.TRIGGER,verifyEmail)
 }
 
 function* verifySubmitCode(action){
@@ -214,7 +207,7 @@ function* verifySubmitCode(action){
 
         const data = yield Auth.verifyCurrentUserAttributeSubmit("email",code)
 
-        yield put(verifySubmitCodeRoutine.success({data}))
+        yield put(verifySubmitCodeRoutine.success())
                     
     }catch(error){
 
@@ -227,7 +220,7 @@ function* verifySubmitCode(action){
 }
 
 export function* verifySubmitCodeWatcher(){
-    yield takeEvery(verifySubmitCodeRoutine.TRIGGER,verifySubmitCode)
+    yield takeLatest(verifySubmitCodeRoutine.TRIGGER,verifySubmitCode)
 }
 
 function* getAuthUser() {
@@ -237,7 +230,7 @@ function* getAuthUser() {
 
     try{
         
-        const user = yield Auth.currentAuthenticatedUser()
+        const user = yield Auth.currentAuthenticatedUser({bypassCache:false})
 
         yield put(getAuthUserRoutine.success({data:user}))
 

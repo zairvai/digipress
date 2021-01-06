@@ -1,9 +1,8 @@
 import {
-    initSignIn,signIn,signOut,
+    initSignIn,
     completeNewPassword,
-    initForgotPassword,forgotPassword,resetPassword,
-    getAuthUser,
-    setAccount
+    setAccount,
+    setUser
 } from 'State/actions/auth'
 
 import AccountController from './AccountController'
@@ -117,6 +116,10 @@ export default class Controller{
         this.dispatch(setAccount(account))
     }
 
+    _setUser = user =>{
+        this.dispatch(setUser(user))
+    }
+
     _initSignIn = () =>{
         this.dispatch(initSignIn())
     }
@@ -140,6 +143,15 @@ export default class Controller{
         return this.props.signOutRoutinePromise()
     }
 
+    _forgotPassword = (email) =>{
+
+        return this.props.forgotPasswordRoutinePromise({
+            values:{
+                username:email
+            }
+        })
+    }
+
     _completeNewPassword = (name,password) =>{
 
         const user = this.props.auth.data        
@@ -151,15 +163,6 @@ export default class Controller{
                 password
             }
         }))
-    }
-
-    _forgotPassword = (email) =>{
-
-        return this.props.forgotPasswordRoutinePromise({
-            values:{
-                username:email
-            }
-        })
     }
 
     _verifyEmail = (email) =>{
@@ -182,13 +185,13 @@ export default class Controller{
 
     _resetPassword = (email,password,code) =>{
 
-        this.dispatch(resetPassword({
+        return this.props.resetPasswordRoutinePromise({
             values:{
                 username:email,
                 password,
                 code
             }
-        }))
+        })
     }
 
 }

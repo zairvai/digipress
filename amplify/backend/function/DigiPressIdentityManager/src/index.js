@@ -84,10 +84,16 @@ exports.handler = (event,context,callback)=>{
           })
       }
 
+      if(emailAddress){
+        userAttributes.push({
+          "Name":"email",
+          "Value":emailAddress
+        })
+      }
       
       var params = {
           "UserAttributes":userAttributes,
-          "Username":emailAddress,
+          "Username":id,
           "UserPoolId":userPoolId
       }
       
@@ -124,10 +130,10 @@ exports.handler = (event,context,callback)=>{
       
       case "enableUser":
           
-          var {id,emailAddress} = event.arguments
+          var {id} = event.arguments
           
           var params = {
-              "Username":emailAddress,
+              "Username":id,
               "UserPoolId":userPoolId
           }
           
@@ -144,10 +150,10 @@ exports.handler = (event,context,callback)=>{
       
       case "disableUser":
           
-          var {id,emailAddress} = event.arguments
+          var {id} = event.arguments
           
           var params = {
-              "Username":emailAddress,
+              "Username":id,
               "UserPoolId":userPoolId
           }
           
@@ -164,10 +170,10 @@ exports.handler = (event,context,callback)=>{
 
       case "setPassword":
 
-          var {id,emailAddress,permanent,password} = event.arguments
+          var {id,permanent,password} = event.arguments
 
           var params = {
-              "Username":emailAddress,
+              "Username":id,
               "UserPoolId":userPoolId,
               "Permanent":permanent,
               "Password":password

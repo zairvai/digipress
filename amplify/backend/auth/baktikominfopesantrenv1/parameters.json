@@ -4,9 +4,9 @@
     "resourceNameTruncated": "baktik634cbbf7",
     "userPoolName": "baktikominfopesantrenv1",
     "autoVerifiedAttributes": [
-        "email"
+        "phone_number"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
         "SMS Text Message"
     ],
@@ -67,26 +67,8 @@
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],
-    "adminQueries": true,
+    "adminQueries": false,
     "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "baktikominfopesantrenv1PostConfirmation",
-            "triggerProvider": "Cognito",
-            "attributes": [
-                "Arn",
-                "Name"
-            ]
-        },
-        {
-            "category": "function",
-            "resourceName": "baktikominfopesantrenv1PostAuthentication",
-            "triggerProvider": "Cognito",
-            "attributes": [
-                "Arn",
-                "Name"
-            ]
-        },
         {
             "category": "function",
             "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
@@ -97,7 +79,7 @@
             ]
         }
     ],
-    "triggers": "{\n  \"PostAuthentication\": [\n    \"custom\"\n  ],\n  \"PostConfirmation\": [\n    \"custom\"\n  ],\n  \"PreTokenGeneration\": [\n    \"alter-claims\"\n  ]\n}",
+    "triggers": "{\n  \"PreTokenGeneration\": [\n    \"alter-claims\"\n  ]\n}",
     "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"

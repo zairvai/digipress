@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
-import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
-import { MailOutlined,LockOutlined} from '@ant-design/icons';
+import { LockOutlined} from '@ant-design/icons';
 import { Row, Col,Button, Alert,Form,Input,Typography} from 'antd'
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -21,14 +19,11 @@ const schema = yup.object().shape({
     code:yup.string().required("Mohon ketik kode verifikasi")
 })
 
-const FormAuth = ({emailAddress,...props}) => {    
-    
-    const {auth} = props
+const FormAuth = ({item,...props}) => {    
 
     const [isSubmitting, setSubmitting] = React.useState(false)
     const [error,setError] = React.useState()
     const authController = new AuthController(props)
-
     
     const {
         handleSubmit,
@@ -48,10 +43,18 @@ const FormAuth = ({emailAddress,...props}) => {
     const onSubmit = values =>{
 
         setSubmitting(true)
+
+        // setTimeout(()=>{
+        //     if(props.onSuccess) props.onSuccess()
+        // },3000)
+        
+
         authController._verifySubmitCode(values.code)
-            .then(verify=>{
-                console.log(verify)
-                if(props.onSuccess)  props.onSuccess(verify.data)
+            .then(()=>{
+                
+                if(props.onSuccess) props.onSuccess()
+
+                authController._setUser({email:item.emailAddress,email_verified:true})
             })
             .catch(errors=>{
                console.log(errors)
@@ -73,10 +76,6 @@ const FormAuth = ({emailAddress,...props}) => {
             }
             
         }
-        // else if(props.auth.isError){
-        //     if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar."        
-        //     else if(props.auth.limitExceeded) message="Kamu telah mencoba beberapa kali. Silahkan coba lagi dalam beberapa menit."
-        // }
 
         
         if(message.length>0){
@@ -110,7 +109,7 @@ const FormAuth = ({emailAddress,...props}) => {
                     <Col md={24}>
                         <Alert
                             className="mb-3"
-                            description={`Silahkan masukan kode verifikasi yang sudah dikirim ke email kamu ${emailAddress}`}
+                            description={`Silahkan masukan kode verifikasi yang sudah dikirim ke email kamu ${item && item.emailAddress}`}
                             type="info"
                             showIcon
                         />

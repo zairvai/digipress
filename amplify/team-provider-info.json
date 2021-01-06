@@ -16,8 +16,6 @@
         "baktikominfopesantrenv1": {}
       },
       "function": {
-        "baktikominfopesantrenv1PostConfirmation": {},
-        "baktikominfopesantrenv1PostAuthentication": {},
         "baktikominfopesantrenv1PreTokenGeneration": {},
         "DigiPressLayers": {
           "deploymentBucketName": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",

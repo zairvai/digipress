@@ -1,7 +1,3 @@
-import {
-    updateList
-} from 'State/actions/user'
-
 export default class Controller{
 
     constructor({dispatch, ...props}){
@@ -34,7 +30,9 @@ export default class Controller{
         return this.props.listUsersRoutinePromise(values)
     }
 
-    _updateList = (method,items,index)=>{
-        this.dispatch(updateList(method,items,index))
+    _getUserByEmail = ({emailAddress}) =>{
+        
+        return this.props.getUserByEmailRoutinePromise({emailAddress})
     }
+
 }

@@ -1,4 +1,3 @@
 {
-  "modules": "alter-claims",
-  "resourceName": "baktikominfopesantrenv1PreTokenGeneration"
+  "modules": "alter-claims"
 }

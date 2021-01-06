@@ -10,11 +10,15 @@ import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { resetPasswordRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
+import {authError} from 'Helper/errors'
 
 const {Text} = Typography
 
 const schema = yup.object().shape({
+    email:yup.string().required().email(),
     code:yup.number().typeError("Kode konfirmasi terdiri dari angka saja.").required("Mohon ketik kode keamanan yang telah dikirim ke email.").positive("Mohon masukan kode keamanan dengan benar."),
     password:yup.string().required("Mohon ketik password kamu yang baru."),
     confirm_password:yup.string().oneOf([yup.ref("password"),null],"Mohon pastikan password konfirmasi sama dengan password di atas.")
@@ -22,18 +26,26 @@ const schema = yup.object().shape({
 
 const FormAuth = props => {
 
+    const {auth} = props
 
+    const [error,setError] = React.useState()
+    const [isSubmitting,setSubmitting] = React.useState(false)
+
+    React.useEffect(()=>{
+        setValue("email",auth.data.username)
+    },[])
     const {
         handleSubmit,
         reset,
         control,
         errors,
         formState,
-        
+        setValue
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
                 code:null,
+                email:"",
                 password:"",
                 confirm_password:""
             }
@@ -43,38 +55,26 @@ const FormAuth = props => {
     
 
     const onSubmit = values =>{
+        
         const{email,password,code} = values
+
+        setSubmitting(true)
+
         authController._resetPassword(email,password,code)
+            .then(()=>{
+                if(props.onSuccess) props.onSuccess()
+            })
+            .catch(errors=>{
+                console.log(errors)
+                setSubmitting(false)
+
+                const error = authError(errors.error)
+                setError(error)
+            })
     }
 
     const onError = (errors,e) => {
-        console.log(errors,e)
-    }
-
-    const ShowError = () => {
-
-        let message = ""
-
-        if(props.auth.isError){
-            if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar."        
-            else if(props.auth.limitExceeded) message="Kamu telah mencoba beberapa kali. Silahkan coba lagi dalam beberapa menit."        
-
-            return (
-                <Row>
-                    <Col md={24} xs={24}>
-                        <Alert className="mb-3"
-                            message="Error"
-                            description={message}
-                            type="error"
-                            showIcon
-                            />
-                    </Col>
-                </Row>
-            )
-        }
-
-        return <></>
-
+        console.log(errors)
     }
 
     return (
@@ -89,7 +89,7 @@ const FormAuth = props => {
                         <Alert
                             className="mb-3"
                             message="Kode keamanan"
-                            description={`Kode keamanan untuk mengubah password kamu telah dikirim melalui ${props.auth.data.CodeDeliveryDetails.AttributeName} ${props.auth.data.CodeDeliveryDetails.Destination} . Silahkan ketik kode tersebut pada kolom kode di bawah.`}
+                            description={`Kode keamanan untuk mengubah password kamu telah dikirim melalui ${auth.data.CodeDeliveryDetails.AttributeName} ${auth.data.CodeDeliveryDetails.Destination} . Silahkan ketik kode tersebut pada kolom kode di bawah.`}
                             type="info"
                             showIcon
                         />
@@ -97,20 +97,37 @@ const FormAuth = props => {
                 </Row>
 
 
-                <ShowError/>
+                {error  &&   <Row>
+                                <Col md={24} xs={24}>
+                                    <Alert className="mb-3"
+                                        message="Error"
+                                        description={error.message}
+                                        type="error"
+                                        showIcon
+                                        />
+                                </Col>
+                            </Row>
+                }
                 
+                <Controller
+                    name="email"
+                    control={control}
+                    render={props=><Form.Item hidden ><Input name="email" autoComplete="username" value={props.value}/></Form.Item>}
+                />
+                    
+
                 <Row>
                     <Col md={24} xs={24}>
-                        <Form.Item hidden ><Input name="email" autoComplete="username" value={props.auth.data.username}/></Form.Item>
+
                         <Controller
                             name="password"
-                            defaultValue=""
                             control={control}
                             render={props=>
                                 <Form.Item label="Password">
                                     <Input.Password
                                         size="large"   
                                         prefix={<LockOutlined className="site-form-item-icon" />}
+                                        disabled={isSubmitting}
                                         autoComplete="current-password"
                                         placeholder="Password"
                                         value={props.value} 
@@ -128,13 +145,13 @@ const FormAuth = props => {
                     <Col md={24} xs={24}>
                         <Controller
                             name="confirm_password"
-                            defaultValue=""
                             control={control}
                             render={props=>
                                 <Form.Item label="Konfirmasi Password">
                                     <Input.Password
                                         size="large"   
                                         prefix={<LockOutlined className="site-form-item-icon" />}
+                                        disabled={isSubmitting}
                                         autoComplete="current-password"
                                         placeholder="Konfirmasi password"
                                         value={props.value} 
@@ -150,7 +167,7 @@ const FormAuth = props => {
                 </Row>
 
                 <Row>
-                    <Col md={10} xs={24}>
+                    <Col md={18} xs={24}>
                         <Controller
                             name="code"
                             control={control}
@@ -159,12 +176,13 @@ const FormAuth = props => {
                                     <Input 
                                         size="large"  
                                         prefix={<LockTwoTone className="site-form-item-icon" />} 
+                                        disabled={isSubmitting}
                                         placeholder="Kode"
                                         autoComplete="off"
                                         type="number"
                                         value={props.value} 
                                         onChange={props.onChange} />
-                                    {/* {errors && errors.code && <Text type="danger">{errors.code.message}</Text>} */}
+                                    {errors && errors.code && <Text type="danger">{errors.code.message}</Text>}
                                 </Form.Item>
                             }
                         />
@@ -173,10 +191,10 @@ const FormAuth = props => {
                 
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:'/auth/login'}}shallow><a>Kembali ke halaman Login</a></Link>
+                        <Button  onClick={props.onCancel} type="link" className="p-0" disabled={isSubmitting}>Kembali ke halaman login</Button>
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
+                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block loading={isSubmitting}>Kirim</Button>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
@@ -185,4 +203,11 @@ const FormAuth = props => {
     );
 }
 
-export default connect(state=>state)(FormAuth)
+export default connect(
+    state=>({auth:state.auth}),
+    (dispatch)=>({
+            ...bindPromiseCreators({
+                resetPasswordRoutinePromise
+        },dispatch),dispatch
+    })
+)(FormAuth)

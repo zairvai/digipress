@@ -45,8 +45,6 @@ const FormAccount = ({item,...props}) => {
         reset,
         control,
         errors,
-        setError,
-        clearErrors,
         getValues,
         setValue
         } = useForm({
@@ -103,6 +101,7 @@ const FormAccount = ({item,...props}) => {
 
     }
 
+    let validateURLTimeout
     const handleURLChange = e =>{
         
         if(errors && !errors.uniqueURL){
@@ -116,14 +115,15 @@ const FormAccount = ({item,...props}) => {
 
             if(uniqueURLValue.length >= 5){
 
-                setTimeout(()=>{
+                if(validateURLTimeout) clearTimeout(validateURLTimeout)
+
+                validateURLTimeout = setTimeout(()=>{
                     accountController._getAccountByUniqueUrl({url:uniqueURLValue})
                         .then(account=>{
                             if(account.data) {
-                                setErrorUniqueURL("URL sudah digunakan sebelumnya, silahkan ketik URL yang lain")
+                                setErrorUniqueURL("URL sudah digunakan sebelumnya.")
                             }else{
                                 setErrorUniqueURL(false)
-                                clearErrors("uniqueURL")
                             }
                         })
                         .catch(error=>console.log(error))

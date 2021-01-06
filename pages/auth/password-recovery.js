@@ -6,15 +6,23 @@ import {
 	VuroxLayout,
 	ContentLayout,
 } from 'Components/layout'
-
-import { vuroxContext } from 'Context'
-import { Row, Col,Button, Checkbox,Form,Menu} from 'antd'
+import { Row, Col} from 'antd'
 import FormForgotPassword from 'Components/FormAuthForgotPassword'
 import FormResetPassword from 'Components/FormAuthResetPassword'
 
 const Page = props => {
 
-	const {router} = props
+	const {auth,router} = props
+
+	const [isCodeSent,setCodeSent] = React.useState(false)
+
+ 	const handleSuccessResetPassword = () =>{
+		router.push("/")
+	}
+
+	const handleCancel = () =>{
+		router.push("/")
+	}
 
 	return (
 		<React.Fragment>
@@ -28,10 +36,10 @@ const Page = props => {
 							<Row className="align-items-center fullHeight">
 								<Col md={24} sm={24} xs={24}>
 									
-									{props.auth.onResetPassword ? 
-										<FormResetPassword/>
+									{isCodeSent ? 
+										<FormResetPassword onSuccess={handleSuccessResetPassword} onCancel={handleCancel}/>
 										:
-										<FormForgotPassword/>
+										<FormForgotPassword onSuccess={()=>setCodeSent(true)} onCancel={handleCancel}/>
 									}
 
 								</Col>
@@ -46,4 +54,4 @@ const Page = props => {
 	);
 	
 }
-export default connect(state=>state)(withRouter(Page))
+export default connect(state=>({auth:state.auth}))(withRouter(Page))

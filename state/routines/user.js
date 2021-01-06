@@ -25,3 +25,6 @@ export const listUsersRoutinePromise = promisifyRoutine(listUsersRoutine)
 //get user
 export const getUserRoutine = createRoutine("get_user")
 export const getUserRoutinePromise = promisifyRoutine(getUserRoutine)
+
+export const getUserByEmailRoutine = createRoutine("get_user_by_email")
+export const getUserByEmailRoutinePromise = promisifyRoutine(getUserByEmailRoutine)

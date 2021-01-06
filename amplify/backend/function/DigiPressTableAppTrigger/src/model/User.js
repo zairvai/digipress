@@ -4,7 +4,8 @@ function searchManagerPut(record){
     
     var id = record.dynamodb.Keys.id.S
     var newImage = record.dynamodb.NewImage
-
+    var oldImage = record.dynamodb.OldImage
+    
     var roles = []
     newImage.roles.L.forEach(item=>{
       
@@ -62,20 +63,18 @@ function cognitoUpdate(record){
 
     if(newImage.name.S != oldImage.name.S) cognitoUpdateAttr["name"] = newImage.name.S
     if(newImage.phoneNumber.S != oldImage.phoneNumber.S) cognitoUpdateAttr["phoneNumber"] = newImage.phoneNumber.S
-
+    if(newImage.emailAddress.S != oldImage.emailAddress.S) cognitoUpdateAttr["emailAddress"] = newImage.emailAddress.S
+    
     if(newImage.status.S != oldImage.status.S) cognitoEnabledDisabled["status"] = newImage.status.S
 
     if(Object.keys(cognitoUpdateAttr).length>0) {
       cognitoUpdateAttr["id"] = id
-      cognitoUpdateAttr["emailAddress"] = newImage.emailAddress.S
-
       //update cognito attribute
       promises.push(functions.invokeLambdaIdentityManager("updateUser",cognitoUpdateAttr))
     }
 
     if(Object.keys(cognitoEnabledDisabled).length>0) {
       cognitoEnabledDisabled["id"] = id
-      cognitoEnabledDisabled["emailAddress"] = newImage.emailAddress.S
       
       //update cognito enabled/disabled
       if(newImage.status.S == "Active") promises.push(functions.invokeLambdaIdentityManager("enableUser",cognitoEnabledDisabled))

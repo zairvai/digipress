@@ -7,35 +7,15 @@ Parameters:
     Type: String
   unauthRoleArn:
     Type: String
+
   
   
   
-  
-  functionbaktikominfopesantrenv1PostConfirmationArn: 
-    Type: String
-    Default: functionbaktikominfopesantrenv1PostConfirmationArn
-  
-  functionbaktikominfopesantrenv1PostConfirmationName: 
-    Type: String
-    Default: functionbaktikominfopesantrenv1PostConfirmationName
-  
-  
-  
-  functionbaktikominfopesantrenv1PostAuthenticationArn: 
-    Type: String
-    Default: functionbaktikominfopesantrenv1PostAuthenticationArn
-  
-  functionbaktikominfopesantrenv1PostAuthenticationName: 
-    Type: String
-    Default: functionbaktikominfopesantrenv1PostAuthenticationName
-  
-  
-  
-  functionbaktikominfopesantrenv1PreTokenGenerationArn: 
+  functionbaktikominfopesantrenv1PreTokenGenerationArn:
     Type: String
     Default: functionbaktikominfopesantrenv1PreTokenGenerationArn
   
-  functionbaktikominfopesantrenv1PreTokenGenerationName: 
+  functionbaktikominfopesantrenv1PreTokenGenerationName:
     Type: String
     Default: functionbaktikominfopesantrenv1PreTokenGenerationName
   
@@ -197,32 +177,32 @@ Resources:
   
   
   # BEGIN SNS ROLE RESOURCE
-  SNSRole: 
+  SNSRole:
   # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
     Type: AWS::IAM::Role
     Properties:
       RoleName: !If [ShouldNotCreateEnvResources, 'baktik634cbbf7_sns-role', !Join ['',[ 'sns', '634cbbf7', !Select [3, !Split ['-', !Ref 'AWS::StackName']], '-', !Ref env]]]
-      AssumeRolePolicyDocument: 
+      AssumeRolePolicyDocument:
         Version: "2012-10-17"
-        Statement: 
+        Statement:
           - Sid: ""
             Effect: "Allow"
-            Principal: 
+            Principal:
               Service: "cognito-idp.amazonaws.com"
-            Action: 
+            Action:
               - "sts:AssumeRole"
-            Condition: 
+            Condition:
               StringEquals:
                 sts:ExternalId: baktik634cbbf7_role_external_id
-      Policies: 
-        - 
+      Policies:
+        -
           PolicyName: baktik634cbbf7-sns-policy
-          PolicyDocument: 
+          PolicyDocument:
             Version: "2012-10-17"
-            Statement: 
-              - 
+            Statement:
+              -
                 Effect: "Allow"
-                Action: 
+                Action:
                   - "sns:Publish"
                 Resource: "*"
   # BEGIN USER POOL RESOURCES
@@ -234,7 +214,8 @@ Resources:
     Properties:
       UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
       
-      Schema: 
+      
+      Schema:
         
         -
           Name: email
@@ -253,10 +234,6 @@ Resources:
         
         
         
-          PostAuthentication: !Ref functionbaktikominfopesantrenv1PostAuthenticationArn
-        
-        
-          PostConfirmation: !Ref functionbaktikominfopesantrenv1PostConfirmationArn
         
         
         
@@ -269,9 +246,6 @@ Resources:
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
       
-      EmailVerificationMessage: !Ref emailVerificationMessage
-      EmailVerificationSubject: !Ref emailVerificationSubject
-            
       Policies:
         PasswordPolicy:
           MinimumLength: !Ref passwordPolicyMinLength
@@ -281,50 +255,34 @@ Resources:
           RequireUppercase: true
       
       UsernameAttributes: !Ref usernameAttributes
-          
+      
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
-      SmsConfiguration: 
+      SmsConfiguration:
         SnsCallerArn: !GetAtt SNSRole.Arn
         ExternalId: baktik634cbbf7_role_external_id
     
-  
+    DependsOn: SNSRole
     
-    
   
   
-  UserPoolPostAuthenticationLambdaInvokePermission: 
+  
+  
+  
+  
+  
+  
+  
+  UserPoolPreTokenGenerationLambdaInvokePermission:
     Type: "AWS::Lambda::Permission"
     DependsOn: UserPool
-    Properties: 
-      Action: "lambda:invokeFunction"
-      Principal: "cognito-idp.amazonaws.com"
-      FunctionName: !Ref functionbaktikominfopesantrenv1PostAuthenticationName
-      SourceArn: !GetAtt UserPool.Arn
-    
-  
-  UserPoolPostConfirmationLambdaInvokePermission: 
-    Type: "AWS::Lambda::Permission"
-    DependsOn: UserPool
-    Properties: 
-      Action: "lambda:invokeFunction"
-      Principal: "cognito-idp.amazonaws.com"
-      FunctionName: !Ref functionbaktikominfopesantrenv1PostConfirmationName
-      SourceArn: !GetAtt UserPool.Arn
-    
-  
-  
-  
-  UserPoolPreTokenGenerationLambdaInvokePermission: 
-    Type: "AWS::Lambda::Permission"
-    DependsOn: UserPool
-    Properties: 
+    Properties:
       Action: "lambda:invokeFunction"
       Principal: "cognito-idp.amazonaws.com"
       FunctionName: !Ref functionbaktikominfopesantrenv1PreTokenGenerationName
       SourceArn: !GetAtt UserPool.Arn
-   
-    
+  
+  
   # Updating lambda role with permissions to Cognito
   
   
@@ -372,7 +330,7 @@ Resources:
     Type: 'AWS::Lambda::Function'
     Properties:
       Code:
-        ZipFile: !Join 
+        ZipFile: !Join
           - |+
           - - 'const response = require(''cfn-response'');'
             - 'const aws = require(''aws-sdk'');'
@@ -388,7 +346,7 @@ Resources:
             - '   };'
             - '   identity.describeUserPoolClient(params).promise()'
             - '     .then((res) => {'
-            - '       response.send(event, context, response.SUCCESS, {''appSecret'': res.UserPoolClient.ClientSecret});'   
+            - '       response.send(event, context, response.SUCCESS, {''appSecret'': res.UserPoolClient.ClientSecret});'
             - '     })'
             - '     .catch((err) => {'
             - '       response.send(event, context, response.FAILED, {err});'
@@ -398,7 +356,7 @@ Resources:
       Handler: index.handler
       Runtime: nodejs10.x
       Timeout: '300'
-      Role: !GetAtt 
+      Role: !GetAtt
         - UserPoolClientRole
         - Arn
     DependsOn: UserPoolClientRole
@@ -409,7 +367,7 @@ Resources:
     Type: 'AWS::IAM::Policy'
     Properties:
       PolicyName: baktik634cbbf7_userpoolclient_lambda_iam_policy
-      Roles: 
+      Roles:
         - !Ref UserPoolClientRole
       PolicyDocument:
         Version: '2012-10-17'
@@ -426,7 +384,7 @@ Resources:
     Type: 'AWS::IAM::Policy'
     Properties:
       PolicyName: baktik634cbbf7_userpoolclient_lambda_log_policy
-      Roles: 
+      Roles:
         - !Ref UserPoolClientRole
       PolicyDocument:
         Version: 2012-10-17
@@ -436,10 +394,10 @@ Resources:
               - 'logs:CreateLogGroup'
               - 'logs:CreateLogStream'
               - 'logs:PutLogEvents'
-            Resource: !Sub  
+            Resource: !Sub
               - arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*
               - { region: !Ref "AWS::Region",  account: !Ref "AWS::AccountId", lambda: !Ref UserPoolClientLambda}
-    DependsOn: UserPoolClientLambdaPolicy  
+    DependsOn: UserPoolClientLambdaPolicy
   UserPoolClientInputs:
   # Values passed to Userpool client Lambda
   # Depends on UserPool for Id
@@ -457,14 +415,140 @@ Resources:
   
 
   
+  # BEGIN MFA LAMBDA RESOURCES
+  MFALambdaRole:
+  # Created to execute Lambda which sets MFA config values
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !If [ShouldNotCreateEnvResources, 'baktik634cbbf7_totp_lambda_role', !Join ['',['baktik634cbbf7_totp_lambda_role', '-', !Ref env]]]
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+      - PolicyName: baktik634cbbf7_totp_pass_role_policy
+        PolicyDocument:
+          Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - 'iam:PassRole'
+              Resource: !If [ShouldNotCreateEnvResources, 'arn:aws:iam:::role/baktik634cbbf7_totp_lambda_role', !Join ['',['arn:aws:iam:::role/baktik634cbbf7_totp_lambda_role', '-', !Ref env]]]
+  MFALambda:
+  # Lambda which sets MFA config values
+  # Depends on MFALambdaRole for role ARN
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Code:
+        ZipFile: !Join
+          - |+
+          - - 'const response = require(''cfn-response'');'
+            - 'const aws = require(''aws-sdk'');'
+            - 'const identity = new aws.CognitoIdentityServiceProvider();'
+            - 'exports.handler = (event, context, callback) => {'
+            - ' if (event.RequestType == ''Delete'') { '
+            - '   response.send(event, context, response.SUCCESS, {})'
+            - ' }'
+            - ' if (event.RequestType == ''Update'' || event.RequestType == ''Create'') {'
+            - '   let totpParams = {};'
+            - '   try {'
+            - '     totpParams = {'
+            - '       UserPoolId: event.ResourceProperties.userPoolId,'
+            - '       MfaConfiguration: event.ResourceProperties.mfaConfiguration,'
+            - '       SmsMfaConfiguration: {'
+            - '         SmsAuthenticationMessage: event.ResourceProperties.smsAuthenticationMessage,'
+            - '         SmsConfiguration: {'
+            - '           SnsCallerArn: event.ResourceProperties.smsConfigCaller,'
+            - '           ExternalId: event.ResourceProperties.smsConfigExternalId'
+            - '         }'
+            - '       },'
+            - '       SoftwareTokenMfaConfiguration: {Enabled: event.ResourceProperties.totpEnabled.toLowerCase() === ''true'' ? true : false}'
+            - '     };'
+            - '   } catch(e) {'
+            - '     response.send(event, context, response.FAILED, {e});'
+            - '   };'
+            - '   identity.setUserPoolMfaConfig(totpParams).promise()'
+            - '     .then((res) => {'
+            - '       response.send(event, context, response.SUCCESS, {res});'
+            - '     })'
+            - '     .catch((err) => {'
+            - '       response.send(event, context, response.FAILED, {err});'
+            - '     });'
+            - ' }'
+            - '};'
+      Handler: index.handler
+      Runtime: nodejs10.x
+      Timeout: '300'
+      Role: !GetAtt
+        - MFALambdaRole
+        - Arn
+    DependsOn: MFALambdaRole
+  MFALambdaPolicy:
+  # Sets policy for the role that executes the MFA Lambda
+  # Depends on Userpool for Arn
+  # Marked as depending on MFALambda for easier to understand CFN sequencing
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: baktik634cbbf7_totp_lambda_iam_policy
+      Roles:
+        - !If [ShouldNotCreateEnvResources, 'baktik634cbbf7_totp_lambda_role', !Join ['',['baktik634cbbf7_totp_lambda_role', '-', !Ref env]]]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'cognito-idp:SetUserPoolMfaConfig'
+            Resource: !GetAtt UserPool.Arn
+    DependsOn: MFALambda
+  MFALogPolicy:
+  # Sets log policy for the role that executes the MFA Lambda
+  # Marked as depending on MFALambdaPolicy for easier to understand CFN sequencing
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: baktik634cbbf7_totp_lambda_log_policy
+      Roles:
+        - !If [ShouldNotCreateEnvResources, 'baktik634cbbf7_totp_lambda_role', !Join ['',['baktik634cbbf7_totp_lambda_role', '-', !Ref env]]]
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'logs:CreateLogGroup'
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+            Resource: !Sub
+              - arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*
+              - { region: !Ref "AWS::Region",  account: !Ref "AWS::AccountId", lambda: !Ref MFALambda}
+    DependsOn: MFALambdaPolicy
+  MFALambdaInputs:
+  # Values passed to MFA Lambda
+  # Depends on UserPool for Arn
+  # Depends on MFALambda for Arn
+  # Marked as depending on MFALambdaPolicy for easier to understand CFN sequencing
+    Type: 'Custom::LambdaCallout'
+    Properties:
+      ServiceToken: !GetAtt MFALambda.Arn
+      userPoolId: !Ref UserPool
+      mfaConfiguration: !Ref mfaConfiguration
+      totpEnabled: false
+      smsConfigCaller: !GetAtt SNSRole.Arn
+      smsAuthenticationMessage: !Ref smsAuthenticationMessage
+      smsConfigExternalId: baktik634cbbf7_role_external_id
+    DependsOn: MFALogPolicy
+  
     
   # BEGIN IDENTITY POOL RESOURCES
   
- 
+
   IdentityPool:
   # Always created
     Type: AWS::Cognito::IdentityPool
-    Properties: 
+    Properties:
       IdentityPoolName: !If [ShouldNotCreateEnvResources, 'baktikominfopesantrenv1', !Join ['',['baktikominfopesantrenv1', '__', !Ref env]]]
       
       CognitoIdentityProviders:
@@ -478,16 +562,16 @@ Resources:
             - { region: !Ref "AWS::Region",  client: !Ref UserPool}
             
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
-       
-       
-    DependsOn: UserPoolClientInputs 
+      
     
-  
+    DependsOn: UserPoolClientInputs
+    
+
   IdentityPoolRoleMap:
   # Created to map Auth and Unauth roles to the identity pool
   # Depends on Identity Pool for ID ref
     Type: AWS::Cognito::IdentityPoolRoleAttachment
-    Properties: 
+    Properties:
       IdentityPoolId: !Ref IdentityPool
       Roles:
           unauthenticated: !Ref unauthRoleArn
@@ -501,7 +585,7 @@ Outputs :
     Value: !Ref 'IdentityPool'
     Description:  Id for the identity pool
   IdentityPoolName:
-    Value: !GetAtt IdentityPool.Name 
+    Value: !GetAtt IdentityPool.Name
   
   
   
@@ -520,9 +604,13 @@ Outputs :
   AppClientSecret:
     Value: !GetAtt UserPoolClientInputs.appSecret
   
-   
-   
+  CreatedSNSRole:
+    Value: !GetAtt SNSRole.Arn
+    Description: role arn
   
-   
-   
+  
+  
+  
+  
+  
   

@@ -6,24 +6,6 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "baktikominfopesantrenv1PostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "baktikominfopesantrenv1PostAuthentication",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        },
-        {
-          "category": "function",
           "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
           "triggerProvider": "Cognito",
           "attributes": [
@@ -99,16 +81,6 @@
           ]
         }
       ]
-    },
-    "baktikominfopesantrenv1PostConfirmation": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "baktikominfopesantrenv1PostAuthentication": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "baktikominfopesantrenv1PreTokenGeneration": {
       "build": true,

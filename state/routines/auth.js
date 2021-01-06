@@ -27,14 +27,14 @@ export const forgotPasswordRoutinePromise = promisifyRoutine(forgotPasswordRouti
 export const resetPasswordRoutine = createRoutine("reset_password")
 export const resetPasswordRoutinePromise = promisifyRoutine(resetPasswordRoutine)
 
-customRoutine = createRoutineCreator(["SETACCOUNT"])
+customRoutine = createRoutineCreator(["SETACCOUNT","SETUSER"])
 export const customSetDataRoutine = customRoutine("set_data_custom")
 
 export const getAuthUserRoutine = createRoutine("get_auth_user")
 export const getAuthUserRoutinePromise = promisifyRoutine(getAuthUserRoutine)
 
-export const verifyEmailRoutine = createRoutine("verifiy_email")
+export const verifyEmailRoutine = createRoutine("verify_email")
 export const verifyEmailRoutinePromise = promisifyRoutine(verifyEmailRoutine)
 
-export const verifySubmitCodeRoutine = createRoutine("verifiy_code")
+export const verifySubmitCodeRoutine = createRoutine("verify_code")
 export const verifySubmitCodeRoutinePromise = promisifyRoutine(verifySubmitCodeRoutine)

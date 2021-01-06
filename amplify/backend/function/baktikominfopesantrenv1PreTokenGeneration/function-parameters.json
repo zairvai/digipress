@@ -7,10 +7,11 @@
   "functionName": "baktikominfopesantrenv1PreTokenGeneration",
   "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
   "parentStack": "auth",
-  "triggerEnvs": [],
+  "triggerEnvs": "[]",
   "triggerDir": "/Users/zairvai/.npm-global/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PreTokenGeneration",
   "triggerTemplate": "PreTokenGeneration.json.ejs",
   "roleName": "baktikominfopesantrenv1PreTokenGeneration",
   "skipEdit": true,
-  "enableCors": false
+  "enableCors": false,
+  "triggerEventPath": "PreTokenGeneration.event.json"
 }

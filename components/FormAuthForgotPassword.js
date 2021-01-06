@@ -1,7 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
-import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
@@ -14,6 +12,7 @@ import * as yup from 'yup'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { forgotPasswordRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
+import {authError} from 'Helper/errors'
 
 const {Text} = Typography
 
@@ -24,8 +23,9 @@ const schema = yup.object().shape({
 const FormAuth = props => {    
     
     const {auth} = props
-
+    const [isSubmitting,setSubmitting] = React.useState(false)
     const [error,setError] = React.useState()
+
     const authController = new AuthController(props)
 
     const {
@@ -33,7 +33,6 @@ const FormAuth = props => {
         reset,
         control,
         errors,
-        formState,
         
         } = useForm({
             resolver:yupResolver(schema),
@@ -45,65 +44,27 @@ const FormAuth = props => {
 
     const onSubmit = values =>{
 
+        setSubmitting(true)
+
         authController._forgotPassword(values.email)
-            .then(data=>console.log(data))
+            .then((data)=>{
+                if(props.onSuccess) props.onSuccess()
+            })
             .catch(errors=>{
                 
                 console.log(errors)
-                
-                if(errors){
-                    
-                    const error = errors.error
-        
-                    if(error && error.message=="Cannot reset password for the user as there is no registered/verified email or phone_number"){
-                       setError({message:"Email kamu belum pernah diverifikasi. Silahkan verifikasi terlebih dahulu."})
-                       
-                    }
-                }
+                setSubmitting(false)
+
+                const error = authError(errors.error)
+                setError(error)
                 
             })
     }
 
     const onError = (errors,e) => {
-        console.log(errors,e)
-    }
-
-    const ShowError = () => {
-
-        let message = ""
-
-        if(error){
-
-            if(error && error.message){
-                message = error.message
-            }
-            
-        }
-        else if(props.auth.isError){
-            if(props.auth.userNotFound) message="Email yang kamu gunakan belum terdaftar."        
-            else if(props.auth.limitExceeded) message="Kamu telah mencoba beberapa kali. Silahkan coba lagi dalam beberapa menit."
-        }
-
         
-        if(message.length>0){
-            
-            return (
-                <Row>
-                    <Col md={24} xs={24}>
-                        <Alert className="mb-3"
-                            message="Error"
-                            description={message}
-                            type="error"
-                            showIcon
-                            />
-                    </Col>
-                </Row>
-            )
-        }
-
-        else return <></>
-
     }
+
 
     return (
         <Form 
@@ -125,7 +86,18 @@ const FormAuth = props => {
                 </Row>
 
 
-                <ShowError/>
+                {error  &&   <Row>
+                                <Col md={24} xs={24}>
+                                    <Alert className="mb-3"
+                                        message="Error"
+                                        description={error.message}
+                                        type="error"
+                                        showIcon
+                                        />
+                                </Col>
+                            </Row>
+                }
+                
                 
                 <Row>
                     <Col md={24} xs={24}>
@@ -138,6 +110,7 @@ const FormAuth = props => {
                                     <Input 
                                         size="large"  
                                         prefix={<MailOutlined className="site-form-item-icon" />} 
+                                        disabled={isSubmitting}
                                         placeholder="Email address"
                                         autoComplete="off"
                                         type="email"
@@ -151,12 +124,11 @@ const FormAuth = props => {
                 </Row>
                 
                 <Row>
-                    <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Link href={{pathname:`/${auth.account.uniqueURL}/auth/login`}} shallow><a>Kembali ke halaman Login</a></Link>
-                        {/* <Button className="pl-0" type="link" onClick={()=>router.back()}>Kembali ke halaman login</Button> */}
+                    <Col md={12} sm={24} xs={24} className="pt-2">
+                        <Button  onClick={props.onCancel} type="link" className="p-0" disabled={isSubmitting}>Kembali ke halaman login</Button>
                     </Col>
-                    <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Ganti Password</Button>
+                    <Col md={12} sm={24} xs={24} className="fright">
+                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block loading={isSubmitting}>Ganti Password</Button>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>

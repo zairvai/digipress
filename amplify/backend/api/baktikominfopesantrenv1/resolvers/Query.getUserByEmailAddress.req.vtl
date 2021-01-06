@@ -9,9 +9,13 @@
 #end
 
 #set($query={
-  "match_phrase": {
-      "emailAddress": $ctx.args.emailAddress 
-  }   
+  "bool": {
+      "must": [
+        {"match": {
+          "emailAddress.keyword": $ctx.args.emailAddress
+        }}
+      ]
+    } 
 })
 
 #set($body={

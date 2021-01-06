@@ -14,6 +14,7 @@
 
 #if( !$util.isNull($ctx.args.input.emailAddress ))
 	$util.qr($input.put("emailAddress",$ctx.args.input.emailAddress))
+	$util.qr($input.put("emailAddressVerified",false))
 #end
 
 #if( !$util.isNull($ctx.args.input.phoneCode) && !$util.isNull($ctx.args.input.phoneNumber ))

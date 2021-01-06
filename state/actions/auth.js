@@ -57,7 +57,13 @@ export const getAuthUser = () => ({
     type:getAuthUserRoutine.TRIGGER
 })
 
+export const setUser = user => ({
+    type:customSetDataRoutine.SETUSER,
+    user
+})
+
 export const setAccount = account => ({
     type:customSetDataRoutine.SETACCOUNT,
     account
 })
+

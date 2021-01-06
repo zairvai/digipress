@@ -1,7 +1,7 @@
 import { routinePromiseWatcherSaga } from 'redux-saga-routines';
 import {signInWatcher, signOutWatcher,completeNewPasswordWatcher,forgotPasswordWatcher,resetPasswordWatcher,getAuthUserWatcher,verifyEmailWatcher,verifySubmitCodeWatcher} from './auth'
 import {createAccountWatcher,listAccountsWatcher,getAccountWatcher, updateAccountWatcher,deleteAccountWatcher,getAccountByUniqueUrlWatcher} from './account'
-import {createUserWatcher,getUserWatcher,listUsersWatcher,updateUserWatcher} from "./user"
+import {createUserWatcher,getUserWatcher,listUsersWatcher,updateUserWatcher,getUserByEmailWatcher} from "./user"
 import {listTagsWatcher,deleteTagWatcher,createTagWatcher} from './tag'
 import {listCategoriesWatcher,deleteCategoryWatcher,createCategoryWatcher,updateCategoryWatcher,getCategoryWatcher} from './category'
 
@@ -44,6 +44,7 @@ const sagas = [
     getUserWatcher,
     listUsersWatcher,
     updateUserWatcher,
+    getUserByEmailWatcher,
     
     //tag
     listTagsWatcher,

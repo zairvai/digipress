@@ -85,6 +85,8 @@ const PageLogin = props =>{
 	}
 
 	return(
+		<>
+		{auth && auth.account &&
 		<React.Fragment>
 			<NextSeo title="Login"/>
 			<Header/>
@@ -134,6 +136,8 @@ const PageLogin = props =>{
 			</VuroxLayout>
 			
 		</React.Fragment>
+		}
+		</>
 	)
 	
 }

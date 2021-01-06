@@ -95,6 +95,7 @@ export const signIn = (state=initialState,action) => {
                 name:attributes.name,
                 phoneNumber:attributes.phone_number,
                 email:attributes.email,
+                email_verified: attributes.email_verified ? true : false,
                 access
             }
 
@@ -404,16 +405,16 @@ export const getAuthUser = (state=initialState,action) => {
 
             //const access = JSON.parse(signInUserSession.idToken.payload.access)
 
-            const user = {
-                id:attributes.sub,
-                name:attributes.name,
-                phoneNumber:attributes.phone_number,
-                email:attributes.email,
-                access:state.user.access
-            }
+            // const user = {
+            //     id:attributes.sub,
+            //     name:attributes.name,
+            //     phoneNumber:attributes.phone_number,
+            //     email:attributes.email,
+            //     access:state.user.access
+            // }
 
-            if(attributes.email_verified) user.email_verified = true
-            else if(!attributes.email_verified) user.email_verified = false
+            // if(attributes.email_verified) user.email_verified = true
+            // else if(!attributes.email_verified) user.email_verified = false
             
             return Object.assign({},state,{
                 isRequesting:false,
@@ -423,8 +424,7 @@ export const getAuthUser = (state=initialState,action) => {
                 userNotFound:false,
                 newPasswordRequired:false,
                 isLoggedIn:true,
-                data:false,
-                user
+                data:false
             })     
 
         }
@@ -467,7 +467,6 @@ export const verifyEmail = (state=initialState,action) => {
                 isRequesting:false,
                 error:false,
                 isError:false,
-                isLoggedIn:false,
                 data
             })  
         }
@@ -501,14 +500,10 @@ export const verifySubmitCode = (state=initialState,action) => {
         }
         case verifySubmitCodeRoutine.SUCCESS : {
 
-            const {data} = action.payload
-
             return Object.assign({},state,{
                 isRequesting:false,
                 error:false,
-                isError:false,
-                isLoggedIn:false,
-                data
+                isError:false
             })  
         }
             
@@ -538,6 +533,18 @@ export const authData = (state=initialState,action) => {
             return Object.assign({},state,{
                 account
             })  
+        }
+
+        case customSetDataRoutine.SETUSER :{
+
+            const {user} = action
+
+            const stateUser = {...state.user,...user}
+
+            return Object.assign({},state,{
+                user:stateUser
+            })
+            
         }
     }
 

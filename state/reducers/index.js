@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { appReducer } from './app'
 import { signIn,signOut,completeNewPassword,forgotPassword,resetPassword,authData,getAuthUser,verifyEmail,verifySubmitCode} from './auth'
 import { createAccount,listAccounts,getAccount,updateAccount,deleteAccount,getAccountByUniqueUrl } from './account'
-import { createUser,getUser,listUsers, updateUser } from './user'
+import { createUser,getUser,listUsers, updateUser,getUserByEmail } from './user'
 import { listTags,deleteTag,createTag } from './tag'
 import { listCategories,getCategory,deleteCategory,createCategory,updateCategory } from './category'
 import { createArticle,deleteArticle,updateArticle,listArticles,getArticle } from './article'
@@ -45,8 +45,10 @@ const rootReducer = combineReducers({
 	//user
 	createUser:persistReducer({key:"createUser",storage},createUser),
 	getUser:persistReducer({key:"getUser",storage},getUser),
-	listUsers:persistReducer({key:"listUsers",storage},listUsers),
+	getUserByEmail,
+	listUsers,
 	updateUser:persistReducer({key:"updateUser",storage},updateUser),
+	
 	//tag
 	listTags:persistReducer({key:"listTags",storage},listTags),
 	deleteTag:persistReducer({key:"deleteTag",storage},deleteTag),
