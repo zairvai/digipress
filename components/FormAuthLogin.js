@@ -143,7 +143,6 @@ const FormAuth = props => {
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
                         <Button  onClick={props.onForgotPassword} type="link" className="p-0" disabled={auth.isRequesting || auth.isLoggedIn}>Lupa password ?</Button>
-                        {/* <Link href={{pathname:'/auth/password-recovery'}} disabled={auth.isRequesting || auth.isLoggedIn} shallow><a>Lupa password?</a></Link> */}
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
                         <Button className="mt-md-0 mt-3" size="large" type="primary" loading={auth.isRequesting || auth.isLoggedIn} htmlType="submit" block>Login</Button>

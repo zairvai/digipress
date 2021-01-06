@@ -112,7 +112,7 @@ const PageAuth = props => {
                         :
                         isChangingEmail ? <FormVerifyChangeEmail item={item} onCancel={()=>setChangingEmail(false)} onSuccess={handleSuccessChangeEmail}/>
                         :
-                        isCodeSent ? <FormVerifySubmit item={item} onSuccess={handleSuccessSubmitCode} />
+                        isCodeSent ? <FormVerifySubmit item={item} onSuccess={handleSuccessSubmitCode} onCancel={()=>setCodeSent(false)}/>
                         :
                         isVerified ? <FormVerifySuccess item={item}/>
                         :

@@ -11,7 +11,7 @@ import {EditTwoTone} from '@ant-design/icons'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { verifyEmailRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
-
+import {authError} from 'Helper/errors'
 
 const schema = yup.object().shape({
     email:yup.string().required("Mohon ketik email kamu")
@@ -21,6 +21,7 @@ const FormAuth = ({item,...props}) => {
     
     const authController = new AuthController(props)
 
+    const [error,setError] = React.useState()
     const [isSubmitting, setSubmitting] = React.useState(false)
 
     const {Title} = Typography
@@ -53,7 +54,12 @@ const FormAuth = ({item,...props}) => {
             .then(verify=>{
                 if(props.onSuccess) props.onSuccess(verify.data)
             })
-            .catch(errors=>console.log(errors))
+            .catch(errors=>{
+                console.log(errors)
+                setSubmitting(false)
+                const error = authError(errors.error)
+                setError(error)
+            })
     }
 
     const onError = (errors,e) => {
@@ -66,6 +72,20 @@ const FormAuth = ({item,...props}) => {
             onFinish={handleSubmit(onSubmit,onError)}>
            
             <VuroxComponentsContainer className="p-4">
+
+
+                {error  &&   <Row>
+                                <Col md={24} xs={24}>
+                                    <Alert className="mb-3"
+                                        message="Error"
+                                        description={error.message}
+                                        type="error"
+                                        showIcon
+                                        />
+                                </Col>
+                            </Row>
+                }
+
                 <Controller
                     name="email"
                     defaultValue=""

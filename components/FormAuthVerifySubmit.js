@@ -12,6 +12,7 @@ import * as yup from 'yup'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { verifySubmitCodeRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
+import {authError} from 'Helper/errors'
 
 const {Text} = Typography
 
@@ -21,8 +22,8 @@ const schema = yup.object().shape({
 
 const FormAuth = ({item,...props}) => {    
 
-    const [isSubmitting, setSubmitting] = React.useState(false)
     const [error,setError] = React.useState()
+    const [isSubmitting, setSubmitting] = React.useState(false)
     const authController = new AuthController(props)
     
     const {
@@ -44,11 +45,6 @@ const FormAuth = ({item,...props}) => {
 
         setSubmitting(true)
 
-        // setTimeout(()=>{
-        //     if(props.onSuccess) props.onSuccess()
-        // },3000)
-        
-
         authController._verifySubmitCode(values.code)
             .then(()=>{
                 
@@ -57,45 +53,14 @@ const FormAuth = ({item,...props}) => {
                 authController._setUser({email:item.emailAddress,email_verified:true})
             })
             .catch(errors=>{
-               console.log(errors)
+                console.log(errors)
+                setSubmitting(false)
+                const error = authError(errors.error)
+                setError(error)
             })
     }
 
     const onError = (errors,e) => {
-        console.log(errors,e)
-    }
-
-    const ShowError = () => {
-
-        let message = ""
-
-        if(error){
-
-            if(error && error.message){
-                message = error.message
-            }
-            
-        }
-
-        
-        if(message.length>0){
-            
-            return (
-                <Row>
-                    <Col md={24} xs={24}>
-                        <Alert className="mb-3"
-                            message="Error"
-                            description={message}
-                            type="error"
-                            showIcon
-                            />
-                    </Col>
-                </Row>
-            )
-        }
-
-        else return <></>
-
     }
 
     return (
@@ -117,7 +82,17 @@ const FormAuth = ({item,...props}) => {
                 </Row>
 
 
-                <ShowError/>
+                {error  &&   <Row>
+                                <Col md={24} xs={24}>
+                                    <Alert className="mb-3"
+                                        message="Error"
+                                        description={error.message}
+                                        type="error"
+                                        showIcon
+                                        />
+                                </Col>
+                            </Row>
+                }
                 
                 <Row>
                     <Col md={24} xs={24}>
@@ -145,9 +120,14 @@ const FormAuth = ({item,...props}) => {
                 
                 <Row>
                     <Col md={24} sm={24} xs={24}>
-                        <div className="fright">
-                            <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" disabled={isSubmitting}>Kirim</Button>
-                        </div>
+                        <Row className="justify-content-end">
+                            <Col md={6} sm={8} xs={12}  >
+                                <Button  disabled={isSubmitting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                            </Col>
+                            <Col md={6} sm={8} xs={12} className="fright">
+                                <Button  type="primary" htmlType="submit" loading={isSubmitting} block>Kirim</Button>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
