@@ -83,8 +83,8 @@ const PageLogin = props =>{
 	}
 
 	const handleSuccessLogin = user =>{
-		// console.log(user)
-		router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,user.access.role))
+		if(!user.email_verified) router.push(`/${auth.account.uniqueURL}/auth/verify`)
+		else router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,user.access.role))
 	}
 
 	const handleSuccessNewPassword = () =>{

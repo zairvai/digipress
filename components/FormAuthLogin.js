@@ -57,6 +57,7 @@ const FormAuth = props => {
                 if(props.onNewPasswordRequired) props.onNewPasswordRequired(cognitoUser)
             }
             else if(cognitoUser.signInUserSession.idToken.payload.access==="false"){
+                setSubmitting(false)
                 await authController._signOut()
                 const error = authError({code:"NoAccessToAccountException"})
                 setError(error)

@@ -51,7 +51,7 @@ const PageAuth = props => {
 
                 userController._get(auth.user.id)
                     .then(user=>{
-                        console.log(user)
+                        //console.log(user)
                         setItem(user.data)
                     })
                     .catch(error=>console.log(error))
@@ -96,7 +96,7 @@ const PageAuth = props => {
 				<Col md={10} sm={24} xs={24}>
                     <VuroxComponentsContainer className="p-4">
                         <Title level={5}>Verifikasi Email</Title>
-                        <Text type="secondary">Untuk keamanan akun dan lupa password.</Text>
+                        <Text type="secondary">Untuk keamanan akun dan perbaikan saat lupa password, silahkan verifikasi email terlebih dahulu.</Text>
                     </VuroxComponentsContainer>
 				</Col>
 			</Row>
