@@ -121,7 +121,7 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
 
                             dataRows.sort((a,b)=>a.value < b.value ? 1 : b.value < a.value ? -1 : 0)
 
-                            if(posts && posts.data.items){
+                            if(posts && posts.data && posts.data.items){
 
                                 const items = posts.data.items
 
@@ -171,11 +171,11 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
 
     return(
         <>
-            <VuroxComponentsContainer style={{height:"330px"}}>
+            <VuroxComponentsContainer style={{minHeight:"330px"}}>
                 <Row>
                     <Col md={24}>
                         {isEmpty && !isFetching ? 
-                            <div className="d-flex align-items-center justify-content-center" style={{height:"330px"}}>
+                            <div className="d-flex align-items-center justify-content-center" style={{minHeight:"330px"}}>
                                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                             </div>
                         :

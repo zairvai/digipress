@@ -1,6 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
-
 import { 
 	VuroxChartsBoxHead
 } from 'Components/charts'
@@ -34,7 +32,7 @@ const Chart = ({label,description,fillColor,toolTopStyle,loading,...props}) => {
         
         <>
             {loading ?
-                <div className="d-flex  justify-content-center align-items-center" style={{height:"330px"}}>
+                <div className="d-flex  justify-content-center align-items-center" style={{minHeight:"330px"}}>
                     <LoadingOutlined style={{fontSize:"50px",color:"#333333"}} className="align-self-center"/>
                 </div>
                 :

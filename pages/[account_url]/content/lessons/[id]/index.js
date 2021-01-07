@@ -69,7 +69,6 @@ const PageLessonId = props => {
           onOk() {
             lessonController._delete(item)
                 .then(classroom=>{
-                    //classroomController._updateList("remove",[{id:article.data.id}])
                     setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`),1000)
                 }).catch(error=>console.log(error))
           },
@@ -86,8 +85,6 @@ const PageLessonId = props => {
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.post && item.post.title} ghost={false}
                         onBack={()=>{
-                            // if(mode=="question") router.push(`/[account_ur]/main/qnas/`,`/${auth.account.uniqueURL}/main/qnas/`,{shallow:true})
-                            // else if(mode=="answer") router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
                             if(window.history) window.history.back()
                             else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
                         }}

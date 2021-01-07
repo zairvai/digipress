@@ -40,7 +40,7 @@ const Chart = ({label,fillColor,toolTopStyle,loading,...props}) => {
                         </Col>
                     </Row>
                 </VuroxChartsBoxHead>
-                <ResponsiveContainer width='100%' height={123}>
+                <ResponsiveContainer width='100%' height={101}>
                     <BarChart data={data && data.rows}  margin={{ top: 20, right: 0, left: 0, bottom: 1 }}>
                         <XAxis dataKey="date" stroke="#ccc" hide={true} tickLine={false} axisLine={false} />
                         <Tooltip contentStyle={toolTopStyle} cursor={false} />

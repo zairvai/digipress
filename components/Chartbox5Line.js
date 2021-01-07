@@ -42,7 +42,7 @@ const Chart = ({label,fillColor,toolTopStyle,loading,...props}) => {
                         </Col>
                     </Row>
                 </VuroxChartsBoxHead>
-                <ResponsiveContainer width='100%' height={123} >	
+                <ResponsiveContainer width='100%' height={101} >	
                     <AreaChart data={data && data.rows}
                         margin={{ top: 10, right: 0, left: 0, bottom: 3 }}>
                         <defs>

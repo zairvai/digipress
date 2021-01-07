@@ -35,12 +35,14 @@ const ArticleItem = ({item,index,auth,...props}) => {
                     <Col md={24}>
                         <Title level={3} className="mt-2">{item.title}</Title>
                         
-                        <HTML 
-                            html={item.content}
-                            componentOverrides={{
-                                p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
-                            }}
-                            />
+                        <Paragraph ellipsis={{ rows: 20, expandable: true, symbol: 'Buka' }}>
+                            <HTML 
+                                html={item.content}
+                                componentOverrides={{
+                                    p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                                }}
+                                />
+                        </Paragraph>
                     
                     </Col>
                 </Row>
