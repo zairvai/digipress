@@ -140,7 +140,7 @@ const List = props =>{
                                         p:Component=>props=><Component ellipsis={{ rows: 4, expandable: true, symbol: 'Buka' }} {...props}/>
                                     }}
                                 />
-                                <Text type="secondary" className="mt-3">{moment(record.createdAt).fromNow()}</Text>
+                                <Text type="secondary">{moment(record.replies[0].createdAt).fromNow()}</Text>
 
                             </>
                         }

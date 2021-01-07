@@ -102,7 +102,7 @@ const List = props =>{
                 width:"1%"
             },
             {
-                title:"Komentar",
+                title:"Tanya jawab",
                 width:"25%",
                 key:"index",
                 render:(text,record,index)=>(
