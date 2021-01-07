@@ -26,7 +26,7 @@ function* createClassroom(action){
             categoryId:values.categoryId.trim(),
             tags:values.tags,
             content:values.content,
-            allowComment:values.allowComment,
+            // allowComment:values.allowComment,
             access:values.readAccess
         }
 
@@ -156,7 +156,7 @@ function* updateClassroom(action){
         if(values.categoryId) updateParams.categoryId = values.categoryId.trim()
         if(values.tags) updateParams.tags = values.tags
         if(values.content) updateParams.content = values.content
-        if(values.allowComment) updateParams.allowComment = values.allowComment
+        // if(values.allowComment) updateParams.allowComment = values.allowComment
         if(values.access) updateParams.access = values.readAccess.trim()   
         if(values.status) updateParams.status = values.status
         

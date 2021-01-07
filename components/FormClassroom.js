@@ -25,7 +25,7 @@ const schema = yup.object().shape({
     content:yup.string(),
     category:yup.object().required("Silahkan pilih kategori"),
     tags:yup.array(),
-    allowComment:yup.string(),
+    // allowComment:yup.string(),
     readAccess:yup.string()
 })
 
@@ -80,7 +80,7 @@ const FormClassroom = ({item,...props}) => {
                 }
 
                 setValue("tags",selectedTags)
-                setValue("allowComment",item.allowComment)
+                //setValue("allowComment",item.allowComment)
                 setValue("readAccess",item.access)
         
             }
@@ -113,7 +113,7 @@ const FormClassroom = ({item,...props}) => {
                 content: "",
                 category:{id:null,value:null},
                 tags:[],
-                allowComment:false,
+                //allowComment:false,
                 readAccess:"public"
             }
     })
@@ -181,7 +181,7 @@ const FormClassroom = ({item,...props}) => {
     }
 
     const onAllowCommentChange = e =>{
-        setValue("allowComment",e.target.checked)
+        //setValue("allowComment",e.target.checked)
     }
 
     const onReadAccessChange = e => {
@@ -294,7 +294,7 @@ const FormClassroom = ({item,...props}) => {
                                 </div> */}
                             </Col>
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <Col md={24}>
                                 <Controller
                                     name="allowComment"
@@ -304,7 +304,7 @@ const FormClassroom = ({item,...props}) => {
                                 />
                                 
                             </Col>
-                        </Row>
+                        </Row> */}
                         <Row>
                             <Col md={24}>
 
