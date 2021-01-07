@@ -24,28 +24,30 @@ function* signIn(action) {
     try{
 
         
-        const user = yield Auth.signIn(username,password,{accountId})
-        //const user = yield call([Auth, 'signIn'], {username,password,{test:"yes"}});
-        // const user = yield call([Auth, 'signIn'], {username,password,"clientMetadata":{accountId}});
+        const data = yield Auth.signIn(username,password,{accountId})
         
-        if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
-        else if(user.signInUserSession.idToken.payload.access==="false") {
-            yield Auth.signOut()
-            yield put(customSignInRoutine.noaccesstoaccount())
-        }
-        else yield put(signInRoutine.success({data:user}))
+        // if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
+        // else if(user.signInUserSession.idToken.payload.access==="false") {
+        //     yield Auth.signOut()
+        //     yield put(customSignInRoutine.noaccesstoaccount())
+        // }
+        // else yield put(signInRoutine.success({data:user}))
+
+        yield put(signInRoutine.success({data}))
 
     }catch(error){
 
-        if(typeof error.code !== undefined){
+        // if(typeof error.code !== undefined){
             
-            const {code} = error
+        //     const {code} = error
 
-            if(code==="UserNotConfirmedException") yield put(customSignInRoutine.usernotconfirmed({error:{username,password}}))
-            else if(code==="UserNotFoundException") yield put(customSignInRoutine.usernotfound({error:{username}}))
-            else yield put(signInRoutine.failure({error}))
-        }
-        else yield put(signInRoutine.failure({error}))
+        //     if(code==="UserNotConfirmedException") yield put(customSignInRoutine.usernotconfirmed({error:{username,password}}))
+        //     else if(code==="UserNotFoundException") yield put(customSignInRoutine.usernotfound({error:{username}}))
+        //     else yield put(signInRoutine.failure({error}))
+        // }
+        // else yield put(signInRoutine.failure({error}))
+
+        yield put(signInRoutine.failure({error}))
 
     }finally{
         yield put(signInRoutine.fulfill())

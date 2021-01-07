@@ -13,6 +13,7 @@ function* listPosts(action){
 
         const {ids,accountId,postTypes,name,orderBy,direction,from,size,statuses} = action.payload
 
+        
         const listParams={from,size}
         
         if(ids) listParams.ids = ids

@@ -30,15 +30,14 @@ const PageLogin = props =>{
 	const authController = new AuthController(props)
 	const accountController = new AccountController(props)
 
+	const [user,setUser] = React.useState()
+	const [isNewPasswordRequired,setNewPasswordRequired] = React.useState(false)
 	const [visible,setVisible] = React.useState(false)
 	 
 	 React.useEffect(async()=>{
-		
-		console.log(window)
 
 		try{
 
-			
 			if(auth.isLoggedIn){
 				
 				if(auth.user.access.accountId != auth.account.id){
@@ -52,8 +51,7 @@ const PageLogin = props =>{
 			else{
 				
 				const uniqueURLPath = router.query.account_url
-				
-				authController._initSignIn()
+				// authController._initSignIn()
 				//get account id by unique URL
 				const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
 
@@ -73,15 +71,24 @@ const PageLogin = props =>{
 	const goToForgotPassword = () =>{
         router.push('/auth/password-recovery')
 	}
+
+	const handleNewPasswordRequired = user =>{
+		setUser(user)
+		setNewPasswordRequired(true)
+	}
 	
-	const onBacktoLogin = () => {
+	const handleBackToLogin = () => {
+		setNewPasswordRequired(false)
 		authController._signOut()
-			.then(()=>authController._initSignIn())
 	}
 
-	const onSuccess = user =>{
-		const access = JSON.parse(user.signInUserSession.idToken.payload.access)
-		router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,access.role))
+	const handleSuccessLogin = user =>{
+		// console.log(user)
+		router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,user.access.role))
+	}
+
+	const handleSuccessNewPassword = () =>{
+		setNewPasswordRequired(false)
 	}
 
 	return(
@@ -110,10 +117,10 @@ const PageLogin = props =>{
 								
 								<Row className="align-items-center fullHeight">
 									<Col md={24} sm={24} xs={24}>
-										{auth.newPasswordRequired ? 
-											<FormCompleteNewPasword onBack={onBacktoLogin}/>
+										{isNewPasswordRequired ? 
+											<FormCompleteNewPasword user={user} onSuccess={handleSuccessNewPassword} onBack={handleBackToLogin}/>
 											:
-											<FormLogin onSuccess={onSuccess} accountId={auth.account.id} onForgotPassword={goToForgotPassword}/>
+											<FormLogin onSuccess={handleSuccessLogin} onNewPasswordRequired={handleNewPasswordRequired} onForgotPassword={goToForgotPassword}/>
 										}
 									</Col>
 								</Row>

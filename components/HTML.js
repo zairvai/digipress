@@ -9,7 +9,10 @@ const HTML = (props) =>{
     return (
         <HTMLRenderer
             components={{
-                p:props=><Paragraph {...props}/>
+                div:props=><span>{props.children}</span>,
+                a:props=><span>{props.children}</span>,
+                span:props=><span>{props.children}</span>,
+                p:props=><Paragraph>{props.children}</Paragraph>
             }}
             {...props}
         />

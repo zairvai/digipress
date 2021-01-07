@@ -6,8 +6,16 @@ export const authError = error =>{
 
     switch(code){
 
+        case "NotAuthorizedException" :
+            errorObj = {message:"Email atau password yang kamu masukan tidak sesuai."}
+            break
+            
+        case "NoAccessToAccountException" :
+            errorObj = {message:"Kamu tidak memiliki akses ke akun ini"}
+            break
+
         case "UserNotFoundException" : 
-            errorObj = {message:"Email yang kamu masukkan belum terdaftar."}
+            errorObj = {message:"Email yang kamu masukkan tidak terdaftar."}
             break
 
         case "LimitExceededException": 

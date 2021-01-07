@@ -23,12 +23,13 @@ function* createArticle(action){
         const inputParams = {
             accountId:values.accountId.trim(),
             title:values.title.trim(),
-            categoryId:values.category.id,
-            tags:values.tags,
             content:values.content,
             allowComment:values.allowComment,
             access:values.readAccess
         }
+
+        if(values.categoryId) inputParams.categoryId = values.categoryId
+        if(values.tags) inputParams.tags = values.tags
 
         const response = yield API.graphql(graphqlOperation(mutations.createArticle,{input:inputParams}))
 

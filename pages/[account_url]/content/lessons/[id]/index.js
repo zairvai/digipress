@@ -26,6 +26,7 @@ const PageLessonId = props => {
 
     const {auth,app,router} = props
     const lessonController = new LessonController(props)
+    const [mode,setMode] = React.useState()
     
     const [item,setItem] = React.useState({})
 
@@ -35,11 +36,8 @@ const PageLessonId = props => {
 
         try{
 
-            if(ref){
-                if(AuthController.isStudent(auth) || AuthController.isMember(auth)){
-                    router.push(`/${auth.account.uniqueURL}/main/home/`)
-                }
-            }
+            if(app.currentPage=="classrooms" || ref=="classrooms") setMode("answer")
+            else setMode("question")
 
             const lesson = await lessonController._get(id)
             setItem(lesson.data)
@@ -51,13 +49,15 @@ const PageLessonId = props => {
         
     },[])
 
-    // const links = [
-    //                 ['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],
-    //                 ['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],
-    //                 [item.post && item.post.title,`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
-    //                 ['Materi',`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}`,''],
-    //                 [item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.post && item.post.id}/lessons/${item.id}`,'active']]
+    React.useEffect(()=>{
 
+        if(mode=="answer"){
+            if(AuthController.isStudent(auth) || AuthController.isMember(auth)){
+                router.push(`/${auth.account.uniqueURL}/main/home/`)
+            }
+        }
+
+    },[mode])
 
     const showDeleteConfirm = item => {
         confirm({
@@ -86,8 +86,9 @@ const PageLessonId = props => {
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.post && item.post.title} ghost={false}
                         onBack={()=>{
-                            if(app.currentPage==="qnas") router.push(`/[account_ur]/main/qnas/`,`/${auth.account.uniqueURL}/main/qnas/`,{shallow:true})
-                            else if(app.currentPage=="classrooms") router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
+                            // if(mode=="question") router.push(`/[account_ur]/main/qnas/`,`/${auth.account.uniqueURL}/main/qnas/`,{shallow:true})
+                            // else if(mode=="answer") router.push(`/[account_ur]/content/classrooms/[id]`,`/${auth.account.uniqueURL}/content/classrooms/${item.post.id}`,{shallow:true})
+                            if(window.history) window.history.back()
                             else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
                         }}
 
@@ -113,7 +114,7 @@ const PageLessonId = props => {
                 </Col>
             </Row>
             
-            {ref ? 
+            {mode=="answer" ? 
                 <Row>
                     <Col md={24} className="mt-2">
                         <VuroxComponentsContainer>

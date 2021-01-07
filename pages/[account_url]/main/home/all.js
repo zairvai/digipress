@@ -27,6 +27,8 @@ const Home = props =>{
     const articleController = new ArticleController(props)
     const classroomController = new ClassroomController(props)
     
+    const [items,setItems] = React.useState()
+
     const {confirm} = Modal
     
 	React.useEffect(()=>{
@@ -37,13 +39,15 @@ const Home = props =>{
 			accountId = auth.account.id
 		}
 
-		postController._list({accountId,postTypes:["Article","Classroom"],orderBy,direction})
+        postController._list({accountId,postTypes:["Article","Classroom"],orderBy,direction})
+            .then(list=>{
+                console.log(list)
+                setItems(list)
+            })
+            .catch(errors=>console.log(errors))
 
 	},[])
 
-    const pagename=""
-    const links = [['Main',`/${auth.account.uniqueURL}/main/home/all`,''],['Home',`/${auth.account.uniqueURL}/main/home`,'active']]
-    
     const showDeleteConfirm = (item,index) => {
 
         confirm({
@@ -80,7 +84,7 @@ const Home = props =>{
     return (
         <Layout>
             <NextSeo title="Home"/>
-            <ListPosts items={listPosts && listPosts.list && listPosts.list.items} foundDoc={listPosts && listPosts.list && listPosts.list.foundDocs} onDelete={showDeleteConfirm}/>
+            <ListPosts items={items && items.data.items} foundDoc={items && items.data.foundDocs} onDelete={showDeleteConfirm}/>
         </Layout>
     )
 }

@@ -1,31 +1,27 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Row,Col,Button,Tag} from 'antd'
-import Link from 'next/link'
-import Permission from 'Library/controllers/Permission'
-import HTMLRenderer from 'react-html-renderer'
+import {Row,Col,Tag} from 'antd'
+import HTML from 'Components/HTML'
 
-const Reader = ({item,...props}) =>{
-
-    const {auth} = props 
+const Reader = ({item}) =>{
 
     return(
         <>
             <Row>
                 <Col md={24}>
-                    <HTMLRenderer html={item.content ? item.content : ""}/>
+                    <HTML html={item && item.content}/>
                 </Col>
             </Row>
             <Row>
                 <Col md={24}>
-                    Tag&nbsp;
                 {
                     item.tags && 
-                    item.tags.map(tag=> tag &&
+                    <>Tag&nbsp;
+                    {item.tags.map(tag=> tag &&
                         <Tag key={tag.id}>
-                            <Link href={{pathname:`/content/tags/[name]`,query:{name:tag.name}}} shallow><a>{tag.name}</a></Link>
+                            {tag.name}
                         </Tag>	
-                    )
+                    )}
+                    </>
                 }
                 </Col>
             </Row>
@@ -34,4 +30,4 @@ const Reader = ({item,...props}) =>{
 
 }
 
-export default connect(state=>state)(Reader)
+export default Reader

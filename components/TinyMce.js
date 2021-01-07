@@ -53,6 +53,7 @@ const TinyMce = ({id,className="",mode="full",
                         autoresize_bottom_margin: bottomMargin ? bottomMargin : 50,
                         min_height: height ? height : minHeight ? minHeight : 600,
                         max_height:maxHeight ? maxHeight : 2000,
+                        contextmenu:false,
                         setup:(tinyEditor)=>{
                             
                             $(editorId).addClass("isTinymce")

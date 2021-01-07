@@ -117,7 +117,7 @@ const ListPostComments = props =>  {
                 accountId,postId,orderBy,direction,minDate,maxDate,size,statuses
             })
 
-            if(response.data.items) {
+            if(response.data && response.data.items) {
                 
                 const dataItems = _.cloneDeep(response.data.items)
                 const length = dataItems.length

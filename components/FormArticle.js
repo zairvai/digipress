@@ -61,11 +61,13 @@ const FormArticle = ({item,...props}) => {
                 setValue("title",item.title)
                 setValue("content",item.content)
                 
-                setValue("category",{
-                    id:item.category.id,
-                    value:item.category.id.toString(),
-                    label:item.category.name
-                })
+                if(item.category){
+                    setValue("category",{
+                        id:item.category.id,
+                        value:item.category.id.toString(),
+                        label:item.category.name
+                    })
+                }
                 
                 let selectedTags = []
 

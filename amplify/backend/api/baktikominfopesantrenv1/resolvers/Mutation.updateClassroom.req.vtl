@@ -20,10 +20,6 @@
 	$util.qr($input.put("tags",$ctx.args.input.tags))
 #end
 
-#if( !$util.isNull($ctx.args.input.allowComment ))
-	$util.qr($input.put("allowComment",$ctx.args.input.allowComment))
-#end
-
 #if( !$util.isNull($ctx.args.input.access ))
 	$util.qr($input.put("access",$ctx.args.input.access))
 #end

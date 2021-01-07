@@ -36,19 +36,15 @@ const Sidebar = (props) => {
 				<Navitem active = {app.currentPage == "comments" ? true : false} link={`/${auth.account.uniqueURL}/main/comments`} activeLink={`/${auth.account.uniqueURL}/main/comments`} text='Komentar' icon={<Icon size="1.3em" path={mdiCommentMultipleOutline} />} />
 				<Navitem active = {app.currentPage == "qnas" ? true : false} link={`/${auth.account.uniqueURL}/main/qnas`} activeLink={`/${auth.account.uniqueURL}/main/qnas`} text='Tanya jawab' icon={<Icon size="1.3em" path={mdiCommentQuestionOutline} />} />
 
-				
-				<VerticalNavHeading>Konten</VerticalNavHeading>
-				<Navitem active = {app.currentPage == "classrooms" ? true : false} link={`/${auth.account.uniqueURL}/content/classrooms`} text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
-				<Navitem active = {app.currentPage == "articles" ? true : false} link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
-				
 				{
-					(!AuthController.isStudent(auth) || !AuthController.isMember(auth)) &&
-					
+					(!AuthController.isStudent(auth) && !AuthController.isMember(auth)) &&
 					<>
+						<VerticalNavHeading>Konten</VerticalNavHeading>
+						<Navitem active = {app.currentPage == "classrooms" ? true : false} link={`/${auth.account.uniqueURL}/content/classrooms`} text='Ruang belajar' icon={<Icon size="1.3em" path={mdiBookOpenPageVariantOutline} />} />
+						<Navitem active = {app.currentPage == "articles" ? true : false} link={`/${auth.account.uniqueURL}/content/articles`} text='Berita artikel' icon={<Icon size="1.3em" path={mdiPostOutline} />} />
 						<Navitem active = {app.currentPage == "categories" ? true : false} link={`/${auth.account.uniqueURL}/content/categories`} text='Kategori' icon={<Icon size="1.3em" path={mdiShapeOutline} />} />
 						<Navitem active = {app.currentPage == "tags" ? true : false} link={`/${auth.account.uniqueURL}/content/tags`} text='Tag' icon={<Icon size="1.3em" path={mdiTagMultipleOutline} />} />
 					</>
-
 				}
 				
 				{

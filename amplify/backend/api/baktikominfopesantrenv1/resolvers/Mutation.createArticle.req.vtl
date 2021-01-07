@@ -7,9 +7,7 @@
 
 #set( $input = {
 	"accountId":$ctx.args.input.accountId,
-    "categoryId":$ctx.args.input.categoryId,
 	"title":$ctx.args.input.title,
-    "tags":$util.defaultIfNull($ctx.args.input.tags,[]),
     "allowComment":$util.defaultIfNull($ctx.args.input.allowComment,true),
     "access":$util.defaultIfNull($ctx.args.input.access,"public"),
     "status":3,
@@ -20,6 +18,14 @@
     "createdAt":$util.time.nowISO8601(),
     "updatedAt":$util.time.nowISO8601()
 } )
+
+#if( !$util.isNull($ctx.args.input.categoryId ))
+	$util.qr($input.put("categoryId",$ctx.args.input.categoryId))
+#end
+
+#if( !$util.isNull($ctx.args.input.tags ))
+	$util.qr($input.put("tags",$ctx.args.input.tags))
+#end
 
 $util.qr($ctx.stash.put("input",$input))
 

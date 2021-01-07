@@ -133,7 +133,7 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onClick: e => {
-                router.push(props.destinationPath,`/${auth.account.uniqueURL}/content/lessons/${record.id}`,{shallow:true})
+                router.push('/[account_url]/content/lessons/[id]',`/${auth.account.uniqueURL}/content/lessons/${record.id}`,{shallow:true})
             }
         }
     }
@@ -167,7 +167,7 @@ const List = props =>{
 
 
 export default connect(
-    state=>({auth:state.auth}),
+    state=>({auth:state.auth,app:state.app}),
     (dispatch)=>({
         ...bindPromiseCreators({
             listLessonsRoutinePromise,

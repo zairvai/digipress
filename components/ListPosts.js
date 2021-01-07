@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Link from 'next/link'
-import Truncate from 'react-truncate-html'
+import HTML from 'Components/HTML'
 import {Row,Col,Typography,Divider,Button} from 'antd'
 import {
 	VuroxComponentsContainer
@@ -35,12 +35,12 @@ const ArticleItem = ({item,index,auth,...props}) => {
                     <Col md={24}>
                         <Title level={3} className="mt-2">{item.title}</Title>
                         
-                        <Truncate 
-                            lines={10}
-                            responsive={false} 
-                            dangerouslySetInnerHTML={{
-                                __html: item.content
-                            }}/>
+                        <HTML 
+                            html={item.content}
+                            componentOverrides={{
+                                p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                            }}
+                            />
                     
                     </Col>
                 </Row>
@@ -92,7 +92,7 @@ const ClassroomItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={18} sm={12} xs={12}>
                         <Icon size="1.5em" path={mdiBookOpenPageVariantOutline}/> &nbsp;
-                        <Text>{item.category.name}</Text>
+                        <Text>{item.category && item.category.name}</Text>
                         
                     </Col>
                     <Col md={6} sm={12} xs={12}>
@@ -107,12 +107,13 @@ const ClassroomItem = ({item,index,auth,...props}) => {
                 <Row>
                     <Col md={24}>
                         <Title level={3} className="mt-2">{item.title}</Title>
-                        <Truncate 
-                            lines={10}
-                            responsive={false} 
-                            dangerouslySetInnerHTML={{
-                                __html: item.content
-                            }}/>
+                        
+                        <HTML 
+                            html={item.content}
+                            componentOverrides={{
+                                p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                            }}
+                            />
                         
                     </Col>
                 </Row>

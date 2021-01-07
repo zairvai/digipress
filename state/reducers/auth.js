@@ -14,11 +14,7 @@ const initialState = {
     error:false,
     isLoggedIn:false,
     isRequesting:false,
-    isError:false,
-    data:false,
-    user:false,
-    account:false,
-    noAccessToAccount:false
+    isError:false
 }
 
 //signin
@@ -31,11 +27,7 @@ export const signIn = (state=initialState,action) => {
             return Object.assign({},state,{
                 isRequesting:false,
                 error:false,
-                isError:false,
-                userNotFound:false,
-                userNotConfirmed:false,
-                newPasswordRequired:false,
-                noAccessToAccount:false
+                isError:false
             })
 
         }
@@ -45,71 +37,33 @@ export const signIn = (state=initialState,action) => {
             return Object.assign({},state,{
                 isRequesting:true,
                 error:false,
-                isError:false,
-                userNotFound:false,
-                userNotConfirmed:false,
-                newPasswordRequired:false,
-                isLoggedIn:false,
-                noAccessToAccount:false,
-                data:false
+                isError:false
             })
 
-        }
-
-        case customSignInRoutine.NEWPASSWORDREQUIRED : {
-            
-            const {data} = action.payload
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:false,
-                error:false,
-                newPasswordRequired:true,
-                isLoggedIn:false,
-                data
-            })
-
-        }
-
-        case customSignInRoutine.NOACCESSTOACCOUNT : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:true,
-                error:false,
-                isLoggedIn:false,
-                noAccessToAccount:true
-            })
-
+        
         }
 
         case signInRoutine.SUCCESS : {
 
             const {data} = action.payload
-            const {attributes,signInUserSession} = data
+            //const {attributes} = data
 
-            const access = JSON.parse(signInUserSession.idToken.payload.access)
+            // const {attributes,signInUserSession} = data
+            // const access = JSON.parse(signInUserSession.idToken.payload.access)
 
-            const user = {
-                id:attributes.sub,
-                name:attributes.name,
-                phoneNumber:attributes.phone_number,
-                email:attributes.email,
-                email_verified: attributes.email_verified ? true : false,
-                access
-            }
+            // const user = {
+            //     id:attributes.sub,
+            //     name:attributes.name,
+            //     phoneNumber:attributes.phone_number,
+            //     email:attributes.email,
+            //     email_verified: attributes.email_verified ? true : false,
+            //     // access
+            // }
 
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,
-                error:false,
-                userNotConfirmed:false,
-                userNotFound:false,
-                newPasswordRequired:false,
-                isLoggedIn:true,
-                data:false,
-                noAccessToAccount:false,
-                user
+                error:false
             })     
 
         }
@@ -122,40 +76,10 @@ export const signIn = (state=initialState,action) => {
                 isRequesting:false,
                 isError:true,
                 error,
-                isLoggedIn:false,
-                data:false,
-                user:false
+                isLoggedIn:false
             })
         }
 
-        case customSignInRoutine.USERNOTCONFIRMED : {
-
-            const {error} = action.payload
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:true,
-                error,
-                userNotConfirmed:true,
-                data:false
-            })
-
-        }
-
-        case customSignInRoutine.USERNOTFOUND : {
-
-            const {error} = action.payload
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:true,
-                error,
-                userNotFound:true,
-                isLoggedIn:false,
-                data:false
-            })
-
-        }
 
     }    
 
@@ -527,6 +451,7 @@ export const verifySubmitCode = (state=initialState,action) => {
 export const authData = (state=initialState,action) => {
 
     switch(action.type){
+
         case customSetDataRoutine.SETACCOUNT : {
             
             const {account} = action
@@ -546,6 +471,16 @@ export const authData = (state=initialState,action) => {
             })
             
         }
+
+        case customSetDataRoutine.SETLOGGEDIN : {
+            
+            const {value} = action
+
+            return Object.assign({},state,{
+                isLoggedIn:value
+            })  
+        }
+
     }
 
     return state

@@ -240,7 +240,7 @@ type Article implements Post @aws_iam
 
 input CreateArticleInput {
 	accountId: ID!
-	categoryId: ID!
+	categoryId: ID
 	title: String!
   	content:String!
 	tags: [ID!]
@@ -289,7 +289,7 @@ type Classroom implements Post @aws_iam
 
 input CreateClassroomInput {
 	accountId: ID!
-	categoryId: ID!
+	categoryId: ID
 	title: String!
   	content:String!
 	tags: [ID!]

@@ -9,9 +9,6 @@ import AuthController from 'Library/controllers/AuthController'
 import QnaController from 'Library/controllers/QnaController'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { listUserQnasRoutinePromise } from 'State/routines/qna';
-import {Status} from 'Components/mycomponents.js'
-import Icon from '@mdi/react'
-import {mdiFormatQuoteOpenOutline,mdiFormatQuoteCloseOutline} from '@mdi/js'
 import _ from 'lodash'
 import moment from 'moment'
 import HTML from 'Components/HTML'
@@ -61,7 +58,7 @@ const List = props =>{
 
             const params = {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses}
 
-            console.log(params)
+            //console.log(params)
 
 			const response = await qnaController._listUserQnas(params)
 
@@ -108,42 +105,40 @@ const List = props =>{
                 render:(text,record,index)=>(
                     <>
                     {
-                        record.replyToUser ?
+                        record.qnaType=="ans" ?
                         <>
-                            <p className="mb-3"><Text>{auth.user.id == record.createdBy.id ? "Kamu" : record.createdBy.name}</Text> Menjawab pertanyaan <Text>{auth.user.id == record.replyToUser.id ? "kamu" : record.replyToUser.name}</Text> pada materi <Text strong={true}>{record.lesson.title}</Text> di ruang belajar <Text strong={true}>{record.post.title}</Text></p>
+                            <p className="mb-0"><Text>{auth.user.id == record.createdBy.id ? "Kamu" : record.createdBy.name}</Text> Menjawab pertanyaan <Text>{auth.user.id == record.replyToUser.id ? "kamu" : record.replyToUser.name}</Text> pada materi <Text strong={true}>{record.lesson.title}</Text> di ruang belajar <Text strong={true}>{record.post.title}</Text></p>
                             
-                            "<HTML 
-                                html={record.content}
-                                componentOverrides={{
-                                    p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
-                                }}
-                            />"
-
                             <p className="mt-1">
                                 <Tooltip title={moment(record.createdAt).format("dddd, Do MMMM YYYY [jam] hh:mm")}>
                                     <span>{moment(record.createdAt).fromNow()}</span>
                                 </Tooltip>
-                            </p>                        
-                            
-                            
-                        </>
-                        :
-                        <>
-                            <p className="mb-3">kamu mengirimkan pertanyaan pada materi <Text strong={true}>{record.lesson.title}</Text> di ruang belajar <Text strong={true}>{record.post.title}</Text></p>
+                            </p> 
 
-                            "
                             <HTML 
                                 html={record.content}
                                 componentOverrides={{
                                     p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
                                 }}
-                            />"
+                            />
+                        </>
+                        :
+                        <>
+                            <p className="mb-0"><Text>{auth.user.id == record.createdBy.id ? "Kamu" : record.createdBy.name}</Text> mengirimkan pertanyaan pada materi <Text strong={true}>{record.lesson.title}</Text> di ruang belajar <Text strong={true}>{record.post.title}</Text></p>
 
                             <p className="mt-1">
                                 <Tooltip title={moment(record.createdAt).format("dddd, Do MMMM YYYY [jam] hh:mm")}>
                                     <span>{moment(record.createdAt).fromNow()}</span>
                                 </Tooltip>
                             </p>
+
+                            <HTML 
+                                html={record.content}
+                                componentOverrides={{
+                                    p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                                }}
+                            />
+                            
                             
                         </>
                     }
@@ -162,7 +157,9 @@ const List = props =>{
     const rowHandler = (record,rowIndex) => {
         return{
             onClick: e => {
-                router.push(`/${auth.account.uniqueURL}/content/lessons/${record.lesson.id}`)
+                if(record.qnaType=="ques" && !AuthController.isStudent(auth)) router.push("/[account_url]/content/lessons/[id]/?ref=classrooms",`/${auth.account.uniqueURL}/content/lessons/${record.lesson.id}`,{shallow:true})
+                else if(record.qnaType=="ans" && auth.user.id == record.createdBy.id)  router.push("/[account_url]/content/lessons/[id]/?ref=classrooms",`/${auth.account.uniqueURL}/content/lessons/${record.lesson.id}`,{shallow:true})
+                else router.push("/[account_url]/content/lessons/[id]",`/${auth.account.uniqueURL}/content/lessons/${record.lesson.id}`,{shallow:true})
             }
         }
     }
@@ -190,13 +187,10 @@ const List = props =>{
             }
         </VuroxTableDark>
     )
-
-
 }
 
-
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
         ...bindPromiseCreators({
             listUserQnasRoutinePromise

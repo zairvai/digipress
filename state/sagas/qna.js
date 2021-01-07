@@ -33,7 +33,7 @@ function* createQna(action){
         if(values.replyToId) inputParams.replyToId = values.replyToId
         if(values.replyToUserId) inputParams.replyToUserId = values.replyToUserId
         
-        console.log(inputParams)
+        // console.log(inputParams)
 
         const response = yield API.graphql(graphqlOperation(mutations.createQna,{input:inputParams}))
 

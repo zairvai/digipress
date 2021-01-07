@@ -11,17 +11,28 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import AuthController from 'Library/controllers/AuthController'
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { completeNewPasswordRoutinePromise } from 'State/routines/auth';
 
 const {Text} = Typography
 
 const schema = yup.object().shape({
     name:yup.string().required("Mohon ketik nama kamu."),
-    password:yup.string().required("Mohon ketik password yang baru."),
+    password:yup.string().required("Mohon ketik password kamu.").min(8,"Password minimal 8 karakter.").max(99,"Maksimal 99 karakter")
+        .test("test-name","Masukan password kombinasi huruf besar, kecil dan angka.",
+            value=>{
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value)
+            }
+        ),
     confirm_password:yup.string().oneOf([yup.ref("password"),null],"Mohon pastikan password konfirmasi sama dengan password di atas.")
 })
 
-const FormAuth = props => {
+const FormAuth = ({user,...props}) => {
 
+
+    const [isSubmitting,setSubmitting] = React.useState(false)
+
+    const authController = new AuthController(props)
 
     const {
         handleSubmit,
@@ -29,7 +40,7 @@ const FormAuth = props => {
         control,
         errors,
         formState,
-        
+        setValue
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -38,48 +49,31 @@ const FormAuth = props => {
                 confirm_password:""
             }
     })
-
-    const authController = new AuthController(props)
     
     const onSubmit = values =>{
-        authController._completeNewPassword(values.name,values.password)
+
+        setSubmitting(true)
+        authController._completeNewPassword(values.name,values.password,user)
+            .then(()=>{
+                if(props.onSuccess) props.onSuccess()
+            })
+            .catch(errors=>{
+                console.log(errors)
+                setSubmitting(false)
+            })
+
     }
 
     const onError = (errors,e) => {
-        console.log(errors,e)
-    }
-
-    const ShowError = () => {
-
-        let message = ""
-
-        if(props.auth.isError){
-            if(props.auth.userNotFound){
-                message="Email yang anda gunakan belum terdaftar."        
-            }
-
-            return (
-                <Row>
-                    <Col md={24} xs={24}>
-                        <Alert className="mb-3"
-                            message="Error"
-                            description={message}
-                            type="error"
-                            showIcon
-                            />
-                    </Col>
-                </Row>
-            )
-        }
-
-        return <></>
-
+        // console.log(errors,e)
     }
 
     return (
         <Form 
             layout="vertical"
-            onFinish={handleSubmit(onSubmit,onError)}>
+            onFinish={handleSubmit(onSubmit,onError)}
+            autoComplete="off"
+            >
            
             <VuroxComponentsContainer className="p-4">
                 
@@ -94,22 +88,21 @@ const FormAuth = props => {
                         />
                     </Col>
                 </Row>
-
-                <ShowError/>
                 
                 <Row>
                     <Col md={24} xs={24}>
                         <Controller
                             name="name"
-                            defaultValue=""
                             control={control}
                             render={props=>
                                 <Form.Item label="Nama">
                                     <Input 
+                                        disabled={isSubmitting}
                                         size="large"  
-                                        prefix={<UserOutlined className="site-form-item-icon" />} 
-                                        placeholder="Nama lengkap"
                                         autoComplete="off"
+                                        prefix={<UserOutlined/>} 
+                                        placeholder="Nama lengkap"
+                                        autoComplete="newpassword"
                                         type="text"
                                         value={props.value} 
                                         onChange={props.onChange} />
@@ -123,14 +116,14 @@ const FormAuth = props => {
                     <Col md={24} xs={24}>
                         <Controller
                             name="password"
-                            defaultValue=""
                             control={control}
                             render={props=>
                                 <Form.Item label="Password">
                                     <Input.Password
+                                        disabled={isSubmitting}
                                         size="large"   
-                                        prefix={<LockOutlined className="site-form-item-icon" />}
-                                        autoComplete="current-password"
+                                        prefix={<LockOutlined/>}
+                                        autoComplete="newpassword"
                                         placeholder="Password"
                                         value={props.value} 
                                         onChange={props.onChange} 
@@ -147,14 +140,14 @@ const FormAuth = props => {
                     <Col md={24} xs={24}>
                         <Controller
                             name="confirm_password"
-                            defaultValue=""
                             control={control}
                             render={props=>
                                 <Form.Item label="Konfirmasi Password">
                                     <Input.Password
+                                        disabled={isSubmitting}
                                         size="large"   
                                         prefix={<LockOutlined className="site-form-item-icon" />}
-                                        autoComplete="current-password"
+                                        autoComplete="newpassword"
                                         placeholder="Konfirmasi password"
                                         value={props.value} 
                                         onChange={props.onChange} 
@@ -170,10 +163,10 @@ const FormAuth = props => {
                 </Row>
                 <Row>
                     <Col md={16} sm={24} xs={24} className="pt-2">
-                        <Button type="link" className="p-0" onClick={props.onBack}>Kembali ke halaman Login</Button>
+                        <Button type="link" className="p-0" disabled={isSubmitting} onClick={props.onBack}>Kembali ke halaman Login</Button>
                     </Col>
                     <Col md={8} sm={24} xs={24} className="fright">
-                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block>Kirim</Button>
+                        <Button className="mt-md-0 mt-3" size="large" type="primary" htmlType="submit" block loading={isSubmitting}>Kirim</Button>
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
@@ -182,4 +175,11 @@ const FormAuth = props => {
     );
 }
 
-export default connect(state=>state)(FormAuth)
+export default connect(
+    state=>({auth:state.auth}),
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            completeNewPasswordRoutinePromise
+        },dispatch),dispatch
+    })
+)(FormAuth)

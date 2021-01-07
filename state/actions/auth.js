@@ -62,8 +62,14 @@ export const setUser = user => ({
     user
 })
 
+export const setLoggedIn = value => ({
+    type:customSetDataRoutine.SETLOGGEDIN,
+    value
+})
+
 export const setAccount = account => ({
     type:customSetDataRoutine.SETACCOUNT,
     account
 })
+
 

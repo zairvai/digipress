@@ -14,6 +14,8 @@ export const signOutRoutinePromise = promisifyRoutine(signOutRoutine)
 
 //complete complete new password after add user via cognito
 export const completeNewPasswordRoutine = createRoutine("complete_new_password")
+export const completeNewPasswordRoutinePromise = promisifyRoutine(completeNewPasswordRoutine)
+
 
 //send forgot password code
 customRoutine = createRoutineCreator(["INIT","USERNOTFOUND","LIMITEXCEEDED"])
@@ -27,7 +29,7 @@ export const forgotPasswordRoutinePromise = promisifyRoutine(forgotPasswordRouti
 export const resetPasswordRoutine = createRoutine("reset_password")
 export const resetPasswordRoutinePromise = promisifyRoutine(resetPasswordRoutine)
 
-customRoutine = createRoutineCreator(["SETACCOUNT","SETUSER"])
+customRoutine = createRoutineCreator(["SETACCOUNT","SETUSER","SETLOGGEDIN"])
 export const customSetDataRoutine = customRoutine("set_data_custom")
 
 export const getAuthUserRoutine = createRoutine("get_auth_user")

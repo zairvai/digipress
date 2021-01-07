@@ -2,7 +2,8 @@ import {
     initSignIn,
     completeNewPassword,
     setAccount,
-    setUser
+    setUser,
+    setLoggedIn
 } from 'State/actions/auth'
 
 import AccountController from './AccountController'
@@ -120,6 +121,10 @@ export default class Controller{
         this.dispatch(setUser(user))
     }
 
+    _setLoggedIn = value =>{
+        this.dispatch(setLoggedIn(value))
+    }
+
     _initSignIn = () =>{
         this.dispatch(initSignIn())
     }
@@ -152,17 +157,15 @@ export default class Controller{
         })
     }
 
-    _completeNewPassword = (name,password) =>{
+    _completeNewPassword = (name,password,user) =>{
 
-        const user = this.props.auth.data        
-
-        this.dispatch(completeNewPassword({
+        return this.props.completeNewPasswordRoutinePromise({
             values:{
                 user,
                 name,
                 password
             }
-        }))
+        })
     }
 
     _verifyEmail = (email) =>{

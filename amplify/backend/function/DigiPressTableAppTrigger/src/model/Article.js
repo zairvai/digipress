@@ -9,7 +9,6 @@ function searchManagerPut(record){
         "id":id,
         "accountId":newImage.accountId.S,
         "title":newImage.title.S,
-        "categoryId":newImage.categoryId.S,
         "allowComment":newImage.allowComment.BOOL,
         "access":newImage.access.S,
         "status":newImage.status.N,
@@ -20,6 +19,8 @@ function searchManagerPut(record){
         "updatedAt":newImage.updatedAt.S
       }
   
+      if(newImage.categoryId) body["categoryId"] = newImage.categoryId.S
+
       if(newImage.tags){
           let tags = []
           newImage.tags.L.forEach(item=>{
