@@ -10,7 +10,7 @@ import Icon from '@mdi/react'
 import { mdiBookOpenPageVariantOutline, mdiCommentMultipleOutline,mdiCommentOffOutline, mdiPostOutline } from '@mdi/js'
 import Permission from 'Library/controllers/Permission'
 
-const {Title,Text,Paragraph} = Typography
+const {Title,Text} = Typography
 
 const ArticleItem = ({item,index,auth,...props}) => {
 
@@ -33,23 +33,17 @@ const ArticleItem = ({item,index,auth,...props}) => {
                 </Row>
                 <Row>
                     <Col md={24}>
-                        <Title level={3} className="mt-2">{item.title}</Title>
+                        <Title level={3} className="mt-2 mb-1">{item.title}</Title>
+                        <Text>Penulis : {item.createdBy.name}</Text>
                         
-                        <Paragraph ellipsis={{ rows: 20, expandable: true, symbol: 'Buka' }}>
+                        <div className="listContentWrapper mt-2">
                             <HTML 
                                 html={item.content}
                                 componentOverrides={{
                                     p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
                                 }}
                                 />
-                        </Paragraph>
-                    
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col md={24}>
-                        <Text>Penulis : {item.createdBy.name}</Text>
+                        </div>
                     </Col>
                 </Row>
 
@@ -108,20 +102,17 @@ const ClassroomItem = ({item,index,auth,...props}) => {
                 </Row>
                 <Row>
                     <Col md={24}>
-                        <Title level={3} className="mt-2">{item.title}</Title>
+                        <Title level={3} className="mt-2 mb-1">{item.title}</Title>
+                        <Text>Penulis : {item.createdBy.name}</Text>
                         
-                        <HTML 
-                            html={item.content}
-                            componentOverrides={{
-                                p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
-                            }}
-                            />
-                        
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={24}>
-                        <Text>Pengajar : {item.createdBy.name}</Text>
+                        <div className="listContentWrapper mt-2">
+                            <HTML 
+                                html={item.content}
+                                componentOverrides={{
+                                    p:Component=>props=><Component ellipsis={{ rows: 1, expandable: true, symbol: 'Buka' }} {...props}/>
+                                }}
+                                />
+                        </div>
                     </Col>
                 </Row>
             </div>
@@ -132,12 +123,7 @@ const ClassroomItem = ({item,index,auth,...props}) => {
             
             <div className="pb-3 px-3">
                 <Row>
-                    <Col md={12} sm={12} xs={12}>
-                        {/* <ul className="vurox-horizontal-links vurox-standard-ul">
-                            <li><a><Icon size="1.3em" path={mdiCommentMultipleOutline}/>&nbsp;10</a></li>
-                        </ul> */}
-                    </Col>
-                    <Col md={12} sm={12} xs={12}>
+                    <Col md={24} sm={24} xs={24}>
                         <div className="fright">
                             <ul className="vurox-horizontal-links vurox-standard-ul">
                                 <li><Link href={`/${auth.account.uniqueURL}/main/home/classrooms/${item.id}`}><a>Masuk ruang belajar</a></Link></li>

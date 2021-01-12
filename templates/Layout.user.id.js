@@ -23,12 +23,11 @@ const Layout = props => {
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
 
-	const [isAllowed,setAllowed] = React.useState(false)
+    const [isAllowed,setAllowed] = React.useState(false)
 
     React.useEffect(()=>{
 
-		if(Permission.MANAGE_ACCOUNTS({auth})){
-			appController._setCurrentPage("accounts")
+		if(Permission.MANAGE_USERS({auth})){
 			setAllowed(true)
 		}
 
@@ -36,7 +35,6 @@ const Layout = props => {
 
 
 	return (
-		
 		<AppContainer>
 			{isAllowed ? 
 				<>

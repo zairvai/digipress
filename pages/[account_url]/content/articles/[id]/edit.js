@@ -1,17 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import {
-	VuroxLayout,
-	HeaderLayout,
-	VuroxSidebar,
-	ContentLayout
-} from 'Components/layout'
-import { Row, Col,Modal,PageHeader,Button} from 'antd'
-import { vuroxContext } from 'Context'
-import HeaderDark from 'Templates/HeaderDark';
-import Summery2 from 'Templates/Summery2';
-import Sidebar from 'Templates/HeaderSidebar';
+
+import { Row, Col,PageHeader} from 'antd'
 import LayoutArticle from 'Templates/Layout.article'
 import FormArticle from 'Components/FormArticle'
 
@@ -38,27 +29,25 @@ const PageArticleEdit = props => {
 
 	const {id} = React.useMemo(()=>router.query,[])
 	
-    const pagename=""
-	const links = [['Konten',`/${auth.account.uniqueURL}/content/articles`,''],['Artikel',`/${auth.account.uniqueURL}/content/articles`,''],[item.title,`/${auth.account.uniqueURL}/content/articles/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/content/articles/${item.id}/edit`,'active']]
-	
-	const { menuState } = React.useContext(vuroxContext)
-	const toggleClass = menuState ? 'menu-closed' : 'menu-open'
+	const isMounted = React.useRef()
 
-	React.useEffect(async()=>{
+	React.useEffect(()=>{
+		isMounted.current = true
+
+		if(isMounted.current){
+			//get category
+			categoryController._list({accountId:auth.account.id})
+			//get tag
+			tagController._list({accountId:auth.account.id})
 		
-		//get category
-		categoryController._list({accountId:auth.account.id})
-		//get tag
-		tagController._list({accountId:auth.account.id})
-		
-		try{
-			const article = await articleController._get(id)
-			setItem(article.data)
-		}catch(error){
-			router.push(`/${auth.account.uniqueURL}/content/articles`)
+			articleController._get(id)
+				.then(article=>setItem(article.data))
+				.catch(error=>router.push(`/${auth.account.uniqueURL}/content/articles`))
 		}
 			
-		
+		return ()=>{
+			isMounted.current = false
+		}
 
 	},[])
 
@@ -68,7 +57,6 @@ const PageArticleEdit = props => {
     }
     
     const onSuccess = article =>{
-		console.log(article)
         //userController._updateList("add",user,0)
         router.push(`/${auth.account.uniqueURL}/content/articles/${item.id}`)	
 	}

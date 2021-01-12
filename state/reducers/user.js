@@ -55,15 +55,6 @@ export const createUser = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createUserRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
     }
 
     return state
@@ -108,16 +99,6 @@ export const getUser = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case getUserRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 
@@ -167,17 +148,6 @@ export const getUserByEmail = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-
-        case getUserByEmailRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
     }
 
     return state
@@ -225,17 +195,6 @@ export const listUsers = (state={list:[],...initialState},action) => {
                 list:[]
             })
         }
-
-        case listUsersRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
     }
 
     return state
@@ -284,17 +243,6 @@ export const updateUser = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-
-        case updateUserRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
     }
 
     return state

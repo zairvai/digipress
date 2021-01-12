@@ -51,7 +51,6 @@ const PageLogin = props =>{
 			else{
 				
 				const uniqueURLPath = router.query.account_url
-				// authController._initSignIn()
 				//get account id by unique URL
 				const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
 

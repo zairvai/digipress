@@ -55,15 +55,15 @@ export const createArticle = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createArticleRoutine.FULFILL : {
+        // case createArticleRoutine.FULFILL : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         isSuccessFull:false,
+        //         isError:false,
+        //         error:false
+        //     })
+        // }
     }
 
     return state
@@ -111,15 +111,15 @@ export const getArticle = (state={item:{},...initialState},action) => {
             })
         }
 
-        case getArticleRoutine.FULFILL : {
+        // case getArticleRoutine.FULFILL : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false
+        //     })
+        // }
 
     }
 
@@ -168,39 +168,15 @@ export const listArticles = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listArticlesRoutine.FULFILL : {
+        // case listArticlesRoutine.FULFILL : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
-        case customListArticlesRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                if(index){
-                //hapus items dari index sepanjang items.length
-                    state.list.items.splice(index,items.length)
-                }else{
-                    let index = state.list.items.findIndex(obj=>obj.id==items[0].id)
-                    state.list.items.splice(index,items.length)
-
-                }
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false
+        //     })
+        // }
 
     }
 
@@ -248,16 +224,6 @@ export const updateArticle = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case updateArticleRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 

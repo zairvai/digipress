@@ -1,7 +1,3 @@
-import {
-    updateList
-} from 'State/actions/tag'
-
 export default class Controller{
 
     constructor({dispatch, ...props}){
@@ -29,9 +25,5 @@ export default class Controller{
 
     _list = values => {
         return this.props.listTagsRoutinePromise(values)
-    }
-
-    _updateList = (method,items,index)=>{
-        this.dispatch(updateList(method,items,index))
     }
 }

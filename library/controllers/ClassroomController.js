@@ -1,7 +1,3 @@
-import {
-    updateList
-} from 'State/actions/classroom'
-
 export default class Controller{
 
     constructor({dispatch, ...props}){
@@ -49,9 +45,5 @@ export default class Controller{
 
     _list = values => {
         return this.props.listClassroomsRoutinePromise(values)
-    }
-
-    _updateList = (method,items,index)=>{
-        this.dispatch(updateList(method,items,index))
     }
 }

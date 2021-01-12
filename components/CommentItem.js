@@ -37,7 +37,7 @@ const CommentItem = props =>{
     const [maxDate,setMaxDate] = React.useState(moment().toISOString())
     const [minDate,setMinDate] = React.useState()
 
-    const [isFormVisible,setFormVisible] = React.useState(false)
+    // const [isFormVisible,setFormVisible] = React.useState(false)
    
     const [isUpdating,setUpdating] = React.useState(false)
     const [isReplying,setReplying] = React.useState(false)
@@ -408,7 +408,6 @@ const CommentItem = props =>{
                                     comment={row} post={postItem}
                                     auth={auth}
                                     listPostCommentsRoutinePromise={props.listPostCommentsRoutinePromise}
-                                    updateCommentRoutinePromise={props.updateCommentRoutinePromise}
                                     onSuccessUpdate={onSuccessUpdate} onSuccessDelete={onSuccessDelete}
                                     onPostSuccessAddComment={props.onPostSuccessAddComment}
                                     onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
@@ -419,7 +418,6 @@ const CommentItem = props =>{
                                     comment={row} post={postItem}
                                     auth={auth}
                                     listPostCommentsRoutinePromise={props.listPostCommentsRoutinePromise}
-                                    updateCommentRoutinePromise={props.updateCommentRoutinePromise}
                                     onSuccessUpdate={onSuccessUpdate} onSuccessDelete={onSuccessDelete}
                                     onPostSuccessAddComment={props.onPostSuccessAddComment}
                                     onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
@@ -479,15 +477,18 @@ const CommentItem = props =>{
 }
 
 
-const MemoComment = React.memo(props=><CommentItem {...props}/>)
+// const MemoComment = React.memo(props=><CommentItem {...props}/>)
 // export default MemoComment
 
 export default connect(
-    state=>({auth:state.auth}),
+    state=>({
+        auth:state.auth,
+        dispatch:state.dispatch
+    }),
     (dispatch)=>({
             ...bindPromiseCreators({
             listPostCommentsRoutinePromise,
             updateCommentRoutinePromise
         },dispatch),dispatch
     })
-)(MemoComment)
+)(CommentItem)

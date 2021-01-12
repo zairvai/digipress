@@ -1,5 +1,4 @@
 import {
-    initSignIn,
     completeNewPassword,
     setAccount,
     setUser,
@@ -123,10 +122,6 @@ export default class Controller{
 
     _setLoggedIn = value =>{
         this.dispatch(setLoggedIn(value))
-    }
-
-    _initSignIn = () =>{
-        this.dispatch(initSignIn())
     }
 
     _get = () => {

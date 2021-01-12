@@ -55,15 +55,6 @@ export const createQna = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createQnaRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
     }
 
     return state
@@ -111,15 +102,6 @@ export const getQna = (state={item:{},...initialState},action) => {
             })
         }
 
-        case getQnaRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
 
     }
 
@@ -168,15 +150,6 @@ export const listPostQnas = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listPostQnasRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
 
     }
 
@@ -225,15 +198,6 @@ export const listUserQnas = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listUserQnasRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
 
     }
 
@@ -281,16 +245,6 @@ export const updateQna = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case updateQnaRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 

@@ -26,21 +26,29 @@ const TinyMce = ({id,className="",mode="full",
                     const url = window.location
 
                     let plugins=[],pluginList = [],toolbar1 = "",skinUrl = ""
+                    let quickBarImage=false,formats=false
 
                     if(mode=="full"){
                     
-                        pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste"]
+                        pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste image imagetools"]
                         toolbar1 = "undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
                                     alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
                                     code | fullscreen | paste pastetext"
                         
-                        skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`
-                        
+                        skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`                    
+
+                        formats ={
+                            alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-left',exact:true},
+                            aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-center',exact:true},
+                            alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-right',exact:true}
+                        }
+
                     }else{
                     
                         pluginList = ["autoresize"]
                         skinUrl=`${url.origin}/modules/tinymce/skins/ui/simple`
                     }
+
 
                     let tinyParams = {
                         selector:editorId,
@@ -49,6 +57,10 @@ const TinyMce = ({id,className="",mode="full",
                         toolbar1:toolbar1,
                         menubar:false,
                         statusbar:false,
+                        formats:formats,
+                        //quickbars_image_toolbar: quickBarImage,
+                        quickbars_selection_toolbar: false,
+                        quickbars_insert_toolbar:false,
                         height:height ? height : minHeight ? minHeight : 100,
                         autoresize_bottom_margin: bottomMargin ? bottomMargin : 50,
                         min_height: height ? height : minHeight ? minHeight : 600,
@@ -101,6 +113,9 @@ const TinyMce = ({id,className="",mode="full",
                             tinyEditor.on("detach remove",function(){
                                 if(props.onRemove) props.onRemove(tinyEditor)
                             })
+
+                            //custom context
+                            setupContextToolbar(editor)
                             
                         }
                     }
@@ -114,6 +129,9 @@ const TinyMce = ({id,className="",mode="full",
                             if(mode=="full"){
                                 plugins = [
                                     import("Plugins/tinymce/mymedia"),
+                                    import("tinymce/plugins/quickbars"),
+                                    import("tinymce/plugins/image"),
+                                    import("tinymce/plugins/imagetools"),
                                     import("tinymce/plugins/advlist"),
                                     import("tinymce/plugins/lists"),
                                     import("tinymce/plugins/fullscreen"),
@@ -145,7 +163,7 @@ const TinyMce = ({id,className="",mode="full",
         return ()=>{
 
             isMounted.current = false
-            tinymce.remove(editor)
+            if(tinymce) tinymce.remove(editor)
 
             
         }
@@ -169,6 +187,17 @@ const TinyMce = ({id,className="",mode="full",
         }
     },[ed,props.isSubmitting])
 
+    const setupContextToolbar = editor =>{
+
+        editor.ui.registry.addContextToolbar('imagealignment', {
+            predicate: function (node) {
+              return node.nodeName.toLowerCase() === 'img'
+            },
+            items: 'alignleft aligncenter alignright',
+            position: 'node',
+            scope: 'node'
+          });
+    }
 
     return <>
     

@@ -27,7 +27,7 @@ const Layout = props => {
 
     React.useEffect(()=>{
 
-		if(Permission.VIEW_USERS({auth})){
+		if(Permission.MANAGE_USERS({auth})){
 			appController._setCurrentPage("users")
 			setAllowed(true)
 		}

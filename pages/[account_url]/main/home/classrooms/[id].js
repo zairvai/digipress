@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import Layout from 'Templates/Layout.home'
-import { Row, Col,Modal,Typography} from 'antd'
+import { Row, Col,Modal,Typography,PageHeader,Button} from 'antd'
 import Link from 'next/link'
 import {
 	VuroxComponentsContainer
@@ -47,9 +47,6 @@ const PageClassroomId = props => {
         
     },[])
 
-    
-
-    const links = [['Main',`/${auth.account.uniqueURL}/main/home/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/main/home/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/main/home/classrooms/${item.id}`,'active']]
 
     const showDeleteConfirm = item => {
         confirm({
@@ -73,6 +70,24 @@ const PageClassroomId = props => {
     return(
         <Layout>
             <NextSeo title={`${item.title} - Ruang belajar`}/>
+            <Row>
+				<Col md={24}>
+                    <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
+                        onBack={()=>window.history.back()}
+						extra={[
+							<div className="d-inline" key="1">
+                                {Permission.UPDATE_CLASSROOM({auth}) 
+                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah artikel</Button></Link>}
+                            </div>,
+                            <div className="d-inline" key="2">
+                                {Permission.DELETE_CLASSROOM({auth}) 
+                                    && <Button  type="primary" onClick={()=>showDeleteConfirm(item)}><i className="ti-trash"></i>&nbsp;Hapus artikel</Button>}
+                            </div>
+						]}
+					/>
+					
+				</Col>
+			</Row>
             <Row>
                 <Col md={24}>
                     <VuroxComponentsContainer className="p-4">

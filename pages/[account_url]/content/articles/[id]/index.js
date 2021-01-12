@@ -8,7 +8,7 @@ import {
 } from 'Components/layout'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { mdiCommentMultipleOutline,mdiCommentOffOutline } from '@mdi/js'
-import LayoutArticle from 'Templates/Layout.article'
+import Layout from 'Templates/Layout.article.id'
 import Permission from 'Library/controllers/Permission'
 import ArticleController from 'Library/controllers/ArticleController'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -28,6 +28,8 @@ const PageArticleId = props => {
     const articleController = new ArticleController(props)
 
     const [item,setItem] = React.useState({})
+    const [isFetching,setFetching] = React.useState(true)
+
     const [noOfComment,setNoOfComment] = React.useState(0)
 
     const {id} = React.useMemo(()=>router.query,[])
@@ -36,6 +38,7 @@ const PageArticleId = props => {
        
         try{
             const article = await articleController._get(id)
+            setFetching(false)
             setItem(article.data)
             setNoOfComment(article.data.noOfAllComment)
 
@@ -63,10 +66,7 @@ const PageArticleId = props => {
                     setTimeout(()=>router.push(`/${auth.account.uniqueURL}/content/articles`),1000)
                     
                 }).catch(error=>console.log(error))
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
+          }
         });
     }
 
@@ -83,12 +83,20 @@ const PageArticleId = props => {
     }
 
     return(
-        <LayoutArticle>
+        <Layout>
             <NextSeo title={`Konten - Artikel -  ${item.title}`}/>
+            <VuroxComponentsContainer>
+            <Row>
+                <Col md={24}>
+                    
+                </Col>
+            </Row>
+            </VuroxComponentsContainer>
+
             <Row>
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
-                        onBack={()=>router.push(`/[account_ur]/content/articles`,`/${auth.account.uniqueURL}/content/articles`,{shallow:true})}
+                        onBack={()=>window.history.back()}
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_ARTICLE({auth}) 
@@ -133,7 +141,7 @@ const PageArticleId = props => {
                     </Col>
                 </Row>
             </VuroxComponentsContainer>
-        </LayoutArticle> 
+        </Layout> 
     )
 }
 

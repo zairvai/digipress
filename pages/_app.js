@@ -10,6 +10,7 @@ import 'antd/dist/antd.less'
 import 'react-quill/dist/quill.snow.css';
 import 'Styles/styles.less'
 import 'Styles/mycustom.less'
+import 'Styles/mymedia.less'
 import moment from 'moment'
 import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'

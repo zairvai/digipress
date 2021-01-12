@@ -55,15 +55,6 @@ export const createLesson = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createLessonRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
     }
 
     return state
@@ -111,15 +102,6 @@ export const getLesson = (state={item:{},...initialState},action) => {
             })
         }
 
-        case getLessonRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
 
     }
 
@@ -168,34 +150,6 @@ export const listLessons = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listLessonsRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
-        case customListLessonsRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
-        }
-
     }
 
     return state
@@ -242,16 +196,6 @@ export const updateLesson = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case updateLessonRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 

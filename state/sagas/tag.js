@@ -58,8 +58,6 @@ function* listTags(action){
             listParams.direction = direction
         }
 
-        console.log(listParams)
-
         yield put(listTagsRoutine.request())
                 
         const response = yield API.graphql(graphqlOperation(queries.listTags,{input:listParams}))

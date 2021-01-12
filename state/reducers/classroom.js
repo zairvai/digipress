@@ -55,15 +55,6 @@ export const createClassroom = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createClassroomRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
     }
 
     return state
@@ -108,16 +99,6 @@ export const getClassroom = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case getClassroomRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 
@@ -168,34 +149,6 @@ export const listClassrooms = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listClassroomsRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
-        case customListClassroomsRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
-        }
-
     }
 
     return state
@@ -242,16 +195,6 @@ export const updateClassroom = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case updateClassroomRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 

@@ -46,20 +46,7 @@ export const signIn = (state=initialState,action) => {
         case signInRoutine.SUCCESS : {
 
             const {data} = action.payload
-            //const {attributes} = data
-
-            // const {attributes,signInUserSession} = data
-            // const access = JSON.parse(signInUserSession.idToken.payload.access)
-
-            // const user = {
-            //     id:attributes.sub,
-            //     name:attributes.name,
-            //     phoneNumber:attributes.phone_number,
-            //     email:attributes.email,
-            //     email_verified: attributes.email_verified ? true : false,
-            //     // access
-            // }
-
+        
             return Object.assign({},state,{
                 isRequesting:false,
                 isError:false,
@@ -124,14 +111,6 @@ export const signOut = (state=initialState,action) => {
             }) 
         }
 
-        case signOutRoutine.FULFILL:{
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false
-            })  
-        }
     }
 
     return state
@@ -231,35 +210,35 @@ export const forgotPassword = (state=initialState,action)=>{
             })
         }
 
-        case customForgotPasswordRoutine.USERNOTFOUND : {
+        // case customForgotPasswordRoutine.USERNOTFOUND : {
 
-            const {error} = action.payload
+        //     const {error} = action.payload
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:true,
-                error,
-                userNotFound:true,
-                isLoggedIn:false,
-                data:false
-            })
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         isError:true,
+        //         error,
+        //         userNotFound:true,
+        //         isLoggedIn:false,
+        //         data:false
+        //     })
 
-        }
+        // }
 
-        case customForgotPasswordRoutine.LIMITEXCEEDED : {
+        // case customForgotPasswordRoutine.LIMITEXCEEDED : {
 
-            const {error} = action.payload
+        //     const {error} = action.payload
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                isError:true,
-                error,
-                limitExceeded:true,
-                isLoggedIn:false,
-                data:false
-            })
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         isError:true,
+        //         error,
+        //         limitExceeded:true,
+        //         isLoggedIn:false,
+        //         data:false
+        //     })
 
-        }
+        // }
     }
 
     return state
@@ -325,20 +304,7 @@ export const getAuthUser = (state=initialState,action) => {
         case getAuthUserRoutine.SUCCESS : {
 
             const {data} = action.payload
-            const {attributes,signInUserSession} = data
 
-            //const access = JSON.parse(signInUserSession.idToken.payload.access)
-
-            // const user = {
-            //     id:attributes.sub,
-            //     name:attributes.name,
-            //     phoneNumber:attributes.phone_number,
-            //     email:attributes.email,
-            //     access:state.user.access
-            // }
-
-            // if(attributes.email_verified) user.email_verified = true
-            // else if(!attributes.email_verified) user.email_verified = false
             
             return Object.assign({},state,{
                 isRequesting:false,

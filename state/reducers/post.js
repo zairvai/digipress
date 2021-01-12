@@ -53,16 +53,6 @@ export const getPost = (state={item:{},...initialState},action) => {
             })
         }
 
-        case getPostRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
     }
 
     return state
@@ -108,40 +98,6 @@ export const listPosts = (state={list:[],...initialState},action) => {
                 error,
                 list:[]
             })
-        }
-
-        case listPostsRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
-        case customListPostsRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                if(index){
-                //hapus items dari index sepanjang items.length
-                    state.list.items.splice(index,items.length)
-                }else{
-                    let index = state.list.items.findIndex(obj=>obj.id==items[0].id)
-                    state.list.items.splice(index,items.length)
-
-                }
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
         }
 
     }

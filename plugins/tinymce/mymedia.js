@@ -7,14 +7,16 @@
   
     global.add("mymedia",function(editor){
       
-      console.log(editor)
-      console.log("shit")
+      const event = new CustomEvent("openTinymceMedia",{
+        detail:{
+          editor
+        }})
 
       editor.ui.registry.addButton("mymedia",{
         text:"Add Media",
         tooltip:"add shit",
         onAction:function(){
-          alert(1)
+          document.dispatchEvent(event)
         }
       })
 

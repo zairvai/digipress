@@ -17,18 +17,6 @@ export const createAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        // case customCreateAccountRoutine.INIT  : {
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         error:false,
-        //         isError:false,
-        //         isSuccessFull:false,
-        //         item:{}
-        //     })
-
-        // }
-
         case createAccountRoutine.REQUEST  : {
 
             return Object.assign({},state,{
@@ -112,24 +100,6 @@ export const listAccounts = (state={list:[],...initialState},action) => {
             })
         }
 
-        case customListAccountsRoutine.UPDATELIST : {
-
-            const {method,items,index}  = action
-            
-            if(method==="add") state.list.items.unshift(items)
-            else if(method==="remove"){
-                //hapus items dari index sepanjang items.length
-                state.list.items.splice(index,items.length)
-            }
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:true,
-                isError:false,
-                error:false
-            })
-
-        }
-
     }
 
     return state
@@ -138,17 +108,6 @@ export const listAccounts = (state={list:[],...initialState},action) => {
 export const getAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
-
-        // case customGetAccountRoutine.INIT : {
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         error:false,
-        //         isError:false,
-        //         isSuccessFull:false,
-        //         item:{}
-        //     })
-        // }
 
         case getAccountRoutine.REQUEST : {
 
@@ -245,17 +204,6 @@ export const updateAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
 
-        // case customUpdateAccountRoutine.INIT : {
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         error:false,
-        //         isError:false,
-        //         isSuccessFull:false,
-        //         item:{}
-        //     })
-        // }
-
         case updateAccountRoutine.REQUEST : {
 
             return Object.assign({},state,{
@@ -294,15 +242,15 @@ export const updateAccount = (state={item:{},...initialState},action) => {
             })
         }
 
-        case updateAccountRoutine.FULFILL : {
+        // case updateAccountRoutine.FULFILL : {
 
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
+        //     return Object.assign({},state,{
+        //         isRequesting:false,
+        //         error:false,
+        //         isError:false,
+        //         isSuccessFull:false
+        //     })
+        // }
 
     }
 
@@ -313,17 +261,6 @@ export const updateAccount = (state={item:{},...initialState},action) => {
 export const deleteAccount = (state={item:{},...initialState},action) => {
 
     switch(action.type){
-
-        // case customDeleteAccountRoutine.INIT : {
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         error:false,
-        //         isError:false,
-        //         isSuccessFull:false,
-        //         item:{}
-        //     })
-        // }
 
         case deleteAccountRoutine.REQUEST : {
 

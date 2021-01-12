@@ -84,9 +84,9 @@ const PageLessonId = props => {
             <Row>
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.post && item.post.title} ghost={false}
-                        onBack={()=>{
-                            if(window.history) window.history.back()
-                            else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
+                        onBack={()=>{window.history.back()
+                            //if(window.history) window.history.back()
+                            //else router.push(`/[account_ur]/main/home/classrooms/[id]`,`/${auth.account.uniqueURL}/main/home/classrooms/${item.post.id}`,{shallow:true})
                         }}
 
 						extra={[

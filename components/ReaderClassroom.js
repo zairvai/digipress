@@ -8,7 +8,9 @@ const Reader = ({item}) =>{
         <>
             <Row>
                 <Col md={24}>
-                    <HTML html={item && item.content}/>
+                    <div id="postContent">
+                        <HTML html={item && item.content}/>
+                    </div>
                 </Col>
             </Row>
             <Row>

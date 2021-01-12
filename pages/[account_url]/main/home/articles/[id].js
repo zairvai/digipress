@@ -88,7 +88,7 @@ const PageArticleId = props => {
             <Row>
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
-                        onBack={()=>router.push(`/[account_ur]/content/articles`,`/${auth.account.uniqueURL}/content/articles`,{shallow:true})}
+                        onBack={()=>window.history.back()}
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_ARTICLE({auth}) 

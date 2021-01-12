@@ -55,7 +55,7 @@ const PageArticleAdd = props => {
 			</Row>
 			<Row>
 				<Col md={24} className="mt-2">
-					<FormArticle onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list.items} tags={listTags.list.items}/>
+					<FormArticle onSuccess={onSuccess} onCancel={onCancel} accountId={auth.account.id} categories={listCategories.list && listCategories.list.items} tags={listTags.list && listTags.list.items}/>
 				</Col>
 			</Row>
 		</LayoutArticle>

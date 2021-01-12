@@ -50,19 +50,8 @@ const PageAccounts = props => {
 					<Sidebar className={toggleClass} />
 				</VuroxSidebar>
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					<Summery2 pagename={props.pagename} links={props.links}/>
-					<Row className="mb-2">
-						<Col md={12} sm={24} xs={24}>
-							<VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/>
-						</Col>
-						<Col md={12}>
-							{/* <div className="fright">
-								<ul className="vurox-horizontal-links vurox-standard-ul pt-3">
-									<li className="p-0"><Link href={{pathname:`/${auth.account.uniqueURL}/manage/accounts/add`}} shallow><a><i className="ti-plus"></i>&nbsp;Tambah akun</a></Link></li>
-								</ul>
-							</div> */}
-						</Col>
-					</Row>
+					
+					
                     <Row className="mb-2">
                         <Col md={12}>
                             <div className="vurox-tabs-underlined vurox-dark vurox-tabs-underlined-left mt-3 mb-3">

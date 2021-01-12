@@ -55,15 +55,6 @@ export const createComment = (state={item:{},...initialState},action) => {
                 item:{}
             })
         }
-        case createCommentRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                isSuccessFull:false,
-                isError:false,
-                error:false
-            })
-        }
     }
 
     return state
@@ -108,16 +99,6 @@ export const getComment = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case getCommentRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 
@@ -168,16 +149,6 @@ export const listPostComments = (state={list:[],...initialState},action) => {
             })
         }
 
-        case listPostCommentsRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
-            })
-        }
-
     }
 
     return state
@@ -222,16 +193,6 @@ export const listUserComments = (state={list:[],...initialState},action) => {
                 isError:true,
                 error,
                 list:[]
-            })
-        }
-
-        case listUserCommentsRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 
@@ -281,16 +242,6 @@ export const updateComment = (state={item:{},...initialState},action) => {
                 isError:true,
                 error,
                 item:{}
-            })
-        }
-
-        case updateCommentRoutine.FULFILL : {
-
-            return Object.assign({},state,{
-                isRequesting:false,
-                error:false,
-                isError:false,
-                isSuccessFull:false
             })
         }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
-import LayoutUser from 'Templates/Layout.user'
+import Layout from 'Templates/Layout.user.id'
 import { Row, Col,PageHeader, Alert} from 'antd'
 import FormUser from 'Components/FormUser'
 
@@ -108,16 +108,13 @@ const PageUserAdd = props => {
     }
 
     return (
-        <LayoutUser>
+        <Layout>
             <NextSeo title="Kelola - Tambah anggota"/>
 
             <Row>
 				<Col md={14}>
 					<PageHeader title="Tambah anggota" subTitle={account && account.name} ghost={false}
-						onBack={()=>{
-                            if(account) router.push(`/[account_ur]/manage/accounts/[id]`,`/${auth.account.uniqueURL}/manage/accounts/${account.id}`,{shallow:true})
-                            else router.push(`/[account_ur]/manage/users`,`/${auth.account.uniqueURL}/manage/users`,{shallow:true})
-                        }}
+						onBack={()=>window.history.back()}
 					/>
 				</Col>
 			</Row>
@@ -128,7 +125,7 @@ const PageUserAdd = props => {
                 </Col>
             </Row>
              
-        </LayoutUser>
+        </Layout>
     );
 	
 }

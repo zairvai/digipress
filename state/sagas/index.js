@@ -18,6 +18,7 @@ import {createCommentWatcher,deleteCommentWatcher,
     updateCommentWatcher,getCommentWatcher,
     listPostCommentsWatcher,listUserCommentsWatcher} from './comment'
 
+import {putObjectWatcher,getObjectWatcher, listObjectsWatcher} from './storage'
 
 const sagas = [
     
@@ -99,6 +100,11 @@ const sagas = [
     createCommentWatcher,
     updateCommentWatcher,
     getCommentWatcher,
+
+    //storage
+    putObjectWatcher,
+    getObjectWatcher,
+    listObjectsWatcher,
 
     routinePromiseWatcherSaga
 ]

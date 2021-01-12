@@ -8,14 +8,14 @@ export default class Controller{
         this.dispatch = dispatch
     }
 
-    static VIEW_ACCOUNTS = ({auth})=>{
+    static MANAGE_ACCOUNTS = ({auth})=>{
 
         if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)) return false
 
         return true
     }
 
-    static VIEW_USERS = ({auth})=>{
+    static MANAGE_USERS = ({auth})=>{
 
         console.log(auth)
         if(!AuthController.isOwner(auth) && !AuthController.isAdmin(auth)) return false

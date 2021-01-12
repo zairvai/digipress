@@ -10,7 +10,7 @@ import * as yup from 'yup'
 import TinyMce from 'Components/TinyMce'
 import SelectCategory from 'Components/SelectCategory'
 import SelectTags from 'Components/SelectTags'
-
+import Media from 'Components/Media'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
 import ArticleController from 'Library/controllers/ArticleController';
@@ -36,16 +36,22 @@ const FormArticle = ({item,...props}) => {
     const articleController = new ArticleController(props)
 
     const [isSubmitting,setSubmitting] = React.useState(false)
-
     const [editor,setEditor] = React.useState()
     const [content,setContent] = React.useState("")
+    const [isOpenMedia,setOpenMedia] = React.useState(false)
 
     const isMounted = React.useRef()
     
     React.useEffect(()=>{
 
+        document.addEventListener("openTinymceMedia",function(e){
+            const {editor} = e.detail
+            setOpenMedia(true)
+        },false)
         return()=>{
-            setEditor(null)
+            document.removeEventListener("openTinymceMedia",function(e){
+                setOpenMedia(true)
+            },false)
         }
     },[])
 
@@ -193,161 +199,181 @@ const FormArticle = ({item,...props}) => {
         setValue("content",editor.getContent().replace(/\r?\n|\r/g,""))
     }
 
+    const handleSelectedMedia = selectedFiles => {
+        setOpenMedia(false)
+        console.log(selectedFiles)
+        if(selectedFiles.length>0){
+            let mediaDom = ""
+            selectedFiles.forEach((file,index)=>{
+                mediaDom += `<img width="400" src="${file.url}" class="media-${index} content-align-left"/>`
+            })
+            
+            editor.execCommand('mceInsertContent', false,mediaDom);
+        }
+    }
+
+
     return (
-        <Form
-            layout="vertical"
-            onFinish={handleSubmit(onSubmit,onError)}
-        >
-            <Row>
-                <Col md={18}>
-                    <VuroxComponentsContainer className="p-4">
-                        <Row>
-                            <Col md={24}>
-                                <Controller
-                                    name="title"
-                                    defaultValue=""
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Judul artikel">
-                                            <Input 
-                                                disabled={isSubmitting}
-                                                size="large" placeholder="Judul artikel" value={props.value} onChange={props.onChange} />
-                                            {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
-                                        </Form.Item>
-                                    }
-                                />
-                                
-                            </Col>
-                        </Row>
-                    
-                        <Row>
-                            <Col md={24}>
-                                
-                                <Controller
-                                    name="content"
-                                    defaultValue=""
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Isi artikel" className="mb-0">
-                                           
-                                            <TinyMce 
-                                                id="articleEditor" 
-                                                isSubmitting={isSubmitting}
-                                                minHeight={400}
-                                                onFinishSetup={handleEditorSetup}
-                                                onChange={handleEditorChange} 
-                                                value={props.value} placeholder="Ketik isi tulisan..."/>
-                                            {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
-                                        </Form.Item>
-                                    }
-                                />
-                                
-                            </Col>
-                        </Row>
-                    </VuroxComponentsContainer>
-                </Col>
-                <Col md={6}>
-                    <VuroxComponentsContainer className="p-4 ml-2">
-                        <Row>
-                            <Col md={24}>
-                                <Controller
-                                    name="category"
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Kategori" className="mb-0">
-                                            <SelectCategory 
-                                                disabled={isSubmitting}
-                                                items={categories} 
-                                                value={props.value}
-                                                onChange={onSelectCategoryChange}
+
+        <>
+            <Media editor={editor} visible={isOpenMedia} onCancel={()=>setOpenMedia(false)} onOK={handleSelectedMedia}/>
+            <Form
+                layout="vertical"
+                onFinish={handleSubmit(onSubmit,onError)}
+            >
+                <Row>
+                    <Col md={18}>
+                        <VuroxComponentsContainer className="p-4">
+                            <Row>
+                                <Col md={24}>
+                                    <Controller
+                                        name="title"
+                                        defaultValue=""
+                                        control={control}
+                                        render={props=>
+                                            <Form.Item label="Judul artikel">
+                                                <Input 
+                                                    disabled={isSubmitting}
+                                                    size="large" placeholder="Judul artikel" value={props.value} onChange={props.onChange} />
+                                                {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
+                                            </Form.Item>
+                                        }
+                                    />
+                                    
+                                </Col>
+                            </Row>
+                        
+                            <Row>
+                                <Col md={24}>
+                                    
+                                    <Controller
+                                        name="content"
+                                        defaultValue=""
+                                        control={control}
+                                        render={props=>
+                                            <Form.Item label="Isi artikel" className="mb-0">
+                                            
+                                                <TinyMce 
+                                                    id="articleEditor" 
+                                                    isSubmitting={isSubmitting}
+                                                    minHeight={400}
+                                                    onFinishSetup={handleEditorSetup}
+                                                    onChange={handleEditorChange} 
+                                                    value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
+                                            </Form.Item>
+                                        }
+                                    />
+                                    
+                                </Col>
+                            </Row>
+                        </VuroxComponentsContainer>
+                    </Col>
+                    <Col md={6}>
+                        <VuroxComponentsContainer className="p-4 ml-2">
+                            <Row>
+                                <Col md={24}>
+                                    <Controller
+                                        name="category"
+                                        control={control}
+                                        render={props=>
+                                            <Form.Item label="Kategori" className="mb-0">
+                                                <SelectCategory 
+                                                    disabled={isSubmitting}
+                                                    items={categories} 
+                                                    value={props.value}
+                                                    onChange={onSelectCategoryChange}
+                                                    />
+                                                {errors && errors.category && <Text type="danger">{errors.category.message}</Text>}
+                                            </Form.Item>
+                                        }
+                                    />
+                                    {/* <div className="d-flex justify-content-end">
+                                        <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah kategory</Button>
+                                    </div> */}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24}>
+                                    <Controller
+                                        name="tags"
+                                        control={control}
+                                        render={props=>
+                                            <Form.Item label="Tag" className="mb-0 mt-3">
+                                                <SelectTags 
+                                                    disabled={isSubmitting}
+                                                    items={tags}
+                                                    value={props.value}
+                                                    onChange={onSelectTagsChange}
                                                 />
-                                            {errors && errors.category && <Text type="danger">{errors.category.message}</Text>}
-                                        </Form.Item>
-                                    }
-                                />
-                                {/* <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah kategory</Button>
-                                </div> */}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={24}>
-                                <Controller
-                                    name="tags"
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Tag" className="mb-0 mt-3">
-                                            <SelectTags 
-                                                disabled={isSubmitting}
-                                                items={tags}
-                                                value={props.value}
-                                                onChange={onSelectTagsChange}
-                                            />
-                                        </Form.Item>
-                                    }
-                                />
+                                            </Form.Item>
+                                        }
+                                    />
 
-                                {/* <div className="d-flex justify-content-end">
-                                    <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah tag</Button>
-                                </div> */}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={24}>
-                                <Controller
-                                    name="allowComment"
-                                    control={control}
-                                    // onChange={onAllowCommentChange.bind(this)}
-                                    render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
-                                />
-                                
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={24}>
+                                    {/* <div className="d-flex justify-content-end">
+                                        <Button className="link mt-2" type="link" size="small" icon={<i className="ti-plus"></i>}>&nbsp;Tambah tag</Button>
+                                    </div> */}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24}>
+                                    <Controller
+                                        name="allowComment"
+                                        control={control}
+                                        // onChange={onAllowCommentChange.bind(this)}
+                                        render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
+                                    />
+                                    
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={24}>
 
-                                <Controller
-                                    name="readAccess"
-                                    control={control}
-                                    render={props=>
-                                        <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
-                                            <Radio.Group disabled={isSubmitting} 
-                                                onChange={onReadAccessChange} value={props.value}>
-                                                <Radio value="public">Umum</Radio>
-                                                <Radio value="protected">Internal</Radio>
-                                            </Radio.Group>
-                                        </Form.Item>
-                                    }
-                                />
+                                    <Controller
+                                        name="readAccess"
+                                        control={control}
+                                        render={props=>
+                                            <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
+                                                <Radio.Group disabled={isSubmitting} 
+                                                    onChange={onReadAccessChange} value={props.value}>
+                                                    <Radio value="public">Umum</Radio>
+                                                    <Radio value="protected">Internal</Radio>
+                                                </Radio.Group>
+                                            </Form.Item>
+                                        }
+                                    />
 
-                            </Col>
-                        </Row>
-                    </VuroxComponentsContainer>
-                    <VuroxComponentsContainer className="p-4 ml-2 mt-2">
-                        <Row>
-                            <Col md={24}>
-                                <Row>
-                                    <Col md={11}>
-                                        <Button onClick={props.onCancel} size="medium" type="link" danger disabled={isSubmitting} block>Batal</Button>
-                                    </Col>
+                                </Col>
+                            </Row>
+                        </VuroxComponentsContainer>
+                        <VuroxComponentsContainer className="p-4 ml-2 mt-2">
+                            <Row>
+                                <Col md={24}>
+                                    <Row>
+                                        <Col md={11}>
+                                            <Button onClick={props.onCancel} size="medium" type="link" danger disabled={isSubmitting} block>Batal</Button>
+                                        </Col>
 
-                                    <Col md={11} className="ml-0 ml-md-2">
-                                        <Button size="medium" type="primary" htmlType="submit" loading={isSubmitting} block>Publikasi</Button>
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
-                    </VuroxComponentsContainer>
-                </Col>
-            </Row>
-        </Form>
+                                        <Col md={11} className="ml-0 ml-md-2">
+                                            <Button size="medium" type="primary" htmlType="submit" loading={isSubmitting} block>Publikasi</Button>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </VuroxComponentsContainer>
+                    </Col>
+                </Row>
+            </Form>
+        </>
     )
 
 
 }
 
 export default connect(
-    state=>state,
+    state=>({
+        dispatch:state.dispatch,
+    }),
     (dispatch)=>({
             ...bindPromiseCreators({
             createArticleRoutinePromise,
