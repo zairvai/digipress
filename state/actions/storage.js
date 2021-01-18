@@ -28,6 +28,7 @@ export const getResetObject = () =>({
     type: customGetRoutine.RESET
 })
 
-export const listResetObject = () =>({
-    type: customListRoutine.RESET
+export const setListdata = payload =>({
+    type: customListRoutine.SET,
+    payload
 })

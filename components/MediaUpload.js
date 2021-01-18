@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Upload} from 'antd'
+import {Upload,message} from 'antd'
 import {UploadOutlined,PlusOutlined} from '@ant-design/icons'
 import {MediaImage} from 'Components/MediaItem' 
 import { bindPromiseCreators } from 'redux-saga-routines'
@@ -32,6 +32,7 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
 
     React.useEffect(()=>{
         if(props.onChange) props.onChange(selectedFiles)
+        
     },[selectedFiles])
 
     React.useEffect(()=>{
@@ -54,8 +55,7 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
     const handleUpload = file =>{
 
         return storageController._put({
-            level:"public",
-            directory:`${auth.account.id}/media`,
+            directory:`${auth.account.id}`,
             file
         })
     }
@@ -72,14 +72,12 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
         }
     }
 
-
-
-    const handleChange = ({file,isSelected}) => {
+    const handleChange = ({media,isSelected}) => {
 
         if(isSelected){
-            setSelectedFiles([...selectedFiles,file])
+            setSelectedFiles([...selectedFiles,media])
         }else{
-            const foundIndex = selectedFiles.findIndex(obj=>obj.uid==file.uid)
+            const foundIndex = selectedFiles.findIndex(obj=>obj.uid==media.uid)
             if(foundIndex > -1){
                 selectedFiles.splice(foundIndex,1)
                 setSelectedFiles([...selectedFiles])
@@ -101,12 +99,22 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
             name={name}
             multiple={multiple} 
             style={{height:"100%"}}
+            beforeUpload={file=>{
+
+                console.log(file)
+
+                if(file.type!=="image/png" && file.type!=="image/jpeg"){
+                    message.error(`Hanya format gambar .png dan .jpg saja yang diperbolehkan.`);
+                }
+
+                return file.type === "image/png" || file.type === "image/jpeg"
+            }}
             customRequest={({file})=>handleUpload(file)}>
             {
                 uploadedFiles.length>0 ?
                 <>
                     <div className="media-manager d-flex justify-content-start flex-wrap align-content-start" style={{height:"100%"}}>
-                        {uploadedFiles.map((uploaded,index)=><MediaImage key={`media-image-${index}`} media={uploaded} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
+                        {uploadedFiles.map((uploaded,index)=><MediaImage key={`media-image-${index}`} index={index} media={uploaded} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
                         <UploadButton width={100} className="ml-3"/>
                     </div>
                 </>
@@ -115,10 +123,13 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
                     <p className="ant-upload-drag-icon">
                         <UploadOutlined />
                     </p>
-                    <p className="ant-upload-text">Klik atau geser file yang akan diunggah.</p>
+                    <p className="ant-upload-text">Klik atau geser ke sini gambar yang akan diunggah.</p>
                     <p className="ant-upload-hint">
-                        Bisa satu atau beberapa file. Dilarang mengunggah media yang tidak sesuai dengan ketentuan.
+                        Bisa satu atau beberapa file. Hanya gambar dengan format .jpeg dan png saja yang diperbolehkan.
                     </p>   
+                    <p className="ant-upload-hint">
+                        Dilarang mengunggah media yang tidak sesuai dengan ketentuan.
+                    </p>
                 </>
             }
         </Dragger>   

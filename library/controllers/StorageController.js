@@ -1,4 +1,4 @@
-import {putResetObject,getResetObject,listResetObject} from 'State/actions/storage'
+import {putResetObject,getResetObject,setListdata} from 'State/actions/storage'
 
 export default class Controller{
 
@@ -17,12 +17,14 @@ export default class Controller{
         return this.props.getRoutinePromise({object})
     }
 
+    _remove = object =>{
+        return this.props.removeRoutinePromise({object})
+    }
 
     _list = object => {
         return this.props.listRoutinePromise({object})
     }
 
-    
     _putReset = () =>{
         this.dispatch(putResetObject())
     }
@@ -31,7 +33,8 @@ export default class Controller{
         this.dispatch(getResetObject())
     }
 
-    _listReset = () =>{
-        this.dispatch(listResetObject())
+    _setListdata = data =>{
+
+        this.dispatch(setListdata(data))
     }
 }

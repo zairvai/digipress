@@ -33,14 +33,15 @@ const TinyMce = ({id,className="",mode="full",
                         pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste image imagetools"]
                         toolbar1 = "undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
                                     alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
-                                    code | fullscreen | paste pastetext"
+                                    code | fullscreen | paste pastetext | mymedia"
                         
                         skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`                    
 
                         formats ={
-                            alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-left',exact:true},
-                            aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-center',exact:true},
-                            alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes : 'content-align-right',exact:true}
+                            alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-left',exact:true},
+                            aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-center',exact:true},
+                            alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-right',exact:true},
+                            alignjustify : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-justify',exact:true}
                         }
 
                     }else{
@@ -191,12 +192,32 @@ const TinyMce = ({id,className="",mode="full",
 
         editor.ui.registry.addContextToolbar('imagealignment', {
             predicate: function (node) {
-              return node.nodeName.toLowerCase() === 'img'
+                return node.nodeName.toLowerCase() === 'img'
             },
-            items: 'alignleft aligncenter alignright',
+            items: 'alignleft aligncenter alignright | imageoptions',
             position: 'node',
             scope: 'node'
           });
+
+        editor.ui.registry.addContextToolbar('textselection',{
+            predicate:function(node){
+                return !editor.selection.isCollapsed() && node.nodeName.toLowerCase() !== 'img'
+            },
+            items: 'alignleft aligncenter alignright',
+            position: 'selection',
+            scope: 'node'
+        })
+
+        editor.ui.registry.addContextToolbar('iframealignment', {
+            predicate: function (node) {
+                console.log(node)
+                return node.nodeName.toLowerCase() === 'iframe'
+            },
+            items: 'alignleft aligncenter alignright | imageoptions',
+            position: 'node',
+            scope: 'node'
+        });
+
     }
 
     return <>

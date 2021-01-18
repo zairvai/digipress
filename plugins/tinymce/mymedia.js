@@ -13,8 +13,9 @@
         }})
 
       editor.ui.registry.addButton("mymedia",{
-        text:"Add Media",
-        tooltip:"add shit",
+        icon:"image",
+        text:"Media",
+        tooltip:"Add Media",
         onAction:function(){
           document.dispatchEvent(event)
         }

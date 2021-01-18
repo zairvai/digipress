@@ -12,7 +12,7 @@ import { createQna,deleteQna,updateQna,listPostQnas,listUserQnas,getQna} from '.
 import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
 import { getPost,listPosts } from './post'
 
-import {putObject,getObject,listObjects} from './storage'
+import {putObject,getObject,listObjects,removeObject} from './storage'
 
 import {reduceReducers} from 'Helper'
 import {persistReducer} from 'redux-persist'
@@ -98,7 +98,8 @@ const rootReducer = combineReducers({
 	//storage
 	putObject,
 	getObject,
-	listObjects
+	listObjects,
+	removeObject
 })
 
 

@@ -246,10 +246,24 @@ ul.vurox-horizontal-links li a{
 	height:100%;
 }
 
-.content-align-left{float:left;margin:0 20px 10px 0;}
-.content-align-center{margin:0 auto 10px auto;display:block;}
-.content-align-right{float:right;margin:0 0 10px 20px;}
+.content-align-left{text-align:left;}
+.content-align-center{text-align:center;}
+.content-align-right{text-align:right;}
+.content-align-justify{text-align: justify;}
+
+iframe.content-align-left,img.content-align-left{float:left;margin:0 20px 10px 0;}
+iframe.content-align-center,img.content-align-center{margin:0 auto 10px auto;display:block;}
+iframe.content-align-right,img.content-align-right{float:right;margin:0 0 10px 20px;}
 
 #postContent{
 	font-size: 16px;
+}
+
+#postContent img,#postContent iframe{
+	border:1px solid #dddddd;
+	padding:5px;
+}
+
+.ant-message{
+	z-index:9999;
 }

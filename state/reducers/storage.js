@@ -1,13 +1,17 @@
 import {putRoutine,getRoutine,listRoutine,removeRoutine,
     customPutRoutine,customGetRoutine,customListRoutine} from '../routines/storage'
 
+import _ from 'lodash'
+
 const initialState = {
     error:false,
     isRequesting:false,
     isError:false,
     putData:{},
     getData:{},
-    listData:[]
+    listData:{
+        items:[]
+    }
 }
 
 export const putObject = (state=initialState,action) =>{
@@ -135,13 +139,17 @@ export const listObjects = (state=initialState,action) =>{
 
         case listRoutine.SUCCESS : {
 
-            const {data} = action.payload
+            const {payload} = action
+            const {items,...rest} = payload
 
             return Object.assign({},state,{
                 isRequesting:false,
                 error:false,
                 isError:false,
-                listData:[...state.listData,...data]
+                listData:{
+                    items:[...state.listData.items,...items],
+                    ...rest
+                }
             })
         }
 
@@ -156,9 +164,61 @@ export const listObjects = (state=initialState,action) =>{
             })
         }
 
-        case customListRoutine.RESET : {
+        case customListRoutine.SET : {
+            
+            const {items} = action.payload
+
             return Object.assign({},state,{
-                listData:[]
+                listData:{...state.listData,items:items}
+            })
+        }
+    }
+
+    return state
+}
+
+
+export const removeObject = (state=initialState,action) =>{
+
+    switch(action.type){
+
+        case removeRoutine.REQUEST : {
+
+            return Object.assign({},state,{
+                isRequesting:true,
+                error:false,
+                isError:false
+            })
+
+        }
+
+        case removeRoutine.SUCCESS : {
+
+            const {index} = action.payload
+            
+            console.log(state)
+            // const newItems = _.cloneDeep(state.listData.items)
+        
+            // newItems.splice(index,1)
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                error:false,
+                isError:false,
+                listData:{
+                    ...state.listData,items:[]
+                }
+            })
+        }
+
+        case removeRoutine.FAILURE : {
+
+            const {error} = action.payload
+
+            return Object.assign({},state,{
+                isRequesting:false,
+                isError:true,
+                error
             })
         }
     }

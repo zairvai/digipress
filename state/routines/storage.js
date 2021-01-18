@@ -2,7 +2,7 @@ import {
     createRoutine,promisifyRoutine,createRoutineCreator
 } from 'redux-saga-routines'
 
-const customRoutine = createRoutineCreator(["RESET","PROGRESS"])
+const customRoutine = createRoutineCreator(["RESET","SET","PROGRESS"])
 export const customPutRoutine = customRoutine("custom_put_object")
 export const putRoutine = createRoutine("put_object")
 export const putRoutinePromise = promisifyRoutine(putRoutine)

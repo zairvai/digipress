@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "DigiPressLayers",
+      "version": 3
+    }
+  ]
+}

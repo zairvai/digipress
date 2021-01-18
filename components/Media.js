@@ -1,32 +1,32 @@
 import React from 'react'
 import {Modal,Tabs} from 'antd'
-import {UploadOutlined, FolderOutlined, LinkOutlined} from '@ant-design/icons'
+import {UploadOutlined, FolderOutlined, YoutubeOutlined} from '@ant-design/icons'
 import MediaUpload from 'Components/MediaUpload'
 import MediaChoose from 'Components/MediaChoose'
+import MediaYoutube from 'Components/MediaYoutube'
 
 const Media = ({editor,visible,...props})=>{
 
     const {TabPane} = Tabs
-    const [selectedFiles,setSelectedFiles] = React.useState([])
-    const [isOkDisabled,setOkDisabled] = React.useState(false)
-
-
-    // React.useEffect(()=>{
-    //     if(editor){
-    //         console.log(editor)
-    //     }
-    // },[editor])
+    const [selectedMedias,setSelectedMedias] = React.useState([])
+    const [isOkDisabled,setOkDisabled] = React.useState(true)
 
     const handleOK = () =>{
-        // console.log(selectedFiles)
-        if(props.onOK) props.onOK(selectedFiles)
+        if(props.onOK) props.onOK(selectedMedias)
     } 
 
-    const handleChange = selectedFiles =>{
-        if(selectedFiles.length > 0) setOkDisabled(false)
+    const handleChange = selectedMedias =>{
+
+        // console.log(selectedMedias)
+        if(selectedMedias.length > 0) setOkDisabled(false)
         else setOkDisabled(true)
 
-        setSelectedFiles(selectedFiles)
+        setSelectedMedias(selectedMedias)
+    }
+
+    const handleTabChange = key => {
+        setSelectedMedias([])
+        setOkDisabled(true)
     }
 
     return(
@@ -44,18 +44,21 @@ const Media = ({editor,visible,...props})=>{
             destroyOnClose={true}
         >
 
-            <div style={{height:"500px"}}>
+            <div style={{height:"600px"}}>
 
-                <Tabs defaultActiveKey="upload" style={{height:"inherit"}}>
-                    <TabPane tab={<span><UploadOutlined/>Upload</span>} key="upload" style={{height:"inherit"}}>
+                <Tabs defaultActiveKey="upload" style={{height:"inherit"}} onChange={handleTabChange}>
+                    <TabPane tab={<span><UploadOutlined/>Unggah gambar</span>} key="upload" style={{height:"inherit"}}>
                         <MediaUpload onChange={handleChange}/>
                     </TabPane>
-                    <TabPane tab={<span><FolderOutlined/>Pilih</span>} key="choose" style={{height:"inherit"}}>
-                        <MediaChoose/>
+                    <TabPane tab={<span><FolderOutlined/>Pilih gambar</span>} key="choose" style={{height:"inherit"}}>
+                        <MediaChoose onChange={handleChange}/>
                     </TabPane>
-                    <TabPane tab={<span><LinkOutlined/>Link</span>} key="link" style={{height:"inherit"}}>
-
+                    <TabPane tab={<span><YoutubeOutlined/>Youtube</span>} key="youtube" style={{height:"inherit"}}>
+                        <MediaYoutube onChange={handleChange}/>
                     </TabPane>
+                    
+                    
+                    
                 </Tabs>
 
             </div>

@@ -438,7 +438,7 @@ type Comment @aws_iam
 	replyTo:Comment
 	replyToUser:User
 	replies:[Comment]
-	content: String!
+	content: String
 	noOfReply:Int
 	createdBy: User
 	updatedBy: User
@@ -536,7 +536,7 @@ type Qna @aws_iam
 	replies:[Qna]
 	replyTo:Qna
 	replyToUser:User
-	content: String!
+	content: String
 	createdBy: User
 	updatedBy: User
 	createdAt: AWSDateTime

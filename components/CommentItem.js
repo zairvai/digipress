@@ -408,6 +408,7 @@ const CommentItem = props =>{
                                     comment={row} post={postItem}
                                     auth={auth}
                                     listPostCommentsRoutinePromise={props.listPostCommentsRoutinePromise}
+                                    updateCommentRoutinePromise={props.updateCommentRoutinePromise}
                                     onSuccessUpdate={onSuccessUpdate} onSuccessDelete={onSuccessDelete}
                                     onPostSuccessAddComment={props.onPostSuccessAddComment}
                                     onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}
@@ -418,6 +419,7 @@ const CommentItem = props =>{
                                     comment={row} post={postItem}
                                     auth={auth}
                                     listPostCommentsRoutinePromise={props.listPostCommentsRoutinePromise}
+                                    updateCommentRoutinePromise={props.updateCommentRoutinePromise}
                                     onSuccessUpdate={onSuccessUpdate} onSuccessDelete={onSuccessDelete}
                                     onPostSuccessAddComment={props.onPostSuccessAddComment}
                                     onPostSuccessDeleteComment={props.onPostSuccessDeleteComment}

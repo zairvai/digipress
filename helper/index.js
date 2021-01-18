@@ -1,4 +1,4 @@
-
+import cssjson from 'cssjson'
 
 export function reduceReducers(...reducers) {
   return (previous, current) =>
@@ -61,4 +61,19 @@ export function getBase64(file) {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
+}
+
+export const inlineCssToJson = styleString =>{
+
+  const styleAttributes = cssjson.toJSON(styleString).attributes
+  const newAttributes = {}
+  
+  for (const [key, value] of Object.entries(styleAttributes)) {
+    if(key=="font-family") continue
+    else if(key=="font-size") newAttributes["fontSize"] = value
+    else newAttributes[key] = value
+  }
+
+  return newAttributes
+
 }
