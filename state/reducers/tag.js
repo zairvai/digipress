@@ -11,7 +11,10 @@ const initialState = {
     error:false,
     isRequesting:false,
     isSuccessFull:false,
-    isError:false
+    isError:false,
+    list:{
+        items:[]
+    }
 }
 
 
@@ -144,8 +147,7 @@ export const listTags = (state={list:[],...initialState},action) => {
                 isRequesting:false,
                 isSuccessFull:false,
                 isError:true,
-                error,
-                list:[]
+                error
             })
         }
 

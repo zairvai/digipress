@@ -208,15 +208,15 @@ const TinyMce = ({id,className="",mode="full",
             scope: 'node'
         })
 
-        editor.ui.registry.addContextToolbar('iframealignment', {
-            predicate: function (node) {
-                console.log(node)
-                return node.nodeName.toLowerCase() === 'iframe'
-            },
-            items: 'alignleft aligncenter alignright | imageoptions',
-            position: 'node',
-            scope: 'node'
-        });
+        // editor.ui.registry.addContextToolbar('iframealignment', {
+        //     predicate: function (node) {
+        //         console.log(node)
+        //         return node.nodeName.toLowerCase() === 'iframe'
+        //     },
+        //     items: 'alignleft aligncenter alignright | imageoptions',
+        //     position: 'node',
+        //     scope: 'node'
+        // });
 
     }
 

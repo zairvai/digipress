@@ -10,6 +10,7 @@ const Media = ({editor,visible,...props})=>{
     const {TabPane} = Tabs
     const [selectedMedias,setSelectedMedias] = React.useState([])
     const [isOkDisabled,setOkDisabled] = React.useState(true)
+    const [okText,setOkText] = React.useState("Pilih gambar")
 
     const handleOK = () =>{
         if(props.onOK) props.onOK(selectedMedias)
@@ -18,8 +19,14 @@ const Media = ({editor,visible,...props})=>{
     const handleChange = selectedMedias =>{
 
         // console.log(selectedMedias)
-        if(selectedMedias.length > 0) setOkDisabled(false)
-        else setOkDisabled(true)
+        if(selectedMedias.length > 0) {
+            setOkText("Masukkan gambar")
+            setOkDisabled(false)
+        }
+        else {
+            setOkText("Pilih gambar")
+            setOkDisabled(true)
+        }
 
         setSelectedMedias(selectedMedias)
     }
@@ -37,6 +44,7 @@ const Media = ({editor,visible,...props})=>{
             keyboard={false}
             maskClosable={false}
             cancelText="Tutup"
+            okText={okText}
             visible={visible}
             onCancel={props.onCancel}
             onOk={handleOK}
