@@ -47,7 +47,7 @@ const List = props =>{
             const size = pagination.pageSize
 
 			const response = await accountController._list({name,orderBy,direction,from,size,statuses})
-            console.log(response)
+            // console.log(response)
 			if(response.data.items){
                 setItems(response.data.items)
                 setPagination({...pagination,total:response.data.foundDocs})

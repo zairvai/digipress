@@ -186,7 +186,7 @@ const List = props =>{
 
           },
           onCancel() {
-            console.log('Cancel');
+            // console.log('Cancel');
           },
         });
     }

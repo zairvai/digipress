@@ -166,7 +166,7 @@ function* listObjects(action){
             //StartAfter:"public/07112834-fea0-43c2-85e1-b9ca31cbe891/media/2016-BMW-M4-GTS-interior.jpg"
         }).promise()
 
-        console.log(data)
+        // console.log(data)
 
         let items=[]
 

@@ -104,7 +104,7 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
                         })
 
                         const newUsers = {results:round((newUsersCounter/results)*100),rows:newUsersRows}
-                        console.log(newUsers)
+                        
                         setGaNewUsers(newUsers)
                         const returnUsers = {results:round((returnUsersCounter/results)*100),rows:returnUsersRows}
                         setGaReturnUsers(returnUsers)

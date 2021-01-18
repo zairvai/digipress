@@ -174,7 +174,7 @@ const List = props =>{
 
     const handleTableChange = (pagination,filter,sorter) =>{
 
-        console.log(sorter)
+        // console.log(sorter)
         
         if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
 			accountId = auth.account.id
@@ -241,7 +241,7 @@ const List = props =>{
         const index = clonedtems.findIndex(obj=>obj.id==repliedQuestion.id)
         
         if(index > -1){
-            console.log(repliedQuestion)
+            // console.log(repliedQuestion)
             clonedtems.splice(index,1,repliedQuestion)
             setItems(clonedtems)
         }else{

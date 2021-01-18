@@ -138,7 +138,7 @@ const ListPostComments = props =>  {
                 }
 
             }else{
-                console.log("No data found")
+                // console.log("No data found")
                 if(maxDate){
                     setPrevCommentVisible(false)
                 }else if(minDate){
@@ -211,7 +211,7 @@ const ListPostComments = props =>  {
         setFormVisible(true)
     }
     const closeForm = () =>{
-        console.log("close")
+        // console.log("close")
         setFormVisible(false)
     }
 

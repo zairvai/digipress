@@ -141,7 +141,7 @@ function* updateArticle(action){
 
     
     try{
-        console.log(action)
+        // console.log(action)
 
         yield put(updateArticleRoutine.request())
 

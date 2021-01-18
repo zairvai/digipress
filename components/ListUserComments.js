@@ -61,7 +61,7 @@ const List = props =>{
 
             const params = {accountId,createdById,replyToUserId,orderBy,direction,from,size,statuses}
 
-            console.log(params)
+            // console.log(params)
 
 			const response = await commentController._listUserComments(params)
 

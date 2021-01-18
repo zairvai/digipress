@@ -175,7 +175,7 @@ const List = props =>{
 
     const handleTableChange = (pagination,filter,sorter) =>{
 
-        console.log(sorter)
+        // console.log(sorter)
         
         if(!AuthController.isAppOwner(auth) && !AuthController.isAppAdmin(auth)){
 			accountId = auth.account.id

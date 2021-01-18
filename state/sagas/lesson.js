@@ -65,8 +65,6 @@ function* listLessons(action){
         }
        
 
-        console.log(listParams)
-
         yield put(listLessonsRoutine.request())
                 
         const response = yield API.graphql(graphqlOperation(queries.listLessons,{input:listParams}))
@@ -141,7 +139,7 @@ function* updateLesson(action){
 
     try{
 
-        console.log(action)
+        // console.log(action)
 
         yield put(updateLessonRoutine.request())
 
