@@ -17,7 +17,7 @@ export default class Controller{
 
     static MANAGE_USERS = ({auth})=>{
 
-        console.log(auth)
+        //console.log(auth)
         if(!AuthController.isOwner(auth) && !AuthController.isAdmin(auth)) return false
 
         return true
