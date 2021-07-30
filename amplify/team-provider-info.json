@@ -19,7 +19,9 @@
       "function": {
         "DigipressAuthPreTokenGeneration": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressAuthPreTokenGeneration-5332414d515854457237-build.zip"
+          "s3Key": "amplify-builds/DigipressAuthPreTokenGeneration-5332414d515854457237-build.zip",
+          "tableApp": "digipress",
+          "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com"
         },
         "DigipressGA": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
@@ -37,13 +39,21 @@
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
           "s3Key": "amplify-builds/DigipressStorageManager-6f61436730674452545a-build.zip"
         },
-        "DigiPressSearchManager": {
-          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigiPressSearchManager-48656369382b47753632-build.zip"
-        },
         "DigipressImageResize": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressImageResize-36303458755155374f71-build.zip"
+          "s3Key": "amplify-builds/DigipressImageResize-36303458755155374f71-build.zip",
+          "bucket": "digipress-media",
+          "url": "https://d211x4vjup154z.cloudfront.net",
+          "allowedDimensions": "100x100,300x300,autox300,300xauto,500x500,autox500,500xauto"
+        },
+        "DigipressSearchManager": {
+          "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com",
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressSearchManager-79343461346b42612f34-build.zip"
+        },
+        "DigipressTableAppTrigger": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressTableAppTrigger-6245646968763933764a-build.zip"
         }
       }
     }

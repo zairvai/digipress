@@ -12,6 +12,10 @@
     {
       "cloudFormationParameterName": "url",
       "environmentVariableName": "URL"
+    },
+    {
+      "cloudFormationParameterName": "allowedDimensions",
+      "environmentVariableName": "ALLOWED_DIMENSIONS"
     }
   ]
 }
