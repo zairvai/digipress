@@ -2,20 +2,26 @@
   "presets": ["next/babel"],
   "plugins": [
     [
-      "import", {
-        "libraryName": "antd"
-      }
+      "@babel/plugin-syntax-import-assertions"
+    ],
+    [
+      "import", 
+      {"libraryName": "antd"}
     ],
     [
     	"module-resolver", {
 	      "root": ["."],
 	      "alias": {
-          "Hooks":"./hooks",
+          "Src":"./src",
           "Context":"./context",
 	        "Components": "./components",
 	        "Templates": "./templates",
           "Styles": "./public/style",
-          "Utilities": "./utilities"
+          "Utilities": "./utilities",
+          "State":"./state",
+          "Library":"./library",
+          "Helper":"./helper",
+          "Plugins":"./plugins"
 	      }
 	    }
     ]

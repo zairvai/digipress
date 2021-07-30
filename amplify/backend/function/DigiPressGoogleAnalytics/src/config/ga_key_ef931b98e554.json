@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "eternal-bruin-300213",
+  "private_key_id": "ef931b98e554fd3e4700a25611a6a115487e41c0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCxTOo+0BYrcMpq\n3KZvQ5F2tH1uqxNv2ENJRI131rzTjZSk/tZOh3TsJbXehycAOGTH3hQFiOgnGNLV\nGJMzxWWYLBSK9VXWIFHnxawtNmniT37AycwXGDwo80HzcfdYiJIgvznUFbbGscv1\nxXoS1BbwMoQDTWzQS87mFkQ72WSwAKaSFKmqERvNYiGj9EpEBNxY2DsxQSLPUbUJ\nDGu7IG4BRghxQfh3lK2IR+4QOl1ZeL3WXlAlclYtqDwOSjvmZZDPZL7qXzAf0e/3\n0xEMi6XOn/eVx+iAH7m35qD1xwGpERDHECRn/LXz5o8aXHp06aTNoNmbXPa+1TQS\nrKLdTWtzAgMBAAECggEAMemOuh8XVqRaf4ndWs5BOZMnCowjnSVbD9m6H6X2o3Gk\nimxpRVMx0bbuA5a1noTBrlhw93vqqvL8i1vvOLBV4Ohr4hCd2PlhRWerCFFcroal\njr1gdJHwgbC1fMS1Fpnf1VMwAuoX+cicu/QbYQiO6pC2BD38J4ln1fMnw1d4Vmln\n2ZhBs08TWFaB7rnSgpkr8JY7AlG+9xG5LfW2CvtEioGCrV7lVz3cNdlWpg1a3Mkw\nk9+MDWqPIeO/vbUEjVd7yWfewe7Po1OdP2R0nAHg2sPls73Aw1lYnDX9+aejre1y\n+jGDkvWKDAun0bbR4k98l9vOfYB10VyEjDXXAlcrnQKBgQDs8BVmnhf2DukG4Al/\nC9y2jLDQa8fRAFxHYH9p4sbwnxF5NlN2I0oUr9xNiOtetRdYntjM//UVk914SVHy\nzXpNC8gPLXC1VQmHwSAFLTABnG4agW313VPwHZZIiLNOulMQ2ojpLq2cH+UoRcap\n0PdlNV+CnmKi1XbZJAwoUn4gPwKBgQC/kI3KBZm3DwRGMzJla9ko3ESsNWRSWF/N\nlerQXlten9HYWZUFjMwl+O436DzBmdPGWJQlMAMv39FHDhrsM42No9PaozR9FGdk\n3NLV6tOQbZmj+NmuPblMdr+8sKEYRBjL+KYYGtRUF1IZB/VHT4c58xD1ECCEKPFD\n/g7nz5wnzQKBgAqQYcPjhJn57DXcQ1AgzURuXWvNgmk1JOghy0yDSe9siDDpVStN\nQ35MoPvsAOKGHHZdDrmFJ/5AS32Td03mD2/j+JWEpyPOmNAusijI7P0FZntUDf0K\nUzW/e/Xb8nKuKAn2VGhhJmhxm5wCEGt936npiUqfmTI9ZkEkNE6P7wOtAoGBALP5\nl3zp7hTyYs2hZAOtY4TkDRDNyMckiD2aT9YcEDPCa2CcKUnhkhtK2GRmKE6ruy9q\nISUfCp975B6hveGUPbWI6Y1MMBAjj1BPtzWLPeE/V02aiskM7H5OQq2ANJmbwMBB\nh6q16i5nCpbBx0uMCDwFhTT4RdRksudyVYasosUxAoGAHAiIJyXpxg/V+Kn7Mond\n+M8X/9ceF56gMl1lkO859QOiOsQWfmjlUGe5skt5BMHt7mlVweQs6pB9MCvsrski\nMjPtjW8n9ObedUNNiKK1FFed1cSmmwbCp4YEH5Rj8UbqpZsf+gk3FrVhzBjF3cGq\njCGokk4G4hm9k6zfIA+gsNA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "digipress@eternal-bruin-300213.iam.gserviceaccount.com",
+  "client_id": "113774371344746084099",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/digipress%40eternal-bruin-300213.iam.gserviceaccount.com"
+}

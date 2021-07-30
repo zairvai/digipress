@@ -19,8 +19,6 @@ class Summery extends React.Component {
 			$('.slideHiddenContent').slideToggle()
 		} )
 
-		console.log(this.props.links)
-
 	}
 
 	render() {
@@ -28,7 +26,7 @@ class Summery extends React.Component {
 		return (
 			<div className="vurox-admin-summery">
 				<Row>
-					<Col lg={12} md={10} xs={24}>
+					<Col lg={24} md={24} xs={24}>
 						<Row>
                             <Col md={24}>
                                 <Row className="vurox-admin-content-top-section">
@@ -38,9 +36,9 @@ class Summery extends React.Component {
                                 </Row>
                             </Col>
 							
-							<Col xs={8} className='d-block d-sm-none'>
+							{/* <Col xs={8} className='d-block d-sm-none'>
 								<button className='btn btn-sm bg-green-5 fright slideHidden'>Info</button>
-							</Col>
+							</Col> */}
 						</Row>
 					</Col>
 					<Col lg={12} md={14} className='d-none d-sm-block slideHiddenContent'>

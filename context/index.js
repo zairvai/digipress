@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react'
 
 export const vuroxContext = createContext()
+
 export const useWindowSize = () => {
   const isClient = typeof window === 'object';
 
@@ -28,12 +29,15 @@ export const useWindowSize = () => {
 
   return windowSize;
 }
+
 export const VuroxContextProvider = (props) => {
+  
     const [menutoggle, setMenutoggle] = props.pageWidth > 700 ? useState(false) : useState(true)  
     const [initClosed, setInitClosed] = useState(true)
-    const toggleMenu = () => {
+    const toggleMenu = React.useCallback(() => {
         setMenutoggle(!menutoggle)
-    }
+    },[menutoggle])
+
     return (
         <vuroxContext.Provider value={{
                 menuInitState: initClosed, 

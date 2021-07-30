@@ -1,0 +1,10 @@
+## $util.toJson($context.result)
+
+##$util.error($context.result.body)
+
+#set($response={
+	"results" : $context.result.body.results,
+    "rows" : $context.result.body.rows
+})
+
+$util.toJson($response)

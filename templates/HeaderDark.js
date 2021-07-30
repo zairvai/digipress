@@ -1,24 +1,43 @@
 import React, {useContext} from 'react'
 import {connect} from 'react-redux'
 import Header from './Head'
-import Link from 'next/link'
 import {Space} from 'antd'
-import VuroxHeader, {VuroxBrand, VuroxMenuToggler} from 'Components/Header'
-import VuroxFormSearch from 'Components/search'
-import ProfileBadge from 'Components/profile'
-import VuroxDropdown, { DropdownItems, DropdownItem, DropdownItemSeperator, DropdownBigItems, DropdownItemsHead } from 'Components/dropdown'
-import { 
-	VuroxProgressbar
-} from 'Components/progressbar';
-import { Search, GridFill ,Grid } from 'react-bootstrap-icons'
+import VuroxHeader from 'Components/Header'
+import VuroxDropdown, { DropdownItems, DropdownItem, DropdownBigItems, DropdownItemsHead } from 'Components/dropdown'
+import { GridFill ,Grid } from 'react-bootstrap-icons'
 import { vuroxContext } from '../context'
+import { Row, Col} from 'antd'
 
-import Nav, { Navitem, SubNavItems } from 'Components/nav'
-import { Row, Col } from 'antd'
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { signOutRoutinePromise } from 'State/routines/auth';
+import moment from 'moment'
 
 const HeaderDark = props => {
-	const { toggleMenu, menuState } = useContext(vuroxContext)
 	
+	const {auth} = props
+
+	const { toggleMenu, menuState } = useContext(vuroxContext)
+
+	const [notificationItems,setNotificationItems] = React.useState([])
+
+	React.useEffect(()=>{
+
+        if(!auth.user.email_verified){
+            
+            const item = {
+				date : moment().format("MMMM DD, YYYY"),
+				link:`/${auth.account.uniqueURL}/auth/verify`,
+				activity:"Verifikasi email kamu",
+				description:"Demi keamanaan password, mohon verifikasi email kamu",
+				className:"ti-email bg-red-4"
+			}
+			setNotificationItems([item,...notificationItems])
+        }else{
+			setNotificationItems([])
+		}
+
+    },[auth.user.email_verified])
+
 	return (
 		<div>
 			<Header />
@@ -26,16 +45,19 @@ const HeaderDark = props => {
 				<Row align="middle">
 					<Col span={12}>
 						<Space direction="horizontal" size="large" align="center">
-							<VuroxBrand image='/image/logo.png' />
+							{/* <VuroxBrand image='/image/logo.png' /> */}
 							{
 								menuState ? 
-								<Link href='#'><Grid className="vurox-menu-toggler" onClick={ toggleMenu } /></Link>
+								<Grid className="vurox-menu-toggler" onClick={ toggleMenu } />
 								:
 								<GridFill className="vurox-menu-toggler" onClick={ toggleMenu } />
 							}
 							{/* <VuroxFormSearch border='rounded-pill border-0' placeholder='Search...' icon={<Search />}/> */}
+							<h5 className="vurox-text-sizes mb-0">{auth.account.name}</h5>
+							<h6 className="mt-2">{auth.user.access ? auth.user.access.role : ""}</h6>
 						</Space>
 					</Col>
+				
 					<Col span={12}>
 						<div className='justify-content-end d-flex flex-row'>
 							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
@@ -50,19 +72,38 @@ const HeaderDark = props => {
 							<VuroxDropdown position='vurox-dropdown-top-right'>
 								<button className='dropbtn'><i className="ti-bell"></i></button>
 								<DropdownItems width={240} className='pb-2'>
+
 									<DropdownItemsHead color='bg-cyan-6'>
-										Notifications <span className="badge badge-pill badge-light">20+</span>
+										Notifikasi <span className="badge badge-pill badge-light">{notificationItems.length > 0 && notificationItems.length}</span>
 									</DropdownItemsHead>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-pulse bg-yellow-6 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p className='text-meta'>March 28, 2020</p>
-												<p>This is a alert notification</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
+
+									{
+									
+										notificationItems.length > 0 ? 
+										
+										notificationItems.map((item,index)=>(
+											<DropdownItem key={`notification${index}`} link={item.link}>
+												<DropdownBigItems>
+													<i className={`${item.className}`}></i>
+													<div className="dropdown-big-items-content">
+														<p className='text-meta'>{item.date}</p>
+														<p>{item.activity}</p>
+													</div>
+												</DropdownBigItems>
+											</DropdownItem>
+										))
+
+										:
+										<DropdownItem link='#'>
+											<DropdownBigItems>
+												<div className="dropdown-big-items-content">
+													<p>Belum ada notifikasi</p>
+												</div>
+											</DropdownBigItems>
+										</DropdownItem>
+
+									}
+									{/* <DropdownItem link='/'>
 										<DropdownBigItems>
 											<i className='ti-user bg-purple-6 flex-fill'></i>
 											<div className="dropdown-big-items-content">
@@ -79,87 +120,19 @@ const HeaderDark = props => {
 												<p>Received a new help request</p>
 											</div>
 										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-stats-up bg-red-4 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p className='text-meta'>April 08, 2020</p>
-												<p>A new monthly report has been published</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
+									</DropdownItem> */}
+									
 								</DropdownItems>
 							</VuroxDropdown>
 
-							{/* <VuroxDropdown position='vurox-dropdown-top-right'>
-								<button className='dropbtn'><i className="ti-email"></i></button>
-								<DropdownItems width={240}> 
-									<DropdownItemsHead color='bg-green-6'>
-										Message <span className="badge badge-pill badge-light">20+</span>
+							<VuroxDropdown position='vurox-dropdown-top-right' className="ml-3">
+								<button className='dropbtn'><i className='ti-user bg-blue-6 flex-fill'></i></button>
+								<DropdownItems width={240} className='pb-2'>
+									<DropdownItemsHead color='bg-cyan-6'>
+										{auth.user.name}
 									</DropdownItemsHead>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/5.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Hello, we are going to fishing </p>
-												<p className='text-meta'>March 28, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/1.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>We are opening a new shop</p>
-												<p className='text-meta'>March 28, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/4.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Received a new help request</p>
-												<p className='text-meta'>April 08, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItem link='/'>
-										<DropdownBigItems>
-											<i className='ti-stats-up bg-red-4 flex-fill'></i>
-											<div className="dropdown-big-items-content">
-												<p>A new monthly report has been published</p>
-												<p className='text-meta'>April 08, 2020</p>
-											</div>
-										</DropdownBigItems>
-									</DropdownItem>
-									<DropdownItemSeperator />
-									<DropdownItem className='text-center' link='/' >Check All</DropdownItem>
-								</DropdownItems>
-							</VuroxDropdown> */}
-
-
-							<VuroxDropdown position='vurox-dropdown-top-right'>
-								<ProfileBadge name='S'  size='md' shape='rounded' version='dark' className='mt-3 ml-2 vurox-dropdown' badge='2' badgeColor='bg-purple-6' badgeShape='circle' />
-								<DropdownItems width={200} className='py-2'>
-									<DropdownItem link='#' className='disabled-hover'>
-										<DropdownBigItems>
-											<img className='flex-fill' src="/image/propic/5.jpg" alt=""/>
-											<div className="dropdown-big-items-content">
-												<p>Welcome, {props.users.username} </p>
-												<p className='text-meta'>Balance: $4435.34</p>
-											</div>
-										</DropdownBigItems>
-										<VuroxProgressbar className='mt-3 progressbar-xs' progresstextleft='Storage' progresstextright='45GB' progresscolor='#7B4DFF' width='80%' />
-									</DropdownItem>
-									<DropdownItem link='/'><i className='ti-user'></i>Profile</DropdownItem>
-									<DropdownItem link='/'><i className='ti-image'></i>Portfolio</DropdownItem>
-									<DropdownItem link='/'><i className='ti-import'></i>Downloads</DropdownItem>
-									<DropdownItem link='/'><i className='ti-heart'></i>Favourite</DropdownItem>
-									<DropdownItem link='/'><i className='ti-layers'></i>Collections</DropdownItem>
-									<DropdownItem link='/'><i className='ti-money'></i>Earnings</DropdownItem>
-									<DropdownItem link='/'><i className='ti-layout-media-overlay'></i>Statements</DropdownItem>
+									{/* <DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem> */}
+									<DropdownItem link={`/${auth.account.uniqueURL}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
 						</div>
@@ -169,4 +142,11 @@ const HeaderDark = props => {
 		</div>
 	);
 }
-export default connect( state=>state )(HeaderDark)
+export default connect(
+    state=>state,
+    (dispatch)=>({
+            ...bindPromiseCreators({
+            signOutRoutinePromise
+        },dispatch),dispatch
+    })
+)(HeaderDark)

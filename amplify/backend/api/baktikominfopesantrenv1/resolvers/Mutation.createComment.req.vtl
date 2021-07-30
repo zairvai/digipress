@@ -1,0 +1,28 @@
+#set( $input = {
+    "accountId":$ctx.args.input.accountId,
+    "postId":$ctx.args.input.postId,
+    "isReply":$util.defaultIfNull($ctx.args.input.isReply,false),
+    "status":3,
+    "__typename":"Comment",
+    "version":1,
+    "createdBy":$ctx.identity.sub,
+    "updatedBy":$ctx.identity.sub,
+    "createdAt":$util.time.nowISO8601(),
+    "updatedAt":$util.time.nowISO8601()
+} )
+
+#if( !$util.isNull($ctx.args.input.replyToId))
+	$util.qr($input.put("replyToId",$ctx.args.input.replyToId))
+#end
+
+#if( !$util.isNull($ctx.args.input.replyToUserId))
+	$util.qr($input.put("replyToUserId",$ctx.args.input.replyToUserId))
+#end
+
+$util.qr($ctx.stash.put("input",$input))
+
+$util.qr($ctx.stash.put("field","put"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/comments"))
+$util.qr($ctx.stash.put("content",$ctx.args.input.content))
+
+{}

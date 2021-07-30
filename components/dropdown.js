@@ -19,7 +19,7 @@ import $ from 'jquery'
   	render() {
   		return (
 
-  			<div className={ this.props.position + " vurox-dropdown-block " + this.props.className} tabIndex='3'>
+  			<div className={ this.props.position + " vurox-dropdown-block " + this.props.className}>
 
   				{this.props.children}
   			</div>				
@@ -38,7 +38,7 @@ export const DropdownItems = (props) => {
 export const DropdownItem = (props) => {
   return (
     <li className={props.className}>
-    	<Link href={props.link}>
+    	<Link href={props.link} shallow>
     		<a>
 		    	{props.children}
     		</a>

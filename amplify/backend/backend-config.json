@@ -1,0 +1,145 @@
+{
+  "auth": {
+    "baktikominfopesantrenv1": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false
+    }
+  },
+  "api": {
+    "baktikominfopesantrenv1": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authbaktikominfopesantrenv1"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
+  "function": {
+    "DigiPressSearchManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "DigiPressIdentityManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "baktikominfopesantrenv1",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "DigiPressTableAppTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "DigiPressSearchManager",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "DigiPressIdentityManager",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "DigiPressStorageManager",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ]
+    },
+    "baktikominfopesantrenv1PreTokenGeneration": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "DigiPressStorageManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "baktikominfopesantrenv1",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
+    },
+    "DigiPressLayers": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "DigiPressGoogleAnalytics": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "DigiPressLayers",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "DigiPressImageResize": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "DigiPressLayers",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "storage": {
+    "baktikominfopesantrenv1": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  }
+}

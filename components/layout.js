@@ -1,5 +1,5 @@
 import React from 'react';
-import {useWindowSize} from '../context/index'
+import {useWindowSize} from 'Context'
 export const VuroxBody = props => (
   <div className={props.className + ' vurox-dark-version vurox-fixed-position vurox-admin-template'}>
     {props.children}
@@ -53,7 +53,7 @@ export const VuroxComponentsContainer = (props) => {
     if(props.style) style = Object.assign(style,props.style)
 
     return (
-        <div className={props.className + ' rounded vurox-admin-primary-bg vurox-admin-components-block overview-hidden'} style={style}> 
+        <div className={props.className + ' vurox-admin-primary-bg vurox-admin-components-block overview-hidden'} style={style}> 
             {props.children}             
         </div>
     )

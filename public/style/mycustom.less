@@ -2,6 +2,12 @@
 @import './variables.less';
 @import './colors.less';
 
+div#__next{
+	height:100%
+}
+.fullHeight{
+	height:100%;
+}
 .ant-checkbox-wrapper{
 	line-height:0 !important;
 }
@@ -104,27 +110,23 @@ ul.vurox-horizontal-links{
 		color:#333333;
 	}
   }
+  
 
-  .ant-input{
-	  background:#ffffff;
-	  color:#333333;
+//   span.anticon{
+// 	  color:#888888;
+//   }
+
+  .vurox-admin-table thead tr th{
+	  font-size:14px;
+	  padding:16px 17px 10px;
   }
 
-  span.anticon{
-	  color:#888888;
+  .vurox-admin-table tbody tr td{
+	  font-weight: normal;
+	  font-size: 14px;
   }
-
-  .ant-select-selector{
-	  background: #ffffff !important;
-	  color:#333333 !important;
-  }
-
-  .ant-select-selection-placeholder{
-	color:#888888;
-  }
-
   Button.link, ul.vurox-horizontal-links li a {
-	  color: rgba(255, 255, 255, 0.65);
+	  
 	  padding:0;
 	  font-size:14px;
 
@@ -132,3 +134,136 @@ ul.vurox-horizontal-links{
 		  color: inherit;
 	  }
   }
+
+.vurox-breadcrumb-list li a{
+	font-weight: normal;
+	text-transform:lowercase;
+}
+
+.vurox-breadcrumb-list li:after{
+	top:10px;
+}
+
+.vurox-breadcrumb-list li a.active {
+	font-size:14px;
+	color:#333333 !important;
+	font-weight: bold;
+}
+	
+.vurox-tabs-underlined ul li a,.vurox-tabs-underlined .nav > .nav-item > a{
+	font-weight:normal;
+}
+
+.vurox-tabs-underlined .nav > .nav-item > a.active{
+	color: #333333 !important;
+    background: transparent !important;
+    border-color: #333333 !important;
+	font-weight: 600;
+}
+
+.vurox-vertical-nav ul li.active a {
+	color: @vurox-text-primary-color;
+	background: rgba(0,193,216,0.5);
+			
+}
+
+.vurox-dropdown-block button span{
+	color: rgba(0, 0, 0, 0.8);
+    padding: 8px 12px 6px;
+    line-height: 20px;
+    display: block;
+}
+.vurox-dropdown-block button i.flex-fill{
+	border-radius: 50px;
+    color: #ffffff;
+    padding: 7px 8px 10px 8px;
+    line-height: 1;
+    margin-top: 3px;
+}
+
+ul.vurox-horizontal-links li a{
+	color: #1890ff;
+	font-weight: normal;
+}
+
+.ant-tabs.ant-tabs-top.formTab .ant-tabs-nav{
+	margin: 0 25px;
+}
+
+.tox .tox-toolbar{
+	background-color:#f2f2f2 !important;
+}
+.tox .tox-tbtn svg{
+	fill:#444444;
+}
+.tox .tox-tbtn,.tox-icon tox-tbtn__icon-wrap{
+	color:#444444 !important;
+	
+}
+.tox-tinymce{
+	border:1px solid #dddddd !important;
+}
+.tox-tinymce,.tox-editor-container{
+	border-radius:3px !important;
+}
+
+.vurox-vertical-nav ul li a span{
+	font-size:.9375rem;
+}
+.ant-comment-content{
+	font-size: .9375rem;
+}
+.ant-comment-content-author-name{
+	color:rgba(0, 0, 0, 0.8)
+}
+.ant-comment-content-author-time{
+	color:#777777;
+}
+.ant-comment-content-author > a, .ant-comment-content-author > span{
+	font-size: .8375rem;
+}
+.comment-action{
+	margin-right: 10px;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 12px;
+    transition: color 0.3s;
+    user-select: none;
+}
+.ant-table-pagination.ant-pagination{
+	margin:16px;
+}
+.ant-comment-actions{
+	margin-top:0;
+}
+.vurox-admin-table button span,.vurox-admin-table i{
+	color:#ffffff;
+}
+.listContentWrapper {
+    max-height: 180px;
+    overflow: hidden;
+}
+.ant-tabs-content.ant-tabs-content-top{
+	height:100%;
+}
+
+.content-align-left{text-align:left;}
+.content-align-center{text-align:center;}
+.content-align-right{text-align:right;}
+.content-align-justify{text-align: justify;}
+
+iframe.content-align-left,img.content-align-left{float:left;margin:0 20px 10px 0;}
+iframe.content-align-center,img.content-align-center{margin:0 auto 10px auto;display:block;}
+iframe.content-align-right,img.content-align-right{float:right;margin:0 0 10px 20px;}
+
+#postContent{
+	font-size: 16px;
+}
+
+#postContent img,#postContent iframe{
+	border:1px solid #dddddd;
+	padding:5px;
+}
+
+.ant-message{
+	z-index:9999;
+}

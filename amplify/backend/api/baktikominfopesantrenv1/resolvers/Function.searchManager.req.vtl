@@ -1,0 +1,16 @@
+#**
+The value of 'payload' after the template has been evaluated
+will be passed as the event to AWS Lambda.
+*#
+
+{
+  "version" : "2018-05-29",
+  "operation": "Invoke",
+  "payload": {
+  	"field":"get",
+    "arguments":{
+    	"path":"${ctx.stash.input.path}",
+        "body":$ctx.stash.input.body
+    }
+  }
+}

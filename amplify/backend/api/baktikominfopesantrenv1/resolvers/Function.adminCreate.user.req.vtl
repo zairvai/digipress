@@ -1,0 +1,47 @@
+## Below example shows how to create an object from all provided GraphQL arguments
+## The primary key of the obejct is a randomly generated UUD using the $util.autoId() utility
+## Other utilities include $util.matches() for regular expressions, $util.time.nowISO8601() or
+##   $util.time.nowEpochMilliSeconds() for timestamps, and even List or Map helpers like
+##   $util.list.copyAndRetainAll() $util.map.copyAndRemoveAllKeys() for shallow copies
+## Read more: https://docs.aws.amazon.com/appsync/latest/devguide/resolver-context-reference.html#utility-helpers-in-util
+
+#if($ctx.prev.result.isEmpty() || $util.isNull($ctx.prev.result))
+	#return($ctx.prev.result)
+#end
+#set( $roles = [
+	{
+    	"accountId":$ctx.stash.role.accountId,
+        "role":$ctx.stash.role.role,
+        "status":3,
+        "createdBy":$ctx.identity.sub,
+        "updatedBy":$ctx.identity.sub,
+        "createdAt":$ctx.prev.result.createdAt,
+        "updatedAt":$ctx.prev.result.updatedAt
+        
+    }
+])
+#set( $input = {
+	"name":$ctx.prev.result.name,
+    "emailAddress":$ctx.prev.result.emailAddress,
+    "phoneNumber":"${ctx.stash.user.phoneCode}-${ctx.stash.user.phoneNumber}",
+    "emailAddressVerified":false,
+    "phoneNumberVerified":false,
+    "roles":$roles,
+    "__typename":"User",
+    "version":1,
+    "status":3,
+    "createdBy":$ctx.identity.sub,
+    "updatedBy":$ctx.identity.sub,
+    "createdAt":$ctx.prev.result.createdAt,
+    "updatedAt":$ctx.prev.result.updatedAt,
+    "enabled":$ctx.prev.result.enabled
+} )
+
+{
+	"version" : "2018-05-29",
+    "operation" : "PutItem",
+    "key" : {
+        "id": $util.dynamodb.toDynamoDBJson($ctx.prev.result.id),
+    },
+    "attributeValues" : $util.dynamodb.toMapValuesJson($input)
+}
