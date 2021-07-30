@@ -1,5 +1,5 @@
 /* Amplify Params - DO NOT EDIT
-	AUTH_USERPOOLID
+	AUTH_DIGIPRESSAUTH_USERPOOLID
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -10,7 +10,7 @@ exports.handler = (event,context,callback)=>{
   
   const cisp = new AWS.CognitoIdentityServiceProvider()
 
-  const userPoolId = process.env.AUTH_USERPOOLID
+  const userPoolId = process.env.AUTH_DIGIPRESSAUTH_USERPOOLID
   
   var field;
     

@@ -1,9 +1,17 @@
 {
-  "lambdaLayers": [
+  "lambdaLayers": [],
+  "environmentVariableList": [
     {
-      "type": "ProjectLayer",
-      "resourceName": "DigiPressLayers",
-      "version": 3
+      "cloudFormationParameterName": "allowedDimensions",
+      "environmentVariableName": "ALLOWED_DIMENSIONS"
+    },
+    {
+      "cloudFormationParameterName": "bucket",
+      "environmentVariableName": "BUCKET"
+    },
+    {
+      "cloudFormationParameterName": "url",
+      "environmentVariableName": "URL"
     }
   ]
 }

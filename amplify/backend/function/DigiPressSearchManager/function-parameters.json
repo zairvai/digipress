@@ -1,3 +1,9 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "elasticsearchEndpoint",
+      "environmentVariableName": "ELASTICSEARCH_ENDPOINT"
+    }
+  ]
 }

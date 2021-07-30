@@ -7,7 +7,16 @@
       "Default": "NONE",
       "Description": " Schedule Expression"
     },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
     "env": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
+    },
+    "elasticsearchEndpoint": {
       "Type": "String"
     }
   },
@@ -29,6 +38,14 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
@@ -55,6 +72,9 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "ELASTICSEARCH_ENDPOINT": {
+              "Ref": "elasticsearchEndpoint"
             }
           }
         },
@@ -64,13 +84,9 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
         "Layers": [],
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/DigiPressSearchManager-44616a6635542f5a7457-build.zip"
-        }
+        "Timeout": "25"
       }
     },
     "LambdaExecutionRole": {
@@ -79,12 +95,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "baktikominfopesantrenv1LambdaRole729ab451",
+            "baktipesantrenLambdaRole3e8b424d",
             {
               "Fn::Join": [
                 "",
                 [
-                  "baktikominfopesantrenv1LambdaRole729ab451",
+                  "baktipesantrenLambdaRole3e8b424d",
                   "-",
                   {
                     "Ref": "env"

@@ -7,12 +7,18 @@
       "Default": "NONE",
       "Description": " Schedule Expression"
     },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
     "env": {
       "Type": "String"
     },
-    "authbaktikominfopesantrenv1UserPoolId": {
+    "s3Key": {
+      "Type": "String"
+    },
+    "authDigipressAuthUserPoolId": {
       "Type": "String",
-      "Default": "authbaktikominfopesantrenv1UserPoolId"
+      "Default": "authDigipressAuthUserPoolId"
     }
   },
   "Conditions": {
@@ -33,16 +39,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "DigiPressIdentityManager",
+            "DigipressIdentityManager",
             {
               "Fn::Join": [
                 "",
                 [
-                  "DigiPressIdentityManager",
+                  "DigipressIdentityManager",
                   "-",
                   {
                     "Ref": "env"
@@ -60,8 +74,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "AUTH_BAKTIKOMINFOPESANTRENV1_USERPOOLID": {
-              "Ref": "authbaktikominfopesantrenv1UserPoolId"
+            "AUTH_DIGIPRESSAUTH_USERPOOLID": {
+              "Ref": "authDigipressAuthUserPoolId"
             }
           }
         },
@@ -71,13 +85,9 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
         "Layers": [],
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/DigiPressIdentityManager-6b324e4634576f6f4255-build.zip"
-        }
+        "Timeout": "25"
       }
     },
     "LambdaExecutionRole": {
@@ -86,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "baktikominfopesantrenv1LambdaRoleb117e30d",
+            "baktipesantrenLambdaRole29e2a557",
             {
               "Fn::Join": [
                 "",
                 [
-                  "baktikominfopesantrenv1LambdaRoleb117e30d",
+                  "baktipesantrenLambdaRole29e2a557",
                   "-",
                   {
                     "Ref": "env"
@@ -277,7 +287,7 @@
                       },
                       ":userpool/",
                       {
-                        "Ref": "authbaktikominfopesantrenv1UserPoolId"
+                        "Ref": "authDigipressAuthUserPoolId"
                       }
                     ]
                   ]

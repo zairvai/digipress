@@ -1,24 +1,50 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "Lambda resource stack creation using Amplify CLI",
   "Parameters": {
-    "CloudWatchRule": {
+    "modules": {
       "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Default": "",
+      "Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
     },
-    "deploymentBucketName": {
-      "Type": "String"
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
     },
     "env": {
+      "Type": "String"
+    },
+    "deploymentBucketName": {
       "Type": "String"
     },
     "s3Key": {
       "Type": "String"
     },
-    "storageDigipressStorageBucketName": {
-      "Type": "String",
-      "Default": "storageDigipressStorageBucketName"
+    "elasticsearchEndpoint": {
+      "Type": "String"
+    },
+    "tableApp": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -39,24 +65,16 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "DigipressStorageManager",
+            "DigipressAuthPreTokenGeneration",
             {
               "Fn::Join": [
                 "",
                 [
-                  "DigipressStorageManager",
+                  "DigipressAuthPreTokenGeneration",
                   "-",
                   {
                     "Ref": "env"
@@ -71,11 +89,17 @@
             "ENV": {
               "Ref": "env"
             },
+            "MODULES": {
+              "Ref": "modules"
+            },
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_DIGIPRESSSTORAGE_BUCKETNAME": {
-              "Ref": "storageDigipressStorageBucketName"
+            "ELASTICSEARCH_ENDPOINT": {
+              "Ref": "elasticsearchEndpoint"
+            },
+            "TABLE_APP": {
+              "Ref": "tableApp"
             }
           }
         },
@@ -86,8 +110,15 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Layers": [],
-        "Timeout": "25"
+        "Timeout": "25",
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        }
       }
     },
     "LambdaExecutionRole": {
@@ -96,12 +127,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "baktipesantrenLambdaRolebef8932f",
+            "DigipressAuthPreTokenGeneration",
             {
               "Fn::Join": [
                 "",
                 [
-                  "baktipesantrenLambdaRolebef8932f",
+                  "DigipressAuthPreTokenGeneration",
                   "-",
                   {
                     "Ref": "env"
@@ -171,64 +202,6 @@
           ]
         }
       }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "s3:ListBucket",
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storageDigipressStorageBucketName"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "s3:PutObject",
-                "s3:GetObject",
-                "s3:DeleteObject"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storageDigipressStorageBucketName"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      }
     }
   },
   "Outputs": {
@@ -245,14 +218,14 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }

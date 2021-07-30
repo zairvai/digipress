@@ -3,15 +3,15 @@
 
 const awsmobile = {
     "aws_project_region": "ap-southeast-1",
-    "aws_cognito_identity_pool_id": "ap-southeast-1:63543b5b-55f0-4729-aff6-5158c989d4af",
+    "aws_cognito_identity_pool_id": "ap-southeast-1:b83216a9-ad22-46a2-9348-62d3a93812ff",
     "aws_cognito_region": "ap-southeast-1",
-    "aws_user_pools_id": "ap-southeast-1_fjsHDcGof",
-    "aws_user_pools_web_client_id": "5j8dm0ektndf5ts34qgk0uk3r4",
+    "aws_user_pools_id": "ap-southeast-1_ZUaz2uAUp",
+    "aws_user_pools_web_client_id": "54gur7s91ao9jfm254cqk5f1au",
     "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://dihpijoyjzepthbftgpsaxhbjm.appsync-api.ap-southeast-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://hwhfc3zvu5fj7lnpgzgbezzuxm.appsync-api.ap-southeast-1.amazonaws.com/graphql",
     "aws_appsync_region": "ap-southeast-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "baktikominfo-pesantrenv181f9e408111a40b7aff79aclive-live",
+    "aws_user_files_s3_bucket": "digipress-storage132445-dev",
     "aws_user_files_s3_bucket_region": "ap-southeast-1"
 };
 

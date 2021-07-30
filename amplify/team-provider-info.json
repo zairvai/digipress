@@ -1,82 +1,50 @@
 {
-  "live": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-baktikominfo-pesantrenv1-live-33123-authRole",
-      "UnauthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-live-33123-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-live-33123-authRole",
-      "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-      "UnauthRoleName": "amplify-baktikominfo-pesantrenv1-live-33123-unauthRole",
-      "StackName": "amplify-baktikominfo-pesantrenv1-live-33123",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:147604133037:stack/amplify-baktikominfo-pesantrenv1-live-33123/59ccb420-36aa-11eb-b80f-02f95ca67868",
-      "AmplifyAppId": "d36af40al4qg3j"
-    },
-    "categories": {
-      "auth": {
-        "baktikominfopesantrenv1": {}
-      },
-      "function": {
-        "baktikominfopesantrenv1PreTokenGeneration": {},
-        "DigiPressLayers": {
-          "deploymentBucketName": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "s3Key": "amplify-builds/DigiPressLayers-build.zip"
-        }
-      }
-    },
-    "nonCFNdata": {
-      "function": {
-        "DigiPressLayers": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "awsAccounts",
-                  "accounts": [
-                    "147604133037"
-                  ]
-                },
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "4Zsn+GQXCpsIXUJUnzzt581vAOmPHJPZqZr5MtIC01c="
-            },
-            "2": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "iTq3PSxS3j65vAygjgR1oOlK2I0lwxsdLU/pI/ra1Q4="
-            },
-            "3": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "kW6E6Vs6d7Vl0EZzTjY/YnqiysL78yA67F04E3ss1Yo="
-            }
-          }
-        }
-      }
-    }
-  },
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-baktikominfo-pesantrenv1-dev-30759-authRole",
-      "UnauthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-dev-30759-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::147604133037:role/amplify-baktikominfo-pesantrenv1-dev-30759-authRole",
+      "AuthRoleName": "amplify-baktipesantren-dev-132445-authRole",
+      "UnauthRoleArn": "arn:aws:iam::607380331963:role/amplify-baktipesantren-dev-132445-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::607380331963:role/amplify-baktipesantren-dev-132445-authRole",
       "Region": "ap-southeast-1",
-      "DeploymentBucketName": "amplify-baktikominfo-pesantrenv1-dev-30759-deployment",
-      "UnauthRoleName": "amplify-baktikominfo-pesantrenv1-dev-30759-unauthRole",
-      "StackName": "amplify-baktikominfo-pesantrenv1-dev-30759",
-      "StackId": "arn:aws:cloudformation:ap-southeast-1:147604133037:stack/amplify-baktikominfo-pesantrenv1-dev-30759/150a7fa0-36a7-11eb-9681-0243768bbe4a",
-      "AmplifyAppId": "d36af40al4qg3j"
+      "DeploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+      "UnauthRoleName": "amplify-baktipesantren-dev-132445-unauthRole",
+      "StackName": "amplify-baktipesantren-dev-132445",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:607380331963:stack/amplify-baktipesantren-dev-132445/d7d98b90-f0fe-11eb-917e-0ada089be6c4",
+      "AmplifyAppId": "d1z0jpu7muwj4g",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-baktipesantren-dev-132445-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "baktikominfopesantrenv1": {}
+        "DigipressAuth": {}
+      },
+      "function": {
+        "DigipressAuthPreTokenGeneration": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressAuthPreTokenGeneration-5332414d515854457237-build.zip"
+        },
+        "DigipressGA": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressGA-6b37794f656e634b6674-build.zip"
+        },
+        "baktipesantrenDigipressLayer": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersion0ebcdb84-build.zip"
+        },
+        "DigipressIdentityManager": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressIdentityManager-334a4553413169725268-build.zip"
+        },
+        "DigipressStorageManager": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressStorageManager-6f61436730674452545a-build.zip"
+        },
+        "DigiPressSearchManager": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigiPressSearchManager-48656369382b47753632-build.zip"
+        },
+        "DigipressImageResize": {
+          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
+          "s3Key": "amplify-builds/DigipressImageResize-36303458755155374f71-build.zip"
+        }
       }
     }
   }
