@@ -53,7 +53,7 @@
         },
         "DigipressTableAppTrigger": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressTableAppTrigger-6245646968763933764a-build.zip"
+          "s3Key": "amplify-builds/DigipressTableAppTrigger-5775654a4a2f464f4575-build.zip"
         }
       }
     }

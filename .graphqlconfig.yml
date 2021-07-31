@@ -1,6 +1,6 @@
 projects:
-  baktikominfopesantrenv1:
-    schemaPath: amplify/backend/api/baktikominfopesantrenv1/build/schema.graphql
+  DigipressAPI:
+    schemaPath: amplify/backend/api/DigipressAPI/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
@@ -12,7 +12,6 @@ projects:
         docsFilePath: src/graphql
         region: ap-southeast-1
         apiId: null
-        maxDepth: 5
 extensions:
   amplify:
     version: 3
