@@ -14,7 +14,10 @@ will be passed as the event to AWS Lambda.
         "terms": {
           "status.keyword": $statuses
         }
-      }
+      },
+      {"match": {
+          "__typename": "Comment"
+        }}
     ]
   }
 })
@@ -100,7 +103,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/comment/_search",
+      "path":"/records/_search",
       "body": $util.toJson($body)
     }
   }

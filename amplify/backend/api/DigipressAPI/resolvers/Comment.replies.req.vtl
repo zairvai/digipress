@@ -20,6 +20,9 @@ will be passed as the event to AWS Lambda.
         {"match": {
           "replyToId": $ctx.source.id
         }},
+        {"match": {
+          "__typename": "Comment"
+        }},
         {"terms": {
           "status.keyword": $statuses }
       	},
@@ -44,7 +47,7 @@ will be passed as the event to AWS Lambda.
 ## $util.error($util.toJson($body))
 
 $util.qr($ctx.stash.put("input",{
-	"path":"/comment/_search",
+	"path":"/records/_search",
     "body" : $util.toJson($body)
 }))
 

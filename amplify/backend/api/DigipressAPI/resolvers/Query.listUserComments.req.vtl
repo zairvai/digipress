@@ -22,6 +22,9 @@ will be passed as the event to AWS Lambda.
   #set($queryCreatedBy={
     "bool": {
       "must": [
+        {"match": {
+          "__typename": "Comment"
+        }},
         {
           "term": {
             "createdBy.keyword": {
@@ -116,7 +119,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/comment/_search",
+      "path":"/records/_search",
       "body": $util.toJson($body)
     }
   }

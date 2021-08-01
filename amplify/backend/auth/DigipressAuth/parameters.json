@@ -12,8 +12,8 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
-    "emailVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Konfirmasi kode keamanan",
+    "emailVerificationMessage": "<p>Assalamu alaikum wr wb,</p><p>Kode keamanan kamu adalah : {####}. <br/>Selanjutnya silahkan masukkan kode ini pada kolom kode keamanan.</p><p>Salam</p>",
     "defaultPasswordPolicy": true,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [

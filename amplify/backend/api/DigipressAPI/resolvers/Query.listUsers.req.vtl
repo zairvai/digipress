@@ -19,6 +19,9 @@ will be passed as the event to AWS Lambda.
             "query": {
               "bool": {
                 "must": [
+                  {"match": {
+                    "__typename": "User"
+                  }},
                   {"match":{"roles.accountId": $accountId }},
                   {
                     "terms": {
@@ -82,7 +85,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/user/_search",
+      "path":"/records/_search",
       "body":{
           "_source":{
               "includes":"id"

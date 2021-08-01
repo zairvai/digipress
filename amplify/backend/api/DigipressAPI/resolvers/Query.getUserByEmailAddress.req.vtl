@@ -13,6 +13,9 @@
       "must": [
         {"match": {
           "emailAddress.keyword": $ctx.args.emailAddress
+        }},
+        {"match": {
+          "__typename": "User"
         }}
       ]
     } 
@@ -24,7 +27,7 @@
 })
 
 #set($input={
-	"path":"/user/_search",
+	"path":"/records/_search",
 	"body":$util.toJson($body)
 })
 

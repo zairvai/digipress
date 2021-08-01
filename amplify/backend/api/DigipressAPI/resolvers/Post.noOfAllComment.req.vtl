@@ -9,6 +9,9 @@ will be passed as the event to AWS Lambda.
         {"match": {
           "postId": $ctx.source.id
         }},
+        {"match": {
+          "__typename": "Comment"
+        }},
         {"terms": {
           "status.keyword": [3] }
       	}
@@ -22,7 +25,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-    	"path" : "/comment/_count",
+    	"path" : "/records/_count",
         "body" : {
         	"query":$util.toJson($query)
         }
