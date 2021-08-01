@@ -15,7 +15,10 @@ will be passed as the event to AWS Lambda.
         "terms": {
           "status.keyword": $statuses
         }
-      }
+      },
+      {"match": {
+          "__typename": "Qna"
+        }}
     ]
   }
 })
@@ -107,7 +110,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/qna/_search",
+      "path":"/records/_search",
       "body":{
           "_source":{
               "includes":"id"

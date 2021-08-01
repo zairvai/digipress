@@ -11,11 +11,12 @@
 #set($query={
   "bool": {
     "must": [
-        {
-        "match": {
+        {"match": {
           "uniqueURL.keyword":$ctx.args.url
-        }
-      }
+        }},
+        {"match": {
+          "__typename": "Account"
+        }}
     ],
     "must_not":[
         {
@@ -33,7 +34,7 @@
 })
 
 #set($input={
-	"path":"/account/_search",
+	"path":"/records/_search",
 	"body":$util.toJson($body)
 })
 

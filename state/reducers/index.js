@@ -10,7 +10,7 @@ import { createClassroom,deleteClassroom,updateClassroom,listClassrooms,getClass
 import { createLesson, deleteLesson,updateLesson,listLessons,getLesson} from './lesson'
 import { createQna,deleteQna,updateQna,listPostQnas,listUserQnas,getQna} from './qna'
 import { createComment,deleteComment,updateComment,listPostComments,listUserComments,getComment} from './comment'
-import { getPost,listPosts } from './post'
+//import { getPost,listPosts } from './post'
 
 import {putObject,getObject,listObjects,removeObject} from './storage'
 
@@ -61,8 +61,8 @@ const rootReducer = combineReducers({
 	updateCategory,
 	deleteCategory,
 	//post
-	getPost,
-	listPosts,
+	//getPost,
+	//listPosts,
 	//article
 	createArticle,
 	getArticle,

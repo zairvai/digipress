@@ -107,7 +107,7 @@ function get(path,body=false){
 
 function remove(path){
 
-    console.log(path)
+    //console.log(path)
     
     return new Promise((resolve,reject)=>{
 

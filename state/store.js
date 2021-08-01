@@ -13,10 +13,11 @@ function configureStore(preloadedState) {
 	const middlewares = [sagaMiddleware]
 	
 	middlewares.push(thunk)
-	// middlewares.push(logger)
+	middlewares.push(logger)
 
-	//const { persistReducer } = require('redux-persist')
-	// const storage = mystorage//require('redux-persist/lib/storage').default
+	const { persistReducer } = require('redux-persist')
+	//const storage = mystorage//require('redux-persist/lib/storage').default
+
 	const storage = require('redux-persist/lib/storage').default
 	
 	const persistConfig = {
@@ -26,8 +27,8 @@ function configureStore(preloadedState) {
 	}
 
   	const store = createStore(
-		// persistReducer(persistConfig,rootReducer),
-		rootReducer,
+		persistReducer(persistConfig,rootReducer),
+		//rootReducer,
     	// preloadedState,
     	applyMiddleware(...middlewares)
 	  )

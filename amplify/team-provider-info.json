@@ -49,11 +49,11 @@
         "DigipressSearchManager": {
           "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com",
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressSearchManager-79343461346b42612f34-build.zip"
+          "s3Key": "amplify-builds/DigipressSearchManager-675055752b593544774c-build.zip"
         },
         "DigipressTableAppTrigger": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressTableAppTrigger-5775654a4a2f464f4575-build.zip"
+          "s3Key": "amplify-builds/DigipressTableAppTrigger-58596142724157344a5a-build.zip"
         }
       }
     }

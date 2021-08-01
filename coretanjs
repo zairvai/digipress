@@ -834,3 +834,48 @@ query getItem{
     }
   }
 }
+
+{
+  "id": {
+    "S": "07112834-fea0-43c2-85e1-b9ca31cbe891"
+  },
+  "__typename": {
+    "S": "Account"
+  },
+  "phoneNumber": {
+    "S": "+62-343783438"
+  },
+  "version": {
+    "N": "8"
+  },
+  "status": {
+    "N": "2"
+  },
+  "createdAt": {
+    "S": "2020-12-06T22:26:56.594Z"
+  },
+  "updatedBy": {
+    "S": "052eb0b5-a460-48b6-9cba-7c10d3d44976"
+  },
+  "address": {
+    "S": "JL Raya Kenep, Beji, Bangil, Pondokyapi, Gunungsari, Kec. Beji, Pasuruan, Jawa Timur"
+  },
+  "contactPerson": {
+    "S": "Zaid Alaydrus"
+  },
+  "createdBy": {
+    "S": "64929284-d0b7-4a27-bd06-69684060e2a0"
+  },
+  "name": {
+    "S": "Al-Mahadul Islami"
+  },
+  "uniqueURL": {
+    "S": "yapi-bangil"
+  },
+  "emailAddress": {
+    "S": "zaid@gmail.com"
+  },
+  "updatedAt": {
+    "S": "2020-12-12T20:59:49.945Z"
+  }
+}

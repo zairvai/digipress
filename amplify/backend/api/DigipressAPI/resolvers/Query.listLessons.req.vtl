@@ -15,7 +15,10 @@ will be passed as the event to AWS Lambda.
         "terms": {
           "status.keyword": $statuses
         }
-      }
+      },
+      {"match": {
+          "__typename": "Lesson"
+        }}
     ]
   }
 })
@@ -70,7 +73,7 @@ will be passed as the event to AWS Lambda.
   "payload": {
   	"field":"get",
     "arguments":{
-      "path":"/lesson/_search",
+      "path":"/records/_search",
       "body":{
           "_source":{
               "includes":"id"
