@@ -28,7 +28,6 @@
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
-    "@sls-next/-component":"latest",
     "analytics": "^0.6.4",
     "antd": "^4.2.0",
     "aws-amplify": "^3.3.11",

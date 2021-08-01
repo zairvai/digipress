@@ -1,0 +1,4 @@
+# serverless.yml
+
+myNextApplication:
+  component: "@sls-next/serverless-component@latest" # it is recommended you pin the latest stable version of serverless-next.js
