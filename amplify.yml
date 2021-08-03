@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - yarn add webpack@webpack-4 --dev
         - yarn install
     build:
       commands:
