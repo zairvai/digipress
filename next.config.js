@@ -16,6 +16,7 @@ const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/consta
 
 module.exports = vuroxConfigPlugins([
 	[{
+		webpack5:false,
 		trailingSlash: true
 	}],
 	[withLess, {
