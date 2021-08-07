@@ -1,8 +1,9 @@
 import App, { Container } from 'next/app'
-import { Provider } from 'react-redux'
+import {END} from 'redux-saga'
+import {useStore} from 'react-redux'
 import React from 'react'
 import withRedux from 'next-redux-wrapper'
-import configureStore from '../state/store'
+import { wrapper } from '../state/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { VuroxContextProvider } from '../context'
 import { AppContextProvider } from '../context/app'
@@ -32,18 +33,30 @@ export function reportWebVitals({ id, name, label, value }) {
 	});
   }
 
-const MyApp = ({Component,pageProps,store,...props}) => {
+const MyApp = ({Component,pageProps,...props}) => {
 
 	const [width,setWidth] = React.useState()
-	
+	const store = useStore()
 
 	const getInitialProps =  async ( { Component, ctx } ) => {
-		
-		let pageProps = {}
-		if( Component.getInitialProps ){
-			pageProps = await Component.getInitialProps(ctx)
+
+		// 1. Wait for all page actions to dispatch
+		const pageProps = {
+			...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
 		}
-		return { pageProps}
+
+		// 2. Stop the saga if on server
+        if (ctx.req) {
+            ctx.store.dispatch(END);
+            await ctx.store.sagaTask.toPromise();
+        }
+
+        // 3. Return props
+        return {
+            pageProps
+        }
+
+
 	}
 
 	React.useEffect(()=>{
@@ -52,20 +65,20 @@ const MyApp = ({Component,pageProps,store,...props}) => {
 		setWidth(width)
 
 	},[])
+	
+	
 
 	return (
-		<Provider store={store}>
-			<PersistGate persistor={store._PERSISTOR} loading={null}>
-				<VuroxContextProvider pageWidth={width}>
-					<AppContextProvider>
-						<DefaultSeo {...SEO}/>
-						<Component {...pageProps}/>
-					</AppContextProvider>
-				</VuroxContextProvider>
-			</PersistGate>
-		</Provider>
+		<PersistGate persistor={store.__persistor} loading={null}>
+			<VuroxContextProvider pageWidth={width}>
+				<AppContextProvider>
+					<DefaultSeo {...SEO}/>
+					<Component {...pageProps}/>
+				</AppContextProvider>
+			</VuroxContextProvider>
+		</PersistGate>
 	)
 }
 
-export default withRedux(configureStore)(MyApp)
+export default wrapper.withRedux(MyApp)
 

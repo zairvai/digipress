@@ -25,8 +25,10 @@ const {Title,Text} = Typography
 
 const PageLogin = props =>{
 
-	const {router,auth} = props
+	// console.log(router)
 
+	const {router,auth} = props
+	
 	const authController = new AuthController(props)
 	const accountController = new AccountController(props)
 
@@ -34,7 +36,9 @@ const PageLogin = props =>{
 	const [isNewPasswordRequired,setNewPasswordRequired] = React.useState(false)
 	const [visible,setVisible] = React.useState(false)
 	 
-	 React.useEffect(async()=>{
+	React.useEffect(async()=>{
+		
+		console.log(router)
 
 		try{
 
@@ -50,22 +54,26 @@ const PageLogin = props =>{
 			}
 			else{
 				
-				const uniqueURLPath = router.query.account_url
-				//get account id by unique URL
-				const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
+				console.log(router)
+				if(router.query.account_url){
+					const uniqueURLPath = router.query.account_url
+					//get account id by unique URL
+					const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
 
-				authController._setAccount(account.data)
-				
-				setVisible(true)
+					authController._setAccount(account.data)
+					
+					setVisible(true)
+				}
 				
 			}
 		}
 		catch(error){
 			console.log(error)
+			//console.log(props)
 			router.push('/not-found')
 		}
 			
-	},[])
+	},[auth.isLoggedIn,router.query.account_url])
 
 	const goToForgotPassword = () =>{
         router.push('/auth/password-recovery')

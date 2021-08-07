@@ -6,7 +6,10 @@
     ],
     [
       "import", 
-      {"libraryName": "antd"}
+      {
+        "libraryName": "antd",
+        "style":true
+      }
     ],
     [
     	"module-resolver", {
