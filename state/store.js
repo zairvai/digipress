@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
+import {createWrapper} from 'next-redux-wrapper'
 import createSagaMiddleware from 'redux-saga'
 import { persistStore } from 'redux-persist'
 import { createLogger } from 'redux-logger'
@@ -6,7 +7,7 @@ import rootReducer from './reducers'
 import rootSaga from './sagas'
 import thunk from 'redux-thunk'
 // import mystorage from './storage'
-function configureStore(preloadedState) {
+function makeStore(preloadedState) {
 
 	const logger = createLogger()
   	const sagaMiddleware = createSagaMiddleware()
@@ -33,7 +34,7 @@ function configureStore(preloadedState) {
     	applyMiddleware(...middlewares)
 	  )
 	
-	store._PERSISTOR = persistStore(store)
+	store.__persistor = persistStore(store)
 
 	rootSaga.forEach(saga=> {
 		sagaMiddleware.run(saga)
@@ -43,4 +44,4 @@ function configureStore(preloadedState) {
   	return store
 }
 
-export default configureStore
+export const wrapper = createWrapper(makeStore,{debug:true})
