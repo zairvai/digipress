@@ -24,7 +24,7 @@ module.exports = vuroxConfigPlugins([
 		trailingSlash: true,
 		webpack5:false
 	}],
-	[withSass,{
+	[withCss,{
 		cssModules:true,
 		...withLess({
 			lessLoaderOptions: {
@@ -71,6 +71,5 @@ module.exports = vuroxConfigPlugins([
 			}
 		})
 	}],
-	[withCss],
 	[withFonts]
 ])
