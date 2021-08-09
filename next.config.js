@@ -48,13 +48,7 @@ const { PHASE_PRODUCTION_SERVER, PHASE_PRODUCTION_BUILD } = require('next/consta
 
 module.exports = vuroxConfigPlugins([
 	{
-		trailingSlash:true,
-		webpack : (config,{isServer})=>{
-			if(!isServer){
-				config.resolve.fallback = {fs:false,crypto:false}
-			}
-			return config
-		}
+		trailingSlash:true
 	},
 	[withLess,{
 		lessLoaderOptions:{
@@ -62,9 +56,14 @@ module.exports = vuroxConfigPlugins([
 			//modifyVars:themeVariables
 		},
 		...withAntdLess({
-			lessVarsFilePath: './public/style/styles.less'
+			lessVarsFilePath: './public/style/styles.less',
+			webpack : (config,{isServer})=>{
+				if(!isServer){
+					config.resolve.fallback = {fs:false,crypto:false}
+				}
+				return config
+			}
 		})
-
 	}],
 	[withFonts]
 ])
