@@ -1,20 +1,18 @@
-import App, { Container } from 'next/app'
 import {END} from 'redux-saga'
 import {useStore} from 'react-redux'
 import React from 'react'
-import withRedux from 'next-redux-wrapper'
 import { wrapper } from '../state/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { VuroxContextProvider } from '../context'
 import { AppContextProvider } from '../context/app'
-import 'antd/dist/antd.less'
-import 'react-quill/dist/quill.snow.css';
-import 'Styles/styles.less'
-import 'Styles/mycustom.less'
-import 'Styles/mymedia.less'
 import moment from 'moment'
 import Amplify from 'aws-amplify'
 import awsExports from 'Src/aws-exports'
+
+import 'Styles/styles.less'
+import 'antd/dist/antd.less'
+
+
 Amplify.configure(awsExports)
 
 import {DefaultSeo} from 'next-seo'
