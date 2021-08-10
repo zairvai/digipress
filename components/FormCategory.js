@@ -30,7 +30,6 @@ const FormCategory = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
         formState:{errors},
         setValue
         } = useForm({
