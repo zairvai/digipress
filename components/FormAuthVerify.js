@@ -37,8 +37,8 @@ const FormAuth = ({item,...props}) => {
     const {
         handleSubmit,
         setValue,
-        control
-        
+        control,
+        formState:{errors}
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -90,7 +90,7 @@ const FormAuth = ({item,...props}) => {
                     name="email"
                     defaultValue=""
                     control={control}
-                    render={props=><input type="hidden" value={props.value}/>}
+                    render={props=><input type="hidden" value={props.field.value}/>}
                 />
                 <Row className="justify-content-center">
                     <Col md={24} className="text-center">

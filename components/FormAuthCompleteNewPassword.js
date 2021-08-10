@@ -38,8 +38,7 @@ const FormAuth = ({user,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -104,8 +103,8 @@ const FormAuth = ({user,...props}) => {
                                         placeholder="Nama lengkap"
                                         autoComplete="newpassword"
                                         type="text"
-                                        value={props.value} 
-                                        onChange={props.onChange} />
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange} />
                                     {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                 </Form.Item>
                             }
@@ -125,8 +124,8 @@ const FormAuth = ({user,...props}) => {
                                         prefix={<LockOutlined/>}
                                         autoComplete="newpassword"
                                         placeholder="Password"
-                                        value={props.value} 
-                                        onChange={props.onChange} 
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
                                     
@@ -149,8 +148,8 @@ const FormAuth = ({user,...props}) => {
                                         prefix={<LockOutlined className="site-form-item-icon" />}
                                         autoComplete="newpassword"
                                         placeholder="Konfirmasi password"
-                                        value={props.value} 
-                                        onChange={props.onChange} 
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
                                 

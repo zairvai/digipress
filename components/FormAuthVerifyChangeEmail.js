@@ -38,8 +38,7 @@ const FormAuth = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         getValues,
         } = useForm({
             resolver:yupResolver(schema),
@@ -198,9 +197,9 @@ const FormAuth = ({item,...props}) => {
                                         prefix={<MailOutlined/>} 
                                         placeholder="contoh : email@digipress.id"
                                         autoComplete="off"
-                                        value={props.value} 
+                                        value={props.field.value} 
                                         onChange={e=>{
-                                            props.onChange(e);
+                                            props.field.onChange(e);
                                             handleEmailChange(e);
                                         }} />
                                     {errors && errors.newEmailAddress && <Text type="danger">{errors.newEmailAddress.message}</Text>}

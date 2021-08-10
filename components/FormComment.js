@@ -72,7 +72,7 @@ const FormComment = ({formId,item,...props}) => {
     const { 
         handleSubmit,
         control,
-        errors,
+        formState:{errors},
         setValue,
         reset
         } = useForm({
@@ -189,7 +189,7 @@ const FormComment = ({formId,item,...props}) => {
                             <Controller
                                 name="hiddenContent"
                                 control={control}
-                                render={props=><input type="hidden" value={props.value}/>}/>
+                                render={props=><input type="hidden" value={props.field.value}/>}/>
                         </Col>
                         {/* <Col md={4} sm={7} xs={7}>
                             <Button 

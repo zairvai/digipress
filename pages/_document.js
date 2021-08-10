@@ -9,7 +9,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link rel="shortcut icon" href="/image/favicon.png" />
+        </Head>
         <body className='vurox-dark-version vurox-admin-template'>
           <Main />
           <NextScript />

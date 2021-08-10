@@ -109,7 +109,7 @@ const FormArticle = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -240,7 +240,9 @@ const FormArticle = ({item,...props}) => {
                                             <Form.Item label="Judul artikel">
                                                 <Input 
                                                     disabled={isSubmitting}
-                                                    size="large" placeholder="Judul artikel" value={props.value} onChange={props.onChange} />
+                                                    size="large" placeholder="Judul artikel" 
+                                                    value={props.field.value} 
+                                                    onChange={props.field.onChange} />
                                                 {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                             </Form.Item>
                                         }
@@ -265,7 +267,7 @@ const FormArticle = ({item,...props}) => {
                                                     minHeight={400}
                                                     onFinishSetup={handleEditorSetup}
                                                     onChange={handleEditorChange} 
-                                                    value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                    value={props.field.value} placeholder="Ketik isi tulisan..."/>
                                                 {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
                                             </Form.Item>
                                         }
@@ -287,7 +289,7 @@ const FormArticle = ({item,...props}) => {
                                                 <SelectCategory 
                                                     disabled={isSubmitting}
                                                     items={categories} 
-                                                    value={props.value}
+                                                    value={props.field.value}
                                                     onChange={onSelectCategoryChange}
                                                     />
                                                 {errors && errors.category && <Text type="danger">{errors.category.message}</Text>}
@@ -309,7 +311,7 @@ const FormArticle = ({item,...props}) => {
                                                 <SelectTags 
                                                     disabled={isSubmitting}
                                                     items={tags}
-                                                    value={props.value}
+                                                    value={props.field.value}
                                                     onChange={onSelectTagsChange}
                                                 />
                                             </Form.Item>
@@ -327,7 +329,7 @@ const FormArticle = ({item,...props}) => {
                                         name="allowComment"
                                         control={control}
                                         // onChange={onAllowCommentChange.bind(this)}
-                                        render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.value} className="mt-3">Izinkan komentar</Checkbox>}
+                                        render={props=><Checkbox  disabled={isSubmitting} onChange={onAllowCommentChange.bind(this)} checked={props.field.value} className="mt-3">Izinkan komentar</Checkbox>}
                                     />
                                     
                                 </Col>
@@ -341,7 +343,7 @@ const FormArticle = ({item,...props}) => {
                                         render={props=>
                                             <Form.Item label="Siapa yang dapat membaca artikel ini" className="mt-3 mb-0">
                                                 <Radio.Group disabled={isSubmitting} 
-                                                    onChange={onReadAccessChange} value={props.value}>
+                                                    onChange={onReadAccessChange} value={props.field.value}>
                                                     <Radio value="public">Umum</Radio>
                                                     <Radio value="protected">Internal</Radio>
                                                 </Radio.Group>
