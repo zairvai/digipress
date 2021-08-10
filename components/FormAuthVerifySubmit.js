@@ -30,7 +30,6 @@ const FormAuth = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
         formState:{errors}
         } = useForm({
             resolver:yupResolver(schema),
