@@ -70,7 +70,7 @@ const FormQna = ({formId,item,...props}) => {
     const { 
         handleSubmit,
         control,
-        errors,
+        formState:{errors},
         setValue,
         reset
         } = useForm({
@@ -197,7 +197,7 @@ const FormQna = ({formId,item,...props}) => {
                                     className="editor"
                                     height={80}
                                     bottomMargin={1}
-                                    value={props.value} 
+                                    value={props.field.value} 
                                     placeholder={auth && auth.user.name}
                                     isSubmitting={isSubmiting}
                                     onFinishSetup={handleEditorSetup} 
@@ -214,7 +214,7 @@ const FormQna = ({formId,item,...props}) => {
                     <Controller
                         name="hiddenContent"
                         control={control}
-                        render={props=><input type="hidden" value={props.value}/>}/>
+                        render={props=><input type="hidden" value={props.field.value}/>}/>
                 </Col>
             </Row>
 

@@ -113,8 +113,7 @@ const FormClassroom = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -246,7 +245,9 @@ const FormClassroom = ({item,...props}) => {
                                             <Form.Item label="Nama pelajaran">
                                                 <Input 
                                                     disabled={isSubmitting}
-                                                    size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
+                                                    size="large" placeholder="Pelajaran" 
+                                                    value={props.field.value} 
+                                                    onChange={props.field.onChange} />
                                                 {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                             </Form.Item>
                                         }
@@ -267,11 +268,13 @@ const FormClassroom = ({item,...props}) => {
                                             
                                                 <TinyMce 
                                                     id="classroomEditor"
+                                                    placeholder="Ketik isi tulisan..."
                                                     isSubmitting={isSubmitting}
                                                     minHeight={400}
                                                     onFinishSetup={handleEditorSetup}
                                                     onChange={handleEditorChange} 
-                                                    value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                    value={props.field.value} 
+                                                    />
                                                 
                                             </Form.Item>
                                         }

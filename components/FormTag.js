@@ -29,8 +29,7 @@ const FormTag = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -81,7 +80,9 @@ const FormTag = ({item,...props}) => {
                                                 disabled={createTag.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
-                                                size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                         </Form.Item>
                                     }

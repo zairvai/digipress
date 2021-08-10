@@ -31,7 +31,7 @@ const FormCategory = ({item,...props}) => {
         reset,
         control,
         errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -97,7 +97,9 @@ const FormCategory = ({item,...props}) => {
                                                 disabled={createCategory.isRequesting || updateCategory.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
-                                                size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                         </Form.Item>
                                     }
@@ -118,7 +120,9 @@ const FormCategory = ({item,...props}) => {
                                                 tabIndex="3"
                                                 allowClear
                                                 autoSize={{ minRows: 3, maxRows: 5 }}
-                                                placeholder="..." value={props.value} onChange={props.onChange}/>
+                                                placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.desc && <Text type="danger">{errors.desc.message}</Text>}
                                         </Form.Item>
                                     }

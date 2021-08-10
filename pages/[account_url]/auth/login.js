@@ -38,7 +38,7 @@ const PageLogin = props =>{
 	 
 	React.useEffect(async()=>{
 		
-		console.log(router)
+		//console.log(router)
 
 		try{
 
@@ -54,7 +54,7 @@ const PageLogin = props =>{
 			}
 			else{
 				
-				console.log(router)
+				//console.log(router)
 				if(router.query.account_url){
 					const uniqueURLPath = router.query.account_url
 					//get account id by unique URL

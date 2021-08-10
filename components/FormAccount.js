@@ -44,7 +44,7 @@ const FormAccount = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
+        formState:{errors},
         getValues,
         setValue
         } = useForm({
@@ -151,7 +151,11 @@ const FormAccount = ({item,...props}) => {
                                             disabled={isSubmitting}
                                             tabIndex="2"
                                             allowClear
-                                            size="large" placeholder="..." value={props.value} onChange={props.onChange} {...props} />
+                                            size="large" placeholder="..." 
+                                            {...props} 
+                                            value={props.field.value} 
+                                            onChange={props.field.onChange}
+                                            />
                                         {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                     </Form.Item>
                                 }
@@ -175,10 +179,10 @@ const FormAccount = ({item,...props}) => {
                                             addonBefore="https://digipress.id/"
                                             placeholder="Contoh : pesantren,pesantren123, akun-pesantren" 
                                             onChange={e=>{
-                                                props.onChange(e);
+                                                props.field.onChange(e);
                                                 handleURLChange(e);
                                             }}
-                                            value={props.value} 
+                                            value={props.field.value} 
                                             />
                                         {/* <Text className="d-block" style={{width:"100%"}} type="secondary">hanya karakter a-z 0-9 dan _ - </Text> */}
                                         {errors && errors.uniqueURL && <Text type="danger">{errors.uniqueURL.message}</Text>}
@@ -200,7 +204,7 @@ const FormAccount = ({item,...props}) => {
                                             tabIndex="3"
                                             allowClear
                                             autoSize={{ minRows: 3, maxRows: 5 }}
-                                            placeholder="..." value={props.value} onChange={props.onChange}/>
+                                            placeholder="..." value={props.field.value} onChange={props.field.onChange}/>
                                         {errors && errors.address && <Text type="danger">{errors.address.message}</Text>}
                                     </Form.Item>
                                 }
@@ -220,7 +224,7 @@ const FormAccount = ({item,...props}) => {
                                             disabled={isSubmitting}
                                             tabIndex="4" 
                                             allowClear
-                                            size="large" placeholder="contoh: Muhammad " value={props.value} onChange={props.onChange} />
+                                            size="large" placeholder="contoh: Muhammad " value={props.field.value} onChange={props.field.onChange} />
                                         {errors && errors.contactPerson && <Text type="danger">{errors.contactPerson.message}</Text>}
                                     </Form.Item>
                                 }
@@ -251,7 +255,7 @@ const FormAccount = ({item,...props}) => {
                                                 disabled={isSubmitting}
                                                 tabIndex="5"
                                                 size="large"
-                                                style={{ width: '70%' }} value={props.value} placeholder="8xx" onChange={props.onChange}/>
+                                                style={{ width: '70%' }} value={props.field.value} placeholder="8xx" onChange={props.field.onChange}/>
                                         
                                         }
                                     />
@@ -271,7 +275,7 @@ const FormAccount = ({item,...props}) => {
                                             disabled={isSubmitting}
                                             tabIndex="6" 
                                             allowClear
-                                            size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
+                                            size="large" placeholder="xxxx@gmail.com " value={props.field.value} onChange={props.field.onChange} />
                                         {errors && errors.emailAddress && <Text type="danger">{errors.emailAddress.message}</Text>}
                                     </Form.Item>
                                 }

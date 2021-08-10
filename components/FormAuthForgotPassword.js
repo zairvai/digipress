@@ -32,8 +32,7 @@ const FormAuth = props => {
         handleSubmit,
         reset,
         control,
-        errors,
-        
+        formState:{errors}
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -78,7 +77,7 @@ const FormAuth = props => {
                         <Alert
                             className="mb-3"
                             message="Perubahan password"
-                            description="Untuk mengubah password anda, mohon ketik email yang sudah terdaftar."
+                            description="Untuk mengubah password anda, mohon ketik email yang sudah diverifikasi."
                             type="info"
                             showIcon
                         />
@@ -114,8 +113,8 @@ const FormAuth = props => {
                                         placeholder="Email address"
                                         autoComplete="off"
                                         type="email"
-                                        value={props.value} 
-                                        onChange={props.onChange} />
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange} />
                                     {errors && errors.email && <Text type="danger">{errors.email.message}</Text>}
                                 </Form.Item>
                             }

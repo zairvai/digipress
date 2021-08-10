@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Link from 'next/link'
 import {
 	VuroxComponentsContainer
 } from 'Components/layout'
@@ -20,7 +19,7 @@ const {Text} = Typography
 
 const schema = yup.object().shape({
     email:yup.string().required("Mohon ketik email kamu"),
-    password:yup.string().required("mohon ketik password kamu"),
+    password:yup.string().required("mohon ketik password kamu")
 })
 
 const FormAuth = props => {
@@ -33,11 +32,10 @@ const FormAuth = props => {
     const [isSubmitting,setSubmitting] = React.useState(false)
 
     const {
-        handleSubmit,
-        reset,
-        control,
-        errors,
-        formState,
+            handleSubmit,
+            reset,
+            control,
+            formState:{errors}
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -45,7 +43,7 @@ const FormAuth = props => {
                 password:""
             }
     })
-    
+
     const onSubmit = async(values) =>{
         try{
             setSubmitting(true)
@@ -94,7 +92,7 @@ const FormAuth = props => {
     }
 
     const onError = (errors,e) => {
-        //console.log(errors,e)
+        console.log(errors)
     }
 
     return (
@@ -131,8 +129,8 @@ const FormAuth = props => {
                                         autoComplete="off"
                                         type="email"
                                         disabled={isSubmitting}
-                                        value={props.value} 
-                                        onChange={props.onChange} />
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange} />
                                     {errors && errors.email && <Text type="danger">{errors.email.message}</Text>}
                                 </Form.Item>
                             }
@@ -152,13 +150,11 @@ const FormAuth = props => {
                                         prefix={<LockOutlined className="site-form-item-icon" />}
                                         autoComplete="current-password"
                                         placeholder="Password"
-                                        value={props.value} 
                                         disabled={isSubmitting}
-                                        onChange={props.onChange} 
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
-                                  
-                                    
                                     {errors && errors.password && <Text type="danger">{errors.password.message}</Text>}
                                 </Form.Item>
                             }
