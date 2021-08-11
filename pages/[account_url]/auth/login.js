@@ -54,7 +54,6 @@ const PageLogin = props =>{
 			}
 			else{
 				
-				//console.log(router)
 				if(router.query.account_url){
 					const uniqueURLPath = router.query.account_url
 					//get account id by unique URL
@@ -73,6 +72,10 @@ const PageLogin = props =>{
 			router.push('/not-found')
 		}
 			
+		return (()=>{
+			setUser()
+			setNewPasswordRequired(false)
+		})
 	},[auth.isLoggedIn,router.query.account_url])
 
 	const goToForgotPassword = () =>{
