@@ -9,7 +9,7 @@ function put(path,body){
 
     return new Promise((resolve,reject)=>{
         request.method = "PUT"
-        request.path = path //venue/doc/id
+        request.path = path // /records/_search
         request.body = JSON.stringify(body)
         request.headers["host"] = domain
         request.headers["Content-Type"] = "application/json"
@@ -50,7 +50,7 @@ function get(path,body=false){
     return new Promise((resolve,reject)=>{
 
         request.method = "GET"
-        request.path = path //venue/doc/id
+        request.path = path // /records/doc/id
         request.headers["host"] = domain
 
         if(body){
@@ -95,7 +95,7 @@ function remove(path){
     return new Promise((resolve,reject)=>{
 
         request.method = "DELETE"
-        request.path = path //venue/doc/id
+        request.path = path // /records/doc/id
         request.headers["host"] = domain
 
         var credentials = new AWS.EnvironmentCredentials('AWS');

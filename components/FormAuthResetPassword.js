@@ -88,7 +88,7 @@ const FormAuth = props => {
                         <Alert
                             className="mb-3"
                             message="Kode keamanan"
-                            description={`Kode keamanan untuk mengubah password kamu telah dikirim melalui ${auth.data.CodeDeliveryDetails.AttributeName} ${auth.data.CodeDeliveryDetails.Destination} . Silahkan ketik kode tersebut pada kolom kode di bawah.`}
+                            description={`Kode keamanan untuk mengubah password kamu telah dikirim ke email ${auth.data.CodeDeliveryDetails.AttributeName} ${auth.data.CodeDeliveryDetails.Destination}. Silahkan ketik Password baru kamu berikut kode keamanan.`}
                             type="info"
                             showIcon
                         />

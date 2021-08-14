@@ -19,8 +19,7 @@
       "function": {
         "DigipressAuthPreTokenGeneration": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressAuthPreTokenGeneration-5332414d515854457237-build.zip",
-          "tableApp": "digipress",
+          "s3Key": "amplify-builds/DigipressAuthPreTokenGeneration-612f74374d6f735a5561-build.zip",
           "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com"
         },
         "DigipressGA": {
@@ -42,9 +41,9 @@
         "DigipressImageResize": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
           "s3Key": "amplify-builds/DigipressImageResize-36303458755155374f71-build.zip",
+          "allowedDimensions": "100x100,300x300,autox300,300xauto,500x500,autox500,500xauto",
           "bucket": "digipress-media",
-          "url": "https://d211x4vjup154z.cloudfront.net",
-          "allowedDimensions": "100x100,300x300,autox300,300xauto,500x500,autox500,500xauto"
+          "url": "https://d211x4vjup154z.cloudfront.net"
         },
         "DigipressSearchManager": {
           "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com",

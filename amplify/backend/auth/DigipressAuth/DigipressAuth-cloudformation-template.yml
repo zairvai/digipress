@@ -1,3 +1,4 @@
+
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
@@ -81,6 +82,10 @@ Parameters:
       
         
   requiredAttributes:
+    Type: CommaDelimitedList
+      
+        
+  aliasAttributes:
     Type: CommaDelimitedList
       
   
@@ -185,6 +190,7 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
   
@@ -256,7 +262,10 @@ Resources:
       
       
       
-      AutoVerifiedAttributes: !Ref autoVerifiedAttributes
+      AutoVerifiedAttributes:
+      
+        - email
+      
       
       
       EmailVerificationMessage: !Ref emailVerificationMessage
@@ -271,6 +280,7 @@ Resources:
           RequireUppercase: true
       
       UsernameAttributes: !Ref usernameAttributes
+      
       
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
@@ -357,7 +367,7 @@ Resources:
             - '};'
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: '300'
+      Timeout: 300
       Role: !GetAtt
         - UserPoolClientRole
         - Arn
@@ -444,7 +454,7 @@ Resources:
       - PolicyName: baktip431e7b88_sns_pass_role_policy
         PolicyDocument:
           Version: 2012-10-17
-          Statement: 
+          Statement:
             - Effect: Allow
               Action:
                 - 'iam:PassRole'
@@ -494,7 +504,7 @@ Resources:
             - '};'
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: '300'
+      Timeout: 300
       Role: !GetAtt
         - MFALambdaRole
         - Arn

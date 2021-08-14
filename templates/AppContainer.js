@@ -8,7 +8,7 @@ import AuthController from 'Library/controllers/AuthController'
 const Container = props => {
 
     const authController = new AuthController(props)
-    const [visible,setVisible] = React.useState(true)//testing
+    const [visible,setVisible] = React.useState(false)//testing
     const {auth} = props
 
     const router = useRouter()
@@ -24,6 +24,9 @@ const Container = props => {
 
             await authController._get()
             
+            // console.log(auth.user)
+            // console.log(`${auth.account.uniqueURL} - ${router.query.account_url}`)
+            
             if(!auth.user.access) shouldSignOut = true
             else {
                 if(auth.account.uniqueURL != router.query.account_url) shouldSignOut=true
@@ -32,6 +35,7 @@ const Container = props => {
             
 
         }catch(error){
+            // console.log(error)
             shouldSignOut = true
         }
 

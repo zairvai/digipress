@@ -17,7 +17,7 @@ const Page = props => {
 	const [isCodeSent,setCodeSent] = React.useState(false)
 	const [visible,setVisible] = React.useState(true)
 
- 	const handleSuccessResetPassword = () =>{
+ 	const handlePasswordResetRequiredSuccess = () =>{
 		router.push("/")
 	}
 
@@ -45,7 +45,7 @@ const Page = props => {
 									<Col md={24} sm={24} xs={24}>
 										
 										{isCodeSent ? 
-											<FormResetPassword onSuccess={handleSuccessResetPassword} onCancel={handleCancel}/>
+											<FormResetPassword onSuccess={handlePasswordResetRequiredSuccess} onCancel={handleCancel}/>
 											:
 											<FormForgotPassword onSuccess={()=>setCodeSent(true)} onCancel={handleCancel}/>
 										}

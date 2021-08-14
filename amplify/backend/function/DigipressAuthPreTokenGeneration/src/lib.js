@@ -2,13 +2,18 @@ var es = require("./es")
 
 exports.getUserAccountAccess  = async (userId,accountId) => {
     
-    const path = "/user/_search"
+    const path = "/records/_search"
     
     const body = {
       "_source":{"includes":["id","roles"]},
       "query":{
         "bool": {
             "must": [
+              {
+                "match": {
+                  "__typename": "User"
+                }
+              },
               {
                 "nested": {
                   "path": "roles",

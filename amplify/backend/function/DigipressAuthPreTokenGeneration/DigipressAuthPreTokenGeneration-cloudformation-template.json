@@ -42,9 +42,6 @@
     },
     "elasticsearchEndpoint": {
       "Type": "String"
-    },
-    "tableApp": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -97,9 +94,6 @@
             },
             "ELASTICSEARCH_ENDPOINT": {
               "Ref": "elasticsearchEndpoint"
-            },
-            "TABLE_APP": {
-              "Ref": "tableApp"
             }
           }
         },

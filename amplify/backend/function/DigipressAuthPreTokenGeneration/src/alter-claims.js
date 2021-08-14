@@ -2,9 +2,14 @@ var lib = require("./lib")
 
 exports.handler = async (event, context, callback) => {
   
+  let userId
   const {clientMetadata} = event.request
   const accountId = clientMetadata ? clientMetadata.accountId : false
-  const userId = event.request.userAttributes.sub
+
+  //console.log(event.request.userAttributes)
+
+  if(event.request.userAttributes.preferred_username) userId = event.request.userAttributes.preferred_username
+  else userId = event.request.userAttributes.sub
   
   let access={}
 
