@@ -15,13 +15,21 @@ const Page = props => {
 	const {auth,router} = props
 
 	const [isCodeSent,setCodeSent] = React.useState(false)
+	const [visible,setVisible] = React.useState(true)
 
- 	const handleSuccessResetPassword = () =>{
+ 	const handlePasswordResetRequiredSuccess = () =>{
 		router.push("/")
 	}
 
 	const handleCancel = () =>{
-		router.push("/")
+		
+		if(auth.account){
+			router.replace(`/${auth.account.uniqueURL}/auth/login`)
+		}else{
+			router.replace("/")
+		}
+
+		router.replace("/")
 	}
 
 	return (
@@ -30,24 +38,24 @@ const Page = props => {
 			<VuroxLayout>
 				
 				<ContentLayout width='100%' className='p-3 vurox-scroll-y'>
-					
-					<Row className="justify-content-center fullHeight">
-						<Col md={8} sm={24} xs={24} className="fullHeight">
-							<Row className="align-items-center fullHeight">
-								<Col md={24} sm={24} xs={24}>
-									
-									{isCodeSent ? 
-										<FormResetPassword onSuccess={handleSuccessResetPassword} onCancel={handleCancel}/>
-										:
-										<FormForgotPassword onSuccess={()=>setCodeSent(true)} onCancel={handleCancel}/>
-									}
+					<div style={visible ? {visibility:"visible"} : {visibility:"hidden"}}>	
+						<Row className="justify-content-center fullHeight">
+							<Col md={8} sm={24} xs={24} className="fullHeight">
+								<Row className="align-items-center fullHeight">
+									<Col md={24} sm={24} xs={24}>
+										
+										{isCodeSent ? 
+											<FormResetPassword onSuccess={handlePasswordResetRequiredSuccess} onCancel={handleCancel}/>
+											:
+											<FormForgotPassword onSuccess={()=>setCodeSent(true)} onCancel={handleCancel}/>
+										}
 
-								</Col>
-							</Row>
-							
-						</Col>
-					</Row>
-					
+									</Col>
+								</Row>
+								
+							</Col>
+						</Row>
+					</div>
 				</ContentLayout>
 			</VuroxLayout>
 		</React.Fragment>

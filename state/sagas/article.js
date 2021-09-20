@@ -71,6 +71,8 @@ function* listArticles(action){
                 
         const response = yield API.graphql(graphqlOperation(queries.listArticles,{input:listParams}))
 
+        console.log(response)
+        
         yield put(listArticlesRoutine.success({data:response.data.listArticles}))
 
                     

@@ -11,6 +11,7 @@ import {getRedirectToUserDefaultPath} from 'Helper'
 
 import { Row, Col,Image,Typography} from 'antd'
 import FormLogin from 'Components/FormAuthLogin'
+import FormResetPassword from 'Components/FormAuthResetPassword'
 import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
 
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -34,6 +35,7 @@ const PageLogin = props =>{
 
 	const [user,setUser] = React.useState()
 	const [isNewPasswordRequired,setNewPasswordRequired] = React.useState(false)
+	const [isPasswordResetRequired,setPasswordResetRequired] = React.useState(false)
 	const [visible,setVisible] = React.useState(false)
 	 
 	React.useEffect(async()=>{
@@ -54,7 +56,6 @@ const PageLogin = props =>{
 			}
 			else{
 				
-				//console.log(router)
 				if(router.query.account_url){
 					const uniqueURLPath = router.query.account_url
 					//get account id by unique URL
@@ -73,6 +74,10 @@ const PageLogin = props =>{
 			router.push('/not-found')
 		}
 			
+		return (()=>{
+			setUser()
+			setNewPasswordRequired(false)
+		})
 	},[auth.isLoggedIn,router.query.account_url])
 
 	const goToForgotPassword = () =>{
@@ -84,6 +89,24 @@ const PageLogin = props =>{
 		setNewPasswordRequired(true)
 	}
 	
+	const handlePasswordResetRequired = async(user) =>{
+		// console.log(user)
+		try{
+			await authController._resetRequired(user.email)
+			setPasswordResetRequired(true)
+		}
+		catch(error){console.log(error)}
+	}
+	const handleSuccessPasswordReset = () =>{
+		setPasswordResetRequired(false)
+	}
+
+	const handleCancelPasswordReset = () =>{
+		
+		setPasswordResetRequired(false)
+	}
+
+
 	const handleBackToLogin = () => {
 		setNewPasswordRequired(false)
 		authController._signOut()
@@ -127,7 +150,10 @@ const PageLogin = props =>{
 										{isNewPasswordRequired ? 
 											<FormCompleteNewPasword user={user} onSuccess={handleSuccessNewPassword} onBack={handleBackToLogin}/>
 											:
-											<FormLogin onSuccess={handleSuccessLogin} onNewPasswordRequired={handleNewPasswordRequired} onForgotPassword={goToForgotPassword}/>
+										isPasswordResetRequired ? 
+											<FormResetPassword onSuccess={handleSuccessPasswordReset} onCancel={handleCancelPasswordReset}/>
+											:
+											<FormLogin onSuccess={handleSuccessLogin} onNewPasswordRequired={handleNewPasswordRequired} onForgotPassword={goToForgotPassword} onPasswordResetRequired={handlePasswordResetRequired}/>
 										}
 									</Col>
 								</Row>

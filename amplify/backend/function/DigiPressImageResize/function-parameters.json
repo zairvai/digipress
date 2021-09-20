@@ -1,5 +1,13 @@
 {
-  "lambdaLayers": [],
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "baktipesantrenDigipressLayer",
+      "env": "dev",
+      "version": 1,
+      "isLatestVersionSelected": false
+    }
+  ],
   "environmentVariableList": [
     {
       "cloudFormationParameterName": "allowedDimensions",
@@ -12,10 +20,6 @@
     {
       "cloudFormationParameterName": "url",
       "environmentVariableName": "URL"
-    },
-    {
-      "cloudFormationParameterName": "allowedDimensions",
-      "environmentVariableName": "ALLOWED_DIMENSIONS"
     }
   ]
 }

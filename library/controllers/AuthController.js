@@ -1,5 +1,6 @@
 import {
     completeNewPassword,
+    forgotPassword,
     setAccount,
     setUser,
     setLoggedIn
@@ -150,6 +151,14 @@ export default class Controller{
                 username:email
             }
         })
+    }
+
+    _resetRequired = email =>{
+        this.dispatch(forgotPassword({
+            values:{
+                username:email
+            }
+        }))
     }
 
     _completeNewPassword = (name,password,user) =>{

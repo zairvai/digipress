@@ -66,7 +66,7 @@ const FormAuth = props => {
                 const access = JSON.parse(signInUserSession.idToken.payload.access)
                 
                 const user = {
-                    id:attributes.sub,
+                    id:attributes.preferred_username ? attributes.preferred_username : attributes.sub,
                     name:attributes.name,
                     phoneNumber:attributes.phone_number,
                     email:attributes.email,
@@ -82,11 +82,18 @@ const FormAuth = props => {
             }
             
         }catch(errors){
+            
             console.log(errors)
-            setSubmitting(false)
+            
+            const {error} = errors
 
-            const error = authError(errors.error)
-            setError(error)
+            if(error.code=="PasswordResetRequiredException"){
+                props.onPasswordResetRequired({email:values.email})
+            }
+            else{
+                setSubmitting(false)
+                setError(authError(error))
+            }
         }
 
     }

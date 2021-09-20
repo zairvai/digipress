@@ -26,6 +26,7 @@ function* signIn(action) {
         
         const data = yield Auth.signIn(username,password,{accountId})
         
+        //HANDLED IN FORM LOGIN
         // if(user.challengeName === "NEW_PASSWORD_REQUIRED") yield put(customSignInRoutine.newpasswordrequired({data:user}))
         // else if(user.signInUserSession.idToken.payload.access==="false") {
         //     yield Auth.signOut()
@@ -37,6 +38,8 @@ function* signIn(action) {
 
     }catch(error){
 
+        //HANDLED IN FORM LOGIN
+        
         // if(typeof error.code !== undefined){
             
         //     const {code} = error
