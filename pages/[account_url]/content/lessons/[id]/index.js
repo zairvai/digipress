@@ -134,7 +134,7 @@ const PageLessonId = props => {
     )
 }
 
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth,app:state.app}),
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -142,4 +142,4 @@ export default connect(
                 updateLessonRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLessonId))
+)(PageLessonId))

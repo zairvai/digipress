@@ -46,4 +46,4 @@ const PageAccountAdd = props => {
     );
 	
 }
-export default connect(state=>({auth:state.auth}))(withRouter(PageAccountAdd))
+export default withRouter(connect(state=>({auth:state.auth}))(PageAccountAdd))

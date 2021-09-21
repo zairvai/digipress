@@ -53,4 +53,4 @@ const PageCategories = props => {
 }
 
 
-export default connect(state=>state)(withRouter(PageCategories))
+export default withRouter(connect(state=>state)(PageCategories))

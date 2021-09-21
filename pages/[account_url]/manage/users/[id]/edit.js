@@ -52,11 +52,11 @@ const PageUserEdit = props => {
 	
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
             getUserRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageUserEdit))
+)(PageUserEdit))

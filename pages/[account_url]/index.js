@@ -21,4 +21,4 @@ const Index = props =>{
 
 }
 
-export default connect(state=>({auth:state.auth}))(withRouter(Index))
+export default withRouter(connect(state=>({auth:state.auth}))(Index))

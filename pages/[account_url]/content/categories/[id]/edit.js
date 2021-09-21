@@ -59,11 +59,11 @@ const PageCategoryAdd = props => {
     );
 	
 }
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getCategoryRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageCategoryAdd))
+)(PageCategoryAdd))

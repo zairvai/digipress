@@ -176,7 +176,7 @@ const PageAccountId = props => {
 
 }
 
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -186,4 +186,4 @@ export default connect(
             getAccountRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageAccountId))
+)(PageAccountId))

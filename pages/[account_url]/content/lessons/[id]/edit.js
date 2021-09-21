@@ -82,11 +82,11 @@ const PageLessonEdit = props => {
 
 }
 
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getLessonRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLessonEdit))
+)(PageLessonEdit))

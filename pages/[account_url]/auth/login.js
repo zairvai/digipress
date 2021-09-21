@@ -80,6 +80,9 @@ const PageLogin = props =>{
 		})
 	},[auth.isLoggedIn,router.query.account_url])
 
+
+	
+
 	const goToForgotPassword = () =>{
         router.push('/auth/password-recovery')
 	}
@@ -182,7 +185,7 @@ const PageLogin = props =>{
 	
 }
 
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -190,4 +193,4 @@ export default connect(
 				getAccountByUniqueUrlRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLogin))
+)(PageLogin))

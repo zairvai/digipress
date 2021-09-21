@@ -145,7 +145,7 @@ const PageArticleId = props => {
     )
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -153,4 +153,4 @@ export default connect(
                 updateArticleRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageArticleId))
+)(PageArticleId))

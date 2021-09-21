@@ -15,4 +15,4 @@ const Redirector = props => {
     return (<></>)
 }
 
-export default connect(state=>({auth:state.auth}))(withRouter(Redirector))
+export default withRouter(connect(state=>({auth:state.auth}))(Redirector))
