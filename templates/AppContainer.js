@@ -40,12 +40,12 @@ const Container = props => {
 
     React.useEffect(()=>{
 
-		if(router.query && router.query.account_url){
+		if(router.query.account_url && auth.account){
             if(auth.account.uniqueURL != router.query.account_url) setShouldSignOut(true)
             else setVisible(true)
 		}
 
-	},[router])
+	},[router,auth])
 
     React.useEffect(async()=>{
         if(shouldSignOut){
