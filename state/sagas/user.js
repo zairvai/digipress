@@ -26,7 +26,7 @@ function* createUser(action){
             phoneCode:values.phoneCode.trim(),
             phoneNumber:values.phoneNumber.trim(),
             password:values.password.trim(),
-            role = {
+            role:{
                 accountId:values.accountId.trim(),
                 role:values.role.trim()
             }
