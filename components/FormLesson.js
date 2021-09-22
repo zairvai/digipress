@@ -25,7 +25,7 @@ const schema = yup.object().shape({
 
 const FormLesson = ({item,...props}) => {
 
-    const {createLesson,updateLesson} = props
+    const {auth,createLesson,updateLesson} = props
 
     const lessonController = new LessonController(props)
 
@@ -103,12 +103,15 @@ const FormLesson = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
+            values.updatedByid = auth.user.id
             lessonController._update(item,values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))
         }else{
             values.accountId = props.accountId
             values.postId = props.postId
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
             lessonController._create(values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))
@@ -257,7 +260,7 @@ const FormLesson = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createLessonRoutinePromise,

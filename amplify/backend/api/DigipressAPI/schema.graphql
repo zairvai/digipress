@@ -157,6 +157,8 @@ input CreateAccountInput {
 	contactPerson: String!
 	emailAddress: AWSEmail!
 	phoneNumber: String!
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateAccountInput {
@@ -168,6 +170,7 @@ input UpdateAccountInput {
 	emailAddress: AWSEmail
 	phoneNumber: String
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -204,6 +207,8 @@ input CreateArticleInput {
 	tags: [ID!]
 	allowComment: Boolean
 	access: ReadAccess
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateArticleInput {
@@ -216,6 +221,7 @@ input UpdateArticleInput {
 	allowComment: Boolean
 	access: ReadAccess
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -252,6 +258,8 @@ input CreateClassroomInput {
 	tags: [ID!]
 	allowComment: Boolean
 	access: ReadAccess
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateClassroomInput {
@@ -264,6 +272,7 @@ input UpdateClassroomInput {
 	allowComment: Boolean
 	access: ReadAccess
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -291,6 +300,7 @@ input UpdateCategoryInput {
 	name: String
 	desc: String
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -299,6 +309,8 @@ input CreateCategoryInput {
 	accountId: ID!
 	name: String!
 	desc: String
+	createdById:ID
+	updatedById:ID
 }
 
 type CategoryConnection {
@@ -322,12 +334,15 @@ type Tag @aws_iam
 input CreateTagInput {
 	accountId: ID!
 	name: String!
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateTagInput {
 	id: ID!
 	name: String
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -361,6 +376,8 @@ input CreateUserInput {
 	emailAddress: AWSEmail!
 	password: String
 	role: AccessInputType!
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateUserInput {
@@ -371,6 +388,7 @@ input UpdateUserInput {
 	phoneNumber: String
 	roles: [AccessInputType]
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -412,6 +430,8 @@ input CreateCommentInput {
 	isReply:Boolean
 	replyToId:ID
 	replyToUserId:ID
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateCommentInput {
@@ -420,6 +440,7 @@ input UpdateCommentInput {
 	postId:ID!
 	content:String
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -470,6 +491,8 @@ input CreateLessonInput {
 	title:String!
 	seq:Int!
 	content:String!
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateLessonInput{
@@ -480,6 +503,7 @@ input UpdateLessonInput{
 	content:String
 	seq:Int
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 
@@ -521,6 +545,8 @@ input CreateQnaInput {
 	replyToId:ID
 	replyToUserId:ID
 	status:Int
+	createdById:ID
+	updatedById:ID
 }
 
 input UpdateQnaInput {
@@ -530,6 +556,7 @@ input UpdateQnaInput {
 	lessonId:ID
 	content:String
 	status: Int
+	updatedById:ID
 	expectedVersion: Int!
 }
 

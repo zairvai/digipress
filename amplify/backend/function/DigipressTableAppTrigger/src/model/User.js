@@ -35,7 +35,9 @@ function searchManagerPut(record){
       "status":newImage.status.S,
       "__typename":newImage.__typename.S,
       "createdAt":newImage.createdAt.S,
-      "updatedAt":newImage.updatedAt.S
+      "updatedAt":newImage.updatedAt.S,
+      "createdBy":newImage.createdBy.S,
+      "updatedBy":newImage.updatedBy.S,
     }
 
     return functions.invokeLambdaSearchManager("put",`/records/_doc/${id}`,body)

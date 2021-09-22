@@ -20,6 +20,15 @@ $util.qr($ctx.stash.put("user",{
     $util.qr($ctx.stash.put("role",$ctx.args.input.role))
 #end
 
+
+#if( !$util.isNull($ctx.args.input.createdById))
+	$util.qr($input.put("createdBy",$ctx.args.input.createdById))
+#end
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
+#end
+
 $util.qr($ctx.stash.put("field","createUser"))
 $util.qr($ctx.stash.put("input",$input))
 

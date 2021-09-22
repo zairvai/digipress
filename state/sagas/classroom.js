@@ -31,6 +31,10 @@ function* createClassroom(action){
         if(values.categoryId) inputParams.categoryId = values.categoryId
         if(values.tags) inputParams.tags = values.tags
 
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
+
         const response = yield API.graphql(graphqlOperation(mutations.createClassroom,{input:inputParams}))
 
         yield delay(2000)
@@ -159,6 +163,7 @@ function* updateClassroom(action){
         if(values.content) updateParams.content = values.content
         if(values.access) updateParams.access = values.readAccess.trim()   
         if(values.status) updateParams.status = values.status
+        if(values.updatedById) updateParams.updatedById = values.updatedById
         
         const response = yield API.graphql(graphqlOperation(mutations.updateClassroom,{input:updateParams}))
 

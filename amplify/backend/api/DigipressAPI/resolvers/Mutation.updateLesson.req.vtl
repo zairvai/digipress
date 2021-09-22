@@ -22,6 +22,10 @@ $util.qr($input.put("expectedVersion",$ctx.args.input.expectedVersion))
 $util.qr($input.put("updatedBy",$ctx.identity.sub))
 $util.qr($input.put("updatedAt",$util.time.nowISO8601()))
 
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
+#end
+
 $util.qr($ctx.stash.put("input",$input))
 
 #if(!$util.isNull($ctx.args.input.content))

@@ -49,6 +49,9 @@ const FormTag = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
+        
+        values.createdById = auth.user.id
+        values.updatedByid = auth.user.id
 
         tagController._create(values)
             .then(tag=>props.onSuccess(tag.data))
@@ -112,7 +115,7 @@ const FormTag = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createTagRoutinePromise

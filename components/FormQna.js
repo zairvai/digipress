@@ -93,7 +93,9 @@ const FormQna = ({formId,item,...props}) => {
         setSubmiting(true)
 
         if(item){
-            // console.log("qnaType : " + props.qnaType)
+            
+            values.updatedByid = auth.user.id
+
             if(props.qnaType=="ques"){
                 qnaController._update(item,values)
                     .then(question=>{
@@ -118,6 +120,9 @@ const FormQna = ({formId,item,...props}) => {
             values.accountId = lesson.account.id
             values.postId = lesson.post.id
             values.lessonId = lesson.id
+
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
 
             values.qnaType = props.qnaType
 

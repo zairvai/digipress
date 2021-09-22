@@ -77,6 +77,9 @@ const FormUser = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
+        
+        values.createdById = auth.user.id
+        values.updatedByid = auth.user.id
 
         userController._create(values)
             .then(user=>props.onSuccess(user.data))
@@ -305,7 +308,7 @@ const FormUser = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createUserRoutinePromise
