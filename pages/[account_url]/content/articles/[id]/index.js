@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col,Modal,PageHeader,Button} from 'antd'
 import Link from 'next/link'
 import {
@@ -23,31 +23,41 @@ const PageArticleId = props => {
 
     const {confirm} = Modal
 
-    const {auth,commentId,router} = props
+    const {auth,commentId} = props
+    const router = useRouter()
 
     const articleController = new ArticleController(props)
 
+    const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
     const [isFetching,setFetching] = React.useState(true)
 
     const [noOfComment,setNoOfComment] = React.useState(0)
 
-    const {id} = React.useMemo(()=>router.query,[])
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
     React.useEffect(async ()=>{
        
-        try{
-            const article = await articleController._get(id)
-            setFetching(false)
-            setItem(article.data)
-            setNoOfComment(article.data.noOfAllComment)
+        if(id){
+            try{
+                const article = await articleController._get(id)
+                setFetching(false)
+                setItem(article.data)
+                setNoOfComment(article.data.noOfAllComment)
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/articles`)
-            console.log(error)
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/content/articles`)
+                console.log(error)
+            }
         }
         
-    },[])
+    },[id])
+
+
 
     
     
@@ -145,7 +155,7 @@ const PageArticleId = props => {
     )
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -153,4 +163,4 @@ export default withRouter(connect(
                 updateArticleRoutinePromise
         },dispatch),dispatch
     })
-)(PageArticleId))
+)(PageArticleId)

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 
 import { Row, Col,PageHeader} from 'antd'
 import LayoutArticle from 'Templates/Layout.article'
@@ -19,37 +19,46 @@ import {NextSeo} from 'next-seo'
 
 const PageArticleEdit = props => {
 
-	const {auth,listTags,listCategories,router} = props
-	
+	const {auth,listTags,listCategories} = props
+	const router = useRouter()
+
 	const articleController = new ArticleController(props)
 	const categoryController = new CategoryController(props)
 	const tagController = new TagController(props)
 
+	const [id,setId] = React.useState(false)
 	const [item,setItem] = React.useState(false)
-
-	const {id} = React.useMemo(()=>router.query,[])
 	
 	const isMounted = React.useRef()
 
 	React.useEffect(()=>{
-		isMounted.current = true
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
-		if(isMounted.current){
-			//get category
-			categoryController._list({accountId:auth.account.id})
-			//get tag
-			tagController._list({accountId:auth.account.id})
+	React.useEffect(()=>{
 		
-			articleController._get(id)
-				.then(article=>setItem(article.data))
-				.catch(error=>router.push(`/${auth.account.uniqueURL}/content/articles`))
+		if(id){
+			isMounted.current = true
+
+			if(isMounted.current){
+				//get category
+				categoryController._list({accountId:auth.account.id})
+				//get tag
+				tagController._list({accountId:auth.account.id})
+			
+				articleController._get(id)
+					.then(article=>setItem(article.data))
+					.catch(error=>router.push(`/${auth.account.uniqueURL}/content/articles`))
+			}
 		}
 			
 		return ()=>{
 			isMounted.current = false
 		}
 
-	},[])
+	},[id])
 
 
 	const onCancel = () => {
@@ -85,7 +94,7 @@ const PageArticleEdit = props => {
 	
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -94,4 +103,4 @@ export default withRouter(connect(
 				listTagsRoutinePromise
         },dispatch),dispatch
     })
-)(PageArticleEdit))
+)(PageArticleEdit)
