@@ -117,9 +117,9 @@ const FormQna = ({formId,item,...props}) => {
         }
         else{
 
+            console.log(lesson)
             values.accountId = lesson.account.id
             values.postId = lesson.post.id
-            values.lessonId = lesson.id
 
             values.createdById = auth.user.id
             values.updatedByid = auth.user.id
@@ -133,7 +133,7 @@ const FormQna = ({formId,item,...props}) => {
             if(replyToUser) values.replyToUserId = replyToUser.id
 
             if(props.qnaType=="ques"){
-
+                values.lessonId = lesson.id
                 // console.log(values)
                 // setSubmiting(false)
                 qnaController._create(values)
@@ -145,6 +145,7 @@ const FormQna = ({formId,item,...props}) => {
                     .catch(error=>console.log(error))
             }
             else if(props.qnaType=="ans"){
+                values.lessonId = lesson.lesson.id
                 qnaController._create(values)
                     .then(answer=>{
                         //update pertanyaan jadi terjawab status = 3

@@ -310,7 +310,7 @@ const List = props =>{
                             <div className="mb-3"><Title level={5}>Jawaban</Title></div>
                             <FormQna formId="qnaForm" 
                                 item={selectedItem && selectedItem.replies && selectedItem.replies[0]}
-                                lesson={selectedItem && selectedItem.lesson}
+                                lesson={selectedItem}
                                 replyTo={selectedItem}
                                 replyToUser={selectedItem && selectedItem.createdBy} 
                                 qnaType="ans" 
