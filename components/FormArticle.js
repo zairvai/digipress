@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 
 const FormArticle = ({item,...props}) => {
 
-    const {tags,categories} = props
+    const {auth,tags,categories} = props
 
     const articleController = new ArticleController(props)
 
@@ -138,11 +138,17 @@ const FormArticle = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
+            
+            values.updatedByid = auth.user.id
 
             articleController._update(item,values)
                 .then(article=>props.onSuccess(article.data))
                 .catch(error=>console.log(error))
         }else{
+            
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+
             values.accountId = props.accountId
             articleController._create(values)
                 .then(article=>props.onSuccess(article.data))
@@ -380,6 +386,7 @@ const FormArticle = ({item,...props}) => {
 
 export default connect(
     state=>({
+        auth:state.auth,
         dispatch:state.dispatch,
     }),
     (dispatch)=>({

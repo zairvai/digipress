@@ -21,8 +21,12 @@
     "updatedAt":$util.time.nowISO8601()
 } )
 
-#if( !$util.isNull($ctx.args.input.description ))
-	$util.qr($input.put("description",$ctx.args.input.description))
+#if( !$util.isNull($ctx.args.input.createdById))
+	$util.qr($input.put("createdBy",$ctx.args.input.createdById))
+#end
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
 #end
 
 $util.qr($ctx.stash.put("input",$input))

@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="shortcut icon" href="/image/favicon.png" />
+          <link rel="shortcut icon" href="/image/favicon.jpg?v1" />
         </Head>
         <body className='vurox-dark-version vurox-admin-template'>
           <Main />

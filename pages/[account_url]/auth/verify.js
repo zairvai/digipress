@@ -125,11 +125,11 @@ const PageAuth = props => {
     );
 	
 }
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getUserRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageAuth))
+)(PageAuth))

@@ -54,7 +54,8 @@ const FormCategory = ({item,...props}) => {
         if(item) {
 
             values = {id:item.id,version:item.version,...values}
-            
+            values.updatedByid = auth.user.id
+
             categoryController._update(values)
                 .then(category=>props.onSuccess(category.data))
                 .catch(error=>console.log(error))
@@ -62,6 +63,9 @@ const FormCategory = ({item,...props}) => {
         }else{
             if(props.accountId) values.accountId = props.accountId
 
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+            
             categoryController._create(values)
                 .then(category=>props.onSuccess(category.data))
                 .catch(error=>console.log(error))
@@ -153,7 +157,7 @@ const FormCategory = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createCategoryRoutinePromise,

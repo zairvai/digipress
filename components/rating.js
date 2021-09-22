@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'
 export class VuroxRatingBlock extends React.Component{
 	constructor(props){
 		super(props)
@@ -16,7 +17,7 @@ export class VuroxRatingBlock extends React.Component{
 	render(){
 		return(
 			<li>
-				<img src={this.props.image} alt="review-author" />
+				<Image src={this.props.image} alt="review-author" />
 				<span className="absolute-right">{this.props.time}</span>
 				<div className="vurox-list-desc vw-80">
 					<h6>{this.props.author}</h6>

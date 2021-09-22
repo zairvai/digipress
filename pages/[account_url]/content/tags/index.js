@@ -28,7 +28,7 @@ const PageTags = props => {
 						extra={[
 							<div key="1">
 							{Permission.ADD_TAG({auth}) 
-								&& <Link href={`/${auth.account.uniqueURL}/content/tags/add`} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Tambah tag</Button></Link>}
+								&& <Link passHref href={`/${auth.account.uniqueURL}/content/tags/add`} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Tambah tag</Button></Link>}
 							</div>
 						]}
 					/>

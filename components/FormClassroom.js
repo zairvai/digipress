@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 
 const FormClassroom = ({item,...props}) => {
 
-    const {tags,categories} = props
+    const {auth,tags,categories} = props
 
     const classroomController = new ClassroomController(props)
 
@@ -142,10 +142,16 @@ const FormClassroom = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
+            
+            values.updatedByid = auth.user.id
+
             classroomController._update(item,values)
                 .then(classroom=>props.onSuccess(classroom.data))
                 .catch(error=>console.log(error))
         }else{
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+            
             values.accountId = props.accountId
             classroomController._create(values)
                 .then(classroom=>props.onSuccess(classroom.data))
@@ -385,7 +391,7 @@ const FormClassroom = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createClassroomRoutinePromise,

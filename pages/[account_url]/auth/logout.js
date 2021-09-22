@@ -41,11 +41,11 @@ const PageLogout = props => {
 
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
             signOutRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLogout))
+)(PageLogout))

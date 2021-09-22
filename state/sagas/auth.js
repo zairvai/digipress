@@ -235,7 +235,7 @@ function* getAuthUser() {
 
     try{
         
-        const user = yield Auth.currentAuthenticatedUser({bypassCache:false})
+        const user = yield Auth.currentAuthenticatedUser({bypassCache:true})
 
         yield put(getAuthUserRoutine.success({data:user}))
 

@@ -7,38 +7,50 @@ import AuthController from 'Library/controllers/AuthController'
 
 const Container = props => {
 
+    
+    
     const authController = new AuthController(props)
     const [visible,setVisible] = React.useState(false)//testing
+    const [shouldSignOut,setShouldSignOut] = React.useState(false)
     const {auth} = props
 
     const router = useRouter()
    
     React.useEffect(async()=>{
 
+        //console.log(props)
+
         router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
         router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
-
-        let shouldSignOut = false
 
         try{
 
             await authController._get()
-            
-            // console.log(auth.user)
-            // console.log(`${auth.account.uniqueURL} - ${router.query.account_url}`)
-            
-            if(!auth.user.access) shouldSignOut = true
-            else {
-                if(auth.account.uniqueURL != router.query.account_url) shouldSignOut=true
-                else setVisible(true)
-            }
-            
+
+            if(!auth.user.access) setShouldSignOut(true)
+
 
         }catch(error){
-            // console.log(error)
-            shouldSignOut = true
+            console.log(error)
+            setShouldSignOut(true)
         }
 
+
+    },[])
+
+    //making sure user dont access to other unique url account directly
+    React.useEffect(()=>{
+
+		// if(router.query.account_url && auth.account){
+        //     if(auth.account.uniqueURL != router.query.account_url) setShouldSignOut(true)
+        //     else setVisible(true)
+		// }
+
+        setVisible(true)
+
+	},[router,auth])
+
+    React.useEffect(async()=>{
         if(shouldSignOut){
             await authController._signOut()
             
@@ -47,11 +59,8 @@ const Container = props => {
             }else{
                 router.push(`/app/auth/login`)
             }
-
         }
-
-
-    },[])
+    },[shouldSignOut])
 
    
     return(

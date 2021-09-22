@@ -14,4 +14,4 @@ const Redirector = props => {
     )
 }
 
-export default connect(state=>state)(withRouter(Redirector))
+export default withRouter(connect(state=>state)(Redirector))

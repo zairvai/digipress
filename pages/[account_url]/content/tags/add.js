@@ -43,10 +43,10 @@ const PageTagAdd = props => {
     );
 	
 }
-export default connect(
+export default withRouter(connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
         },dispatch),dispatch
     })
-)(withRouter(PageTagAdd))
+)(PageTagAdd))

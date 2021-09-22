@@ -34,6 +34,8 @@ const schema = yup.object().shape({
 
 const FormAccount = ({item,...props}) => {
 
+    const {auth} = props
+
     const [isSubmitting,setSubmitting] = React.useState(false)
 
     const [isErrorUniqueURL,setErrorUniqueURL] = React.useState(false)
@@ -84,14 +86,18 @@ const FormAccount = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
-            
+            values.updatedByid = auth.user.id
             accountController._update(item,values)
                 .then(account=>props.onSuccess(account.data))
                 .catch(error=>console.log(error))
         }
-        else accountController._create(values)
+        else {
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+            accountController._create(values)
                 .then(account=>props.onSuccess(account.data))
                 .catch(error=>console.log(error))
+        }
 
     }
 

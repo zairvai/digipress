@@ -20,22 +20,19 @@ function* createAccount(action){
 
         const {values} = action.payload
 
-        const name = values.name.trim()
-        const address = values.address.trim()
-        const contactPerson = values.contactPerson.trim()
-        const uniqueURL = values.uniqueURL.trim().toLowerCase()
-        const phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
-        const emailAddress = values.emailAddress.trim()
+        const inputParams = {
+            name:values.name.trim(),
+            address:values.address.trim(),
+            contactPerson:values.contactPerson.trim(),
+            uniqueURL:values.uniqueURL.trim().toLowerCase(),
+            phoneNumber:values.phoneCode.trim() +"-"+ values.phoneNumber.trim(),
+            emailAddress:values.emailAddress.trim()
+        }
 
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
 
-        const response = yield API.graphql(graphqlOperation(mutations.createAccount,{
-            input:{
-                name,
-                address,
-                contactPerson,
-                uniqueURL,
-                phoneNumber,
-                emailAddress}}))
+        const response = yield API.graphql(graphqlOperation(mutations.createAccount,{input:inputParams}))
 
         yield delay(2000)
         yield put(createAccountRoutine.success({data:response.data.createAccount}))
@@ -190,6 +187,7 @@ function* updateAccount(action){
         if(values.phoneNumber) updateParams.phoneNumber = values.phoneCode.trim() +"-"+ values.phoneNumber.trim()
         if(values.emailAddress) updateParams.emailAddress = values.emailAddress.trim()
         if(values.status) updateParams.status = values.status
+        if(values.updatedById) updateParams.updatedById = values.updatedById
         
 
         const response = yield API.graphql(graphqlOperation(mutations.updateAccount,{input:updateParams}))

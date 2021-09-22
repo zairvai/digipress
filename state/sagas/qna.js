@@ -32,6 +32,8 @@ function* createQna(action){
         if(values.status) inputParams.status = values.status
         if(values.replyToId) inputParams.replyToId = values.replyToId
         if(values.replyToUserId) inputParams.replyToUserId = values.replyToUserId
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
         
         // console.log(inputParams)
 
@@ -200,7 +202,8 @@ function* updateQna(action){
         if(values.lessonId) updateParams.lessonId = values.lessonId
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
-        
+        if(values.updatedById) updateParams.updatedById = values.updatedById
+
         const response = yield API.graphql(graphqlOperation(mutations.updateQna,{input:updateParams}))
 
         yield put(updateQnaRoutine.success({data:response.data.updateQna}))

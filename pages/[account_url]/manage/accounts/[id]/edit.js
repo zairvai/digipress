@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import FormAccount from 'Components/FormAccount'
 import LayoutAccount from 'Templates/Layout.account'
 import { Row, Col,PageHeader} from 'antd'
@@ -13,16 +13,24 @@ const PageAccountEdit = props => {
     
     const accountController = new AccountController(props)
 
-    const {auth,router} = props
+    const {auth} = props
 
-	const [item,setItem] = React.useState({})
+	const router = useRouter()
+	const [id,setId] = React.useState(false)
+	const [item,setItem] = React.useState(false)
 
-    const {id} = React.useMemo(()=>router.query,[])
+	React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
     React.useEffect(async ()=>{
-        const account = await accountController._get(id)
-        setItem(account.data)
-    },[])
+        if(id){
+            const account = await accountController._get(id)
+            setItem(account.data)
+        }
+    },[id])
 
 
     const onSuccess = account =>{
@@ -64,4 +72,4 @@ export default connect(
             getAccountRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageAccountEdit))
+)(PageAccountEdit)

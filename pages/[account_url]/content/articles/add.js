@@ -63,7 +63,7 @@ const PageArticleAdd = props => {
 	
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -71,4 +71,4 @@ export default connect(
 				listTagsRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageArticleAdd))
+)(PageArticleAdd))

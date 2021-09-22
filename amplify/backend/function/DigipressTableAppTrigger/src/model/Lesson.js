@@ -8,7 +8,7 @@ function searchManagerPut(record){
       var body = {
         "id":id,
         "accountId":newImage.accountId.S,
-        "postId":newImage.classroomId.S,
+        "postId":newImage.postId.S,
         "title":newImage.title.S,
         "seq":newImage.seq.N,
         "status":newImage.status.N,

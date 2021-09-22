@@ -1,11 +1,12 @@
 import React from 'react'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import {connect} from 'react-redux'
 import {getRedirectToUserDefaultPath} from 'Helper'
 
 const Index = props =>{
 
-    const {auth,router} = props
+    const {auth} = props
+    const router = useRouter()
     const {asPath,pathname} = router
 
     React.useEffect(()=>{
@@ -21,4 +22,5 @@ const Index = props =>{
 
 }
 
-export default connect(state=>({auth:state.auth}))(withRouter(Index))
+
+export default connect(state=>({auth:state.auth}))(Index)

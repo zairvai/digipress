@@ -98,6 +98,8 @@ const FormComment = ({formId,item,...props}) => {
 
         if(item){
 
+            values.updatedByid = auth.user.id
+            
             commentController._update(item,values)
                 .then(comment=>{
                     props.onSuccess(comment.data)
@@ -110,6 +112,8 @@ const FormComment = ({formId,item,...props}) => {
 
             values.accountId = post.account.id
             values.postId = post.id
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
             
             if(replyTo) values.replyToId = replyTo.id
             if(replyToUser) values.replyToUserId = replyToUser.id

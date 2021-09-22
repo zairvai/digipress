@@ -5,11 +5,12 @@
     "status":3,
     "__typename":"Comment",
     "version":1,
-    "createdBy":$ctx.identity.sub,
+    "createdBy": $ctx.identity.sub,
     "updatedBy":$ctx.identity.sub,
     "createdAt":$util.time.nowISO8601(),
     "updatedAt":$util.time.nowISO8601()
 } )
+
 
 #if( !$util.isNull($ctx.args.input.replyToId))
 	$util.qr($input.put("replyToId",$ctx.args.input.replyToId))
@@ -17,6 +18,14 @@
 
 #if( !$util.isNull($ctx.args.input.replyToUserId))
 	$util.qr($input.put("replyToUserId",$ctx.args.input.replyToUserId))
+#end
+
+#if( !$util.isNull($ctx.args.input.createdById))
+	$util.qr($input.put("createdBy",$ctx.args.input.createdById))
+#end
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
 #end
 
 $util.qr($ctx.stash.put("input",$input))

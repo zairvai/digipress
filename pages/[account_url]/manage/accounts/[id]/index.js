@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import LayoutAccount from 'Templates/Layout.account'
 import { Row, Col,Tag,Modal,Button,Typography,PageHeader} from 'antd'
 import Link from 'next/link'
@@ -28,24 +28,32 @@ const PageAccountId = props => {
 
     const [url,setUrl] = React.useState(window.location) 
 
-    const {auth,router} = props
+    const {auth} = props
 
+    const router = useRouter()
+    const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
 
-    const {id} = React.useMemo(()=>router.query,[])
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
     React.useEffect(async ()=>{
        
-        try{
-            const account = await accountController._get(id)
-            setItem(account.data)
+        if(id){
+            try{
+                const account = await accountController._get(id)
+                setItem(account.data)
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/manage/accounts`)
-            console.log(error)
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/manage/accounts`)
+                console.log(error)
+            }
         }
         
-    },[])
+    },[id])
     
     const links = [['Kelola',`/${auth.account.uniqueURL}/manage/accounts`,''],['Akun',`/${auth.account.uniqueURL}/manage/accounts`,''],[item.name,`/${auth.account.uniqueURL}/manage/accounts/${item.id}`,'active']]
     
@@ -186,4 +194,4 @@ export default connect(
             getAccountRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageAccountId))
+)(PageAccountId)

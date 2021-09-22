@@ -130,7 +130,7 @@ const PageClassroomId = props => {
 
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -138,4 +138,4 @@ export default connect(
                 updateClassroomRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageClassroomId))
+)(PageClassroomId))

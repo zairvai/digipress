@@ -23,7 +23,7 @@ function FullCalendar(props) {
 		  	ssr: false
 		})
 		setCalendarLoaded(true)
-	})
+	},[])
   	let showCalendar = (props) => {
     	if ( !calendarLoaded ) return <div>Loading ...</div>
     	return (

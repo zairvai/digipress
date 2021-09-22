@@ -20,10 +20,16 @@ function* createTag(action){
 
         const {values} = action.payload
 
-        const name = values.name.trim().toLowerCase()
-        const accountId = values.accountId.trim()
+        const inputParams = {
+            name : values.name.trim().toLowerCase(),
+            accountId:values.accountId.trim()
+        }
 
-        const response = yield API.graphql(graphqlOperation(mutations.createTag,{input:{name,accountId}}))
+
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
+        const response = yield API.graphql(graphqlOperation(mutations.createTag,{input:inputParams}))
 
         yield delay(2000)
 
@@ -144,7 +150,8 @@ function* updateTag(action){
         }
 
         if(values.name) updateParams.name = values.name.trim().toLowerCase()
-
+        if(values.updatedById) updateParams.updatedById = values.updatedById
+        
         const response = yield API.graphql(graphqlOperation(mutations.updateTag,{input:updateParams}))
 
         yield put(updateTagRoutine.success({data:response.data.updateTag}))

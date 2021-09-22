@@ -62,4 +62,4 @@ const Page = props => {
 	);
 	
 }
-export default connect(state=>({auth:state.auth}))(withRouter(Page))
+export default withRouter(connect(state=>({auth:state.auth}))(Page))

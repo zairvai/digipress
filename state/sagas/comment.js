@@ -36,6 +36,9 @@ function* createComment(action){
             inputParams.isReply = true
         }
 
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
         const response = yield API.graphql(graphqlOperation(mutations.createComment,{input:inputParams}))
 
         yield delay(2000)
@@ -200,6 +203,7 @@ function* updateComment(action){
     
         if(values.content) updateParams.content = values.content
         if(values.status) updateParams.status = values.status
+        if(values.updatedById) updateParams.updatedById = values.updatedById
 
         
         const response = yield API.graphql(graphqlOperation(mutations.updateComment,{input:updateParams}))
