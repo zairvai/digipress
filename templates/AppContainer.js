@@ -38,14 +38,14 @@ const Container = props => {
 
     },[])
 
-    React.useEffect(()=>{
+    // React.useEffect(()=>{
 
-		if(router.query.account_url && auth.account){
-            if(auth.account.uniqueURL != router.query.account_url) setShouldSignOut(true)
-            else setVisible(true)
-		}
+	// 	if(router.query.account_url && auth.account){
+    //         if(auth.account.uniqueURL != router.query.account_url) setShouldSignOut(true)
+    //         else setVisible(true)
+	// 	}
 
-	},[router,auth])
+	// },[router,auth])
 
     React.useEffect(async()=>{
         if(shouldSignOut){
