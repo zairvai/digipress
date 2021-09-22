@@ -26,9 +26,9 @@ const FormComment = ({item,...props}) => {
 
     const commentController = new CommentController(props)
 
-    React.useEffect(()=>{
+    // React.useEffect(()=>{
 
-    },[])
+    // },[])
 
     const { 
         handleSubmit,
@@ -143,12 +143,12 @@ const ListComments = props =>  {
             })
         }
 
-    },[post])
+    },[post,listItems])
 
 
     React.useEffect(()=>{
 
-        console.log(`from : ${frm} - size : ${sze}`)
+        //console.log(`from : ${frm} - size : ${sze}`)
 
         if(frm<=0) setPrevCommentVisible(false)
         else setPrevCommentVisible(true)

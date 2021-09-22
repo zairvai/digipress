@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col,Modal,Typography,PageHeader,Button} from 'antd'
 import Link from 'next/link'
 import {
@@ -22,27 +22,35 @@ const PageClassroomId = props => {
     const {Text} = Typography
     const {confirm} = Modal
 
-    const {auth,getClassroom,listLessons,router} = props
-
+    const {auth,getClassroom,listLessons} = props
     const classroomController = new ClassroomController(props)
     
+    const router = useRouter()
+    const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
 
-    const {id} = React.useMemo(()=>router.query,[])
+
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
     React.useEffect(async ()=>{
        
-        try{
-            const classroom = await classroomController._get(id)
-            //console.log(classroom)
-            setItem(classroom.data)
+        if(id){
+            try{
+                const classroom = await classroomController._get(id)
+                //console.log(classroom)
+                setItem(classroom.data)
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms`)
-            console.log(error)
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/content/classrooms`)
+                console.log(error)
+            }
         }
         
-    },[])
+    },[id])
 
     
 
@@ -122,7 +130,7 @@ const PageClassroomId = props => {
     )
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -130,4 +138,4 @@ export default withRouter(connect(
                 updateClassroomRoutinePromise
         },dispatch),dispatch
     })
-)(PageClassroomId))
+)(PageClassroomId)

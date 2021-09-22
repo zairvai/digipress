@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col, PageHeader} from 'antd'
 import FormCategory from 'Components/FormCategory'
 import { bindPromiseCreators } from 'redux-saga-routines';
@@ -14,19 +14,33 @@ const PageCategoryAdd = props => {
 
     const categoryController = new CategoryController(props)
 
-    const {auth,router} = props
+    const {auth} = props
 
-    const {id} = React.useMemo(()=>router.query,[])
-
-	const [item,setItem] = React.useState({})
+    const router = useRouter()
+	const [id,setId] = React.useState(false)
+    const [item,setItem] = React.useState({})
+    
+    const isMounted = React.useRef()
 	
     // const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Kategori',`/${auth.account.uniqueURL}/content/categories`,''],[item.name,`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`,''],["Ubah",`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`,'active']]
 
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
+
     React.useEffect(async()=>{
         
-        const category = await categoryController._get(id)
-        setItem(category.data)
+        if(id){
+            isMounted.current = true
+            if(isMounted.current){
+                const category = await categoryController._get(id)
+                setItem(category.data)
+            }
+        }
 
+        return ()=> isMounted.current = false
         
     },[id])
 
@@ -59,11 +73,11 @@ const PageCategoryAdd = props => {
     );
 	
 }
-export default withRouter(connect(
+export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getCategoryRoutinePromise
         },dispatch),dispatch
     })
-)(PageCategoryAdd))
+)(PageCategoryAdd)

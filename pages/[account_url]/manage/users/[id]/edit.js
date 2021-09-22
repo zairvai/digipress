@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import FormUser from 'Components/FormUser'
 import LayoutUser from 'Templates/Layout.user'
 import UserController from 'Library/controllers/UserController'
@@ -15,16 +15,24 @@ const PageUserEdit = props => {
     
     const userController = new UserController(props)
 
-    const {auth,router,getUser,updateUser} = props
+    const {auth,getUser,updateUser} = props
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const router = useRouter()
+	const [id,setId] = React.useState(false)
+	const [item,setItem] = React.useState(false)
 
-	const [item,setItem] = React.useState({})
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
-     React.useEffect(async()=>{
+    React.useEffect(async()=>{
         
-        const user = await userController._get(id)
-        setItem(user.data)
+        if(id){
+            const user = await userController._get(id)
+            setItem(user.data)
+        }
         // console.log(user.data)
         //console.log(getUser.item)
 
@@ -52,11 +60,11 @@ const PageUserEdit = props => {
 	
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
             getUserRoutinePromise
         },dispatch),dispatch
     })
-)(PageUserEdit))
+)(PageUserEdit)

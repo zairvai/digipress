@@ -20,12 +20,13 @@ import {NextSeo} from 'next-seo'
 const PageArticleEdit = props => {
 
 	const {auth,listTags,listCategories} = props
-	const router = useRouter()
+	
 
 	const articleController = new ArticleController(props)
 	const categoryController = new CategoryController(props)
 	const tagController = new TagController(props)
 
+	const router = useRouter()
 	const [id,setId] = React.useState(false)
 	const [item,setItem] = React.useState(false)
 	

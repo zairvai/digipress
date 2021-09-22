@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col, PageHeader} from 'antd'
 import LayoutLesson from 'Templates/Layout.lesson'
 import LessonController from 'Library/controllers/LessonController'
@@ -11,34 +11,43 @@ import {NextSeo} from 'next-seo'
 
 const PageLessonEdit = props => {
 
-    const {auth,router} = props
+    const {auth} = props
 
     const lessonController = new LessonController(props)
     
+    const router = useRouter()
+	const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
-
-    const {id} = React.useMemo(()=>router.query,[])
     
     const isMounted = React.useRef()
 
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
+
+
     React.useEffect(async ()=>{
        
-        isMounted.current = true
+        if(id){
+            isMounted.current = true
 
-        if(isMounted.current){
-            try{
-                const lesson = await lessonController._get(id)
-                setItem(lesson.data)
+            if(isMounted.current){
+                try{
+                    const lesson = await lessonController._get(id)
+                    setItem(lesson.data)
 
-            }catch(error){
-                router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
-                console.log(error)
+                }catch(error){
+                    router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
+                    console.log(error)
+                }
             }
         }
 
         return ()=> isMounted.current = false
 
-    },[])
+    },[id])
 
     
     // const links = [
@@ -82,11 +91,11 @@ const PageLessonEdit = props => {
 
 }
 
-export default withRouter(connect(
+export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
                 getLessonRoutinePromise
         },dispatch),dispatch
     })
-)(PageLessonEdit))
+)(PageLessonEdit)

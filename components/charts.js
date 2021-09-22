@@ -44,7 +44,7 @@ export const VuroxCustomTick = ({ payload, x, y, textAnchor, stroke, radius }) =
 	          x={x}
 	          y={y}
 	          className="recharts-text recharts-polar-angle-axis-tick-value vurox-radar-charts-styles"
-	          text-anchor={textAnchor}
+	          textAnchor={textAnchor}
 	          fill='#ccc'
 	        >
           		<tspan x={x} dy="0em">

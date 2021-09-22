@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col,Tag,Modal,Button, Checkbox,Typography} from 'antd'
 import Link from 'next/link'
 import {
@@ -26,33 +26,40 @@ const {confirm} = Modal
 
 const PageUserId = props => {
 
-    const {auth,getUser,deleteUser,router} = props
+    const {auth,getUser,deleteUser} = props
 
-    const {id} = React.useMemo(()=>router.query,[])
+    const router = useRouter()
+    const [id,setId] = React.useState(false)
+    const [item,setItem] = React.useState({})
 
     const userController = new UserController(props)
-
-	const [item,setItem] = React.useState({})
 
     const [editRoleVisible,setEditRoleVisible] = React.useState(false)
 
     React.useState(()=>router.prefetch("/[account_url]/manage/users/",`/${auth.account.uniqueURL}/manage/users/`))
 
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
+
     React.useEffect(async()=>{
         
-        try{
-            const user = await userController._get(id)
-            
-            const index = user.data.roles.findIndex((role) => role.accountId === auth.account.id)
-            if(index==-1) router.push(`/${auth.account.uniqueURL}/manage/users/`)
+        if(id){
+            try{
+                const user = await userController._get(id)
+                
+                const index = user.data.roles.findIndex((role) => role.accountId === auth.account.id)
+                if(index==-1) router.push(`/${auth.account.uniqueURL}/manage/users/`)
 
-            setItem(user.data)
-            console.log(user.data)
-            
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/manage/users`)
+                setItem(user.data)
+                console.log(user.data)
+                
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/manage/users`)
+            }
         }
-
         
     },[id])
 
@@ -165,7 +172,7 @@ const PageUserId = props => {
 
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -173,4 +180,4 @@ export default withRouter(connect(
             getUserRoutinePromise
         },dispatch),dispatch
     })
-)(PageUserId))
+)(PageUserId)
