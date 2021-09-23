@@ -110,7 +110,7 @@ const PageArticleId = props => {
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_ARTICLE({auth}) 
-                                    && <Link passHref href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah artikel</Button></Link>}
+                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/articles/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah artikel</Button></Link>}
                             </div>,
                             <div className="d-inline" key="2">
                                 {Permission.DELETE_ARTICLE({auth}) 

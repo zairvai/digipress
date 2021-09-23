@@ -9,7 +9,7 @@ const config = {
     region : "ap-southeast-1"
 }
 
-const storageBaseURL = "https://d1wnrlqq9u8wb1.cloudfront.net"
+const storageBaseURL = "https://d211x4vjup154z.cloudfront.net"
 //const storageBaseURL = "https://baktikominfo-digipress-media.s3-ap-southeast-1.amazonaws.com"
 
 AWS.config.s3 = {
