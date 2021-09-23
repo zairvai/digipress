@@ -25,7 +25,7 @@ const PageArticles = props => {
 						extra={[
 							<div key="1">
 							{Permission.ADD_ARTICLE({auth}) 
-								&& <Link href={`/${auth.account.uniqueURL}/content/articles/add`} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Tambah artikel</Button></Link>}
+								&& <Link passHref href={`/${auth.account.uniqueURL}/content/articles/add`} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Tambah artikel</Button></Link>}
 							</div>
 						]}
 					/>
