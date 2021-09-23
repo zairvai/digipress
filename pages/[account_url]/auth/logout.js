@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
@@ -8,7 +8,8 @@ import {NextSeo} from 'next-seo'
 
 const PageLogout = props => {
 
-    const {router,auth} = props
+    const {auth} = props
+    const router = useRouter()
 
     const authController = new AuthController(props)
 
@@ -22,9 +23,9 @@ const PageLogout = props => {
             await authController._signOut()
             
             if(auth && auth.account && auth.account.uniqueURL){
-                router.push(`/${auth.account.uniqueURL}/auth/login`)
+                router.push(`/${auth.account.uniqueURL}/auth/login`,{shallow:true})
             }else{
-                router.push(`/app/auth/login`)
+                router.push(`/app/auth/login`,{shallow:true})
             }
             
 
@@ -41,11 +42,11 @@ const PageLogout = props => {
 
 }
 
-export default withRouter(connect(
+export default connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
             signOutRoutinePromise
         },dispatch),dispatch
     })
-)(PageLogout))
+)(PageLogout)
