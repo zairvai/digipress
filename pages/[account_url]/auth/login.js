@@ -81,6 +81,11 @@ const PageLogin = props =>{
 	},[auth.isLoggedIn,router.query.account_url])
 
 
+	React.useEffect(()=>{
+		if(auth.data){
+			if(auth.data.CodeDeliveryDetails) setPasswordResetRequired(true)
+		}
+	},[auth.data])
 	
 
 	const goToForgotPassword = () =>{
@@ -92,13 +97,13 @@ const PageLogin = props =>{
 		setNewPasswordRequired(true)
 	}
 	
-	const handlePasswordResetRequired = async(user) =>{
+	const handlePasswordResetRequired = user =>{
 		// console.log(user)
-		try{
-			await authController._resetRequired(user.email)
-			setPasswordResetRequired(true)
-		}
-		catch(error){console.log(error)}
+		
+		authController._resetRequired(user.email)
+			//setPasswordResetRequired(true)
+		
+		// catch(error){console.log(error)}
 	}
 	const handleSuccessPasswordReset = () =>{
 		setPasswordResetRequired(false)
