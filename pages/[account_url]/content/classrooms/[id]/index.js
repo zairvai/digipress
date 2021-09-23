@@ -85,7 +85,7 @@ const PageClassroomId = props => {
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_CLASSROOM({auth}) 
-                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/[id]/edit`,query:{id:item.id}}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah ruang belajar</Button></Link>}
+                                    && <Link href={{pathname:`/${auth.account.uniqueURL}/content/classrooms/${id}/edit`}} shallow><Button  type="primary"><i className="ti-plus"></i>&nbsp;Ubah ruang belajar</Button></Link>}
                             </div>,
                             <div className="d-inline" key="2">
                                 {Permission.DELETE_CLASSROOM({auth}) 
