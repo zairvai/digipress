@@ -7,12 +7,18 @@
       "Default": "NONE",
       "Description": " Schedule Expression"
     },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
     "env": {
       "Type": "String"
     },
-    "storagebaktikominfopesantrenv1BucketName": {
+    "s3Key": {
+      "Type": "String"
+    },
+    "storageDigipressStorageBucketName": {
       "Type": "String",
-      "Default": "storagebaktikominfopesantrenv1BucketName"
+      "Default": "storageDigipressStorageBucketName"
     }
   },
   "Conditions": {
@@ -33,16 +39,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "DigiPressStorageManager",
+            "DigipressStorageManager",
             {
               "Fn::Join": [
                 "",
                 [
-                  "DigiPressStorageManager",
+                  "DigipressStorageManager",
                   "-",
                   {
                     "Ref": "env"
@@ -60,8 +74,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME": {
-              "Ref": "storagebaktikominfopesantrenv1BucketName"
+            "STORAGE_DIGIPRESSSTORAGE_BUCKETNAME": {
+              "Ref": "storageDigipressStorageBucketName"
             }
           }
         },
@@ -71,13 +85,9 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
         "Layers": [],
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/DigiPressStorageManager-507955347a332b4c3775-build.zip"
-        }
+        "Timeout": "25"
       }
     },
     "LambdaExecutionRole": {
@@ -86,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "baktikominfopesantrenv1LambdaRolee3f5564f",
+            "baktipesantrenLambdaRolebef8932f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "baktikominfopesantrenv1LambdaRolee3f5564f",
+                  "baktipesantrenLambdaRolebef8932f",
                   "-",
                   {
                     "Ref": "env"
@@ -179,10 +189,26 @@
           "Statement": [
             {
               "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storageDigipressStorageBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
               "Action": [
                 "s3:PutObject",
                 "s3:GetObject",
-                "s3:ListBucket",
                 "s3:DeleteObject"
               ],
               "Resource": [
@@ -192,7 +218,7 @@
                     [
                       "arn:aws:s3:::",
                       {
-                        "Ref": "storagebaktikominfopesantrenv1BucketName"
+                        "Ref": "storageDigipressStorageBucketName"
                       },
                       "/*"
                     ]

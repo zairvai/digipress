@@ -28,6 +28,9 @@ function* createLesson(action){
             content:values.content
         }
 
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
         const response = yield API.graphql(graphqlOperation(mutations.createLesson,{input:inputParams}))
 
         yield delay(2000)
@@ -156,7 +159,8 @@ function* updateLesson(action){
         if(values.content) updateParams.content = values.content
         if(values.seq) updateParams.seq = values.seq
         if(values.status) updateParams.status = values.status
-
+        if(values.updatedById) updateParams.updatedById = values.updatedById
+        
         const response = yield API.graphql(graphqlOperation(mutations.updateLesson,{input:updateParams}))
 
         yield put(updateLessonRoutine.success({data:response.data.updateLesson}))

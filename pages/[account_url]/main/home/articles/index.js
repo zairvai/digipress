@@ -75,11 +75,11 @@ const Home = props =>{
 }
 
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
                 listPostsRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(Home))
+)(Home))

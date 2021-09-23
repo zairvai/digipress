@@ -20,25 +20,23 @@ function* createUser(action){
 
         const {values} = action.payload
 
-        const name = values.name.trim()
-        const emailAddress = values.emailAddress.trim().toLowerCase()
-        const phoneCode = values.phoneCode.trim()
-        const phoneNumber =  values.phoneNumber.trim()
-        const password = values.password.trim()
-        const role = {
-            accountId:values.accountId.trim(),
-            role:values.role.trim()
+        const inputParams = {
+            name:values.name.trim(),
+            emailAddress:values.emailAddress.trim().toLowerCase(),
+            phoneCode:values.phoneCode.trim(),
+            phoneNumber:values.phoneNumber.trim(),
+            password:values.password.trim(),
+            role:{
+                accountId:values.accountId.trim(),
+                role:values.role.trim()
+            }
         }
 
-        const response = yield API.graphql(graphqlOperation(mutations.createUser,{
-            input:{
-                name,
-                phoneCode,
-                phoneNumber,
-                emailAddress,
-                password,
-                role
-            }}))
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
+
+        const response = yield API.graphql(graphqlOperation(mutations.createUser,{input:inputParams}))
 
         yield delay(2000)
         yield put(createUserRoutine.success({data:response.data.createUser}))
@@ -167,12 +165,11 @@ function* updateUser(action){
         if(values.phoneNumber) updateParams.phoneNumber =  values.phoneNumber.trim()
         if(values.status) updateParams.status = values.status.trim()
         if(values.roles) updateParams.roles =  values.roles        
-
+        if(values.updatedById) updateParams.updatedById = values.updatedById
         // console.log(updateParams) 
         // return
 
-        const response = yield API.graphql(graphqlOperation(mutations.updateUser,{
-            input:updateParams}))
+        const response = yield API.graphql(graphqlOperation(mutations.updateUser,{input:updateParams}))
 
         yield put(updateUserRoutine.success({data:response.data.updateUser}))
 

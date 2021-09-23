@@ -30,9 +30,7 @@ const FormAuth = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
-        
+        formState:{errors}
         } = useForm({
             resolver:yupResolver(schema),
             defaultValues:{
@@ -109,8 +107,8 @@ const FormAuth = ({item,...props}) => {
                                         placeholder="Kode..."
                                         autoComplete="off"
                                         type="number"
-                                        value={props.value} 
-                                        onChange={props.onChange} />
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange} />
                                     {errors && errors.code && <Text type="danger">{errors.code.message}</Text>}
                                 </Form.Item>
                             }

@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 
 const FormClassroom = ({item,...props}) => {
 
-    const {tags,categories} = props
+    const {auth,tags,categories} = props
 
     const classroomController = new ClassroomController(props)
 
@@ -113,8 +113,7 @@ const FormClassroom = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -143,10 +142,16 @@ const FormClassroom = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
+            
+            values.updatedByid = auth.user.id
+
             classroomController._update(item,values)
                 .then(classroom=>props.onSuccess(classroom.data))
                 .catch(error=>console.log(error))
         }else{
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+            
             values.accountId = props.accountId
             classroomController._create(values)
                 .then(classroom=>props.onSuccess(classroom.data))
@@ -246,7 +251,9 @@ const FormClassroom = ({item,...props}) => {
                                             <Form.Item label="Nama pelajaran">
                                                 <Input 
                                                     disabled={isSubmitting}
-                                                    size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
+                                                    size="large" placeholder="Pelajaran" 
+                                                    value={props.field.value} 
+                                                    onChange={props.field.onChange} />
                                                 {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                             </Form.Item>
                                         }
@@ -267,11 +274,13 @@ const FormClassroom = ({item,...props}) => {
                                             
                                                 <TinyMce 
                                                     id="classroomEditor"
+                                                    placeholder="Ketik isi tulisan..."
                                                     isSubmitting={isSubmitting}
                                                     minHeight={400}
                                                     onFinishSetup={handleEditorSetup}
                                                     onChange={handleEditorChange} 
-                                                    value={props.value} placeholder="Ketik isi tulisan..."/>
+                                                    value={props.field.value} 
+                                                    />
                                                 
                                             </Form.Item>
                                         }
@@ -382,7 +391,7 @@ const FormClassroom = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createClassroomRoutinePromise,

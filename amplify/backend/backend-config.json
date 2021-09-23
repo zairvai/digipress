@@ -1,12 +1,114 @@
 {
+  "function": {
+    "DigipressAuthPreTokenGeneration": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "DigipressGA": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "baktipesantrenDigipressLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "baktipesantrenDigipressLayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "DigipressIdentityManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "DigipressAuth",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "DigipressStorageManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "DigipressStorage",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
+    },
+    "DigipressImageResize": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "baktipesantrenDigipressLayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "DigipressSearchManager": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    },
+    "DigipressTableAppTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "DigipressIdentityManager",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "DigipressStorageManager",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "DigipressSearchManager",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ]
+    }
+  },
   "auth": {
-    "baktikominfopesantrenv1": {
+    "DigipressAuth": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "baktikominfopesantrenv1PreTokenGeneration",
+          "resourceName": "DigipressAuthPreTokenGeneration",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -18,7 +120,7 @@
     }
   },
   "api": {
-    "baktikominfopesantrenv1": {
+    "DigipressAPI": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -26,7 +128,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authbaktikominfopesantrenv1"
+              "userPoolId": "authDigipressAuth"
             }
           },
           "additionalAuthenticationProviders": []
@@ -34,112 +136,10 @@
       }
     }
   },
-  "function": {
-    "DigiPressSearchManager": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "DigiPressIdentityManager": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "baktikominfopesantrenv1",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "DigiPressTableAppTrigger": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "DigiPressSearchManager",
-          "attributes": [
-            "Name"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "DigiPressIdentityManager",
-          "attributes": [
-            "Name"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "DigiPressStorageManager",
-          "attributes": [
-            "Name"
-          ]
-        }
-      ]
-    },
-    "baktikominfopesantrenv1PreTokenGeneration": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "DigiPressStorageManager": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "baktikominfopesantrenv1",
-          "attributes": [
-            "BucketName"
-          ]
-        }
-      ]
-    },
-    "DigiPressLayers": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
-    "DigiPressGoogleAnalytics": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "DigiPressLayers",
-          "attributes": [
-            "Arn"
-          ]
-        }
-      ]
-    },
-    "DigiPressImageResize": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "DigiPressLayers",
-          "attributes": [
-            "Arn"
-          ]
-        }
-      ]
-    }
-  },
   "storage": {
-    "baktikominfopesantrenv1": {
+    "DigipressStorage": {
       "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "providerPlugin": "awscloudformation"
     }
   }
 }

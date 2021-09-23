@@ -1,0 +1,29 @@
+#set( $input = {
+    "accountId":$ctx.args.input.accountId,
+    "postId":$ctx.args.input.postId,
+    "title":$ctx.args.input.title,
+    "seq":$ctx.args.input.seq,
+    "status":3,
+    "__typename":"Lesson",
+    "version":1,
+    "createdBy":$ctx.identity.sub,
+    "updatedBy":$ctx.identity.sub,
+    "createdAt":$util.time.nowISO8601(),
+    "updatedAt":$util.time.nowISO8601()
+} )
+
+#if( !$util.isNull($ctx.args.input.createdById))
+	$util.qr($input.put("createdBy",$ctx.args.input.createdById))
+#end
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
+#end
+
+$util.qr($ctx.stash.put("input",$input))
+
+$util.qr($ctx.stash.put("field","put"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/lessons"))
+$util.qr($ctx.stash.put("content",$ctx.args.input.content))
+
+{}

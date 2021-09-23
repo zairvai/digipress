@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "googleapis": "^82.0.0",
+    "q": "^1.5.1",
+    "sharp": "^0.28.3"
+  },
+  "devDependencies": {}
+}

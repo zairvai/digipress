@@ -44,8 +44,7 @@ const FormUser = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -78,6 +77,9 @@ const FormUser = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
+        
+        values.createdById = auth.user.id
+        values.updatedByid = auth.user.id
 
         userController._create(values)
             .then(user=>props.onSuccess(user.data))
@@ -135,8 +137,8 @@ const FormUser = ({item,...props}) => {
                                                 disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 size="large" 
                                                 style={{ width: "100%" }} 
-                                                value={props.value} 
-                                                onChange={props.onChange} placeholder="...">
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} placeholder="...">
                                                 {
                                                     roleInputs.map(input=><Select.Option key={input.value} value={input.value}>{input.name}</Select.Option>)
                                                 }
@@ -159,7 +161,9 @@ const FormUser = ({item,...props}) => {
                                                 disabled={createUser.isRequesting || updateUser.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
-                                                size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                         </Form.Item>
                                     }
@@ -182,7 +186,7 @@ const FormUser = ({item,...props}) => {
                                                     disabled={createUser.isRequesting || updateUser.isRequesting}
                                                     size="large" 
                                                     style={{width:"30%"}}
-                                                    value={props.value} readOnly/>
+                                                    value={props.field.value} readOnly/>
                                             }
                                         />
                                         <Controller
@@ -194,7 +198,9 @@ const FormUser = ({item,...props}) => {
                                                     tabIndex="3"
                                                     size="large"
                                                     style={{ width: '70%' }} 
-                                                    value={props.value} placeholder="8xx" onChange={props.onChange}/>
+                                                    placeholder="8xx"
+                                                    value={props.field.value} 
+                                                    onChange={props.field.onChange} />
                                            
                                             }
                                         />
@@ -215,7 +221,9 @@ const FormUser = ({item,...props}) => {
                                                 tabIndex="4" 
                                                 autoComplete="username"
                                                 allowClear
-                                                size="large" placeholder="xxxx@gmail.com " value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="xxxx@gmail.com " 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.emailAddress && <Text type="danger">{errors.emailAddress.message}</Text>}
                                         </Form.Item>
                                     }
@@ -239,8 +247,8 @@ const FormUser = ({item,...props}) => {
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                                 autoComplete="current-password"
                                                 placeholder="Password"
-                                                value={props.value} 
-                                                onChange={props.onChange} 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange}
                                                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                                 />
                                             
@@ -263,8 +271,8 @@ const FormUser = ({item,...props}) => {
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
                                                 autoComplete="current-password"
                                                 placeholder="Konfirmasi password"
-                                                value={props.value} 
-                                                onChange={props.onChange} 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange}
                                                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                                 />
                                             
@@ -300,7 +308,7 @@ const FormUser = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createUserRoutinePromise

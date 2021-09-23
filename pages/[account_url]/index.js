@@ -6,18 +6,21 @@ import {getRedirectToUserDefaultPath} from 'Helper'
 const Index = props =>{
 
     const {auth} = props
-
     const router = useRouter()
-    const {asPath} = router
-    
+    const {asPath,pathname} = router
+
     React.useEffect(()=>{
-        console.log(router)
-        if(auth.isLoggedIn) router.push(getRedirectToUserDefaultPath(asPath,auth.user.access.role))
-        else router.push(`${asPath}auth/login`)
-    },[])
+        
+        if(asPath!=pathname){
+            // console.log(router)    
+            if(auth.isLoggedIn) router.push(getRedirectToUserDefaultPath(asPath,auth.user.access.role))
+            else router.push(`${asPath}auth/login`)
+        }
+    },[asPath])
 
     return (<></>)
 
 }
+
 
 export default connect(state=>({auth:state.auth}))(Index)

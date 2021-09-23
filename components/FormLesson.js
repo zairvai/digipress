@@ -25,7 +25,7 @@ const schema = yup.object().shape({
 
 const FormLesson = ({item,...props}) => {
 
-    const {createLesson,updateLesson} = props
+    const {auth,createLesson,updateLesson} = props
 
     const lessonController = new LessonController(props)
 
@@ -87,7 +87,7 @@ const FormLesson = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -103,12 +103,15 @@ const FormLesson = ({item,...props}) => {
         setSubmitting(true)
 
         if(item) {
+            values.updatedByid = auth.user.id
             lessonController._update(item,values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))
         }else{
             values.accountId = props.accountId
             values.postId = props.postId
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
             lessonController._create(values)
                 .then(lesson=>props.onSuccess(lesson.data))
                 .catch(error=>console.log(error))
@@ -171,7 +174,9 @@ const FormLesson = ({item,...props}) => {
                                         <Input 
                                             tabIndex="1"
                                             disabled={isSubmitting}
-                                            size="large" placeholder="Pelajaran" value={props.value} onChange={props.onChange} />
+                                            size="large" placeholder="Pelajaran" 
+                                            value={props.field.value} 
+                                            onChange={props.field.onChange} />
                                         {errors && errors.title && <Text type="danger">{errors.title.message}</Text>}
                                     </Form.Item>
                                 }
@@ -194,7 +199,9 @@ const FormLesson = ({item,...props}) => {
                                             min={1}
                                             max={100} 
                                             disabled={isSubmitting}
-                                            size="large" placeholder="1" value={props.value} onChange={props.onChange} />
+                                            size="large" placeholder="1" 
+                                            value={props.field.value} 
+                                            onChange={props.field.onChange} />
                                         {errors && errors.seq && <div><Text type="danger">{errors.seq.message}</Text></div>}
                                     </Form.Item>
                                 }
@@ -220,7 +227,8 @@ const FormLesson = ({item,...props}) => {
                                             minHeight={300}
                                             onFinishSetup={handleEditorSetup} 
                                             onRemove={handleEditorRemove}
-                                            onChange={handleEditorChange} value={props.value} placeholder="Ketik isi materi..."/>
+                                            onChange={handleEditorChange} 
+                                            value={props.field.value} placeholder="Ketik isi materi..."/>
                                         
                                     </Form.Item>
                                 }
@@ -252,7 +260,7 @@ const FormLesson = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createLessonRoutinePromise,

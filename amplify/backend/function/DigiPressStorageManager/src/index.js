@@ -1,7 +1,7 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
-	STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME
+	STORAGE_DIGIPRESSSTORAGE_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 
 const AWS = require("aws-sdk")
@@ -20,7 +20,7 @@ exports.handler = async(event,context,callback) => {
             
             var params = {
                 Body:event.arguments.content,
-                Bucket:process.env.STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME,
+                Bucket:process.env.STORAGE_DIGIPRESSSTORAGE_BUCKETNAME,
                 Key: event.arguments.key
             }
             
@@ -29,7 +29,7 @@ exports.handler = async(event,context,callback) => {
         case 'get'      :
 
             var params = {
-                Bucket:process.env.STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME,
+                Bucket:process.env.STORAGE_DIGIPRESSSTORAGE_BUCKETNAME,
                 Key: event.arguments.key
             }
             
@@ -42,7 +42,7 @@ exports.handler = async(event,context,callback) => {
         case 'delete'   :   
             
             var params = {
-                Bucket:process.env.STORAGE_BAKTIKOMINFOPESANTRENV1_BUCKETNAME,
+                Bucket:process.env.STORAGE_DIGIPRESSSTORAGE_BUCKETNAME,
                 Key: event.arguments.key
             }
             

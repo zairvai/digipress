@@ -7,12 +7,27 @@
       "Default": "NONE",
       "Description": " Schedule Expression"
     },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
     "env": {
       "Type": "String"
     },
-    "functionDigiPressLayersArn": {
+    "s3Key": {
+      "Type": "String"
+    },
+    "allowedDimensions": {
+      "Type": "String"
+    },
+    "bucket": {
+      "Type": "String"
+    },
+    "url": {
+      "Type": "String"
+    },
+    "functionbaktipesantrenDigipressLayerArn": {
       "Type": "String",
-      "Default": "functionDigiPressLayersArn"
+      "Default": "functionbaktipesantrenDigipressLayerArn"
     }
   },
   "Conditions": {
@@ -33,16 +48,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "DigiPressImageResize",
+            "DigipressImageResize",
             {
               "Fn::Join": [
                 "",
                 [
-                  "DigiPressImageResize",
+                  "DigipressImageResize",
                   "-",
                   {
                     "Ref": "env"
@@ -59,6 +82,15 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "ALLOWED_DIMENSIONS": {
+              "Ref": "allowedDimensions"
+            },
+            "BUCKET": {
+              "Ref": "bucket"
+            },
+            "URL": {
+              "Ref": "url"
             }
           }
         },
@@ -68,17 +100,13 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:DigiPressLayers-live:3"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:baktipesantrenDigipressLayer-dev:1"
           }
         ],
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": "amplify-baktikominfo-pesantrenv1-live-33123-deployment",
-          "S3Key": "amplify-builds/DigiPressImageResize-46726b6449727350664d-build.zip"
-        }
+        "Timeout": "25"
       }
     },
     "LambdaExecutionRole": {
@@ -87,12 +115,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "baktikominfopesantrenv1LambdaRolec4852aa2",
+            "baktipesantrenLambdaRole3d8d0b2e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "baktikominfopesantrenv1LambdaRolec4852aa2",
+                  "baktipesantrenLambdaRole3d8d0b2e",
                   "-",
                   {
                     "Ref": "env"
@@ -158,6 +186,43 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:PutObjectAcl"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::digipress-media-dev/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

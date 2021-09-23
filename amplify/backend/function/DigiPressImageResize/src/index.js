@@ -6,7 +6,8 @@ const S3 = new AWS.S3({
 });
 const Sharp = require('sharp');
 
-const BUCKET = process.env.BUCKET;
+const ENV = process.env.ENV
+const BUCKET = `${process.env.BUCKET}-${ENV}`;
 const URL = process.env.URL;
 const ALLOWED_DIMENSIONS = new Set();
 

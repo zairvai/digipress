@@ -30,7 +30,9 @@ function* createArticle(action){
 
         if(values.categoryId) inputParams.categoryId = values.categoryId
         if(values.tags) inputParams.tags = values.tags
-
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+        
         const response = yield API.graphql(graphqlOperation(mutations.createArticle,{input:inputParams}))
 
         yield delay(2000)
@@ -71,6 +73,8 @@ function* listArticles(action){
                 
         const response = yield API.graphql(graphqlOperation(queries.listArticles,{input:listParams}))
 
+        console.log(response)
+        
         yield put(listArticlesRoutine.success({data:response.data.listArticles}))
 
                     
@@ -160,6 +164,7 @@ function* updateArticle(action){
         if(values.allowComment) updateParams.allowComment = values.allowComment
         if(values.access) updateParams.access = values.readAccess.trim()
         if(values.status) updateParams.status = values.status
+        if(values.updatedById) updateParams.updatedById = values.updatedById
 
         const response = yield API.graphql(graphqlOperation(mutations.updateArticle,{input:updateParams}))
 

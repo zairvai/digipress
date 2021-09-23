@@ -21,4 +21,4 @@ const AppIndex = props => {
     )
 }
 
-export default connect(state=>({auth:state.auth}))(withRouter(AppIndex))
+export default withRouter(connect(state=>({auth:state.auth}))(AppIndex))

@@ -15,4 +15,4 @@ const AppIndex = props => {
     )
 }
 
-export default connect(state=>state)(withRouter(AppIndex))
+export default withRouter(connect(state=>state)(AppIndex))

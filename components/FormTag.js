@@ -29,8 +29,7 @@ const FormTag = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -50,6 +49,9 @@ const FormTag = ({item,...props}) => {
     const onSubmit = (values) => {
 
         if(props.accountId) values.accountId = props.accountId
+        
+        values.createdById = auth.user.id
+        values.updatedByid = auth.user.id
 
         tagController._create(values)
             .then(tag=>props.onSuccess(tag.data))
@@ -81,7 +83,9 @@ const FormTag = ({item,...props}) => {
                                                 disabled={createTag.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
-                                                size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                         </Form.Item>
                                     }
@@ -111,7 +115,7 @@ const FormTag = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createTagRoutinePromise

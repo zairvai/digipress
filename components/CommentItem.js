@@ -340,11 +340,11 @@ const CommentItem = props =>{
                 
                  
             ]}
-            author={item && item.createdBy.name}
+            author={item && item.createdBy && item.createdBy.name}
             avatar={
                 <Avatar
                     src="/image/default_user.jpg"
-                    alt={item && item.createdBy.name}
+                    alt={item && item.createdBy && item.createdBy.name}
                     />
             }
             content={(

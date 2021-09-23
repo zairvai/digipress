@@ -1,0 +1,25 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "function": {
+      "DigipressIdentityManager": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "DigipressStorageManager": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "DigipressSearchManager": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

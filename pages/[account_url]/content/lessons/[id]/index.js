@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { Row, Col,Modal,PageHeader,Button,Typography} from 'antd'
 import Link from 'next/link'
 import {
@@ -24,30 +24,37 @@ const PageLessonId = props => {
 
     const {confirm} = Modal
 
-    const {auth,app,router} = props
+    const {auth,app} = props
     const lessonController = new LessonController(props)
     const [mode,setMode] = React.useState()
     
+    const router = useRouter()
+    const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
 
-    const {id,ref} = React.useMemo(()=>router.query,[])
+    React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
 
     React.useEffect(async ()=>{
 
-        try{
+        if(id){
+            try{
 
-            if(app.currentPage=="classrooms" || ref=="classrooms") setMode("answer")
-            else setMode("question")
+                if(app.currentPage=="classrooms" || ref=="classrooms") setMode("answer")
+                else setMode("question")
 
-            const lesson = await lessonController._get(id)
-            setItem(lesson.data)
+                const lesson = await lessonController._get(id)
+                setItem(lesson.data)
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms/`)
-            console.log(error)
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/content/classrooms/`)
+                console.log(error)
+            }
         }
-        
-    },[])
+    },[id])
 
     React.useEffect(()=>{
 
@@ -142,4 +149,4 @@ export default connect(
                 updateLessonRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLessonId))
+)(PageLessonId)

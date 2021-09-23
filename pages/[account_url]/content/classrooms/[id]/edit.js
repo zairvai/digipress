@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 
 import LayoutClassroom from 'Templates/Layout.classroom'
 import FormClassroom from 'Components/FormClassroom'
@@ -19,35 +19,50 @@ import {NextSeo} from 'next-seo'
 
 const PageClassroomEdit = props => {
 
-	const {auth,listTags,listCategories,router} = props
+	const {auth,listTags,listCategories} = props
 	
 	const classroomController = new ClassroomController(props)
 	const categoryController = new CategoryController(props)
 	const tagController = new TagController(props)
 
+	const router = useRouter()
+	const [id,setId] = React.useState(false)
 	const [item,setItem] = React.useState(false)
-
-	const {id} = React.useMemo(()=>router.query,[])
 	
+	const isMounted = React.useRef()
+
     const pagename=""
 	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/content/classrooms/${item.id}/edit`,'active']]
 
+	React.useEffect(()=>{
+        if(router.query.id){
+            setId(router.query.id)
+        }
+    },[router])
+
 	React.useEffect(async()=>{
 		
-		//get category
-		categoryController._list({accountId:auth.account.id})
-		//get tag
-		tagController._list({accountId:auth.account.id})
+		if(id){
+			isMounted.current = true
 
-		try{
-			const classroom = await classroomController._get(id)
-			setItem(classroom.data)
-		}catch(error){
-			router.push(`/${auth.account.uniqueURL}/content/classrooms`)
+            if(isMounted.current){
+				//get category
+				categoryController._list({accountId:auth.account.id})
+				//get tag
+				tagController._list({accountId:auth.account.id})
+
+				try{
+					const classroom = await classroomController._get(id)
+					setItem(classroom.data)
+				}catch(error){
+					router.push(`/${auth.account.uniqueURL}/content/classrooms`)
+				}
+			}
 		}
-			
 
-	},[])
+		return ()=> isMounted.current = false
+
+	},[id])
 
 
 	const onCancel = () => {
@@ -91,4 +106,4 @@ export default connect(
 				listTagsRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageClassroomEdit))
+)(PageClassroomEdit)

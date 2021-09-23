@@ -20,14 +20,17 @@ function* createCategory(action){
 
         const {values} = action.payload
 
-        const updateParams = {
+        const inputParams = {
             accountId:values.accountId.trim(),
             name : values.name.trim()
         }
 
-        if(values.desc) updateParams.desc = values.desc.trim()
+        if(values.desc) inputParams.desc = values.desc.trim()
 
-        const response = yield API.graphql(graphqlOperation(mutations.createCategory,{input:updateParams}))
+        if(values.createdById) inputParams.createdById = values.createdById
+        if(values.updatedById) inputParams.updatedById = values.updatedById
+
+        const response = yield API.graphql(graphqlOperation(mutations.createCategory,{input:inputParams}))
 
         yield delay(2000)
         
@@ -147,6 +150,7 @@ function* updateCategory(action){
 
         if(values.name) updateParams.name = values.name.trim()
         if(values.desc) updateParams.desc = values.desc.trim()
+        if(values.updatedById) updateParams.updatedById = values.updatedById
 
         const response = yield API.graphql(graphqlOperation(mutations.updateCategory,{input:updateParams}))
 

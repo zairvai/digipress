@@ -1,4 +1,10 @@
+ yarn add @fullcalendar/daygrid @fullcalendar/interaction @fullcalendar/react @fullcalendar/timegrid @hookform/error-message @hookform/resolvers @mdi/js @mdi/react @react-native-community/async-storage @tinymce/tinymce-react @types/next @types/react @zeit/next-css @zeit/next-less @zeit/next-sass @zeit/next-typescript 
+ yarn add analytics antd aws-amplify aws-sdk bootstrap css-loader cssjson express file-saver firebase-tools hex-to-rgba image-to-base64 isomorphic-unfetch jquery json-loader less less-vars-to-js lodash moment mongoose net next next-compose next-compose-plugins next-fonts next-images next-redux-saga next-redux-wrapper next-seo next-transpile-modules nodemon now null-loader panzoom path postcss-loader prop-types quill-image-resize-module react react-big-calendar react-bootstrap react-bootstrap-icons react-dom react-export-excel react-ga react-hook-form react-html-renderer react-infinite-scroll-component react-player react-quill react-redux react-request react-simple-maps react-text-loop react-tooltip react-truncate react-truncate-html recharts redux redux-logger redux-persist redux-saga redux-saga-routines redux-thunk sass serve sharp socket.io socket.io-client style-loader styled-jsx svg-pan-zoom tempa-xlsx tinify tinymce yup
+ yarn add @babel/core @babel/plugin-syntax-import-assertions babel-plugin-import babel-plugin-module-resolver null-loader file-loader raw-loader typescript webpack webpack-cli xlsx --dev
+ 
+
 {
+
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -832,5 +838,50 @@ query getItem{
         name
       }
     }
+  }
+}
+
+{
+  "id": {
+    "S": "07112834-fea0-43c2-85e1-b9ca31cbe891"
+  },
+  "__typename": {
+    "S": "Account"
+  },
+  "phoneNumber": {
+    "S": "+62-343783438"
+  },
+  "version": {
+    "N": "8"
+  },
+  "status": {
+    "N": "2"
+  },
+  "createdAt": {
+    "S": "2020-12-06T22:26:56.594Z"
+  },
+  "updatedBy": {
+    "S": "052eb0b5-a460-48b6-9cba-7c10d3d44976"
+  },
+  "address": {
+    "S": "JL Raya Kenep, Beji, Bangil, Pondokyapi, Gunungsari, Kec. Beji, Pasuruan, Jawa Timur"
+  },
+  "contactPerson": {
+    "S": "Zaid Alaydrus"
+  },
+  "createdBy": {
+    "S": "64929284-d0b7-4a27-bd06-69684060e2a0"
+  },
+  "name": {
+    "S": "Al-Mahadul Islami"
+  },
+  "uniqueURL": {
+    "S": "yapi-bangil"
+  },
+  "emailAddress": {
+    "S": "zaid@gmail.com"
+  },
+  "updatedAt": {
+    "S": "2020-12-12T20:59:49.945Z"
   }
 }

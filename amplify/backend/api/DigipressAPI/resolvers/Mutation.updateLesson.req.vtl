@@ -1,0 +1,37 @@
+#set( $input = {} )
+
+#if( !$util.isNull($ctx.args.input.title))
+	$util.qr($input.put("title",$ctx.args.input.title))
+#end
+
+#if( !$util.isNull($ctx.args.input.seq))
+	$util.qr($input.put("seq",$ctx.args.input.seq))
+#end
+
+#if( !$util.isNull($ctx.args.input.status))
+	$util.qr($input.put("status",$ctx.args.input.status))
+#end
+
+#if($input.isEmpty() && $util.isNull($ctx.args.input.content))
+	#{return}
+#end
+
+$util.qr($ctx.stash.put("id",$ctx.args.input.id))
+
+$util.qr($input.put("expectedVersion",$ctx.args.input.expectedVersion))
+$util.qr($input.put("updatedBy",$ctx.identity.sub))
+$util.qr($input.put("updatedAt",$util.time.nowISO8601()))
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
+#end
+
+$util.qr($ctx.stash.put("input",$input))
+
+#if(!$util.isNull($ctx.args.input.content))
+	$util.qr($ctx.stash.put("field","put"))
+	$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/lessons"))
+	$util.qr($ctx.stash.put("content",$ctx.args.input.content))
+#end
+
+{}

@@ -72,11 +72,11 @@ const PageLessonAdd = props => {
 	
 }
 
-export default connect(
+export default withRouter(connect(
     state=>state,
     (dispatch)=>({
             ...bindPromiseCreators({
 				getClassroomRoutinePromise
         },dispatch),dispatch
     })
-)(withRouter(PageLessonAdd))
+)(PageLessonAdd))

@@ -2,8 +2,24 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
-      "resourceName": "DigiPressLayers",
-      "version": 3
+      "resourceName": "baktipesantrenDigipressLayer",
+      "env": "dev",
+      "version": 1,
+      "isLatestVersionSelected": false
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "allowedDimensions",
+      "environmentVariableName": "ALLOWED_DIMENSIONS"
+    },
+    {
+      "cloudFormationParameterName": "bucket",
+      "environmentVariableName": "BUCKET"
+    },
+    {
+      "cloudFormationParameterName": "url",
+      "environmentVariableName": "URL"
     }
   ]
 }

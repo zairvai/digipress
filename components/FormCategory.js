@@ -30,8 +30,7 @@ const FormCategory = ({item,...props}) => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -55,7 +54,8 @@ const FormCategory = ({item,...props}) => {
         if(item) {
 
             values = {id:item.id,version:item.version,...values}
-            
+            values.updatedByid = auth.user.id
+
             categoryController._update(values)
                 .then(category=>props.onSuccess(category.data))
                 .catch(error=>console.log(error))
@@ -63,6 +63,9 @@ const FormCategory = ({item,...props}) => {
         }else{
             if(props.accountId) values.accountId = props.accountId
 
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
+            
             categoryController._create(values)
                 .then(category=>props.onSuccess(category.data))
                 .catch(error=>console.log(error))
@@ -97,7 +100,9 @@ const FormCategory = ({item,...props}) => {
                                                 disabled={createCategory.isRequesting || updateCategory.isRequesting}
                                                 tabIndex="2"
                                                 allowClear
-                                                size="large" placeholder="..." value={props.value} onChange={props.onChange} />
+                                                size="large" placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.name && <Text type="danger">{errors.name.message}</Text>}
                                         </Form.Item>
                                     }
@@ -118,7 +123,9 @@ const FormCategory = ({item,...props}) => {
                                                 tabIndex="3"
                                                 allowClear
                                                 autoSize={{ minRows: 3, maxRows: 5 }}
-                                                placeholder="..." value={props.value} onChange={props.onChange}/>
+                                                placeholder="..." 
+                                                value={props.field.value} 
+                                                onChange={props.field.onChange} />
                                             {errors && errors.desc && <Text type="danger">{errors.desc.message}</Text>}
                                         </Form.Item>
                                     }
@@ -150,7 +157,7 @@ const FormCategory = ({item,...props}) => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             createCategoryRoutinePromise,

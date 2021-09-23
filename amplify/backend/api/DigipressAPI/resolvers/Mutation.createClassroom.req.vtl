@@ -1,0 +1,45 @@
+## By default in a before template, all you need is a valid JSON payload.
+## You can also stash data to be made available to the functions in the pipeline.
+## Examples: 
+## - $ctx.stash.put("email", $ctx.args.email)
+## - $ctx.stash.put("badgeNumber", $ctx.args.input.badgeNumber)
+## - $ctx.stash.put("username", $ctx.identity.username)
+
+#set( $input = {
+	"accountId":$ctx.args.input.accountId,
+	"title":$ctx.args.input.title,
+    "access":$util.defaultIfNull($ctx.args.input.readAccess,"public"),
+    "status":3,
+    "__typename":"Classroom",
+    "version":1,
+    "createdBy":$ctx.identity.sub,
+    "updatedBy":$ctx.identity.sub,
+    "createdAt":$util.time.nowISO8601(),
+    "updatedAt":$util.time.nowISO8601()
+} )
+
+
+#if( !$util.isNull($ctx.args.input.categoryId ))
+	$util.qr($input.put("categoryId",$ctx.args.input.categoryId))
+#end
+
+#if( !$util.isNull($ctx.args.input.tags ))
+	$util.qr($input.put("tags",$ctx.args.input.tags))
+#end
+
+#if( !$util.isNull($ctx.args.input.createdById))
+	$util.qr($input.put("createdBy",$ctx.args.input.createdById))
+#end
+
+#if( !$util.isNull($ctx.args.input.updatedById))
+	$util.qr($input.put("updatedBy",$ctx.args.input.updatedById))
+#end
+
+
+$util.qr($ctx.stash.put("input",$input))
+
+$util.qr($ctx.stash.put("field","put"))
+$util.qr($ctx.stash.put("folder","public/${ctx.args.input.accountId}/posts"))
+$util.qr($ctx.stash.put("content",$ctx.args.input.content))
+
+{}

@@ -38,8 +38,7 @@ const FormAuth = props => {
         handleSubmit,
         reset,
         control,
-        errors,
-        formState,
+        formState:{errors},
         setValue
         } = useForm({
             resolver:yupResolver(schema),
@@ -89,7 +88,7 @@ const FormAuth = props => {
                         <Alert
                             className="mb-3"
                             message="Kode keamanan"
-                            description={`Kode keamanan untuk mengubah password kamu telah dikirim melalui ${auth.data.CodeDeliveryDetails.AttributeName} ${auth.data.CodeDeliveryDetails.Destination} . Silahkan ketik kode tersebut pada kolom kode di bawah.`}
+                            description={`Kode keamanan untuk mengubah password kamu telah dikirim ke email ${auth.data.CodeDeliveryDetails.AttributeName} ${auth.data.CodeDeliveryDetails.Destination}. Silahkan ketik Password baru kamu berikut kode keamanan.`}
                             type="info"
                             showIcon
                         />
@@ -112,7 +111,10 @@ const FormAuth = props => {
                 <Controller
                     name="email"
                     control={control}
-                    render={props=><Form.Item hidden ><Input name="email" autoComplete="username" value={props.value}/></Form.Item>}
+                    render={props=>
+                        <Form.Item hidden >
+                            <Input name="email" autoComplete="username" value={props.field.value}/>
+                        </Form.Item>}
                 />
                     
 
@@ -130,8 +132,8 @@ const FormAuth = props => {
                                         disabled={isSubmitting}
                                         autoComplete="current-password"
                                         placeholder="Password"
-                                        value={props.value} 
-                                        onChange={props.onChange} 
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
                                     
@@ -154,8 +156,8 @@ const FormAuth = props => {
                                         disabled={isSubmitting}
                                         autoComplete="current-password"
                                         placeholder="Konfirmasi password"
-                                        value={props.value} 
-                                        onChange={props.onChange} 
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                         />
                                     
@@ -180,8 +182,8 @@ const FormAuth = props => {
                                         placeholder="Kode"
                                         autoComplete="off"
                                         type="number"
-                                        value={props.value} 
-                                        onChange={props.onChange} />
+                                        value={props.field.value} 
+                                        onChange={props.field.onChange} />
                                     {errors && errors.code && <Text type="danger">{errors.code.message}</Text>}
                                 </Form.Item>
                             }

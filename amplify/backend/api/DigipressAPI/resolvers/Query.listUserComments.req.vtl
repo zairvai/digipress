@@ -1,0 +1,126 @@
+#**
+The value of 'payload' after the template has been evaluated
+will be passed as the event to AWS Lambda.
+*#
+
+#set($statuses=$util.defaultIfNull($ctx.args.input.statuses,[1,2,3,4]))
+#set($size=$util.defaultIfNull($ctx.args.input.size, 20))
+
+#if($util.isNull($ctx.args.input.createdById) && $util.isNull($ctx.args.input.replyToUserId))
+  #return
+#end
+
+#set($query={
+  "dis_max": {
+    "queries": []
+  }
+})
+
+
+##set query created by
+#if(!$util.isNull($ctx.args.input.createdById))
+  #set($queryCreatedBy={
+    "bool": {
+      "must": [
+        {"match": {
+          "__typename": "Comment"
+        }},
+        {
+          "term": {
+            "createdBy.keyword": {
+              "value": $ctx.args.input.createdById
+            }
+          }
+        },
+        {
+          "terms": {
+            "status.keyword": $statuses
+          }
+        }
+      ]
+    }
+  })
+
+  #if(!$util.isNull($ctx.args.input.accountId))
+    $util.qr($queryCreatedBy.bool.must.add(
+      {
+        "match": {
+          "accountId.keyword": $ctx.args.input.accountId
+        }
+      }
+    ))
+  #end
+
+  $util.qr($query.dis_max.queries.add($queryCreatedBy))
+#end
+
+## set query reply to user
+#if(!$util.isNull($ctx.args.input.replyToUserId))
+  #set($queryReplyToUser={
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "replyToUserId.keyword": {
+              "value": $ctx.args.input.replyToUserId
+            }
+          }
+        },
+        {
+          "terms": {
+            "status.keyword": $statuses
+          }
+        }
+      ]
+    }
+  })
+
+  #if(!$util.isNull($ctx.args.input.accountId))
+    $util.qr($queryReplyToUser.bool.must.add(
+      {
+        "match": {
+          "accountId.keyword": $ctx.args.input.accountId
+        }
+      }
+    ))
+  #end
+
+  $util.qr($query.dis_max.queries.add($queryReplyToUser))
+#end
+
+
+##set sort order
+#if(!$util.isNull($ctx.args.input.orderBy))
+  #set($sort=[
+    {
+      "${ctx.args.input.orderBy}": {
+        "order": $util.defaultIfNull($ctx.args.input.direction,"asc")
+      }
+    }
+  ])
+#else
+	#set($sort=[])
+#end
+
+#set($body={
+  "_source" : {"includes":"id"},
+  "size" : $size,
+  "query" : $query,
+  "sort" : $sort
+})
+
+#if(!$util.isNull($ctx.args.input.from))
+  $util.qr($body.put("from",$ctx.args.input.from))
+#end
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+  	"field":"get",
+    "arguments":{
+      "path":"/records/_search",
+      "body": $util.toJson($body)
+    }
+  }
+}

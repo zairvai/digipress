@@ -1,0 +1,126 @@
+#**
+The value of 'payload' after the template has been evaluated
+will be passed as the event to AWS Lambda.
+*#
+
+## default value
+#set($statuses=$util.defaultIfNull($ctx.args.input.statuses,[1,2,3,4]))
+#set($size=$util.defaultIfNull($ctx.args.input.size, 20))
+#set($from=$util.defaultIfNull($ctx.args.input.from, 0))
+
+#set($query={
+  "bool": {
+    "must": [
+      {
+        "terms": {
+          "status.keyword": $statuses
+        }
+      },
+      {"match": {
+          "__typename": "Qna"
+        }}
+    ]
+  }
+})
+
+##set match accountid
+#if(!$util.isNull($ctx.args.input.accountId))
+  #set($match={
+    "match": {"accountId": $ctx.args.input.accountId}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##set match classroomid
+#if(!$util.isNull($ctx.args.input.postId))
+  #set($match={
+    "match": {"postId": $ctx.args.input.postId}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##set match lessonId
+#if(!$util.isNull($ctx.args.input.lessonId))
+  #set($match={
+    "match": {"lessonId": $ctx.args.input.lessonId}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##set match createdById
+#if(!$util.isNull($ctx.args.input.createdById))
+  #set($match={
+    "match": {"createdBy": $ctx.args.input.createdById}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##set match qnaType
+#if(!$util.isNull($ctx.args.input.qnaType))
+  #set($match={
+    "match": {"qnaType": $ctx.args.input.qnaType}
+  })
+  $util.qr($query.bool.must.add($match))
+#end
+
+##with reply or not
+#if($util.isNull($ctx.args.input.replyToId))
+
+  #set($noReply={
+      "bool": {
+        "must_not": [
+          {
+            "exists": {
+              "field": "replyToId"
+            }
+          }
+        ]
+      }
+  })
+
+  $util.qr($query.bool.must.add($noReply))
+
+#else
+
+  #set($withReply={
+    "match": {"replyToId": $ctx.args.input.replyToId}
+  })
+
+  $util.qr($query.bool.must.add($withReply))
+
+#end
+
+##set order
+#if(!$util.isNull($ctx.args.input.orderBy))
+  #set($sort=[
+    {
+      "${ctx.args.input.orderBy}": {
+        "order": $ctx.args.input.direction
+      }
+    }
+  ])
+#else
+	#set($sort=[])
+#end
+
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+  	"field":"get",
+    "arguments":{
+      "path":"/records/_search",
+      "body":{
+          "_source":{
+              "includes":"id"
+          },
+          "size":$size,
+          "from":$from,
+          "query":$util.toJson($query),
+          "sort":$util.toJson($sort)
+
+      }
+    }
+  }
+}

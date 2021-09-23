@@ -209,36 +209,6 @@ export const forgotPassword = (state=initialState,action)=>{
                 error:error
             })
         }
-
-        // case customForgotPasswordRoutine.USERNOTFOUND : {
-
-        //     const {error} = action.payload
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         isError:true,
-        //         error,
-        //         userNotFound:true,
-        //         isLoggedIn:false,
-        //         data:false
-        //     })
-
-        // }
-
-        // case customForgotPasswordRoutine.LIMITEXCEEDED : {
-
-        //     const {error} = action.payload
-
-        //     return Object.assign({},state,{
-        //         isRequesting:false,
-        //         isError:true,
-        //         error,
-        //         limitExceeded:true,
-        //         isLoggedIn:false,
-        //         data:false
-        //     })
-
-        // }
     }
 
     return state
