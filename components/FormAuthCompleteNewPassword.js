@@ -80,8 +80,8 @@ const FormAuth = ({user,...props}) => {
                     <Col md={24}>
                         <Alert
                             className="mb-3"
-                            message="Login pertama kali"
-                            description="Hai kamu adalah pengguna baru. Mohon ketik nama dan perbaharui password kamu untuk melanjutkan."
+                            message="Perkuat keamanan password kamu"
+                            description="Mohon ketik nama dan perbaharui password kamu untuk melanjutkan."
                             type="info"
                             showIcon
                         />
