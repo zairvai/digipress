@@ -2,6 +2,8 @@ import React, {useContext} from 'react'
 import {connect} from 'react-redux'
 import Header from './Head'
 import {Space} from 'antd'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import VuroxHeader from 'Components/Header'
 import VuroxDropdown, { DropdownItems, DropdownItem, DropdownBigItems, DropdownItemsHead } from 'Components/dropdown'
 import { GridFill ,Grid } from 'react-bootstrap-icons'
@@ -14,7 +16,11 @@ import moment from 'moment'
 
 const HeaderDark = props => {
 	
+	const [logoutLink,setLogoutLink] = React.useState("#")
+
 	const {auth} = props
+
+	const router = useRouter()
 
 	const { toggleMenu, menuState } = useContext(vuroxContext)
 
@@ -37,6 +43,17 @@ const HeaderDark = props => {
 		}
 
     },[auth.user.email_verified])
+
+	React.useEffect(()=>{
+		if(auth.account){
+			setLogoutLink(`/${auth.account.uniqueURL}/auth/logout`)
+		}
+	},[auth.account])
+
+
+	const doLogout = () => {
+		router.push()
+	}
 
 	return (
 		<div>
@@ -132,7 +149,7 @@ const HeaderDark = props => {
 										{auth.user.name}
 									</DropdownItemsHead>
 									{/* <DropdownItem link="/"><i className='ti-lock'></i>Ubah password</DropdownItem> */}
-									<DropdownItem link={`/${auth.account.uniqueURL}/auth/logout`}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
+									<DropdownItem link={{pathname:logoutLink}}><i className='ti-arrow-left'></i>Keluar</DropdownItem>
 								</DropdownItems>
 							</VuroxDropdown>
 						</div>

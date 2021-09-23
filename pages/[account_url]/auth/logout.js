@@ -10,30 +10,39 @@ const PageLogout = props => {
 
     const {auth} = props
     const router = useRouter()
+    const property = React.useRef(props)
+    const authController = React.useMemo(()=> new AuthController(property.current),[property])
 
-    const authController = new AuthController(props)
+    // React.useEffect(()=>{
+	// 	router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
+    // },[])
 
-    React.useEffect(()=>{
-		router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
-    },[])
+    const {account} = auth
+    const {uniqueURL} = account
     
-    React.useEffect(async ()=>{
+    React.useEffect(()=>{
 
-        try{
-            await authController._signOut()
-            
-            if(auth && auth.account && auth.account.uniqueURL){
-                router.push(`/${auth.account.uniqueURL}/auth/login`,{shallow:true})
-            }else{
-                router.push(`/app/auth/login`,{shallow:true})
+        async function doSignOut(){
+            try{
+
+                await authController._signOut()
+                
+                router.push("/")
+                // if(uniqueURL){
+                //     router.push({pathname:`/${uniqueURL}`,query:{account_url:uniqueURL}})
+                // }else{
+                //     router.push({pathname:`/app`,query:{account_url:"app"}})
+                // }
+                
+    
+            }catch(error){
+                console.log(error)
             }
-            
-
-        }catch(error){
-            console.log(error)
         }
 
-    },[])
+        doSignOut()
+
+    },[uniqueURL,authController])
     
 
     return <>
@@ -43,7 +52,7 @@ const PageLogout = props => {
 }
 
 export default connect(
-    state=>state,
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             signOutRoutinePromise

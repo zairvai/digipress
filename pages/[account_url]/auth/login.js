@@ -6,7 +6,7 @@ import {
 	ContentLayout,
 	VuroxComponentsContainer
 } from 'Components/layout'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import {getRedirectToUserDefaultPath} from 'Helper'
 
 import { Row, Col,Image,Typography} from 'antd'
@@ -28,8 +28,11 @@ const PageLogin = props =>{
 
 	// console.log(router)
 
-	const {router,auth} = props
-	
+	const {auth} = props
+	const router = useRouter()
+	//const property = React.useRef(props)
+	// const authController = React.useMemo(()=> new AuthController(property.current),[property])
+	// const accountController = React.useMemo(()=>new AccountController(property.current),[property])
 	const authController = new AuthController(props)
 	const accountController = new AccountController(props)
 
@@ -38,47 +41,58 @@ const PageLogin = props =>{
 	const [isPasswordResetRequired,setPasswordResetRequired] = React.useState(false)
 	const [visible,setVisible] = React.useState(false)
 	 
-	React.useEffect(async()=>{
+	const {isLoggedIn} = auth
+	const authUser = auth.user
+	const authAccount = auth.account
+
+	const {account_url} = router.query
+
+	React.useEffect(()=>{
 		
 		//console.log(router)
 
-		try{
+		async function checkLogin(){
 
-			if(auth.isLoggedIn){
-				
-				if(auth.user.access.accountId != auth.account.id){
-					await authController._signOut()
-					setVisible(true)
+			try{
+
+				if(isLoggedIn){
+					
+					if(authUser.access.accountId != authAccount.id){
+						await authController._signOut()
+						setVisible(true)
+					}
+					else{
+						router.push(getRedirectToUserDefaultPath(`/${authAccount.uniqueURL}/`,authUser.access.role))
+					}
 				}
 				else{
-					router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,auth.user.access.role))
-				}
-			}
-			else{
-				
-				if(router.query.account_url){
-					const uniqueURLPath = router.query.account_url
-					//get account id by unique URL
-					const account = await accountController._getAccountByUniqueUrl({url:uniqueURLPath})
-
-					authController._setAccount(account.data)
 					
-					setVisible(true)
+					if(account_url){
+						//get account id by unique URL
+						const account = await accountController._getAccountByUniqueUrl({url:account_url})
+	
+						authController._setAccount(account.data)
+						
+						setVisible(true)
+					}
+					
 				}
-				
 			}
+			catch(error){
+				console.log(error)
+				//console.log(props)
+				//router.push('/not-found')
+			}
+
 		}
-		catch(error){
-			console.log(error)
-			//console.log(props)
-			router.push('/not-found')
-		}
+
+		checkLogin()
 			
 		return (()=>{
 			setUser()
 			setNewPasswordRequired(false)
 		})
-	},[auth.isLoggedIn,router.query.account_url])
+	},[account_url,isLoggedIn])
 
 
 	React.useEffect(()=>{
@@ -190,7 +204,7 @@ const PageLogin = props =>{
 	
 }
 
-export default withRouter(connect(
+export default connect(
     state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
@@ -198,4 +212,4 @@ export default withRouter(connect(
 				getAccountByUniqueUrlRoutinePromise
         },dispatch),dispatch
     })
-)(PageLogin))
+)(PageLogin)
