@@ -8,8 +8,8 @@ import AuthController from 'Library/controllers/AuthController'
 const Container = props => {
 
     
-    
-    const authController = new AuthController(props)
+    const property = React.useRef(props)
+    const authController = React.useMemo(()=>new AuthController(property.current),[property])
     const [visible,setVisible] = React.useState(false)//testing
     const [shouldSignOut,setShouldSignOut] = React.useState(false)
     const {auth} = props
@@ -50,17 +50,21 @@ const Container = props => {
 
 	},[router,auth])
 
-    React.useEffect(async()=>{
-        if(shouldSignOut){
-            await authController._signOut()
-            
-            if(auth && auth.account && auth.account.uniqueURL){
-                router.push(`/${auth.account.uniqueURL}/auth/login`)
-            }else{
-                router.push(`/app/auth/login`)
-            }
-        }
-    },[shouldSignOut])
+    React.useEffect(()=>{
+
+        // async function doLogout(){
+        //     if(shouldSignOut){
+        //         await authController._signOut()
+                
+        //         if(auth && auth.account && auth.account.uniqueURL){
+        //             router.push(`/${auth.account.uniqueURL}/auth/login`)
+        //         }else{
+        //             router.push(`/app/auth/login`)
+        //         }
+        //     }
+        // }
+        // doLogout()
+    },[shouldSignOut,auth,authController])
 
    
     return(

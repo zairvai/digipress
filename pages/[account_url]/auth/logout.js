@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { signOutRoutinePromise } from 'State/routines/auth';
 import AuthController from 'Library/controllers/AuthController'
@@ -8,31 +8,41 @@ import {NextSeo} from 'next-seo'
 
 const PageLogout = props => {
 
-    const {router,auth} = props
+    const {auth} = props
+    const router = useRouter()
+    const property = React.useRef(props)
+    const authController = React.useMemo(()=> new AuthController(property.current),[property])
 
-    const authController = new AuthController(props)
+    // React.useEffect(()=>{
+	// 	router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
+    // },[])
 
-    React.useEffect(()=>{
-		router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
-    },[])
+    const {account} = auth
+    const {uniqueURL} = account
     
-    React.useEffect(async ()=>{
+    React.useEffect(()=>{
 
-        try{
-            await authController._signOut()
-            
-            if(auth && auth.account && auth.account.uniqueURL){
-                router.push(`/${auth.account.uniqueURL}/auth/login`)
-            }else{
-                router.push(`/app/auth/login`)
+        async function doSignOut(){
+            try{
+
+                await authController._signOut()
+                
+                router.push("/")
+                // if(uniqueURL){
+                //     router.push({pathname:`/${uniqueURL}`,query:{account_url:uniqueURL}})
+                // }else{
+                //     router.push({pathname:`/app`,query:{account_url:"app"}})
+                // }
+                
+    
+            }catch(error){
+                console.log(error)
             }
-            
-
-        }catch(error){
-            console.log(error)
         }
 
-    },[])
+        doSignOut()
+
+    },[uniqueURL,authController])
     
 
     return <>
@@ -41,11 +51,11 @@ const PageLogout = props => {
 
 }
 
-export default withRouter(connect(
-    state=>state,
+export default connect(
+    state=>({auth:state.auth}),
     (dispatch)=>({
             ...bindPromiseCreators({
             signOutRoutinePromise
         },dispatch),dispatch
     })
-)(PageLogout))
+)(PageLogout)

@@ -38,7 +38,7 @@ export const DropdownItems = (props) => {
 export const DropdownItem = (props) => {
   return (
     <li className={props.className}>
-    	<Link passHref href={props.link} shallow>
+    	<Link href={props.link} shallow>
     		<a>
 		    	{props.children}
     		</a>
