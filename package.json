@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development NODE_OPTIONS=--max_old_space_size=3000 next dev",
-    "build": "next build && next export",
+    "debug": "next build --debug", 
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
