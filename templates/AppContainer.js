@@ -13,58 +13,78 @@ const Container = props => {
     const [visible,setVisible] = React.useState(false)//testing
     const [shouldSignOut,setShouldSignOut] = React.useState(false)
     const {auth} = props
-
+    const authUser = auth.user
+    const authAccount = auth.account
+    
     const router = useRouter()
+    const accountUrl = router.query.account_url
+
    
-    React.useEffect(async()=>{
+    React.useEffect(()=>{
 
         //console.log(props)
 
-        router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
-        router.prefetch('/[account_url]/report/dashboard',`/${auth.account.uniqueURL}/report/dashboard`)
+        async function checkLogin(){
 
-        try{
+            if(authAccount && authUser){
+   
+                router.prefetch('/[account_url]/auth/login',`/${authAccount.uniqueURL}/auth/login`)
+                router.prefetch('/[account_url]/report/dashboard',`/${authAccount.uniqueURL}/report/dashboard`)
 
-            await authController._get()
+                try{
 
-            if(!auth.user.access) setShouldSignOut(true)
+                    await authController._get()
+
+                    if(!authUser.access) {
+                        setVisible(false)
+                        setShouldSignOut(true)
+                    }
 
 
-        }catch(error){
-            console.log(error)
-            setShouldSignOut(true)
+                }catch(error){
+                    console.log(error)
+                    setShouldSignOut(true)
+                }
+            }
         }
 
+        checkLogin()
 
-    },[])
+    },[authUser,authAccount])
 
     //making sure user dont access to other unique url account directly
     React.useEffect(()=>{
 
-		// if(router.query.account_url && auth.account){
-        //     if(auth.account.uniqueURL != router.query.account_url) setShouldSignOut(true)
-        //     else setVisible(true)
-		// }
+		if(accountUrl && authAccount){
+            if(authAccount.uniqueURL != accountUrl) {
+                setVisible(false)
+                setShouldSignOut(true)
+            }
+            else setVisible(true)
+		}
 
         setVisible(true)
 
-	},[router,auth])
+	},[accountUrl,authAccount])
 
     React.useEffect(()=>{
 
-        // async function doLogout(){
-        //     if(shouldSignOut){
-        //         await authController._signOut()
+        async function doLogout(){
+            if(shouldSignOut){
                 
-        //         if(auth && auth.account && auth.account.uniqueURL){
-        //             router.push(`/${auth.account.uniqueURL}/auth/login`)
-        //         }else{
-        //             router.push(`/app/auth/login`)
-        //         }
-        //     }
-        // }
-        // doLogout()
-    },[shouldSignOut,auth,authController])
+                setVisible(false)
+
+                await authController._signOut()
+                
+                if(authAccount && authAccount.uniqueURL){
+                    router.push(`/${authAccount.uniqueURL}/auth/login`)
+                }else{
+                    router.push(`/app/auth/login`)
+                }
+            }
+        }
+        doLogout()
+    },[shouldSignOut,authAccount])
 
    
     return(

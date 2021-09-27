@@ -46,7 +46,10 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
 
         }
 
-        return ()=>isMounted.current=false
+        return ()=>{
+            analyticController._cancel()
+            isMounted.current=false
+        }
 
     },[selectedRange])
 
@@ -71,7 +74,7 @@ const AnalyticBox = ({selectedMenu,...props}) =>{
         analyticController._getData(params)
 			.then(data=>{
 				
-				if(data.results){
+				if(data && data.results){
 
                     const results = parseInt(data.results["ga:sessions"])
                     

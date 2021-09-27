@@ -57,7 +57,7 @@ const PageLogin = props =>{
 
 				if(isLoggedIn){
 					
-					if(authUser.access.accountId != authAccount.id){
+					if(!authUser || authUser.access.accountId != authAccount.id){
 						await authController._signOut()
 						setVisible(true)
 					}
