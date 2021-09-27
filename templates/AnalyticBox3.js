@@ -54,7 +54,10 @@ const AnalyticBox = ({selectedMenu,gaFilters,...props}) =>{
 
         }
 
-        return ()=>isMounted.current=false
+        return ()=>{
+            analyticController._cancel()
+            isMounted.current=false
+        }
 
     },[selectedRange])
 
