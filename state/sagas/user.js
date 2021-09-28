@@ -126,8 +126,6 @@ function* listUsers(action){
             listParams.direction = direction
         }
 
-        console.log(listParams)
-
         yield put(listUsersRoutine.request())
                 
         const response = yield API.graphql(graphqlOperation(queries.listUsers,{input:listParams}))
