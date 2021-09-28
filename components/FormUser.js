@@ -35,10 +35,12 @@ const schema = yup.object().shape({
 
 const FormUser = ({item,...props}) => {
 
-    const {auth,roleInputs,createUser,updateUser} = props
+    const {auth,roleInputs} = props
 
+    const userController = React.useMemo(()=>new UserController(props),[props])
+
+    const [isSubmitting,setSubmitting] = React.useState(false)
     const [error,setError] = React.useState()
-    const userController = new UserController(props)
 
     const {
         handleSubmit,
@@ -76,6 +78,8 @@ const FormUser = ({item,...props}) => {
 
     const onSubmit = (values) => {
 
+        setSubmitting(true)
+
         if(props.accountId) values.accountId = props.accountId
         
         values.createdById = auth.user.id
@@ -84,6 +88,8 @@ const FormUser = ({item,...props}) => {
         userController._create(values)
             .then(user=>props.onSuccess(user.data))
             .catch(errors=>{
+
+                setSubmitting(false)
 
                 if(errors){
                     
@@ -134,7 +140,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Role">
                                             <Select 
-                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large" 
                                                 style={{ width: "100%" }} 
                                                 value={props.field.value} 
@@ -158,7 +164,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama">
                                             <Input 
-                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                disabled={isSubmitting}
                                                 tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." 
@@ -183,7 +189,7 @@ const FormUser = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <Input 
-                                                    disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                    disabled={isSubmitting}
                                                     size="large" 
                                                     style={{width:"30%"}}
                                                     value={props.field.value} readOnly/>
@@ -194,7 +200,7 @@ const FormUser = ({item,...props}) => {
                                             control={control}
                                             render={props=>
                                                 <InputNumber
-                                                    disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                    disabled={isSubmitting}
                                                     tabIndex="3"
                                                     size="large"
                                                     style={{ width: '70%' }} 
@@ -217,7 +223,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Email" className="ml-0 ml-md-3">
                                             <Input
-                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                disabled={isSubmitting}
                                                 tabIndex="4" 
                                                 autoComplete="username"
                                                 allowClear
@@ -241,7 +247,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Password">
                                             <Input.Password
-                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large"   
                                                 tabIndex="5" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -265,7 +271,7 @@ const FormUser = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Konfirmasi Password" className="ml-0 ml-md-3">
                                             <Input.Password
-                                                disabled={createUser.isRequesting || updateUser.isRequesting}
+                                                disabled={isSubmitting}
                                                 size="large"   
                                                 tabIndex="6" 
                                                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -290,10 +296,10 @@ const FormUser = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7" disabled={createUser.isRequesting || updateUser.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                <Button tabIndex="7" disabled={isSubmitting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="8" type="primary" htmlType="submit"  loading={createUser.isRequesting || updateUser.isRequesting} block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit"  loading={isSubmitting} block>Kirim</Button>
                             </Col>
                         </Row>
 
