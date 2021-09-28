@@ -92,8 +92,9 @@ const PageUserAdd = props => {
     }
     
     const onSuccess = user =>{
-        if(account) router.push(`/[account_ur]/manage/accounts/[id]`,`/${auth.account.uniqueURL}/manage/accounts/${account.id}`,{shallow:true})
-        else router.push(`/[account_ur]/manage/users`,`/${auth.account.uniqueURL}/manage/users`,{shallow:true})
+        console.log(user)
+        // if(account) router.push(`/[account_ur]/manage/accounts/[id]`,`/${auth.account.uniqueURL}/manage/accounts/${account.id}`,{shallow:true})
+        // else router.push(`/[account_ur]/manage/users`,`/${auth.account.uniqueURL}/manage/users`,{shallow:true})
     }
 
     const handleError = errors =>{

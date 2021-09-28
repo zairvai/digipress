@@ -13,15 +13,13 @@ will be passed as the event to AWS Lambda.
 #set($query={
   "bool": {
       "must": [
+        {"match": {"__typename": "User"}},
         {
           "nested": {
             "path": "roles",
             "query": {
               "bool": {
                 "must": [
-                  {"match": {
-                    "__typename": "User"
-                  }},
                   {"match":{"roles.accountId": $accountId }},
                   {
                     "terms": {
@@ -47,7 +45,7 @@ will be passed as the event to AWS Lambda.
     "match":{"roles.role": $ctx.args.input.role }
   })	
       
-  $util.qr($query.bool.must[0].nested.query.bool.must.add($matchRole))
+  $util.qr($query.bool.must[1].nested.query.bool.must.add($matchRole))
       
 #end
 
