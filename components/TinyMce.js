@@ -5,7 +5,8 @@ import _ from 'lodash'
 const TinyMce = ({id,className="",mode="full",
     height,maxHeight,minHeight,bottomMargin,content,placeholder,onChange,onRemove,...props}) =>{
 
-    let tinymce,editor
+    const tinymce = React.useRef()
+    const editor = React.useRef()
 
     const [ed,setEd] = React.useState()
 
@@ -71,11 +72,11 @@ const TinyMce = ({id,className="",mode="full",
                             
                             $(editorId).addClass("isTinymce")
 
-                            editor = tinyEditor
+                            editor.current = tinyEditor
 
                             setEd(tinyEditor)
 
-                            tinymce.execCommand('mceFocus',false,editorId);
+                            tinymce.current.execCommand('mceFocus',false,editorId);
 
                             tinyEditor.on('focusout blur',function(e,evt){
                                 if(props.onFocusOut) props.onFocusOut()
@@ -104,7 +105,7 @@ const TinyMce = ({id,className="",mode="full",
                             })
 
                             tinyEditor.on("keyup change",function(e,evt){
-                                onChange(editor)
+                                onChange(editor.current)
                             })
 
                             tinyEditor.on("init",function(e,evt){
@@ -116,7 +117,7 @@ const TinyMce = ({id,className="",mode="full",
                             })
 
                             //custom context
-                            setupContextToolbar(editor)
+                            setupContextToolbar(editor.current)
                             
                         }
                     }
@@ -125,7 +126,7 @@ const TinyMce = ({id,className="",mode="full",
                     import('tinymce/tinymce')
                         .then(async(obj)=>{
 
-                            tinymce = obj.default
+                            tinymce.current = obj.default
                             
                             if(mode=="full"){
                                 plugins = [
@@ -151,7 +152,7 @@ const TinyMce = ({id,className="",mode="full",
             
                             await Promise.all(plugins)
 
-                            tinymce.init(tinyParams)
+                            tinymce.current.init(tinyParams)
                             
                         })
                     
@@ -164,7 +165,7 @@ const TinyMce = ({id,className="",mode="full",
         return ()=>{
 
             isMounted.current = false
-            if(tinymce) tinymce.remove(editor)
+            if(tinymce.current) tinymce.current.remove(editor)
 
             
         }

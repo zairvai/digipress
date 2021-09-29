@@ -10,18 +10,18 @@ const HTML = (htmlProps) =>{
     return (
         <HTMLRenderer
             components={{
-                p:props=><Paragraph className={props.class}>{props.children}</Paragraph>,
+                p:props=><Paragraph displayName="htmlParagraph" className={props.class}>{props.children}</Paragraph>,
                 div:props=>{
                     const styleAttributes = inlineCssToJson(props.style)
                     return <Text style={styleAttributes}>{props.children}</Text>
                 },
                 a:props=>{
                     const styleAttributes = inlineCssToJson(props.style)
-                    return <Text style={styleAttributes}>{props.children}</Text>
+                    return <Text displayName="htmlAnchor" style={styleAttributes}>{props.children}</Text>
                 },
                 span:props=>{
                     const styleAttributes = inlineCssToJson(props.style)
-                    return <Text style={styleAttributes}>{props.children}</Text>
+                    return <Text displayName="htmlSpan" style={styleAttributes}>{props.children}</Text>
                 },
                 
             }}

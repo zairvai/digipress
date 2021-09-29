@@ -101,7 +101,6 @@ const FormAuth = ({user,...props}) => {
                                         autoComplete="off"
                                         prefix={<UserOutlined/>} 
                                         placeholder="Nama lengkap"
-                                        autoComplete="newpassword"
                                         type="text"
                                         value={props.field.value} 
                                         onChange={props.field.onChange} />

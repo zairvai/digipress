@@ -5,7 +5,8 @@ import _ from 'lodash'
 const TinyMce = ({id,className="",mode="full",
     height,maxHeight,minHeight,bottomMargin,content,placeholder,onChange,onRemove,...props}) =>{
 
-    let tinymce,editor
+    const tinymce = React.useRef()
+    const editor = React.useRef()
 
     const [ed,setEd] = React.useState()
 
@@ -57,11 +58,11 @@ const TinyMce = ({id,className="",mode="full",
                             
                             $(editorId).addClass("isTinymce")
 
-                            editor = tinyEditor
+                            editor.current = tinyEditor
 
                             setEd(tinyEditor)
 
-                            tinymce.execCommand('mceFocus',false,editorId);
+                            tinymce.current.execCommand('mceFocus',false,editorId);
 
                             tinyEditor.on('focusout blur',function(e,evt){
                                 if(props.onFocusOut) props.onFocusOut()
@@ -85,7 +86,7 @@ const TinyMce = ({id,className="",mode="full",
 
                             tinyEditor.on("keyup change",()=>{
                                 //const content = tinyEditor.getContent()
-                                onChange(editor)
+                                onChange(editor.current)
                             })
 
                             if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
@@ -96,7 +97,7 @@ const TinyMce = ({id,className="",mode="full",
                     import('tinymce/tinymce')
                         .then(async(obj)=>{
 
-                            tinymce = obj.default
+                            tinymce.current = obj.default
                             
                             if(mode=="full"){
                                 plugins = [
@@ -119,7 +120,7 @@ const TinyMce = ({id,className="",mode="full",
             
                             await Promise.all(plugins)
 
-                            tinymce.init(tinyParams)
+                            tinymce.current.init(tinyParams)
                             
                         })
                     
@@ -141,7 +142,7 @@ const TinyMce = ({id,className="",mode="full",
             
             // }
 
-            tinymce.remove(editor)
+            tinymce.current.remove(editor)
             if(onRemove) onRemove()
             
 

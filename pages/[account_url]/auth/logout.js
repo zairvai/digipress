@@ -10,12 +10,12 @@ const PageLogout = props => {
 
     const {auth} = props
     const router = useRouter()
-    const property = React.useRef(props)
-    const authController = React.useMemo(()=> new AuthController(property.current),[property])
+    const propsRef = React.useRef(props)
+    const authController = React.useMemo(()=> new AuthController(propsRef.current),[propsRef])
 
-    // React.useEffect(()=>{
-	// 	router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
-    // },[])
+    React.useEffect(()=>{
+		router.prefetch('/[account_url]/auth/login',`/${auth.account.uniqueURL}/auth/login`)
+    },[])
 
     const {account} = auth
     const {uniqueURL} = account
