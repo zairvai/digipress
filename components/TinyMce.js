@@ -8,6 +8,9 @@ const TinyMce = ({id,className="",mode="full",
     const tinymce = React.useRef()
     const editor = React.useRef()
 
+    const interval = React.useRef()
+    const counter=React.useRef(0)
+
     const [ed,setEd] = React.useState()
 
     const isMounted = React.useRef()
@@ -220,6 +223,42 @@ const TinyMce = ({id,className="",mode="full",
         // });
 
     }
+
+
+    React.useEffect(()=>{
+
+        // console.log(ed)
+
+        isMounted.current = true
+
+        if(isMounted.current){
+            interval.current = setTimeout(function run(){
+                    
+                // console.log(editor)
+                // console.log(content)
+                if(content && content.trim() !== ""){
+                    if(counter.current<10){
+
+                        if(ed && content){
+                            // console.log("DONE")
+                            ed.setContent(content)
+                            clearTimeout(interval.current)
+                        }else{
+                            setTimeout(run,1000)
+                        }
+                        counter.current++ 
+                    }
+                }
+            
+                
+            },1000)
+        }
+    
+        return ()=>{
+            clearTimeout(interval.current)
+            return ()=>isMounted.current = false
+        }
+    },[ed,content])
 
     return <>
     

@@ -109,7 +109,7 @@ const PageArticleId = props => {
             <Row>
 				<Col md={24}>
                     <PageHeader title={item.title} subTitle={item.category && item.category.name} ghost={false}
-                        onBack={()=>window.history.back()}
+                        onBack={()=>router.back()}
 						extra={[
 							<div className="d-inline" key="1">
                                 {Permission.UPDATE_ARTICLE({auth}) 
