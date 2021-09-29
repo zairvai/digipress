@@ -39,10 +39,10 @@ const PageFaq = props => {
 							<p>Setelah login, akan ada tanda bell nofitikasi di kanan atas, silahkan klik tanda tersebut dan klik tautan verifikasi email. dan selanjutnya ikuti proses yang diarahkan.</p>
 						</Panel>
 						<Panel header="Apa yang harus dilakukan saat lupa password" key="6">
-							<p>Pada form login, silahkan klik tautan 'lupa password' lalu masukan alamat email yang sudah diverifikasi. Selanjutnya kode keamanan untuk mengganti password dikirim ke alamat email tersebut. Lalu masukan kode tersebut pada saat penggantian password.</p>
+							<p>Pada form login, silahkan klik tautan &apos;lupa password&apos; lalu masukan alamat email yang sudah diverifikasi. Selanjutnya kode keamanan untuk mengganti password dikirim ke alamat email tersebut. Lalu masukan kode tersebut pada saat penggantian password.</p>
 						</Panel>
 						<Panel header="Kode penggantian password tidak sampai ke alamat email" key="7">
-							<p>Kode keamanan mungkin bisa langsung masuk kotak 'inbox'. Jika tidak ada silahkan cek juga di kotak 'spam'</p>
+							<p>Kode keamanan mungkin bisa langsung masuk kotak &apos;inbox&apos;. Jika tidak ada silahkan cek juga di kotak &apos;spam&apos;</p>
 						</Panel>
 
 						<Panel header="Siapa saja yang dapat membuat artikel dan ruang belajar" key="20">
@@ -50,34 +50,34 @@ const PageFaq = props => {
 						</Panel>
 
 						<Panel header="Bagaimana cara membuat artikel" key="8">
-							<p>Ke halaman artikel lalu klik tombol 'tambah' artikel</p>
+							<p>Ke halaman artikel lalu klik tombol &apos;tambah&apos; artikel</p>
 						</Panel>
 						<Panel header="Bagaimana cara mengubah artikel" key="9">
-							<p>Ke halaman artikel lalu klik artikel yang mau diubah lalu klik tombol 'ubah' artikel</p>
+							<p>Ke halaman artikel lalu klik artikel yang mau diubah lalu klik tombol &apos;ubah&apos; artikel</p>
 						</Panel>
 						<Panel header="Bagaimana cara menghapus artikel" key="10">
-							<p>Ke halaman artikel lalu klik artikel yang mau dihapus lalu klik tombol 'hapus' artikel</p>
+							<p>Ke halaman artikel lalu klik artikel yang mau dihapus lalu klik tombol &apos;hapus&apos; artikel</p>
 						</Panel>
 						<Panel header="Bagaimana cara membuat ruang belajar" key="11">
-							<p>Ke halaman ruang belajar lalu klik tombol 'tambah' ruang belajar</p>
+							<p>Ke halaman ruang belajar lalu klik tombol &apos;tambah&apos; ruang belajar</p>
 						</Panel>
 						<Panel header="Bagaimana cara mengubah ruang belajar" key="12">
-							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau diubah lalu klik tombol 'ubah' ruang belajar</p>
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau diubah lalu klik tombol &apos;ubah&apos; ruang belajar</p>
 						</Panel>
 						<Panel header="Bagaimana cara menghapus ruang belajar" key="13">
-							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau dihapus lalu klik tombol 'hapus' ruang belajar</p>
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang mau dihapus lalu klik tombol &apos;hapus&apos; ruang belajar</p>
 						</Panel>
 
 						<Panel header="Bagaimana cara membuat materi" key="14">
-							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan ditambahkan materi lalu klik tombol 'tambah' materi</p>
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan ditambahkan materi lalu klik tombol &apos;tambah&apos; materi</p>
 						</Panel>
 
 						<Panel header="Bagaimana cara mengubah materi" key="15">
-							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan diubah materinya dan klik materi tersebut lalu klik tombol 'ubah' materi</p>
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan diubah materinya dan klik materi tersebut lalu klik tombol &apos;ubah&apos; materi</p>
 						</Panel>
 						
 						<Panel header="Bagaimana cara menghapus materi" key="16">
-							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan dihapus materinya dan klik materi tersebut lalu klik tombol 'hapus' materi</p>
+							<p>Ke halaman ruang belajar lalu klik ruang belajar yang akan dihapus materinya dan klik materi tersebut lalu klik tombol &apos;hapus&apos; materi</p>
 						</Panel>
 
 						<Panel header="Bagaimana cara mengirim komentar" key="17">

@@ -16,7 +16,8 @@ const List = props =>{
 
     const {auth,router,postId} = props
 
-	const lessonController = new LessonController(props)
+    const propsRef = React.useRef(props)
+	const lessonController = React.useMemo(()=>new LessonController(propsRef.current),[propsRef])
 
     let accountId
 
@@ -34,6 +35,7 @@ const List = props =>{
 			accountId = auth.account.id
 		}
 
+        
         fetchItems({accountId,postId,orderBy,direction,pagination})
 
     },[])

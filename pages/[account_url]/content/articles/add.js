@@ -17,8 +17,11 @@ const PageArticleAdd = props => {
 
 	const {auth,listTags,listCategories,router} = props
 	
-	const categoryController = new CategoryController(props)
-	const tagController = new TagController(props)
+	const propsRef = React.useRef(props)
+
+	const categoryController = React.useMemo(()=>new CategoryController(propsRef.current),[propsRef])
+	const tagController = React.useMemo(()=>new TagController(propsRef.current),[propsRef])
+
 	
 	const { menuState } = React.useContext(vuroxContext)
 	const toggleClass = menuState ? 'menu-closed' : 'menu-open'

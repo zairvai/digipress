@@ -23,7 +23,8 @@ const PageClassroomId = props => {
     const {confirm} = Modal
 
     const {auth,getClassroom,listLessons} = props
-    const classroomController = new ClassroomController(props)
+    const propsRef = React.useRef(props)
+    const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
     
     const router = useRouter()
     const [id,setId] = React.useState(false)
