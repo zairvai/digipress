@@ -17,8 +17,11 @@ const PageClassroomAdd = props => {
 
 	const {auth,listTags,listCategories,router} = props
 	
-	const categoryController = new CategoryController(props)
-	const tagController = new TagController(props)
+	const propsRef = React.useRef(props)
+
+	const categoryController = React.useMemo(()=>new CategoryController(propsRef.current),[propsRef])
+	const tagController = React.useMemo(()=>new TagController(propsRef.current),[propsRef])
+
 
     const pagename=""
 	const links = [['Kontent',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],['Penambahan ruang belajar',`/${auth.account.uniqueURL}/content/classrooms/add`,'active']]

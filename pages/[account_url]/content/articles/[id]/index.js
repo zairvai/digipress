@@ -26,7 +26,10 @@ const PageArticleId = props => {
     const {auth,commentId} = props
     const router = useRouter()
 
-    const articleController = new ArticleController(props)
+    const propsRef = React.useRef(props)
+
+	const articleController = React.useMemo(()=>new ArticleController(propsRef.current),[propsRef])
+
 
     const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})

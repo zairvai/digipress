@@ -21,9 +21,11 @@ const PageClassroomEdit = props => {
 
 	const {auth,listTags,listCategories} = props
 	
-	const classroomController = new ClassroomController(props)
-	const categoryController = new CategoryController(props)
-	const tagController = new TagController(props)
+	const propsRef = React.useRef(props)
+
+	const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
+	const categoryController = React.useMemo(()=>new CategoryController(propsRef.current),[propsRef])
+	const tagController = React.useMemo(()=>new TagController(propsRef.current),[propsRef])
 
 	const router = useRouter()
 	const [id,setId] = React.useState(false)

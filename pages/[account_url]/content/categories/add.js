@@ -11,7 +11,10 @@ import {NextSeo} from 'next-seo'
 
 const PageCategoryAdd = props => {
 
-    const categoryController = new CategoryController(props)
+    const propsRef = React.useRef(props)
+
+	const categoryController = React.useMemo(()=>new CategoryController(propsRef.current),[propsRef])
+
 
     const {auth,router} = props
 

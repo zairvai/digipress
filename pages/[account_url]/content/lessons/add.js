@@ -16,7 +16,9 @@ const PageLessonAdd = props => {
 
 	const {auth,router} = props
 	
-	const classroomController = new ClassroomController(props)
+	const propsRef = React.useRef(props)
+
+	const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
 
     const [item,setItem] = React.useState({})
 

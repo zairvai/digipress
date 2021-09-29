@@ -13,7 +13,8 @@ const PageLessonEdit = props => {
 
     const {auth} = props
 
-    const lessonController = new LessonController(props)
+    const propsRef = React.useRef(props)
+    const lessonController = React.useMemo(()=>new LessonController(propsRef.current),[propsRef])
     
     const router = useRouter()
 	const [id,setId] = React.useState(false)

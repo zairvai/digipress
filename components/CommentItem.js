@@ -260,7 +260,7 @@ const CommentItem = props =>{
           content: <HTML
                         html={item && item.content}
                         componentOverrides={{
-                            p:Component=>props=><Component displayName="textMessage" ellipsis={{ rows: 3, expandable: true, symbol: 'Buka' }} {...props}/>
+                            p:Component=>props=><Component ellipsis={{ rows: 3, expandable: true, symbol: 'Buka' }} {...props}/>
                         }}
                     />,
           okText:"Ya",
