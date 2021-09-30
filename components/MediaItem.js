@@ -40,7 +40,7 @@ const ItemImage = ({media,index=false,dimension={width:100,height:100},width="10
 
         if(media.key){
             setFetching(false)
-            const url = `${media.baseURL}/${dimension.width}x${dimension.height}/${encodeURI(media.key)}`
+            const url = `${media.baseURL}/${encodeURI(media.key)}?w=${dimension.width}&h=${dimension.height}`
             setPreviewMedia(url)
         }
         // else if(media.file){
@@ -105,11 +105,11 @@ const ItemImage = ({media,index=false,dimension={width:100,height:100},width="10
     )
 }
 
-const MediaImage = connect(state=>({
+const MediaItem = connect(state=>({
         auth:state.auth,
         dispatch:state.dispatch,
     }))(ItemImage)
 
 export {
-    MediaImage   
+    MediaItem 
 }

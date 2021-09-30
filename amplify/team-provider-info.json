@@ -28,7 +28,7 @@
         },
         "baktipesantrenDigipressLayer": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersion0ebcdb84-build.zip"
+          "s3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersiondc5262d2-build.zip"
         },
         "DigipressIdentityManager": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
@@ -52,7 +52,7 @@
         },
         "DigipressTableAppTrigger": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressTableAppTrigger-663856387a4555376e38-build.zip"
+          "s3Key": "amplify-builds/DigipressTableAppTrigger-4f464e47585a624f4355-build.zip"
         }
       }
     }

@@ -208,15 +208,17 @@ const FormArticle = ({item,...props}) => {
     const handleSelectedMedia = selectedMedias => {
         setOpenMedia(false)
         
+        const mediaWith = 400
+        const videoHeight = 0.7*mediaWith
         if(selectedMedias.length > 0){
             let mediaDom = ""
             selectedMedias.forEach((media,index)=>{
                 if(media.type=="image") {
-                    const url = encodeURI(`${media.baseURL}/500xauto/${media.key}`)
-                    mediaDom += `<img width="400" src="${url}" class="media-${index} content-align-left"/>`
+                    const url = encodeURI(`${media.baseURL}/${media.key}?w=${mediaWith}`)
+                    mediaDom += `<img width="${mediaWith}" src="${url}" class="media-${index} content-align-left"/>`
                 }else if(media.type=="youtube"){
                     const url = `https://www.youtube.com/embed/${media.youtubeId}?rel=0&modestbranding=1`
-                    mediaDom += `<iframe width="500" height="350" src="${url}" frameboder="0" allowfullscreen="allowfullscreen"></iframe>`
+                    mediaDom += `<iframe width="${mediaWith}" height="${videoHeight}" src="${url}" frameboder="0" allowfullscreen="allowfullscreen"></iframe>`
                 }
             })
             
