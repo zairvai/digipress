@@ -101,7 +101,7 @@ const FormCategory = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama category">
                                             <Input 
-                                                disabled={isSubmiting || updateCategory.isRequesting}
+                                                disabled={isSubmiting}
                                                 tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." 
@@ -123,7 +123,7 @@ const FormCategory = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Deskripsi">
                                             <Input.TextArea 
-                                                disabled={isSubmiting || updateCategory.isRequesting}
+                                                disabled={isSubmiting}
                                                 tabIndex="3"
                                                 allowClear
                                                 autoSize={{ minRows: 3, maxRows: 5 }}
@@ -145,10 +145,10 @@ const FormCategory = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7" disabled={isSubmiting || updateCategory.isRequesting} onClick={props.onCancel} danger type="link" block>Batal</Button>
+                                <Button tabIndex="7" disabled={isSubmiting} onClick={props.onCancel} danger type="link" block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmiting || updateCategory.isRequesting} block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmiting} block>Kirim</Button>
                             </Col>
                         </Row>
 
