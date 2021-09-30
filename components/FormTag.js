@@ -24,6 +24,7 @@ const FormTag = ({item,...props}) => {
     const {auth,createTag} = props
 
     const tagController = new TagController(props)
+    const [isSubmiting,setSubmiting] = React.useState(false)
 
     const {
         handleSubmit,
@@ -47,6 +48,8 @@ const FormTag = ({item,...props}) => {
     },[item])
 
     const onSubmit = (values) => {
+
+        setSubmiting(true)
 
         if(props.accountId) values.accountId = props.accountId
         
@@ -80,7 +83,7 @@ const FormTag = ({item,...props}) => {
                                     render={props=>
                                         <Form.Item label="Nama tag">
                                             <Input 
-                                                disabled={createTag.isRequesting}
+                                                disabled={isSubmiting}
                                                 tabIndex="2"
                                                 allowClear
                                                 size="large" placeholder="..." 
@@ -99,10 +102,10 @@ const FormTag = ({item,...props}) => {
                     <VuroxComponentsContainer className="px-4 py-3">
                         <Row className="justify-content-end">
                             <Col md={6} sm={8} xs={12}  >
-                                <Button tabIndex="7"  onClick={props.onCancel} danger type="link" disabled={createTag.isRequesting} block>Batal</Button>
+                                <Button tabIndex="7"  onClick={props.onCancel} danger type="link" disabled={isSubmiting} block>Batal</Button>
                             </Col>
                             <Col md={6} sm={8} xs={12} className="fright">
-                                <Button tabIndex="8" type="primary" htmlType="submit" loading={createTag.isRequesting} block>Kirim</Button>
+                                <Button tabIndex="8" type="primary" htmlType="submit" loading={isSubmiting} block>Kirim</Button>
                             </Col>
                         </Row>
 
