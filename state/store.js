@@ -14,7 +14,8 @@ function makeStore(preloadedState) {
 	const middlewares = [sagaMiddleware]
 	
 	middlewares.push(thunk)
-	middlewares.push(logger)
+
+	if(!process.env.FRONTEND_ENV || process.env.FRONTEND_ENV=="dev") middlewares.push(logger)
 
 	const { persistReducer } = require('redux-persist')
 	//const storage = mystorage//require('redux-persist/lib/storage').default

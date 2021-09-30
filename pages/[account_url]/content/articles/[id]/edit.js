@@ -30,33 +30,34 @@ const PageArticleEdit = props => {
 
 
 	const router = useRouter()
-	const [id,setId] = React.useState(false)
+	const id = router.query.id
+
 	const [item,setItem] = React.useState(false)
 	
 	const isMounted = React.useRef()
 
 	React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
-
-	React.useEffect(()=>{
 		
-		if(id){
-			isMounted.current = true
+		isMounted.current = true
 
-			if(isMounted.current){
+		async function doLoad(){
+
+			try{
 				//get category
 				categoryController._list({accountId:auth.account.id})
 				//get tag
 				tagController._list({accountId:auth.account.id})
-			
-				articleController._get(id)
-					.then(article=>setItem(article.data))
-					.catch(error=>router.push(`/${auth.account.uniqueURL}/content/articles`))
+
+				const post = await articleController._get(id)
+				setItem(post.data)
+
+			}catch(error){
+				router.push(`/${auth.account.uniqueURL}/content/articles`)
 			}
+		
 		}
+
+		if(id && isMounted.current) doLoad()
 			
 		return ()=>{
 			isMounted.current = false

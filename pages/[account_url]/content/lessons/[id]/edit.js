@@ -17,34 +17,27 @@ const PageLessonEdit = props => {
     const lessonController = React.useMemo(()=>new LessonController(propsRef.current),[propsRef])
     
     const router = useRouter()
-	const [id,setId] = React.useState(false)
+	const id = router.query.id
     const [item,setItem] = React.useState({})
     
     const isMounted = React.useRef()
 
     React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
+        
+        isMounted.current = true
 
+        async function doLoad(){
+            try{
+                const lesson = await lessonController._get(id)
+                setItem(lesson.data)
 
-    React.useEffect(async ()=>{
-       
-        if(id){
-            isMounted.current = true
-
-            if(isMounted.current){
-                try{
-                    const lesson = await lessonController._get(id)
-                    setItem(lesson.data)
-
-                }catch(error){
-                    router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
-                    console.log(error)
-                }
+            }catch(error){
+                router.push(`/${auth.account.uniqueURL}/content/classrooms/${item.classroom && item.classroom.id}`)
+                console.log(error)
             }
         }
+        
+        if(id && isMounted.current) doLoad()
 
         return ()=> isMounted.current = false
 
