@@ -31,6 +31,8 @@ function* createLesson(action){
         if(values.createdById) inputParams.createdById = values.createdById
         if(values.updatedById) inputParams.updatedById = values.updatedById
 
+        //console.log(inputParams)
+
         const response = yield API.graphql(graphqlOperation(mutations.createLesson,{input:inputParams}))
 
         yield delay(2000)
@@ -68,6 +70,8 @@ function* listLessons(action){
         }
        
 
+        console.log(listParams)
+        
         yield put(listLessonsRoutine.request())
                 
         const response = yield API.graphql(graphqlOperation(queries.listLessons,{input:listParams}))

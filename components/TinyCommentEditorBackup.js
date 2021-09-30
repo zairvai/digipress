@@ -147,7 +147,6 @@ const TinyMce = ({id,className="",mode="full",
             tinymce.current.remove(editor)
             if(onRemove) onRemove()
             
-
             return ()=>isMounted.current = false
             
         }

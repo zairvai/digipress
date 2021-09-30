@@ -5,11 +5,7 @@ import _ from 'lodash'
 const TinyMce = ({id,className="",mode="full",
     height,maxHeight,minHeight,bottomMargin,content,placeholder,onChange,onRemove,...props}) =>{
 
-    const tinymce = React.useRef()
-    const editor = React.useRef()
-
-    const interval = React.useRef()
-    const counter=React.useRef(0)
+    let tinymce,editor
 
     const [ed,setEd] = React.useState()
 
@@ -75,11 +71,11 @@ const TinyMce = ({id,className="",mode="full",
                             
                             $(editorId).addClass("isTinymce")
 
-                            editor.current = tinyEditor
+                            editor = tinyEditor
 
                             setEd(tinyEditor)
 
-                            tinymce.current.execCommand('mceFocus',false,editorId);
+                            tinymce.execCommand('mceFocus',false,editorId);
 
                             tinyEditor.on('focusout blur',function(e,evt){
                                 if(props.onFocusOut) props.onFocusOut()
@@ -108,7 +104,7 @@ const TinyMce = ({id,className="",mode="full",
                             })
 
                             tinyEditor.on("keyup change",function(e,evt){
-                                onChange(editor.current)
+                                onChange(editor)
                             })
 
                             tinyEditor.on("init",function(e,evt){
@@ -120,7 +116,7 @@ const TinyMce = ({id,className="",mode="full",
                             })
 
                             //custom context
-                            setupContextToolbar(editor.current)
+                            setupContextToolbar(editor)
                             
                         }
                     }
@@ -129,7 +125,7 @@ const TinyMce = ({id,className="",mode="full",
                     import('tinymce/tinymce')
                         .then(async(obj)=>{
 
-                            tinymce.current = obj.default
+                            tinymce = obj.default
                             
                             if(mode=="full"){
                                 plugins = [
@@ -155,7 +151,7 @@ const TinyMce = ({id,className="",mode="full",
             
                             await Promise.all(plugins)
 
-                            tinymce.current.init(tinyParams)
+                            tinymce.init(tinyParams)
                             
                         })
                     
@@ -168,7 +164,7 @@ const TinyMce = ({id,className="",mode="full",
         return ()=>{
 
             isMounted.current = false
-            if(tinymce.current) tinymce.current.remove(editor)
+            if(tinymce) tinymce.remove(editor)
 
             
         }
@@ -223,42 +219,6 @@ const TinyMce = ({id,className="",mode="full",
         // });
 
     }
-
-
-    React.useEffect(()=>{
-
-        // console.log(ed)
-
-        isMounted.current = true
-
-        if(isMounted.current){
-            interval.current = setTimeout(function run(){
-                    
-                // console.log(editor)
-                // console.log(content)
-                if(content && content.trim() !== ""){
-                    if(counter.current<10){
-
-                        if(ed && content){
-                            // console.log("DONE")
-                            ed.setContent(content)
-                            clearTimeout(interval.current)
-                        }else{
-                            setTimeout(run,1000)
-                        }
-                        counter.current++ 
-                    }
-                }
-            
-                
-            },1000)
-        }
-    
-        return ()=>{
-            clearTimeout(interval.current)
-            return ()=>isMounted.current = false
-        }
-    },[ed,content])
 
     return <>
     

@@ -25,27 +25,25 @@ const PageArticleId = props => {
 
     const {auth,commentId} = props
     const router = useRouter()
+    const id = router.query.id
 
     const propsRef = React.useRef(props)
 
 	const articleController = React.useMemo(()=>new ArticleController(propsRef.current),[propsRef])
 
-
-    const [id,setId] = React.useState(false)
     const [item,setItem] = React.useState({})
     const [isFetching,setFetching] = React.useState(true)
 
     const [noOfComment,setNoOfComment] = React.useState(0)
 
-    React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
+    const isMounted = React.useRef()
 
-    React.useEffect(async ()=>{
+    React.useEffect(()=>{
        
-        if(id){
+        isMounted.current = true
+        
+        async function doLoad(){
+
             try{
                 const article = await articleController._get(id)
                 setFetching(false)
@@ -54,8 +52,13 @@ const PageArticleId = props => {
 
             }catch(error){
                 router.push(`/${auth.account.uniqueURL}/content/articles`)
-                console.log(error)
             }
+        }
+        
+        if(id && isMounted.current) doLoad()
+
+        return ()=>{
+            isMounted.current = false
         }
         
     },[id])

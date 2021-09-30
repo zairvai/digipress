@@ -19,7 +19,7 @@ const PageCategoryAdd = props => {
     const {auth} = props
 
     const router = useRouter()
-	const [id,setId] = React.useState(false)
+	const id = router.query.id
     const [item,setItem] = React.useState({})
     
     const isMounted = React.useRef()
@@ -27,20 +27,22 @@ const PageCategoryAdd = props => {
     // const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Kategori',`/${auth.account.uniqueURL}/content/categories`,''],[item.name,`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`,''],["Ubah",`/${auth.account.uniqueURL}/content/categories/${item.id}/edit`,'active']]
 
     React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
 
-    React.useEffect(async()=>{
-        
-        if(id){
-            isMounted.current = true
-            if(isMounted.current){
+        isMounted.current = true
+
+        async function doLoad(){
+            
+            try{
                 const category = await categoryController._get(id)
                 setItem(category.data)
             }
+            catch(error){
+                console.log(error)
+            }
+        
         }
+
+        if(id && isMounted.current) doLoad()
 
         return ()=> isMounted.current = false
         

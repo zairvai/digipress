@@ -30,18 +30,15 @@ const PageLessonId = props => {
     const [mode,setMode] = React.useState()
     
     const router = useRouter()
-    const [id,setId] = React.useState(false)
+    const id = router.query.id
     const [item,setItem] = React.useState({})
+    const isMounted = React.useRef()
 
     React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
 
-    React.useEffect(async ()=>{
+        isMounted.current = true
 
-        if(id){
+        async function doLoad(){
             try{
 
                 if(app.currentPage=="classrooms" || ref=="classrooms") setMode("answer")
@@ -55,6 +52,11 @@ const PageLessonId = props => {
                 console.log(error)
             }
         }
+
+        if(id && isMounted.current) doLoad()
+
+        return ()=> isMounted.current = false
+        
     },[id])
 
     React.useEffect(()=>{

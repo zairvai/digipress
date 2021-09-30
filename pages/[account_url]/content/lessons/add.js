@@ -22,22 +22,32 @@ const PageLessonAdd = props => {
 
     const [item,setItem] = React.useState({})
 
-    const {id} = React.useMemo(()=>router.query,[])
-    
+    const id = router.query.id
 
-	React.useEffect(async ()=>{
-       
-        try{
-            const classroom = await classroomController._get(id)
-            //console.log(classroom)
-            setItem(classroom.data)
+	const isMounted = React.useRef()
 
-        }catch(error){
-            router.push(`/${auth.account.uniqueURL}/content/classrooms`)
-            console.log(error)
+    React.useEffect(()=>{
+        
+        isMounted.current = true
+
+        async function doLoad(){
+            try{
+				const classroom = await classroomController._get(id)
+				//console.log(classroom)
+				setItem(classroom.data)
+	
+			}catch(error){
+				router.push(`/${auth.account.uniqueURL}/content/classrooms`)
+				console.log(error)
+			}
         }
         
-    },[])
+        if(id && isMounted.current) doLoad()
+
+        return ()=> isMounted.current = false
+
+    },[id])
+
 
     // const pagename=""
 	// const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}/`,''],['Penambahan materi',`/${auth.account.uniqueURL}/content/lessons/add`,'active']]

@@ -28,7 +28,7 @@ const PageClassroomEdit = props => {
 	const tagController = React.useMemo(()=>new TagController(propsRef.current),[propsRef])
 
 	const router = useRouter()
-	const [id,setId] = React.useState(false)
+	const id = router.query.id
 	const [item,setItem] = React.useState(false)
 	
 	const isMounted = React.useRef()
@@ -37,30 +37,26 @@ const PageClassroomEdit = props => {
 	const links = [['Konten',`/${auth.account.uniqueURL}/content/classrooms`,''],['Ruang belajar',`/${auth.account.uniqueURL}/content/classrooms`,''],[item.title,`/${auth.account.uniqueURL}/content/classrooms/${item.id}`,''],["Ubah",`/${auth.account.uniqueURL}/content/classrooms/${item.id}/edit`,'active']]
 
 	React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
-
-	React.useEffect(async()=>{
 		
-		if(id){
-			isMounted.current = true
+		isMounted.current = true
 
-            if(isMounted.current){
-				//get category
-				categoryController._list({accountId:auth.account.id})
-				//get tag
-				tagController._list({accountId:auth.account.id})
+		async function doLoad(){
+			
+			//get category
+			categoryController._list({accountId:auth.account.id})
+			//get tag
+			tagController._list({accountId:auth.account.id})
 
-				try{
-					const classroom = await classroomController._get(id)
-					setItem(classroom.data)
-				}catch(error){
-					router.push(`/${auth.account.uniqueURL}/content/classrooms`)
-				}
+			try{
+				const classroom = await classroomController._get(id)
+				setItem(classroom.data)
+			}catch(error){
+				router.push(`/${auth.account.uniqueURL}/content/classrooms`)
 			}
+			
 		}
+
+		if(id && isMounted.current) doLoad()
 
 		return ()=> isMounted.current = false
 

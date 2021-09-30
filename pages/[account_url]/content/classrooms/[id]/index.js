@@ -27,19 +27,15 @@ const PageClassroomId = props => {
     const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
     
     const router = useRouter()
-    const [id,setId] = React.useState(false)
+    const id = router.query.id
     const [item,setItem] = React.useState({})
-
+    const isMounted = React.useRef()
 
     React.useEffect(()=>{
-        if(router.query.id){
-            setId(router.query.id)
-        }
-    },[router])
-
-    React.useEffect(async ()=>{
        
-        if(id){
+        isMounted.current = true
+
+        async function doLoad(){
             try{
                 const classroom = await classroomController._get(id)
                 //console.log(classroom)
@@ -50,6 +46,10 @@ const PageClassroomId = props => {
                 console.log(error)
             }
         }
+
+        if(id && isMounted.current) doLoad()
+
+		return ()=> isMounted.current = false
         
     },[id])
 
