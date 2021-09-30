@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Upload,message} from 'antd'
 import {UploadOutlined,PlusOutlined} from '@ant-design/icons'
-import {MediaImage} from 'Components/MediaItem' 
+import {MediaItem} from 'Components/MediaItem' 
 import { bindPromiseCreators } from 'redux-saga-routines'
 import { putRoutinePromise} from 'State/routines/storage'
 import StorageController from 'Library/controllers/StorageController'
@@ -114,7 +114,7 @@ const MediaUpload = ({name="file",multiple=true,...props}) =>{
                 uploadedFiles.length>0 ?
                 <>
                     <div className="media-manager d-flex justify-content-start flex-wrap align-content-start" style={{height:"100%"}}>
-                        {uploadedFiles.map((uploaded,index)=><MediaImage key={`media-image-${index}`} index={index} media={uploaded} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
+                        {uploadedFiles.map((uploaded,index)=><MediaItem key={`media-image-${index}`} index={index} media={uploaded} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
                         <UploadButton width={100} className="ml-3"/>
                     </div>
                 </>
