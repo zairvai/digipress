@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { bindPromiseCreators } from 'redux-saga-routines'
 import { listRoutinePromise,removeRoutinePromise } from 'State/routines/storage'
-import {MediaImage} from 'Components/MediaItem' 
+import {MediaItem} from 'Components/MediaItem' 
 import StorageController from 'Library/controllers/StorageController'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {LoadingOutlined} from '@ant-design/icons'
@@ -39,7 +39,7 @@ const MediaChoose = ({...props}) =>{
     }
 
     const fetchMoreData = () =>{
-        console.log("more data")
+        // console.log("more data")
         fetchItems({maxKeys:16,directory:`${auth.account.id}`,nextToken:listObjects.listData.nextToken})
     }
 
@@ -87,7 +87,7 @@ const MediaChoose = ({...props}) =>{
                     }
                 >
                     <div className="media-manager d-flex justify-content-start flex-wrap align-content-start" style={{height:"100%"}}>
-                        {listObjects.listData.items.map((item,index)=><MediaImage key={`media-image-${index}`} index={index} media={item} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
+                        {listObjects.listData.items.map((item,index)=><MediaItem key={`media-image-${index}`} index={index} media={item} width={100} onChange={handleChange} onDelete={handleDelete} className="ml-3 mb-3"/>)}
                     </div>
                 </InfiniteScroll>
                 :

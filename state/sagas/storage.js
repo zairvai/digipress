@@ -5,11 +5,11 @@ import {buffers,eventChannel,END} from 'redux-saga'
 import {put,call,take,takeEvery,takeLatest} from 'redux-saga/effects'
 
 const config = {
-    bucket : "baktikominfo-digipress-media",
+    bucket : "digipress-media-dev",
     region : "ap-southeast-1"
 }
 
-const storageBaseURL = "https://d211x4vjup154z.cloudfront.net"
+const storageBaseURL = "https://duxyhvy2in0sd.cloudfront.net"
 //const storageBaseURL = "https://baktikominfo-digipress-media.s3-ap-southeast-1.amazonaws.com"
 
 AWS.config.s3 = {

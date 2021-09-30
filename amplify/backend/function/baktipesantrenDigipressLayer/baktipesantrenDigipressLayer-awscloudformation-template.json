@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersion0ebcdb84": {
+    "LambdaLayerVersion505460e4": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -51,23 +51,68 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionAwsAccounts6073803319630ebcdb84": {
+    "LambdaLayerPermissionAwsAccounts607380331963505460e4": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion0ebcdb84"
+          "Ref": "LambdaLayerVersion505460e4"
         },
         "Principal": "607380331963"
       }
     },
-    "LambdaLayerPermissionPrivate0ebcdb84": {
+    "LambdaLayerPermissionPrivate505460e4": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion0ebcdb84"
+          "Ref": "LambdaLayerVersion505460e4"
         },
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersiondc5262d2": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersiondc5262d2-build.zip"
+        },
+        "Description": "Updated layer version 2021-09-30T09:02:51.786Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "baktipesantrenDigipressLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsAccounts607380331963dc5262d2": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:607380331963:layer:baktipesantrenDigipressLayer-dev:2",
+        "Principal": "607380331963"
+      }
+    },
+    "LambdaLayerPermissionPrivatedc5262d2": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:607380331963:layer:baktipesantrenDigipressLayer-dev:2",
         "Principal": {
           "Ref": "AWS::AccountId"
         }
@@ -77,7 +122,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersion0ebcdb84"
+        "Ref": "LambdaLayerVersion505460e4"
       }
     }
   }
