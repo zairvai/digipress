@@ -28,7 +28,7 @@
         },
         "baktipesantrenDigipressLayer": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersiondc5262d2-build.zip"
+          "s3Key": "amplify-builds/baktipesantrenDigipressLayer-LambdaLayerVersion505460e4-build.zip"
         },
         "DigipressIdentityManager": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
@@ -37,13 +37,6 @@
         "DigipressStorageManager": {
           "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
           "s3Key": "amplify-builds/DigipressStorageManager-6f61436730674452545a-build.zip"
-        },
-        "DigipressImageResize": {
-          "deploymentBucketName": "amplify-baktipesantren-dev-132445-deployment",
-          "s3Key": "amplify-builds/DigipressImageResize-36303458755155374f71-build.zip",
-          "allowedDimensions": "100x100,300x300,autox300,300xauto,500x500,autox500,500xauto",
-          "bucket": "digipress-media",
-          "url": "https://d211x4vjup154z.cloudfront.net"
         },
         "DigipressSearchManager": {
           "elasticsearchEndpoint": "search-digipress-dev-ba7ubifsk4ur4bhzdfyzujtwa4.ap-southeast-1.es.amazonaws.com",
