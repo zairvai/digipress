@@ -24,7 +24,8 @@
           "State":"./state",
           "Library":"./library",
           "Helper":"./helper",
-          "Plugins":"./plugins"
+          "Plugins":"./plugins",
+          "Public":"./public"
 	      }
 	    }
     ]

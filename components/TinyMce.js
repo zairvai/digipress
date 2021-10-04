@@ -2,131 +2,141 @@ import React from 'react'
 import $ from 'jquery'
 import _ from 'lodash'
 
+
+// Content styles, including inline UI like fake cursors
+  /* eslint import/no-webpack-loader-syntax: off */
+import contentCss from '!!raw-loader!tinymce/skins/content/default/content.min.css';
+import contentUiCss from '!!raw-loader!tinymce/skins/ui/oxide/content.min.css';
+
+
 const TinyMce = ({id,className="",mode="full",
     height,maxHeight,minHeight,bottomMargin,content,placeholder,onChange,onRemove,...props}) =>{
 
-    let tinymce,editor
+    const tinymceRef = React.useRef(null)
+    const editorRef = React.useRef(null)
 
-    const [ed,setEd] = React.useState()
+    const[tinymce,setTinymce] = React.useState()
+    const[editor,setEditor] = React.useState()
+    //const[params,setParams] = React.useState()
 
-    const isMounted = React.useRef()
+    const isMounted = React.useRef(true)
+
+    const getParams = () =>{
+
+        const selector= `#${id}` + (className!=="" ? `.${className}` : "")
+        const editorId = selector
+
+        const url = window.location
+
+        let pluginList = [],toolbar1 = "",skinUrl = ""
+        let quickBarImage=false,formats=false
+
+        if(mode=="full"){
+        
+            pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste image imagetools"]
+            toolbar1 = "undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
+                        alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
+                        code | fullscreen | paste pastetext | mymedia"
+            
+            skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`                    
+
+            formats ={
+                alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-left',exact:true},
+                aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-center',exact:true},
+                alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-right',exact:true},
+                alignjustify : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-justify',exact:true}
+            }
+
+        }else{
+        
+            pluginList = ["autoresize"]
+            skinUrl=`${url.origin}/modules/tinymce/skins/ui/simple`
+        }
+
+        const tinyParams = {
+            selector:editorId,
+            skin_url:skinUrl,
+            plugins:pluginList,
+            toolbar1:toolbar1,
+            menubar:false,
+            statusbar:false,
+            formats:formats,
+            //quickbars_image_toolbar: quickBarImage,
+            quickbars_selection_toolbar: false,
+            quickbars_insert_toolbar:false,
+            height:height ? height : minHeight ? minHeight : 100,
+            autoresize_bottom_margin: bottomMargin ? bottomMargin : 50,
+            min_height: height ? height : minHeight ? minHeight : 600,
+            max_height:maxHeight ? maxHeight : 2000,
+            contextmenu:false,
+            setup:(tinyEditor)=>{
+                
+                $(editorId).addClass("isTinymce")
+        
+                setEditor(tinyEditor)
+        
+                tinymce.execCommand('mceFocus',false,editorId);
+        
+                tinyEditor.on('focusout blur',function(e,evt){
+                    if(props.onFocusOut) props.onFocusOut()
+                })
+        
+                tinyEditor.on('keydown', function (e, evt) {
+                    
+                    if (e.keyCode == 9) e.preventDefault();
+        
+                    else if(e.keyCode == 13){
+                        
+                        //if this function handler, prevent new line on enter.
+                        //shift + enter instead.
+                        if(props.onPressEnter){
+        
+                            if(e.shiftKey){
+                                tinyEditor.execCommand('mceInsertContent', false, "");
+                                e.stopPropagation()
+                            }
+                            else{
+                                e.preventDefault()
+                                props.onPressEnter(tinyEditor)
+                            }
+                        }
+                    }
+                })
+        
+                tinyEditor.on("keyup change",function(e,evt){
+                    onChange(tinyEditor)
+                })
+        
+                tinyEditor.on("init",function(e,evt){
+                    // console.log(editor)
+                    if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
+                })
+        
+                tinyEditor.on("detach remove",function(){
+                    if(props.onRemove) props.onRemove(tinyEditor)
+                })
+        
+                //custom context
+                setupContextToolbar(tinyEditor)
+                
+            }
+        }
+
+        return tinyParams
+
+    }
 
     React.useEffect(()=>{
         
-        isMounted.current = true
+        let plugins=[]
 
         if(isMounted.current){
 
-            const selector= `#${id}` + (className!=="" ? `.${className}` : "")
-            const editorId = selector
-
-
             setTimeout(()=>{
-                
-                const url = window.location
 
-                let plugins=[],pluginList = [],toolbar1 = "",skinUrl = ""
-                let quickBarImage=false,formats=false
-
-                if(mode=="full"){
-                
-                    pluginList = ["advlist lists fullscreen autolink link code autoresize mymedia paste image imagetools"]
-                    toolbar1 = "undo redo | formatselect | fontsizeselect | bold italic underline forecolor backcolor | \
-                                alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | link |\
-                                code | fullscreen | paste pastetext | mymedia"
-                    
-                    skinUrl=`${url.origin}/modules/tinymce/skins/ui/custom`                    
-
-                    formats ={
-                        alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-left',exact:true},
-                        aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-center',exact:true},
-                        alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-right',exact:true},
-                        alignjustify : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe', classes : 'content-align-justify',exact:true}
-                    }
-
-                }else{
-                
-                    pluginList = ["autoresize"]
-                    skinUrl=`${url.origin}/modules/tinymce/skins/ui/simple`
-                }
-
-
-                let tinyParams = {
-                    selector:editorId,
-                    skin_url:skinUrl,
-                    plugins:pluginList,
-                    toolbar1:toolbar1,
-                    menubar:false,
-                    statusbar:false,
-                    formats:formats,
-                    //quickbars_image_toolbar: quickBarImage,
-                    quickbars_selection_toolbar: false,
-                    quickbars_insert_toolbar:false,
-                    height:height ? height : minHeight ? minHeight : 100,
-                    autoresize_bottom_margin: bottomMargin ? bottomMargin : 50,
-                    min_height: height ? height : minHeight ? minHeight : 600,
-                    max_height:maxHeight ? maxHeight : 2000,
-                    contextmenu:false,
-                    setup:(tinyEditor)=>{
-                        
-                        $(editorId).addClass("isTinymce")
-
-                        editor = tinyEditor
-
-                        setEd(tinyEditor)
-
-                        tinymce.execCommand('mceFocus',false,editorId);
-
-                        tinyEditor.on('focusout blur',function(e,evt){
-                            if(props.onFocusOut) props.onFocusOut()
-                        })
-
-                        tinyEditor.on('keydown', function (e, evt) {
-                            
-                            if (e.keyCode == 9) e.preventDefault();
-
-                            else if(e.keyCode == 13){
-                                
-                                //if this function handler, prevent new line on enter.
-                                //shift + enter instead.
-                                if(props.onPressEnter){
-
-                                    if(e.shiftKey){
-                                        tinyEditor.execCommand('mceInsertContent', false, "");
-                                        e.stopPropagation()
-                                    }
-                                    else{
-                                        e.preventDefault()
-                                        props.onPressEnter(tinyEditor)
-                                    }
-                                }
-                            }
-                        })
-
-                        tinyEditor.on("keyup change",function(e,evt){
-                            onChange(editor)
-                        })
-
-                        tinyEditor.on("init",function(e,evt){
-                            if(props.onFinishSetup) props.onFinishSetup(tinyEditor)
-                        })
-
-                        tinyEditor.on("detach remove",function(){
-                            if(props.onRemove) props.onRemove(tinyEditor)
-                        })
-
-                        //custom context
-                        setupContextToolbar(editor)
-                        
-                    }
-                }
-
-            
                 import('tinymce/tinymce')
                     .then(async(obj)=>{
 
-                        tinymce = obj.default
-                        
                         if(mode=="full"){
                             plugins = [
                                 import("Plugins/tinymce/mymedia"),
@@ -151,42 +161,42 @@ const TinyMce = ({id,className="",mode="full",
         
                         await Promise.all(plugins)
 
-                        tinymce.init(tinyParams)
+                        setTinymce(obj.default)
                         
                     })
                 
                 
-            },5)
+            },1000)
         }
                 
-            
-        
         return ()=>{
 
             isMounted.current = false
             if(tinymce) tinymce.remove(editor)
 
-            
         }
 
     },[])
 
     React.useEffect(()=>{
-        if(ed){
+        if(tinymce) tinymce.init(getParams())
+    },[tinymce])
+
+    React.useEffect(()=>{
+        if(editor){
             if(props.isSubmitting){
-                ed.mode.set('readonly')
+                editor.mode.set('readonly')
             }
             else{
                 //finish submission
-                //ed.setContent("")
-                ed.mode.set('design')
+                editor.mode.set('design')
             }
         }
        
         return ()=>{
-            if(ed) ed.setContent("")
+            if(editor) editor.setContent("")
         }
-    },[ed,props.isSubmitting])
+    },[editor,props.isSubmitting])
 
     const setupContextToolbar = editor =>{
 

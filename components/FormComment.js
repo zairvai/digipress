@@ -8,8 +8,8 @@ import { Row, Col,Form,Avatar,Button, Typography} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createCommentRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
 import CommentController from 'Library/controllers/CommentController';
-import CommentEditor from 'Components/TinyMce'
-
+import Editor from 'Components/TinyMce'
+import {debug} from 'Helper'
 const {Text} = Typography
 
 const schema = yup.object().shape({
@@ -21,10 +21,10 @@ const FormComment = ({formId,item,...props}) => {
     const {auth,post,replyTo} = props
     
     const commentController = new CommentController(props)
+    const editorRef = React.useRef(null)
+
     const [replyToUser,setReplyToUser] = React.useState()
     const [isSubmiting,setSubmiting] = React.useState(false)
-    const [content,setContent] = React.useState("")
-    const [editor,setEditor] = React.useState()
     const isMounted = React.useRef()
 
     React.useEffect(()=>{
@@ -53,21 +53,21 @@ const FormComment = ({formId,item,...props}) => {
         isMounted.current = true
 
         if(isMounted.current){
-
-            if(item){
+            console.log(item)
+            console.log(editorRef.current)
+            if(item && editorRef.current){
                 //console.log(item.content)
-                if(editor) editor.setContent(item.content)
-                
+                editorRef.current.setContent(item.content)
                 //setContent(item.content)
                 setValue("content",item.content)
             }
         }
         return ()=>{
             isMounted.current = false
-            if(editor) editor.setContent("")
+            //if(editorRef.current) editorRef.current.setContent("")
         }
 
-    },[item,editor])
+    },[item,editorRef.current])
 
     const { 
         handleSubmit,
@@ -135,7 +135,9 @@ const FormComment = ({formId,item,...props}) => {
     }
 
     const handleEditorSetup = editor =>{
-        setEditor(editor)
+        // setEditor(editor)
+        debug("setup editor")
+        editorRef.current = editor
     }
 
     const handleEditorFocusOut = () => {
@@ -168,7 +170,7 @@ const FormComment = ({formId,item,...props}) => {
                                 render={props=>
                                     <Form.Item className="mb-0">
                                         
-                                        <CommentEditor 
+                                        <Editor 
                                             mode="basic"
                                             id={formId}
                                             className="editor"

@@ -209,8 +209,7 @@ const CommentItem = props =>{
     }
     const updateComment = updatedItem =>{
         
-        console.log(items)
-
+        // console.log(items)
         setUpdating(true)
     }
 
