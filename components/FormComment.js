@@ -8,8 +8,8 @@ import { Row, Col,Form,Avatar,Button, Typography} from 'antd'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createCommentRoutinePromise,updateCommentRoutinePromise} from 'State/routines/comment';
 import CommentController from 'Library/controllers/CommentController';
-import Editor from 'Components/TinyMce'
-import {debug} from 'Helper'
+import CommentEditor from 'Components/TinyMce'
+
 const {Text} = Typography
 
 const schema = yup.object().shape({
@@ -19,12 +19,13 @@ const schema = yup.object().shape({
 const FormComment = ({formId,item,...props}) => {
     
     const {auth,post,replyTo} = props
-    
-    const commentController = new CommentController(props)
-    const editorRef = React.useRef(null)
+    const propsRef = React.useRef(props)
+    const commentController = React.useMemo(()=>new CommentController(propsRef.current),[propsRef])
 
     const [replyToUser,setReplyToUser] = React.useState()
     const [isSubmiting,setSubmiting] = React.useState(false)
+    const [content,setContent] = React.useState("")
+    const [editor,setEditor] = React.useState()
     const isMounted = React.useRef()
 
     React.useEffect(()=>{
@@ -53,26 +54,26 @@ const FormComment = ({formId,item,...props}) => {
         isMounted.current = true
 
         if(isMounted.current){
-            console.log(item)
-            console.log(editorRef.current)
-            if(item && editorRef.current){
+
+            if(item){
                 //console.log(item.content)
-                editorRef.current.setContent(item.content)
+                if(editor) editor.setContent(item.content)
+                
                 //setContent(item.content)
                 setValue("content",item.content)
             }
         }
         return ()=>{
             isMounted.current = false
-            //if(editorRef.current) editorRef.current.setContent("")
+            if(editor) editor.setContent("")
         }
 
-    },[item,editorRef.current])
+    },[item,editor])
 
     const { 
         handleSubmit,
         control,
-        formState:{errors},
+        errors,
         setValue,
         reset
         } = useForm({
@@ -112,11 +113,12 @@ const FormComment = ({formId,item,...props}) => {
 
             values.accountId = post.account.id
             values.postId = post.id
-            values.createdById = auth.user.id
-            values.updatedByid = auth.user.id
             
             if(replyTo) values.replyToId = replyTo.id
             if(replyToUser) values.replyToUserId = replyToUser.id
+            
+            values.createdById = auth.user.id
+            values.updatedByid = auth.user.id
 
             commentController._create(values)
                 .then(comment=>{
@@ -135,9 +137,7 @@ const FormComment = ({formId,item,...props}) => {
     }
 
     const handleEditorSetup = editor =>{
-        // setEditor(editor)
-        debug("setup editor")
-        editorRef.current = editor
+        setEditor(editor)
     }
 
     const handleEditorFocusOut = () => {
@@ -170,7 +170,7 @@ const FormComment = ({formId,item,...props}) => {
                                 render={props=>
                                     <Form.Item className="mb-0">
                                         
-                                        <Editor 
+                                        <CommentEditor 
                                             mode="basic"
                                             id={formId}
                                             className="editor"
@@ -195,7 +195,7 @@ const FormComment = ({formId,item,...props}) => {
                             <Controller
                                 name="hiddenContent"
                                 control={control}
-                                render={props=><input type="hidden" value={props.field.value}/>}/>
+                                render={props=><input type="hidden" value={props.value}/>}/>
                         </Col>
                         {/* <Col md={4} sm={7} xs={7}>
                             <Button 
