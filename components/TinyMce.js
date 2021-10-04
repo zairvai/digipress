@@ -61,6 +61,7 @@ const TinyMce = ({id,className="",mode="full",
             menubar:false,
             statusbar:false,
             formats:formats,
+            //forced_root_block: false,
             //quickbars_image_toolbar: quickBarImage,
             quickbars_selection_toolbar: false,
             quickbars_insert_toolbar:false,
@@ -130,6 +131,8 @@ const TinyMce = ({id,className="",mode="full",
         
         let plugins=[]
 
+        isMounted.current = true
+
         if(isMounted.current){
 
             setTimeout(()=>{
@@ -179,8 +182,14 @@ const TinyMce = ({id,className="",mode="full",
     },[])
 
     React.useEffect(()=>{
-        if(tinymce) tinymce.init(getParams())
-    },[tinymce])
+        if(tinymce && !tinymce.get(editor)) {
+            tinymce.init(getParams())
+        }
+
+        return ()=>{
+            if(tinymce) tinymce.remove(editor)
+        }
+    },[tinymce,editor])
 
     React.useEffect(()=>{
         if(editor){

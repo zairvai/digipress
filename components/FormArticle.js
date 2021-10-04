@@ -32,9 +32,10 @@ const FormArticle = ({item,...props}) => {
 
     const {auth,tags,categories} = props
     
-    const articleController = new ArticleController(props)
-    
+    const propsRef = React.useRef(props)
 
+    const articleController = React.useMemo(()=>new ArticleController(propsRef.current),[propsRef])
+    
     const [isSubmitting,setSubmitting] = React.useState(false)
     const [editor,setEditor] = React.useState()
     const [content,setContent] = React.useState("")
