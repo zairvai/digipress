@@ -2,22 +2,11 @@ import React from 'react'
 import $ from 'jquery'
 import _ from 'lodash'
 
-
-// Content styles, including inline UI like fake cursors
-  /* eslint import/no-webpack-loader-syntax: off */
-import contentCss from '!!raw-loader!tinymce/skins/content/default/content.min.css';
-import contentUiCss from '!!raw-loader!tinymce/skins/ui/oxide/content.min.css';
-
-
 const TinyMce = ({id,className="",mode="full",
     height,maxHeight,minHeight,bottomMargin,content,placeholder,onChange,onRemove,...props}) =>{
 
-    const tinymceRef = React.useRef(null)
-    const editorRef = React.useRef(null)
-
     const[tinymce,setTinymce] = React.useState()
     const[editor,setEditor] = React.useState()
-    //const[params,setParams] = React.useState()
 
     const isMounted = React.useRef(true)
 
@@ -169,13 +158,15 @@ const TinyMce = ({id,className="",mode="full",
                     })
                 
                 
-            },1000)
+            },1)
         }
                 
         return ()=>{
 
             isMounted.current = false
-            if(tinymce) tinymce.remove(editor)
+            console.log("remove 1")
+            // if(tinymce && editor) tinymce.remove(editor)
+            // setTinymce(null)
 
         }
 
@@ -183,11 +174,14 @@ const TinyMce = ({id,className="",mode="full",
 
     React.useEffect(()=>{
         if(tinymce && !tinymce.get(editor)) {
+            console.log("init 1")
             tinymce.init(getParams())
         }
 
         return ()=>{
-            if(tinymce) tinymce.remove(editor)
+            console.log("remove 2")
+            if(tinymce && editor) tinymce.remove(editor)
+            // setTinymce(null)
         }
     },[tinymce,editor])
 

@@ -33,7 +33,9 @@ const FormClassroom = ({item,...props}) => {
 
     const {auth,tags,categories} = props
 
-    const classroomController = new ClassroomController(props)
+    const propsRef = React.useRef(props)
+
+    const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
 
     const [isSubmitting,setSubmitting] = React.useState(false)
 
