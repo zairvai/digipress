@@ -7,15 +7,14 @@ import {
 import {useForm,Controller} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import TinyMce from 'Components/TinyMce'
 import SelectCategory from 'Components/SelectCategory'
 import SelectTags from 'Components/SelectTags'
 import Media from 'Components/Media'
 import { bindPromiseCreators } from 'redux-saga-routines';
 import { createArticleRoutinePromise,updateArticleRoutinePromise} from 'State/routines/article';
 import ArticleController from 'Library/controllers/ArticleController';
-
-
+import Editor from 'Components/TinyMce'
+import {debug} from 'Helper'
 const {Text} = Typography
 
 //validation schema
@@ -32,9 +31,11 @@ const schema = yup.object().shape({
 const FormArticle = ({item,...props}) => {
 
     const {auth,tags,categories} = props
+    
+    const propsRef = React.useRef(props)
 
-    const articleController = new ArticleController(props)
-
+    const articleController = React.useMemo(()=>new ArticleController(propsRef.current),[propsRef])
+    
     const [isSubmitting,setSubmitting] = React.useState(false)
     const [editor,setEditor] = React.useState()
     const [content,setContent] = React.useState("")
@@ -45,7 +46,6 @@ const FormArticle = ({item,...props}) => {
     React.useEffect(()=>{
 
         document.addEventListener("openTinymceMedia",function(e){
-            const {editor} = e.detail
             setOpenMedia(true)
         },false)
         return()=>{
@@ -99,7 +99,6 @@ const FormArticle = ({item,...props}) => {
     },[item])
 
     React.useEffect(()=>{
-
         if(content && editor){
             editor.setContent(content)
         }
@@ -267,16 +266,15 @@ const FormArticle = ({item,...props}) => {
                                         defaultValue=""
                                         control={control}
                                         render={props=>
-                                            <Form.Item label="Isi artikel" className="mb-0">
-                                            
-                                                <TinyMce 
+                                            <Form.Item className="mb-0">
+                                                <Editor 
                                                     id="articleEditor" 
                                                     isSubmitting={isSubmitting}
                                                     minHeight={400}
                                                     onFinishSetup={handleEditorSetup}
                                                     onChange={handleEditorChange} 
                                                     value={props.field.value} placeholder="Ketik isi tulisan..."/>
-                                                {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
+                                                    {errors && errors.content && <Text type="danger">{errors.content.message}</Text>}
                                             </Form.Item>
                                         }
                                     />

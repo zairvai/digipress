@@ -1,0 +1,238 @@
+import React from 'react'
+import {connect} from 'react-redux'
+import Header from 'Templates/Head'
+import {
+	VuroxLayout,
+	ContentLayout,
+	VuroxComponentsContainer
+} from 'Components/layout'
+import {useRouter} from 'next/router'
+import {getRedirectToUserDefaultPath} from 'Helper'
+
+import { Row, Col,Typography} from 'antd'
+import Image from 'next/image'
+import FormLogin from 'Components/FormAuthLogin'
+import FormResetPassword from 'Components/FormAuthResetPassword'
+import FormCompleteNewPasword from 'Components/FormAuthCompleteNewPassword'
+
+import { bindPromiseCreators } from 'redux-saga-routines';
+import { getAccountByUniqueUrlRoutinePromise } from 'State/routines/account';
+import { signOutRoutinePromise } from 'State/routines/auth';
+import AuthController from 'Library/controllers/AuthController'
+import AccountController from 'Library/controllers/AccountController'
+import {NextSeo} from 'next-seo'
+
+import logoPic from "Public/image/logo.jpg"
+
+const {Title,Text} = Typography
+
+const PageLogin = props =>{
+
+	// console.log(router)
+
+	const {auth} = props
+	const router = useRouter()
+	const propsRef = React.useRef(props)
+	const authController = React.useMemo(()=> new AuthController(propsRef.current),[propsRef])
+	const accountController = React.useMemo(()=>new AccountController(propsRef.current),[propsRef])
+
+	const [user,setUser] = React.useState()
+	const [isNewPasswordRequired,setNewPasswordRequired] = React.useState(false)
+	const [isPasswordResetRequired,setPasswordResetRequired] = React.useState(false)
+	const [visible,setVisible] = React.useState(false)
+	 
+	const {isLoggedIn} = auth
+	const authUser = auth.user
+	const authAccount = auth.account
+
+	const {account_url} = router.query
+
+	React.useEffect(()=>{
+		
+		//console.log(router)
+
+		async function checkLogin(){
+
+			try{
+
+				if(isLoggedIn){
+					
+					if(!authUser || authUser.access.accountId != authAccount.id){
+						await authController._signOut()
+						setVisible(true)
+					}
+					else{
+						router.push(getRedirectToUserDefaultPath(`/${authAccount.uniqueURL}/`,authUser.access.role))
+					}
+				}
+				else{
+					
+					if(account_url){
+						//get account id by unique URL
+						const account = await accountController._getAccountByUniqueUrl({url:account_url})
+	
+						authController._setAccount(account.data)
+						
+						setVisible(true)
+					}
+					
+				}
+			}
+			catch(error){
+				console.log(error)
+				//console.log(props)
+				//router.push('/not-found')
+			}
+
+		}
+
+		checkLogin()
+			
+		return (()=>{
+			setUser()
+			setNewPasswordRequired(false)
+		})
+	},[account_url,isLoggedIn])
+
+
+	React.useEffect(()=>{
+		if(auth.data){
+			if(auth.data.CodeDeliveryDetails) setPasswordResetRequired(true)
+		}
+	},[auth.data])
+	
+
+	const goToForgotPassword = () =>{
+        router.push('/auth/password-recovery')
+	}
+
+	const handleNewPasswordRequired = user =>{
+		setUser(user)
+		setNewPasswordRequired(true)
+	}
+	
+	const handlePasswordResetRequired = user =>{
+		// console.log(user)
+		
+		authController._resetRequired(user.email)
+			//setPasswordResetRequired(true)
+		
+		// catch(error){console.log(error)}
+	}
+	const handleSuccessPasswordReset = () =>{
+		setPasswordResetRequired(false)
+	}
+
+	const handleCancelPasswordReset = () =>{
+		
+		setPasswordResetRequired(false)
+	}
+
+
+	const handleBackToLogin = () => {
+		setNewPasswordRequired(false)
+		authController._signOut()
+	}
+
+	const handleSuccessLogin = user =>{
+		if(!user.email_verified) router.push(`/${auth.account.uniqueURL}/auth/verify`)
+		else router.push(getRedirectToUserDefaultPath(`/${auth.account.uniqueURL}/`,user.access.role))
+	}
+
+	const handleSuccessNewPassword = () =>{
+		setNewPasswordRequired(false)
+	}
+
+	return(
+		<>
+		{auth && auth.account &&
+		<React.Fragment>
+			<NextSeo title="Login"/>
+			<Header/>
+			<VuroxLayout className="flex-column fullHeight">
+				
+				<VuroxComponentsContainer className="py-2 px-4" style={{borderBottom:"1px solid #dddddd"}}>
+					
+					<Image src={logoPic} width={60} height={70}/>
+					{/* <Title level={4} className="mb-0">{auth.account.name}</Title> */}
+					{/* <Text type="secondary">Anda sedang mengakses akun {auth.account.name}.</Text>
+					<Text type="secondary"> Silahkan login menggunakan email yang telah terdaftar pada akun {auth.account.name}</Text> */}
+			
+				</VuroxComponentsContainer>
+
+				<Row>
+					<Col md={24}>
+						<Row>
+							<Col md={18}>
+								<VuroxComponentsContainer className="py-2 px-2" style={{borderRight:"1px solid #dddddd"}}>
+								</VuroxComponentsContainer>
+							</Col>
+							<Col md={6}>	
+								<Row>
+									<Col md={24}>
+										<VuroxComponentsContainer className="py-2">
+											{isNewPasswordRequired ? 
+												<FormCompleteNewPasword user={user} onSuccess={handleSuccessNewPassword} onBack={handleBackToLogin}/>
+												:
+											isPasswordResetRequired ? 
+												<FormResetPassword onSuccess={handleSuccessPasswordReset} onCancel={handleCancelPasswordReset}/>
+												:
+												<FormLogin onSuccess={handleSuccessLogin} onNewPasswordRequired={handleNewPasswordRequired} onForgotPassword={goToForgotPassword} onPasswordResetRequired={handlePasswordResetRequired}/>
+											}
+										</VuroxComponentsContainer>
+									</Col>
+								</Row>
+							</Col>
+						</Row>
+					</Col>
+				</Row>
+						
+					{/* <Row>
+						<Col md={24}>
+							<Row>
+								<Col md={18}></Col>
+								<Col md={6}>
+									<VuroxComponentsContainer className="py-2 px-2" style={{borderLeft:"1px solid #dddddd"}}>
+										<Row>
+											<Col md={24}>
+											
+												{isNewPasswordRequired ? 
+													<FormCompleteNewPasword user={user} onSuccess={handleSuccessNewPassword} onBack={handleBackToLogin}/>
+													:
+												isPasswordResetRequired ? 
+													<FormResetPassword onSuccess={handleSuccessPasswordReset} onCancel={handleCancelPasswordReset}/>
+													:
+													<FormLogin onSuccess={handleSuccessLogin} onNewPasswordRequired={handleNewPasswordRequired} onForgotPassword={goToForgotPassword} onPasswordResetRequired={handlePasswordResetRequired}/>
+												}
+											</Col>
+										</Row>
+									</VuroxComponentsContainer>
+								</Col>
+							</Row>
+						</Col>
+					</Row> */}
+					
+					{/* <div style={{backgroundColor:"#000000",height:"20px"}}></div>
+					<div style={{backgroundColor:"#dddddd",height:"20px"}} className="mt-auto"></div> */}
+					
+				
+				{/* <div>top</div> */}
+				{/* <div className="align-self-end mt-auto">bottom</div> */}
+			</VuroxLayout>
+			
+		</React.Fragment>
+		}
+		</>
+	)
+	
+}
+
+export default connect(
+    state=>({auth:state.auth}),
+    (dispatch)=>({
+            ...bindPromiseCreators({
+				signOutRoutinePromise,
+				getAccountByUniqueUrlRoutinePromise
+        },dispatch),dispatch
+    })
+)(PageLogin)

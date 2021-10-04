@@ -77,3 +77,9 @@ export const inlineCssToJson = styleString =>{
   return newAttributes
 
 }
+
+export function debug(object,level=1){
+  if(!process.env.FRONTEND_ENV || process.env.FRONTEND_ENV=="dev"){
+    console.log(object)
+  }
+}
