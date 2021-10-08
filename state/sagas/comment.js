@@ -116,6 +116,8 @@ function* listUserComments(action){
             listParams.direction = direction
         }
 
+        console.log(listParams)
+        
         yield put(listUserCommentsRoutine.request())
                 
         const response = yield API.graphql(graphqlOperation(queries.listUserComments,{input:listParams}))

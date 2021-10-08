@@ -5,7 +5,7 @@ import {createUserWatcher,getUserWatcher,listUsersWatcher,updateUserWatcher,getU
 import {listTagsWatcher,deleteTagWatcher,createTagWatcher} from './tag'
 import {listCategoriesWatcher,deleteCategoryWatcher,createCategoryWatcher,updateCategoryWatcher,getCategoryWatcher} from './category'
 
-//import {getPostWatcher,listPostsWatcher} from './post'
+import {getPostWatcher,listPostsWatcher} from './post'
 import {createArticleWatcher,deleteArticleWatcher,updateArticleWatcher,getArticleWatcher,listArticlesWatcher} from './article'
 import {createClassroomWatcher,deleteClassroomWatcher,updateClassroomWatcher,getClassroomWatcher,listClassroomsWatcher} from './classroom'
 import {createLessonWatcher,deleteLessonWatcher,updateLessonWatcher,getLessonWatcher,listLessonsWatcher} from './lesson'
@@ -59,9 +59,9 @@ const sagas = [
     updateCategoryWatcher,
     getCategoryWatcher,
 
-    //post
-    //listPostsWatcher,
-    //getPostWatcher,
+    // post
+    listPostsWatcher,
+    getPostWatcher,
 
     //article
     listArticlesWatcher,

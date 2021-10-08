@@ -1,6 +1,21 @@
 
+## #if($ctx.error)
+##   $util.error($ctx.error.message, $ctx.error.type)
+## #end
+
+## $util.toJson($context.result.data["digipress-dev"])
+
 #if($ctx.error)
   $util.error($ctx.error.message, $ctx.error.type)
 #end
 
-$util.toJson($context.result.data["digipress-dev"])
+#set($result=[])
+
+#foreach( $item in $context.result.data["digipress-dev"] )
+	
+    #if(!$util.isNullOrEmpty($item))
+		$util.qr($result.add($item))
+    #end
+#end
+
+$util.toJson($result)

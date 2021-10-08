@@ -1,5 +1,5 @@
 import {Auth} from 'aws-amplify'
-import {put,takeEvery,takeLatest} from 'redux-saga/effects'
+import {put,takeLatest} from 'redux-saga/effects'
 import {
     signInRoutine,customSignInRoutine,
     completeNewPasswordRoutine,

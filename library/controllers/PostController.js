@@ -21,7 +21,7 @@ export default class Controller{
 
     static _all = sagas =>{
         this.actionList = [...this.actionList,...sagas]
-        console.log(sagas)
+        // console.log(sagas)
     }
 
 }

@@ -23,9 +23,12 @@ const Home = props =>{
 
 	const [orderBy,setOrderBy]	= React.useState("createdAt")
 	const [direction,setDirection] = React.useState("desc")
-    const postController = new PostController(props)
-    const articleController = new ArticleController(props)
-    const classroomController = new ClassroomController(props)
+
+    const propsRef = React.useRef(props)
+
+    const postController = React.useMemo(()=>new PostController(propsRef.current),[propsRef])
+    const articleController = React.useMemo(()=>new ArticleController(propsRef.current),[propsRef])
+    const classroomController = React.useMemo(()=>new ClassroomController(propsRef.current),[propsRef])
     
     const [items,setItems] = React.useState()
 
@@ -62,14 +65,14 @@ const Home = props =>{
                 articleController._delete(item)
                     .then(post=>{
                         setTimeout(()=>{
-                            postController._updateList("remove",[item],index)
+                           // postController._updateList("remove",[item],index)
                         },1000)
                     }).catch(error=>console.log(error))
             }else{
                 classroomController._delete(item)
                     .then(post=>{
                         setTimeout(()=>{
-                            postController._updateList("remove",[item],index)
+                            //postController._updateList("remove",[item],index)
                         },1000)
                     }).catch(error=>console.log(error))
             }
