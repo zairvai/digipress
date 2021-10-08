@@ -976,6 +976,339 @@ export const listCategories = /* GraphQL */ `
     }
   }
 `;
+export const getPost = /* GraphQL */ `
+  query GetPost($input: GetItemInput) {
+    getPost(input: $input) {
+      id
+      account {
+        id
+        name
+        uniqueURL
+        address
+        contactPerson
+        emailAddress
+        phoneNumber
+        status
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+      }
+      category {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        desc
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      title
+      tags {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        name
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      content
+      allowComment
+      access
+      createdBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      updatedBy {
+        id
+        name
+        emailAddress
+        phoneNumber
+        emailAddressVerified
+        phoneNumberVerified
+        enabled
+        roles {
+          accountId
+          role
+          createdBy
+          updatedBy
+          createdAt
+          updatedAt
+          status
+        }
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        version
+        status
+      }
+      createdAt
+      updatedAt
+      status
+      version
+      ... on Article {
+        noOfAllComment
+        noOfNoReplyComment
+      }
+      ... on Classroom {
+        total
+      }
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts($input: ListPostInput) {
+    listPosts(input: $input) {
+      items {
+        id
+        account {
+          id
+          name
+          uniqueURL
+          address
+          contactPerson
+          emailAddress
+          phoneNumber
+          status
+          createdAt
+          updatedAt
+          version
+        }
+        category {
+          id
+          name
+          desc
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        title
+        tags {
+          id
+          name
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        content
+        allowComment
+        access
+        createdBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        updatedBy {
+          id
+          name
+          emailAddress
+          phoneNumber
+          emailAddressVerified
+          phoneNumberVerified
+          enabled
+          createdAt
+          updatedAt
+          version
+          status
+        }
+        createdAt
+        updatedAt
+        status
+        version
+        ... on Article {
+          noOfAllComment
+          noOfNoReplyComment
+        }
+        ... on Classroom {
+          total
+        }
+      }
+      foundDocs
+    }
+  }
+`;
 export const getArticle = /* GraphQL */ `
   query GetArticle($input: GetItemInput!) {
     getArticle(input: $input) {

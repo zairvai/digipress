@@ -54,7 +54,7 @@ const Home = props =>{
             articleController._delete(item)
                 .then(post=>{
                     setTimeout(()=>{
-                        postController._updateList("remove",[item],index)
+                        //postController._updateList("remove",[item],index)
                     },1000)
                 }).catch(error=>console.log(error))
             

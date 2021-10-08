@@ -22,7 +22,9 @@ const List = props =>{
 
     const {auth,currentUser,router} = props
 
-	const commentController = new CommentController(props)
+    const propsRef = React.useRef(props)
+
+	const commentController = React.useMemo(()=>new CommentController(propsRef.current),[propsRef])
 
     let accountId
 

@@ -53,6 +53,9 @@ type Query @aws_iam
 	getCategory(input: GetItemInput!): Category
 	listCategories(input: ListItemInput): CategoryConnection
 
+	getPost(input:GetItemInput):Post
+	listPosts(input:ListPostInput): PostConnection
+
 	getArticle(input: GetItemInput!): Article
 	listArticles(input: ListItemInput): ArticleConnection
 	
@@ -105,6 +108,18 @@ input ListItemInput {
 	title:String
 	roles: [UserRole]
 	name: String
+	orderBy: String
+	direction: String
+	from: Int
+	size: Int
+	statuses:[Int]
+}
+
+input ListPostInput{
+	ids:[ID]
+	postTypes:[PostType!]
+	accountId: ID
+	title:String
 	orderBy: String
 	direction: String
 	from: Int
@@ -179,7 +194,7 @@ type AccountConnection {
 	foundDocs: Int
 }
 
-type Article @aws_iam
+type Article implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
@@ -231,7 +246,7 @@ type ArticleConnection {
 	foundDocs: Int
 }
 
-type Classroom @aws_iam
+type Classroom implements Post @aws_iam
 @aws_cognito_user_pools {
 	id: ID!
 	account: Account!
@@ -403,6 +418,33 @@ enum UserRole {
 	tutor
 	student
 	member
+}
+
+enum PostType{
+	Article
+	Classroom
+}
+
+interface Post{
+	id: ID!
+	account: Account!
+	category: Category
+	title: String!
+	tags: [Tag]
+	content:String
+	allowComment: Boolean
+	access: ReadAccess
+	createdBy: User
+	updatedBy: User
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	status: Int
+	version:Int!
+}
+
+type PostConnection {
+	items: [Post]
+	foundDocs: Int
 }
 
 type Comment @aws_iam
